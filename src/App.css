@@ -57,7 +57,7 @@ html, body {
   margin: 0 0 9vh;
 }
 
-.btn btn-success {
+#root .App .btn {
   margin-bottom: 10vh;
 }
 

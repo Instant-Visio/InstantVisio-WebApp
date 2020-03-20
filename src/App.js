@@ -32,6 +32,11 @@ function App() {
     phone: ''
   });
 
+  const [submission, setSubmission] = useState({
+    success: false,
+    fail: false,
+  });
+
   const handleChange = (event) => {
     setValues(({ ...values, [event.target.name]: event.target.value }));
   };
@@ -40,20 +45,28 @@ function App() {
     return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
-  }
+  };
+
+  const VISIOURL = `${process.env.REACT_APP_VISIODOMAIN}/${Date.now()}${uuidv4()}`;
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!hasValidData(values)){
+    const { personName, mail, phone } = values;
+
+    // either mail or phone info is required
+    const contactInfo = mail || phone;
+
+    const infoToSend = {
+      personName,
+      contactInfo
+    };
+
+    if (!hasValidData(infoToSend)) {
       window.alert('Certains champs n\'ont pas été renseignés, veuillez procéder aux modifications')
       return
     }
     
-    const { personName, mail } = values;
-
-    const VISIOURL = `${process.env.REACT_APP_VISIODOMAIN}/${Date.now()}${uuidv4()}`;
-
     const html = `Bonjour, c'est ${personName}, je voudrais que tu me rejoignes en visio en cliquant sur ce lien ${VISIOURL}`;
 
     const name = 'Demande URGENTE de visiophonie de votre proche';
@@ -76,7 +89,21 @@ function App() {
     )
     .then((response) => {
       console.log(response)
+
+      setSubmission({
+        ...submission,
+        success: true,
+        fail: false
+      });
     })
+    .finally(() => {
+      // to make sure submission result is visible,
+      // as well as the link where user can join their contact
+      window.scrollTo({
+        top: document.querySelector('.form-submission-message').offsetTop,
+        behavior: 'smooth',
+      });
+    });
   }
 
   return (
@@ -106,7 +133,7 @@ function App() {
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="formBasicPhone">
-              <Form.Label>Numéro de téléphone de votre proche</Form.Label>
+              <Form.Label>Numéro de téléphone de votre proche (optionnel si vous renseignez une adresse e-mail)</Form.Label>
               <Form.Control
                 type="phone"
                 name="phone"
@@ -117,7 +144,7 @@ function App() {
               />
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>E-mail de votre proche (optionnel)</Form.Label>
+              <Form.Label>E-mail de votre proche (optionnel si vous renseignez un numéro de téléphone)</Form.Label>
               <Form.Control
                 type="email"
                 name="mail"
@@ -134,6 +161,8 @@ function App() {
             </Button>
           </Form>
         </Container>
+        {submission.success && <p className="form-submission-message">Le message a bien été envoyé à votre proche. Cliquez sur <a href={VISIOURL} target="_blank"
+            rel="noopener noreferrer">sur ce lien</a>; votre proche vous y rejoindra en visio.</p>}
       </body>
     </div>
   );
