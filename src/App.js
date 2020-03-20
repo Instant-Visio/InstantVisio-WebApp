@@ -18,12 +18,20 @@ function App() {
     setValues(({ ...values, [event.target.name]: event.target.value }));
   };
 
+  const uuidv4 = () => {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const { personName, mail } = values;
 
-    const html = `Bonjour, c'est ${personName}, je voudrais que tu me rejoignes en visio en cliquant sur ce lien`
+    const VISIOURL = `${process.env.REACT_APP_VISIODOMAIN}/${Date.now()}${uuidv4()}`;
+
+    const html = `Bonjour, c'est ${personName}, je voudrais que tu me rejoignes en visio en cliquant sur ce lien ${VISIOURL}`;
 
     const name = 'Demande URGENTE de visiophonie de votre proche';
 
