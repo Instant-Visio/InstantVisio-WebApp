@@ -59,7 +59,39 @@ html, body {
 
 #root .App .btn {
   margin-bottom: 10vh;
+  float: right;
 }
+
+.form-submission-message {
+  clear: right;
+}
+
+.loader {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 8vh;
+}
+
+.loader-content {
+  border: .7vh solid #f3f3f3;
+  border-top: .7vh solid #d4c3cc;
+  border-radius: 50%;
+  width: 7vh;
+  height: 7vh;
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) 
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}     
 
 @keyframes App-logo-spin {
   from {
