@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Form, Button } from 'react-bootstrap';
-import axios from 'axios';
+import {sendMail, sendSms} from './providers'
 
 import './App.css';
 
@@ -49,7 +49,7 @@ function App() {
 
   const VISIOURL = `${process.env.REACT_APP_VISIODOMAIN}/${Date.now()}${uuidv4()}`;
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const { personName, mail, phone } = values;
@@ -67,43 +67,50 @@ function App() {
       return
     }
     
-    const html = `Bonjour, c'est ${personName}, je voudrais que tu me rejoignes en visio en cliquant sur ce lien ${VISIOURL}`;
+    let provider
+    const params = {
+      personName,
+      generatedLink: VISIOURL
+    }
 
-    const name = 'Demande URGENTE de visiophonie de votre proche';
-
-    const userInfo = {
-      name,
-      mail,
-      html
-    };
-
-    axios.post(
-      process.env.REACT_APP_SENDING_EMAIL,
-      userInfo,
-      {
-        headers : {
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Accept': 'application/json'
-        }
+    try{
+      if (mail) {
+        provider = await sendMail({
+          ...params,
+          mail
+        })
+      }else if (phone){
+        provider = await sendSms({
+          ...params,
+          phone
+        })
+      }else{
+        //todo manage all
+        //provider = Promise.all([])
       }
-    )
-    .then((response) => {
-      console.log(response)
-
+    
       setSubmission({
         ...submission,
         success: true,
         fail: false
-      });
-    })
-    .finally(() => {
+      })
+      
+    }catch(e){
+
+      setSubmission({
+        ...submission,
+        success: false,
+        fail: true
+      })
+
+    }finally{
       // to make sure submission result is visible,
       // as well as the link where user can join their contact
       window.scrollTo({
-        top: document.querySelector('.form-submission-message').offsetTop,
+        top: document.querySelector('.btn').offsetTop,
         behavior: 'smooth',
       });
-    });
+    }
   }
 
   return (
@@ -126,6 +133,7 @@ function App() {
                 placeholder="Ex. : Laure, François"
                 title="Veuillez saisissez votre nom"
                 value={values.personName}
+                required
                 onChange={handleChange}
                 required
               />
@@ -162,7 +170,7 @@ function App() {
           </Form>
         </Container>
         {submission.success && <p className="form-submission-message">Le message a bien été envoyé à votre proche. Cliquez sur <a href={VISIOURL} target="_blank"
-            rel="noopener noreferrer">sur ce lien</a>; votre proche vous y rejoindra en visio.</p>}
+            rel="noopener noreferrer">sur ce lien</a> votre proche vous y rejoindra en visio.</p>}
       </body>
     </div>
   );
