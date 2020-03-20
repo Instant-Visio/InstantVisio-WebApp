@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Route } from 'react-router-dom';
 
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -47,7 +48,7 @@ function App() {
     );
   };
 
-  const VISIOURL = `${process.env.REACT_APP_VISIODOMAIN}/${Date.now()}${uuidv4()}`;
+  const visioURL = `${process.env.REACT_APP_VISIODOMAIN}/${Date.now()}${uuidv4()}`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,28 +64,37 @@ function App() {
     };
 
     if (!hasValidData(infoToSend)) {
-      window.alert('Certains champs n\'ont pas été renseignés, veuillez procéder aux modifications')
-      return
-    }
+      window.alert('Certains champs n\'ont pas été renseignés, veuillez procéder aux modifications');
+      return;
+    };
     
-    let provider
+    let provider;
+
     const params = {
       personName,
-      generatedLink: VISIOURL
-    }
+      generatedLink: visioURL
+    };
 
     try{
-      if (mail) {
-        provider = await sendMail({
-          ...params,
-          mail
-        })
-      }else if (phone){
-        provider = await sendSms({
-          ...params,
-          phone
-        })
-      }else{
+
+      if (mail || phone) {
+
+        if (mail) {
+          provider = await sendMail({
+            ...params,
+            mail
+          })
+        }
+        
+        if (phone) {
+          provider = await sendSms({
+            ...params,
+            phone
+          })
+        }
+
+      }
+      else {
         //todo manage all
         //provider = Promise.all([])
       }
@@ -93,21 +103,21 @@ function App() {
         ...submission,
         success: true,
         fail: false
-      })
-      
-    }catch(e){
+      });
+ 
+    } catch(e){
 
       setSubmission({
         ...submission,
         success: false,
         fail: true
-      })
+      });
 
-    }finally{
+    } finally{
       // to make sure submission result is visible,
       // as well as the link where user can join their contact
       window.scrollTo({
-        top: document.querySelector('.btn').offsetTop,
+        top: document.querySelector('.form-submission-message').offsetTop,
         behavior: 'smooth',
       });
     }
@@ -130,12 +140,11 @@ function App() {
               <Form.Control
                 type="text"
                 name="personName"
-                placeholder="Ex. : Laure, François"
+                placeholder="Ex. : Laure"
                 title="Veuillez saisissez votre nom"
                 value={values.personName}
                 required
                 onChange={handleChange}
-                required
               />
               <Form.Text className="text-muted">
               </Form.Text>
@@ -145,7 +154,7 @@ function App() {
               <Form.Control
                 type="phone"
                 name="phone"
-                placeholder="Ex : 0706050403"
+                placeholder="Ex. : 0706050403"
                 title="Saisissez le numéro de téléphone de votre proche"
                 value={values.phone}
                 onChange={handleChange}
@@ -169,8 +178,17 @@ function App() {
             </Button>
           </Form>
         </Container>
-        {submission.success && <p className="form-submission-message">Le message a bien été envoyé à votre proche. Cliquez sur <a href={VISIOURL} target="_blank"
-            rel="noopener noreferrer">sur ce lien</a> votre proche vous y rejoindra en visio.</p>}
+        <div className="form-submission-message">
+          {/* submission.success && <p>Le message a bien été envoyé à votre proche. Cliquez sur <a href={visioURL} target="_blank"
+              rel="noopener noreferrer">sur ce lien</a> votre proche vous y rejoindra en visio.</p> */}
+          {submission.success && <Route
+            render={() => {
+              window.location.href = visioURL;
+              return null;
+            }}
+          />}
+          {submission.fail && <p>Le message n'a pas pu être envoyé. Veuillez soumettre le formulaire à nouveau.</p>}
+        </div>
       </body>
     </div>
   );

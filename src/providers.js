@@ -46,7 +46,12 @@ function sendMail({personName, mail, generatedLink}){
  * @param {mail} values 
  * @returns Promise
  */
-function sendSms({personName, phone}){
+function sendSms({personName, phone, generatedLink}){
+
+    const userInfo = {
+      phone,
+      html: generateContent(personName, generatedLink)
+    }
     
     //todo
     return new Promise((resolve, reject) => {
