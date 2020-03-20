@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,7 +7,25 @@ import axios from 'axios';
 
 import './App.css';
 
+const hasValidData = (values) => Object.values(values).every(item => item.trim())
+
 function App() {
+  useEffect(() => {
+    // when using vh and vw units in css:
+    // to make sure the height taken into account
+    // is the whole window size,
+    // not the visible window size
+    // (critical on mobile, where, on click on the contact form inputs,
+    // the keyboard appears and takes half of the window size,
+    // which shrinks the form size - unpleasant user experience)
+    setTimeout(() => {
+      const viewheight = window.innerHeight;
+      const viewwidth = window.innerWidth;
+      const viewport = document.querySelector('meta[name=viewport]');
+      viewport.setAttribute('content', `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`);
+    }, 300);
+  }, []);
+
   const [values, setValues] = useState({
     personName: '',
     mail: '',
@@ -27,6 +45,11 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    if (!hasValidData(values)){
+      window.alert('Certains champs n\'ont pas été renseignés, veuillez procéder aux modifications')
+      return
+    }
+    
     const { personName, mail } = values;
 
     const VISIOURL = `${process.env.REACT_APP_VISIODOMAIN}/${Date.now()}${uuidv4()}`;
@@ -61,45 +84,50 @@ function App() {
       <header className="App-header">
         <h1>Instant Visio</h1>
         <Container>
-        <p>Saisissez le numéro de téléphone mobile ou l'email de la personne que vous souhaitez rejoindre en visiophone (vous pouvez saisir les deux)</p>
-        <p>Un message sera envoyé pour que votre proche puisse vous rejoindre directement en visiophone et échanger avec vous.</p></Container>
+          <p className="App-desc">Saisissez le numéro de téléphone mobile ou l'email de la personne que vous souhaitez rejoindre en visiophone (vous pouvez saisir les deux).</p>
+          <p className="App-desc">Un message sera envoyé pour que votre proche puisse vous rejoindre directement en visiophone et échanger avec vous.</p>
+        </Container>
       </header>
       <body className="App-body">
         <Container>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Nom</Form.Label>
+              <Form.Label>Votre nom</Form.Label>
               <Form.Control
                 type="text"
                 name="personName"
-                placeholder="Saisissez votre nom"
+                placeholder="Ex. : Laure, François"
+                title="Veuillez saisissez votre nom"
                 value={values.personName}
                 onChange={handleChange}
-              />
-              <Form.Text className="text-muted">
-              </Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                name="mail"
-                placeholder="Saisissez votre email"
-                value={values.mail}
-                onChange={handleChange}
+                required
               />
               <Form.Text className="text-muted">
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="formBasicPhone">
-              <Form.Label>Téléphone</Form.Label>
+              <Form.Label>Numéro de téléphone de votre proche</Form.Label>
               <Form.Control
                 type="phone"
                 name="phone"
-                placeholder="Saisissez votre numéro de téléphone"
+                placeholder="Ex : 0706050403"
+                title="Saisissez le numéro de téléphone de votre proche"
                 value={values.phone}
                 onChange={handleChange}
               />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>E-mail de votre proche (optionnel)</Form.Label>
+              <Form.Control
+                type="email"
+                name="mail"
+                placeholder="Ex. : laure.durand@gmail.com"
+                title="Saisissez l'adresse e-mail de votre proche"
+                value={values.mail}
+                onChange={handleChange}
+              />
+              <Form.Text className="text-muted">
+              </Form.Text>
             </Form.Group>
             <Button style={ {float: "right"}} variant="success" type="submit">
               Joindre mon proche
