@@ -7,17 +7,25 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <form>
+          <label>
+            Nom :
+            <input type="text" name="name" />
+          </label>
+          <br />
+          <label>
+            Numéro de téléphone de votre proche :
+            <input type="phone" name="phone" />
+          </label>
+          <br />
+          <label>
+            Email :
+            <input type="text" name="name" />
+          </label>
+          <input type="submit" value="Envoyer" />
+          <br />
+          <input type="submit" value="Envoyer" />
+        </form>
       </header>
     </div>
   );
