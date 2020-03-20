@@ -3,19 +3,50 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Form, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 import './App.css';
 
 function App() {
   const [values, setValues] = useState({
-    name: '',
-    email: '',
+    personName: '',
+    mail: '',
     phone: ''
   });
 
   const handleChange = (event) => {
     setValues(({ ...values, [event.target.name]: event.target.value }));
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const { personName, mail } = values;
+
+    const html = `Bonjour, c'est ${personName}, je voudrais que tu me rejoignes en visio en cliquant sur ce lien`
+
+    const name = 'Demande URGENTE de visiophonie de votre proche';
+
+    const userInfo = {
+      name,
+      mail,
+      html
+    };
+
+    axios.post(
+      process.env.REACT_APP_SENDING_EMAIL,
+      userInfo,
+      {
+        headers : {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Accept': 'application/json'
+        }
+      }
+    )
+    .then((response) => {
+      console.log(response)
+    })
+  }
 
   return (
     <div className="App">
@@ -27,14 +58,14 @@ function App() {
       </header>
       <body className="App-body">
         <Container>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Nom</Form.Label>
               <Form.Control
                 type="text"
-                name="name"
+                name="personName"
                 placeholder="Saisissez votre nom"
-                value={values.name}
+                value={values.personName}
                 onChange={handleChange}
               />
               <Form.Text className="text-muted">
@@ -44,9 +75,9 @@ function App() {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
-                name="email"
+                name="mail"
                 placeholder="Saisissez votre email"
-                value={values.email}
+                value={values.mail}
                 onChange={handleChange}
               />
               <Form.Text className="text-muted">
