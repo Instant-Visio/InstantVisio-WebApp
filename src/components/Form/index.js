@@ -18,7 +18,7 @@ const validate = (values) => {
 	const {mail, phone} = values
 
 	if (!mail && !phone){
-		errors.contact = 'Le numéro de téléphone ou l\'adresse email doit être renseigné'
+		errors.contact = 'Le numéro de téléphone ou l\'adresse e-mail doit être renseigné-e'
 	}
 
 	return errors
