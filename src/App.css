@@ -14,14 +14,18 @@ html, body {
   text-align: center;
 }
 
+:disabled {
+  cursor: not-allowed;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .loader-content {
+    animation: spin infinite 20s linear;
   }
 }
 
@@ -59,13 +63,32 @@ html, body {
 
 #root .App .btn {
   margin-bottom: 10vh;
+  float: right;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.form-submission-message {
+  clear: right;
+}
+
+@keyframes loading {
+  100% {
+      transform: translateX(100%);
   }
-  to {
-    transform: rotate(360deg);
-  }
+}
+
+.loading{
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after{
+  display: block;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent);
+  animation: loading 1.2s infinite;
 }
