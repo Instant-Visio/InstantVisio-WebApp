@@ -51,7 +51,7 @@ export default function Form({onSubmit, isSending}){
 							type="text"
 							name="personName"
 							placeholder="Ex. : Laure"
-							title="Veuillez saisissez votre nom"
+							title="Veuillez saisir votre nom"
 							value={values.personName}
 							onChange={handleChange}
 							disabled={isSending}
@@ -62,26 +62,26 @@ export default function Form({onSubmit, isSending}){
 						<div className="error-field">
 							{(touched.mail || touched.phone) && errors.contact}
 						</div>
-						<Field 
+						{/* <Field 
 							label="Numéro de téléphone de votre proche (optionnel si vous renseignez une adresse e-mail et à saisir uniquement si votre appareil est équipé d'une carte SIM)"
 							type="phone"
 							name="phone"
 							onBlur={handleBlur}
 							placeholder="Ex. : 0706050403"
-							title="Saisissez le numéro de téléphone de votre proche"
+							title="Veuillez saisir le numéro de téléphone de votre proche"
 							value={values.phone}
 							disabled={isSending}
 							touched={touched.phone}
 							error={errors.phone}
 							onChange={handleChange}
-						/>
+						/> */}
 						<Field 
-							label="E-mail de votre proche (optionnel si vous renseignez un numéro de téléphone)"
+							label="E-mail de votre proche"
 							type="email"
 							name="mail"
 							onBlur={handleBlur}
-							placeholder="Ex. : laure.durand@gmail.com"
-							title="Saisissez l'adresse e-mail de votre proche"
+							placeholder="Ex. : thomas.durand@gmail.com"
+							title="Veuillez saisir l'adresse e-mail de votre proche"
 							value={values.mail}
 							disabled={isSending}
 							onChange={handleChange}
