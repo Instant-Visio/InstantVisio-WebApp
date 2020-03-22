@@ -85,8 +85,8 @@ const App = () => {
 			<header className="App-header">
 				<h1>Instant Visio</h1>
 				<Container>
-					<p className="App-desc">{'Saisissez le numéro de téléphone mobile ou l\'e-mail de la personne que vous souhaitez rejoindre en visiophone (vous pouvez saisir les deux).'}</p>
-					<p className="App-desc">{'À la soumission du formulaire, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un message sera envoyé pour que votre proche puisse vous rejoindre directement en visiophone et échanger avec vous.'}</p>
+					<p className="App-desc">{'Saisissez l\'e-mail de la personne que vous souhaitez rejoindre en visiophone.'}</p>
+					<p className="App-desc">{'À la soumission du formulaire, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un mail sera envoyé à votre proche pour qu\'il ou elle vous rejoigne directement sur la page et échange avec vous.'}</p>
 				</Container>
 			</header>
 			<body className="App-body">
