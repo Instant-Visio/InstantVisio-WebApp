@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { Route } from 'react-router-dom'
 import './lib/promisePollyfill'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -33,11 +34,23 @@ const App = () => {
 
 	const [loading, setLoading] = useState(false)
 
-	const visioURL = `${process.env.REACT_APP_VISIODOMAIN}${Date.now()}${generateUuid()}`
+	const [visioURL, setVisioURL] = useState(null)
 
 	const handleSubmit = async (values) => {
 
 		setLoading(true)
+
+		setVisioURL(await (
+			await axios.post(
+				process.env.REACT_APP_VISIO_API,
+				{},
+				{
+					headers : {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${process.env.REACT_APP_VISIO_API_KEY}`
+					}
+				}
+			)).data.url)
 
 		const {personName, ...contacts} = values
 
@@ -96,7 +109,8 @@ const App = () => {
 						{submission.success && 
                 <Route
                 	render={() => {
-                	  window.location.href = visioURL
+					  console.log(visioURL)
+					  window.location.href = visioURL
                 	  return null
                 	}}
                 />
