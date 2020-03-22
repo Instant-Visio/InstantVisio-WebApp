@@ -33,7 +33,7 @@ const App = () => {
 
 	const [loading, setLoading] = useState(false)
 
-	const visioURL = `${process.env.REACT_APP_VISIODOMAIN}${generateUuid()}`
+	const visioURL = `${process.env.REACT_APP_VISIODOMAIN}${Date.now()}${generateUuid()}`
 
 	const handleSubmit = async (values) => {
 
