@@ -5,7 +5,6 @@ import './lib/promisePollyfill'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
 import providers from './lib/providers'
-import generateUuid from './lib/uuid'
 import Form from './components/Form'
 
 import './App.css'
@@ -36,10 +35,7 @@ const App = () => {
 
 	const [visioURL, setVisioURL] = useState(null)
 
-	const handleSubmit = async (values) => {
-
-		setLoading(true)
-
+	const createVisioURL = async () => {
 		setVisioURL(await (
 			await axios.post(
 				process.env.REACT_APP_VISIO_API,
@@ -51,6 +47,23 @@ const App = () => {
 					}
 				}
 			)).data.url)
+	}
+
+	useEffect(() => {
+		if (!visioURL) {
+			createVisioURL()
+		}
+
+	}, [visioURL])
+
+	const handleSubmit = async (values) => {
+
+		setLoading(true)
+
+		window.scrollTo({
+			top: document.querySelector('body').scrollHeight - document.querySelector('body').clientHeight,
+			behavior: 'smooth',
+		})
 
 		const {personName, ...contacts} = values
 
@@ -84,10 +97,7 @@ const App = () => {
 				fail: true
 			})
 		} finally {
-			window.scrollTo({
-				top: document.querySelector('body').scrollHeight - document.querySelector('body').clientHeight,
-				behavior: 'smooth',
-			})
+			
 
 			setLoading(false)
 		}
