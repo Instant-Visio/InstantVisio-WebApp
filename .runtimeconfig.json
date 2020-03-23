@@ -1,0 +1,18 @@
+{
+  "gmail": {
+    "auth": {
+      "type": "OAuth2",
+      "client": {
+        "id": "302360591073-d0r9apf11j5e8barimfhlr3sa1qra7hm.apps.googleusercontent.com",
+        "refreshtoken": "1//04C6LfmjTWeeFCgYIARAAGAQSNwF-L9IrYPgqvJjWn-SWN_8tY4jTQEYnl2U4LS0RKn28PE2_0G7n0ZzR0phwLzFqE9KP7tZS-IQ",
+        "secret": "w0XFSxlOA4KNwRzR8ImrFlCs"
+      }
+    },
+    "user": "instantvisioapp@gmail.com",
+    "password": "pfsd@987n"
+  },
+  "email": {
+    "password": "X83*#im5u0cF",
+    "user": "contact@tabbya.fr"
+  }
+}
