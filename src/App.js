@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios'
-import {Route} from 'react-router-dom'
-import './lib/promisePollyfill'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
-import providers from './lib/providers'
 import Form from './components/Form'
+import {
+    functions,
+} from './firebase/firebase'
 
 import './App.css'
+import {Route} from 'react-router-dom'
 
 const App = () => {
     useEffect(() => {
@@ -35,29 +35,7 @@ const App = () => {
 
     const [visioURL, setVisioURL] = useState(null)
 
-    const createVisioURL = async () => {
-        setVisioURL(await (
-            await axios.post(
-                process.env.REACT_APP_VISIO_API,
-                {},
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${process.env.REACT_APP_VISIO_API_KEY}`
-                    }
-                }
-            )).data.url)
-    }
-
-    useEffect(() => {
-        if (!visioURL) {
-            createVisioURL()
-        }
-
-    }, [visioURL])
-
     const handleSubmit = async (values) => {
-
         setLoading(true)
 
         window.scrollTo({
@@ -65,25 +43,26 @@ const App = () => {
             behavior: 'smooth',
         })
 
-        const {personName, ...contacts} = values
-
         try {
-            const promises = Object
-                .entries(contacts)
-                .filter((item) => item[1])
-                .map(async (item) => {
-                    const [providerName, value] = item
-                    if (providers[providerName]) {
-                        await providers[providerName]({personName, value, generatedLink: visioURL})
-                    }
+            const result = await functions.newCall({
+                name: values.personName,
+                phone: values.phone,
+                email: values.mail
+            }).catch((error) => {
+                console.error(error)
+                setSubmission({
+                    ...submission,
+                    success: false,
+                    fail: true
                 })
+                throw new Error('Failed to trigger the call')
+            })
 
-            const promisesStatus = await Promise.allSettled(promises)
-            const rejectedPromised = promisesStatus.filter((item) => item.status === 'rejected')
-
-            if (rejectedPromised.length === promises.length) {
-                throw new Error('all promises rejected')
+            if(!result || !result.data || !result.data.roomUrl) {
+                throw new Error('Room url was not received')
             }
+
+            setVisioURL(result.data.roomUrl)
 
             setSubmission({
                 ...submission,
@@ -91,14 +70,13 @@ const App = () => {
                 fail: false
             })
         } catch (e) {
+            console.error(e)
             setSubmission({
                 ...submission,
                 success: false,
                 fail: true
             })
         } finally {
-
-
             setLoading(false)
         }
     }
@@ -108,7 +86,6 @@ const App = () => {
             <header className="App-header">
                 <h1>Instant Visio</h1>
                 <Container>
-                    {/* <p className="App-desc">{'Saisissez l\'e-mail de la personne que vous souhaitez rejoindre en visiophone.'}</p> */}
                     <p className="App-desc">{'À la soumission du formulaire, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un e-mail sera envoyé à votre proche pour qu\'il ou elle vous rejoigne directement sur la page et échange avec vous.'}</p>
                 </Container>
             </header>
@@ -119,7 +96,6 @@ const App = () => {
                         {submission.success &&
                         <Route
                             render={() => {
-                                console.log(visioURL)
                                 window.location.href = visioURL
                                 return null
                             }}
