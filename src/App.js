@@ -112,28 +112,28 @@ const App = () => {
                     <p className="App-desc">{'À la soumission du formulaire, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un e-mail sera envoyé à votre proche pour qu\'il ou elle vous rejoigne directement sur la page et échange avec vous.'}</p>
                 </Container>
             </header>
-            <body className="App-body">
-            <Container>
-                <Form onSubmit={handleSubmit} isSending={loading}/>
-                <div className="form-submission-message">
-                    {submission.success &&
-                    <Route
-                        render={() => {
-                            console.log(visioURL)
-                            window.location.href = visioURL
-                            return null
-                        }}
-                    />
-                    }
-                    {submission.fail &&
-                    <>
-                        <p>{'Le message n\'a pas pu être envoyé. Si vous avez renseigné un numéro de téléphone, vous pouvez envoyer un message uniquement si votre appareil est équipé d\'une carte SIM.'}</p>
-                        <p>Veuillez soumettre à nouveau le formulaire.</p>
-                    </>
-                    }
-                </div>
-            </Container>
-            </body>
+            <div className="App-body">
+                <Container>
+                    <Form onSubmit={handleSubmit} isSending={loading}/>
+                    <div className="form-submission-message">
+                        {submission.success &&
+                        <Route
+                            render={() => {
+                                console.log(visioURL)
+                                window.location.href = visioURL
+                                return null
+                            }}
+                        />
+                        }
+                        {submission.fail &&
+                        <>
+                            <p>{'Le message n\'a pas pu être envoyé. Si vous avez renseigné un numéro de téléphone, vous pouvez envoyer un message uniquement si votre appareil est équipé d\'une carte SIM.'}</p>
+                            <p>Veuillez soumettre à nouveau le formulaire.</p>
+                        </>
+                        }
+                    </div>
+                </Container>
+            </div>
         </div>
     )
 }

@@ -1,6 +1,8 @@
-const functions = require('firebase-functions');
-const nodemailer = require('nodemailer');
-const cors = require('cors')({ origin: true, });
+import * as functions  from 'firebase-functions'
+import * as nodemailer  from 'nodemailer'
+import * as corsModule from 'cors'
+
+const cors = corsModule({ origin: true, });
 
 const mailTransport = nodemailer.createTransport({
     service: 'gmail',
@@ -13,16 +15,16 @@ const mailTransport = nodemailer.createTransport({
     }
 });
 
-exports.mailInvite = functions.https.onRequest((req, res) => {
+export const mailInvite =  functions.https.onRequest((req, res) => {
     return cors(req, res, () => {
         if (req.method !== "POST") {
             res.status(405).send();
         } else {
-            var email = req.body.mail;
-            var html = req.body.html;
-            var link = "https://google.com";
+            const email = req.body.mail;
+            let html = req.body.html;
+            const link = "https://google.com";
 
-            var stringified = JSON.stringify(html);
+            const stringified = JSON.stringify(html);
 
             stringified.replace('LINK_TOKEN', link);
             stringified.replace('LINK_TOKEN', link);
@@ -37,7 +39,7 @@ exports.mailInvite = functions.https.onRequest((req, res) => {
                 html: html
             };
 
-            mailTransport.sendMail(mailOptions, (error, info) => {
+            mailTransport.sendMail(mailOptions, (error) => {
                 if (error) {
                     console.log(error);
                     mailTransport.close();
