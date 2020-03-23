@@ -104,9 +104,11 @@ const App = () => {
         }
     }
 
+    const visioName = window.location.pathname === '/' && visioURL ? `/${visioURL.name}` : window.location.pathname.split().pop()
+
     const visioURLName = async () => {
         setGuestVisioURL(await (await axios.get(
-            `${process.env.REACT_APP_VISIO_API}${window.location.pathname.split().pop()}`,
+            `${process.env.REACT_APP_VISIO_API}${visioName}`,
             {
                 headers: {
                     'Authorization': `Bearer ${process.env.REACT_APP_VISIO_API_KEY}`
@@ -117,10 +119,10 @@ const App = () => {
     }
 
     useEffect(() => {
-        if (window.location.pathname.split('/').pop() !== '') {
+        if (window.location.pathname.split('/').pop() !== '' || submission.success) {
             visioURLName()
         }
-    }, [])
+    }, [guestVisioURL, submission])
 
     console.log(guestVisioURL)
 
