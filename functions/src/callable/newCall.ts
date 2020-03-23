@@ -96,7 +96,7 @@ const sendEmail = async (params: NotificationParams, messageBody: string) => {
     sgMail.setApiKey(params.sendGridCredentials.apikey)
     const msg = {
         to: params.email,
-        from: 'instantvisioapp@gmail.com',
+        from: 'noreply@instantvisio.com',
         subject: 'Demande URGENTE de visiophonie de votre proche',
         text: messageBody,
     }
