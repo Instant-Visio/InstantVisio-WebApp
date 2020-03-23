@@ -1,9 +1,12 @@
-Instant Visio
+Instant Visio app (web + firebase)
 
-## TODO
+Instant Visio is a no-app one to one video conference for medical workers & patients. 
 
-Inc...
+More info on the Hacking Health Camp 2020 slack, #instantvisio
 
-Twilio Video React App
 
-https://github.com/twilio/twilio-video-app-react
+# Setup
+
+1. Use & setup `nvm` to use the correct node version depending of the project (functions or web app)
+2. Clone this repo and install dependencies using `npm i`
+3. Run the web app `npm start`
