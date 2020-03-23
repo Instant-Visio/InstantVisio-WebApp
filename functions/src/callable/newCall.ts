@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions'
 import {isEmpty} from 'lodash'
 import fetch from 'node-fetch'
 import * as sgMail from '@sendgrid/mail'
+import * as ovh from 'ovh'
 
 export const newCall = functions.https.onCall(async data => {
     const {ovh, sendgrid, visio} = functions.config()
@@ -58,7 +59,12 @@ interface NotificationParams {
     email: string,
     phone: string,
     roomUrl: string,
-    ovhCredentials: string,
+    ovhCredentials: {
+        consumerkey: string,
+        appsecret: string,
+        appkey: string,
+        servicename: string
+    },
     sendGridCredentials: {
         apikey: string
     }
@@ -91,7 +97,7 @@ const sendEmail = async (params: NotificationParams, messageBody: string) => {
     const msg = {
         to: params.email,
         from: 'instantvisioapp@gmail.com',
-        subject: 'Demande URGENT de visiophonie de votre proche',
+        subject: 'Demande URGENTE de visiophonie de votre proche',
         text: messageBody,
     }
 
@@ -99,7 +105,6 @@ const sendEmail = async (params: NotificationParams, messageBody: string) => {
         const result = await sgMail.send(msg)
         const response = result && result[0]
         if (response.statusCode > 200 && response.statusCode < 400) {
-            console.log(`Email sent for room ${params.roomUrl}`)
             return Promise.resolve()
         }
         console.log(`Fail to send email for room ${params.roomUrl}`, response.statusCode, response.statusMessage, response.body)
@@ -110,8 +115,27 @@ const sendEmail = async (params: NotificationParams, messageBody: string) => {
 }
 
 const sendSms = async (params: NotificationParams, messageBody: string) => {
-    // TODO
+    const ovhInstance = ovh({
+        appKey: params.ovhCredentials.appkey,
+        appSecret: params.ovhCredentials.appsecret,
+        consumerKey: params.ovhCredentials.consumerkey
+    })
 
-    return Promise.resolve()
+    return new Promise((resolve, reject) => {
+        // Send a simple SMS with a short number using your serviceName
+        ovhInstance.request('POST', `/sms/${params.ovhCredentials.servicename}/jobs`, {
+            message: 'Hello World!',
+            senderForResponse: true,
+            receivers: ['0033609274620'],
+            sender: 'INSTANT VIS'
+        }, (errsend: any, result: any) => {
+            console.log(errsend, result)
+            if (!errsend) {
+                resolve(result)
+            } else {
+                reject(errsend)
+            }
+        })
+    })
 
 }

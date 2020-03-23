@@ -19,7 +19,8 @@
     "firebase-functions": "^3.3.0",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
-    "nodemailer": "^6.4.6"
+    "nodemailer": "^6.4.6",
+    "ovh": "^2.0.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
