@@ -63,7 +63,7 @@ export default function Form({onSubmit, isSending}) {
                             {(touched.mail || touched.phone) && errors.contact}
                         </div>
                         <Field
-                            label="Numéro de téléphone de votre proche (optionnel si vous renseignez une adresse e-mail et à saisir uniquement si votre appareil est équipé d'une carte SIM)"
+                            label="Numéro de téléphone de votre proche (optionnel si e-mail renseigné)"
                             type="phone"
                             name="phone"
                             onBlur={handleBlur}
@@ -76,7 +76,7 @@ export default function Form({onSubmit, isSending}) {
                             onChange={handleChange}
                         />
                         <Field
-                            label="E-mail de votre proche"
+                            label="E-mail de votre proche (optionnel si téléphone renseigné)"
                             type="email"
                             name="mail"
                             onBlur={handleBlur}
