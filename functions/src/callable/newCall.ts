@@ -39,6 +39,7 @@ export const newCall = functions.https.onCall(async data => {
             name: data.name,
             email: data.email,
             phone: data.phone,
+            country: data.country || 'FR',
             roomUrl: room.url,
             ovhCredentials: ovh,
             sendGridCredentials: sendgrid
@@ -74,13 +75,13 @@ const getRoomUrl = async (credentials: VisioCredentials): Promise<Room> => {
             properties: {
                 enable_screenshare: false,
                 lang: 'fr',
-                exp: Math.floor(Date.now()/1000) + roomExpirationSeconds
+                exp: Math.floor(Date.now() / 1000) + roomExpirationSeconds
             }
         })
     })
     const result = await response.json()
     return {
-        roomUrl : result.url,
+        roomUrl: result.url,
         ...result
     }
 }
