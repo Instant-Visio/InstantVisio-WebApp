@@ -1,8 +1,9 @@
 import * as functions from 'firebase-functions'
 import {isEmpty} from 'lodash'
 import fetch from 'node-fetch'
-import * as sgMail from '@sendgrid/mail'
-import * as ovh from 'ovh'
+import {NotificationParams, sendEmail, sendSms} from './utils/notification'
+
+const roomExpirationSeconds = 60 * 120 // = 2hr
 
 export const newCall = functions.https.onCall(async data => {
     const {ovh, sendgrid, visio} = functions.config()
@@ -28,7 +29,7 @@ export const newCall = functions.https.onCall(async data => {
         console.warn("Warn: No credentials for OVH")
     }
 
-    const roomUrl = await getRoomUrl({
+    const room = await getRoomUrl({
         apikey: visio.apikey,
         api: visio.api,
     })
@@ -38,15 +39,13 @@ export const newCall = functions.https.onCall(async data => {
             name: data.name,
             email: data.email,
             phone: data.phone,
-            roomUrl: roomUrl,
+            roomUrl: room.url,
             ovhCredentials: ovh,
             sendGridCredentials: sendgrid
         })
     }
 
-    return {
-        roomUrl: roomUrl
-    }
+    return room
 })
 
 interface VisioCredentials {
@@ -54,35 +53,39 @@ interface VisioCredentials {
     api: string
 }
 
-interface NotificationParams {
-    name: string,
-    email: string,
-    phone: string,
+interface Room {
     roomUrl: string,
-    ovhCredentials: {
-        consumerkey: string,
-        appsecret: string,
-        appkey: string,
-        servicename: string
-    },
-    sendGridCredentials: {
-        apikey: string
-    }
+    name: string,
+    id: string,
+    privacy: string,
+    url: string,
+    created_at: string,
+    config: any
 }
 
-const getRoomUrl = async (credentials: VisioCredentials) => {
+const getRoomUrl = async (credentials: VisioCredentials): Promise<Room> => {
     const response = await fetch(credentials.api, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${credentials.apikey}`
-        }
+        },
+        body: JSON.stringify({
+            properties: {
+                enable_screenshare: false,
+                lang: 'fr',
+                exp: Math.floor(Date.now()/1000) + roomExpirationSeconds
+            }
+        })
     })
     const result = await response.json()
-    return result.url
+    return {
+        roomUrl : result.url,
+        ...result
+    }
 }
 
-const triggerNotification = async (params: NotificationParams) => {
+export const triggerNotification = async (params: NotificationParams) => {
     const message = `Bonjour, c'est ${params.name}, je voudrais que tu me rejoignes en visio en cliquant sur ce lien ${params.roomUrl}`
     if (!isEmpty(params.email) && !isEmpty(params.sendGridCredentials)) {
         await sendEmail(params, message)
@@ -90,52 +93,4 @@ const triggerNotification = async (params: NotificationParams) => {
     if (!isEmpty(params.phone) && !isEmpty(params.ovhCredentials)) {
         await sendSms(params, message)
     }
-}
-
-const sendEmail = async (params: NotificationParams, messageBody: string) => {
-    sgMail.setApiKey(params.sendGridCredentials.apikey)
-    const msg = {
-        to: params.email,
-        from: 'noreply@instantvisio.com',
-        subject: 'Demande URGENTE de visiophonie de votre proche',
-        text: messageBody,
-    }
-
-    try {
-        const result = await sgMail.send(msg)
-        const response = result && result[0]
-        if (response.statusCode > 200 && response.statusCode < 400) {
-            return Promise.resolve()
-        }
-        console.log(`Fail to send email for room ${params.roomUrl}`, response.statusCode, response.statusMessage, response.body)
-    } catch (err) {
-        console.error(err.toString())
-    }
-    return Promise.reject("Failed to send email")
-}
-
-const sendSms = async (params: NotificationParams, messageBody: string) => {
-    const ovhInstance = ovh({
-        appKey: params.ovhCredentials.appkey,
-        appSecret: params.ovhCredentials.appsecret,
-        consumerKey: params.ovhCredentials.consumerkey
-    })
-
-    return new Promise((resolve, reject) => {
-        // Send a simple SMS with a short number using your serviceName
-        ovhInstance.request('POST', `/sms/${params.ovhCredentials.servicename}/jobs`, {
-            message: 'Hello World!',
-            senderForResponse: true,
-            receivers: [params.phone],
-            sender: 'InstanVisio'
-        }, (errsend: any, result: any) => {
-            console.log(errsend, result)
-            if (!errsend) {
-                resolve(result)
-            } else {
-                reject(errsend)
-            }
-        })
-    })
-
 }
