@@ -126,8 +126,8 @@ const sendSms = async (params: NotificationParams, messageBody: string) => {
         ovhInstance.request('POST', `/sms/${params.ovhCredentials.servicename}/jobs`, {
             message: 'Hello World!',
             senderForResponse: true,
-            receivers: ['0033609274620'],
-            sender: 'INSTANT VIS'
+            receivers: [params.phone],
+            sender: 'InstanVisio'
         }, (errsend: any, result: any) => {
             console.log(errsend, result)
             if (!errsend) {
