@@ -35,7 +35,7 @@ const VideoCallFrame = ({ url }) => {
 
         setTimeout(() => {
             leavingMessage.current.innerHTML = 'Vous pouvez fermer cette page.'
-        }, 5000)
+        }, 10000)
 
         window.addEventListener('beforeunload', leavingCallPage)
         // ComponentWillUnmount
