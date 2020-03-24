@@ -62,19 +62,19 @@ export default function Form({onSubmit, isSending}) {
                         <div className="error-field">
                             {(touched.mail || touched.phone) && errors.contact}
                         </div>
-                        {/*<Field*/}
-                        {/*    label="Numéro de téléphone de votre proche (optionnel si vous renseignez une adresse e-mail et à saisir uniquement si votre appareil est équipé d'une carte SIM)"*/}
-                        {/*    type="phone"*/}
-                        {/*    name="phone"*/}
-                        {/*    onBlur={handleBlur}*/}
-                        {/*    placeholder="Ex. : 0706050403"*/}
-                        {/*    title="Veuillez saisir le numéro de téléphone de votre proche"*/}
-                        {/*    value={values.phone}*/}
-                        {/*    disabled={isSending}*/}
-                        {/*    touched={touched.phone}*/}
-                        {/*    error={errors.phone}*/}
-                        {/*    onChange={handleChange}*/}
-                        {/*/>*/}
+                        <Field
+                            label="Numéro de téléphone de votre proche (optionnel si vous renseignez une adresse e-mail et à saisir uniquement si votre appareil est équipé d'une carte SIM)"
+                            type="phone"
+                            name="phone"
+                            onBlur={handleBlur}
+                            placeholder="Ex. : 0706050403"
+                            title="Veuillez saisir le numéro de téléphone de votre proche"
+                            value={values.phone}
+                            disabled={isSending}
+                            touched={touched.phone}
+                            error={errors.phone}
+                            onChange={handleChange}
+                        />
                         <Field
                             label="E-mail de votre proche"
                             type="email"
