@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import DailyIframe from '@daily-co/daily-js'
 import './style.css'
-import LeaveModal from './LeaveModal'
+
 
 const VideoCallFrame = ({ url }) => {
 
     const videoFrame = useRef(null)
-
-    const hangUpConfirm = useRef(null)
-
-    const [hangUp, setHangUp] = useState('')
+    const leavingMessage = useRef(null)
 
     // to display confirmation message 
     // when user attempts leaving page
@@ -24,17 +21,21 @@ const VideoCallFrame = ({ url }) => {
         const daily = DailyIframe.createFrame(
             videoFrame.current,
             {
+                showLeaveButton: true,
                 iframeStyle: {
                     position: 'fixed',
                     bottom: 0,
                     left: 0,
                     width: '100%',
                     height: '100%'
-                },
-                showLeaveButton: true
+                }
             }
         )
         daily.join({ url })
+
+        setTimeout(() => {
+            leavingMessage.current.innerHTML = 'Vous pouvez fermer cette page.'
+        }, 5000)
 
         window.addEventListener('beforeunload', leavingCallPage)
         // ComponentWillUnmount
@@ -42,13 +43,14 @@ const VideoCallFrame = ({ url }) => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
        
-    })
+    }, [])
+
     
     return (
         <>
-            <div ref={videoFrame}>  
-            </div>
-            <div ref={hangUpConfirm}>{hangUp}</div>    
+            <div ref={videoFrame}>
+                <div ref={leavingMessage} className="visio-message-container"></div>
+            </div>  
         </>
     )
 }

@@ -1,30 +1,26 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Redirect} from 'react-router-dom'
-import handleSubmit from '../../lib/handleSubmit'
+import { createCall } from '../../actions/createCall'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
-import Form from '../Form'
+import Form from '../Form/Form'
 import './NewCall.css'
 
 const NewCall = () => {
-
-    const [submission, setSubmission] = useState({
-        success: false,
-        fail: false,
-    })
-
     const [loading, setLoading] = useState(false)
-
     const [videoCallId, setVideoCallId] = useState()
+    const [error, setError] = useState()
 
     const submit = (values) => {
-        handleSubmit(
-            setLoading,
-            values,
-            setSubmission,
-            submission,
-            setVideoCallId
-        )
+        setLoading(true)
+        createCall(values)
+            .then(roomName => {
+                setVideoCallId(roomName)
+            })
+            .catch(setError)
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     return (
@@ -39,10 +35,10 @@ const NewCall = () => {
                 <Container>
                     <Form onSubmit={submit} isSending={loading}/>
                     <div className="form-submission-message">
-                        {submission.success &&
+                        {videoCallId &&
                             <Redirect to={`/${videoCallId}`} />
                         }
-                        {submission.fail &&
+                        {error &&
                         <>
                             <p>{'Le message n\'a pas pu être envoyé. Si vous avez renseigné un numéro de téléphone, vous pouvez envoyer un message uniquement si votre appareil est équipé d\'une carte SIM.'}</p>
                             <p>Veuillez soumettre à nouveau le formulaire.</p>

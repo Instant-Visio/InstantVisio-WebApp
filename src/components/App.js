@@ -3,8 +3,8 @@ import {
     Route,
     withRouter
 } from 'react-router-dom'
-import NewCall from '../NewCall/NewCall'
-import AnyCall from '../AnyCall/AnyCall'
+import NewCall from './NewCall/NewCall'
+import AnyCall from './AnyCall'
 
 const App = () => {
     useEffect(() => {

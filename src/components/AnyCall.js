@@ -2,7 +2,7 @@ import React from 'react'
 import {
     useParams
 } from 'react-router-dom'
-import VideoCallFrame from '../VideoCallFrame/VideoCallFrame'
+import VideoCallFrame from './VideoCallFrame/VideoCallFrame'
 
 const AnyCall = () => {
     const {callId}  = useParams()
