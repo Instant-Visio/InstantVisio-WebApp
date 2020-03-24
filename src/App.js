@@ -44,7 +44,12 @@ const App = () => {
                 setVisioURL(await (
                     await axios.post(
                         process.env.REACT_APP_VISIO_API,
-                        {},
+                        {
+                            properties: {
+                                'enable_screenshare': false,
+                                'lang': 'fr'
+                            }
+                        },
                         {
                             headers: {
                                 'Content-Type': 'application/json',

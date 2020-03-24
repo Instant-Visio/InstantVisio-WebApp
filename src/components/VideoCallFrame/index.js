@@ -7,9 +7,13 @@ const VideoCallFrame = ({ url }) => {
 
     const videoFrame = useRef(null)
 
+    const hangUpConfirm = useRef(null)
+
+    const [hangUp, setHangUp] = useState('')
+
     // to display confirmation message 
     // when user attempts leaving page
-    const leavingCall = (event) => {
+    const leavingCallPage = (event) => {
         // Cancel the event as stated by the standard.
         event.preventDefault()
         // Chrome requires returnValue to be set.
@@ -27,23 +31,24 @@ const VideoCallFrame = ({ url }) => {
                     width: '100%',
                     height: '100%'
                 },
-                lang: 'fr',
                 showLeaveButton: true
             }
         )
         daily.join({ url })
 
-        window.addEventListener('beforeunload', leavingCall)
+        window.addEventListener('beforeunload', leavingCallPage)
         // ComponentWillUnmount
         return () => {
-            window.removeEventListener('beforeunload', leavingCall)
+            window.removeEventListener('beforeunload', leavingCallPage)
         }
        
-    }, [])
-
+    })
+    
     return (
         <>
-            <div ref={videoFrame} />
+            <div ref={videoFrame}>  
+            </div>
+            <div ref={hangUpConfirm}>{hangUp}</div>    
         </>
     )
 }

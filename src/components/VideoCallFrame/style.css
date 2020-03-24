@@ -1,4 +1,5 @@
-.video-frame {
-    width: 80vh;
-    height: 50vh;
+.visio-message {
+    position: absolute;
+    top: 0;
+    z-index: 1;
 }
