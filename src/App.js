@@ -38,7 +38,6 @@ const App = () => {
 
     const [guestVisioURL, setGuestVisioURL] = useState(null)
     
-
     useEffect(() => {
         if (!visioURL) {
             const createVisioURL = async () => {

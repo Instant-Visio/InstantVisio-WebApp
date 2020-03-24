@@ -10,14 +10,14 @@ const VideoCallFrame = ({ url }) => {
         const daily = DailyIframe.createFrame(
             videoFrame.current,
             {
-                showLeaveButton: true,
                 iframeStyle: {
                     position: 'fixed',
                     bottom: 0,
                     left: 0,
                     width: '100%',
-                    height: '70%'
-                }
+                    height: '100%'
+                },
+                lang: 'fr'
             }
         )
         daily.join({ url })
