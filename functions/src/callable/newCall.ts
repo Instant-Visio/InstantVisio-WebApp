@@ -6,7 +6,7 @@ import {NotificationParams, sendEmail, sendSms} from './utils/notification'
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
 export const newCall = functions.https.onCall(async data => {
-    const {ovh, sendgrid, visio} = functions.config()
+    const {ovh, sendgrid, visio, app} = functions.config()
 
     if (isEmpty(data) || isEmpty(data.name)) {
         throw new functions.https.HttpsError(
@@ -22,6 +22,12 @@ export const newCall = functions.https.onCall(async data => {
         )
     }
 
+    if (isEmpty(app) || isEmpty(app.domain) || isEmpty(app.emailfrom)) {
+        throw new functions.https.HttpsError(
+            'failed-precondition',
+            'Config missing for app (domain/emailfrom)'
+        )
+    }
     if (isEmpty(sendgrid)) {
         console.warn("Warn: No credentials for SendGrid")
     }
@@ -32,7 +38,7 @@ export const newCall = functions.https.onCall(async data => {
     const room = await getRoomUrl({
         apikey: visio.apikey,
         api: visio.api,
-    })
+    }, app.domain)
 
     if (!isEmpty(data.name)) {
         await triggerNotification({
@@ -40,9 +46,10 @@ export const newCall = functions.https.onCall(async data => {
             email: data.email,
             phone: data.phone,
             country: data.country || 'FR',
-            roomUrl: room.url,
+            roomUrl: room.roomUrl,
             ovhCredentials: ovh,
-            sendGridCredentials: sendgrid
+            sendGridCredentials: sendgrid,
+            emailFrom: app.emailfrom
         })
     }
 
@@ -64,7 +71,7 @@ interface Room {
     config: any
 }
 
-const getRoomUrl = async (credentials: VisioCredentials): Promise<Room> => {
+const getRoomUrl = async (credentials: VisioCredentials, domainName: string): Promise<Room> => {
     const response = await fetch(credentials.api, {
         method: 'POST',
         headers: {
@@ -81,7 +88,7 @@ const getRoomUrl = async (credentials: VisioCredentials): Promise<Room> => {
     })
     const result = await response.json()
     return {
-        roomUrl: result.url,
+        roomUrl: `https://${domainName}/${result.name}`,
         ...result
     }
 }
