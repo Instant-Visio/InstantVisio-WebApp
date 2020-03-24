@@ -8,6 +8,7 @@ export interface NotificationParams {
     phone: string,
     roomUrl: string,
     country: string,
+    emailFrom: string,
     ovhCredentials: {
         consumerkey: string,
         appsecret: string,
@@ -19,12 +20,11 @@ export interface NotificationParams {
     }
 }
 
-
 export const sendEmail = async (params: NotificationParams, messageBody: string) => {
     sgMail.setApiKey(params.sendGridCredentials.apikey)
     const msg = {
         to: params.email,
-        from: 'noreply@instantvisio.com',
+        from: params.emailFrom,
         subject: `Demande URGENTE de visiophonie de ${params.name}`,
         text: messageBody,
     }
