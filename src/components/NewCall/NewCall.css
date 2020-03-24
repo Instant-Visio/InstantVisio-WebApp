@@ -1,0 +1,94 @@
+html, body {
+    margin: 0;
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App {
+    height: 100vh;
+    text-align: center;
+}
+
+:disabled {
+    cursor: not-allowed;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .loader-content {
+        animation: spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    margin-top: 10vh;
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-desc {
+    margin: 6vh 0 15vh;
+}
+
+.App-footer {
+    background: #998B7D;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    margin-top: 50px;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+#root .App .form-group {
+    margin: 0 0 9vh;
+}
+
+#root .App .btn {
+    margin-bottom: 10vh;
+    float: right;
+}
+
+.form-submission-message {
+    clear: right;
+}
+
+@keyframes loading {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent);
+    animation: loading 1.2s infinite;
+}
