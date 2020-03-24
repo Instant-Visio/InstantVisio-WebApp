@@ -1,8 +1,6 @@
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 
-import 'firebase/analytics'
-import 'firebase/auth'
-import 'firebase/firestore'
+import 'firebase/functions'
 import 'firebase/remote-config'
 
 const firebaseConfig = {
@@ -16,7 +14,13 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 export const remoteConfig = firebase.remoteConfig()
-
 remoteConfig.settings = {
     minimumFetchIntervalMillis: 3600000,
+}
+
+if(process.env.NODE_ENV === 'development') {
+    firebase.functions().useFunctionsEmulator('http://localhost:5000')
+}
+export const functions = {
+    newCall: firebase.functions().httpsCallable('newCall'),
 }
