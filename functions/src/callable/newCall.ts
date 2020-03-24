@@ -88,7 +88,7 @@ const getRoomUrl = async (credentials: VisioCredentials, domainName: string): Pr
     })
     const result = await response.json()
     return {
-        roomUrl: `https://${domainName}/${result.name}`,
+        roomUrl: result.url,
         ...result
     }
 }
