@@ -94,7 +94,7 @@ const getRoomUrl = async (credentials: VisioCredentials, domainName: string): Pr
 }
 
 export const triggerNotification = async (params: NotificationParams) => {
-    const message = `Bonjour, c'est ${params.name}, je voudrais que tu me rejoignes en visio en cliquant sur ce lien ${params.roomUrl}`
+    const message = `${params.name} vous invite à une conversation vidéo. Rejoignez maintenant la conversation grâce à ce lien : ${params.roomUrl}`
     if (!isEmpty(params.email) && !isEmpty(params.sendGridCredentials)) {
         await sendEmail(params, message)
     }
