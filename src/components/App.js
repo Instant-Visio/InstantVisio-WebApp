@@ -4,7 +4,6 @@ import {
     withRouter
 } from 'react-router-dom'
 import NewCall from './NewCall/NewCall'
-import AnyCall from './AnyCall'
 
 const App = () => {
     useEffect(() => {
@@ -25,7 +24,6 @@ const App = () => {
     
     return  <div>
         <Route path="/" exact component={NewCall}/>
-        <Route path="/:callId" component={AnyCall}/>
     </div>
 }
 

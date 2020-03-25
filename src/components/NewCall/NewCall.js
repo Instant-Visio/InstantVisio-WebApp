@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {Redirect} from 'react-router-dom'
-import { createCall } from '../../actions/createCall'
+import {Route} from 'react-router-dom'
+import {createCall} from '../../actions/createCall'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
 import Form from '../Form/Form'
@@ -36,7 +36,12 @@ const NewCall = () => {
                     <Form onSubmit={submit} isSending={loading}/>
                     <div className="form-submission-message">
                         {videoCallId &&
-                            <Redirect to={`/${videoCallId}`} />
+                            <Route  
+                                render={() => {
+                                    window.location.href = `https://instantvisio.daily.co/${videoCallId}`
+                                    return null
+                                }} 
+                            />
                         }
                         {error &&
                         <>
