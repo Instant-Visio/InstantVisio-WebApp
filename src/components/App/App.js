@@ -3,7 +3,8 @@ import {
     Route,
     withRouter
 } from 'react-router-dom'
-import NewCall from './NewCall/NewCall'
+import NewCall from '../NewCall/NewCall'
+import './App.css'
 
 const App = () => {
     useEffect(() => {
@@ -22,7 +23,7 @@ const App = () => {
         }, 300)
     }, [])
     
-    return  <div>
+    return  <div className="App">
         <Route path="/" exact component={NewCall}/>
     </div>
 }
