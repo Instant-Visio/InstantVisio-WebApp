@@ -28,7 +28,7 @@ const NewCall = () => {
             <header className="App-header">
                 <h1>Instant Visio</h1>
                 <Container>
-                    <p className="App-desc">{'À la soumission du formulaire, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un e-mail sera envoyé à votre proche pour qu\'il ou elle vous rejoigne directement sur la page et échange avec vous.'}</p>
+                    <p className="App-desc">{'À la soumission du formulaire, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un sms et / ou un e-mail sera envoyé à votre proche et l\'invitera à vous rejoindre directement sur la page pour échanger avec vous.'}</p>
                 </Container>
             </header>
             <div className="App-body">
