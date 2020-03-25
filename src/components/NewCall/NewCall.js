@@ -35,7 +35,7 @@ const NewCall = () => {
                     />
                 </h1>
                 <Container>
-                    <p className="App-desc">{'À la soumission du formulaire, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un sms et / ou un e-mail sera envoyé à votre proche et l\'invitera à vous rejoindre directement sur la page pour échanger avec vous.'}</p>
+                    <p className="App-desc">{'À la soumission du formulaire ci-dessous, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un sms et / ou un e-mail sera envoyé à votre proche et l\'invitera à vous rejoindre directement sur la page pour échanger avec vous.'}</p>
                 </Container>
             </header>
             <div className="App-body">
