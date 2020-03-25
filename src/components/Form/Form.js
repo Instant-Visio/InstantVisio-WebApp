@@ -89,7 +89,6 @@ export default function Form({onSubmit, isSending}) {
                             error={errors.mail}
                         />
                         <Button
-                            variant="success"
                             type="submit"
                             disabled={isSending}
                             className={classNames({loading: isSending})}>

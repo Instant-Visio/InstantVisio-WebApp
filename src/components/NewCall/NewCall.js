@@ -4,6 +4,7 @@ import {createCall} from '../../actions/createCall'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
 import Form from '../Form/Form'
+import InstantVisioLogo from '../../styles/assets/images/Favicon_InstantVisio_Titre.png'
 import './NewCall.css'
 
 const NewCall = () => {
@@ -26,7 +27,13 @@ const NewCall = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <h1>Instant Visio</h1>
+                <h1>
+                    <img
+                        src={InstantVisioLogo}
+                        alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
+                        className="App-logo"
+                    />
+                </h1>
                 <Container>
                     <p className="App-desc">{'À la soumission du formulaire, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un sms et / ou un e-mail sera envoyé à votre proche et l\'invitera à vous rejoindre directement sur la page pour échanger avec vous.'}</p>
                 </Container>

@@ -19,8 +19,9 @@ html, body {
 }
 
 .App-logo {
-    height: 40vmin;
-    pointer-events: none;
+    /* height: 40vmin;
+    pointer-events: none; */
+    width: 36vh
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -61,14 +62,18 @@ html, body {
     margin: 0 0 9vh;
 }
 
-#root .App .btn {
-    margin-bottom: 10vh;
-    float: right;
+#root .App .form-control {
+    color: #313131
 }
 
-.form-submission-message {
-    clear: right;
+#root .App .btn {
+    margin: 6vh 0 10vh;
+    background-color: #468ea0;
 }
+
+/* .form-submission-message {
+    clear: right;
+} */
 
 @keyframes loading {
     100% {
