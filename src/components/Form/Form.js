@@ -4,7 +4,7 @@ import {Form as BootstrapForm, Button} from 'react-bootstrap'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import schema from './schema'
-import './style.css'
+import './Form.css'
 import Field from './Field'
 
 const initialValues = {

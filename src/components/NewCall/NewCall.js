@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import {Route} from 'react-router-dom'
 import {createCall} from '../../actions/createCall'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -11,6 +11,7 @@ const NewCall = () => {
     const [loading, setLoading] = useState(false)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
+    const formSubmissionMessage = useRef(null)
 
     const submit = (values) => {
         setLoading(true)
@@ -20,28 +21,32 @@ const NewCall = () => {
             })
             .catch(setError)
             .finally(() => {
+                window.scrollTo({
+                    top: formSubmissionMessage.current.offsetTop,
+                    behavior: 'smooth',
+                })
                 setLoading(false)
             })
     }
 
     return (
-        <div className="App">
-            <header className="App-header">
+        <>
+            <header className="NewCall-header">
                 <h1>
                     <img
                         src={InstantVisioLogo}
                         alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                        className="App-logo"
+                        className="NewCall-logo"
                     />
                 </h1>
                 <Container>
-                    <p className="App-desc">{'À la soumission du formulaire ci-dessous, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un sms et / ou un e-mail sera envoyé à votre proche et l\'invitera à vous rejoindre directement sur la page pour échanger avec vous.'}</p>
+                    <p className="NewCall-desc">{'À la soumission du formulaire ci-dessous, vous serez redirigé-e vers la page d\'appel en visiophone. En parallèle, un sms et / ou un e-mail sera envoyé à votre proche et l\'invitera à vous rejoindre directement sur la page pour échanger avec vous.'}</p>
                 </Container>
             </header>
-            <div className="App-body">
+            <div className="NewCall-body">
                 <Container>
                     <Form onSubmit={submit} isSending={loading}/>
-                    <div className="form-submission-message">
+                    <div ref={formSubmissionMessage}>
                         {videoCallId &&
                             <Route  
                                 render={() => {
@@ -52,14 +57,14 @@ const NewCall = () => {
                         }
                         {error &&
                         <>
-                            <p>{'Le message n\'a pas pu être envoyé. Si vous avez renseigné un numéro de téléphone, vous pouvez envoyer un message uniquement si votre appareil est équipé d\'une carte SIM.'}</p>
+                            <p>{'Le sms ou l\'e-mail n\'a pas pu être envoyé. Veuillez vérifier les informations renseignées et soumettre à nouveau le formulaire.'}</p>
                             <p>Veuillez soumettre à nouveau le formulaire.</p>
                         </>
                         }
                     </div>
                 </Container>
             </div>
-        </div>
+        </>
     )
 }
 
