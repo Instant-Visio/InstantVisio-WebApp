@@ -77,19 +77,6 @@ export default function Form({onSubmit, isSending}) {
                             onChange={handleChange}
                         />
                         <Field
-                            label="Adresse e-mail de votre proche"
-                            type="email"
-                            name="mail"
-                            onBlur={handleBlur}
-                            placeholder="Ex. : thomas.durand@gmail.com"
-                            title="Veuillez saisir l'adresse e-mail de votre proche"
-                            value={values.mail}
-                            disabled={isSending}
-                            onChange={handleChange}
-                            touched={touched.mail}
-                            error={errors.mail}
-                        />
-                        <Field
                             label="Quel est votre nom ?"
                             type="text"
                             name="personName"
