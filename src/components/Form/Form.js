@@ -37,19 +37,6 @@ export default function Form({onSubmit, isSending}) {
 
                     <BootstrapForm onSubmit={handleSubmit} className="form" noValidate>
                         <Field
-                            label="Quel est le nom de votre proche ?"
-                            type="text"
-                            name="otherPersonName"
-                            placeholder="Ex. : Thomas"
-                            title="Veuillez saisir le nom de votre proche"
-                            value={values.otherPersonName}
-                            onChange={handleChange}
-                            disabled={isSending}
-                            onBlur={handleBlur}
-                            touched={touched.otherPersonName}
-                            error={errors.otherPersonName}
-                        />
-                        <Field
                             label="Numéro de téléphone de votre proche"
                             type="otherPersonName"
                             name="phone"
