@@ -9,6 +9,7 @@ import Field from './Field'
 
 const initialValues = {
     personName: '',
+    otherPersonName: '',
     phone: '',
     mail: '',
 }
@@ -47,24 +48,24 @@ export default function Form({onSubmit, isSending}) {
 
                     <BootstrapForm onSubmit={handleSubmit} className="form" noValidate>
                         <Field
-                            label="Votre nom"
+                            label="Quel est le nom de votre proche ?"
                             type="text"
-                            name="personName"
-                            placeholder="Ex. : Laure"
-                            title="Veuillez saisir votre nom"
-                            value={values.personName}
+                            name="otherPersonName"
+                            placeholder="Ex. : Thomas"
+                            title="Veuillez saisir le nom de votre proche"
+                            value={values.otherPersonName}
                             onChange={handleChange}
                             disabled={isSending}
                             onBlur={handleBlur}
-                            touched={touched.personName}
-                            error={errors.personName}
+                            touched={touched.otherPersonName}
+                            error={errors.otherPersonName}
                         />
                         <div className="error-field">
                             {(touched.mail || touched.phone) && errors.contact}
                         </div>
                         <Field
-                            label="Numéro de téléphone de votre proche (optionnel si e-mail renseigné)"
-                            type="phone"
+                            label="Numéro de téléphone de votre proche"
+                            type="otherPersonName"
                             name="phone"
                             onBlur={handleBlur}
                             placeholder="Ex. : 0706050403"
@@ -76,7 +77,7 @@ export default function Form({onSubmit, isSending}) {
                             onChange={handleChange}
                         />
                         <Field
-                            label="E-mail de votre proche (optionnel si téléphone renseigné)"
+                            label="Adresse e-mail de votre proche"
                             type="email"
                             name="mail"
                             onBlur={handleBlur}
@@ -87,6 +88,19 @@ export default function Form({onSubmit, isSending}) {
                             onChange={handleChange}
                             touched={touched.mail}
                             error={errors.mail}
+                        />
+                        <Field
+                            label="Quel est votre nom ?"
+                            type="text"
+                            name="personName"
+                            placeholder="Ex. : Laure"
+                            title="Veuillez saisir votre nom"
+                            value={values.personName}
+                            onChange={handleChange}
+                            disabled={isSending}
+                            onBlur={handleBlur}
+                            touched={touched.personName}
+                            error={errors.personName}
                         />
                         <Button
                             type="submit"
