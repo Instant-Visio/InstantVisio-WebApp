@@ -17,6 +17,9 @@ const initialValues = {
 export default function Form({onSubmit, isSending}) {
 
     const handleSubmitForm = (values) => {
+        if(values.phone) {
+            values.phone = values.phone.replace(' ', '').trim()
+        }
         if (onSubmit) {
             onSubmit(values)
         }
