@@ -60,7 +60,7 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
         message: messageBody,
         noStopClause: true,
         receivers: [phoneNumber.formatInternational()],
-        sender: 'InstanVisio',
+        sender: 'iVisio',
         priority: "high",
         validityPeriod: 30, // 30 min
     }).then((success: any) => {

@@ -14,17 +14,6 @@ const initialValues = {
     mail: '',
 }
 
-const validate = (values) => {
-    const errors = {}
-    const {mail, phone} = values
-
-    if (!mail && !phone) {
-        errors.contact = 'Le numéro de téléphone ou l\'adresse e-mail doit être renseigné-e'
-    }
-
-    return errors
-}
-
 export default function Form({onSubmit, isSending}) {
 
     const handleSubmitForm = (values) => {
@@ -34,7 +23,7 @@ export default function Form({onSubmit, isSending}) {
     }
     return (
         /* eslint-disable react/prop-types */
-        <Formik validationSchema={schema} validate={validate} initialValues={initialValues} onSubmit={handleSubmitForm}>
+        <Formik validationSchema={schema} initialValues={initialValues} onSubmit={handleSubmitForm}>
             {props => {
                 const {
                     values,
@@ -60,9 +49,6 @@ export default function Form({onSubmit, isSending}) {
                             touched={touched.otherPersonName}
                             error={errors.otherPersonName}
                         />
-                        <div className="error-field">
-                            {(touched.mail || touched.phone) && errors.contact}
-                        </div>
                         <Field
                             label="Numéro de téléphone de votre proche"
                             type="otherPersonName"
