@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions'
 import {isEmpty} from 'lodash'
 import fetch from 'node-fetch'
 import {NotificationParams, sendEmail, sendSms} from './utils/notification'
+import {logRoomCreated} from '../sumologic/sumologic'
 
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
@@ -87,6 +88,7 @@ const getRoomUrl = async (credentials: VisioCredentials, domainName: string): Pr
         })
     })
     const result = await response.json()
+    logRoomCreated()
     return {
         roomUrl: result.url,
         ...result
