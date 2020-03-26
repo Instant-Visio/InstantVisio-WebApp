@@ -1,6 +1,7 @@
 import * as sgMail from '@sendgrid/mail'
 import * as ovh from 'ovh'
 import {parsePhoneNumberFromString} from 'libphonenumber-js'
+import {logEmailSent, logSmsSent} from '../../sumologic/sumologic'
 
 export interface NotificationParams {
     name: string,
@@ -33,6 +34,7 @@ export const sendEmail = async (params: NotificationParams, messageBody: string)
         const result = await sgMail.send(msg)
         const response = result && result[0]
         if (response.statusCode > 200 && response.statusCode < 400) {
+            logEmailSent()
             return Promise.resolve()
         }
         console.log(`Fail to send email for room ${params.roomUrl}`, response.statusCode, response.statusMessage, response.body)
@@ -64,6 +66,7 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
         priority: "high",
         validityPeriod: 30, // 30 min
     }).then((success: any) => {
+        logSmsSent()
         console.log('sms sent')
     }).catch((error: any) => {
         console.error('Fail to send sms', error)
