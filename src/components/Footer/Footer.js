@@ -1,34 +1,31 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import FooterStyled from './Footer.styled.js'
+import styled from 'styled-components'
+import theme from '../../styles/theme'
 
-const Footer = () => {
-    return (
-        <FooterStyled>
-            <ul className="footer">
-                <li className="footer-link">
-                    <Link
-                        to="/mentions-legales"
-                        className="footer-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Mentions légales
-                    </Link>
-                </li>
-                <li className="footer-link">
-                    <a
-                        className="footer-link-content"
-                        href="mailto:contact@instantvisio.com?Subject=Prise de contact"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Nous contacter
-                    </a>
-                </li>
-            </ul>
-        </FooterStyled>
-    )
-}
 
-export default Footer
+const FooterStyled = styled.footer`
+    background: #222222;
+    padding: ${theme.spacing.XXL};
+    display: flex;
+    justify-content: center;
+    color: #7D7D7D;
+    font-size: 16px;
+    .footer {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        &-link {
+            list-style: none;
+            margin: 0 ${theme.spacing.M};
+            padding: ${theme.spacing.XXS} 0;
+            &-content {
+                color: #7D7D7D;
+                text-decoration: none;
+            }
+        }
+    }
+`
+
+export default FooterStyled

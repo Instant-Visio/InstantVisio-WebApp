@@ -4,9 +4,9 @@ import {
     withRouter
 } from 'react-router-dom'
 
-import NewCall from '../NewCall/NewCall'
-import LegalMentions from '../LegalMentions/LegalMentions'
-import './App.css'
+import NewCall from '../NewCall'
+import LegalMentions from '../LegalMentions'
+import './app.css'
 
 const App = () => {
     useEffect(() => {

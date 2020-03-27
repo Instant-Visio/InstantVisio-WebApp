@@ -7,11 +7,11 @@ import InstantVisioLogo from '../../styles/assets/images/Favicon_InstantVisio_Ti
 import InstantVisioLogoMobile from '../../styles/assets/images/Favicon_InstantVisio_Titre_mobile.png'
 import {createCall} from '../../actions/createCall'
 
-import './NewCall.css'
+import './newcall.css'
 
-import Header from '../Header/Header'
-import Form from '../Form/Form'
-import Footer from '../Footer/Footer'
+import Header from '../Header'
+import Form from '../Form'
+import Footer from '../Footer'
 
 const NewCall = () => {
     const [loading, setLoading] = useState(false)

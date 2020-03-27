@@ -1,30 +1,78 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container} from 'react-bootstrap'
-
-import InstantVisioLogo from '../../styles/assets/images/Favicon_InstantVisio_Titre.png'
-import InstantVisioLogoMobile from '../../styles/assets/images/Favicon_InstantVisio_Titre_mobile.png'
-import HeaderStyled from './Header.styled.js'
+import styled from 'styled-components'
 
 
-const Header = () => (
-    <HeaderStyled>
-        <Container className="header">
-            <img
-                src={InstantVisioLogo}
-                alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                className="header-desktopLogo"
-            />
-            <img
-                src={InstantVisioLogoMobile}
-                alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                className="header-mobileLogo"
-            />
-            <Container className="header-baseline">
-                <p className="header-baseline-content">Joignez un proche en visio, en un clic, gratuitement.</p>
-            </Container>
-        </Container>
-    </HeaderStyled>
-)
+const HeaderStyled = styled.header`
+    background-color: #323742;
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    text-align: left;
+    .header {
+        display: flex;
+        
+        &-baseline {
+            color: #aaabbd;
+            font-weight: 500;
+            
+            &-content {
+                font-family: 'Baloo Thambi 2'; cursive;
+                font-size: 3.5vh;
+            }
+        }
 
-export default Header
+        &-mobileLogo {
+            width: 22vh;
+        }
+
+        &-desktopLogo {
+            width: 37vh;
+            text-align: left;
+        }
+    };
+    @media screen and (min-width: 300px) {
+        .header {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            &-baseline-content {
+                margin: 4vh 0;
+                text-align: center;
+            }
+
+            &-mobileLogo {
+                margin-top: 4vh;
+            }
+
+            &-desktopLogo {
+                display: none;
+            }
+        }
+    };
+    @media screen and (min-width: 1024px) {
+        padding: 0;
+        height: 20vh;
+        .header {
+            flex-direction: row;
+            justify-content: space-between;
+            
+            &-baseline-content {
+                margin: 0;
+                text-align: right;
+            }
+
+            &-mobileLogo {
+                display: none;
+            }
+
+            &-desktopLogo {
+                display: block;
+            }
+        }
+    }
+`
+
+export default HeaderStyled
