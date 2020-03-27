@@ -3,8 +3,6 @@ import {Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
 
-import InstantVisioLogo from '../../styles/assets/images/Favicon_InstantVisio_Titre.png'
-import InstantVisioLogoMobile from '../../styles/assets/images/Favicon_InstantVisio_Titre_mobile.png'
 import {createCall} from '../../actions/createCall'
 
 import './newcall.css'

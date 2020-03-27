@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import theme from '../../styles/theme'
 
 const HeaderStyled = styled.header`
     background-color: #323742;
@@ -14,7 +14,7 @@ const HeaderStyled = styled.header`
         display: flex;
         
         &-baseline {
-            color: #aaabbd;
+            color: ${theme.color.logoGrey};
             font-weight: 500;
             
             &-content {

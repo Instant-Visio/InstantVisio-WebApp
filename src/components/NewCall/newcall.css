@@ -43,8 +43,8 @@
 }
 
 .NewCall-desc {
-    margin-top: 11vh;
-    margin-bottom: 11vh;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .NewCall-desc-container {
@@ -52,7 +52,7 @@
 }
 
 .NewCall-desc-title {
-    font-size: 4vh;
+    font-size: 1.25rem;
     margin-bottom: 5vh;
 }
 
