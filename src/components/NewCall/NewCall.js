@@ -9,6 +9,7 @@ import {createCall} from '../../actions/createCall'
 
 import './NewCall.css'
 
+import Header from '../Header/Header'
 import Form from '../Form/Form'
 import Footer from '../Footer/Footer'
 
@@ -36,23 +37,7 @@ const NewCall = () => {
 
     return (
         <>
-            <header className="NewCall-header">
-                <Container className="NewCall-header-content">
-                    <img
-                        src={InstantVisioLogo}
-                        alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                        className="NewCall-logo"
-                    />
-                    <img
-                        src={InstantVisioLogoMobile}
-                        alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                        className="NewCall-logo-mobile"
-                    />
-                    <Container className="NewCall-baseline">
-                        <p className="NewCall-baseline-content">Joignez un proche en visio, en un clic, gratuitement.</p>
-                    </Container>
-                </Container>
-            </header>
+            <Header />
             <Container className="NewCall-desc">
                 <p className="NewCall-desc-title">Comment ça fonctionne ?</p>
                 <ol className="NewCall-desc-list">

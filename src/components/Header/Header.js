@@ -13,12 +13,12 @@ const Header = () => (
             <img
                 src={InstantVisioLogo}
                 alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                className="NewCall-logo"
+                className="header-desktopLogo"
             />
             <img
                 src={InstantVisioLogoMobile}
                 alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                className="NewCall-logo-mobile"
+                className="header-mobileLogo"
             />
             <Container className="header-baseline">
                 <p className="header-baseline-content">Joignez un proche en visio, en un clic, gratuitement.</p>
