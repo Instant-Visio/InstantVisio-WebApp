@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../styles/theme'
 
 const HeaderStyled = styled.header`
-    background-color: #323742;
+    background-color: ${theme.color.headerFooterGrey};
     display: flex;
     width: 100vw;
     flex-direction: column;

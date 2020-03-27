@@ -6,6 +6,7 @@ import {
 
 import NewCall from '../NewCall'
 import LegalMentions from '../LegalMentions'
+import PersonalData from '../PersonalData'
 import './app.css'
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
     return  <div className="App">
         <Route path="/" exact component={NewCall}/>
         <Route path="/mentions-legales" exact component={LegalMentions}/>
+        <Route path="/donnees-personnelles" exact component={PersonalData}/>
     </div>
 }
 

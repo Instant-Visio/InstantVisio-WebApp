@@ -14,9 +14,10 @@ export default {
         blue: '#5DC5DF',
         red:  '#dc3545',
         white: '#ffffff',
+        headerFooterGrey: '#323742',
         logoGrey: '#aaabbd',
-        textGrey: '#8e91a2',
-        grey: '#323742'
+        textGrey: '#35353b',
+        grey: '#3d3e45'
     },
     font: sizes,
     spacing: sizes

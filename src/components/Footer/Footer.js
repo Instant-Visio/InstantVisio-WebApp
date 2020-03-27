@@ -3,7 +3,7 @@ import theme from '../../styles/theme'
 
 
 const FooterStyled = styled.footer`
-    background: #222222;
+    background: ${theme.color.headerFooterGrey};
     padding: ${theme.spacing.XXL};
     display: flex;
     justify-content: center;

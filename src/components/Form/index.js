@@ -40,7 +40,7 @@ export default function Form({onSubmit, isSending}) {
 
                     <BootstrapForm onSubmit={handleSubmit} className="form" noValidate>
                         <Field
-                            label="Numéro de téléphone de votre proche"
+                            label="Numéro de téléphone de votre proche *"
                             type="otherPersonName"
                             name="phone"
                             onBlur={handleBlur}
@@ -53,7 +53,7 @@ export default function Form({onSubmit, isSending}) {
                             onChange={handleChange}
                         />
                         <Field
-                            label="Quel est votre nom ?"
+                            label="Votre prénom ou surnom (pour que votre proche vous reconnaisse) *"
                             type="text"
                             name="personName"
                             placeholder="Ex. : Laure"

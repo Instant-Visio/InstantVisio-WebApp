@@ -10,10 +10,16 @@ const Footer = () => {
                     <Link
                         to="/mentions-legales"
                         className="footer-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
                     >
                         Mentions légales
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link
+                        to="/donnees-personnelles"
+                        className="footer-link"
+                    >
+                        Données personnelles
                     </Link>
                 </li>
                 <li className="footer-link">
