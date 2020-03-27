@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter} from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
@@ -6,13 +6,16 @@ import './index.css'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import theme from './styles/theme'
+import './i18n/i18n'
 
 const rootComponent = (
-    <BrowserRouter>
-        <ThemeProvider theme={theme}>
-            <App/>
-        </ThemeProvider>
-    </BrowserRouter>
+    <Suspense fallback={null}>
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <App/>
+            </ThemeProvider>
+        </BrowserRouter>
+    </Suspense>
 )
 
 ReactDOM.render(rootComponent, document.getElementById('root'))

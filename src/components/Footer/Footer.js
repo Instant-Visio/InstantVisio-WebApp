@@ -28,4 +28,4 @@ const FooterStyled = styled.footer`
     }
 `
 
-export default FooterStyled
+export default Footer
