@@ -1,24 +1,24 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import './Footer.css'
+import FooterStyled from './Footer.styled.js'
 
 const Footer = () => {
     return (
-        <footer>
-            <ul>
-                <li>
-                    <Link to="/mentions-legales" className="footer-link">CGU</Link>
+        <FooterStyled>
+            <ul className="footer">
+                <li className="footer-link">
+                    <Link to="/mentions-legales" className="footer-link">Mentions légales</Link>
                 </li>
-                <li>
+                <li className="footer-link">
                     <a
-                        className="footer-link"
+                        className="footer-link-content"
                         href="mailto:contact@instantvisio.com?Subject=Prise de contact"
                         target="_blank"
                         rel="noopener noreferrer"
                     >Nous contacter</a>
                 </li>
             </ul>
-        </footer>
+        </FooterStyled>
     )
 }
 
