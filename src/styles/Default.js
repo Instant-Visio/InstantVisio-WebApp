@@ -5,6 +5,9 @@ const DefaultStyled = styled.div`
     .default {
         margin-top: ${theme.spacing.XXXL};
         margin-bottom: ${theme.spacing.XXXL};
+        padding: ${theme.spacing.XXXL};
+        background: ${theme.color.white};
+        border-radius: ${theme.spacing.XS};
 
         &-title {
             font-size: ${theme.font.XL};

@@ -3,7 +3,7 @@ import theme from '../../styles/theme'
 
 
 const FooterStyled = styled.footer`
-    background: ${theme.color.headerFooterGrey};
+    background: #222222;
     padding: ${theme.spacing.XXL};
     display: flex;
     justify-content: center;
@@ -20,9 +20,14 @@ const FooterStyled = styled.footer`
             list-style: none;
             margin: 0 ${theme.spacing.M};
             padding: ${theme.spacing.XXS} 0;
+            
             &-content {
                 color: #7D7D7D;
                 text-decoration: none;
+
+                &:visited {
+                    color: #7D7D7D;
+                }
             }
         }
     }
