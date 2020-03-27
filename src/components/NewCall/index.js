@@ -1,12 +1,15 @@
 import React, {useState, useRef} from 'react'
 import {Route} from 'react-router-dom'
-import {createCall} from '../../actions/createCall'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
-import Form from '../Form/Form'
-import InstantVisioLogo from '../../styles/assets/images/Favicon_InstantVisio_Titre.png'
-import InstantVisioLogoMobile from '../../styles/assets/images/Favicon_InstantVisio_Titre_mobile.png'
-import './NewCall.css'
+
+import {createCall} from '../../actions/createCall'
+
+import './newcall.css'
+
+import Header from '../Header'
+import Form from '../Form'
+import Footer from '../Footer'
 
 const NewCall = () => {
     const [loading, setLoading] = useState(false)
@@ -32,23 +35,7 @@ const NewCall = () => {
 
     return (
         <>
-            <header className="NewCall-header">
-                <Container className="NewCall-header-content">
-                    <img
-                        src={InstantVisioLogo}
-                        alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                        className="NewCall-logo"
-                    />
-                    <img
-                        src={InstantVisioLogoMobile}
-                        alt="logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
-                        className="NewCall-logo-mobile"
-                    />
-                    <Container className="NewCall-baseline">
-                        <p className="NewCall-baseline-content">Joignez un proche en visio, en un clic, gratuitement.</p>
-                    </Container>
-                </Container>
-            </header>
+            <Header />
             <Container className="NewCall-desc">
                 <p className="NewCall-desc-title">Comment ça fonctionne ?</p>
                 <ol className="NewCall-desc-list">
@@ -89,6 +76,9 @@ const NewCall = () => {
                         }
                     </div>
                 </Container>
+            </div>
+            <div className="NewCall-footer">
+                <Footer />
             </div>
         </>
     )

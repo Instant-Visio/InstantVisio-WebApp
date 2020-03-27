@@ -3,8 +3,10 @@ import {
     Route,
     withRouter
 } from 'react-router-dom'
-import NewCall from '../NewCall/NewCall'
-import './App.css'
+
+import NewCall from '../NewCall'
+import LegalMentions from '../LegalMentions'
+import './app.css'
 
 const App = () => {
     useEffect(() => {
@@ -25,6 +27,7 @@ const App = () => {
     
     return  <div className="App">
         <Route path="/" exact component={NewCall}/>
+        <Route path="/mentions-legales" exact component={LegalMentions}/>
     </div>
 }
 
