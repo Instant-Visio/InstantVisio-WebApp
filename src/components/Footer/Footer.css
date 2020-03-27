@@ -1,0 +1,30 @@
+footer {
+    background: #222222;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    color: #7D7D7D;
+    font-size: 16px;
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+footer ul li{
+    list-style: none;
+    margin: 0 1rem;
+    padding: 0.25rem 0;
+}
+
+
+footer .footer-link{
+    color: #7D7D7D;
+    text-decoration: none;
+
+} 

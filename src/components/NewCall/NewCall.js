@@ -1,12 +1,16 @@
 import React, {useState, useRef} from 'react'
 import {Route} from 'react-router-dom'
-import {createCall} from '../../actions/createCall'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
-import Form from '../Form/Form'
+
 import InstantVisioLogo from '../../styles/assets/images/Favicon_InstantVisio_Titre.png'
 import InstantVisioLogoMobile from '../../styles/assets/images/Favicon_InstantVisio_Titre_mobile.png'
+import {createCall} from '../../actions/createCall'
+
 import './NewCall.css'
+
+import Form from '../Form/Form'
+import Footer from '../Footer/Footer'
 
 const NewCall = () => {
     const [loading, setLoading] = useState(false)
@@ -89,6 +93,9 @@ const NewCall = () => {
                         }
                     </div>
                 </Container>
+            </div>
+            <div className="NewCall-footer">
+                <Footer />
             </div>
         </>
     )

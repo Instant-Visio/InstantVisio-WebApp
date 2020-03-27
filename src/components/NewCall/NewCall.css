@@ -97,15 +97,6 @@
     font-size: 3vh;
 }
 
-.NewCall-footer {
-    background: #998B7D;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-    margin-top: 50px;
-}
-
 .NewCall-link {
     color: #61dafb;
 }
