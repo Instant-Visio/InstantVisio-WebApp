@@ -2,12 +2,18 @@ import React from 'react'
 import {Form} from 'react-bootstrap'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { useField } from 'formik'
 
 export default function Field(props) {
 
-    const {label, type, name, title, placeholder, onBlur, value, disabled, touched, error, onChange} = props
+    const [field, meta] = useField(props.name)
+    const {touched, error} = meta
+    const {value, onChange, onBlur} = field
+
+    const {label, className, type, name, disabled, title, placeholder} = props
+    
     return (
-        <Form.Group>
+        <Form.Group className={className}>
             <Form.Label>{label}</Form.Label>
             <Form.Control
                 type={type}
@@ -18,12 +24,13 @@ export default function Field(props) {
                 disabled={disabled}
                 onChange={onChange}
                 onBlur={onBlur}
-                className={classNames({'is-invalid': touched && error})}
+                className={classNames({'is-invalid': touched && error}, {'is-valid': touched && !error})}
             />
-            <Form.Control.Feedback type="invalid">
-                {error}
-            </Form.Control.Feedback>
-
+            {touched && error &&
+                <Form.Control.Feedback type="invalid">
+                    {error}
+                </Form.Control.Feedback>
+            }
         </Form.Group>
     )
 }
@@ -34,6 +41,7 @@ Field.propTypes = {
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
+    className: PropTypes.string,
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,

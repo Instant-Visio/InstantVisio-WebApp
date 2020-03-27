@@ -1,8 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import FooterStyled from './Footer.styled.js'
+import { useTranslation } from 'react-i18next'
 
 const Footer = () => {
+    const {t} = useTranslation()
     return (
         <FooterStyled>
             <ul className="footer">
@@ -13,7 +15,7 @@ const Footer = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Mentions légales
+                        {t('footer.legal-mentions')}
                     </Link>
                 </li>
                 <li className="footer-link">
@@ -23,7 +25,7 @@ const Footer = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Nous contacter
+                        {t('footer.contact-us')}
                     </a>
                 </li>
             </ul>
