@@ -1,4 +1,5 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled'
+
 
 const FooterStyled = styled.footer({
     background: '#222222',
@@ -24,6 +25,6 @@ const FooterStyled = styled.footer({
             }
         }
     }
-});
+})
 
-export default FooterStyled;
+export default FooterStyled

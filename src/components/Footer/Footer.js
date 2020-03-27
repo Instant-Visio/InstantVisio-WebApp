@@ -7,7 +7,14 @@ const Footer = () => {
         <FooterStyled>
             <ul className="footer">
                 <li className="footer-link">
-                    <Link to="/mentions-legales" className="footer-link">Mentions légales</Link>
+                    <Link
+                        to="/mentions-legales"
+                        className="footer-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Mentions légales
+                    </Link>
                 </li>
                 <li className="footer-link">
                     <a
@@ -15,7 +22,9 @@ const Footer = () => {
                         href="mailto:contact@instantvisio.com?Subject=Prise de contact"
                         target="_blank"
                         rel="noopener noreferrer"
-                    >Nous contacter</a>
+                    >
+                        Nous contacter
+                    </a>
                 </li>
             </ul>
         </FooterStyled>
