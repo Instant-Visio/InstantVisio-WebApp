@@ -7,13 +7,12 @@ import Logo from '../Logo'
 
 
 const Header = () => {
-    const {t} = useTranslation()
         return (
         <HeaderStyled>
             <Container className="header">
                 <Logo />
                 <Container className="header-baseline">
-                    <p className="header-baseline-content">{t('baseline')}</p>
+                    <p className="header-baseline-content"></p>
                 </Container>
             </Container>
         </HeaderStyled>

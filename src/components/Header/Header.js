@@ -2,18 +2,22 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
 import HeaderStyled from './Header.styled.js'
+import { useTranslation } from 'react-i18next'
 import Logo from '../Logo'
 
 
-const Header = () => (
+const Header = () => {
+    const {t} = useTranslation()
+    return (
     <HeaderStyled>
         <Container className="header">
             <Logo />
             <Container className="header-baseline">
-                <p className="header-baseline-content">Joignez un proche en visio, en un clic, gratuitement.</p>
+                <p className="header-baseline-content">{t('baseline')}</p>
             </Container>
         </Container>
     </HeaderStyled>
-)
+    )
+}
 
 export default Header
