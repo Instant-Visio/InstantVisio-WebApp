@@ -9,6 +9,12 @@ const sizes = {
     XXXL: '3rem', //    48px
 }
 
+export const SCREEN = {
+    MOBILE: '@media screen and (max-width: 767px)',
+    TABLET: '@media screen and (max-width: 1279px) and (min-width:768px)',
+    DESKTOP_AND_TABLET: '@media screen and (min-width: 1280px)',
+}
+
 export default {
     color: {
         blue: '#5DC5DF',
@@ -16,7 +22,9 @@ export default {
         white: '#ffffff',
         logoGrey: '#aaabbd',
         textGrey: '#8e91a2',
-        grey: '#323742'
+        grey: '#323742',
+        black: '#222222',
+        orange: '#F28E1D'
     },
     font: sizes,
     spacing: sizes
