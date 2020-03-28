@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react'
-import {Link, useParams} from 'react-router-dom'
+import React, {useEffect} from 'react'
+import {useParams} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
 
@@ -11,6 +11,9 @@ import Footer from '../Footer'
 import blog from '../../data/blog'
 
 const Blog = () => {
+    useEffect(() => {
+        document.title = "Blog - Instant Visio"
+    }, [])
 
     let { article } = useParams()
     

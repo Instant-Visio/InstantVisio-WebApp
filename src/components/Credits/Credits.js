@@ -17,7 +17,8 @@ const CreditsStyled = styled.div`
 
     @media (min-width: 1024px) {
         flex-flow: row wrap;
-        justify-content: space-around;
+        justify-content: space-between;
+        padding: 0 ${theme.spacing.XXL};
     }
 
 `

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import {Route, Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Container} from 'react-bootstrap'
@@ -17,6 +17,10 @@ const NewCall = () => {
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const formSubmissionMessage = useRef(null)
+
+    useEffect(() => {
+        document.title = 'Instant Visio'
+    }, [])
 
     const submit = (values) => {
         setLoading(true)
