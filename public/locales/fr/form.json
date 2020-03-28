@@ -1,12 +1,12 @@
 {
     "title": "Joindre mon proche",
-    "description": "Comment souhaitez vous prévenir votre proche",
+    "description": "Comment souhaitez-vous prévenir votre proche ?",
     "buttons": {
         "sms": {
             "label": "Par sms"
         },
         "mail": {
-            "label": "Par email"
+            "label": "Par e-mail"
         },
         "submit": {
             "label": "Joindre mon proche"
@@ -22,12 +22,12 @@
         }
     },
     "mail": {
-        "label": "Adresse email votre proche",
-        "title": "Email de votre proche",
+        "label": "Adresse e-mail votre proche",
+        "title": "E-mail de votre proche",
         "placeholder": "Ex.: jean.dupont@gmail.com"
     },
     "personName": {
-        "label": "Quel est votre nom",
+        "label": "Quel est votre nom (ou surnom) ?",
         "title": "Votre nom",
         "placeholder": "Ex.: Laure"
     },
