@@ -12,10 +12,14 @@ const HeaderStyled = styled.header`
     text-align: left;
     .header {
         display: flex;
+        min-width: 100%;
+        padding-right: 0;
+        padding-left: 0;
         
         &-baseline {
             color: ${theme.color.logoGrey};
             font-weight: 500;
+            padding-right: 0;
             
             &-content {
                 font-family: 'Baloo Thambi 2'; cursive;
@@ -33,18 +37,19 @@ const HeaderStyled = styled.header`
         }
     };
     @media screen and (min-width: 300px) {
+        padding: 0;
+        width: 100%;
         .header {
             flex-direction: column;
             justify-content: center;
             align-items: center;
             
             &-baseline-content {
-                margin: 4vh 0;
-                text-align: center;
+                display: none;
             }
 
             &-mobileLogo {
-                margin-top: 4vh;
+                margin: 4vh 0;
             }
 
             &-desktopLogo {
@@ -53,13 +58,15 @@ const HeaderStyled = styled.header`
         }
     };
     @media screen and (min-width: 1024px) {
-        padding: 0;
+        width: 100vw;
         height: 20vh;
+        padding: 2rem;
         .header {
             flex-direction: row;
             justify-content: space-between;
             
             &-baseline-content {
+                display: block;
                 margin: 0;
                 text-align: right;
             }

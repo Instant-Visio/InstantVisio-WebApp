@@ -8,7 +8,7 @@ import {createCall} from '../../actions/createCall'
 import './newcall.css'
 
 import Header from '../Header'
-import Default from '../../styles/Default'
+import DefaultStyled from '../../styles/Default'
 import Form from '../Form'
 import Footer from '../Footer'
 
@@ -37,7 +37,7 @@ const NewCall = () => {
     return (
         <>
             <Header />
-            <Default>
+            <DefaultStyled>
                 <Container className="NewCall-desc">
                     <p className="default-smallTitle">Comment ça fonctionne ?</p>
                     <ol className="NewCall-desc-list">
@@ -80,7 +80,7 @@ const NewCall = () => {
                         <p>Stéphane Luçon traite les données recueillies pour assurer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont immédiatement effacées. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, reportez-vous à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</p>
                     </Container>
                 </div>
-            </Default>
+            </DefaultStyled>
             <div className="NewCall-footer">
                 <Footer />
             </div>
