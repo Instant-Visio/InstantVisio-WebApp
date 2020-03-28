@@ -19,7 +19,7 @@ const Blog = () => {
             <Header />
             <DefaultStyled>
                 <Container className="default">
-                    {blog.map(({ id, slug, title, date, author, content }) => {
+                    {blog.articles.map(({ id, slug, title, date, author, content }) => {
 
                         if (article === slug || !article) {
                             return (
