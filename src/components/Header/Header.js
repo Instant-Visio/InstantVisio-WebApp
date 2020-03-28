@@ -1,49 +1,86 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
+import theme from '../../styles/theme'
 
-
-const HeaderStyled = styled.header({
-    backgroundColor:'#323742',
-    display: 'flex',
-    width: '100vw',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 'calc(10px + 2vmin)',
-    textAlign: 'left',
-    '.header': {
-        display: 'flex',
-        '&-baseline': {
-            color: '#aaabbd',
-            fontWeight: '500',
-            '&-content': {
-                fontFamily: `'Baloo Thambi 2', cursive`,
-                fontSize: '3.5vh',
+const HeaderStyled = styled.header`
+    background-color: ${theme.color.white};
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    text-align: left;
+    .header {
+        display: flex;
+        min-width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+        
+        &-baseline {
+            color: ${theme.color.logoGrey};
+            font-weight: 500;
+            padding-right: 0;
+            
+            &-content {
+                font-family: 'Baloo Thambi 2'; cursive;
+                font-size: 3.5vh;
             }
         }
-    },
-    '@media screen and (min-width: 300px)': {
-        '.header': {
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            '&-baseline-content': {
-                margin: '4vh 0',
-                textAlign: 'center',
+
+        &-mobileLogo {
+            width: 22vh;
+        }
+
+        &-desktopLogo {
+            width: 37vh;
+            text-align: left;
+        }
+    };
+    @media screen and (min-width: 300px) {
+        padding: 0;
+        width: 100%;
+        .header {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            &-baseline-content {
+                display: none;
+            }
+
+            &-mobileLogo {
+                margin: 4vh 0;
+            }
+
+            &-desktopLogo {
+                display: none;
             }
         }
-    },
-    '@media screen and (min-width: 1024px)' : {
-        padding: '0',
-        height: '20vh',
-        '.header': {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            '&-baseline-content': {
-                margin: '0',
-                textAlign: 'right',
+    };
+    @media screen and (min-width: 1024px) {
+        width: 100vw;
+        height: 20vh;
+        padding: 2rem;
+        .header {
+            flex-direction: row;
+            justify-content: space-between;
+            
+            &-baseline-content {
+                display: block;
+                margin: 0;
+                text-align: right;
+            }
+
+            &-mobileLogo {
+                display: none;
+            }
+
+            &-desktopLogo {
+                display: block;
             }
         }
     }
 })
+`
 
 export default HeaderStyled

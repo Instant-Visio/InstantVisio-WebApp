@@ -1,3 +1,16 @@
+#root .form-group {
+    margin: 0 0 9vh;
+}
+
+#root .form-control {
+    color: #313131;
+}
+
+#root .btn {
+    margin: 1vh 0 10vh;
+    background-color: #468ea0;
+}
+
 .error-field {
     font-size: 80%;
     color: #dc3545;
