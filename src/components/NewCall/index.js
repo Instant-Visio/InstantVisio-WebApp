@@ -78,7 +78,7 @@ const NewCall = () => {
                                 </>
                                 }
                             </div>
-                            <p>Stéphane Luçon traite les données recueillies pour assurer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont immédiatement effacées. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, reportez-vous à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</p>
+                            <p>Stéphane Luçon traite les données recueillies pour assurer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont immédiatement effacées. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</p>
                         </Container>
                     </div>
                 </Container>

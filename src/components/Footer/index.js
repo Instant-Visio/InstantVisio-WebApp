@@ -31,6 +31,14 @@ const Footer = () => {
                     </Link>
                 </li>
                 <li className="footer-link">
+                    <Link
+                        to="/credits"
+                        className="footer-link-content"
+                    >
+                        Crédits
+                    </Link>
+                </li>
+                <li className="footer-link">
                     <a
                         className="footer-link-content"
                         href="mailto:contact@instantvisio.com?Subject=Prise de contact"

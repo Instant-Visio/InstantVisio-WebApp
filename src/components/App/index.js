@@ -8,6 +8,7 @@ import NewCall from '../NewCall'
 import LegalMentions from '../LegalMentions'
 import PersonalData from '../PersonalData'
 import Blog from '../Blog'
+import Credits from '../Credits'
 import './app.css'
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/donnees-personnelles" exact component={PersonalData}/>
         <Route path="/blog" exact component={Blog} />
         <Route path="/blog/:article" component={Blog} />
+        <Route path="/credits" component={Credits} />
     </div>
 }
 
