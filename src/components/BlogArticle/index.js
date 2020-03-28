@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react'
 import {Link} from 'react-router-dom'
 
 import BlogArticleStyled from './BlogArticle'
-import blog from '../../../data/blog'
+import blog from '../../data/blog'
 
 const BlogArticle = ({
     slug,

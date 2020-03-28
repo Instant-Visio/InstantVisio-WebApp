@@ -13,8 +13,7 @@ const HeaderStyled = styled.header`
     .header {
         display: flex;
         min-width: 100%;
-        padding-right: 0;
-        padding-left: 0;
+        padding: ${theme.spacing.XXL};
         
         &-baseline {
             color: ${theme.color.logoGrey};

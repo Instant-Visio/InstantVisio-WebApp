@@ -85,7 +85,7 @@ const Information = styled.div`
 export default function Description(){
     const {t} = useTranslation(['home'])
     return (<Wrapper>
-        <Logo className="logo" />
+        <Logo />
         <Baseline>
             <Trans i18nKey='common:homeBaseline'>
                 Joignez un proche en visio, en un clic, <span>gratuitement.</span>
