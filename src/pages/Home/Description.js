@@ -11,9 +11,12 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
+    align-items: center;
+    
     ${SCREEN.DESKTOP_AND_TABLET}{
         margin-left: ${({theme}) => theme.spacing.XXL};
         margin-right: 5rem;
+        align-items: flex-start;
     }
     & img {
         align-self: center;
@@ -57,12 +60,13 @@ const Information = styled.div`
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: ${({theme}) => theme.spacing.M} ${({theme}) => theme.spacing.XXXL}; 
+        padding: ${({theme}) => theme.spacing.M}; 
 
         p {
             font-weight: bold;
             font-size: ${({theme}) => theme.spacing.L};
-            margin-left: 4rem;
+            margin-left: ${({theme}) => theme.spacing.XXXL};
+            width: 29%;
         }
 
         ol {
@@ -85,7 +89,7 @@ const Information = styled.div`
 export default function Description(){
     const {t} = useTranslation(['home'])
     return (<Wrapper>
-        <Logo className="logo" />
+        <Logo />
         <Baseline>
             <Trans i18nKey='common:homeBaseline'>
                 Joignez un proche en visio, en un clic, <span>gratuitement.</span>

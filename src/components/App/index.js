@@ -5,8 +5,13 @@ import {
 } from 'react-router-dom'
 
 import './App.scss'
-import LegalMentions from '../LegalMentions'
-import {Home} from '../../pages'
+import {
+    Home,
+    LegalMentions,
+    PersonalData,
+    Blog,
+    Credits
+} from '../../pages'
 
 const App = () => {
     useEffect(() => {
@@ -28,10 +33,10 @@ const App = () => {
     return  <div className="App">
         <Route path="/" exact component={Home}/>
         <Route path="/mentions-legales" exact component={LegalMentions}/>
-        {/* <Route path="/donnees-personnelles" exact component={PersonalData}/>
+        <Route path="/donnees-personnelles" exact component={PersonalData}/>
         <Route path="/blog" exact component={Blog} />
         <Route path="/blog/:article" component={Blog} />
-        <Route path="/credits" component={Credits} /> */}
+        <Route path="/credits" component={Credits} />
     </div>
 }
 

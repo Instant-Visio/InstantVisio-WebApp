@@ -8,6 +8,7 @@ const FooterStyled = styled.footer`
     justify-content: center;
     color: #7D7D7D;
     font-size: 16px;
+    width: 100%;
     .footer {
         list-style: none;
         display: flex;

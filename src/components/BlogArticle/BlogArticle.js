@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../../styles/theme'
+import theme from '../../styles/theme'
 
 
 const BlogArticleStyled = styled.div`
@@ -9,6 +9,7 @@ const BlogArticleStyled = styled.div`
 
             h2 {
                 color: ${theme.color.textBlue};
+                margin-bottom: ${theme.spacing.M};
             }
         }
 
@@ -17,18 +18,19 @@ const BlogArticleStyled = styled.div`
         }
 
         &-forSharing {
-            margin-right: ${theme.spacing.XS}
+            font-size: ${theme.font.L};
+            margin-right: ${theme.spacing.XS};
         }
 
         &-share {
-            margin: 0 ${theme.spacing.XXS}
+            margin: 0 ${theme.spacing.XXS};
         }
     }
 
     @media (min-width: 300px) {
         .article {
             &-forSharing {
-                margin-bottom: ${theme.spacing.S}
+                margin-bottom: ${theme.spacing.S};
             }
         }
     }
