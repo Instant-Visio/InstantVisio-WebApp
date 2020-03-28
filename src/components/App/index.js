@@ -4,9 +4,9 @@ import {
     withRouter
 } from 'react-router-dom'
 
-import NewCall from '../NewCall'
-import LegalMentions from '../LegalMentions'
-import './app.css'
+import './App.scss'
+import LegalMentions from '../LegalMentions/LegalMentions'
+import {Home} from '../../pages'
 
 const App = () => {
     useEffect(() => {
@@ -26,7 +26,7 @@ const App = () => {
     }, [])
     
     return  <div className="App">
-        <Route path="/" exact component={NewCall}/>
+        <Route path="/" exact component={Home}/>
         <Route path="/mentions-legales" exact component={LegalMentions}/>
     </div>
 }

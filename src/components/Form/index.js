@@ -1,84 +1,139 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Formik} from 'formik'
 import {Form as BootstrapForm, Button} from 'react-bootstrap'
+import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import schema from './schema'
-import './form.css'
-import Field from './Field'
+import {MailField, PhoneField, NameField} from './Fields'
 
 const initialValues = {
     personName: '',
-    otherPersonName: '',
     phone: '',
     mail: '',
 }
 
-export default function Form({onSubmit, isSending}) {
+const isStepPhone = (step) => step === 'phone'
 
-    const handleSubmitForm = (values) => {
-        if(values.phone) {
-            values.phone = values.phone.replace(' ', '').trim()
-        }
-        if (onSubmit) {
-            onSubmit(values)
+const FormFields = styled.div`
+    & > * {
+        margin: 0 0 ${({theme}) => theme.spacing.XXL};
+    }
+`
+
+const FormCard = styled.div`
+    background: ${({theme}) => theme.color.white};
+    color: ${({theme}) => theme.color.grey};
+    padding: ${({theme}) => `${theme.spacing.XXL} ${theme.spacing.XL}`};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.5rem;
+    
+    & form {
+        width: 100%;
+
+        & .hide {
+            display: none;
         }
     }
-    return (
-        /* eslint-disable react/prop-types */
-        <Formik validationSchema={schema} initialValues={initialValues} onSubmit={handleSubmitForm}>
-            {props => {
-                const {
-                    values,
-                    touched,
-                    errors,
-                    handleChange,
-                    handleSubmit,
-                    handleBlur,
-                } = props
-                return (
+`
 
-                    <BootstrapForm onSubmit={handleSubmit} className="form" noValidate>
-                        <Field
-                            label="Numéro de téléphone de votre proche"
-                            type="otherPersonName"
-                            name="phone"
-                            onBlur={handleBlur}
-                            placeholder="Ex. : 0706050403"
-                            title="Veuillez saisir le numéro de téléphone de votre proche"
-                            value={values.phone}
-                            disabled={isSending}
-                            touched={touched.phone}
-                            error={errors.phone}
-                            onChange={handleChange}
-                        />
-                        <Field
-                            label="Quel est votre nom ?"
-                            type="text"
-                            name="personName"
-                            placeholder="Ex. : Laure"
-                            title="Veuillez saisir votre nom"
-                            value={values.personName}
-                            onChange={handleChange}
-                            disabled={isSending}
-                            onBlur={handleBlur}
-                            touched={touched.personName}
-                            error={errors.personName}
-                        />
-                        <Button
-                            type="submit"
-                            disabled={isSending}
-                            className={classNames({loading: isSending})}>
-                            Joindre mon proche
-                        </Button>
-                    </BootstrapForm>
-                )
-            }}
-        </Formik>
+const SubmitError = styled.p`
+    color: ${({theme}) => theme.color.red};
+`
+
+const FormCardHeader = styled.div`
+    & p{
+        &:first-child{
+            text-align: center;
+            font-weight: bold;
+            font-size: ${({theme}) => theme.font.XL};
+            color: ${({theme}) => theme.color.orange};
+        }
+    }
+`
+
+const FormSubmit = styled.div`
+    text-align: center;
+`
+
+const ButtonChoices = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    button {
+        text-transform: capitalize;
+        font-size: 1.125rem; 
+    }
+`
+
+const errorHandler = ({step, values, setFieldError, t}) => {
+    if (isStepPhone(step)) {
+        if (!values.phone){
+            setFieldError('phone', t('form.phone.errors.empty'))
+        }
+    }else {
+        if (!values.mail){
+            setFieldError('mail', t('form.mail.errors.empty'))
+        }
+    }
+}
+
+export default function Form({onSubmit, errorSending}) {
+    const [step, setStep] = useState('phone')
+    const { t } = useTranslation('form')
+
+    const handleSubmitForm = (values, {setSubmitting, setFieldError}) => {
+        //errorHandler({step, values, setFieldError, t})
+        if (onSubmit) {
+            onSubmit(values, setSubmitting)
+        }
+    }
+
+    return (
+        <FormCard>
+            <FormCardHeader>
+                <p>{t('title')}</p>
+                <p>{t('description')}</p>
+            </FormCardHeader>
+            <ButtonChoices>
+                <Button disabled={isStepPhone(step)} onClick={() => setStep('phone')}>{t('buttons.sms.label')}</Button>
+                <Button disabled={!isStepPhone(step)} onClick={() => setStep('mail')}>{t('buttons.mail.label')}</Button>
+            </ButtonChoices>
+            <Formik validationSchema={schema} initialValues={initialValues} onSubmit={handleSubmitForm}>
+                {props => {
+                /* eslint-disable react/prop-types */
+                    const {isSubmitting, isValid, handleSubmit, dirty} = props
+                    return (
+
+                        <BootstrapForm onSubmit={handleSubmit} noValidate autoComplete='off'>
+                            <FormFields>
+                                <PhoneField disabled={isSubmitting} className={classNames({'hide': !isStepPhone(step)})} />
+                                <MailField disabled={isSubmitting} className={classNames({'hide': isStepPhone(step)})} />
+                                <NameField disabled={isSubmitting} />
+                            </FormFields>
+                            <FormSubmit>
+                                <Button
+                                    type="submit"
+                                    disabled={!(isValid && dirty) || isSubmitting}
+                                    className={classNames({loading: isSubmitting})}>
+                                    {t('buttons.submit.label')}
+                                </Button>
+                            </FormSubmit>
+                            {errorSending && 
+                                <SubmitError>{t('errors.submit')}</SubmitError>
+                            }
+                        </BootstrapForm>
+                    )
+                }}
+            </Formik>
+        </FormCard>
     )
 }
 
 Form.propTypes = {
     onSubmit: PropTypes.func,
-    isSending: PropTypes.bool
+    errorSending: PropTypes.bool,
 }

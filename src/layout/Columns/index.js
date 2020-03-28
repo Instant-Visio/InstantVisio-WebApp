@@ -1,0 +1,53 @@
+import React from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import {SCREEN} from '../../styles/theme'
+import Footer from '../../components/Footer/Footer'
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    ${SCREEN.DESKTOP_AND_TABLET} {
+        flex-direction: row;
+    }
+`
+
+const Left = styled.div`
+    padding: ${({theme}) => theme.spacing.L};
+    width: 100%;
+    background: ${({theme}) => theme.color.white};
+    ${SCREEN.DESKTOP_AND_TABLET} {
+        padding: ${({theme}) => `${theme.spacing.XXXL} ${theme.spacing.M} ${theme.spacing.XXXL} ${theme.spacing.M}`};
+        width: 55%;
+    }
+`
+
+const Right = styled.div`
+    display: flex; 
+    justify-content: center;
+    background: ${({theme}) => theme.color.grey};
+    width: 100%;
+    padding: ${({theme}) => theme.spacing.M};
+    ${SCREEN.DESKTOP_AND_TABLET} {
+        width: 45%;
+        padding: 7rem;
+    }
+`
+
+export default function Columns({children}){
+    
+    const [first, ...second] = React.Children.toArray(children)
+    return (
+        <>
+            <Wrapper>
+                <Left>{first}</Left>
+                <Right>{second}</Right>
+            </Wrapper>
+            <Footer />
+        </>
+    )
+}
+
+Columns.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.element]).isRequired
+}

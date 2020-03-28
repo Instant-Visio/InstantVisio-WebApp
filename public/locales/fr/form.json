@@ -1,0 +1,37 @@
+{
+    "title": "Joindre mon proche",
+    "description": "Comment souhaitez vous prévenir votre proche",
+    "buttons": {
+        "sms": {
+            "label": "Par sms"
+        },
+        "mail": {
+            "label": "Par email"
+        },
+        "submit": {
+            "label": "Joindre mon proche"
+        }
+    },
+    "phone": {
+        "label": "Numéro de téléphone de votre proche",
+        "title": "Numéro de votre proche",
+        "placeholder": "Ex.: 06 XX XX XX XX",
+        "errors": {
+            "empty": "Veuillez saisir le numéro de votre proche",
+            "invalid": "Le numéro de télephone de votre proche est invalide"
+        }
+    },
+    "mail": {
+        "label": "Adresse email votre proche",
+        "title": "Email de votre proche",
+        "placeholder": "Ex.: jean.dupont@gmail.com"
+    },
+    "personName": {
+        "label": "Quel est votre nom",
+        "title": "Votre nom",
+        "placeholder": "Ex.: Laure"
+    },
+    "errors": {
+        "submit": "Le sms ou l'e-mail n'a pas pu être envoyé. Veuillez vérifier les informations renseignées et soumettre à nouveau le formulaire."
+    }
+}
