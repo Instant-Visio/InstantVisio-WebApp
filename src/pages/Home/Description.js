@@ -27,8 +27,10 @@ const Baseline = styled.p`
     font-size: ${({theme}) => theme.font.XL};
     margin-top: ${({theme}) => theme.spacing.XXXL};
     font-weight: bold;
+    text-align: center;
 
     ${SCREEN.DESKTOP_AND_TABLET}{
+        text-align: left;
         font-size: ${({theme}) => theme.font.XXXL};
         margin-bottom: ${({theme}) => theme.spacing.XXXL};
     }
@@ -45,18 +47,47 @@ const Information = styled.div`
     border-radius: 0.5rem;
     margin-top: ${({theme}) => theme.spacing.L};
     padding: ${({theme}) => theme.spacing.L};
-    
+
     p {
         font-weight: bold;
     }
 
+    ${SCREEN.TABLET}{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: ${({theme}) => theme.spacing.M} ${({theme}) => theme.spacing.XXXL}; 
+
+        p {
+            font-weight: bold;
+            font-size: ${({theme}) => theme.spacing.L};
+            margin-left: 4rem;
+        }
+
+        ol {
+            padding-left: 0;
+        }
+
+        * {
+            margin-bottom: 0;
+        }
+    }
+
+    ${SCREEN.DESKTOP_AND_TABLET}{
+        display: block;
+        p {
+            text-align: left;
+        }
+    }
+    
 `
 export default function Description(){
     const {t} = useTranslation(['home'])
     return (<Wrapper>
-        <Logo />
+        <Logo className="logo" />
         <Baseline>
-            <Trans i18nKey='common:baseline'>
+            <Trans i18nKey='common:homeBaseline'>
                 Joignez un proche en visio, en un clic, <span>gratuitement.</span>
             </Trans>
         </Baseline>

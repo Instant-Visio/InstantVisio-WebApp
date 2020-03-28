@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 
 import './App.scss'
-import LegalMentions from '../LegalMentions/LegalMentions'
+import LegalMentions from '../LegalMentions'
 import {Home} from '../../pages'
 
 const App = () => {
