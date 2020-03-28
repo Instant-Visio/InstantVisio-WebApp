@@ -1,23 +1,49 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import {Container} from 'react-bootstrap'
-import HeaderStyled from './Header.styled.js'
-import { useTranslation } from 'react-i18next'
-import Logo from '../Logo'
+import styled from '@emotion/styled'
 
 
-const Header = () => {
-    const {t} = useTranslation()
-    return (
-    <HeaderStyled>
-        <Container className="header">
-            <Logo />
-            <Container className="header-baseline">
-                <p className="header-baseline-content">{t('baseline')}</p>
-            </Container>
-        </Container>
-    </HeaderStyled>
-    )
-}
+const HeaderStyled = styled.header({
+    backgroundColor:'#323742',
+    display: 'flex',
+    width: '100vw',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 'calc(10px + 2vmin)',
+    textAlign: 'left',
+    '.header': {
+        display: 'flex',
+        '&-baseline': {
+            color: '#aaabbd',
+            fontWeight: '500',
+            '&-content': {
+                fontFamily: `'Baloo Thambi 2', cursive`,
+                fontSize: '3.5vh',
+            }
+        }
+    },
+    '@media screen and (min-width: 300px)': {
+        '.header': {
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            '&-baseline-content': {
+                margin: '4vh 0',
+                textAlign: 'center',
+            }
+        }
+    },
+    '@media screen and (min-width: 1024px)' : {
+        padding: '0',
+        height: '20vh',
+        '.header': {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            '&-baseline-content': {
+                margin: '0',
+                textAlign: 'right',
+            }
+        }
+    }
+})
 
-export default Header
+export default HeaderStyled

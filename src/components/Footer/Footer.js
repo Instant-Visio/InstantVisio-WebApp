@@ -1,36 +1,30 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import FooterStyled from './Footer.styled.js'
-import { useTranslation } from 'react-i18next'
+import styled from '@emotion/styled'
 
-const Footer = () => {
-    const {t} = useTranslation()
-    return (
-        <FooterStyled>
-            <ul className="footer">
-                <li className="footer-link">
-                    <Link
-                        to="/mentions-legales"
-                        className="footer-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {t('footer.legal-mentions')}
-                    </Link>
-                </li>
-                <li className="footer-link">
-                    <a
-                        className="footer-link-content"
-                        href="mailto:contact@instantvisio.com?Subject=Prise de contact"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {t('footer.contact-us')}
-                    </a>
-                </li>
-            </ul>
-        </FooterStyled>
-    )
-}
 
-export default Footer
+const FooterStyled = styled.footer({
+    background: '#222222',
+    padding: '2rem',
+    display: 'flex',
+    justifyContent: 'center',
+    color: '#7D7D7D',
+    fontSize: '16px',
+    '.footer': {
+        listStyle: 'none',
+        display: 'flex',
+        margin: '0',
+        padding: '0',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        '&-link': {
+            listStyle: 'none',
+            margin: '0 1rem',
+            padding: '0.25rem 0',
+            '&-content': {
+                color: '#7D7D7D',
+                textDecoration: 'none',
+            }
+        }
+    }
+})
+
+export default FooterStyled

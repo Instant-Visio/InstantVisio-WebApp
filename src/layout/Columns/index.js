@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import {SCREEN} from '../../styles/theme'
-import Footer from '../../components/Footer/Footer'
+import Footer from '../../components/Footer'
 
 const Wrapper = styled.div`
     display: flex;

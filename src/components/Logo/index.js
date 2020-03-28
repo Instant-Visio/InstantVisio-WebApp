@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import logo from '../../styles/assets/images/logo.png'
-import logoMobile from '../../styles/assets/images/logo_mobile.png'
+import logo from '../../styles/assets/images/logo.svg'
+import logoMobile from '../../styles/assets/images/logo_mobile.svg'
 import useDetectMobile from '../../hooks/useDetectMobile'
 
 
