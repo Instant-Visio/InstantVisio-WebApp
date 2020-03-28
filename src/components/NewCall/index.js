@@ -38,48 +38,50 @@ const NewCall = () => {
         <>
             <Header />
             <DefaultStyled>
-                <Container className="NewCall-desc">
-                    <p className="default-smallTitle">Comment ça fonctionne ?</p>
-                    <ol className="NewCall-desc-list">
-                        <li className="NewCall-desc-list-element">
-                            <span className="NewCall-desc-list-element-number NewCall-desc-list-element-content">1</span>
-                            {<div className="NewCall-desc-list-element-period NewCall-desc-list-element-content">.</div>}
-                            <p className="NewCall-desc-list-element-text">Remplissez le formulaire ci-dessous.</p>
-                        </li>
-                        <li className="NewCall-desc-list-element NewCall-desc-list-element-margin">
-                            <span className="NewCall-desc-list-element-number NewCall-desc-list-element-content">2</span>
-                            {<div className="NewCall-desc-list-element-period NewCall-desc-list-element-content">.</div>}
-                            <p className="NewCall-desc-list-element-text">Validez en cliquant sur le bouton « Joindre mon proche ».</p>
-                        </li>
-                        <li className="NewCall-desc-list-element">
-                            <span className="NewCall-desc-list-element-number NewCall-desc-list-element-content">3</span>
-                            {<div className="NewCall-desc-list-element-period NewCall-desc-list-element-content">.</div>}
-                            <p className="NewCall-desc-list-element-text">La vidéo s’ouvre, vous pouvez échanger avec votre proche.</p>
-                        </li>
-                    </ol>
-                </Container>
-                <div className="NewCall-body">
-                    <Container>
-                        <Form onSubmit={submit} isSending={loading}/>
-                        <div ref={formSubmissionMessage}>
-                            {videoCallId &&
-                                <Route  
-                                    render={() => {
-                                        window.location.href = `https://instantvisio.daily.co/${videoCallId}`
-                                        return null
-                                    }} 
-                                />
-                            }
-                            {error &&
-                            <>
-                                <p>{'Le sms ou l\'e-mail n\'a pas pu être envoyé. Veuillez vérifier les informations renseignées et soumettre à nouveau le formulaire.'}</p>
-                                <p>Veuillez soumettre à nouveau le formulaire.</p>
-                            </>
-                            }
-                        </div>
-                        <p>Stéphane Luçon traite les données recueillies pour assurer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont immédiatement effacées. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, reportez-vous à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</p>
+                <Container className="default">
+                    <Container className="NewCall-desc">
+                        <p className="default-smallTitle">Comment cela fonctionne ?</p>
+                        <ol className="NewCall-desc-list">
+                            <li className="NewCall-desc-list-element">
+                                <span className="NewCall-desc-list-element-number NewCall-desc-list-element-content">1</span>
+                                {<div className="NewCall-desc-list-element-period NewCall-desc-list-element-content">.</div>}
+                                <p className="NewCall-desc-list-element-text">Remplissez le formulaire ci-dessous.</p>
+                            </li>
+                            <li className="NewCall-desc-list-element NewCall-desc-list-element-margin">
+                                <span className="NewCall-desc-list-element-number NewCall-desc-list-element-content">2</span>
+                                {<div className="NewCall-desc-list-element-period NewCall-desc-list-element-content">.</div>}
+                                <p className="NewCall-desc-list-element-text">Validez en cliquant sur le bouton « Joindre mon proche ».</p>
+                            </li>
+                            <li className="NewCall-desc-list-element">
+                                <span className="NewCall-desc-list-element-number NewCall-desc-list-element-content">3</span>
+                                {<div className="NewCall-desc-list-element-period NewCall-desc-list-element-content">.</div>}
+                                <p className="NewCall-desc-list-element-text">La vidéo s’ouvre, vous pouvez échanger avec votre proche.</p>
+                            </li>
+                        </ol>
                     </Container>
-                </div>
+                    <div className="NewCall-body">
+                        <Container>
+                            <Form onSubmit={submit} isSending={loading}/>
+                            <div ref={formSubmissionMessage}>
+                                {videoCallId &&
+                                    <Route  
+                                        render={() => {
+                                            window.location.href = `https://instantvisio.daily.co/${videoCallId}`
+                                            return null
+                                        }} 
+                                    />
+                                }
+                                {error &&
+                                <>
+                                    <p className="NewCall-error">{'Le sms ou l\'e-mail n\'a pas pu être envoyé. Veuillez vérifier les informations renseignées et soumettre à nouveau le formulaire.'}</p>
+                                    <p className="NewCall-error">Veuillez soumettre à nouveau le formulaire.</p>
+                                </>
+                                }
+                            </div>
+                            <p>Stéphane Luçon traite les données recueillies pour assurer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont immédiatement effacées. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, reportez-vous à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</p>
+                        </Container>
+                    </div>
+                </Container>
             </DefaultStyled>
             <div className="NewCall-footer">
                 <Footer />

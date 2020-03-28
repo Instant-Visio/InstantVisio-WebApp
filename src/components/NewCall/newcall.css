@@ -2,9 +2,13 @@
     cursor: not-allowed;
 }
 
-.NewCall-desc {
+.NewCall-body {
     margin-top: 3rem;
-    margin-bottom: 3rem;
+}
+
+.NewCall-desc {
+    background: #e4e4e4;
+    border-radius: .3rem;
 }
 
 .NewCall-desc-container {
@@ -22,6 +26,8 @@
     justify-content: space-between;
     list-style: none;
     font-size: 3vh;
+    padding: 0;
+    margin: 0;
 }
 
 .NewCall-desc-list-element {
@@ -58,10 +64,14 @@
     color: #61dafb;
 }
 
+#root .NewCall-error {
+    color: rgb(252, 49, 83);
+}
+
 
 @media screen and (min-width: 300px) {
-    .NewCall-desc-list {
-        padding: 0;
+    .NewCall-desc {
+        padding: 1rem;
     }
 
     .loader-content {
@@ -70,8 +80,8 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .NewCall-desc-list {
-        padding: 0 0 0 6vh;
+    .NewCall-desc {
+        padding: 2rem;
     }
 
 }

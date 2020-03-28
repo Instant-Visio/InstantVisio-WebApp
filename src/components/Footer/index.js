@@ -9,7 +9,7 @@ const Footer = () => {
                 <li className="footer-link">
                     <Link
                         to="/mentions-legales"
-                        className="footer-link"
+                        className="footer-link-content"
                     >
                         Mentions légales
                     </Link>
@@ -17,9 +17,17 @@ const Footer = () => {
                 <li className="footer-link">
                     <Link
                         to="/donnees-personnelles"
-                        className="footer-link"
+                        className="footer-link-content"
                     >
                         Données personnelles
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link
+                        to="/blog"
+                        className="footer-link-content"
+                    >
+                        Blog
                     </Link>
                 </li>
                 <li className="footer-link">

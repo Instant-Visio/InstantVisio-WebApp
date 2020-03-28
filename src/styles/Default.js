@@ -20,12 +20,12 @@ const DefaultStyled = styled.div`
         }
     }
 
-    p, strong {
+    p, a, strong {
         color: ${theme.color.grey};
     }
 
     a {
-        text-decoration: underline;
+        text-decoration: underline
     }
 
     p, label {

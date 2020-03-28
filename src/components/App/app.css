@@ -7,7 +7,11 @@ html, body {
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    overflow-x: hidden;
+    width: 100%;
+}
+
+#root {
+    width: 100%;
 }
 
 .App {

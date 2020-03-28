@@ -14,7 +14,8 @@ export default {
         blue: '#5DC5DF',
         red:  '#dc3545',
         white: '#ffffff',
-        headerFooterGrey: '#323742',
+        orange: '#F28E1D',
+        textBlue: '#438a9d',
         logoGrey: '#aaabbd',
         textGrey: '#35353b',
         grey: '#3d3e45'
