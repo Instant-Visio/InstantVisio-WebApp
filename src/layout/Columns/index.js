@@ -24,6 +24,7 @@ const Left = styled.div`
 
 const Right = styled.div`
     display: flex; 
+    flex-direction: column;
     justify-content: center;
     background: ${({theme}) => theme.color.grey};
     width: 100%;
@@ -31,6 +32,12 @@ const Right = styled.div`
     ${SCREEN.DESKTOP_AND_TABLET} {
         width: 45%;
         padding: 7rem;
+    }
+
+    .cnil {
+        margin: ${({theme}) => theme.spacing.XS} 0;
+        color: ${({theme}) => theme.color.white};
+        font-size: ${({theme}) => theme.font.S};
     }
 `
 
