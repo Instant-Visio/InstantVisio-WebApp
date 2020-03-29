@@ -21,7 +21,7 @@ const Footer = () => {
                         to="/donnees-personnelles"
                         className="footer-link-content"
                     >
-                        Données personnelles
+                        {t('footer.personal-data')}
                     </Link>
                 </li>
                 <li className="footer-link">
@@ -29,7 +29,7 @@ const Footer = () => {
                         to="/blog"
                         className="footer-link-content"
                     >
-                        Blog
+                        {t('footer.blog')}
                     </Link>
                 </li>
                 <li className="footer-link">
@@ -37,7 +37,7 @@ const Footer = () => {
                         to="/credits"
                         className="footer-link-content"
                     >
-                        Crédits
+                        {t('footer.credits')}
                     </Link>
                 </li>
                 <li className="footer-link">

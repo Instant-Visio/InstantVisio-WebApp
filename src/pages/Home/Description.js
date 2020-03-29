@@ -113,8 +113,8 @@ export default function Description(){
                     <span>{t('information.steps.3')}</span>
                 </List>
             </Information>
-            <p className="details">Après avoir soumis le formulaire, nous vous conseillons de placer votre appareil en mode paysage. Vous verrez d'autant mieux votre proche.</p>
-            <p className="details">Une fois sur la vidéo, vous avez accès au lien de l'appel dans la barre d'adresses. Vous pouvez la communiquer à d'autres proches, de votre côté. Nous vous recommandons de vous limiter à 6 participants par appel, pour une expérience optimale.</p>
+            <p className="details">{t('information.indications.landscape')}</p>
+            <p className="details">{t('information.indications.multiple-people')}</p>
         </div>
     </Wrapper>)
 }

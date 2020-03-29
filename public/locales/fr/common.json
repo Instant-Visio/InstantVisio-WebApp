@@ -6,6 +6,9 @@
     "headerBaseline": "Joignez un proche en visio, en un clic, gratuitement.",
     "footer": {
         "contact-us": "Nous contacter",
-        "legal-mentions": "Mentions légales"
-    }
+        "legal-mentions": "Mentions légales",
+        "personal-data": "Données personnelles",
+        "blog": "Blog",
+        "credits": "Crédits"
+    }  
 }
