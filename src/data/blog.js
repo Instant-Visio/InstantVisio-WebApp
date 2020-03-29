@@ -14,9 +14,9 @@ export default {
             
             <p>En plein dimanche après-midi, nous avons tenté de poser les questions sur la bulle de contact client (« chat widget ») de <a href="https://daily.co">Daily.co</a>.</p>
             
-            <p>Et là… « quelqu’un » (:) hello Kina) réponds à nos questions techniques en nous indiquant comment leur API va nous permettre de créer les séances de visiophonie à la volée et de personnaliser ces fameuses séances (y compris pour que l’interface soit dans d’autres langues). C’est sur leur formule payante.</p>
+            <p>Et là… « quelqu’un » (:) hello Nina) réponds à nos questions techniques en nous indiquant comment leur API va nous permettre de créer les séances de visiophonie à la volée et de personnaliser ces fameuses séances (y compris pour que l’interface soit dans d’autres langues). C’est sur leur formule payante.</p>
             
-            <p>Nous disons à Kina ce que nous sommes en train de bâtir et là, moment magique, intervention de quelqu’un d’autre sur la conversation, Kwin, qui nous accorde un compte premium avec toute la capacité d’offrir le service gratuitement pour, probablement, toutes les personnes qui pourraient avoir besoin d’Instant Visio.</p>
+            <p>Nous disons à Nina ce que nous sommes en train de bâtir et là, moment magique, intervention de quelqu’un d’autre sur la conversation, Kwin, qui nous accorde un compte premium avec toute la capacité d’offrir le service gratuitement pour, probablement, toutes les personnes qui pourraient avoir besoin d’Instant Visio.</p>
             
             <p>Grâce à la documentation très complète de l'API de <a href="https://daily.co">Daily.co</a>, nous avons réussi à mettre en place une solution adaptée aux besoins de nos utilisateurs en l'espace d'une journée.</p>
             
