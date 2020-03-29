@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 import {SCREEN} from '../../styles/theme'
 import Footer from '../../components/Footer'
 
@@ -41,8 +42,8 @@ const Right = styled.div`
     }
 `
 
-export default function Columns({children}){
-    
+export default function Columns({children, title}){
+    useDocumentTitle(title)
     const [first, ...second] = React.Children.toArray(children)
     return (
         <>
@@ -56,5 +57,6 @@ export default function Columns({children}){
 }
 
 Columns.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.element]).isRequired
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.element]).isRequired,
+    title: PropTypes.string.isRequired
 }

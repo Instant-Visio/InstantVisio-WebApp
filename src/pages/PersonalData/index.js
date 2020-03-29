@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+
 import DefaultLayout from '../../layout/Default'
 
 const PersonalData = () => {
-    useEffect(() => {
-        document.title = 'Données personnelles - Instant Visio'
-    }, [])
+    const {t} = useTranslation('credits')
 
     return (
         <>
-            <DefaultLayout>
+            <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
                 <h2 className="default-title">Données personnelles</h2>
                 <p>Les informations recueillies dans le questionnaire ne sont ni enregistrées ni stockées. Le responsable du traitement et de l’absence de traitement des données est Stéphane Luçon, 5 montée des Chrestianne, Pierrevert.</p>
                 <p>Les données marquées par un astérisque dans le questionnaire doivent obligatoirement être fournies. Dans le cas contraire, il sera impossible d’envoyer le message SMS ou email vers le correspondant.</p>

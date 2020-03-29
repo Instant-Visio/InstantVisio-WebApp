@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {SCREEN} from '../../styles/theme'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
@@ -53,7 +54,9 @@ const Container = styled.div`
     
 `
 
-export default function Default({children}){
+export default function Default({children, title}){
+    useDocumentTitle(title)
+
     return (
         <>
             <Header />
@@ -69,5 +72,6 @@ export default function Default({children}){
 
 Default.propTypes = {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.element]).isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    title: PropTypes.string.isRequired
 }

@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react'
 import {Link} from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+
 import ColumnsLayout from '../../layout/Columns'
 import { createCall } from '../../actions/createCall'
 import Form from '../../components/Form'
@@ -8,6 +10,7 @@ import { Route } from 'react-router-dom'
 
 
 export default function Home(){
+    const {t} = useTranslation('home')
     const [loading, setLoading] = useState(false)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
@@ -30,7 +33,7 @@ export default function Home(){
             })
     }
     return (
-        <ColumnsLayout>
+        <ColumnsLayout title={`${t('page-title')} - Instant Visio`}>
             <Description />
             <>
                 <Form onSubmit={submit} isSending={loading} errorSending={error} />

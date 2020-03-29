@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {useParams} from 'react-router-dom'
 import DefaultLayout from '../../layout/Default'
 import BlogArticle from '../../components/BlogArticle'
@@ -6,10 +6,6 @@ import blog from '../../data/blog'
 
 
 const Blog = () => {
-    useEffect(() => {
-        document.title = 'Blog - Instant Visio'
-    }, [])
-
     let { article } = useParams()
     
     return (
@@ -31,6 +27,7 @@ const Blog = () => {
                             <BlogArticle
                                 slug={slug}
                                 title={title}
+                                pageTitle={article ? title : ''}
                                 date={date}
                                 author={author}
                                 content={content}

@@ -8,6 +8,7 @@ import blog from '../../data/blog'
 const BlogArticle = ({
     slug,
     title,
+    pageTitle,
     date,
     author,
     content
@@ -15,7 +16,12 @@ const BlogArticle = ({
     const blogContent = useRef(null)
 
     useEffect(() => {
-        document.title = `${title} - Blog - Instant Visio`
+        if (pageTitle) {
+            document.title = `${pageTitle} - Blog - Instant Visio`
+        } else {
+            document.title = 'Blog - Instant Visio'
+        }
+
         blogContent.current.innerHTML = content
     }, [])
 

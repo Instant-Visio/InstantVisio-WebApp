@@ -1,18 +1,15 @@
-import React, {useEffect} from 'react'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 import DefaultLayout from '../../layout/Default'
 import CreditsStyled from './Credits'
-import { useTranslation } from 'react-i18next'
+
 
 const Credits = () => {
     const {t} = useTranslation('credits')
-    
-    useEffect(() => {
-        document.title = t('page-title')
-    }, [])
 
     return (
-        <DefaultLayout>
+        <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
             <CreditsStyled>
                 <div>
                     <h3 className="default-smallTitle credits-title">{t('creators')}</h3>
