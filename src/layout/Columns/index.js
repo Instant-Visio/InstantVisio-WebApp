@@ -8,7 +8,7 @@ import Footer from '../../components/Footer'
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    ${SCREEN.DESKTOP_AND_TABLET} {
+    ${SCREEN.DESKTOP} {
         flex-direction: row;
     }
 `
@@ -17,7 +17,7 @@ const Left = styled.div`
     padding: ${({theme}) => theme.spacing.L};
     width: 100%;
     background: ${({theme}) => theme.color.white};
-    ${SCREEN.DESKTOP_AND_TABLET} {
+    ${SCREEN.DESKTOP} {
         padding: ${({theme}) => `${theme.spacing.XXXL} ${theme.spacing.M} ${theme.spacing.XXXL} ${theme.spacing.M}`};
         width: 55%;
     }
@@ -30,7 +30,7 @@ const Right = styled.div`
     background: ${({theme}) => theme.color.grey};
     width: 100%;
     padding: ${({theme}) => theme.spacing.M};
-    ${SCREEN.DESKTOP_AND_TABLET} {
+    ${SCREEN.DESKTOP} {
         width: 45%;
         padding: 7rem;
     }

@@ -13,6 +13,7 @@ const Body = styled.div`
 const Container = styled.div`
     background: ${({theme}) => theme.color.white};
     border-radius: ${({theme}) => theme.spacing.XS};
+    min-height: 60vh;
     color: ${({theme}) => theme.color.grey};
     
     h2 {
@@ -37,17 +38,12 @@ const Container = styled.div`
         color: ${({theme}) =>theme.color.textGrey};
     }
 
-    ${SCREEN.MOBILE} {
+    ${SCREEN.MOBILE && SCREEN.TABLET} {
         margin: ${({theme}) => theme.spacing.XXL};
         padding: ${({theme}) => theme.spacing.XXL};
     }
 
-    ${SCREEN.TABLET} {
-        margin: ${({theme}) => theme.spacing.XXL};
-        padding: ${({theme}) => theme.spacing.XXL};
-    }
-
-    ${SCREEN.DESKTOP_AND_TABLET} {
+    ${SCREEN.DESKTOP} {
         margin: ${({theme}) => theme.spacing.XXXL};
         padding: ${({theme}) => theme.spacing.XXXL};
     }

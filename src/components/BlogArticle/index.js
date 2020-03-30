@@ -26,7 +26,7 @@ const BlogArticle = ({
     return(
         <BlogArticleStyled>
             <Link to={`/blog/${slug}`} className="article-title"><h2 className="default-title">{title}</h2></Link>
-            <p className="article-dateAuthor">Le {DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}, par {author}</p>
+            <p className="article-dateAuthor">{DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}, par {author}</p>
             <ReactMarkdown source={content} />
             <div className="article-forSharing">
                 Partager sur :
@@ -34,7 +34,7 @@ const BlogArticle = ({
             {blog.socialMedia.map(({ id, name, sharer, addedSharer, picture }) => { 
                 const checkAddedSharer = addedSharer ? addedSharer + encodeURI(title) : ''
                 return (
-                    <a className="article-share" key={id} href={`${sharer}https://instantvisio.com/${slug}${checkAddedSharer}`} target="_blank">
+                    <a className="article-share" key={id} href={`${sharer}https://instantvisio.com/${slug}${checkAddedSharer}`} target="_blank" rel="noopener noreferrer">
                         <img src={picture} alt={name} />
                     </a>
                 )}

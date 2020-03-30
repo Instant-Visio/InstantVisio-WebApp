@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {SCREEN} from '../../styles/theme'
 
 
 const BlogArticleStyled = styled.div`
@@ -26,7 +27,7 @@ const BlogArticleStyled = styled.div`
         }
     }
 
-    @media (min-width: 300px) {
+    ${SCREEN.MOBILE && SCREEN.TABLET} {
         .article {
             &-forSharing {
                 margin-bottom: ${({theme}) => theme.spacing.S};
@@ -34,7 +35,7 @@ const BlogArticleStyled = styled.div`
         }
     }
 
-    @media (min-width: 1024px) {
+    ${SCREEN.DESKTOP} {
         .article {
             &-forSharing {
                 display: inline-block;

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../styles/theme'
+import {SCREEN} from '../../styles/theme'
 
 
 const CreditsStyled = styled.div`
@@ -9,7 +9,7 @@ const CreditsStyled = styled.div`
     text-align: center;
     .credits {
         &-title {
-            margin-bottom: ${theme.spacing.M};
+            margin-bottom: ${({theme}) => theme.spacing.M};
         }
 
         &-link {
@@ -17,10 +17,10 @@ const CreditsStyled = styled.div`
         }
     }
 
-    @media (min-width: 1064px) {
+    ${SCREEN.DESKTOP} {
         flex-flow: row wrap;
         justify-content: space-between;
-        padding: 0 ${theme.spacing.XXL};
+        padding: 0 ${({theme}) => theme.spacing.XXL};
         align-items: flex-start;
         text-align:left;
     }

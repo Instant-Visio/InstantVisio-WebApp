@@ -11,20 +11,18 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
-    ${SCREEN.MOBILE}{
+    ${SCREEN.MOBILE && SCREEN.TABLET}{
         align-items: center;
     }
-    ${SCREEN.TABLET}{
-        align-items: center;
-    }
-    ${SCREEN.DESKTOP_AND_TABLET}{
+
+    ${SCREEN.DESKTOP}{
         margin-left: ${({theme}) => theme.spacing.XXL};
         margin-right: 5rem;
         align-items: flex-start;
     }
     & img {
         align-self: center;
-        ${SCREEN.DESKTOP_AND_TABLET}{
+        ${SCREEN.DESKTOP}{
             align-self: flex-start;
         }
     }
@@ -41,7 +39,7 @@ const Baseline = styled.p`
     font-weight: bold;
     text-align: center;
 
-    ${SCREEN.DESKTOP_AND_TABLET}{
+    ${SCREEN.DESKTOP}{
         text-align: left;
         font-size: ${({theme}) => theme.font.XXXL};
         margin-bottom: ${({theme}) => theme.spacing.XXXL};
@@ -87,7 +85,7 @@ const Information = styled.div`
         }
     }
 
-    ${SCREEN.DESKTOP_AND_TABLET}{
+    ${SCREEN.DESKTOP}{
         display: block;
         p {
             text-align: left;
