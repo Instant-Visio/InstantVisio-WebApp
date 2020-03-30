@@ -3,9 +3,20 @@
         "alt": "logo de Instant Visio, représentant un écran de téléphone portable bleu où apparaît un visage sous forme de cercle orange, discutant en visio avec le propriétaire du téléphone, dont le visage apparaît sous la forme d'un cercle aux contours oranges."
     },
     "homeBaseline": "Joignez un proche en visio, en un clic, <1>gratuitement.</1>",
-    "headerBaseline": "Joignez un proche en visio, en un clic, gratuitement."
+    "headerBaseline": "Joignez un proche en visio, en un clic, gratuitement.",
     "footer": {
         "contact-us": "Nous contacter",
-        "legal-mentions": "Mentions légales"
-    }
+        "legal-mentions": "Mentions légales",
+        "personal-data": "Données personnelles",
+        "blog": "Blog",
+        "credits": "Crédits",
+        "contact": "Prise de contact"
+    },
+    "url": {
+        "legal-mentions": "mentions-legales",
+        "personal-data": "donnees-personnelles",
+        "blog": "blog",
+        "blog-article": "blog/:article",
+        "credits": "credits"
+    }  
 }

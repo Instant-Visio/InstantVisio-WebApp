@@ -1,49 +1,63 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
+import {SCREEN} from '../../styles/theme'
 
 
-const HeaderStyled = styled.header({
-    backgroundColor:'#323742',
-    display: 'flex',
-    width: '100vw',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 'calc(10px + 2vmin)',
-    textAlign: 'left',
-    '.header': {
-        display: 'flex',
-        '&-baseline': {
-            color: '#aaabbd',
-            fontWeight: '500',
-            '&-content': {
-                fontFamily: `'Baloo Thambi 2', cursive`,
-                fontSize: '3.5vh',
+const HeaderStyled = styled.header`
+    background-color: ${({theme}) => theme.color.white};
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    .header {
+        display: flex;
+        align-items: center;
+        min-width: 100%;
+        padding: ${({theme}) => theme.spacing.XXL};
+        
+        &-baseline {
+            color: ${({theme}) => theme.color.logoGrey};
+            font-weight: 500;
+            padding-right: 0;
+            margin-right: 0;
+            
+            &-content {
+                font-family: 'Baloo Thambi 2'; cursive;
+                font-size: ${({theme}) => theme.font.XL};
             }
         }
-    },
-    '@media screen and (min-width: 300px)': {
-        '.header': {
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            '&-baseline-content': {
-                margin: '4vh 0',
-                textAlign: 'center',
+    }
+
+    ${SCREEN.MOBILE && SCREEN.TABLET} {
+        padding: 0;
+        width: 100%;
+        .header {
+            flex-direction: column;
+            justify-content: center;
+            
+            &-baseline-content {
+                display: none;
             }
         }
-    },
-    '@media screen and (min-width: 1024px)' : {
-        padding: '0',
-        height: '20vh',
-        '.header': {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            '&-baseline-content': {
-                margin: '0',
-                textAlign: 'right',
+    }
+    
+    ${SCREEN.DESKTOP} {
+        width: 100vw;
+        height: 20vh;
+        padding: ${({theme}) => theme.font.XXL};
+        .header {
+            flex-direction: row;
+            justify-content: space-between;
+            
+            &-baseline-content {
+                display: block;
+                margin: 0;
+                text-align: right;
             }
         }
     }
 })
+`
 
 export default HeaderStyled

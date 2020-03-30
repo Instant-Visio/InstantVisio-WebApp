@@ -3,12 +3,20 @@ import {
     Route,
     withRouter
 } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 import './App.scss'
-import LegalMentions from '../LegalMentions'
-import {Home} from '../../pages'
+import {
+    Home,
+    LegalMentions,
+    PersonalData,
+    Blog,
+    Credits
+} from '../../pages'
 
 const App = () => {
+    const {t} = useTranslation()
+
     useEffect(() => {
         // when using vh and vw units in css:
         // to make sure the height taken into account
@@ -27,9 +35,13 @@ const App = () => {
     
     return  <div className="App">
         <Route path="/" exact component={Home}/>
-        <Route path="/mentions-legales" exact component={LegalMentions}/>
+        <Route path={`/${t('url.legal-mentions')}`} exact component={LegalMentions}/>
+        <Route path={`/${t('url.personal-data')}`} exact component={PersonalData}/>
+        <Route path={`/${t('url.blog')}`} exact component={Blog} />
+        <Route path={`/${t('url.blog-article')}`} component={Blog} />
+        <Route path={`/${t('url.credits')}`} component={Credits} />
     </div>
 }
 
-// withRouter to pass props to components (AnyCall)
+// withRouter to pass props to components
 export default withRouter(App)

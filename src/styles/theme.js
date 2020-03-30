@@ -12,7 +12,7 @@ const sizes = {
 export const SCREEN = {
     MOBILE: '@media screen and (max-width: 767px)',
     TABLET: '@media screen and (max-width: 1279px) and (min-width:768px)',
-    DESKTOP_AND_TABLET: '@media screen and (min-width: 1280px)',
+    DESKTOP: '@media screen and (min-width: 1280px)',
 }
 
 export default {
@@ -23,7 +23,11 @@ export default {
         grey: '#323742',
         greyLighten: '#f5f5f5',
         black: '#222222',
-        orange: '#F28E1D'
+        orange: '#F28E1D',
+        textBlue: '#438a9d',
+        logoGrey: '#aaabbd',
+        textGrey: '#35353b',
+        otherGrey: '#3d3e45'
     },
     font: sizes,
     spacing: sizes

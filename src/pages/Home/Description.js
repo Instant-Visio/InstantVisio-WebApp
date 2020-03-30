@@ -11,15 +11,23 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
-    ${SCREEN.DESKTOP_AND_TABLET}{
+    align-items: center;
+
+    ${SCREEN.DESKTOP}{
         margin-left: ${({theme}) => theme.spacing.XXL};
         margin-right: 5rem;
+        align-items: flex-start;
     }
     & img {
         align-self: center;
-        ${SCREEN.DESKTOP_AND_TABLET}{
+        ${SCREEN.DESKTOP}{
             align-self: flex-start;
         }
+    }
+
+    .details {
+        font-size: ${({theme}) => theme.font.S};
+        margin: ${({theme}) => theme.spacing.XS} 0;
     }
 `
 
@@ -29,7 +37,7 @@ const Baseline = styled.p`
     font-weight: bold;
     text-align: center;
 
-    ${SCREEN.DESKTOP_AND_TABLET}{
+    ${SCREEN.DESKTOP}{
         text-align: left;
         font-size: ${({theme}) => theme.font.XXXL};
         margin-bottom: ${({theme}) => theme.spacing.XXXL};
@@ -57,12 +65,13 @@ const Information = styled.div`
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: ${({theme}) => theme.spacing.M} ${({theme}) => theme.spacing.XXXL}; 
+        padding: ${({theme}) => theme.spacing.M}; 
 
         p {
             font-weight: bold;
             font-size: ${({theme}) => theme.spacing.L};
-            margin-left: 4rem;
+            margin-left: ${({theme}) => theme.spacing.XXXL};
+            width: 29%;
         }
 
         ol {
@@ -74,7 +83,7 @@ const Information = styled.div`
         }
     }
 
-    ${SCREEN.DESKTOP_AND_TABLET}{
+    ${SCREEN.DESKTOP}{
         display: block;
         p {
             text-align: left;
@@ -85,19 +94,23 @@ const Information = styled.div`
 export default function Description(){
     const {t} = useTranslation(['home'])
     return (<Wrapper>
-        <Logo className="logo" />
+        <Logo />
         <Baseline>
             <Trans i18nKey='common:homeBaseline'>
                 Joignez un proche en visio, en un clic, <span>gratuitement.</span>
             </Trans>
         </Baseline>
-        <Information>
-            <p>{t('information.title')}</p>
-            <List>
-                <span>{t('information.steps.1')}</span>
-                <span>{t('information.steps.2')}</span>
-                <span>{t('information.steps.3')}</span>
-            </List>
-        </Information>
+        <div>
+            <Information>
+                <p>{t('information.title')}</p>
+                <List>
+                    <span>{t('information.steps.1')}</span>
+                    <span>{t('information.steps.2')}</span>
+                    <span>{t('information.steps.3')}</span>
+                </List>
+            </Information>
+            <p className="details">{t('information.indications.landscape')}</p>
+            <p className="details">{t('information.indications.multiple-people')}</p>
+        </div>
     </Wrapper>)
 }
