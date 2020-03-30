@@ -11,9 +11,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
-    ${SCREEN.MOBILE && SCREEN.TABLET}{
-        align-items: center;
-    }
+    align-items: center;
 
     ${SCREEN.DESKTOP}{
         margin-left: ${({theme}) => theme.spacing.XXL};

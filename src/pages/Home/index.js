@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import {Link} from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 
 import ColumnsLayout from '../../layout/Columns'
 import { createCall } from '../../actions/createCall'
@@ -47,8 +47,10 @@ export default function Home(){
                             />
                     }
                 </div>
-                <p className="cnil">Les champs marqués d'une astérisque sont obligatoires.</p>
-                <p className="cnil">Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</p>
+                <p className="cnil">{t('information.data-mentions.mandatory')}</p>
+                <p className="cnil">
+                    <Trans i18nKey='home:information.data-mentions.management'>Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</Trans>
+                </p>
             </>
         </ColumnsLayout>
     )

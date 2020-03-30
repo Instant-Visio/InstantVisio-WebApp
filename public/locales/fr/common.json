@@ -9,6 +9,14 @@
         "legal-mentions": "Mentions légales",
         "personal-data": "Données personnelles",
         "blog": "Blog",
-        "credits": "Crédits"
+        "credits": "Crédits",
+        "contact": "Prise de contact"
+    },
+    "url": {
+        "legal-mentions": "mentions-legales",
+        "personal-data": "donnees-personnelles",
+        "blog": "blog",
+        "blog-article": "blog/:article",
+        "credits": "credits"
     }  
 }

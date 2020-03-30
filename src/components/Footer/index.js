@@ -10,7 +10,7 @@ const Footer = () => {
             <ul className="footer">
                 <li className="footer-link">
                     <Link
-                        to="/mentions-legales"
+                        to={`/${t('url.legal-mentions')}`}
                         className="footer-link-content"
                     >
                         {t('footer.legal-mentions')}
@@ -18,7 +18,7 @@ const Footer = () => {
                 </li>
                 <li className="footer-link">
                     <Link
-                        to="/donnees-personnelles"
+                        to={`/${t('url.personal-data')}`}
                         className="footer-link-content"
                     >
                         {t('footer.personal-data')}
@@ -26,7 +26,7 @@ const Footer = () => {
                 </li>
                 <li className="footer-link">
                     <Link
-                        to="/blog"
+                        to={`/${t('url.blog')}`}
                         className="footer-link-content"
                     >
                         {t('footer.blog')}
@@ -34,7 +34,7 @@ const Footer = () => {
                 </li>
                 <li className="footer-link">
                     <Link
-                        to="/credits"
+                        to={`/${t('url.credits')}`}
                         className="footer-link-content"
                     >
                         {t('footer.credits')}
@@ -43,7 +43,7 @@ const Footer = () => {
                 <li className="footer-link">
                     <a
                         className="footer-link-content"
-                        href="mailto:contact@instantvisio.com?Subject=Prise de contact"
+                        href={`mailto:contact@instantvisio.com?Subject=${t('footer.contact')}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >

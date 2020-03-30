@@ -10,6 +10,10 @@
         "indications": {
             "landscape": "Après avoir soumis le formulaire, nous vous conseillons de tourner votre appareil en mode paysage. Vous verrez d'autant mieux votre proche.",
             "multiple-people": "Une fois sur la vidéo, vous avez accès au lien de l'appel dans la barre d'adresses. Vous pouvez la communiquer à d'autres proches, de votre côté. Nous vous recommandons de vous limiter à 6 participants par appel, pour une expérience optimale."
+        },
+        "data-mentions": {
+            "mandatory": "Les champs marqués d'une astérisque sont obligatoires.",
+            "management": "Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <1>Données personnelles</1>."
         }
     }
 }

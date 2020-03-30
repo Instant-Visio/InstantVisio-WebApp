@@ -11,7 +11,8 @@ const BlogArticle = ({
     title,
     pageTitle,
     date,
-    author,
+    authors,
+    authorsAnd,
     content
 }) => {
 
@@ -26,7 +27,7 @@ const BlogArticle = ({
     return(
         <BlogArticleStyled>
             <Link to={`/blog/${slug}`} className="article-title"><h2 className="default-title">{title}</h2></Link>
-            <p className="article-dateAuthor">{DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}, par {author}</p>
+            <p className="article-dateAuthor">{DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}, par {authors.join(` ${authorsAnd} `)}</p>
             <ReactMarkdown source={content} />
             <div className="article-forSharing">
                 Partager sur :

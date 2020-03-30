@@ -19,7 +19,8 @@ const Blog = () => {
                     slug,
                     title,
                     date,
-                    author,
+                    authors,
+                    authorsAnd,
                     content
                 }) => {
 
@@ -32,7 +33,8 @@ const Blog = () => {
                                 title={title}
                                 pageTitle={article ? title : ''}
                                 date={date}
-                                author={author}
+                                authors={authors}
+                                authorsAnd={authorsAnd}
                                 content={content}
                                 key={id}
                             />

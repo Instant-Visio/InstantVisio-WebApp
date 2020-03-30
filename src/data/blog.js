@@ -4,7 +4,7 @@ export default {
             id: 1,
             slug: 'dailyco-partenaire-premiere-heure',
             date: '2020-03-28',
-            author: 'Abeba Ngwe',
+            authors: ['Stéphane Luçon', 'Abeba Ngwe'],
             title: 'Daily.co, un partenaire de la première heure',
             content: `<p>A la création de <a href="https://instantvisio.com">Instant Visio</a>, l'enjeu principal a tout de suite été de trouver une technologie de visioconférence à la fois fiable et simple d'utilisation, fonctionnant sur un maximum de dispositifs.</p>
 
