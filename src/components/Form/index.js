@@ -69,24 +69,11 @@ const ButtonChoices = styled.div`
     }
 `
 
-const errorHandler = ({step, values, setFieldError, t}) => {
-    if (isStepPhone(step)) {
-        if (!values.phone){
-            setFieldError('phone', t('form.phone.errors.empty'))
-        }
-    }else {
-        if (!values.mail){
-            setFieldError('mail', t('form.mail.errors.empty'))
-        }
-    }
-}
-
 export default function Form({onSubmit, errorSending}) {
     const [step, setStep] = useState('phone')
     const { t } = useTranslation('form')
 
-    const handleSubmitForm = (values, {setSubmitting, setFieldError}) => {
-        //errorHandler({step, values, setFieldError, t})
+    const handleSubmitForm = (values, {setSubmitting}) => {
         if (onSubmit) {
             onSubmit(values, setSubmitting)
         }
