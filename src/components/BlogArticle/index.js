@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
 import { DateTime } from 'luxon'
 import ReactMarkdown from 'react-remarkable'
+import { useTranslation } from 'react-i18next'
 
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 import BlogArticleStyled from './BlogArticle'
-import blog from '../../data/blog'
+import blog from '../../data/js/blog'
 
 const BlogArticle = ({
     slug,
@@ -15,14 +17,10 @@ const BlogArticle = ({
     authorsAnd,
     content
 }) => {
+    const {t} = useTranslation('blog')
+    const defaultTitle = 'Blog - Instant Visio'
 
-    useEffect(() => {
-        if (pageTitle) {
-            document.title = `${pageTitle} - Blog - Instant Visio`
-        } else {
-            document.title = 'Blog - Instant Visio'
-        }
-    }, [])
+    useDocumentTitle(pageTitle ? `${pageTitle} - ${defaultTitle}` : defaultTitle)
 
     return(
         <BlogArticleStyled>
@@ -30,7 +28,7 @@ const BlogArticle = ({
             <p className="article-dateAuthor">{DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}, par {authors.join(` ${authorsAnd} `)}</p>
             <ReactMarkdown source={content} />
             <div className="article-forSharing">
-                Partager sur :
+                {t('share')}
             </div>
             {blog.socialMedia.map(({ id, name, sharer, addedSharer, picture }) => { 
                 const checkAddedSharer = addedSharer ? addedSharer + encodeURI(title) : ''

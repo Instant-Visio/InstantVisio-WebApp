@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
 
@@ -8,6 +9,14 @@ import Form from '../../components/Form'
 import Description from './Description'
 import { Route } from 'react-router-dom'
 
+
+const DataMentions = styled.div`
+    .cnil {
+        margin: ${({theme}) => theme.spacing.XS} 0;
+        color: ${({theme}) => theme.color.white};
+        font-size: ${({theme}) => theme.font.S};
+    }
+`
 
 export default function Home(){
     const {t} = useTranslation('home')
@@ -47,10 +56,12 @@ export default function Home(){
                             />
                     }
                 </div>
-                <p className="cnil">{t('information.data-mentions.mandatory')}</p>
-                <p className="cnil">
-                    <Trans i18nKey='home:information.data-mentions.management'>Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</Trans>
-                </p>
+                <DataMentions>
+                    <p className="cnil">{t('information.data-mentions.mandatory')}</p>
+                    <p className="cnil">
+                        <Trans i18nKey='home:information.data-mentions.management'>Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</Trans>
+                    </p>
+                </DataMentions>
             </>
         </ColumnsLayout>
     )

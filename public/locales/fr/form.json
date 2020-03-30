@@ -15,7 +15,7 @@
     "phone": {
         "label": "Numéro de téléphone de votre proche*",
         "title": "Numéro de votre proche",
-        "placeholder": "Ex. : 06 XX XX XX XX",
+        "placeholder": "Ex. : 06XXXXXXXX",
         "errors": {
             "empty": "Veuillez saisir le numéro de votre proche",
             "invalid": "Le numéro de télephone de votre proche est invalide"

@@ -34,12 +34,6 @@ const Right = styled.div`
         width: 45%;
         padding: 7rem;
     }
-
-    .cnil {
-        margin: ${({theme}) => theme.spacing.XS} 0;
-        color: ${({theme}) => theme.color.white};
-        font-size: ${({theme}) => theme.font.S};
-    }
 `
 
 export default function Columns({children, title}){
