@@ -1,17 +1,20 @@
 import React from 'react'
 import {useParams} from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+
 import DefaultLayout from '../../layout/Default'
 import BlogArticle from '../../components/BlogArticle'
-import blog from '../../data/blog'
 
 
 const Blog = () => {
     let { article } = useParams()
+    const {t} = useTranslation('blog')
     
     return (
         <>
             <DefaultLayout>
-                {blog.articles.map(({
+                {/* returnObjects key is necessary to be able to use objects and arrays */}
+                {t('articles', { returnObjects: true }).map(({
                     id,
                     slug,
                     title,

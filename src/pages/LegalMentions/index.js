@@ -1,7 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-remarkable'
-import markdown from '../../mdx/legal-mentions.md'
 
 import DefaultLayout from '../../layout/Default'
 

@@ -1,6 +1,7 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import { DateTime } from 'luxon'
+import ReactMarkdown from 'react-remarkable'
 
 import BlogArticleStyled from './BlogArticle'
 import blog from '../../data/blog'
@@ -13,7 +14,6 @@ const BlogArticle = ({
     author,
     content
 }) => {
-    const blogContent = useRef(null)
 
     useEffect(() => {
         if (pageTitle) {
@@ -21,15 +21,13 @@ const BlogArticle = ({
         } else {
             document.title = 'Blog - Instant Visio'
         }
-
-        blogContent.current.innerHTML = content
     }, [])
 
     return(
         <BlogArticleStyled>
             <Link to={`/blog/${slug}`} className="article-title"><h2 className="default-title">{title}</h2></Link>
             <p className="article-dateAuthor">Le {DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}, par {author}</p>
-            <div ref={blogContent} />
+            <ReactMarkdown source={content} />
             <div className="article-forSharing">
                 Partager sur :
             </div>
