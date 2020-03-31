@@ -3,7 +3,6 @@ import {SCREEN} from '../../styles/theme'
 
 
 const FooterStyled = styled.footer`
-    height: 35vh;
     background: #222222;
     padding: ${({theme}) => theme.spacing.XXL};
     display: flex;
@@ -35,12 +34,9 @@ const FooterStyled = styled.footer`
         }
     }
 
-    ${SCREEN.TABLET} {
-        height: 25vh;
-    }
-
-    ${SCREEN.DESKTOP} {
-        height: 18vh;
+    ${SCREEN.MOBILE_AND_TABLET} {
+        .footer {
+            padding-bottom: ${({theme}) => theme.spacing.XXL};
     }
 })
 `
