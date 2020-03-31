@@ -1,7 +1,7 @@
 import * as sgMail from '@sendgrid/mail'
 import * as ovh from 'ovh'
-import {parsePhoneNumberFromString} from 'libphonenumber-js'
 import {logEmailSent, logSmsSent} from '../../sumologic/sumologic'
+import {parsePhoneNumberFromString} from 'libphonenumber-js'
 
 export interface NotificationParams {
     name: string,
@@ -65,9 +65,23 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
         sender: 'INSTANT VIS',
         priority: "high",
         validityPeriod: 30, // 30 min
-    }).then((success: any) => {
-        logSmsSent()
+    }).then((result: any) => {
         console.log('sms sent')
+        logSmsSent()
+        if(result.ids && result.ids.length > 0) {
+            result.ids.forEach((id: string) => {
+                setTimeout(() => {
+                    ovhInstance
+                        .requestPromised('DELETE', `/sms/${params.ovhCredentials.servicename}/outgoing/${id}`)
+                        .then(() => {
+                            console.log("sms history delete done")
+                        })
+                        .catch((error:any) => {
+                            console.log(error)
+                        })
+                }, 2000)
+            })
+        }
     }).catch((error: any) => {
         console.error('Fail to send sms', error)
     })
@@ -79,10 +93,11 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
 // const getNewOVHConsumerKey = (ovhInstance:any) => {
 //     ovhInstance.requestPromised('POST', '/auth/credential', {
 //         'accessRules': [
-//             {'method': 'POST', 'path': '/sms/*/jobs'}
+//             {'method': 'POST', 'path': '/sms/*/jobs'},
+//             {'method': 'DELETE', 'path': '/sms/*/outgoing/*'}
 //         ]
 //     }).then((credential: any) => {
-//         console.log('auth success', credential)
+//         console.log('auth success, open the url below to validate them', credential)
 //     }).catch((error: any) => {
 //         console.log('auth error', error)
 //     })
