@@ -1,12 +1,10 @@
 ## Données personnelles
 
-Les informations recueillies dans le questionnaire ne sont ni enregistrées ni stockées. Le responsable du traitement et de l’absence de traitement des données est Stéphane Luçon, 5 montée des Chrestianne, Pierrevert.
+Les informations recueillies dans le questionnaire ne sont ni enregistrées ni stockées pour d'autre finalité que la mise en relation pour visioconférence ; elles sont supprimées au bout d'une journée des serveurs utilisés pour l'acheminement des SMS et des emails. Le responsable du traitement et de l’absence de traitement des données est Stéphane Luçon, 5 montée des Chrestianne, Pierrevert.
 
 Les données marquées par un astérisque dans le questionnaire doivent obligatoirement être fournies. Dans le cas contraire, il sera impossible d’envoyer le message SMS ou email vers le correspondant.
 
 Les données collectées seront communiquées aux seuls destinataires suivants : OVH Télécom, société assurant la distribution des messages SMS et SendMail, société assurant la distribution des messages email.
-
-Elles sont conservées pendant 1 jour.
 
 Vous pouvez accéder aux données vous concernant, les rectifier, demander leur effacement ou exercer votre droit à la limitation du traitement de vos données.
 

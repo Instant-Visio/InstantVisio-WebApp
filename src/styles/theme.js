@@ -11,9 +11,9 @@ const sizes = {
 
 export const SCREEN = {
     MOBILE: '@media screen and (max-width: 767px)',
-    TABLET: '@media screen and (max-width: 1279px) and (min-width:768px)',
-    MOBILE_AND_TABLET: '@media screen and (max-width: 1279px)',
-    DESKTOP: '@media screen and (min-width: 1280px)',
+    TABLET: '@media screen and (max-width: 1179px) and (min-width:768px)',
+    MOBILE_AND_TABLET: '@media screen and (max-width: 1179px)',
+    DESKTOP: '@media screen and (min-width: 1180px)',
 }
 
 export default {
