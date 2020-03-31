@@ -30,6 +30,11 @@ const FormCard = styled.div`
     flex-direction: column;
     align-items: center;
     border-radius: 0.5rem;
+
+    .sms-disabled {
+        color: #7f8ca6;
+        font-style: italic;
+    }
     
     & form {
         width: 100%;
@@ -83,11 +88,12 @@ export default function Form({onSubmit, errorSending}) {
         <FormCard>
             <FormCardHeader>
                 <p>{t('title')}</p>
-                <p>{t('description')}</p>
+                {/* <p>{t('description')}</p> */}
             </FormCardHeader>
             <ButtonChoices>
-                <Button disabled={isStepPhone(step)} onClick={() => setStep('phone')}>{t('buttons.sms.label')}</Button>
-                <Button disabled={!isStepPhone(step)} onClick={() => setStep('mail')}>{t('buttons.mail.label')}</Button>
+                {/* <Button disabled={isStepPhone(step)} onClick={() => setStep('phone')}>{t('buttons.sms.label')}</Button> */}
+                {/* <Button disabled={!isStepPhone(step)} onClick={() => setStep('mail')}>{t('buttons.mail.label')}</Button> */}
+                <p className="sms-disabled">L'option sms est momentanément désactivée. Elle sera rétablie le 1er avril 2020.</p>
             </ButtonChoices>
             <Formik validationSchema={schema} initialValues={initialValues} onSubmit={handleSubmitForm}>
                 {props => {
@@ -97,8 +103,8 @@ export default function Form({onSubmit, errorSending}) {
 
                         <BootstrapForm onSubmit={handleSubmit} noValidate autoComplete='off'>
                             <FormFields>
-                                <PhoneField disabled={isSubmitting} className={classNames({'hide': !isStepPhone(step)})} />
-                                <MailField disabled={isSubmitting} className={classNames({'hide': isStepPhone(step)})} />
+                                {/* <PhoneField disabled={isSubmitting} className={classNames({'hide': !isStepPhone(step)})} /> */}
+                                <MailField disabled={isSubmitting} /* className={classNames({'hide': isStepPhone(step)})} */ />
                                 <NameField disabled={isSubmitting} />
                             </FormFields>
                             <FormSubmit>
