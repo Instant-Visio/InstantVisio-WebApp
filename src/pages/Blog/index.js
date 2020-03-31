@@ -14,7 +14,7 @@ const Blog = () => {
         <>
             <DefaultLayout>
                 {/* returnObjects key is necessary to be able to use objects and arrays */}
-                {t('articles', { returnObjects: true }).map(({
+                {t('articles', { returnObjects: true }).reverse().map(({
                     id,
                     slug,
                     title,

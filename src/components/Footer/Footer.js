@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {SCREEN} from '../../styles/theme'
 
 
 const FooterStyled = styled.footer`
@@ -10,6 +11,7 @@ const FooterStyled = styled.footer`
     font-size: 16px;
     width: 100%;
     .footer {
+        height: 80%;
         list-style: none;
         display: flex;
         margin: 0;
@@ -30,6 +32,11 @@ const FooterStyled = styled.footer`
                 }
             }
         }
+    }
+
+    ${SCREEN.MOBILE_AND_TABLET} {
+        .footer {
+            padding-bottom: ${({theme}) => theme.spacing.XXL};
     }
 })
 `
