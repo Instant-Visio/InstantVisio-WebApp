@@ -18,19 +18,33 @@ const BlogArticleStyled = styled.div`
         }
 
         &-forSharing {
-            font-size: ${({theme}) => theme.font.L};
-            margin-right: ${({theme}) => theme.spacing.S};
-        }
+            margin-bottom: ${({theme}) => theme.font.XXL};
 
-        &-share {
-            margin: 0 ${({theme}) => theme.spacing.XXS};
+            &-text {
+                font-size: ${({theme}) => theme.font.L};
+                margin-right: ${({theme}) => theme.spacing.S};
+            }
+
+            &-link {
+                margin: 0 ${({theme}) => theme.spacing.XXS};
+            }
         }
     }
 
-    ${SCREEN.MOBILE && SCREEN.TABLET} {
+    ${SCREEN.MOBILE_AND_TABLET} {
         .article {
             &-forSharing {
-                margin-bottom: ${({theme}) => theme.spacing.S};
+
+                &-text {
+                    margin-bottom: ${({theme}) => theme.spacing.S};
+                }
+
+                &-link {
+
+                    &-img {
+                        margin-bottom: 1rem;
+                    }
+                }
             }
         }
     }
@@ -38,8 +52,19 @@ const BlogArticleStyled = styled.div`
     ${SCREEN.DESKTOP} {
         .article {
             &-forSharing {
-                display: inline-block;
-                margin-bottom: 0;
+                margin-bottom: ${({theme}) => theme.font.XXXL};
+                
+                &-text {
+                    display: inline-block;
+                    margin-bottom: 0;
+                }
+
+                &-link {
+
+                    &-img {
+                        margin-bottom: 0;
+                    }
+                }
             }
         }
     }

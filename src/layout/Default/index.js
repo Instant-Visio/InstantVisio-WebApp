@@ -38,7 +38,7 @@ const Container = styled.div`
         color: ${({theme}) =>theme.color.textGrey};
     }
 
-    ${SCREEN.MOBILE && SCREEN.TABLET} {
+    ${SCREEN.MOBILE_AND_TABLET} {
         margin: ${({theme}) => theme.spacing.XXL};
         padding: ${({theme}) => theme.spacing.XXL};
     }
