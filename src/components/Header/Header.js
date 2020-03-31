@@ -29,7 +29,7 @@ const HeaderStyled = styled.header`
         }
     }
 
-    ${SCREEN.MOBILE && SCREEN.TABLET} {
+    ${SCREEN.MOBILE_AND_TABLET} {
         padding: 0;
         width: 100%;
         .header {

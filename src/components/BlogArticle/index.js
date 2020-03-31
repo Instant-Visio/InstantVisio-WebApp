@@ -28,16 +28,18 @@ const BlogArticle = ({
             <p className="article-dateAuthor">{DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)}, par {authors.join(` ${authorsAnd} `)}</p>
             <ReactMarkdown source={content} />
             <div className="article-forSharing">
-                {t('share')}
-            </div>
-            {blog.socialMedia.map(({ id, name, sharer, addedSharer, picture }) => { 
-                const checkAddedSharer = addedSharer ? addedSharer + encodeURI(title) : ''
-                return (
-                    <a className="article-share" key={id} href={`${sharer}https://instantvisio.com/${slug}${checkAddedSharer}`} target="_blank" rel="noopener noreferrer">
-                        <img src={picture} alt={name} />
-                    </a>
+                <div className="article-forSharing-text">
+                    {t('share')}
+                </div>
+                {blog.socialMedia.map(({ id, name, sharer, addedSharer, picture }) => { 
+                    const checkAddedSharer = addedSharer ? addedSharer + encodeURI(title) : ''
+                    return (
+                        <a className="article-forSharing-link" key={id} href={`${sharer}https://instantvisio.com/${slug}${checkAddedSharer}`} target="_blank" rel="noopener noreferrer">
+                            <img className="article-forSharing-link-img" src={picture} alt={name} />
+                        </a>
+                    )}
                 )}
-            )}
+            </div>
         </BlogArticleStyled>
     )
 }

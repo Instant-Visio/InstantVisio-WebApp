@@ -2,6 +2,15 @@
     "articles": [
         {
             "id": 1,
+            "slug": "mise-ligne-instant-visio",
+            "date": "2020-03-26",
+            "authors": ["Stéphane Luçon"],
+            "authorsAnd": "",
+            "title": "Mise en ligne d’Instant Visio",
+            "content": "Depuis une semaine, notre \u00E9quipe de b\u00E9n\u00E9voles a mont\u00E9 un outil de visiophonie ultra-simplifi\u00E9 et totalement gratuit permettant aux personnes isol\u00E9es, hospitalis\u00E9es, en difficult\u00E9, de prendre contact avec leurs proches.\r\n\r\nPour y acc\u00E9der il suffit d'aller sur ce lien : [https:\/\/instantvisio.com](https:\/\/instantvisio.com\/).\r\n\r\nNous sommes conscients que la charge de travail pour les personnels soignants et les aidants professionnels est tr\u00E8s lourde, mais \u00E9galement que l'hospitalisation sans visite ou l'isolement forc\u00E9 (EHPAD, domicile) rendent la situation des b\u00E9n\u00E9ficiaires de soins encore plus difficile. \r\n\r\nC'est cette situation qui nous a d\u00E9termin\u00E9s \u00E0 construire un syst\u00E8me qui soit ultra-simple, gratuit, sans installation, sans inscription ni connexion \u00E0 un compte utilisateur, sans stockage ni exploitation de donn\u00E9es personnelles.\r\n\r\nIl suffit de saisir le num\u00E9ro de t\u00E9l\u00E9phone ou l'email du proche que l'on veut joindre pour lancer une visiophonie et communiquer en vous voyant, tout simplement.\r\n\r\nNous avons mont\u00E9 ce projet de A \u00E0 Z dans le cadre du Hacking Health Camp, gr\u00E2ce \u00E0 la d\u00E9termination et l'abn\u00E9gation de Abeba Ngwe, Nicolas Tchouanmou et Hugo Gresse qui ont su construire l'appli web et son architecture en un clin d'\u0153il !\r\n\r\n... et gr\u00E2ce \u00E0 l'aide d'Antoine Deglesne et S\u00E9bastien L'HOSTE pour l'UI\/UX, d'Oph\u00E9lie Strezlec (logo), de Mattia Primavera (Android), de Dominique Bernard Kanga (React Native), et de J\u00E9r\u00F4me Pansanel, Johan Ayache, Carole Dolignon, Christine Lecomte, Laurentiu Motoonu, David Brischoux et de tous ceux qui nous soutiennent.\r\n\r\nMerci \u00E0 S\u00E9bastien Let\u00E9li\u00E9 qui organise le Hacking Health Camp et aux entreprises OVHcloud, Twilio et Dailyco qui nous apportent gracieusement l'infrastructure permettant \u00E0 Instant Visio d'\u00EAtre gratuit.\r\n\r\nN'h\u00E9sitez pas \u00E0 faire savoir, \u00E0 diffuser autour de vous, dans vos groupes, cet outil. Et bien entendu nous sommes \u00E0 votre disposition pour toute suggestion, am\u00E9lioration..."
+        },
+        {
+            "id": 2,
             "slug": "dailyco-partenaire-premiere-heure",
             "date": "2020-03-28",
             "authors": ["Stéphane Luçon", "Abeba Ngwe"],
