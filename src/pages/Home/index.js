@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
-import {Link, Redirect} from 'react-router-dom'
+import {Link, Redirect, Route} from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
 
 import ColumnsLayout from '../../layout/Columns'
@@ -46,7 +46,12 @@ export default function Home(){
             <Form onSubmit={submit} isSending={loading} errorSending={error ? true : false} />
             <div ref={formSubmissionMessage}>
                 {videoCallId &&
-                    <Redirect to={`/${t('common:url.video-call')}/${videoCallId}`} />
+                    <Route  
+                        render={() => {
+                            window.location.href = `https://instantvisio.com/${t('common:url.video-call')}/${videoCallId}`
+                            return null
+                        }} 
+                    />
                 }
             </div>
             <DataMentions>
