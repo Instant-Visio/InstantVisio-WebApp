@@ -10,7 +10,7 @@ import Footer from '../../components/Footer'
 
 const IframeStyled = styled.div`
     width: 100vw;
-    height: 89vh;
+    height: 81vh;
     color: ${({theme}) => theme.color.white};
     display: flex;
     align-items: center;
@@ -50,10 +50,10 @@ const VideoCallFrame = () => {
     // to display confirmation message 
     // when user attempts leaving page
     const leavingCallPage = (event) => {
-        // Cancel the event as stated by the standard.
+        /* // Cancel the event as stated by the standard.
         event.preventDefault()
         // Chrome requires returnValue to be set.
-        event.returnValue = ''
+        event.returnValue = '' */
     }
 
     const leavingCallFrame = () => {
