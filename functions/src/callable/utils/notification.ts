@@ -63,7 +63,7 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
         message: messageBody,
         noStopClause: true,
         receivers: [phoneNumber.formatInternational()],
-        sender: 'INSTANT VIS',
+        sender: 'VisioPhone',
         priority: "high",
         validityPeriod: 30, // 30 min
     }).then((result: any) => {
