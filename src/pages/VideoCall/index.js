@@ -1,22 +1,46 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import {
     useParams
 } from 'react-router-dom'
 import DailyIframe from '@daily-co/daily-js'
 
+import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 const IframeStyled = styled.div`
     width: 100vw;
     height: 89vh;
+    color: ${({theme}) => theme.color.white};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: ${({theme}) => theme.font.L};
     iframe {
         width: 100%;
-        height: 100%;   
+        height: 100%;
+        border: none;   
+    }
+`
+const LeaveButton = styled.div`
+    width: 100vw;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    color: ${({theme}) => theme.color.white};
+    font-weight: 600;
+    background-color: ${({theme}) => theme.color.red};
+    cursor: pointer;
+    :hover {
+        background-color: #9a2530;
+    }
+    p {
+        margin: 0 auto;
     }
 `
 
 const VideoCallFrame = () => {
+    const [ leftCallFrame, setLeftCallFrame ] = useState(false)
     let { videoName } = useParams()
 
     const url = `https://instantvisio.daily.co/${videoName}`
@@ -32,11 +56,17 @@ const VideoCallFrame = () => {
         event.returnValue = ''
     }
 
+    const leavingCallFrame = () => {
+        setLeftCallFrame(true)
+    }
+
     useEffect(() => {
-        const daily = DailyIframe.wrap(videoFrame.current, {
-            showLeaveButton: true
-        })
+        const daily = DailyIframe.wrap(videoFrame.current)
         daily.join({ url })
+
+        if (leftCallFrame) {
+            daily.leave()
+        }
 
         window.addEventListener('beforeunload', leavingCallPage)
         // ComponentWillUnmount
@@ -49,13 +79,23 @@ const VideoCallFrame = () => {
     
     return (
         <>
+
+            {leftCallFrame && <Header />}
             <IframeStyled>
-                <iframe
-                    title="video call iframe"
-                    ref={videoFrame}
-                    allow="camera; microphone; fullscreen"
-                />
+                {
+                    !leftCallFrame && <iframe
+                        title="video call iframe"
+                        ref={videoFrame}
+                        allow="camera; microphone; fullscreen"
+                    />
+                }
+                {
+                    leftCallFrame && <div>Vous avez bien quitté l'appel. Vous pouvez fermer cette page.</div>
+                }
             </IframeStyled>
+            {!leftCallFrame && <LeaveButton onClick={leavingCallFrame}>
+                <p>Quitter l'appel</p>
+            </LeaveButton>}
             <Footer />
         </>
     )
