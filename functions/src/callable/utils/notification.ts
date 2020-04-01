@@ -71,7 +71,10 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
         logSmsSent()
     }).catch((error: any) => {
         console.error('Fail to send sms', error)
-        throw new functions.https.HttpsError("resource-exhausted","402")
+        if(error.error  && error.error === 402) {
+            throw new functions.https.HttpsError("resource-exhausted","402")
+        }
+        throw new functions.https.HttpsError("unknown", error.message)
     })
 }
 
