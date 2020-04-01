@@ -44,25 +44,23 @@ export default function Home(){
     return (
         <ColumnsLayout title={`${t('page-title')} - Instant Visio`}>
             <Description />
-            <>
-                <Form onSubmit={submit} isSending={loading} errorSending={error} />
-                <div ref={formSubmissionMessage}>
-                    {videoCallId &&
+            <Form onSubmit={submit} isSending={loading} errorSending={error ? true : false} />
+            <div ref={formSubmissionMessage}>
+                {videoCallId &&
                             <Route  
                                 render={() => {
                                     window.location.href = `https://instantvisio.daily.co/${videoCallId}`
                                     return null
                                 }} 
                             />
-                    }
-                </div>
-                <DataMentions>
-                    <p className="cnil">{t('information.data-mentions.mandatory')}</p>
-                    <p className="cnil">
-                        <Trans i18nKey='home:information.data-mentions.management'>Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</Trans>
-                    </p>
-                </DataMentions>
-            </>
+                }
+            </div>
+            <DataMentions>
+                <p className="cnil">{t('information.data-mentions.mandatory')}</p>
+                <p className="cnil">
+                    <Trans i18nKey='home:information.data-mentions.management'>Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <Link to="/donnees-personnelles">Données personnelles</Link>.</Trans>
+                </p>
+            </DataMentions>
         </ColumnsLayout>
     )
 }
