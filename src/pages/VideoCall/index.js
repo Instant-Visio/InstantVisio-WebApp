@@ -50,10 +50,10 @@ const VideoCallFrame = () => {
     // to display confirmation message 
     // when user attempts leaving page
     const leavingCallPage = (event) => {
-        /* // Cancel the event as stated by the standard.
+        // Cancel the event as stated by the standard.
         event.preventDefault()
         // Chrome requires returnValue to be set.
-        event.returnValue = '' */
+        event.returnValue = ''
     }
 
     const leavingCallFrame = () => {

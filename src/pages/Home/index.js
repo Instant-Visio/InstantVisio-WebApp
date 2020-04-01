@@ -48,7 +48,7 @@ export default function Home(){
                 {videoCallId &&
                     <Route  
                         render={() => {
-                            window.location.href = `https://instantvisio.com/${t('common:url.video-call')}/${videoCallId}`
+                            window.location.pathname = `/${t('common:url.video-call')}/${videoCallId}`
                             return null
                         }} 
                     />
