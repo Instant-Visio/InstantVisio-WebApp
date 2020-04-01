@@ -7,7 +7,8 @@ export const createCall = async (values) => {
         const result =  await functions.newCall({
             name: values.personName,
             phone: values.phone,
-            email: values.mail
+            email: values.mail,
+            platform: 'web'
         })
 
         if(!result || !result.data || !result.data.name) {

@@ -26,9 +26,9 @@ export const sendEmail = async (params: NotificationParams, messageBody: string)
     sgMail.setApiKey(params.sendGridCredentials.apikey)
     const msg = {
         to: params.email,
-        from: params.emailFrom,
+        from: `InstantVisio <${params.emailFrom}>`,
         subject: `Demande URGENTE de visiophonie de ${params.name}`,
-        text: messageBody,
+        text: messageBody
     }
 
     try {

@@ -29,6 +29,14 @@ export const newCall = functions.https.onCall(async data => {
             'Config missing for app (domain/emailfrom)'
         )
     }
+
+    if (isEmpty(data.platform) || data.platform !== "web") {
+        throw new functions.https.HttpsError(
+            'failed-precondition',
+            'Missing platform on request, or only web platform is allowed for the moment'
+        )
+    }
+
     if (isEmpty(sendgrid)) {
         console.warn("Warn: No credentials for SendGrid")
     }
