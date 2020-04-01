@@ -1,6 +1,6 @@
 {
     "title": "Joindre mon proche",
-    "description": "Comment souhaitez-vous prévenir votre proche de votre appel?",
+    "description": "Comment souhaitez-vous prévenir votre proche de votre appel ?",
     "buttons": {
         "sms": {
             "label": "Par sms"

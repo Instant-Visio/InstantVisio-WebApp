@@ -1,13 +1,12 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
 
 import ColumnsLayout from '../../layout/Columns'
 import { createCall } from '../../actions/createCall'
 import Form from '../../components/Form'
 import Description from './Description'
-import { Route } from 'react-router-dom'
 
 
 const DataMentions = styled.div`
@@ -19,7 +18,7 @@ const DataMentions = styled.div`
 `
 
 export default function Home(){
-    const {t} = useTranslation('home')
+    const {t} = useTranslation(['home', 'common'])
     const [loading, setLoading] = useState(false)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
@@ -32,11 +31,11 @@ export default function Home(){
                 setVideoCallId(roomName)
             })
             .catch(setError)
-            .finally(() => {
                 window.scrollTo({
                     top: formSubmissionMessage.current.offsetTop,
                     behavior: 'smooth',
                 })
+            .finally(() => {
                 setLoading(false)
                 setSubmitting(false)
             })
@@ -47,12 +46,7 @@ export default function Home(){
             <Form onSubmit={submit} isSending={loading} errorSending={error ? true : false} />
             <div ref={formSubmissionMessage}>
                 {videoCallId &&
-                            <Route  
-                                render={() => {
-                                    window.location.href = `https://instantvisio.daily.co/${videoCallId}`
-                                    return null
-                                }} 
-                            />
+                    <Redirect to={`/${t('common:url.video-call')}/${videoCallId}`} />
                 }
             </div>
             <DataMentions>

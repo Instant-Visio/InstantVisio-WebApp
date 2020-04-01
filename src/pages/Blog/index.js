@@ -7,14 +7,14 @@ import BlogArticle from '../../components/BlogArticle'
 
 
 const Blog = () => {
-    let { article } = useParams()
+    let { post } = useParams()
     const {t} = useTranslation('blog')
     
     return (
         <>
             <DefaultLayout>
                 {/* returnObjects key is necessary to be able to use objects and arrays */}
-                {t('articles', { returnObjects: true }).reverse().map(({
+                {t('posts', { returnObjects: true }).reverse().map(({
                     id,
                     slug,
                     title,
@@ -25,13 +25,13 @@ const Blog = () => {
                 }) => {
 
                     // either all articles are displayed,
-                    // or the article matching the URL
-                    if (article === slug || !article) {
+                    // or the post matching the URL
+                    if (post === slug || !post) {
                         return (
                             <BlogArticle
                                 slug={slug}
                                 title={title}
-                                pageTitle={article ? title : ''}
+                                pageTitle={post ? title : ''}
                                 date={date}
                                 authors={authors}
                                 authorsAnd={authorsAnd}
