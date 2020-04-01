@@ -20,6 +20,7 @@
 .env.production.local
 .env.development
 .env.production
+.env.production.instantvisio
 .history
 
 npm-debug.log*
