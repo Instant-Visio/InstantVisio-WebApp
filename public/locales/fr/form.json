@@ -17,19 +17,26 @@
         "title": "Numéro de votre proche",
         "placeholder": "Ex. : 06XXXXXXXX",
         "errors": {
-            "empty": "Veuillez saisir le numéro de votre proche",
-            "invalid": "Le numéro de télephone de votre proche est invalide"
+            "required": "Veuillez saisir le numéro de votre proche",
+            "invalid": "Le numéro de téléphone de votre proche est invalide. Il doit contenir au minimum 6 chiffres"
         }
     },
     "mail": {
         "label": "Adresse e-mail de votre proche*",
         "title": "E-mail de votre proche",
-        "placeholder": "Ex. : jean.dupont@gmail.com"
+        "placeholder": "Ex. : jean.dupont@gmail.com",
+        "errors": {
+            "required": "Veuillez saisir l'adresse email de votre proche",
+            "invalid": "L'adresse email de votre proche est invalide"
+        }
     },
     "personName": {
         "label": "Quel est votre nom (ou surnom)* ?",
         "title": "Votre nom",
-        "placeholder": "Ex. : Laure, Mamie"
+        "placeholder": "Ex. : Laure, Mamie",
+        "errors": {
+            "required": "Veuillez saisir votre nom"
+        }
     },
     "errors": {
         "general": "Le sms ou l'e-mail n'a pas pu être envoyé. Veuillez vérifier les informations renseignées et soumettre à nouveau le formulaire.",

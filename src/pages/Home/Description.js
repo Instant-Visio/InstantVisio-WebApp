@@ -1,10 +1,49 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import color from 'color'
 import { useTranslation, Trans } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
-import List from '../../components/List'
+import BaseList from '../../components/List'
 import Logo from '../../components/Logo'
+import { useState } from 'react'
+import useDetectMobile from '../../hooks/useDetectMobile'
+
+const List = styled(BaseList)`
+    ${SCREEN.MOBILE}{
+        max-height: 0;
+        overflow: hidden;
+        transition: all .3s ease-in-out;
+        ${({collapsed}) => !collapsed && css`
+            max-height: 300px;
+            margin-top: ${({theme}) => theme.spacing.M};
+        `}
+    }
+
+    ${SCREEN.TABLET}{
+        padding-left: 0;
+    }
+`
+
+const P = styled.p`
+    font-weight: bold;
+    
+    ${SCREEN.DESKTOP}{
+        text-align: left;
+    }
+
+    ${SCREEN.TABLET}{
+        font-size: ${({theme}) => theme.spacing.L};
+        margin-left: ${({theme}) => theme.spacing.XXXL};
+        width: 29%;
+    }
+
+    ${SCREEN.MOBILE}{
+        margin-bottom: 0;
+        margin-block-end: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+`
 
 const Wrapper = styled.div`
     color: ${({theme}) => theme.color.grey};
@@ -56,8 +95,8 @@ const Information = styled.div`
     margin-top: ${({theme}) => theme.spacing.L};
     padding: ${({theme}) => theme.spacing.L};
 
-    p {
-        font-weight: bold;
+    ${SCREEN.MOBILE}{
+        width: 100%;
     }
 
     ${SCREEN.TABLET}{
@@ -67,32 +106,32 @@ const Information = styled.div`
         justify-content: space-between;
         padding: ${({theme}) => theme.spacing.M}; 
 
-        p {
-            font-weight: bold;
-            font-size: ${({theme}) => theme.spacing.L};
-            margin-left: ${({theme}) => theme.spacing.XXXL};
-            width: 29%;
-        }
-
-        ol {
-            padding-left: 0;
-        }
-
         * {
             margin-bottom: 0;
         }
     }
-
-    ${SCREEN.DESKTOP}{
-        display: block;
-        p {
-            text-align: left;
-        }
-    }
-    
 `
+
+const Arrow = styled.i`
+    ${SCREEN.MOBILE}{
+        margin-top: 0.125rem;
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-top: 2px solid ${({theme}) => theme.color.grey};
+        border-left: 2px solid ${({theme}) => theme.color.grey};
+        transform: rotate(225deg);
+        transition: transform .3s ease-in-out;
+        ${({collapsed}) => !collapsed && css`
+            transform: translate(0, 50%) rotate(45deg);
+        `}
+    }
+`
+
 export default function Description(){
     const {t} = useTranslation(['home'])
+    const isMobile = useDetectMobile()
+    const [collapsed, setCollapsed] = useState(true)
     return (<Wrapper>
         <Logo />
         <Baseline>
@@ -100,17 +139,20 @@ export default function Description(){
                 Joignez un proche en visio, en un clic, <span>gratuitement.</span>
             </Trans>
         </Baseline>
-        <div>
-            <Information>
-                <p>{t('information.title')}</p>
-                <List>
-                    <span>{t('information.steps.1')}</span>
-                    <span>{t('information.steps.2')}</span>
-                    <span>{t('information.steps.3')}</span>
-                </List>
-            </Information>
-            <p className="details">{t('information.indications.landscape')}</p>
-            <p className="details">{t('information.indications.multiple-people')}</p>
-        </div>
+        
+        <Information>
+            <P {...(isMobile && {onClick:() => setCollapsed(!collapsed)})}>
+                <span>{t('information.title')}</span>
+                <Arrow collapsed={collapsed} />
+            </P>
+            <List collapsed={collapsed}>
+                <span>{t('information.steps.1')}</span>
+                <span>{t('information.steps.2')}</span>
+                <span>{t('information.steps.3')}</span>
+            </List>
+        </Information>
+        <p className="details">{t('information.indications.landscape')}</p>
+        <p className="details">{t('information.indications.multiple-people')}</p>
+        
     </Wrapper>)
 }

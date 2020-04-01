@@ -1,25 +1,25 @@
 import React, { useState } from 'react'
 import {Formik} from 'formik'
-import {Form as BootstrapForm, Button} from 'react-bootstrap'
+import {Form as BaseForm, Button, Tabs, Tab} from 'react-bootstrap'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import schema from './schema'
-import {MailField, PhoneField, NameField} from './Fields'
+import Field from './Field'
 import CallError from './CallError'
+import triggerValidation from './validation'
 
-const initialValues = {
-    personName: '',
-    phone: '',
-    mail: '',
-}
-
-const isStepPhone = (step) => step === 'phone'
+const BootstrapForm = styled(BaseForm)`
+    width: 100%;
+`
 
 const FormFields = styled.div`
     & > * {
         margin: 0 0 ${({theme}) => theme.spacing.XXL};
+    }
+
+    &:first-child{
+        margin-top: ${({theme}) => theme.spacing.XXL};
     }
 `
 
@@ -32,12 +32,8 @@ const FormCard = styled.div`
     align-items: center;
     border-radius: 0.5rem;
     
-    & form {
-        width: 100%;
-
-        & .hide {
-            display: none;
-        }
+    & [role="tab"]{
+        outline: none;
     }
 `
 
@@ -60,19 +56,34 @@ const FormSubmit = styled.div`
     text-align: center;
 `
 
-const ButtonChoices = styled.div`
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    button {
-        text-transform: capitalize;
-        font-size: 1.125rem; 
-    }
-`
-
 export default function Form({onSubmit, errorSending}) {
-    const [step, setStep] = useState('phone')
+    const tabs = {
+        phone: 'phone',
+        mail: 'mail'
+    }
+    const [tab, setTab] = useState(tabs.phone)
+
     const { t } = useTranslation('form')
+    
+    const initialValues = {
+        personName: '',
+        phone: '',
+        mail: '',
+    }
+    
+    const selectTabOnError = (errors) => {
+        if (!errors.phone && errors.mail && tab === tabs.phone){
+            setTab(tabs.mail)
+        }else if (!errors.mail && errors.phone && tab === tabs.mail){
+            setTab(tabs.phone)
+        }
+    }
+    
+    const onValidate = async (values) => {
+        const errors = await triggerValidation(values, tab, t)
+        selectTabOnError(errors)
+        return errors
+    }
 
     const handleSubmitForm = (values, {setSubmitting}) => {
         if (onSubmit) {
@@ -80,32 +91,61 @@ export default function Form({onSubmit, errorSending}) {
         }
     }
 
+    const onSelectTab = (tab) => setTab(tab)
+
     return (
         <FormCard>
             <FormCardHeader>
                 <p>{t('title')}</p>
                 <p>{t('description')}</p>
             </FormCardHeader>
-            <ButtonChoices>
-                <Button disabled={isStepPhone(step)} onClick={() => setStep('phone')}>{t('buttons.sms.label')}</Button>
-                <Button disabled={!isStepPhone(step)} onClick={() => setStep('mail')}>{t('buttons.mail.label')}</Button>
-            </ButtonChoices>
-            <Formik validationSchema={schema} initialValues={initialValues} onSubmit={handleSubmitForm}>
+            <Formik initialValues={initialValues} validateOnBlur={false} validateOnChange={false} validate={onValidate} onSubmit={handleSubmitForm}>
                 {props => {
                 /* eslint-disable react/prop-types */
-                    const {isSubmitting, isValid, handleSubmit, dirty} = props
+                    const {isSubmitting, handleSubmit, errors} = props
+                    console.log(errors)
                     return (
-
                         <BootstrapForm onSubmit={handleSubmit} noValidate autoComplete='off'>
+                            <Tabs activeKey={tab} onSelect={onSelectTab}>
+                                <Tab eventKey={tabs.phone} title={t('buttons.sms.label')}>
+                                    <FormFields>
+                                        <Field
+                                            name="phone"
+                                            type="tel"
+                                            placeholder={t('phone.placeholder')} 
+                                            label={t('phone.label')} 
+                                            disabled={isSubmitting}
+                                            title={t('phone.title')} 
+                                        />
+                                    </FormFields>
+                                </Tab>
+                                <Tab eventKey={tabs.mail} title={t('buttons.mail.label')}>
+                                    <FormFields>
+                                        <Field
+                                            name="mail"
+                                            type="email"
+                                            disabled={isSubmitting}
+                                            placeholder={t('mail.placeholder')} 
+                                            label={t('mail.label')} 
+                                            title={t('mail.title')} 
+                                        />                                    
+                                    </FormFields>
+                                </Tab>
+                            </Tabs>
                             <FormFields>
-                                <PhoneField disabled={isSubmitting} className={classNames({'hide': !isStepPhone(step)})} />
-                                <MailField disabled={isSubmitting} className={classNames({'hide': isStepPhone(step)})} />
-                                <NameField disabled={isSubmitting} />
+                                <Field
+                                    name="personName"
+                                    type="text" 
+                                    disabled={isSubmitting}
+                                    placeholder={t('personName.placeholder')} 
+                                    label={t('personName.label')} 
+                                    title={t('personName.title')} 
+                                />
                             </FormFields>
                             <FormSubmit>
                                 <Button
                                     type="submit"
-                                    disabled={!(isValid && dirty) || isSubmitting}
+                                    disabled={isSubmitting}
                                     className={classNames({loading: isSubmitting})}>
                                     {t('buttons.submit.label')}
                                 </Button>

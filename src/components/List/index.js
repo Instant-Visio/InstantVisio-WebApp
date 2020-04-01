@@ -9,6 +9,8 @@ const ListItem = styled(BaseListItem)``
 const Wrapper = styled.ol`
     list-style: none;
     counter-reset: my-awesome-counter;
+    margin-bottom: 0;
+    margin-block-end: 0;
 
     ${SCREEN.MOBILE}{
         padding: 0;
@@ -20,14 +22,15 @@ const Wrapper = styled.ol`
     }
 `
 
-export default function List({children}){
+export default function List({children, className}){
     return (
-        <Wrapper>
+        <Wrapper className={className}>
             {React.Children.map(children, (item, index) => (<ListItem key={`list-${index}`}>{item}</ListItem>))}
         </Wrapper>
     )
 }
 
 List.propTypes = {
+    className: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.element]).isRequired
 }
