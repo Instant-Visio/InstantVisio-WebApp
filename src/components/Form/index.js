@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import schema from './schema'
 import {MailField, PhoneField, NameField} from './Fields'
+import CallError from './CallError'
 
 const initialValues = {
     personName: '',
@@ -116,7 +117,7 @@ export default function Form({onSubmit, errorSending}) {
                                 </Button>
                             </FormSubmit>
                             {errorSending &&
-                                <SubmitError>{t('errors.submit')}</SubmitError>
+                                <SubmitError><CallError error={errorSending}/></SubmitError>
                             }
                         </BootstrapForm>
                     )
