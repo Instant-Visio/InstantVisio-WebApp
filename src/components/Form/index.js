@@ -64,13 +64,13 @@ export default function Form({onSubmit, errorSending}) {
     const [tab, setTab] = useState(tabs.phone)
 
     const { t } = useTranslation('form')
-    
+
     const initialValues = {
         personName: '',
         phone: '',
         mail: '',
     }
-    
+
     const selectTabOnError = (errors) => {
         if (!errors.phone && errors.mail && tab === tabs.phone){
             setTab(tabs.mail)
@@ -78,7 +78,7 @@ export default function Form({onSubmit, errorSending}) {
             setTab(tabs.phone)
         }
     }
-    
+
     const onValidate = async (values) => {
         const errors = await triggerValidation(values, tab, t)
         selectTabOnError(errors)
@@ -102,8 +102,7 @@ export default function Form({onSubmit, errorSending}) {
             <Formik initialValues={initialValues} validateOnBlur={false} validateOnChange={false} validate={onValidate} onSubmit={handleSubmitForm}>
                 {props => {
                 /* eslint-disable react/prop-types */
-                    const {isSubmitting, handleSubmit, errors} = props
-                    console.log(errors)
+                    const {isSubmitting, handleSubmit} = props
                     return (
                         <BootstrapForm onSubmit={handleSubmit} noValidate autoComplete='off'>
                             <Tabs activeKey={tab} onSelect={onSelectTab}>
@@ -112,10 +111,10 @@ export default function Form({onSubmit, errorSending}) {
                                         <Field
                                             name="phone"
                                             type="tel"
-                                            placeholder={t('phone.placeholder')} 
-                                            label={t('phone.label')} 
+                                            placeholder={t('phone.placeholder')}
+                                            label={t('phone.label')}
                                             disabled={isSubmitting}
-                                            title={t('phone.title')} 
+                                            title={t('phone.title')}
                                         />
                                     </FormFields>
                                 </Tab>
@@ -125,21 +124,21 @@ export default function Form({onSubmit, errorSending}) {
                                             name="mail"
                                             type="email"
                                             disabled={isSubmitting}
-                                            placeholder={t('mail.placeholder')} 
-                                            label={t('mail.label')} 
-                                            title={t('mail.title')} 
-                                        />                                    
+                                            placeholder={t('mail.placeholder')}
+                                            label={t('mail.label')}
+                                            title={t('mail.title')}
+                                        />
                                     </FormFields>
                                 </Tab>
                             </Tabs>
                             <FormFields>
                                 <Field
                                     name="personName"
-                                    type="text" 
+                                    type="text"
                                     disabled={isSubmitting}
-                                    placeholder={t('personName.placeholder')} 
-                                    label={t('personName.label')} 
-                                    title={t('personName.title')} 
+                                    placeholder={t('personName.placeholder')}
+                                    label={t('personName.label')}
+                                    title={t('personName.title')}
                                 />
                             </FormFields>
                             <FormSubmit>
