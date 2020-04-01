@@ -1,3 +1,4 @@
+import * as functions from 'firebase-functions'
 import * as sgMail from '@sendgrid/mail'
 import * as ovh from 'ovh'
 import {logEmailSent, logSmsSent} from '../../sumologic/sumologic'
@@ -68,22 +69,9 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
     }).then((result: any) => {
         console.log('sms sent')
         logSmsSent()
-        if(result.ids && result.ids.length > 0) {
-            result.ids.forEach((id: string) => {
-                setTimeout(() => {
-                    ovhInstance
-                        .requestPromised('DELETE', `/sms/${params.ovhCredentials.servicename}/outgoing/${id}`)
-                        .then(() => {
-                            console.log("sms history delete done")
-                        })
-                        .catch((error:any) => {
-                            console.log(error)
-                        })
-                }, 2000)
-            })
-        }
     }).catch((error: any) => {
         console.error('Fail to send sms', error)
+        throw new functions.https.HttpsError("resource-exhausted","402")
     })
 }
 

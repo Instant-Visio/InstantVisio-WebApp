@@ -32,6 +32,8 @@
         "placeholder": "Ex. : Laure, Mamie"
     },
     "errors": {
-        "submit": "Le sms ou l'e-mail n'a pas pu être envoyé. Veuillez vérifier les informations renseignées et soumettre à nouveau le formulaire."
+        "general": "Le sms ou l'e-mail n'a pas pu être envoyé. Veuillez vérifier les informations renseignées et soumettre à nouveau le formulaire.",
+        "quotaSMS": "Impossible d'envoyer le SMS, nous n'avons plus de crédit.",
+        "resourceExausted": "Impossible de notifier votre proche, nous n'avons plus de ressource disponible."
     }
 }
