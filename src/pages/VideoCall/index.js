@@ -4,6 +4,7 @@ import {
     useParams
 } from 'react-router-dom'
 import DailyIframe from '@daily-co/daily-js'
+import { useTranslation } from 'react-i18next'
 
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -40,6 +41,8 @@ const LeaveButton = styled.div`
 `
 
 const VideoCallFrame = () => {
+    const {t} = useTranslation('videocall')
+
     const [ leftCallFrame, setLeftCallFrame ] = useState(false)
     let { videoName } = useParams()
 
@@ -94,7 +97,7 @@ const VideoCallFrame = () => {
                     />
                 }
                 {
-                    leftCallFrame && <div>Vous avez bien quitté l'appel. Vous pouvez fermer cette page.</div>
+                    leftCallFrame && <div>{t('leave')}</div>
                 }
             </IframeStyled>
             {!leftCallFrame && <LeaveButton onClick={leavingCallFrame}>
