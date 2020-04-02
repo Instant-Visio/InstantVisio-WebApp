@@ -4,6 +4,13 @@ import * as ovh from 'ovh'
 import {logEmailSent, logSmsSent} from '../../sumologic/sumologic'
 import {parsePhoneNumberFromString} from 'libphonenumber-js'
 
+export interface OVHCredentials {
+    consumerkey: string,
+    appsecret: string,
+    appkey: string,
+    servicename: string
+}
+
 export interface NotificationParams {
     name: string,
     email: string,
@@ -11,12 +18,7 @@ export interface NotificationParams {
     roomUrl: string,
     country: string,
     emailFrom: string,
-    ovhCredentials: {
-        consumerkey: string,
-        appsecret: string,
-        appkey: string,
-        servicename: string
-    },
+    ovhCredentials: OVHCredentials,
     sendGridCredentials: {
         apikey: string
     }
@@ -85,6 +87,7 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
 //     ovhInstance.requestPromised('POST', '/auth/credential', {
 //         'accessRules': [
 //             {'method': 'POST', 'path': '/sms/*/jobs'},
+//             {'method': 'GET', 'path': '/sms/*/outgoing'},
 //             {'method': 'DELETE', 'path': '/sms/*/outgoing/*'}
 //         ]
 //     }).then((credential: any) => {
