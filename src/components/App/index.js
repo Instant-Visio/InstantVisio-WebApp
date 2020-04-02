@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import './App.scss'
 import {
     Home,
+    VideoCall,
     LegalMentions,
     PersonalData,
     Blog,
@@ -35,11 +36,12 @@ const App = () => {
     
     return  <div className="App">
         <Route path="/" exact component={Home}/>
-        <Route path={`/${t('url.legal-mentions')}`} exact component={LegalMentions}/>
-        <Route path={`/${t('url.personal-data')}`} exact component={PersonalData}/>
+        <Route path={`/${t('url.video-call')}/:videoName`} component={VideoCall} />
+        <Route path={`/${t('url.legal-mentions')}`} exact component={LegalMentions} />
+        <Route path={`/${t('url.personal-data')}`} exact component={PersonalData} />
         <Route path={`/${t('url.blog')}`} exact component={Blog} />
-        <Route path={`/${t('url.blog-article')}`} component={Blog} />
-        <Route path={`/${t('url.credits')}`} component={Credits} />
+        <Route path={`/${t('url.blog')}/:post`} exact component={Blog} />
+        <Route path={`/${t('url.credits')}`} exact component={Credits} />
     </div>
 }
 
