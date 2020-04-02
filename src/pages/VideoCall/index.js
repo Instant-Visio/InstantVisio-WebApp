@@ -62,7 +62,11 @@ const VideoCallFrame = () => {
 
     useEffect(() => {
         const daily = DailyIframe.wrap(videoFrame.current)
-        daily.join({ url })
+        
+        daily.join({
+            url,
+            showFullscreenButton: true
+        })
 
         if (leftCallFrame) {
             daily.leave()
@@ -86,7 +90,7 @@ const VideoCallFrame = () => {
                     !leftCallFrame && <iframe
                         title="video call iframe"
                         ref={videoFrame}
-                        allow="camera; microphone; fullscreen"
+                        allow="microphone; camera; autoplay"
                     />
                 }
                 {
