@@ -81,7 +81,7 @@ const VideoCallFrame = () => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
        
-    }, [])
+    }, [url])
 
     
     return (
@@ -97,11 +97,11 @@ const VideoCallFrame = () => {
                     />
                 }
                 {
-                    leftCallFrame && <div>{t('leave')}</div>
+                    leftCallFrame && <div>{t('leave-confirmation')}</div>
                 }
             </IframeStyled>
             {!leftCallFrame && <LeaveButton onClick={leavingCallFrame}>
-                <p>Quitter l'appel</p>
+                <p>{t('leave-feature')}</p>
             </LeaveButton>}
             <Footer />
         </>
