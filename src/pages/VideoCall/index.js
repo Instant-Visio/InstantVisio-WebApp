@@ -6,12 +6,11 @@ import {
 import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
 
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
 const IframeStyled = styled.div`
     width: 100vw;
-    height: 81vh;
+    height: 100vh;
     color: ${({theme}) => theme.color.white};
     display: flex;
     align-items: center;
@@ -21,22 +20,6 @@ const IframeStyled = styled.div`
         width: 100%;
         height: 100%;
         border: none;   
-    }
-`
-const LeaveButton = styled.div`
-    width: 100vw;
-    height: 7vh;
-    display: flex;
-    align-items: center;
-    color: ${({theme}) => theme.color.white};
-    font-weight: 600;
-    background-color: ${({theme}) => theme.color.red};
-    cursor: pointer;
-    :hover {
-        background-color: #9a2530;
-    }
-    p {
-        margin: 0 auto;
     }
 `
 
@@ -58,17 +41,17 @@ const VideoCallFrame = () => {
         // Chrome requires returnValue to be set.
         event.returnValue = ''
     }
-
-    const leavingCallFrame = () => {
-        setLeftCallFrame(true)
-    }
-
+        
     useEffect(() => {
         const daily = DailyIframe.wrap(videoFrame.current)
 
         daily.join({
             url,
-            showFullscreenButton: true
+            showLeaveButton: true
+        })
+
+        daily.on('left-meeting', () => {
+            setLeftCallFrame(true)
         })
 
         if (leftCallFrame) {
@@ -86,24 +69,20 @@ const VideoCallFrame = () => {
 
     return (
         <>
-
-            {leftCallFrame && <Header />}
             <IframeStyled>
                 {
                     !leftCallFrame && <iframe
                         title="video call iframe"
                         ref={videoFrame}
                         allow="microphone; camera; autoplay"
+                        allowFullScreen
                     />
                 }
                 {
                     leftCallFrame && <div>{t('leave-confirmation')}</div>
                 }
             </IframeStyled>
-            {!leftCallFrame && <LeaveButton onClick={leavingCallFrame}>
-                <p>{t('leave-feature')}</p>
-            </LeaveButton>}
-            <Footer />
+            {leftCallFrame && <Footer />}
         </>
     )
 }
