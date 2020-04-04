@@ -47,7 +47,8 @@ const VideoCallFrame = () => {
 
         daily.join({
             url,
-            showLeaveButton: true
+            showLeaveButton: true,
+            showFullscreenButton: true
         })
 
         daily.on('left-meeting', () => {
