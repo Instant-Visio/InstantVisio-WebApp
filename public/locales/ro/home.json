@@ -1,0 +1,19 @@
+{
+    "page-title": "Bunvenit",
+    "information": {
+        "title": "Mod de utilizare ?",
+        "steps": {
+            "1": "Completați formularul.",
+            "2": "Validați apăsând butonul « Fiți alături de persoana apropiată ».",
+            "3": "Imaginea se declanșează, puteți începe conversația."
+        },
+        "indications": {
+            "landscape": "ADupă expedierea formularului, vă sfătuim să setați imaginea în mod peisaj (nu portret). Îl veți vedea mult mai bine pe interlocutorul dumneavoastră.",
+            "multiple-people": "Imediat ce ați comutat pe apel video, aveți acces la linkul apelului, pe bara de adrese. Puteți să-l distribuiți altor apropiați ai dumneavoastră, după dorință. Vă recomandăm totuși limitarea la cel mult 6 participanți, pentru menținerea unei calități optime a apelului."
+        },
+        "data-mentions": {
+            "mandatory": "Câmpurile marcate cu asterisc sunt obligatorii.",
+            "management": "Responsabilul sistemului, Stéphane Luçon, se asigură de utilizarea datelor furnizate pentru trimiterea sms-ului sau emailului către apropiatul dumneavoastră. Pentru mai multe detalii referitoare la gestionarea datelor personale și exercitarea drepturilor dvs. mergeți pe pagina  <1>Date personale</1>."
+        }
+    }
+}

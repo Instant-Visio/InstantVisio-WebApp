@@ -1,0 +1,37 @@
+{
+    "title": "Ismerősöm elérése",
+    "description": "Hogyan kívánja értesíteni ismerősét a hívásról?",
+    "buttons": {
+        "sms": {
+            "label": "SMS-en keresztül"
+        },
+        "mail": {
+            "label": "E-mailen keresztül"
+        },
+        "submit": {
+            "label": "E-mailen keresztül"
+        }
+    },
+    "phone": {
+        "label": "Ismerőse telefonszáma",
+        "title": "Ismerőse telefonszáma",
+        "placeholder": "Pl.: 06 XX XXX XX XX",
+        "errors": {
+            "empty": "Írja be ismerőse telefonszámát",
+            "invalid": "Ismerősének telefonszáma érvénytelen"
+        }
+    },
+    "mail": {
+        "label": "Ismerőse e-mail címe",
+        "title": "Ismerőse e-mail címe",
+        "placeholder": "Pl.: kovacs.bela@gmail.com"
+    },
+    "personName": {
+        "label": "Quel est votre nom (ou surnom)* ?",
+        "title": "Neve",
+        "placeholder": "Pl.: Laura, Mama"
+    },
+    "errors": {
+        "submit": "Az SMS, vagy e-mail kiküldése sikertelen. Kérjük, ellenőrizze a megadott adatokat, és küldje el újra az adatlapot."
+    }
+}

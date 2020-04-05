@@ -1,0 +1,22 @@
+{
+    "logo": {
+        "alt": "Logo-ul Instant Visio, care reprezintă un ecran albastru al telefonului mobil cu o față sub forma unui cerc portocaliu, vorbind vizual cu proprietarul telefonului, a cărui față apare sub forma unui cerc cu contururi portocalii."
+    },
+    "homeBaseline": "Fiți alături de o persoană apropiată pe video, cu un singur clic, <1>gratuit.</1>",
+    "headerBaseline": "Fiți alături de o persoană apropiată pe video, cu un singur clic, gratuit.",
+    "footer": {
+        "contact-us": "Contactați-ne",
+        "legal-mentions": "Mențiuni legale",
+        "personal-data": "Date personale",
+        "blog": "Blog",
+        "credits": "Contribuții",
+        "contact": "Contact"
+    },
+    "url": {
+        "legal-mentions": "mentions-legales",
+        "personal-data": "donnees-personnelles",
+        "blog": "blog",
+        "blog-article": "blog/:article",
+        "credits": "credits"
+    }
+}
