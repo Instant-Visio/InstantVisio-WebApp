@@ -1,0 +1,13 @@
+{
+    "articles": [
+        {
+            "id": 1,
+            "slug": "dailyco-partenaire-premiere-heure",
+            "date": "2020-03-28",
+            "authors": ["Stéphane Luçon", "Abeba Ngwe"],
+            "authorsAnd": "et",
+            "title": "Daily.co, un partener din primul moment",
+            "content": "Când a fost creată [Instant Visio] (https://instantvisio.com), principala provocare a fost imediat aceea de a găsi o tehnologie de conferință video care să fie fiabilă și ușor de utilizat, funcționând pe cât mai multe dispozitive.\nA fost absolut esențial pentru noi să putem intra în telefonie video fără a impune noi descărcări pentru utilizator, dar și pentru a ne asigura că canalele video și audio sunt sigure.\n[Daily.co] (https://daily.co) fiind platforma video a\nprogramului de instruire \"[startupschool.org] (https://startupschool.org)\" înființat de celebrul Y Combinator, ne-am gândit de la bun început să includem instrumentul lor în lista noastră de teste. Chiar dacă totul era perfect tehnic, ne-am confruntat inițial cu faptul că interfața era în engleză și, prin urmare, putea dezorienta utilizatorii care nevorbitori de limba engleză.\nLa mijlocul zilei de duminică după-amiază, am încercat să punem întrebări cu privire la chatul de\ncontact al clienților [Daily.co] (\"widget chat\") (https://daily.co).\nȘi acolo ... \"cineva\" (:) salut Nina) răspunde la întrebărilor noastre tehnice, spunându-ne cum API-ul lor ne va permite să creăm sesiuni videoși să personalizăm aceste faimoase sesiuni (inclusiv pentru ca interfața să fie în alte limbi). Este pe formula lor cu plată.\nÎi spunem Ninei ce construim și acolo, moment magic, intervenția altcuiva în conversație, Kwin, care ne acordă un cont premium cu toată\ncapacitatea de a oferi serviciul gratuit pentru, probabil toți cei care ar putea avea nevoie de Instant Visio.\nDatorită documentației API complete a [Daily.co] (https://daily.co), am reușit să punem la dispoziție o soluție adaptată nevoilor utilizatorilor noștri în spațiul unei zile.\nSuntem recunoscători să cooperăm cu [Daily.co] (https://daily.co) pentru a oferi persoanelor vulnerabile instrumente care să le permită să aibă o legătură vizuală cu cei dragi, mai ales în\naceste momente foarte dificile.\nAi grijă de tine!"
+        }
+    ]
+}

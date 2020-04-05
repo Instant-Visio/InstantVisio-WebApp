@@ -1,0 +1,19 @@
+{
+    "page-title": "Üdvözöljük!",
+    "information": {
+        "title": "Hogyan működik?",
+        "steps": {
+            "1": "Töltse ki az adatlapot.",
+            "2": "Hagyja jóvá az \"Ismerősöm felhívása\" gomb megnyomásával.",
+            "3": "A videó megnyílik, beszélhet ismerősével.."
+        },
+        "indications": {
+            "landscape": "Miután elküldte a kitöltött adatlapot, azt javasoljuk, hogy "táj" üzemmódban használja a telefonját. Úgy jobban látja majd ismerősét.",
+            "multiple-people": "Ha elindul a videó, a címsorban hozzáférhet a hívás hivatkozásához. Ezt megoszthatja más ismerőseivel is. A legjobb teljesítmény elérése érdekében javasoljuk, hogy legfeljebb hat résztvevőre korlátozzák a hívásokat."
+        },
+        "data-mentions": {
+            "mandatory": "A csillaggal jelölt mezők kitöltése kötelező.",
+            "management": "Stéphane Luçon, az datkezelés felelőse gondoskodik a begyűjtött adatok kezeléséről a címzetteknek történő SMS, vagy e-mail kiküldése végett. A kiküldést követően ezek az adatok egy napon belül törlésre kerülnek. További információ érdekében olvassa el a következő oldalon található tájékoztatást: <1>Személyes adatok</1>."
+        }
+    }
+}

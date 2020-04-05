@@ -1,0 +1,22 @@
+{
+    "logo": {
+        "alt": "Instant Visio Logo."
+    },
+    "homeBaseline": "Rufen Sie einen Verwandten an, mit einem Klick, <1>kostenlos.</1>",
+    "headerBaseline": "Rufen Sie einen Verwandten an, mit einem Klick, kostenlos.",
+    "footer": {
+        "contact-us": "Uns kontaktieren",
+        "legal-mentions": "Rechtliche Hinweise",
+        "personal-data": "Personenbezogene Daten",
+        "blog": "Blog",
+        "credits": "Nachweise",
+        "contact": "Kontaktaufnahme"
+    },
+    "url": {
+        "legal-mentions": "mentions-legales",
+        "personal-data": "donnees-personnelles",
+        "blog": "blog",
+        "blog-article": "blog/:article",
+        "credits": "credits"
+    }
+}
