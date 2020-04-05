@@ -1,0 +1,37 @@
+{
+    "title": "Mein Verwandter anrufen",
+    "description": "Wie wollen Sie ihren Verwandten über diesen Anruf informieren?",
+    "buttons": {
+        "sms": {
+            "label": "Per SMS"
+        },
+        "mail": {
+            "label": "Per E-Mail"
+        },
+        "submit": {
+            "label": "Mein Verwandter anrufen"
+        }
+    },
+    "phone": {
+        "label": "Telefonnummer ihres Verwandters*",
+        "title": "Telefonnummer ihres Verwandters",
+        "placeholder": "z.B. 171 1234567",
+        "errors": {
+            "empty": "Bitte das Telefonnummer ihres Verwandters eingeben",
+            "invalid": "Das Telefonnummer ihrers Verwandters ist nicht gültich"
+        }
+    },
+    "mail": {
+        "label": "E-Mail-Addresse ihres Verwandters*",
+        "title": "E-Mail-Addresse ihres Verwandters",
+        "placeholder": "z.B. hans.mueller@gmail.com"
+    },
+    "personName": {
+        "label": "Wie ist euer Name (oder Benutzername)*?",
+        "title": "Ihr Name",
+        "placeholder": "z. B. Anna, Oma"
+    },
+    "errors": {
+        "submit": "Das SMS oder das E-Mail kann nicht gesendet werden. Bitte überprüfen Sie ihre Eingabe und wiederholen Sie den Vorgang."
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "logo": {
+        "alt": "Az Instant Visio logója, amely egy kék színű mobiltelefont ábrázol, amelyben megjelenik egy arc egy narancssárga kör formájában, amely épp videókonferenciában társalog a telefon birtokosával, akinek arca egy narancssárga körvonalakkal rendelkező kör formájában jelenik meg."
+    },
+    "homeBaseline": "Érje el ismerőseit videókonferencián, egy kattintással, <1>ingyenesen.</1>",
+    "headerBaseline": "Érje el ismerőseit videókonferencián, egy kattintással, ingyenesen.",
+    "footer": {
+        "contact-us": "Kapcsolat",
+        "legal-mentions": "Jogi közlemények",
+        "personal-data": "Személyes adatok",
+        "blog": "Blog",
+        "credits": "Közreműködők",
+        "contact": "Kapcsolatfelvétel"
+    },
+    "url": {
+        "legal-mentions": "mentions-legales",
+        "personal-data": "donnees-personnelles",
+        "blog": "blog",
+        "blog-article": "blog/:article",
+        "credits": "credits"
+    }
+}

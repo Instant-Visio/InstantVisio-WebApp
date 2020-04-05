@@ -1,0 +1,37 @@
+{
+    "title": "Contactați persoana apropiată",
+    "description": "Cun doriți să anunțați persoana apropiată de apelul dumneavoastră?",
+    "buttons": {
+        "sms": {
+            "label": "Prin sms"
+        },
+        "mail": {
+            "label": "Pe mail"
+        },
+        "submit": {
+            "label": "Contactați persoana apropiată dumneavoastră"
+        }
+    },
+    "phone": {
+        "label": "Numărul de telefon al persoanei apropiate*",
+        "title": "Numărul persoanei apropiate",
+        "placeholder": "Ex. : 07XX XXX XXX",
+        "errors": {
+            "empty": "Introduceți numărul de telefon al persoanei apropiate dumneavoastră",
+            "invalid": "Numărul de telefon introdus este incorect"
+        }
+    },
+    "mail": {
+        "label": "Introduceți adresa de mail a persoanei apropiate dumneavoastră*",
+        "title": "Emailul apropiatului dumneavoastră",
+        "placeholder": "Ex. : maria.popescu@gmail.com"
+    },
+    "personName": {
+        "label": "Prenumele dumneavoastră",
+        "title": "Prenumele dumneavoastră",
+        "placeholder": "Ex. : Laure, Buni"
+    },
+    "errors": {
+        "submit": "Emailul nu a putut fi expediat.Verificați din nou datele introduse și reîncercați."
+    }
+}
