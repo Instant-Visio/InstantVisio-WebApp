@@ -9,7 +9,7 @@ import BlogArticle from '../../components/BlogArticle'
 const Blog = () => {
     let { post } = useParams()
     const {t} = useTranslation('blog')
-    
+
     return (
         <>
             <DefaultLayout>
@@ -40,6 +40,7 @@ const Blog = () => {
                             />
                         )
                     }
+                    return ''
                 })}
             </DefaultLayout>
         </>
