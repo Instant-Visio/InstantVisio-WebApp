@@ -50,7 +50,7 @@ const VideoCallFrame = () => {
 
     const videoFrame = useRef(null)
 
-    // to display confirmation message 
+    // to display confirmation message
     // when user attempts leaving page
     const leavingCallPage = (event) => {
         // Cancel the event as stated by the standard.
@@ -65,7 +65,7 @@ const VideoCallFrame = () => {
 
     useEffect(() => {
         const daily = DailyIframe.wrap(videoFrame.current)
-        
+
         daily.join({
             url,
             showFullscreenButton: true
@@ -80,10 +80,10 @@ const VideoCallFrame = () => {
         return () => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
-       
-    }, [url])
 
-    
+    }, [url, leftCallFrame])
+
+
     return (
         <>
 

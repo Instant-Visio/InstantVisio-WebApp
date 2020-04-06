@@ -8,6 +8,8 @@ const CallError = (error) => {
         switch (e.code) {
             case 'resource-exhausted':
                 return e.message === '402' ? t('errors.quotaSMS') : t('errors.resourceExausted')
+            default:
+                return t('errors.general')
         }
     }
 
