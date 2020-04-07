@@ -4,9 +4,18 @@ import PropTypes from 'prop-types'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import {SCREEN} from '../../styles/theme'
 import Footer from '../../components/Footer'
+import BaseLang from '../../components/Lang'
+
+const Lang = styled(BaseLang)`
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 1;
+`
 
 const Wrapper = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
     ${SCREEN.DESKTOP} {
         flex-direction: row;
@@ -25,6 +34,7 @@ const Left = styled.div`
 
 const Right = styled.div`
     display: flex; 
+    position: relative;
     flex-direction: column;
     justify-content: center;
     background: ${({theme}) => theme.color.grey};
@@ -42,8 +52,11 @@ export default function Columns({children, title}){
     return (
         <>
             <Wrapper>
+                <Lang />
                 <Left>{first}</Left>
-                <Right>{second}</Right>
+                <Right>
+                    {second}
+                </Right>
             </Wrapper>
             <Footer />
         </>

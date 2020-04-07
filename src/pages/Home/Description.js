@@ -42,6 +42,7 @@ const P = styled.p`
         margin-block-end: 0;
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 `
 
@@ -112,18 +113,14 @@ const Information = styled.div`
     }
 `
 
-const Arrow = styled.i`
+const Arrow = styled.span`
+    display: none;
     ${SCREEN.MOBILE}{
+        display: initial;
         margin-top: 0.125rem;
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        border-top: 2px solid ${({theme}) => theme.color.grey};
-        border-left: 2px solid ${({theme}) => theme.color.grey};
-        transform: rotate(225deg);
         transition: transform .3s ease-in-out;
         ${({collapsed}) => !collapsed && css`
-            transform: translate(0, 50%) rotate(45deg);
+            transform: rotate(60deg);
         `}
     }
 `
@@ -143,7 +140,7 @@ export default function Description(){
         <Information>
             <P {...(isMobile && {onClick:() => setCollapsed(!collapsed)})}>
                 <span>{t('information.title')}</span>
-                <Arrow collapsed={collapsed} />
+                <Arrow collapsed={collapsed}>&#x2BC6;</Arrow>
             </P>
             <List collapsed={collapsed}>
                 <span>{t('information.steps.1')}</span>

@@ -5,6 +5,18 @@ import {SCREEN} from '../../styles/theme'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import BaseLang from '../../components/Lang'
+
+const Lang = styled(BaseLang)`
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 1;
+`
+
+const Wrapper = styled.div`
+    position: relative;
+`
 
 const Body = styled.div`
     width: 100%;
@@ -54,7 +66,8 @@ export default function Default({children, title}){
     useDocumentTitle(title)
 
     return (
-        <>
+        <Wrapper>
+            <Lang />
             <Header />
             <Body>
                 <Container>
@@ -62,7 +75,7 @@ export default function Default({children, title}){
                 </Container>
             </Body>
             <Footer />
-        </>
+        </Wrapper>
     )
 }
 

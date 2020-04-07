@@ -8,10 +8,9 @@ module.exports = {
 		'plugin:react/recommended'
 	],
 	'globals': {
-		'Atomics': 'readonly',
-		'SharedArrayBuffer': 'readonly',
 		'process': 'readonly'
 	},
+	'parser': 'babel-eslint',
 	'parserOptions': {
 		'ecmaFeatures': {
 			'jsx': true

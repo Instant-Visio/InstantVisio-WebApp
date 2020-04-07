@@ -7,6 +7,7 @@ import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import theme from './styles/theme'
 import './i18n/i18n'
+import './i18n/countries'
 
 const rootComponent = (
     <Suspense fallback={null}>
