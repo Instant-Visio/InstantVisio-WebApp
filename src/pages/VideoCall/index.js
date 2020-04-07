@@ -6,6 +6,7 @@ import {
 import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
 
+import {SCREEN} from '../../styles/theme'
 import Footer from '../../components/Footer'
 
 const IframeStyled = styled.div`
@@ -21,6 +22,19 @@ const IframeStyled = styled.div`
         height: 100%;
         border: none;   
     }
+
+    ${SCREEN.MOBILE} and (orientation: portrait) {
+        .landscape {
+          transform: rotate(-90deg);
+          transform-origin: left top;
+          width: 100vh;
+          height: 100vw;
+          overflow-x: hidden;
+          position: absolute;
+          top: 100%;
+          left: 0;
+        }
+      }
 `
 
 const VideoCallFrame = () => {
@@ -51,6 +65,10 @@ const VideoCallFrame = () => {
             showFullscreenButton: true
         })
 
+        if (window.location.pathname.includes('visio')) {
+            document.querySelector('.iframe').classList.add('landscape')
+        }
+
         daily.on('left-meeting', () => {
             setLeftCallFrame(true)
         })
@@ -73,6 +91,7 @@ const VideoCallFrame = () => {
             <IframeStyled>
                 {
                     !leftCallFrame && <iframe
+                        className="iframe"
                         title="video call iframe"
                         ref={videoFrame}
                         allow="microphone; camera; autoplay"
