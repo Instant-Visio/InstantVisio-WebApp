@@ -1,0 +1,46 @@
+{
+    "title": "Chiama il mio familiare",
+    "description": "Come preferisci avvisare il tuo familiare della chiamata?",
+    "buttons": {
+        "sms": {
+            "label": "Per sms"
+        },
+        "mail": {
+            "label": "Per e-mail"
+        },
+        "submit": {
+            "label": "Chiama il mio familiare"
+        }
+    },
+    "phone": {
+        "label": "Numero di telefono del tuo familiare*",
+        "title": "Numero del tuo familiare",
+        "placeholder": "Ex. : 32XXXXXXXX",
+        "errors": {
+            "required": "Inserisci il numero del tuo familiare",
+            "invalid": "Il numero del tuo familiare non è valido. Deve contenere almeno 6 cifre"
+        }
+    },
+    "mail": {
+        "label": "Indirizzo e-mail del tuo familiare*",
+        "title": "E-mail del tuo familiare",
+        "placeholder": "Ex. : jean.dupont@gmail.com",
+        "errors": {
+            "required": "Inserisci l'indirizzo email del tuo familiare",
+            "invalid": "L'indirizzo email del tuo familiare non è valido"
+        }
+    },
+    "personName": {
+        "label": "Qual è il tuo nome (o soprannome)* ?",
+        "title": "Il tuo nome",
+        "placeholder": "Ex. : Laure, Mamie",
+        "errors": {
+            "required": "Inserisci il tuo nome"
+        }
+    },
+    "errors": {
+        "general": "L'sms o l'e-mail non è stato inviato. Verifica le informazioni inserite e ricarica ulteriormente il formulario.",
+        "quotaSMS": "Impossibile inviare l'SMS, il credito è esaurito.",
+        "resourceExausted": "Impossibile contattare il tuo familiare, risorse non disponibili."
+    }
+}

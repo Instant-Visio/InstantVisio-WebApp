@@ -1,0 +1,24 @@
+{
+    "articles": [
+        {
+            "id": 1,
+            "slug": "pubblicazione-instant-visio",
+            "date": "2020-03-26",
+            "authors": ["Stéphane Luçon"],
+            "authorsAnd": "",
+            "title": "Pubblicazione di Instant Visio",
+            "content": "Da una settimana, la nostra squadra di volontari ha creato un sistema di videochiamata ultra semplificato e totalmente gratuito che consente alle persone isolate, ricoverate o in difficoltà di mettersi in contatto con i loro cari.\r\n\r\nPer accedere, basta cliccare sul link : [https:\/\/instantvisio.com](https:\/\/instantvisio.com\/).\r\n\r\nSiamo consapevoli che il carico di lavoro per il personale sanitario e gli assistenti sia considerevole, ma anche che il ricovero senza possibilità di visita o l’isolamento forzato rendano la situazione dei pazienti ancora più difficile.\r\n\r\nÈ questa situazione che ci ha portati a progettare un sistema ultra semplice, gratuito, senza installazione, senza connessione a un account e senza raccolta o utilizzo di dati personali.\r\n\r\nBasta inserire il numero di telefono o l’email del parente che si vuole contattare per poter iniziare la videochiamata e comunicare vedendo la persona. Tutto qui.\r\n\r\n Abbiamo montato questo progetto dalla A alla Z all’interno dell’Hacking Health Camp, grazie alla determinazione e alla dedizione di Abeba Ngwe, Nicolas Tchouanmou e Hugo Gresse che hanno saputo construire l’app et la sua architettura in un batter d’occhio!...e grazie all’aiuto di Antoine Deglesne e Sébastien L'HOSTE per l'UI\/UX, di Ophélie Strezlec (logo), di Mattia Primavera (Android), di Dominique Bernard Kanga (React Native), e di Jéuême Pansanel, Johan Ayache, Carole Dolignon, Christine Lecomte, Laurentiu Motoonu, David Brischoux e di tutti coloro che ci sostengono.\r\n\r\nGrazie Sébastien Letélié che organizza l’Hacking Health Camp e alle aziende OVHcloud, Twilio e Dailyco che ci forniscono gentilmente l’infrastruttura che permette a Instant Visio di essere gratuito.\r\n\r\nNon esitate a far conoscere e a diffondere intorno a voi e nei vostri gruppi questo strumento. E ovviamente noi rimaniamo a vostra disposizione per qualsiasi suggerimento, miglioramento..."
+        },
+        {
+            "id": 2,
+            "slug": "dailyco-partner-prima-ora",
+            "date": "2020-03-28",
+            "authors": ["Stéphane Luçon", "Abeba Ngwe"],
+            "authorsAnd": "e",
+            "title": "Daily.co, un partner della prima ora",
+            "content": "Nel momento della creazione di [Instant Visio](https:\/\/instantvisio.com), la principale sfida è stata subito trovare una tecnologia di videoconferenza sicura ma anche semplice da usare, funzionante su un massimo di dispositivi.\r\n\r\nPer noi era indispensabile soprattutto un accesso alla videochiamata senza imporre ulteriori downloads all’utente, ma assicurandoci comunque che i canali audio e video fossero protetti.\r\n\r\nEssendo [Daily.co](https:\/\/daily.co) la piattaforma di videochiamata del programma di formazione “[startupschool.org](https:\/\/startupschool.org)” creata per il famoso Y Combinator, abbiamo immediatamente pensato di includere il loro strumento nella nostra lista di test. Anche se tutto era perfetto dal punto di vista tecnico, ci siamo scontrati inizialmente col fatto che l’interfaccia fosse in inglese e potesse perciò disorientare gli utenti non anglofoni.\r\n\r\nDi domenica pomeriggio, abbiamo cercato di contattare a tal proposito il supporto clienti (« chat widget ») di [Daily.co](https:\/\/daily.co).\r\n\r\nE qui...« qualcuno » (:) hello Nina) risponde alle nostre domande tecniche indicandoci come la loro API ci permetterà di creare al volo le sessioni di videochiamata e di personalizzarle (incluso per impostare l’interfaccia in altre lingue). È la loro opzione a pagamento. Confidiamo perciò a Nina quello che stiamo progettando e qui, momento magico, interviene qualcun altro nella conversazione, Kwin, che ci concede un account premium con tutta la capacità di offrire il servizio gratuitamente a probabilmente tutte le persone che potrebbero aver bisogno di Instant Visio.\r\n\r\nGrazie alla documentazione completa dell’API di [Daily.co](https:\/\/daily.co), siamo riusciti a progettare una soluzione adatta alle esigenze dei nostri utenti in un solo giorno.\r\n\r\nSiamo grati di cooperare con [Daily.co](https:\/\/daily.co) e mettere a disposizione delle persone vulnerabili degli strumenti che consentano loro di avere un contatto visivo con i loro familiari, soprattutto in questo momento difficile. Abbiate cura di voi stessi!"
+        }
+    ],
+    "share": "Condividere su :",
+    "dateArticle": "Il"
+}
