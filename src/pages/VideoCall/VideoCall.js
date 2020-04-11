@@ -53,6 +53,7 @@ export const MutedCamera = styled.div`
     z-index: 10;
     bottom: 2rem;
     left: 1rem;
+    padding: 0 ${({theme}) => theme.spacing.S};
 
     ${SCREEN.MOBILE} {
         width: 12rem;
@@ -63,7 +64,8 @@ export const MutedCamera = styled.div`
         /* width: 126px;
         height: 68px; */
         width: 9rem;
-        height: 5rem;
+        height: 6rem;
+        padding: 0;
     }
 `
 

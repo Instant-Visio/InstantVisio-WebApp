@@ -1,5 +1,5 @@
 export default `
-.daily-video-toplevel-div {
+    .daily-video-toplevel-div {
         position: relative;
     }
     
@@ -14,48 +14,14 @@ export default `
     .daily-videos-wrapper {
         position: relative;
         display: flex;
-        flex-direction: column;
-        overflow-x: auto;
-        -ms-overflow-style: -ms-autohiding-scrollbar;
+        flex-flow: row wrap;
+        overflow: hidden;
     }
     
     .daily-video-div {
         position: relative;
         visibility: visible;
         overflow: hidden;
-    }
-    
-    /** Alone in call **/
-    .daily-video-div.local, .daily-video-div.screen {
-        border-radius: 0.5rem;
-        width: 17rem;
-        height: 10rem;
-        position: absolute;
-        z-index: 10;
-        bottom: 2rem;
-        left: 1rem;
-    }
-    
-    /** 2-person call **/
-    .daily-videos-wrapper.remote-cams-1 > .daily-video-div.remote {
-        height: 100%;
-    }
-    
-    /** 3-person call**/
-    .daily-videos-wrapper.remote-cams-2 > .daily-video-div.remote:nth-child(2) {
-    }
-    
-    .daily-videos-wrapper.remote-cams-2 > .daily-video-div.remote:nth-child(3) {
-    }
-    
-    /** 4-person call**/
-    .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(2) {
-    }
-    
-    .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(3) {
-    }
-    
-    .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(4) {
     }
 
     .daily-video-div.remote.cam-muted::before {
@@ -71,43 +37,175 @@ export default `
         align-items: center;
         justify-content: center;
     }
+    
+    /** Alone in call **/
+    .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
+        border-radius: 0.5rem;
+        width: 17rem;
+        height: 10rem;
+        position: absolute;
+        z-index: 10;
+        bottom: 2rem;
+        left: 1rem;
+    }
+    
+    /** 2-person call **/
+    .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
+        border-radius: 0.5rem;
+        width: 17rem;
+        height: 10rem;
+        position: absolute;
+        z-index: 10;
+        bottom: 2rem;
+        left: 1rem;
+    }
+
+    .daily-videos-wrapper.remote-cams-1 > .daily-video-div.remote {
+        height: 100%;
+        width: 100%;
+    }
+    
+    /** 3-person call**/
+    .daily-videos-wrapper.remote-cams-2 > .daily-video-div.local {
+        border-radius: 0;
+        width: calc(100%/3);
+        height: 100%;
+        position: inherit;
+        z-index: 10;
+        bottom: 0;
+        left: 0;
+    }
+
+    .daily-videos-wrapper.remote-cams-2 > .daily-video-div.remote:nth-child(2) {
+        width: calc(100%/3);
+        height: 100%;
+    }
+
+    .daily-videos-wrapper.remote-cams-2 > .daily-video-div.remote:nth-child(3) {
+        width: calc(100%/3);
+        height: 100%;
+    }
+    
+    /** 4-person call**/
+    .daily-videos-wrapper.remote-cams-3 > .daily-video-div.local {
+        border-radius: 0;
+        width: 50%;
+        height: 50%;
+        position: inherit;
+        z-index: 10;
+        bottom: 0;
+        left: 0;
+    }
+
+    .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(2) {
+        width: 50%;
+        height: 50%;
+    }
+
+    .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(3) {
+        width: 50%;
+        height: 50%;
+    }
+
+    .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(4) {
+        width: 50%;
+        height: 50%;
+    }
 
     @media screen and (min-width: 500px) and (max-height: 500px) {
-        .daily-videos-wrapper > .daily-video-div.local, .daily-video-div.screen {
+        .daily-videos-wrapper > .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
             width: 9rem;
-            height: 5rem;
+            height: 6rem;
+            border-radius: 0.5rem;
+            position: absolute;
+            z-index: 10;
+            bottom: 2rem;
+            left: 1rem;
+        }
+
+        .daily-videos-wrapper > .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
+            width: 9rem;
+            height: 6rem;
+            border-radius: 0.5rem;
+            position: absolute;
+            z-index: 10;
+            bottom: 2rem;
+            left: 1rem;
         }
     }
     
-    @media screen and (max-width: 767px) {
-        .daily-video-div.local, .daily-video-div.screen {
+    @media screen and (max-width: 767px) and (min-height: 501px) {
+        .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
             width: 12rem;
             height: 7rem;
-        }
-
-        .daily-videos-wrapper {
-            
+            border-radius: 0.5rem;
+            position: absolute;
+            z-index: 10;
+            bottom: 2rem;
+            left: 1rem;
         }
     
         /** 2-person call **/
+        .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
+            width: 12rem;
+            height: 7rem;
+            border-radius: 0.5rem;
+            position: absolute;
+            z-index: 10;
+            bottom: 2rem;
+            left: 1rem;
+        }
+
         .daily-videos-wrapper.remote-cams-1 > .daily-video-div.remote {
+            height: 100%;
+            width: 100%;
         }
     
         /** 3-person call**/
-        .daily-videos-wrapper.remote-cams-2 > .daily-video-div.remote:nth-child(2) {
+        .daily-videos-wrapper.remote-cams-2 > .daily-video-div.local {
+            border-radius: 0;
+            width: 100%;
+            height: calc(100%/3);
+            position: inherit;
+            z-index: 10;
+            bottom: 0;
+            left: 0;
         }
-    
+
+        .daily-videos-wrapper.remote-cams-2 > .daily-video-div.remote:nth-child(2) {
+            width: 100%;
+            height: calc(100%/3);
+        }
+
         .daily-videos-wrapper.remote-cams-2 > .daily-video-div.remote:nth-child(3) {
+            width: 100%;
+            height: calc(100%/3);
         }
     
         /** 4-person call**/
+        .daily-videos-wrapper.remote-cams-3 > .daily-video-div.local {
+            border-radius: 0;
+            width: 50%;
+            height: 50%;
+            position: inherit;
+            z-index: 10;
+            bottom: 0;
+            left: 0;
+        }
+
         .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(2) {
+            width: 50%;
+            height: 50%;
         }
-    
+
         .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(3) {
+            width: 50%;
+            height: 50%;
         }
-    
+
         .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(4) {
+            width: 50%;
+            height: 50%;
         }
     }
 `
