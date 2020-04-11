@@ -7,8 +7,12 @@ import { useTranslation } from 'react-i18next'
 
 import dailyCssText from './dailyCssText'
 import { IframeStyled, MutedCamera, Controls } from './VideoCall'
+import cameraOn from '../../styles/assets/images/camOn.svg'
+import cameraOff from '../../styles/assets/images/camOff.svg'
+import micOn from '../../styles/assets/images/audioOn.svg'
+import micOff from '../../styles/assets/images/audioOff.svg'
+import leave from '../../styles/assets/images/leave.svg'
 import Footer from '../../components/Footer'
-
 
 const VideoCallFrame = () => {
     const {t} = useTranslation('videocall')
@@ -23,6 +27,7 @@ const VideoCallFrame = () => {
 
     const cam = useRef(null)
     const audio = useRef(null)
+    const leaving = useRef(null)
     const videoFrame = useRef(null)
     const turnCamOnMessage = useRef(null)
 
@@ -54,9 +59,9 @@ const VideoCallFrame = () => {
             let participants = daily.participants()
 
             if (participants && Object.keys(participants).length < 2) {
-                setParticipantStatus('Veuillez patientez, votre proche est sur le point de vous rejoindre.')
+                setParticipantStatus(t('waiting-participant'))
             } else if (event && event.participant.local === false && event.participant.video === false) {
-                setParticipantStatus('Votre proche a rejoint l\'appel mais sa caméra n\'est pas active.')
+                setParticipantStatus(t('participant-cam-off'))
             } else if (event && event.participant.local === false && event.participant.video === true) {
                 setParticipantStatus('')
             }
@@ -79,19 +84,16 @@ const VideoCallFrame = () => {
         daily.on('participant-left', (event) => { 
 
             if (event.participant.local === false) {
-                setParticipantStatus('Votre proche a quitté l\'appel.')
+                setParticipantStatus(t('participant-left'))
             } else {
                 setParticipantStatus('')
             }
         })
-            
-        daily.on('left-meeting', () => {
+
+        leaving.current.addEventListener('click', () => {
+            daily.leave()
             setLeftCallFrame(true)
         })
-
-        if (leftCallFrame) {
-            daily.leave()
-        }
 
         window.addEventListener('beforeunload', leavingCallPage)
         // ComponentWillUnmount
@@ -99,7 +101,7 @@ const VideoCallFrame = () => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
 
-    }, [url, leftCallFrame])
+    }, [url])
 
 
     return (
@@ -115,14 +117,26 @@ const VideoCallFrame = () => {
                         allowFullScreen
                     />
                 }
-                {!camOn && <MutedCamera ref={turnCamOnMessage}>{t('turn-on-cam-message')}</MutedCamera>}
+                {!camOn && !leftCallFrame && (<MutedCamera ref={turnCamOnMessage}>{t('turn-on-cam-message')}</MutedCamera>)}
                 {!leftCallFrame && <div className="waiting-participant">{participantStatus}</div>}
                 {leftCallFrame && <div>{t('leave-confirmation')}</div>}
             </IframeStyled>
-            <Controls>
-                <div ref={cam} className={camOn ? 'control' : 'control red'}>{camOn ? t('turn-off-cam') : t('turn-on-cam')}</div>
-                <div ref={audio} className={audioOn ? 'control' : 'control red'}>{audioOn ? t('turn-off-audio') : t('turn-on-audio')}</div>
-            </Controls>
+            {!leftCallFrame && <Controls>
+                <div className="cam-audio">
+                    <div ref={cam} className={camOn ? 'control black' : 'control red'}>
+                        <img src={camOn ? cameraOn : cameraOff} />
+                        <p>{t('cam')}</p>
+                    </div>
+                    <div ref={audio} className={audioOn ? 'control black' : 'control red'}>
+                        <img src={audioOn ? micOn : micOff}/>
+                        <p>{t('audio')}</p>
+                    </div>
+                </div>
+                <div ref={leaving} className="control red leave">
+                    <img src={leave}/>
+                    <p>{t('leave')}</p>
+                </div>
+            </Controls>}
             {leftCallFrame && <Footer />}
         </>
     )

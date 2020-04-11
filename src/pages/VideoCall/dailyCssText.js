@@ -28,8 +28,8 @@ export default `
     /** Alone in call **/
     .daily-video-div.local, .daily-video-div.screen {
         border-radius: 0.5rem;
-        width: 21rem;
-        height: 13rem;
+        width: 17rem;
+        height: 10rem;
         position: absolute;
         z-index: 10;
         bottom: 2rem;
@@ -72,7 +72,12 @@ export default `
         justify-content: center;
     }
     
-    @media (max-width: 800px) {
+    @media (max-width: 767px) {
+        .daily-video-div.local, .daily-video-div.screen {
+            width: 12rem;
+            height: 7rem;
+        }
+
         .daily-videos-wrapper {
             
         }

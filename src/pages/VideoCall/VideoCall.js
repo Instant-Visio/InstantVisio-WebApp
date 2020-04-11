@@ -39,32 +39,70 @@ export const IframeStyled = styled.div`
 
 export const MutedCamera = styled.div`
     background: #000000;
+    text-align: center;
+    font-size: ${({theme}) => theme.font.M};
     border-radius: ${({theme}) => theme.spacing.XS};
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 21rem;
-    height: 13rem;
+    width: 17rem;
+    height: 10rem;
     position: absolute;
     z-index: 10;
     bottom: 2rem;
     left: 1rem;
+
+    ${SCREEN.MOBILE} {
+        width: 12rem;
+        height: 7rem;
+    }
 `
 
 export const Controls = styled.div`
     position: absolute;
+    padding: 0 ${({theme}) => theme.spacing.XXL};
     width: 100vw;
     height: 10vh;
     bottom: 0;
     background: white;
     color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .cam-audio {
+        display: flex;
+        flex-direction: row;
+    }
 
     .control {
         cursor: pointer;
-        with: fit-content;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-right: ${({theme}) => theme.spacing.XXXL}
+    }
+
+    img {
+        margin-bottom: ${({theme}) => theme.font.XXS}
+    }
+
+    p {
+        margin: 0;
+        font-size: ${({theme}) => theme.font.S}
+    }
+
+    .black {
+        color: ${({theme}) => theme.color.black};
     }
 
     .red {
         color: ${({theme}) => theme.color.red};
+    }
+
+    .leave {
+        margin-right: 0;
     }
 `
