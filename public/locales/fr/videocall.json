@@ -1,8 +1,8 @@
 {
     "turn-on-cam": "Activer la caméra",
     "turn-off-cam": "Désactiver la caméra",
-    "turn-on-mic": "Activer le micro",
-    "turn-off-mic": "Désactiver le micro",
+    "turn-on-audio": "Activer le micro",
+    "turn-off-audio": "Désactiver le micro",
     "turn-on-cam-message": "Veuillez activer votre caméra.",
     "waiting-participant": "Veuillez patienter, votre proche est sur le point d'arriver.",
     "leave-feature": "Quitter l'appel",

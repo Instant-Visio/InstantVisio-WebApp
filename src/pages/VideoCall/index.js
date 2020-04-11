@@ -15,13 +15,14 @@ const VideoCallFrame = () => {
 
     const [ leftCallFrame, setLeftCallFrame ] = useState(false)
     const [ camOn, setCamOn ] = useState(true)
+    const [ audioOn, setAudioOn ] = useState(true)
     const [ participantStatus, setParticipantStatus ] = useState('')
-    const [ ps, setPs ] = useState(null)
     let { videoName } = useParams()
 
     const url = `https://instantvisio.daily.co/${videoName}`
 
     const cam = useRef(null)
+    const audio = useRef(null)
     const videoFrame = useRef(null)
     const turnCamOnMessage = useRef(null)
 
@@ -46,16 +47,10 @@ const VideoCallFrame = () => {
 
         const eventActions = (event) => {
             console.log(event ? event : '')
-            if (daily.localVideo() === true) {
-                cam.current.textContent = t('turn-off-cam')
-                cam.current.classList.add('red')
-                turnCamOnMessage.current.style.display = 'none'
-            } else {
-                cam.current.textContent = t('turn-on-cam')
-                cam.current.classList.remove('red')
-                turnCamOnMessage.current.style.display = 'flex'
-            }
-
+            
+            daily.localVideo() === true ? setCamOn(true) : setCamOn(false)
+            daily.localAudio() === true ? setAudioOn(true) : setAudioOn(false)
+            
             let participants = daily.participants()
 
             if (participants && Object.keys(participants).length < 2) {
@@ -69,6 +64,10 @@ const VideoCallFrame = () => {
 
         cam.current.addEventListener('click', () => {
             daily.setLocalVideo(!daily.localVideo())
+        })
+
+        audio.current.addEventListener('click', () => {
+            daily.setLocalAudio(!daily.localAudio())
         })
 
         eventActions()
@@ -100,7 +99,7 @@ const VideoCallFrame = () => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
 
-    }, [url, camOn, /* participantStatus,  */leftCallFrame])
+    }, [url, leftCallFrame])
 
 
     return (
@@ -116,21 +115,13 @@ const VideoCallFrame = () => {
                         allowFullScreen
                     />
                 }
-                {
-                    <MutedCamera ref={turnCamOnMessage}>{t('turn-on-cam-message')}</MutedCamera>
-                }
-                {
-                    !leftCallFrame && <div className="waiting-participant">{participantStatus}</div>
-                }
-                {
-                    leftCallFrame && <div>{t('leave-confirmation')}</div>
-                }
+                {!camOn && <MutedCamera ref={turnCamOnMessage}>{t('turn-on-cam-message')}</MutedCamera>}
+                {!leftCallFrame && <div className="waiting-participant">{participantStatus}</div>}
+                {leftCallFrame && <div>{t('leave-confirmation')}</div>}
             </IframeStyled>
             <Controls>
-                <div ref={cam} className="control" />
-                <div className="control">
-                    Activer le micro
-                </div>
+                <div ref={cam} className={camOn ? 'control' : 'control red'}>{camOn ? t('turn-off-cam') : t('turn-on-cam')}</div>
+                <div ref={audio} className={audioOn ? 'control' : 'control red'}>{audioOn ? t('turn-off-audio') : t('turn-on-audio')}</div>
             </Controls>
             {leftCallFrame && <Footer />}
         </>
