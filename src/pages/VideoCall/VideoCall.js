@@ -21,6 +21,7 @@ export const IframeStyled = styled.div`
     .waiting-participant {
         position: absolute;
         text-align: center;
+        padding: 0 ${({theme}) => theme.spacing.M};
     }
 
     /* ${SCREEN.MOBILE} and (orientation: portrait) {
@@ -35,6 +36,10 @@ export const IframeStyled = styled.div`
           left: 0;
         }
       } */
+
+      ${SCREEN.LANDSCAPE} {
+        height: 85vh;
+    }
 `
 
 export const MutedCamera = styled.div`
@@ -104,5 +109,9 @@ export const Controls = styled.div`
 
     .leave {
         margin-right: 0;
+    }
+
+    ${SCREEN.LANDSCAPE} {
+        height: 15vh;
     }
 `

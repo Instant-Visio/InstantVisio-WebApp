@@ -26,12 +26,14 @@ const App = () => {
         // (critical on mobile, where, on click on the contact form inputs,
         // the keyboard appears and takes half of the window size,
         // which shrinks the form size - unpleasant user experience)
-        setTimeout(() => {
-            const viewheight = window.innerHeight
-            const viewwidth = window.innerWidth
-            const viewport = document.querySelector('meta[name=viewport]')
-            viewport.setAttribute('content', `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`)
-        }, 300)
+        if (!window.location.pathname.includes('visio')) {
+            setTimeout(() => {
+                const viewheight = window.innerHeight
+                const viewwidth = window.innerWidth
+                const viewport = document.querySelector('meta[name=viewport]')
+                viewport.setAttribute('content', `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`)
+            }, 300)
+        }
     }, [])
     
     return  <div className="App">
