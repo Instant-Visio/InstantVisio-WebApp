@@ -11,7 +11,8 @@ import Footer from '../../components/Footer'
 
 const IframeStyled = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
+    position: relative;
     color: ${({theme}) => theme.color.white};
     display: flex;
     align-items: center;
@@ -21,6 +22,11 @@ const IframeStyled = styled.div`
         width: 100%;
         height: 100%;
         border: none;   
+    }
+
+    .waiting-participant {
+        position: absolute;
+        text-align: center;
     }
 
     /* ${SCREEN.MOBILE} and (orientation: portrait) {
@@ -38,8 +44,9 @@ const IframeStyled = styled.div`
 `
 
 const MutedCamera = styled.div`
-    background-color: #e8e8e8;
-    color: #343434;
+    background: radial-gradient(21rem circle, #988673,#473D38);
+    /* OR: background: radial-gradient(19rem circle,#c7a886,#060505); */
+    border-radius: ${({theme}) => theme.spacing.XS};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,7 +54,7 @@ const MutedCamera = styled.div`
     height: 13rem;
     position: absolute;
     z-index: 10;
-    bottom: 6rem;
+    bottom: 2rem;
     left: 1rem;
 `
 const Controls = styled.div`
@@ -57,13 +64,23 @@ const Controls = styled.div`
     bottom: 0;
     background: white;
     color: black;
+
+    .control {
+        cursor: pointer;
+        with: fit-content;
+    }
+
+    .red {
+        color: ${({theme}) => theme.color.red};
+    }
 `
 
 const VideoCallFrame = () => {
     const {t} = useTranslation('videocall')
 
     const [ leftCallFrame, setLeftCallFrame ] = useState(false)
-    const [ camOn, setCamOn ] = useState(false)
+    const [ camOn, setCamOn ] = useState(true)
+    const [ participantStatus, setParticipantStatus ] = useState('')
     const [ ps, setPs ] = useState(null)
     let { videoName } = useParams()
 
@@ -71,6 +88,7 @@ const VideoCallFrame = () => {
 
     const cam = useRef(null)
     const videoFrame = useRef(null)
+    const turnCamOnMessage = useRef(null)
 
     // to display confirmation message
     // when user attempts leaving page
@@ -90,23 +108,23 @@ const VideoCallFrame = () => {
             showFullscreenButton: true,
             cssText: `
             .daily-video-toplevel-div {
-                position: relative;
+                    position: relative;
               }
               
               .scroll::-webkit-scrollbar {
-                display: none;
+                    display: none;
               }
               
               .daily-video-element {
-                object-fit: cover;
+                    object-fit: cover;
               }
               
               .daily-videos-wrapper {
-                  position: relative;
-                  display: flex;
-                  flex-direction: column;
-                  overflow-x: auto;
-                  -ms-overflow-style: -ms-autohiding-scrollbar;
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    overflow-x: auto;
+                    -ms-overflow-style: -ms-autohiding-scrollbar;
               }
               
               .daily-video-div {
@@ -117,12 +135,13 @@ const VideoCallFrame = () => {
               
               /** Alone in call **/
               .daily-video-div.local, .daily-video-div.screen {
-                width: 21rem;
-                height: 13rem;
-                position: absolute;
-                z-index: 10;
-                bottom: 6rem;
-                left: 1rem;
+                    border-radius: 0.5rem;
+                    width: 21rem;
+                    height: 13rem;
+                    position: absolute;
+                    z-index: 10;
+                    bottom: 2rem;
+                    left: 1rem;
               }
               
               /** 2-person call **/
@@ -147,52 +166,22 @@ const VideoCallFrame = () => {
               .daily-videos-wrapper.remote-cams-3 > .daily-video-div.remote:nth-child(4) {
               }
 
-              .daily-video-div.local.cam-muted::before {
-                font-family: 'Open Sans', sans-serif;
-                content: attr(data-switch-cam);
-                background: rgba(255, 255, 255, 0.3) !important;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0;
-                top: 0;
-                z-index: 1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #ffffff;
-              }
-              
-              .show-names .daily-video-div::before {
-                  content: attr(data-user-name);
-                  position: absolute;
-                  padding: 0.65em;
-                  background-color: rgba(255, 255, 255, 0.9);
-                  z-index: 1;
-              }
-              
-              .info-div {
-                  position: fixed;
-                  width: 100%;
-                  bottom: 0;
-                  height: 1.5em;
-                  text-align: center;
-                  font-weight: bold;
-                  color: white;
-                  padding: 0.625em;
-              }
-              
-              .info-div .screen
-              
-              .low-bandwidth .info-div {
-                  background-color: grey;
-              }
-              .low-bandwidth .info-div::after {
-                  content: "32kb/s upstream video bandwidth cap";
+              .daily-video-div.remote.cam-muted::before {
+                    content: '';
+                    background: linear-gradient(to bottom, #404E5D 0%, #606465 32%, #584f45 73%, #121211 101%, #816c54 100%), radial-gradient(ellipse at center, #494f2f 0%, #606465 22%, #d6cabc 62%, #44444C 100%, #6E6A6B 100%) !important;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    z-index: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
               }
               
               @media (max-width: 800px) {
-                  .daily-videos-wrapper {
+                    .daily-videos-wrapper {
                       
                   }
               
@@ -220,24 +209,33 @@ const VideoCallFrame = () => {
             `
         })
 
+        daily.on('joined-meeting', (event) => {
+            console.log('joined-meeting')
+            console.log(event)
+        })
+        
         cam.current.addEventListener('click', () => {
             daily.setLocalVideo(!daily.localVideo())
-            if (daily.localVideo() == true) {
-                
-                cam.current.textContent = t('turn-on-cam')
-            } else {
-            
-                cam.current.textContent = t('turn-off-cam')
-            }
         })
 
-        if (daily.localVideo() == true) {
-            
-            cam.current.textContent = t('turn-on-cam')
-        } else {
-        
-            cam.current.textContent = t('turn-off-cam')
-        }
+        daily.on('participant-updated', (event) => {
+            console.log(event)
+            if (daily.localVideo() === true) {
+                cam.current.textContent = t('turn-off-cam')
+                cam.current.classList.add('red')
+                turnCamOnMessage.current.style.display = 'none'
+            } else {
+                cam.current.textContent = t('turn-on-cam')
+                cam.current.classList.remove('red')
+                turnCamOnMessage.current.style.display = 'flex'
+            }
+
+            if (event.participant.local === false && event.participant.video === false) {
+                setParticipantStatus('Votre proche a rejoint l\'appel mais sa caméra n\'est pas active.')
+            } else {
+                setParticipantStatus('')
+            }
+        })
             
         daily.on('left-meeting', () => {
             setLeftCallFrame(true)
@@ -261,6 +259,7 @@ const VideoCallFrame = () => {
             <IframeStyled>
                 {
                     !leftCallFrame && <iframe
+                        data-cam="Veuillez activer votre caméra"
                         className="iframe"
                         title="video call iframe"
                         ref={videoFrame}
@@ -269,17 +268,18 @@ const VideoCallFrame = () => {
                     />
                 }
                 {
-                   
-                
+                    <MutedCamera ref={turnCamOnMessage}>{t('turn-on-cam-message')}</MutedCamera>
+                }
+                {
+                    !leftCallFrame && <div className="waiting-participant">{participantStatus}</div>
                 }
                 {
                     leftCallFrame && <div>{t('leave-confirmation')}</div>
                 }
             </IframeStyled>
             <Controls>
-                <div ref={cam} />
-
-                <div>
+                <div ref={cam} className="control" />
+                <div className="control">
                     Activer le micro
                 </div>
             </Controls>
