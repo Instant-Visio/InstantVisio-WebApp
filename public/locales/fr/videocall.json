@@ -2,7 +2,7 @@
     "cam": "Caméra",
     "audio": "Micro",
     "turn-on-cam-message": "Veuillez activer votre caméra ci-dessous.",
-    "waiting-participant": "Veuillez patienter, votre proche est sur le point d'arriver.",
+    "waiting-participant": "Veuillez patienter, votre proche est sur le point de vous rejoindre.",
     "participant-cam-off": "Votre proche a rejoint l'appel mais sa caméra est éteinte.",
     "participant-left": "Votre proche a quitté l'appel.",
     "leave": "Quitter",

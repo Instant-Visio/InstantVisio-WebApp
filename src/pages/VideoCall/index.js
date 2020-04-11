@@ -6,7 +6,7 @@ import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
 
 import dailyCssText from './dailyCssText'
-import { IframeStyled, MutedCamera, Controls } from './VideoCall'
+import { CallContainer, IframeContainer, MutedCamera, Controls } from './VideoCall'
 import cameraOn from '../../styles/assets/images/camOn.svg'
 import cameraOff from '../../styles/assets/images/camOff.svg'
 import micOn from '../../styles/assets/images/audioOn.svg'
@@ -106,37 +106,39 @@ const VideoCallFrame = () => {
 
     return (
         <>
-            <IframeStyled>
-                {
-                    !leftCallFrame && <iframe
-                        data-cam="Veuillez activer votre caméra"
-                        className="iframe"
-                        title="video call iframe"
-                        ref={videoFrame}
-                        allow="microphone; camera; autoplay"
-                        allowFullScreen
-                    />
-                }
-                {!camOn && !leftCallFrame && (<MutedCamera ref={turnCamOnMessage}>{t('turn-on-cam-message')}</MutedCamera>)}
-                {!leftCallFrame && <div className="waiting-participant">{participantStatus}</div>}
-                {leftCallFrame && <div>{t('leave-confirmation')}</div>}
-            </IframeStyled>
-            {!leftCallFrame && <Controls>
-                <div className="cam-audio">
-                    <div ref={cam} className={camOn ? 'control black' : 'control red'}>
-                        <img src={camOn ? cameraOn : cameraOff} />
-                        <p>{t('cam')}</p>
+            <CallContainer>
+                <IframeContainer>
+                    {
+                        !leftCallFrame && <iframe
+                            data-cam="Veuillez activer votre caméra"
+                            className="iframe"
+                            title="video call iframe"
+                            ref={videoFrame}
+                            allow="microphone; camera; autoplay"
+                            allowFullScreen
+                        />
+                    }
+                    {!camOn && !leftCallFrame && (<MutedCamera ref={turnCamOnMessage}>{t('turn-on-cam-message')}</MutedCamera>)}
+                    {!leftCallFrame && <div className="waiting-participant">{participantStatus}</div>}
+                    {leftCallFrame && <div>{t('leave-confirmation')}</div>}
+                </IframeContainer>
+                {!leftCallFrame && <Controls>
+                    <div className="cam-audio">
+                        <div ref={cam} className={camOn ? 'control black' : 'control red'}>
+                            <img src={camOn ? cameraOn : cameraOff} />
+                            <p>{t('cam')}</p>
+                        </div>
+                        <div ref={audio} className={audioOn ? 'control black' : 'control red'}>
+                            <img src={audioOn ? micOn : micOff}/>
+                            <p>{t('audio')}</p>
+                        </div>
                     </div>
-                    <div ref={audio} className={audioOn ? 'control black' : 'control red'}>
-                        <img src={audioOn ? micOn : micOff}/>
-                        <p>{t('audio')}</p>
+                    <div ref={leaving} className="control red leave">
+                        <img src={leave}/>
+                        <p>{t('leave')}</p>
                     </div>
-                </div>
-                <div ref={leaving} className="control red leave">
-                    <img src={leave}/>
-                    <p>{t('leave')}</p>
-                </div>
-            </Controls>}
+                </Controls>}
+            </CallContainer>
             {leftCallFrame && <Footer />}
         </>
     )

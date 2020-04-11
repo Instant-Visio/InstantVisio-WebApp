@@ -2,20 +2,26 @@ import styled from 'styled-components'
 import {SCREEN} from '../../styles/theme'
 
 
-export const IframeStyled = styled.div`
-    background: linear-gradient(to bottom, #506377 0%, #56777f 41%, #5a5147 67%, #232321 100%, #8a5d29 92%), radial-gradient(ellipse at center, #4e5c13 13%, #4a6c75 56%, #e0d4c6 47%, #afafcc 83%, #948e90 87%) !important;
+export const CallContainer = styled.div`
     width: 100vw;
-    height: 90vh;
-    position: relative;
+    height: 100%;
     color: ${({theme}) => theme.color.white};
+    background: ${({theme}) => theme.color.black};
+`
+
+export const IframeContainer = styled.div`
+    position: relative;
+    background: linear-gradient(to bottom, #506377 0%, #56777f 41%, #5a5147 67%, #232321 100%, #8a5d29 92%), radial-gradient(ellipse at center, #4e5c13 13%, #4a6c75 56%, #e0d4c6 47%, #afafcc 83%, #948e90 87%) !important;
+    height: 90%;
+    font-size: ${({theme}) => theme.font.L};
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: ${({theme}) => theme.font.L};
     iframe {
         width: 100%;
         height: 100%;
-        border: none;   
+        border: none;
+        display: block;   
     }
 
     .waiting-participant {
@@ -29,7 +35,7 @@ export const IframeStyled = styled.div`
     }
 
       ${SCREEN.LANDSCAPE} {
-        height: 85vh;
+        height: 80%;
     }
 `
 
@@ -54,6 +60,8 @@ export const MutedCamera = styled.div`
     }
 
     ${SCREEN.LANDSCAPE} {
+        /* width: 126px;
+        height: 68px; */
         width: 9rem;
         height: 5rem;
     }
@@ -62,7 +70,7 @@ export const MutedCamera = styled.div`
 export const Controls = styled.div`
     padding: 0 ${({theme}) => theme.spacing.XXL};
     width: 100vw;
-    height: 10vh;
+    height: 10%;
     background: white;
     color: black;
     display: flex;
@@ -106,6 +114,6 @@ export const Controls = styled.div`
     }
 
     ${SCREEN.LANDSCAPE} {
-        height: 15vh;
+        height: 20%;
     }
 `

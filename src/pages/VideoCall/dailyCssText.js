@@ -73,7 +73,7 @@ export default `
     }
 
     @media screen and (min-width: 500px) and (max-height: 500px) {
-        .daily-video-div.local, .daily-video-div.screen {
+        .daily-videos-wrapper > .daily-video-div.local, .daily-video-div.screen {
             width: 9rem;
             height: 5rem;
         }
