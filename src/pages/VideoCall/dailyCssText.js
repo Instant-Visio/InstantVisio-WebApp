@@ -71,8 +71,15 @@ export default `
         align-items: center;
         justify-content: center;
     }
+
+    @media screen and (min-width: 500px) and (max-height: 500px) {
+        .daily-video-div.local, .daily-video-div.screen {
+            width: 9rem;
+            height: 5rem;
+        }
+    }
     
-    @media (max-width: 767px) {
+    @media screen and (max-width: 767px) {
         .daily-video-div.local, .daily-video-div.screen {
             width: 12rem;
             height: 7rem;

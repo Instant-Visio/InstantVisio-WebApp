@@ -19,23 +19,14 @@ export const IframeStyled = styled.div`
     }
 
     .waiting-participant {
-        position: absolute;
-        text-align: center;
         padding: 0 ${({theme}) => theme.spacing.M};
+        text-align: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
     }
-
-    /* ${SCREEN.MOBILE} and (orientation: portrait) {
-        .landscape {
-          transform: rotate(-90deg);
-          transform-origin: left top;
-          width: 100vh;
-          height: 100vw;
-          overflow-x: hidden;
-          position: absolute;
-          top: 100%;
-          left: 0;
-        }
-      } */
 
       ${SCREEN.LANDSCAPE} {
         height: 85vh;
@@ -61,14 +52,17 @@ export const MutedCamera = styled.div`
         width: 12rem;
         height: 7rem;
     }
+
+    ${SCREEN.LANDSCAPE} {
+        width: 9rem;
+        height: 5rem;
+    }
 `
 
 export const Controls = styled.div`
-    position: absolute;
     padding: 0 ${({theme}) => theme.spacing.XXL};
     width: 100vw;
     height: 10vh;
-    bottom: 0;
     background: white;
     color: black;
     display: flex;
