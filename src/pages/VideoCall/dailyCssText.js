@@ -113,7 +113,7 @@ export default `
     }
 
     @media screen and (min-width: 500px) and (max-height: 500px) {
-        .daily-videos-wrapper > .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
+        .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
             width: 9rem;
             height: 6rem;
             border-radius: 0.5rem;
@@ -123,7 +123,7 @@ export default `
             left: 1rem;
         }
 
-        .daily-videos-wrapper > .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
+        .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
             width: 9rem;
             height: 6rem;
             border-radius: 0.5rem;

@@ -135,7 +135,7 @@ const VideoCallFrame = () => {
                             allowFullScreen
                         />
                     }
-                    {!camOn && !leftCallFrame && (<div className={classNames({'mute-camera': true, 'mute-camera-three': participantNumber === 3, 'mute-camera-four': participantNumber === 4 })} ref={turnCamOnMessage}>{t('turn-on-cam-message')}</div>)}
+                    {!camOn && !leftCallFrame && (<div className={classNames({'mute-camera': true, 'mute-camera-two': participantNumber < 3, 'mute-camera-three': participantNumber === 3, 'mute-camera-four': participantNumber === 4 })} ref={turnCamOnMessage}>{t('turn-on-cam-message')}</div>)}
                     
                     {!leftCallFrame && <div className="waiting-participant">{participantStatus}</div>}
                     

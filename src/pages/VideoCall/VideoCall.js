@@ -85,10 +85,22 @@ export const IframeContainer = styled.div`
     ${SCREEN.LANDSCAPE} {
         height: 80%;
 
-        .mute-camera {
+        .mute-camera-three {
+            border-radius: 0;
+            width: calc(100%/3) ! ;
+            height: 100%;
+            bottom: 0;
+            left: 0;
+        }
+
+        .mute-camera-two {
             width: 9rem;
             height: 6rem;
-            padding: 0;
+        }
+
+        .waiting-participant {
+            top: ${({theme}) => theme.spacing.XXXL};
+            transform: inherit;
         }
     }
 `
