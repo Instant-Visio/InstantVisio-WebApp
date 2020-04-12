@@ -50,35 +50,24 @@ const VideoCallFrame = () => {
             cssText: dailyCssText
         })
 
-        let participants = daily.participants()
+        const participants = daily.participants()
 
         const eventActions = (event) => {
-            daily.localVideo() === true ? setCamOn(true) : setCamOn(false)
-            daily.localAudio() === true ? setAudioOn(true) : setAudioOn(false)
+            setCamOn(daily.localVideo())
+            setAudioOn(daily.localAudio())
 
-            if (participants && Object.keys(participants).length < 2) {
-                setParticipantStatus(t('waiting-participant'))
-            } else if (participants && Object.keys(participants).length < 3) {
-                if (event && event.participant.local === false && event.participant.video === false) {
-                    setParticipantStatus(t('participant-cam-off'))
-                } else if (event && event.participant.local === false && event.participant.video === true) {
-                    setParticipantStatus('')
-                }
-            } else {
-                setParticipantStatus('')
-            }
+            const participantsLength = Object.keys(participants).length
 
             if (participants) {
-                switch (Object.keys(participants).length) {
-                case 3:
-                    setParticipantNumber(3)
-                    break
-                case 4:
-                    setParticipantNumber(4)
-                    break
-                default:
-                    setParticipantNumber(1)
+                if (participantsLength < 2) {
+                    setParticipantStatus(t('waiting-participant'))
+                } else if (participantsLength === 2 && (event && !event.participant.local)) {
+                    setParticipantStatus(!event.participant.video ? t('participant-cam-off') : '')
+                } else {
+                    setParticipantStatus('')
                 }
+
+                setParticipantNumber(participantsLength)
             }
         }
 
@@ -94,17 +83,10 @@ const VideoCallFrame = () => {
         eventActions()
 
         daily.on('joined-meeting', eventActions)
-
-        daily.on('participant-updated', eventActions)
-
-        daily.on('participant-left', (event) => { 
-
-            if (event.participant.local === false && Object.keys(participants).length < 2) {
-                setParticipantStatus(t('participant-left'))
-            } else {
-                setParticipantStatus('')
-            }
-        })
+            .on('participant-updated', eventActions)
+            .on('participant-left', (event) => { 
+                setParticipantStatus(!event.participant.local && Object.keys(participants).length < 2 ? t('participant-left') : '')
+            })
 
         leaving.current.addEventListener('click', () => {
             daily.leave()
