@@ -4,9 +4,10 @@ import {
 } from 'react-router-dom'
 import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
 
 import dailyCssText from './dailyCssText'
-import { CallContainer, IframeContainer, MutedCamera, Controls } from './VideoCall'
+import { CallContainer, IframeContainer, Controls } from './VideoCall'
 import cameraOn from '../../styles/assets/images/camOn.svg'
 import cameraOff from '../../styles/assets/images/camOff.svg'
 import micOn from '../../styles/assets/images/audioOn.svg'
@@ -21,6 +22,7 @@ const VideoCallFrame = () => {
     const [ camOn, setCamOn ] = useState(true)
     const [ audioOn, setAudioOn ] = useState(true)
     const [ participantStatus, setParticipantStatus ] = useState('')
+    const [ participantNumber, setParticipantNumber ] = useState(0)
     let { videoName } = useParams()
 
     const url = `https://instantvisio.daily.co/${videoName}`
@@ -45,25 +47,38 @@ const VideoCallFrame = () => {
 
         daily.join({
             url,
-            showLeaveButton: true,
-            showFullscreenButton: true,
             cssText: dailyCssText
         })
 
+        let participants = daily.participants()
+
         const eventActions = (event) => {
-            console.log(event ? event : '')
-            
             daily.localVideo() === true ? setCamOn(true) : setCamOn(false)
             daily.localAudio() === true ? setAudioOn(true) : setAudioOn(false)
-            
-            let participants = daily.participants()
 
             if (participants && Object.keys(participants).length < 2) {
                 setParticipantStatus(t('waiting-participant'))
-            } else if (event && event.participant.local === false && event.participant.video === false) {
-                setParticipantStatus(t('participant-cam-off'))
-            } else if (event && event.participant.local === false && event.participant.video === true) {
+            } else if (participants && Object.keys(participants).length < 3) {
+                if (event && event.participant.local === false && event.participant.video === false) {
+                    setParticipantStatus(t('participant-cam-off'))
+                } else if (event && event.participant.local === false && event.participant.video === true) {
+                    setParticipantStatus('')
+                }
+            } else {
                 setParticipantStatus('')
+            }
+
+            if (participants) {
+                switch (Object.keys(participants).length) {
+                case 3:
+                    setParticipantNumber(3)
+                    break
+                case 4:
+                    setParticipantNumber(4)
+                    break
+                default:
+                    setParticipantNumber(1)
+                }
             }
         }
 
@@ -74,7 +89,8 @@ const VideoCallFrame = () => {
         audio.current.addEventListener('click', () => {
             daily.setLocalAudio(!daily.localAudio())
         })
-
+        
+        // to make cam and audio controls appear as soon as user arrives on page
         eventActions()
 
         daily.on('joined-meeting', eventActions)
@@ -83,7 +99,7 @@ const VideoCallFrame = () => {
 
         daily.on('participant-left', (event) => { 
 
-            if (event.participant.local === false) {
+            if (event.participant.local === false && Object.keys(participants).length < 2) {
                 setParticipantStatus(t('participant-left'))
             } else {
                 setParticipantStatus('')
@@ -107,6 +123,7 @@ const VideoCallFrame = () => {
     return (
         <>
             <CallContainer>
+
                 <IframeContainer>
                     {
                         !leftCallFrame && <iframe
@@ -118,17 +135,20 @@ const VideoCallFrame = () => {
                             allowFullScreen
                         />
                     }
-                    {!camOn && !leftCallFrame && (<MutedCamera ref={turnCamOnMessage}>{t('turn-on-cam-message')}</MutedCamera>)}
+                    {!camOn && !leftCallFrame && (<div className={classNames({'mute-camera': true, 'mute-camera-three': participantNumber === 3, 'mute-camera-four': participantNumber === 4 })} ref={turnCamOnMessage}>{t('turn-on-cam-message')}</div>)}
+                    
                     {!leftCallFrame && <div className="waiting-participant">{participantStatus}</div>}
+                    
                     {leftCallFrame && <div>{t('leave-confirmation')}</div>}
                 </IframeContainer>
+
                 {!leftCallFrame && <Controls>
                     <div className="cam-audio">
-                        <div ref={cam} className={camOn ? 'control black' : 'control red'}>
+                        <div ref={cam} className={classNames({ 'control': true, 'black': camOn, 'red': !camOn })}>
                             <img src={camOn ? cameraOn : cameraOff} />
                             <p>{t('cam')}</p>
                         </div>
-                        <div ref={audio} className={audioOn ? 'control black' : 'control red'}>
+                        <div ref={audio} className={classNames({ 'control': true, 'black': audioOn, 'red': !audioOn })}>
                             <img src={audioOn ? micOn : micOff}/>
                             <p>{t('audio')}</p>
                         </div>
@@ -137,8 +157,11 @@ const VideoCallFrame = () => {
                         <img src={leave}/>
                         <p>{t('leave')}</p>
                     </div>
+
                 </Controls>}
+
             </CallContainer>
+
             {leftCallFrame && <Footer />}
         </>
     )

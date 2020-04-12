@@ -24,6 +24,23 @@ export const IframeContainer = styled.div`
         display: block;   
     }
 
+    .mute-camera {
+        background: #000000;
+        text-align: center;
+        font-size: ${({theme}) => theme.font.M};
+        border-radius: ${({theme}) => theme.spacing.XS};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 17rem;
+        height: 10rem;
+        position: absolute;
+        z-index: 10;
+        bottom: 2rem;
+        left: 1rem;
+        padding: 0 ${({theme}) => theme.spacing.S};    
+    }
+
     .waiting-participant {
         padding: 0 ${({theme}) => theme.spacing.M};
         text-align: center;
@@ -34,38 +51,45 @@ export const IframeContainer = styled.div`
         transform: translateY(-50%);
     }
 
-      ${SCREEN.LANDSCAPE} {
-        height: 80%;
+    .mute-camera-three {
+        border-radius: 0;
+        width: calc(100%/3);
+        height: 100%;
+        bottom: 0;
+        left: 0;
     }
-`
 
-export const MutedCamera = styled.div`
-    background: #000000;
-    text-align: center;
-    font-size: ${({theme}) => theme.font.M};
-    border-radius: ${({theme}) => theme.spacing.XS};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 17rem;
-    height: 10rem;
-    position: absolute;
-    z-index: 10;
-    bottom: 2rem;
-    left: 1rem;
-    padding: 0 ${({theme}) => theme.spacing.S};
+    .mute-camera-four {
+        border-radius: 0;
+        width: 50% !important;
+        height: 50% !important;
+        top: 0;
+        left: 0;
+    }
 
-    ${SCREEN.MOBILE} {
-        width: 12rem;
-        height: 7rem;
+    ${SCREEN.MOBILE} and (min-height: 501px) {
+        .mute-camera {
+            width: 12rem;
+            height: 7rem;
+        }
+
+        .mute-camera-three {
+            border-radius: 0;
+            width: 100%;
+            height: calc(100%/3);
+            top: 0;
+            left: 0;
+        }
     }
 
     ${SCREEN.LANDSCAPE} {
-        /* width: 126px;
-        height: 68px; */
-        width: 9rem;
-        height: 6rem;
-        padding: 0;
+        height: 80%;
+
+        .mute-camera {
+            width: 9rem;
+            height: 6rem;
+            padding: 0;
+        }
     }
 `
 
