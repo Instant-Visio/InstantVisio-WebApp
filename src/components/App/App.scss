@@ -8,6 +8,7 @@ html, body {
 
 #root {
     background-color: #323742;
+    height: 100%;
     & .btn {
         margin: 1vh 0 2rem;
         background-color: #468ea0;
@@ -24,8 +25,7 @@ html, body {
         100% {
             transform: translateX(100%);
         }
-    }
-        
+    }   
 
     .loading {
         position: relative;
@@ -43,4 +43,8 @@ html, body {
         background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent);
         animation: loading 1.2s infinite;
     }
+}
+
+.App {
+    height: 100%;
 }
