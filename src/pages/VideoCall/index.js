@@ -127,7 +127,6 @@ const VideoCallFrame = () => {
                 <IframeContainer>
                     {
                         !leftCallFrame && <iframe
-                            data-cam="Veuillez activer votre caméra"
                             className="iframe"
                             title="video call iframe"
                             ref={videoFrame}
