@@ -16,10 +16,10 @@
 "contact":"Επικοινωνία"
 },
 "url": {
-"legal-mentions":"Νομικές ειδοποιήσεις",
-"personal-data": "Προσωπικά δεδομένα",
-"blog": "blog",
-"blog-article":"blog /: άρθρο",
-"credits": "credits"
-}
+    "video-call": "visio",
+    "legal-mentions": "mentions-legales",
+    "personal-data": "donnees-personnelles",
+    "blog": "blog",
+    "credits": "credits"
+} 
 }

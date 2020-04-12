@@ -13,10 +13,10 @@
         "contact": "Contact"
     },
     "url": {
+        "video-call": "visio",
         "legal-mentions": "mentions-legales",
         "personal-data": "donnees-personnelles",
         "blog": "blog",
-        "blog-article": "blog/:article",
         "credits": "credits"
-    }
+    } 
 }
