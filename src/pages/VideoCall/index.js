@@ -117,7 +117,7 @@ const VideoCallFrame = () => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
 
-    }, [url])
+    }, [url, t])
 
 
     return (
@@ -144,16 +144,16 @@ const VideoCallFrame = () => {
                 {!leftCallFrame && <Controls>
                     <div className="cam-audio">
                         <div ref={cam} className={classNames({ 'control': true, 'black': camOn, 'red': !camOn })}>
-                            <img src={camOn ? cameraOn : cameraOff} />
+                            <img src={camOn ? cameraOn : cameraOff} alt="" />
                             <p>{t('cam')}</p>
                         </div>
                         <div ref={audio} className={classNames({ 'control': true, 'black': audioOn, 'red': !audioOn })}>
-                            <img src={audioOn ? micOn : micOff}/>
+                            <img src={audioOn ? micOn : micOff} alt="" />
                             <p>{t('audio')}</p>
                         </div>
                     </div>
                     <div ref={leaving} className="control red leave">
-                        <img src={leave}/>
+                        <img src={leave} alt="" />
                         <p>{t('leave')}</p>
                     </div>
 
