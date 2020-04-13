@@ -13,12 +13,12 @@
         "contact": "Contact form"
     },
     "lang": {
-        "fr": "French",
+        "fr": "Français",
         "gb": "English",
-        "de": "German",
-        "gr": "Greek",
-        "hu": "Hungarian",
-        "ro": "Romanian"
+        "de": "Deutsch",
+        "gr": "Ελληνικά",
+        "hu": "Magyar",
+        "ro": "Română"
     },
     "url": {
         "video-call": "visio",
@@ -26,5 +26,5 @@
         "personal-data": "donnees-personnelles",
         "blog": "blog",
         "credits": "credits"
-    } 
+    }
 }

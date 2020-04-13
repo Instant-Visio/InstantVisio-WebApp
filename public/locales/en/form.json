@@ -39,6 +39,8 @@
         }
     },
     "errors": {
-        "submit": "The SMS or e-mail could not be sent. Please check the provided information and submit the form again."
+        "general": "The SMS or e-mail could not be sent. Please check the provided information and submit the form again.",
+        "quotaSMS": "Impossible to send SMS, our credits are gone.",
+        "resourceExausted": "Impossible to notitfy your contact, lack of ressources from our side."
     }
 }
