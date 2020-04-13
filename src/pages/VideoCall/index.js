@@ -21,7 +21,8 @@ const VideoCallFrame = () => {
     const [ leftCallFrame, setLeftCallFrame ] = useState(false)
     const [ camOn, setCamOn ] = useState(true)
     const [ audioOn, setAudioOn ] = useState(true)
-    const [ participantStatus, setParticipantStatus ] = useState('')
+    const [ participantStatus, setParticipantStatus ] = useState(t('waiting-participant'))
+    const [ participantLength, setParticipantLength ] = useState(0)
     const [ participantNumber, setParticipantNumber ] = useState(0)
     let { videoName } = useParams()
 
@@ -50,25 +51,20 @@ const VideoCallFrame = () => {
             cssText: dailyCssText
         })
 
-        const participants = daily.participants()
-
         const eventActions = (event) => {
             setCamOn(daily.localVideo())
             setAudioOn(daily.localAudio())
+            
+            const participantsLength = Object.keys(daily.participants()).length
 
-            const participantsLength = Object.keys(participants).length
-
-            if (participants) {
-                if (participantsLength < 2) {
-                    setParticipantStatus(t('waiting-participant'))
-                } else if (participantsLength === 2 && (event && !event.participant.local)) {
-                    setParticipantStatus(!event.participant.video ? t('participant-cam-off') : '')
-                } else {
-                    setParticipantStatus('')
-                }
-
-                setParticipantNumber(participantsLength)
+            if (participantsLength === 2 && (event && !event.participant.local)) {
+                setParticipantStatus(!event.participant.video ? t('participant-cam-off') : '')
+            } else if (participantsLength > 2) {
+                setParticipantStatus('')
             }
+
+            setParticipantNumber(participantLength)
+            
         }
 
         cam.current.addEventListener('click', () => {
@@ -85,7 +81,7 @@ const VideoCallFrame = () => {
         daily.on('joined-meeting', eventActions)
             .on('participant-updated', eventActions)
             .on('participant-left', (event) => { 
-                setParticipantStatus(!event.participant.local && Object.keys(participants).length < 2 ? t('participant-left') : '')
+                setParticipantStatus(!event.participant.local && Object.keys(daily.participants()).length < 2 ? t('participant-left') : '')
             })
 
         leaving.current.addEventListener('click', () => {
