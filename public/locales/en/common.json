@@ -26,5 +26,9 @@
         "personal-data": "donnees-personnelles",
         "blog": "blog",
         "credits": "credits"
+    },
+    "message": {
+      "title": "URGENT video call request from",
+      "Message": "invites you to a video chat. Join the chat now at this link:"
     }
 }

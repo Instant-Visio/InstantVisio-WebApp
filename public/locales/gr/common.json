@@ -27,5 +27,9 @@
         "personal-data": "donnees-personnelles",
         "blog": "blog",
         "credits": "credits"
+    },
+    "message": {
+      "title": "ΕΡΩΤΗΣΕΙΣ για επειγον βίντεο",
+      "Message": "Σας προσκαλεί σε μια συνομιλία μέσω βίντεο. Συμμετοχή στη συνομιλία τώρα σε αυτόν τον σύνδεσμο"
     }
 }

@@ -26,5 +26,9 @@
         "personal-data": "donnees-personnelles",
         "blog": "blog",
         "credits": "credits"
+    },
+    "message": {
+      "title": "Cerere URGENTĂ de conversație video din partea lui",
+      "Message": "va invita la o videoconversatie. Intrati in dialog clicand pe link-ul urmator:"
     }
 }
