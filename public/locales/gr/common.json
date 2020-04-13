@@ -14,12 +14,12 @@
         "contact":"Επικοινωνία"
     },
     "lang": {
-        "fr": "Γαλλικά",
-        "gb": "Αγγλικά",
-        "de": "Γερμανικά",
+        "fr": "Français",
+        "gb": "English",
+        "de": "Deutsch",
         "gr": "Ελληνικά",
-        "hu": "Ουγγρικά",
-        "ro": "Ρουμανικά"
+        "hu": "Magyar",
+        "ro": "Română"
     },
     "url": {
         "video-call": "visio",

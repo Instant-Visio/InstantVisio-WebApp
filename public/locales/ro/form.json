@@ -32,6 +32,9 @@
         "placeholder": "Ex. : Laure, Buni"
     },
     "errors": {
-        "submit": "Emailul nu a putut fi expediat.Verificați din nou datele introduse și reîncercați."
+        "general":"Emailul nu a putut fi expediat.Verificați din nou datele introduse și reîncercați.",
+        "quotaSMS": "Impossible to send SMS, our credits are gone.",
+        "resourceExausted": "Impossible to notitfy your contact, lack of ressources from our side."
+
     }
 }

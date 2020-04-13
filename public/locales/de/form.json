@@ -32,6 +32,8 @@
         "placeholder": "z. B. Anna, Oma"
     },
     "errors": {
-        "submit": "Das SMS oder das E-Mail kann nicht gesendet werden. Bitte überprüfen Sie ihre Eingabe und wiederholen Sie den Vorgang."
+        "general": "Das SMS oder das E-Mail kann nicht gesendet werden. Bitte überprüfen Sie ihre Eingabe und wiederholen Sie den Vorgang.",
+        "quotaSMS": "Impossible to send SMS, our credits are gone.",
+        "resourceExausted": "Impossible to notitfy your contact, lack of ressources from our side."
     }
 }

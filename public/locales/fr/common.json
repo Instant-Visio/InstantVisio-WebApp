@@ -14,11 +14,11 @@
     },
     "lang": {
         "fr": "Français",
-        "gb": "Anglais",
-        "de": "Allemand",
-        "gr": "Grecque",
-        "hu": "Hongrois",
-        "ro": "Roumain"
+        "gb": "English",
+        "de": "Deutsch",
+        "gr": "Ελληνικά",
+        "hu": "Magyar",
+        "ro": "Română"
     },
     "url": {
         "video-call": "visio",
@@ -26,5 +26,5 @@
         "personal-data": "donnees-personnelles",
         "blog": "blog",
         "credits": "credits"
-    }  
+    }
 }
