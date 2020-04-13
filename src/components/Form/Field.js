@@ -5,7 +5,7 @@ import { useField } from 'formik'
 
 export default function Field(props) {
     
-    const {label, className, type, name, disabled, title, placeholder, prepend} = props
+    const {label, className, name, prepend, ...rest} = props
     const [field, meta, helper] = useField(name)
     const {onChange} = field
     const {error} = meta
@@ -23,10 +23,7 @@ export default function Field(props) {
             <InputGroup>
                 {prepend && <InputGroup.Prepend>{prepend}</InputGroup.Prepend>}
                 <Form.Control
-                    type={type}
-                    placeholder={placeholder}
-                    title={title}
-                    disabled={disabled}
+                    {...rest}
                     isInvalid={error}
                     onChange={onChange}
                     name={name}

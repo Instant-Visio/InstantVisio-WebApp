@@ -47,11 +47,12 @@ function Country({defaultCountry, selectedCountries, onSelect, className}){
         return countriesList
     }, [language, selectedCountries, options.fallbackLng])
 
-    const [country, setCountry] = useState(defaultCountry || countries[0][0])
+    const [country, setCountry] = useState('')
 
     useEffect(() => {
-        setCountry(defaultCountry)
-    },[defaultCountry])
+        const firstCountryList =  countries[0][0]
+        setCountry(defaultCountry === 'en' ? firstCountryList : defaultCountry || firstCountryList )
+    },[defaultCountry, countries])
 
     const handlerSelect = (event) => {
         event.preventDefault()

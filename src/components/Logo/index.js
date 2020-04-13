@@ -7,7 +7,7 @@ import logoMobile from '../../styles/assets/images/logo_mobile.svg'
 import useDetectMobile from '../../hooks/useDetectMobile'
 
 
-export default function Logo(){
+function Logo(){
     const {t} = useTranslation()
     const isMobile = useDetectMobile()
     let logoToChoose = ''
@@ -22,3 +22,5 @@ export default function Logo(){
     
     return (<Link to="/"><img src={logoToChoose} alt={t('logo.alt')} /></Link>)
 }
+
+export default React.memo(Logo)

@@ -66,9 +66,13 @@ export const triggerValidation = async(values, tab, translator) => {
 
 export const format = (values) => {
     const {phone, country} = values
-    const phoneNumber = parsePhoneNumberFromString(phone.replace(/ /g, ''), country)
 
-    return {...values, phone: phoneNumber.formatInternational()}
+    if (phone) {
+        const phoneNumber = parsePhoneNumberFromString(phone.replace(/ /g, ''), country)
+        return {...values, phone: phoneNumber.formatInternational()}
+    }
+
+    return values
 }
 
 export default triggerValidation

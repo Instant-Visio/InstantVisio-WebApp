@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 //todo get from firebase
 import config from './config.json'
-import i18n from '../../i18n/i18n'
-import Flag from '../Flag'
 import { useTranslation } from 'react-i18next'
 
 const Wrapper = styled.div`
@@ -13,12 +11,12 @@ const Wrapper = styled.div`
         background: none;
         padding: 0;
         border: none;
-        &::after{
-            display: none;
-        }
+        font-weight: bold;
+        color: ${({theme}) => theme.color.logoGrey};
         &.dropdown-toggle, &.btn-primary{
             background: none;
             &:focus, &:active{
+                color: ${({theme}) => theme.color.logoGrey};
                 background: none;
                 box-shadow: none;
             }
@@ -35,22 +33,21 @@ const Item = styled.div`
 
 export default function Lang({className}){
     
-    const {availableLangs, defaultLang} = config
-    const [flag, setFlag] = useState(i18n.language || defaultLang)
-    const {t} = useTranslation()
+    const {availableLangs} = config
+    const {t, i18n} = useTranslation()
+    const {language} = i18n
 
     const onSelect = (value) => {
         if (i18n.language !== value) {
             i18n.changeLanguage(value)
-            setFlag(value)
         }
     }
 
+    const renderTitle = (value) => <span>{t(`lang.${value}`)}</span>
     const items = availableLangs.map((value, index) => {
-        return (flag !== value && <Dropdown.Item key={`lang-${index}`} eventKey={value}>
+        return (language !== value && <Dropdown.Item key={`lang-${index}`} eventKey={value}>
             <Item>
-                <Flag name={value} /> 
-                <span>{t(`lang.${value}`)}</span>
+                {renderTitle(value)}
             </Item>
         </Dropdown.Item>)
     })
@@ -58,10 +55,10 @@ export default function Lang({className}){
     return (
         <Wrapper className={className}>
             {availableLangs.length > 1 ? (
-                <DropdownButton title={<Flag name={flag} />} onSelect={onSelect}>
+                <DropdownButton title={renderTitle(language)} onSelect={onSelect}>
                     {items}
                 </DropdownButton>
-            ) : (<Flag name={flag} />)}
+            ) : (renderTitle(language))}
         </Wrapper>
     )
 }

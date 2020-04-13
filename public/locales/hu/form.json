@@ -18,18 +18,25 @@
         "placeholder": "Pl.: 06 XX XXX XX XX",
         "errors": {
             "empty": "Írja be ismerőse telefonszámát",
-            "invalid": "Ismerősének telefonszáma érvénytelen"
+            "required": "Ismerősének telefonszáma érvénytelen"
         }
     },
     "mail": {
         "label": "Ismerőse e-mail címe",
         "title": "Ismerőse e-mail címe",
-        "placeholder": "Pl.: kovacs.bela@gmail.com"
+        "placeholder": "Pl.: kovacs.bela@gmail.com",
+       "errors": {
+         "required": "Please enter the e-mail of your close one",
+         "invalid": "The entered e-mail is not valid"
+      }
     },
     "personName": {
         "label": "Quel est votre nom (ou surnom)* ?",
         "title": "Neve",
-        "placeholder": "Pl.: Laura, Mama"
+        "placeholder": "Pl.: Laura, Mama",
+        "errors": {
+            "required": "Please enter your name"
+        }
     },
     "errors": {
         "general":"Az SMS, vagy e-mail kiküldése sikertelen. Kérjük, ellenőrizze a megadott adatokat, és küldje el újra az adatlapot.",

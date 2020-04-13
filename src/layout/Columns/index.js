@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 `
 
 const Left = styled.div`
-    padding: ${({theme}) => theme.spacing.L};
+    padding: ${({theme}) => `4rem ${theme.spacing.L} ${theme.spacing.L}`};
     width: 100%;
     background: ${({theme}) => theme.color.white};
     ${SCREEN.DESKTOP} {
@@ -42,7 +42,7 @@ const Right = styled.div`
     padding: ${({theme}) => theme.spacing.M};
     ${SCREEN.DESKTOP} {
         width: 45%;
-        padding: 7rem;
+        padding: 7rem 6.5rem;
     }
 `
 

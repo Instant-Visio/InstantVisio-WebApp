@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import Field from './Field'
 import CallError from './CallError'
-import {triggerValidation, format} from './processing'
+import {triggerValidation, format} from './validation'
 import PhoneField from './PhoneField'
 
 const BootstrapForm = styled(BaseForm)`

@@ -8,6 +8,7 @@ import Logo from '../Logo'
 
 const Header = () => {
     const {t} = useTranslation()
+
     return (
         <HeaderStyled>
             <Container className="header">
@@ -20,4 +21,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default React.memo(Header)

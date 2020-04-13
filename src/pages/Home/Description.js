@@ -125,10 +125,11 @@ const Arrow = styled.span`
     }
 `
 
-export default function Description(){
+function Description(){
     const {t} = useTranslation(['home'])
     const isMobile = useDetectMobile()
     const [collapsed, setCollapsed] = useState(true)
+
     return (<Wrapper>
         <Logo />
         <Baseline>
@@ -153,3 +154,5 @@ export default function Description(){
         
     </Wrapper>)
 }
+
+export default React.memo(Description)

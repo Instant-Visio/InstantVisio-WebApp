@@ -16,6 +16,11 @@ const Lang = styled(BaseLang)`
 
 const Wrapper = styled.div`
     position: relative;
+    ${SCREEN.MOBILE} {
+        & .header{
+            padding-top: 4rem;
+        }
+    }
 `
 
 const Body = styled.div`
