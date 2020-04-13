@@ -22,7 +22,6 @@ const VideoCallFrame = () => {
     const [ camOn, setCamOn ] = useState(true)
     const [ audioOn, setAudioOn ] = useState(true)
     const [ participantStatus, setParticipantStatus ] = useState(t('waiting-participant'))
-    const [ participantLength, setParticipantLength ] = useState(0)
     const [ participantNumber, setParticipantNumber ] = useState(0)
     let { videoName } = useParams()
 
@@ -63,7 +62,7 @@ const VideoCallFrame = () => {
                 setParticipantStatus('')
             }
 
-            setParticipantNumber(participantLength)
+            setParticipantNumber(participantsLength)
             
         }
 
