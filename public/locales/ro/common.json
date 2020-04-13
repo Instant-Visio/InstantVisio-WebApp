@@ -12,6 +12,14 @@
         "credits": "Contribuții",
         "contact": "Contact"
     },
+    "lang": {
+        "fr": "Franceză",
+        "gb": "Engleză",
+        "de": "Germană",
+        "gr": "Greacă",
+        "hu": "Maghiar",
+        "ro": "Românesc"
+    },
     "url": {
         "video-call": "visio",
         "legal-mentions": "mentions-legales",

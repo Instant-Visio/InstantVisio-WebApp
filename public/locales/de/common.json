@@ -12,6 +12,14 @@
         "credits": "Nachweise",
         "contact": "Kontaktaufnahme"
     },
+    "lang": {
+        "fr": "Französisch",
+        "gb": "Englisch",
+        "de": "Deutsch",
+        "gr": "Griechisch",
+        "hu": "Ungarisch",
+        "ro": "Rumänisch"
+    },
     "url": {
         "video-call": "visio",
         "legal-mentions": "mentions-legales",
