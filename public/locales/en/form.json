@@ -17,19 +17,26 @@
         "title": "Number of your close one",
         "placeholder": "E.g. 06 XX XX XX XX",
         "errors": {
-            "empty": "Please enter the phone number of your close one",
+            "required": "Please enter the phone number of your close one",
             "invalid": "The entered phone number is not valid"
         }
     },
     "mail": {
         "label": "E-mail address of your close one*",
         "title": "E-mail of your close one",
-        "placeholder": "E.g. jane.doe@gmail.com"
+        "placeholder": "E.g. jane.doe@gmail.com",
+        "errors": {
+            "required": "Please enter the e-mail of your close one",
+            "invalid": "The entered e-mail is not valid"
+        }
     },
     "personName": {
         "label": "What is your name (or nickname)*?",
         "title": "Your name",
-        "placeholder": "E.g. Jane, Grandpa"
+        "placeholder": "E.g. Jane, Grandpa",
+        "errors": {
+            "required": "Please enter your name"
+        }
     },
     "errors": {
         "submit": "The SMS or e-mail could not be sent. Please check the provided information and submit the form again."

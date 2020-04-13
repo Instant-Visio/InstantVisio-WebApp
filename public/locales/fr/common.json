@@ -12,6 +12,14 @@
         "credits": "Crédits",
         "contact": "Prise de contact"
     },
+    "lang": {
+        "fr": "Français",
+        "gb": "Anglais",
+        "de": "Allemand",
+        "gr": "Grecque",
+        "hu": "Hongrois",
+        "ro": "Roumain"
+    },
     "url": {
         "video-call": "visio",
         "legal-mentions": "mentions-legales",

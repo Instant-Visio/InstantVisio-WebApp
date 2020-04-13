@@ -1,9 +1,9 @@
 {
     "logo": {
-        "alt": "InstantVisio\'s logo featuring a mobile phone\'s blue screen showing a face, figured by an orange circle, talking through video chat with the owner of the telephone, whose face appears as a circle outlined in orange."
+        "alt": "InstantVisio's logo featuring a mobile phone's blue screen showing a face, figured by an orange circle, talking through video chat with the owner of the telephone, whose face appears as a circle outlined in orange."
     },
     "homeBaseline": "Video chat with your loved ones in a single click, and <1>for free.</1>",
-    "headerBaseline": "Video chat with your loved ones in a single click, and <1>for free.</1>",
+    "headerBaseline": "Video chat with your loved ones in a single click, and for free.",
     "footer": {
         "contact-us": "Contact us",
         "legal-mentions": "Legal mentions",
@@ -11,6 +11,14 @@
         "blog": "Blog",
         "credits": "Credits",
         "contact": "Contact form"
+    },
+    "lang": {
+        "fr": "French",
+        "gb": "English",
+        "de": "German",
+        "gr": "Greek",
+        "hu": "Hungarian",
+        "ro": "Romanian"
     },
     "url": {
         "video-call": "visio",

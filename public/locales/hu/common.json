@@ -12,6 +12,14 @@
         "credits": "Közreműködők",
         "contact": "Kapcsolatfelvétel"
     },
+    "lang": {
+        "fr": "Francia",
+        "gb": "Angol",
+        "de": "Német",
+        "gr": "Görög",
+        "hu": "Magyar",
+        "ro": "Román"
+    },
     "url": {
         "video-call": "visio",
         "legal-mentions": "mentions-legales",
