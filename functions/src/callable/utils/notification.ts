@@ -3,6 +3,8 @@ import * as sgMail from '@sendgrid/mail'
 import * as ovh from 'ovh'
 import {logEmailSent, logSmsSent} from '../../sumologic/sumologic'
 import {parsePhoneNumberFromString} from 'libphonenumber-js'
+import {alert} from '../alerts/alert'
+import {ALERT_OVH_SMS_QUOTA_REACHED} from '../alerts/alertList'
 
 export interface OVHCredentials {
     consumerkey: string,
@@ -74,6 +76,7 @@ export const sendSms = async (params: NotificationParams, messageBody: string) =
     }).catch((error: any) => {
         console.error('Fail to send sms', error)
         if(error.error  && error.error === 402) {
+            alert(ALERT_OVH_SMS_QUOTA_REACHED)
             throw new functions.https.HttpsError("resource-exhausted","402")
         }
         throw new functions.https.HttpsError("unknown", error.message)

@@ -3,6 +3,8 @@ import {isEmpty} from 'lodash'
 import fetch from 'node-fetch'
 import {NotificationParams, sendEmail, sendSms} from './utils/notification'
 import {logRoomCreated} from '../sumologic/sumologic'
+import {alert} from './alerts/alert'
+import {ALERT_ROOM_NOT_CREATED} from './alerts/alertList'
 
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
@@ -88,12 +90,16 @@ const getRoomUrl = async (credentials: VisioCredentials, domainName: string): Pr
             }
         })
     })
-    const result = await response.json()
-    logRoomCreated()
-    return {
-        roomUrl: `https://${domainName}/visio/${result.name}`,
-        ...result
+    if(response.ok) {
+        const result = await response.json()
+        logRoomCreated()
+        return {
+            roomUrl: `https://${domainName}/visio/${result.name}`,
+            ...result
+        }
     }
+    await alert(ALERT_ROOM_NOT_CREATED)
+    throw new functions.https.HttpsError("resource-exhausted","400")
 }
 
 export const triggerNotification = async (params: NotificationParams) => {
