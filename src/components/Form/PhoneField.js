@@ -28,7 +28,7 @@ export default function PhoneField({defaultCountry, isSubmitting}){
 
     return (<Wrapper>
         <Field
-            prepend={<Country defaultCountry={defaultCountry} selectedCountries={['FR', 'GR']} onSelect={onCountrySelect} />}
+            prepend={<Country defaultCountry={defaultCountry} onSelect={onCountrySelect} />}
             name="phone"
             type="tel"
             placeholder={t('phone.placeholder')} 
