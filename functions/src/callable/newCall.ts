@@ -5,6 +5,7 @@ import {NotificationParams, sendEmail, sendSms} from './utils/notification'
 import {logRoomCreated} from '../sumologic/sumologic'
 import {alert} from './alerts/alert'
 import {ALERT_ROOM_NOT_CREATED} from './alerts/alertList'
+import * as translations from '../translations.json'
 
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
@@ -16,6 +17,10 @@ export const newCall = functions.https.onCall(async data => {
             'failed-precondition',
             'Input parameters are empty'
         )
+    }
+
+    if (isEmpty(data.lang)) {
+        console.warn('Missing "lang" params')
     }
 
     if (isEmpty(visio) || isEmpty(visio.apikey) || isEmpty(visio.api)) {
@@ -33,10 +38,10 @@ export const newCall = functions.https.onCall(async data => {
     }
 
     if (isEmpty(sendgrid)) {
-        console.warn("Warn: No credentials for SendGrid")
+        console.warn('Warn: No credentials for SendGrid')
     }
     if (isEmpty(ovh)) {
-        console.warn("Warn: No credentials for OVH")
+        console.warn('Warn: No credentials for OVH')
     }
 
     const room = await getRoomUrl({
@@ -53,7 +58,8 @@ export const newCall = functions.https.onCall(async data => {
             roomUrl: room.roomUrl,
             ovhCredentials: ovh,
             sendGridCredentials: sendgrid,
-            emailFrom: app.emailfrom
+            emailFrom: app.emailfrom,
+            lang: data.lang ? data.lang.trim().toLowerCase() : 'en'
         })
     }
 
@@ -99,15 +105,19 @@ const getRoomUrl = async (credentials: VisioCredentials, domainName: string): Pr
         }
     }
     await alert(ALERT_ROOM_NOT_CREATED)
-    throw new functions.https.HttpsError("resource-exhausted","400")
+    throw new functions.https.HttpsError('resource-exhausted','400')
 }
 
 export const triggerNotification = async (params: NotificationParams) => {
-    const name  = params.name.replace(/(.{20})..+/, "$1…");
+    const name  = params.name.replace(/(.{20})..+/, '$1…')
+    // @ts-ignore
+    const langData = translations[params.lang]
+    const subject = `${langData.title} ${params.name}`
+    const message = `${name} ${langData.Message} ${params.roomUrl}`
 
-    const message = `${name} vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien : ${params.roomUrl}`
+
     if (!isEmpty(params.email) && !isEmpty(params.sendGridCredentials)) {
-        await sendEmail(params, message)
+        await sendEmail(params, message, subject)
     }
     if (!isEmpty(params.phone) && !isEmpty(params.ovhCredentials)) {
         await sendSms(params, message)

@@ -49,6 +49,13 @@ const readCommonAndGetString = (filePath) => {
             reject("-- /!\\ Missing message translation for " + filePath)
         }
 
+        if (!data.message.title) {
+            reject("-- /!\\ Missing 'title' key for translation for " + filePath)
+        }
+
+        if (!data.message.Message) {
+            reject("-- /!\\ Missing 'Message' key translation for " + filePath)
+        }
         resolve(data.message)
     })))
 }
