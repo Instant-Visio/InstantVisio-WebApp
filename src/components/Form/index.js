@@ -9,6 +9,7 @@ import Field from './Field'
 import CallError from './CallError'
 import {triggerValidation, format} from './validation'
 import PhoneField from './PhoneField'
+import { getLocale } from '../../i18n/helper'
 
 const BootstrapForm = styled(BaseForm)`
     width: 100%;
@@ -59,9 +60,8 @@ const FormSubmit = styled.div`
 `
 
 export default function Form({onSubmit, error}) {
-    const { t, i18n } = useTranslation('form')
-    const {language} = i18n
-
+    const { t } = useTranslation('form')
+    const {country} = getLocale()
     const tabs = {
         phone: 'phone',
         mail: 'mail'
@@ -72,7 +72,7 @@ export default function Form({onSubmit, error}) {
         personName: '',
         phone: '',
         mail: '',
-        country: 'language',
+        country: country,
     }
 
     const selectTabOnError = (errors) => {
@@ -112,7 +112,7 @@ export default function Form({onSubmit, error}) {
                             <Tabs activeKey={tab} onSelect={onSelectTab}>
                                 <Tab eventKey={tabs.phone} title={t('buttons.sms.label')}>
                                     <FormFields>
-                                        <PhoneField isSubmitting={isSubmitting} defaultCountry={language} />
+                                        <PhoneField isSubmitting={isSubmitting} />
                                     </FormFields>
                                 </Tab>
                                 <Tab eventKey={tabs.mail} title={t('buttons.mail.label')}>
