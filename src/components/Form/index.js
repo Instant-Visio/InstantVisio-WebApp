@@ -7,7 +7,8 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import Field from './Field'
 import CallError from './CallError'
-import triggerValidation from './validation'
+import {triggerValidation, format} from './validation'
+import PhoneField from './PhoneField'
 
 const BootstrapForm = styled(BaseForm)`
     width: 100%;
@@ -53,22 +54,25 @@ const FormCardHeader = styled.div`
 `
 
 const FormSubmit = styled.div`
+    margin-bottom: ${({theme}) => theme.spacing.XXL};
     text-align: center;
 `
 
-export default function Form({onSubmit, errorSending}) {
+export default function Form({onSubmit, error}) {
+    const { t, i18n } = useTranslation('form')
+    const {language} = i18n
+
     const tabs = {
         phone: 'phone',
         mail: 'mail'
     }
     const [tab, setTab] = useState(tabs.phone)
-
-    const { t } = useTranslation('form')
-
+            
     const initialValues = {
         personName: '',
         phone: '',
         mail: '',
+        country: 'language',
     }
 
     const selectTabOnError = (errors) => {
@@ -87,7 +91,7 @@ export default function Form({onSubmit, errorSending}) {
 
     const handleSubmitForm = (values, {setSubmitting}) => {
         if (onSubmit) {
-            onSubmit(values, setSubmitting)
+            onSubmit(format(values), setSubmitting)
         }
     }
 
@@ -108,14 +112,7 @@ export default function Form({onSubmit, errorSending}) {
                             <Tabs activeKey={tab} onSelect={onSelectTab}>
                                 <Tab eventKey={tabs.phone} title={t('buttons.sms.label')}>
                                     <FormFields>
-                                        <Field
-                                            name="phone"
-                                            type="tel"
-                                            placeholder={t('phone.placeholder')}
-                                            label={t('phone.label')}
-                                            disabled={isSubmitting}
-                                            title={t('phone.title')}
-                                        />
+                                        <PhoneField isSubmitting={isSubmitting} defaultCountry={language} />
                                     </FormFields>
                                 </Tab>
                                 <Tab eventKey={tabs.mail} title={t('buttons.mail.label')}>
@@ -149,8 +146,8 @@ export default function Form({onSubmit, errorSending}) {
                                     {t('buttons.submit.label')}
                                 </Button>
                             </FormSubmit>
-                            {errorSending &&
-                                <SubmitError><CallError error={errorSending}/></SubmitError>
+                            {error &&
+                                <SubmitError><CallError error={error}/></SubmitError>
                             }
                         </BootstrapForm>
                     )
@@ -162,5 +159,5 @@ export default function Form({onSubmit, errorSending}) {
 
 Form.propTypes = {
     onSubmit: PropTypes.func,
-    errorSending: PropTypes.bool,
+    error: PropTypes.object,
 }

@@ -1,0 +1,19 @@
+{
+    "page-title": "Welcome",
+    "information": {
+        "title": "How does it work?",
+        "steps": {
+            "1": "Fill in the form",
+            "2": "Submit by clicking on « Contact my close one ».",
+            "3": "The video starts, you can discuss with your close one."
+        },
+        "indications": {
+            "landscape": "After submitting the form, we recommend you rotate your device in landscape mode. You will be able to better see your close one.",
+            "multiple-people": "Once the video has started, you can invite other participants by sharing the address available in the address or URL bar. For an optimal experience, we recommend up to 6 participants per call."
+        },
+        "data-mentions": {
+            "mandatory": "Fields marked by an asterisk are mandatory.",
+            "management": "The person in charge of data, Stéphane Luçon, processes the collected information before sending the SMS or e-mail to your contact. Your information will be deleted one day after it has been sent. To learn more about data privacy or to exercise your rights regarding your personal data, please see section <1>Personal data</1>."
+        }
+    }
+}

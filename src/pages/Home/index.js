@@ -30,11 +30,13 @@ export default function Home(){
             .then(roomName => {
                 setVideoCallId(roomName)
             })
-            .catch(setError)
+            .catch((error) => {
+                setError(error)
                 window.scrollTo({
                     top: formSubmissionMessage.current.offsetTop,
                     behavior: 'smooth',
                 })
+            })
             .finally(() => {
                 setLoading(false)
                 setSubmitting(false)
@@ -43,7 +45,7 @@ export default function Home(){
     return (
         <ColumnsLayout title={`${t('page-title')} - Instant Visio`}>
             <Description />
-            <Form onSubmit={submit} isSending={loading} errorSending={error ? true : false} />
+            <Form onSubmit={submit} isSending={loading} error={error} />
             <div ref={formSubmissionMessage}>
                 {videoCallId &&
                     <Route  

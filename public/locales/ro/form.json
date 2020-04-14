@@ -1,0 +1,47 @@
+{
+    "title": "Contactați persoana apropiată",
+    "description": "Cun doriți să anunțați persoana apropiată de apelul dumneavoastră?",
+    "buttons": {
+        "sms": {
+            "label": "Prin sms"
+        },
+        "mail": {
+            "label": "Pe mail"
+        },
+        "submit": {
+            "label": "Contactați persoana apropiată dumneavoastră"
+        }
+    },
+    "phone": {
+        "label": "Numărul de telefon al persoanei apropiate*",
+        "title": "Numărul persoanei apropiate",
+        "placeholder": "Ex. : 07XX XXX XXX",
+        "errors": {
+            "empty": "Introduceți numărul de telefon al persoanei apropiate dumneavoastră",
+            "required": "Numărul de telefon introdus este incorect"
+        }
+    },
+    "mail": {
+        "label": "Introduceți adresa de mail a persoanei apropiate dumneavoastră*",
+        "title": "Emailul apropiatului dumneavoastră",
+        "placeholder": "Ex. : maria.popescu@gmail.com",
+        "errors": {
+            "required": "Please enter the e-mail of your close one",
+            "invalid": "The entered e-mail is not valid"
+         }
+    },
+    "personName": {
+        "label": "Prenumele dumneavoastră",
+        "title": "Prenumele dumneavoastră",
+        "placeholder": "Ex. : Laure, Buni",
+        "errors": {
+            "required": "Please enter your name"
+        }
+    },
+    "errors": {
+        "general":"Emailul nu a putut fi expediat.Verificați din nou datele introduse și reîncercați.",
+        "quotaSMS": "Impossible to send SMS, our credits are gone.",
+        "resourceExausted": "Impossible to notitfy your contact, lack of ressources from our side."
+
+    }
+}

@@ -5,6 +5,7 @@ import { useTranslation, Trans } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
 import BaseList from '../../components/List'
 import Logo from '../../components/Logo'
+import BaseArrow from '../../components/Arrow'
 import { useState } from 'react'
 import useDetectMobile from '../../hooks/useDetectMobile'
 
@@ -42,6 +43,7 @@ const P = styled.p`
         margin-block-end: 0;
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 `
 
@@ -112,26 +114,23 @@ const Information = styled.div`
     }
 `
 
-const Arrow = styled.i`
+const Arrow = styled(BaseArrow)`
+    display: none;
     ${SCREEN.MOBILE}{
-        margin-top: 0.125rem;
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        border-top: 2px solid ${({theme}) => theme.color.grey};
-        border-left: 2px solid ${({theme}) => theme.color.grey};
-        transform: rotate(225deg);
+        display: initial;
+        margin-bottom: 0.5rem;
         transition: transform .3s ease-in-out;
         ${({collapsed}) => !collapsed && css`
-            transform: translate(0, 50%) rotate(45deg);
+            transform: rotate(45deg);
         `}
     }
 `
 
-export default function Description(){
+function Description(){
     const {t} = useTranslation(['home'])
     const isMobile = useDetectMobile()
     const [collapsed, setCollapsed] = useState(true)
+
     return (<Wrapper>
         <Logo />
         <Baseline>
@@ -156,3 +155,5 @@ export default function Description(){
         
     </Wrapper>)
 }
+
+export default React.memo(Description)

@@ -1,5 +1,6 @@
 
 import * as Yup from 'yup'
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
 const schema = Yup.object().shape({
 
@@ -38,13 +39,14 @@ const schema = Yup.object().shape({
                     return true
                 }
                 
+                value = value.replace(/ /g, '')
                 return value.match(/(\d+){6,}/gi)
             })
 
     }, ['phone', 'mail'])
 })
 
-const triggerValidation = async(values, tab, translator) => {
+export const triggerValidation = async(values, tab, translator) => {
     let {phone, mail, personName} = values
     const errors = {}
     
@@ -60,6 +62,17 @@ const triggerValidation = async(values, tab, translator) => {
     }
 
     return errors
+}
+
+export const format = (values) => {
+    const {phone, country} = values
+
+    if (phone) {
+        const phoneNumber = parsePhoneNumberFromString(phone.replace(/ /g, ''), country)
+        return {...values, phone: phoneNumber.formatInternational()}
+    }
+
+    return values
 }
 
 export default triggerValidation

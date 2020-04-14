@@ -37,8 +37,8 @@ const FooterStyled = styled.footer`
     ${SCREEN.MOBILE_AND_TABLET} {
         .footer {
             padding-bottom: ${({theme}) => theme.spacing.XXL};
+        }
     }
-})
 `
 
 export default FooterStyled

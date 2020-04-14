@@ -1,0 +1,10 @@
+{
+    "cam": "Webcam",
+    "audio": "Mic",
+    "turn-on-cam-message": "Activați-vă camera web și microfonul mai jos.",
+    "waiting-participant": "Așteptați, apropiatul dumneavoastră se conectează.",
+    "participant-cam-off": "Apropiatul dumneavoastră s-a conectat la apel, dar camera sa web este închisă.",
+    "participant-left": "Apropiatul dumneavoastră s-a deconectat.",
+    "leave": "Închidere",
+    "leave-confirmation": "V-ați deconectat de la apel."
+}

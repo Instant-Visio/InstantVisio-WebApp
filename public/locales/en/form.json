@@ -1,0 +1,46 @@
+{
+    "title": "Get in touch with a close one",
+    "description": "How do you wish to let them know about of your call?",
+    "buttons": {
+        "sms": {
+            "label": "By SMS"
+        },
+        "mail": {
+            "label": "By e-mail"
+        },
+        "submit": {
+            "label": "Contact my close one"
+        }
+    },
+    "phone": {
+        "label": "Phone number of your close one*",
+        "title": "Number of your close one",
+        "placeholder": "E.g. 06 XX XX XX XX",
+        "errors": {
+            "required": "Please enter the phone number of your close one",
+            "invalid": "The entered phone number is not valid"
+        }
+    },
+    "mail": {
+        "label": "E-mail address of your close one*",
+        "title": "E-mail of your close one",
+        "placeholder": "E.g. jane.doe@gmail.com",
+        "errors": {
+            "required": "Please enter the e-mail of your close one",
+            "invalid": "The entered e-mail is not valid"
+        }
+    },
+    "personName": {
+        "label": "What is your name (or nickname)*?",
+        "title": "Your name",
+        "placeholder": "E.g. Jane, Grandpa",
+        "errors": {
+            "required": "Please enter your name"
+        }
+    },
+    "errors": {
+        "general": "The SMS or e-mail could not be sent. Please check the provided information and submit the form again.",
+        "quotaSMS": "Impossible to send SMS, our credits are gone.",
+        "resourceExausted": "Impossible to notitfy your contact, lack of ressources from our side."
+    }
+}
