@@ -67,7 +67,7 @@ export default function Form({onSubmit, error}) {
         mail: 'mail'
     }
     const [tab, setTab] = useState(tabs.phone)
-            
+
     const initialValues = {
         personName: '',
         phone: '',
@@ -91,7 +91,10 @@ export default function Form({onSubmit, error}) {
 
     const handleSubmitForm = (values, {setSubmitting}) => {
         if (onSubmit) {
-            onSubmit(format(values), setSubmitting)
+            onSubmit({
+                ...format(values),
+                lang: i18n.language.split('-')[0]
+            }, setSubmitting)
         }
     }
 
