@@ -130,6 +130,10 @@ export const Controls = styled.div`
         margin-right: ${({theme}) => theme.spacing.XXXL}
     }
 
+    .loader {
+        margin: 0 auto;
+    }
+
     img {
         margin-bottom: ${({theme}) => theme.font.XXS}
     }
