@@ -115,7 +115,6 @@ export const triggerNotification = async (params: NotificationParams) => {
     const subject = `${langData.title} ${params.name}`
     const message = `${name} ${langData.Message} ${params.roomUrl}`
 
-
     if (!isEmpty(params.email) && !isEmpty(params.sendGridCredentials)) {
         await sendEmail(params, message, subject)
     }
