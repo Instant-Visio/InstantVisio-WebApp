@@ -5,6 +5,7 @@ import { useTranslation, Trans } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
 import BaseList from '../../components/List'
 import Logo from '../../components/Logo'
+import BaseArrow from '../../components/Arrow'
 import { useState } from 'react'
 import useDetectMobile from '../../hooks/useDetectMobile'
 
@@ -113,14 +114,14 @@ const Information = styled.div`
     }
 `
 
-const Arrow = styled.span`
+const Arrow = styled(BaseArrow)`
     display: none;
     ${SCREEN.MOBILE}{
         display: initial;
-        margin-top: 0.125rem;
+        margin-bottom: 0.5rem;
         transition: transform .3s ease-in-out;
         ${({collapsed}) => !collapsed && css`
-            transform: rotate(60deg);
+            transform: rotate(45deg);
         `}
     }
 `
@@ -141,7 +142,7 @@ function Description(){
         <Information>
             <P {...(isMobile && {onClick:() => setCollapsed(!collapsed)})}>
                 <span>{t('information.title')}</span>
-                <Arrow collapsed={collapsed}>&#x2BC6;</Arrow>
+                <Arrow collapsed={collapsed} />
             </P>
             <List collapsed={collapsed}>
                 <span>{t('information.steps.1')}</span>

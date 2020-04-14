@@ -16,7 +16,7 @@ import {
 } from '../../pages'
 
 const App = () => {
-    const {t, i18n} = useTranslation()
+    const {t} = useTranslation()
 
     useEffect(() => {
         // when using vh and vw units in css:
@@ -34,7 +34,7 @@ const App = () => {
                 viewport.setAttribute('content', `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`)
             }, 300)
         }
-    }, [i18n])
+    }, [])
     
     return  <div className="App">
         <Route path="/" exact component={Home}/>

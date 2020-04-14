@@ -4,8 +4,8 @@ import {FormControl} from 'react-bootstrap'
 import styled from 'styled-components'
 import i18n from '../../i18n/i18n'
 import Flag from '../Flag'
-import color from 'color'
 import isoCountries from 'i18n-iso-countries'
+import BaseArrow from '../Arrow'
 
 const Wrapper = styled.div`
     display: flex;
@@ -20,8 +20,8 @@ const Wrapper = styled.div`
     }
 `
 
-const Arrow = styled.div`
-    color: ${({theme}) => color(theme.color.grey).lighten(1.5).toString()};
+const Arrow = styled(BaseArrow)`
+    margin-bottom: 0.125rem;
 `
 
 const renderOption = ([code, country], index) => (
@@ -38,8 +38,12 @@ function Country({defaultCountry, selectedCountries, onSelect, className}){
         }
 
         let countriesList = Object.entries(translatedCountries)
-        if (selectedCountries.length){
-            countriesList = countriesList.filter(([code]) => selectedCountries.includes(code))
+        
+        if (selectedCountries){
+            const filteredCountries = countriesList.filter(([code]) => selectedCountries.includes(code)) 
+            if (filteredCountries.length){
+                countriesList = filteredCountries
+            }
         }
 
         countriesList.sort((a, b) => a[1].localeCompare(b[1]))
@@ -71,13 +75,9 @@ function Country({defaultCountry, selectedCountries, onSelect, className}){
                     {countries.map(renderOption)}
                 </FormControl>
             }
-            <Arrow>&#x2BC6;</Arrow>
+            <Arrow width={8} height={8} />
         </Wrapper>
     )
-}
-
-Country.defaultProps = {
-    selectedCountries: []
 }
 
 Country.propTypes = {
