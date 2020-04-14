@@ -68,7 +68,6 @@ export default function Form({onSubmit, error}) {
     }
     const [tab, setTab] = useState(tabs.phone)
 
-    console.log(i18n.language)
     const initialValues = {
         personName: '',
         phone: '',
