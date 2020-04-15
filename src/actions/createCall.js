@@ -8,6 +8,7 @@ export const createCall = async (values) => {
             name: values.personName,
             phone: values.phone,
             email: values.mail,
+            lang: values.lang,
             platform: 'web'
         })
 
