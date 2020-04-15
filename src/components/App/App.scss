@@ -3,6 +3,7 @@ html {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   background-color: #323742;
+  height: 100%;
   overflow-x: hidden;
 
   & .btn {
@@ -38,4 +39,8 @@ html {
     background-color: #323742;
     height: 100%;
   }
+}
+
+.App {
+  height: 100%;
 }
