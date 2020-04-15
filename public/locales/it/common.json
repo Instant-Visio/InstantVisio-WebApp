@@ -12,11 +12,25 @@
         "credits": "Credits",
         "contact": "Contatti"
     },
+    "lang": {
+      "fr": "Français",
+      "gb": "English",
+      "de": "Deutsch",
+      "gr": "Ελληνικά",
+      "hu": "Magyar",
+      "ro": "Română",
+      "es": "Español",
+      "it": "Italiano"
+    },
     "url": {
         "legal-mentions": "note-legali",
         "personal-data": "dati-personali",
         "blog": "blog",
         "blog-article": "blog/:articolo",
         "credits": "credits"
-    }  
+    },
+    "message": {
+      "title": "Demande URGENTE de visiophonie de",
+      "Message": "vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien :"
+    }
 }
