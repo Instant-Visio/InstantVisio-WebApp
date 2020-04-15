@@ -4,7 +4,7 @@ import {SCREEN} from '../../styles/theme'
 
 export const CallContainer = styled.div`
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     color: ${({theme}) => theme.color.white};
     background: ${({theme}) => theme.color.black};
 `
