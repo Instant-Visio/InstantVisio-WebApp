@@ -18,7 +18,9 @@
     "de": "Deutsch",
     "gr": "Ελληνικά",
     "hu": "Magyar",
-    "ro": "Română"
+    "ro": "Română",
+    "es": "Español",
+    "it":"Italiano"
   },
   "url": {
     "video-call": "visio",

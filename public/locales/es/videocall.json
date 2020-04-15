@@ -1,0 +1,10 @@
+{
+    "cam": "Webcam",
+    "audio": "Micro",
+    "turn-on-cam-message": "Gracias por activar su webcam y su micrófono, tal cómo abajo.",
+    "waiting-participant": "Gracias por esperar, su familiar esta a punto de conectarse.",
+    "participant-cam-off": "Su familiar se ha conectado perso su webcam esta apagada",
+    "participant-left": "Su familiar a dejado la llamada",
+    "leave": "Dejar",
+    "leave-confirmation": "Usted, ya, ha dejado la llamada."
+}
