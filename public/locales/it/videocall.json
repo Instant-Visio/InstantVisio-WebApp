@@ -1,10 +1,10 @@
 {
     "cam": "Webcam",
     "audio": "Micro",
-    "turn-on-cam-message": "Veuillez activer votre webcam et votre micro ci-dessous.",
-    "waiting-participant": "Veuillez patienter, votre proche est sur le point de vous rejoindre.",
-    "participant-cam-off": "Votre proche a rejoint l'appel mais sa webcam est éteinte.",
-    "participant-left": "Votre proche a quitté l'appel.",
-    "leave": "Quitter",
-    "leave-confirmation": "Vous avez bien quitté l'appel."
+    "turn-on-cam-message": "Attiva la webcam e il microfono cliccando qui sotto.",
+    "waiting-participant": "Un momento, il tuo familiare si sta collegando.",
+    "participant-cam-off": "Il tuo familiare si è unito alla chiamata ma la sua webcam non è attiva.",
+    "participant-left": "Il tuo familiare ha abbandonato la chiamata.",
+    "leave": "Esci",
+    "leave-confirmation": "Hai abbandonato la chiamata."
 }

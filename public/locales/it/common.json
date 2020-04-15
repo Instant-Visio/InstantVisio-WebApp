@@ -22,15 +22,15 @@
       "es": "Español",
       "it": "Italiano"
     },
+    "message": {
+        "title": "Richiesta URGENTE di videochiamata da parte di",
+        "Message": "ti invita a una videochiamata. Unisciti ora alla conversazione cliccando sul link:"
+    },
     "url": {
         "legal-mentions": "note-legali",
         "personal-data": "dati-personali",
         "blog": "blog",
         "blog-article": "blog/:articolo",
         "credits": "credits"
-    },
-    "message": {
-      "title": "Demande URGENTE de visiophonie de",
-      "Message": "vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien :"
     }
 }
