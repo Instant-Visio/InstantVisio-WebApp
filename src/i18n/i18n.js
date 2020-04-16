@@ -10,12 +10,6 @@ i18n
     .init({
         fallbackLng: 'en',
         defaultNS: ['common'],
-        detection: {
-            order: ['localStorage'],
-            lookupLocalStorage: 'lang',
-            // cache user language on
-            caches: ['localStorage']
-        },
         debug: process.env.NODE_ENV === 'development'
     })
 

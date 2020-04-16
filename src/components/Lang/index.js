@@ -2,9 +2,10 @@ import React from 'react'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 //todo get from firebase
 import config from './config.json'
-import { useTranslation } from 'react-i18next'
+import { getLocale } from '../../i18n/helper'
 
 const Wrapper = styled.div`
     & .btn {
@@ -14,6 +15,7 @@ const Wrapper = styled.div`
         font-weight: bold;
         color: ${({theme}) => theme.color.logoGrey};
         &.dropdown-toggle, &.btn-primary{
+            
             background: none;
             &:focus, &:active{
                 color: ${({theme}) => theme.color.logoGrey};
@@ -35,15 +37,14 @@ export default function Lang({className}){
     
     const {availableLangs} = config
     const {t, i18n} = useTranslation()
-    const {language} = i18n
+    const {language} = getLocale()
 
     const onSelect = (value) => {
-        if (i18n.language !== value) {
-            i18n.changeLanguage(value)
-        }
+        i18n.changeLanguage(value)
     }
 
     const renderTitle = (value) => <span>{t(`lang.${value}`)}</span>
+    
     const items = availableLangs.map((value, index) => {
         return (language !== value && <Dropdown.Item key={`lang-${index}`} eventKey={value}>
             <Item>
