@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import Country from '../Country'
 import Field from './Field'
 import { useField } from 'formik'
+import { getLocale } from '../../i18n/helper'
     
 const Wrapper = styled.div`
 
@@ -16,9 +17,10 @@ const Wrapper = styled.div`
     }
 `
 
-export default function PhoneField({defaultCountry, isSubmitting}){
+export default function PhoneField({isSubmitting}){
     const {t} = useTranslation('form')
-  
+    const {country} = getLocale()
+
     const [,,helper] = useField('country')
     const {setValue} = helper
   
@@ -28,7 +30,7 @@ export default function PhoneField({defaultCountry, isSubmitting}){
 
     return (<Wrapper>
         <Field
-            prepend={<Country defaultCountry={defaultCountry} onSelect={onCountrySelect} />}
+            prepend={<Country defaultCountry={country} onSelect={onCountrySelect} />}
             name="phone"
             type="tel"
             placeholder={t('phone.placeholder')} 
@@ -41,5 +43,4 @@ export default function PhoneField({defaultCountry, isSubmitting}){
 
 PhoneField.propTypes = {
     isSubmitting: PropTypes.bool,
-    defaultCountry: PropTypes.string
 }
