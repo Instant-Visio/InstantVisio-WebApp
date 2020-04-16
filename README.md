@@ -1,9 +1,8 @@
 Instant Visio app (web + firebase)
 
-Instant Visio is a no-app one to one video conference created to help medical workers & caregivers connect patients with their friends and family. 
+Instant Visio is a no-app one to one video conference created to help medical workers & caregivers connect patients with their friends and family.
 
 More info on the Hacking Health Camp 2020 slack, #instantvisio
-
 
 # Setup
 

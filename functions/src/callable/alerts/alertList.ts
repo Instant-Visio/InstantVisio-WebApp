@@ -10,8 +10,7 @@ export const ALERT_ROOM_NOT_CREATED = {
 export const ALERT_OVH_SMS_QUOTA_REACHED = {
     message: 'OVH SMS Quota reached',
     alias: 'sms-ovh-quota-reached',
-    description:
-        'We don\'t have any more credit on ovh, sms was not delivered',
+    description: "We don't have any more credit on ovh, sms was not delivered",
     tags: ['OverwriteQuietHours', 'Critical', 'sms'],
     priority: 'P1',
 }

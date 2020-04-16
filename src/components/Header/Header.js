@@ -1,9 +1,8 @@
 import styled from 'styled-components'
-import {SCREEN} from '../../styles/theme'
-
+import { SCREEN } from '../../styles/theme'
 
 const HeaderStyled = styled.header`
-    background-color: ${({theme}) => theme.color.white};
+    background-color: ${({ theme }) => theme.color.white};
     display: flex;
     width: 100vw;
     flex-direction: column;
@@ -14,17 +13,17 @@ const HeaderStyled = styled.header`
         display: flex;
         align-items: center;
         min-width: 100%;
-        padding: ${({theme}) => theme.spacing.XXL};
+        padding: ${({ theme }) => theme.spacing.XXL};
         
         &-baseline {
-            color: ${({theme}) => theme.color.logoGrey};
+            color: ${({ theme }) => theme.color.logoGrey};
             font-weight: 500;
             padding-right: 0;
             margin-right: 0;
             
             &-content {
                 font-family: 'Baloo Thambi 2'; cursive;
-                font-size: ${({theme}) => theme.font.XL};
+                font-size: ${({ theme }) => theme.font.XL};
             }
         }
     }
@@ -45,7 +44,7 @@ const HeaderStyled = styled.header`
     ${SCREEN.DESKTOP} {
         width: 100vw;
         height: 20vh;
-        padding: ${({theme}) => theme.font.XXL};
+        padding: ${({ theme }) => theme.font.XXL};
         .header {
             flex-direction: row;
             justify-content: space-between;

@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions'
 import fetch from 'node-fetch'
 import { isEmpty } from 'lodash'
 
-export const triggerAlert = functions.https.onCall(data => {
+export const triggerAlert = functions.https.onCall((data) => {
     return alert(data)
 })
 
@@ -46,11 +46,15 @@ export const alert = async (data: {}) => {
             Authorization: `GenieKey ${key}`,
         },
         body: JSON.stringify(data),
-    }).then(response => {
+    }).then((response) => {
         if (response.ok) {
             return response.text()
         } else {
-            console.error("Error sending OpsGenie Alert", response.status, response.statusText)
+            console.error(
+                'Error sending OpsGenie Alert',
+                response.status,
+                response.statusText
+            )
             return `${response.status}: ${response.statusText}`
         }
     })

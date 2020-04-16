@@ -23,35 +23,38 @@ export default {
             <p>Nous sommes reconnaissants de coopérer avec <a href="https://daily.co">Daily.co</a> afin de mettre à la disposition des personnes vulnérables des outils leur permettant d'avoir un lien visuel avec leurs proches, surtout en ces temps très difficiles. </p>
             
             <p>Prenez soin de vous !</p>
-            `
-        }
+            `,
+        },
     ],
     socialMedia: [
         {
             id: 1,
             name: 'Facebook',
             sharer: 'https://www.facebook.com/sharer/sharer.php?u=',
-            picture: 'https://simplesharebuttons.com/images/somacro/facebook.png'
+            picture:
+                'https://simplesharebuttons.com/images/somacro/facebook.png',
         },
         {
             id: 2,
             name: 'Twitter',
             sharer: 'https://twitter.com/share?url=',
             addedSharer: '&text=',
-            picture: 'https://simplesharebuttons.com/images/somacro/twitter.png'
+            picture:
+                'https://simplesharebuttons.com/images/somacro/twitter.png',
         },
         {
             id: 3,
             name: 'LinkedIn',
             sharer: 'https://www.linkedin.com/shareArticle?mini=true&url=',
             addedSharer: '&title=',
-            picture: 'https://simplesharebuttons.com/images/somacro/linkedin.png'
+            picture:
+                'https://simplesharebuttons.com/images/somacro/linkedin.png',
         },
         {
             id: 4,
             name: 'E-mail',
             sharer: 'mailto:?subject=Article du blog Instant Visio&body=',
-            picture: 'https://simplesharebuttons.com/images/somacro/email.png'
-        }
-    ]
-} 
+            picture: 'https://simplesharebuttons.com/images/somacro/email.png',
+        },
+    ],
+}

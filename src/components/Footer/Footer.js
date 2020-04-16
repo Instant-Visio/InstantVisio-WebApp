@@ -1,13 +1,12 @@
 import styled from 'styled-components'
-import {SCREEN} from '../../styles/theme'
-
+import { SCREEN } from '../../styles/theme'
 
 const FooterStyled = styled.footer`
     background: #222222;
-    padding: ${({theme}) => theme.spacing.XXL};
+    padding: ${({ theme }) => theme.spacing.XXL};
     display: flex;
     justify-content: center;
-    color: #7D7D7D;
+    color: #7d7d7d;
     font-size: 16px;
     width: 100%;
     .footer {
@@ -20,15 +19,16 @@ const FooterStyled = styled.footer`
         justify-content: center;
         &-link {
             list-style: none;
-            margin: 0 ${({theme}) => theme.spacing.M};
-            padding: ${({theme}) => theme.spacing.XXS} 0;
-            
+            margin: 0 ${({ theme }) => theme.spacing.M};
+            padding: ${({ theme }) => theme.spacing.XXS} 0;
+
             &-content {
-                color: #7D7D7D;
+                color: #7d7d7d;
                 text-decoration: none;
 
-                &:visited, &:active {
-                    color: #7D7D7D;
+                &:visited,
+                &:active {
+                    color: #7d7d7d;
                 }
             }
         }
@@ -36,7 +36,7 @@ const FooterStyled = styled.footer`
 
     ${SCREEN.MOBILE_AND_TABLET} {
         .footer {
-            padding-bottom: ${({theme}) => theme.spacing.XXL};
+            padding-bottom: ${({ theme }) => theme.spacing.XXL};
         }
     }
 `

@@ -1,18 +1,16 @@
-import {
-    functions,
-} from '../firebase/firebase'
+import { functions } from '../firebase/firebase'
 
 export const createCall = async (values) => {
     try {
-        const result =  await functions.newCall({
+        const result = await functions.newCall({
             name: values.personName,
             phone: values.phone,
             email: values.mail,
             lang: values.lang,
-            platform: 'web'
+            platform: 'web',
         })
 
-        if(!result || !result.data || !result.data.name) {
+        if (!result || !result.data || !result.data.name) {
             throw new Error('Room name was not received')
         }
 

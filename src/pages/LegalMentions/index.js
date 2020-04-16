@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-remarkable'
 import DefaultLayout from '../../layout/Default'
 
 const LegalMentions = () => {
-    const {t} = useTranslation('legal-mentions')
+    const { t } = useTranslation('legal-mentions')
 
     return (
         <DefaultLayout title={`${t('page-title')} - Instant Visio`}>

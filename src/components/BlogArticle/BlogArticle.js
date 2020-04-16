@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import {SCREEN} from '../../styles/theme'
-
+import { SCREEN } from '../../styles/theme'
 
 const BlogArticleStyled = styled.div`
     .article {
@@ -8,8 +7,8 @@ const BlogArticleStyled = styled.div`
             text-decoration: none;
 
             h2 {
-                color: ${({theme}) => theme.color.textBlue};
-                margin-bottom: ${({theme}) => theme.spacing.M};
+                color: ${({ theme }) => theme.color.textBlue};
+                margin-bottom: ${({ theme }) => theme.spacing.M};
             }
         }
 
@@ -18,15 +17,15 @@ const BlogArticleStyled = styled.div`
         }
 
         &-forSharing {
-            margin-bottom: ${({theme}) => theme.font.XXL};
+            margin-bottom: ${({ theme }) => theme.font.XXL};
 
             &-text {
-                font-size: ${({theme}) => theme.font.L};
-                margin-right: ${({theme}) => theme.spacing.S};
+                font-size: ${({ theme }) => theme.font.L};
+                margin-right: ${({ theme }) => theme.spacing.S};
             }
 
             &-link {
-                margin: 0 ${({theme}) => theme.spacing.XXS};
+                margin: 0 ${({ theme }) => theme.spacing.XXS};
             }
         }
     }
@@ -34,13 +33,11 @@ const BlogArticleStyled = styled.div`
     ${SCREEN.MOBILE_AND_TABLET} {
         .article {
             &-forSharing {
-
                 &-text {
-                    margin-bottom: ${({theme}) => theme.spacing.S};
+                    margin-bottom: ${({ theme }) => theme.spacing.S};
                 }
 
                 &-link {
-
                     &-img {
                         margin-bottom: 1rem;
                     }
@@ -52,15 +49,14 @@ const BlogArticleStyled = styled.div`
     ${SCREEN.DESKTOP} {
         .article {
             &-forSharing {
-                margin-bottom: ${({theme}) => theme.font.XXXL};
-                
+                margin-bottom: ${({ theme }) => theme.font.XXXL};
+
                 &-text {
                     display: inline-block;
                     margin-bottom: 0;
                 }
 
                 &-link {
-
                     &-img {
                         margin-bottom: 0;
                     }

@@ -5,11 +5,4 @@ import PersonalData from './PersonalData'
 import Blog from './Blog'
 import Credits from './Credits'
 
-export {
-    Home,
-    VideoCall,
-    LegalMentions,
-    PersonalData,
-    Blog,
-    Credits
-}
+export { Home, VideoCall, LegalMentions, PersonalData, Blog, Credits }

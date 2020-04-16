@@ -1,19 +1,33 @@
 import styled from 'styled-components'
-import {SCREEN} from '../../styles/theme'
-
+import { SCREEN } from '../../styles/theme'
 
 export const CallContainer = styled.div`
     width: 100vw;
     height: 100%;
-    color: ${({theme}) => theme.color.white};
-    background: ${({theme}) => theme.color.black};
+    color: ${({ theme }) => theme.color.white};
+    background: ${({ theme }) => theme.color.black};
 `
 
 export const IframeContainer = styled.div`
     position: relative;
-    background: linear-gradient(to bottom, #506377 0%, #56777f 41%, #5a5147 67%, #232321 100%, #8a5d29 92%), radial-gradient(ellipse at center, #4e5c13 13%, #4a6c75 56%, #e0d4c6 47%, #afafcc 83%, #948e90 87%) !important;
+    background: linear-gradient(
+            to bottom,
+            #506377 0%,
+            #56777f 41%,
+            #5a5147 67%,
+            #232321 100%,
+            #8a5d29 92%
+        ),
+        radial-gradient(
+            ellipse at center,
+            #4e5c13 13%,
+            #4a6c75 56%,
+            #e0d4c6 47%,
+            #afafcc 83%,
+            #948e90 87%
+        ) !important;
     height: 90%;
-    font-size: ${({theme}) => theme.font.L};
+    font-size: ${({ theme }) => theme.font.L};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,14 +35,14 @@ export const IframeContainer = styled.div`
         width: 100%;
         height: 100%;
         border: none;
-        display: block;   
+        display: block;
     }
 
     .mute-camera {
         background: #000000;
         text-align: center;
-        font-size: ${({theme}) => theme.font.M};
-        border-radius: ${({theme}) => theme.spacing.XS};
+        font-size: ${({ theme }) => theme.font.M};
+        border-radius: ${({ theme }) => theme.spacing.XS};
         display: flex;
         justify-content: center;
         align-items: center;
@@ -38,11 +52,11 @@ export const IframeContainer = styled.div`
         z-index: 10;
         bottom: 2rem;
         left: 1rem;
-        padding: 0 ${({theme}) => theme.spacing.S};    
+        padding: 0 ${({ theme }) => theme.spacing.S};
     }
 
     .waiting-participant {
-        padding: 0 ${({theme}) => theme.spacing.M};
+        padding: 0 ${({ theme }) => theme.spacing.M};
         text-align: center;
         position: absolute;
         left: 0;
@@ -53,7 +67,7 @@ export const IframeContainer = styled.div`
 
     .mute-camera-three {
         border-radius: 0;
-        width: calc(100%/3);
+        width: calc(100% / 3);
         height: 100%;
         bottom: 0;
         left: 0;
@@ -76,7 +90,7 @@ export const IframeContainer = styled.div`
         .mute-camera-three {
             border-radius: 0;
             width: 100%;
-            height: calc(100%/3);
+            height: calc(100% / 3);
             top: 0;
             left: 0;
         }
@@ -87,7 +101,7 @@ export const IframeContainer = styled.div`
 
         .mute-camera-three {
             border-radius: 0;
-            width: calc(100%/3) ! ;
+            width: calc(100% / 3) !;
             height: 100%;
             bottom: 0;
             left: 0;
@@ -99,14 +113,14 @@ export const IframeContainer = styled.div`
         }
 
         .waiting-participant {
-            top: ${({theme}) => theme.spacing.XXXL};
+            top: ${({ theme }) => theme.spacing.XXXL};
             transform: inherit;
         }
     }
 `
 
 export const Controls = styled.div`
-    padding: 0 ${({theme}) => theme.spacing.XXL};
+    padding: 0 ${({ theme }) => theme.spacing.XXL};
     width: 100vw;
     height: 10%;
     background: white;
@@ -127,7 +141,7 @@ export const Controls = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-right: ${({theme}) => theme.spacing.XXXL}
+        margin-right: ${({ theme }) => theme.spacing.XXXL};
     }
 
     .loader {
@@ -135,20 +149,20 @@ export const Controls = styled.div`
     }
 
     img {
-        margin-bottom: ${({theme}) => theme.font.XXS}
+        margin-bottom: ${({ theme }) => theme.font.XXS};
     }
 
     p {
         margin: 0;
-        font-size: ${({theme}) => theme.font.S}
+        font-size: ${({ theme }) => theme.font.S};
     }
 
     .black {
-        color: ${({theme}) => theme.color.black};
+        color: ${({ theme }) => theme.color.black};
     }
 
     .red {
-        color: ${({theme}) => theme.color.red};
+        color: ${({ theme }) => theme.color.red};
     }
 
     .leave {

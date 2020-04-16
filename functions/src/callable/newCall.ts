@@ -1,16 +1,16 @@
 import * as functions from 'firebase-functions'
-import {isEmpty} from 'lodash'
+import { isEmpty } from 'lodash'
 import fetch from 'node-fetch'
-import {NotificationParams, sendEmail, sendSms} from './utils/notification'
-import {logRoomCreated} from '../sumologic/sumologic'
-import {alert} from './alerts/alert'
-import {ALERT_ROOM_NOT_CREATED} from './alerts/alertList'
+import { NotificationParams, sendEmail, sendSms } from './utils/notification'
+import { logRoomCreated } from '../sumologic/sumologic'
+import { alert } from './alerts/alert'
+import { ALERT_ROOM_NOT_CREATED } from './alerts/alertList'
 import * as translations from '../translations.json'
 
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
-export const newCall = functions.https.onCall(async data => {
-    const {ovh, sendgrid, visio, app} = functions.config()
+export const newCall = functions.https.onCall(async (data) => {
+    const { ovh, sendgrid, visio, app } = functions.config()
 
     if (isEmpty(data) || isEmpty(data.name)) {
         throw new functions.https.HttpsError(
@@ -44,10 +44,13 @@ export const newCall = functions.https.onCall(async data => {
         console.warn('Warn: No credentials for OVH')
     }
 
-    const room = await getRoomUrl({
-        apikey: visio.apikey,
-        api: visio.api,
-    }, app.domain)
+    const room = await getRoomUrl(
+        {
+            apikey: visio.apikey,
+            api: visio.api,
+        },
+        app.domain
+    )
 
     if (!isEmpty(data.name)) {
         await triggerNotification({
@@ -59,7 +62,7 @@ export const newCall = functions.https.onCall(async data => {
             ovhCredentials: ovh,
             sendGridCredentials: sendgrid,
             emailFrom: app.emailfrom,
-            lang: data.lang ? data.lang.trim().toLowerCase() : 'en'
+            lang: data.lang ? data.lang.trim().toLowerCase() : 'en',
         })
     }
 
@@ -67,49 +70,52 @@ export const newCall = functions.https.onCall(async data => {
 })
 
 interface VisioCredentials {
-    apikey: string,
+    apikey: string
     api: string
 }
 
 interface Room {
-    roomUrl: string,
-    name: string,
-    id: string,
-    privacy: string,
-    url: string,
-    created_at: string,
+    roomUrl: string
+    name: string
+    id: string
+    privacy: string
+    url: string
+    created_at: string
     config: any
 }
 
-const getRoomUrl = async (credentials: VisioCredentials, domainName: string): Promise<Room> => {
+const getRoomUrl = async (
+    credentials: VisioCredentials,
+    domainName: string
+): Promise<Room> => {
     const response = await fetch(credentials.api, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${credentials.apikey}`
+            Authorization: `Bearer ${credentials.apikey}`,
         },
         body: JSON.stringify({
             properties: {
                 enable_screenshare: false,
                 lang: 'fr',
-                exp: Math.floor(Date.now() / 1000) + roomExpirationSeconds
-            }
-        })
+                exp: Math.floor(Date.now() / 1000) + roomExpirationSeconds,
+            },
+        }),
     })
-    if(response.ok) {
+    if (response.ok) {
         const result = await response.json()
         logRoomCreated()
         return {
             roomUrl: `https://${domainName}/visio/${result.name}`,
-            ...result
+            ...result,
         }
     }
     await alert(ALERT_ROOM_NOT_CREATED)
-    throw new functions.https.HttpsError('resource-exhausted','400')
+    throw new functions.https.HttpsError('resource-exhausted', '400')
 }
 
 export const triggerNotification = async (params: NotificationParams) => {
-    const name  = params.name.replace(/(.{20})..+/, '$1…')
+    const name = params.name.replace(/(.{20})..+/, '$1…')
     // @ts-ignore
     const langData = translations[params.lang]
     const subject = `${langData.title} ${params.name}`

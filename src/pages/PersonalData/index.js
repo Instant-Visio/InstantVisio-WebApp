@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-remarkable'
 import DefaultLayout from '../../layout/Default'
 
 const PersonalData = () => {
-    const {t} = useTranslation('personal-data')
+    const { t } = useTranslation('personal-data')
 
     return (
         <>

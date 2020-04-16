@@ -20,7 +20,7 @@ export const SCREEN = {
 export default {
     color: {
         blue: '#5DC5DF',
-        red:  '#dc3545',
+        red: '#dc3545',
         white: '#ffffff',
         grey: '#323742',
         greyLighten: '#f5f5f5',
@@ -29,8 +29,8 @@ export default {
         textBlue: '#438a9d',
         logoGrey: '#aaabbd',
         textGrey: '#35353b',
-        otherGrey: '#3d3e45'
+        otherGrey: '#3d3e45',
     },
     font: sizes,
-    spacing: sizes
+    spacing: sizes,
 }
