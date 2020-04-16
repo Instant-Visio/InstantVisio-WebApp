@@ -1,0 +1,46 @@
+{
+    "title": "Conectarme con un familiar",
+    "description": "¿Como Ud desea avisar su familiar de su llamada ? ",
+    "buttons": {
+        "sms": {
+            "label": "Por sms"
+        },
+        "mail": {
+            "label": "Por e-mail"
+        },
+        "submit": {
+            "label": "Conectarme con mi familiar"
+        }
+    },
+    "phone": {
+        "label": "Numero de telefono de su familiar *",
+        "title": "Numero de su familiar",
+        "placeholder": "Ex. : 06 XX XX XX XX",
+        "errors": {
+            "required": "Gracias por teclar el numero de su familiar",
+            "invalid": " El numero teclado no es valido"
+        }
+    },
+    "mail": {
+        "label": "direccion e-mail de su familiar *",
+        "title": "E-mail de su familiar",
+        "placeholder": "Ex. : jean.dupont@gmail.com",
+        "errors": {
+            "required": "Veuillez saisir l'adresse email de votre proche",
+            "invalid": "invalid e-mail"
+        }
+    },
+    "personName": {
+        "label": "¿ Cual es su apellido (o alias)* ?",
+        "title": "Vuestro apellido",
+        "placeholder": "Ex. : Laura, Mami",
+        "errors": {
+            "required": "Vuestro apellido"
+        }
+    },
+    "errors": {
+        "general": "El sms o el e-mail no ha podido ser enviado. Gracias por verificar los datos transmitidos y intentar de nuevo.",
+        "quotaSMS": "SMS issue",
+        "resourceExausted": "Resource issue"
+    }
+}

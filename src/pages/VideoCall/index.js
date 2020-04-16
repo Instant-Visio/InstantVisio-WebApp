@@ -18,20 +18,19 @@ import Footer from '../../components/Footer'
 const VideoCallFrame = () => {
     const {t} = useTranslation('videocall')
 
-    const [ leftCallFrame, setLeftCallFrame ] = useState(false)
     const [ camOn, setCamOn ] = useState(true)
     const [ audioOn, setAudioOn ] = useState(true)
     const [ participantStatus, setParticipantStatus ] = useState(t('waiting-participant'))
     const [ participantNumber, setParticipantNumber ] = useState(0)
+    const [ leftCallFrame, setLeftCallFrame ] = useState(false)
     let { videoName } = useParams()
 
     const url = `https://instantvisio.daily.co/${videoName}`
 
+    const videoFrame = useRef(null)
     const cam = useRef(null)
     const audio = useRef(null)
     const leaving = useRef(null)
-    const videoFrame = useRef(null)
-    const turnCamOnMessage = useRef(null)
 
     // to display confirmation message
     // when user attempts leaving page
@@ -62,31 +61,28 @@ const VideoCallFrame = () => {
                 setParticipantStatus('')
             }
 
-            setParticipantNumber(participantsLength)
-            
+            setParticipantNumber(participantsLength) 
         }
-
+        
         cam.current.addEventListener('click', () => {
             daily.setLocalVideo(!daily.localVideo())
         })
-
+        
         audio.current.addEventListener('click', () => {
             daily.setLocalAudio(!daily.localAudio())
         })
-        
-        // to make cam and audio controls appear as soon as user arrives on page
-        eventActions()
+    
 
         daily.on('joined-meeting', eventActions)
             .on('participant-updated', eventActions)
             .on('participant-left', (event) => { 
                 setParticipantStatus(!event.participant.local && Object.keys(daily.participants()).length < 2 ? t('participant-left') : '')
             })
-
+       
         leaving.current.addEventListener('click', () => {
             daily.leave()
             setLeftCallFrame(true)
-        })
+        }) 
 
         window.addEventListener('beforeunload', leavingCallPage)
         // ComponentWillUnmount
@@ -99,9 +95,11 @@ const VideoCallFrame = () => {
 
     return (
         <>
+            {/* <div className="loader">bla</div> */}
             <CallContainer>
 
                 <IframeContainer>
+                    
                     {
                         !leftCallFrame && <iframe
                             className="iframe"
@@ -111,14 +109,26 @@ const VideoCallFrame = () => {
                             allowFullScreen
                         />
                     }
-                    {!camOn && !leftCallFrame && (<div className={classNames({'mute-camera': true, 'mute-camera-two': participantNumber < 3, 'mute-camera-three': participantNumber === 3, 'mute-camera-four': participantNumber === 4 })} ref={turnCamOnMessage}>{t('turn-on-cam-message')}</div>)}
+                    {!camOn && !leftCallFrame && (
+                        <div className={
+                            classNames({
+                                'mute-camera': true,
+                                'mute-camera-two': participantNumber < 3,
+                                'mute-camera-three': participantNumber === 3,
+                                'mute-camera-four': participantNumber === 4 }
+                            )
+                        }>
+                            {t('turn-on-cam-message')}
+                        </div>)}
                     
                     {!leftCallFrame && <div className="waiting-participant">{participantStatus}</div>}
                     
                     {leftCallFrame && <div>{t('leave-confirmation')}</div>}
+
                 </IframeContainer>
 
                 {!leftCallFrame && <Controls>
+                    
                     <div className="cam-audio">
                         <div ref={cam} className={classNames({ 'control': true, 'black': camOn, 'red': !camOn })}>
                             <img src={camOn ? cameraOn : cameraOff} alt="" />
@@ -133,7 +143,7 @@ const VideoCallFrame = () => {
                         <img src={leave} alt="" />
                         <p>{t('leave')}</p>
                     </div>
-
+                    
                 </Controls>}
 
             </CallContainer>

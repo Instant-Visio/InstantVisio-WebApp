@@ -1,0 +1,19 @@
+{
+    "page-title": "Bienvenida(o)",
+    "information": {
+        "title": " ¿ Como funciona ?",
+        "steps": {
+            "1": "Rellenar el formulario.",
+            "2": "Validar apasando la tecla  ».",
+            "3": "Empieza la video y se puede intercambiar con su familiar"
+        },
+        "indications": {
+            "landscape": "Siendo abierta la video, le aconsejemos girar su aparato en modo paisaje para poder ver mejor a su familiar.",
+            "multiple-people": "Una vez en la video, se tiene acesso a la linea de direcciones. Se puede por su lado, dirigirla a otros familiares. Recomandamos limitarse a 6 otros familiares, para un mejor experimiento."
+        },
+        "data-mentions": {
+            "mandatory": "Los campos señalados con un asterisco son obligatorios.",
+            "management": "El encargado del tratamiento, Stéphane Luçon verifica los datos conseguidos para mandar el SMS o el e-mail al familiar. Despues del envio, los datos son borrados al final del dia. Para conseguir mas informaciones sobre la gestion de los datos y la proteccion de sus derechos, gracias por dirigirse a la pagina <1>Datos personales <|1>."
+        }
+    }
+}

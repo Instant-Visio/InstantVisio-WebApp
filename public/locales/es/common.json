@@ -1,0 +1,36 @@
+{
+  "logo": {
+    "alt": "logo de Instant Visio, imagen de una pantalla de telefono movil de color azul donde aparece una cara en un circulo de color naranja, hablando en visio con el propietario del telefono, cuya cara aparece en un circulo de color naranja."
+  },
+  "homeBaseline": "Conectarse con un familiar en visio, con una tecla unica, <1>gratis.</1>",
+  "headerBaseline": "Conectarse con un familiar en visio, con una sola tecla, gratis.",
+  "footer": {
+    "contact-us": "Contactarnos",
+    "legal-mentions": "Menciones legales",
+    "personal-data": "Datos personales",
+    "blog": "Blog",
+    "credits": "Creditos",
+    "contact": "Toma de contactos"
+  },
+  "lang": {
+    "fr": "Français",
+    "gb": "English",
+    "de": "Deutsch",
+    "gr": "Ελληνικά",
+    "hu": "Magyar",
+    "ro": "Română",
+    "es": "Español",
+    "it":"Italiano"
+  },
+  "url": {
+    "video-call": "visio",
+    "legal-mentions": "mentions-legales",
+    "personal-data": "donnees-personnelles",
+    "blog": "blog",
+    "credits": "credits"
+  },
+  "message": {
+    "title": "Pedido URGENTE de visiotelefóno de",
+    "Message": "os invita a una charla video. Gracias por conectarse ya con este lazo"
+  }
+}
