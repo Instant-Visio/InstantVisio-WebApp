@@ -63,14 +63,14 @@ export default function Home() {
                 </p>
                 <p className="cnil">
                     <Trans i18nKey="home:information.data-mentions.management">
+                        {/* prettier-ignore */}
                         Le responsable de traitement, Stéphane Luçon, s'assure
                         du traitement des données recueillies pour effectuer
                         l'envoi du SMS ou de l'e-mail au correspondant. Suite à
                         l'envoi, ces données sont effacées au bout d'un jour.
                         Pour en savoir plus sur la gestion des données
                         personnelles et pour exercer vos droits, veuillez vous
-                        reporter à la page{' '}
-                        <Link to="/donnees-personnelles">
+                        reporter à la page <Link to="/donnees-personnelles">
                             Données personnelles
                         </Link>
                         .
