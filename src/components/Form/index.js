@@ -60,7 +60,7 @@ const FormSubmit = styled.div`
 `
 
 export default function Form({onSubmit, error}) {
-    const { t } = useTranslation('form')
+    const { t, i18n } = useTranslation('form')
     const {country} = getLocale()
     const tabs = {
         phone: 'phone',
