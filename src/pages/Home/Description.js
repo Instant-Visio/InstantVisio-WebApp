@@ -141,8 +141,8 @@ function Description() {
             <Logo />
             <Baseline>
                 <Trans i18nKey="common:homeBaseline">
-                    Joignez un proche en visio, en un clic,{' '}
-                    <span>gratuitement.</span>
+                    {/* prettier-ignore */}
+                    Joignez un proche en visio, en un clic, <span>gratuitement.</span>
                 </Trans>
             </Baseline>
 
