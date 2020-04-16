@@ -1,0 +1,10 @@
+{
+    "cam": "Webcam",
+    "audio": "Micro",
+    "turn-on-cam-message": "Attiva la webcam e il microfono cliccando qui sotto.",
+    "waiting-participant": "Un momento, il tuo familiare si sta collegando.",
+    "participant-cam-off": "Il tuo familiare si è unito alla chiamata ma la sua webcam non è attiva.",
+    "participant-left": "Il tuo familiare ha abbandonato la chiamata.",
+    "leave": "Esci",
+    "leave-confirmation": "Hai abbandonato la chiamata."
+}

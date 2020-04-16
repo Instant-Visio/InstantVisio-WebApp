@@ -1,0 +1,19 @@
+{
+    "page-title": "Benvenuto",
+    "information": {
+        "title": "Come funziona ?",
+        "steps": {
+            "1": "Compila il formulario.",
+            "2": "Convalida cliccando sul pulsante « Chiama il mio familiare ».",
+            "3": "Il video si apre, puoi comunicare con il tuo familiare."
+        },
+        "indications": {
+            "landscape": "Dopo aver inviato il formulario, ti consigliamo di impostare il tuo dispositivo in modalità paesaggio. Potrai vedere meglio il tuo familiare.",
+            "multiple-people": "Una volta avviato il video, avrai accesso al link della chiamata nella barra degli indirizzi. Potrai inviarlo ad altri familiari, ma ti raccomandiamo un limite di 6 partecipanti a chiamata, per godere di un'esperienza ottimale."
+        },
+        "data-mentions": {
+            "mandatory": "I campi contrassegnati da un asterisco sono obbligatori.",
+            "management": "Il responsabile del trattamento, Stéphane Luçon, assicura il trattamento dei dati raccolti per effettuare l'invio dell'SMS o dell'e-mail al corrispondente. Dopo l'invio, questi dati saranno cancellati entro le 24h. Per saperne di più sulla gestione dei dati personali e per esercitare i tuoi diritti, visita la pagina <1>Dati personali</1>."
+        }
+    }
+}
