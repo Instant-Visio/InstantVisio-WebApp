@@ -1,61 +1,74 @@
 {
-  "name": "instant-visio",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@daily-co/daily-js": "^0.9.984",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "bootstrap": "^4.4.1",
-    "classnames": "^2.2.6",
-    "color": "^3.1.2",
-    "firebase": "^7.12.0",
-    "flag-icon-css": "^3.4.6",
-    "formik": "^2.1.4",
-    "i18n-iso-countries": "^5.1.0",
-    "i18next": "^19.3.4",
-    "i18next-browser-languagedetector": "^4.0.2",
-    "i18next-xhr-backend": "^3.2.2",
-    "libphonenumber-js": "^1.7.49",
-    "luxon": "^1.22.2",
-    "node-sass": "^4.13.1",
-    "react": "^16.13.1",
-    "react-bootstrap": "^1.0.0-beta.17",
-    "react-dom": "^16.13.1",
-    "react-i18next": "^11.3.4",
-    "react-remarkable": "^1.1.3",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
-    "styled-components": "^5.0.1",
-    "yup": "^0.28.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && firebase deploy --only hosting"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.19.0",
-    "firebase-tools": "^7.15.1"
-  }
+    "name": "instant-visio",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@daily-co/daily-js": "^0.9.984",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.5.0",
+        "@testing-library/user-event": "^7.2.1",
+        "bootstrap": "^4.4.1",
+        "classnames": "^2.2.6",
+        "color": "^3.1.2",
+        "firebase": "^7.12.0",
+        "flag-icon-css": "^3.4.6",
+        "formik": "^2.1.4",
+        "i18n-iso-countries": "^5.1.0",
+        "i18next": "^19.3.4",
+        "i18next-browser-languagedetector": "^4.0.2",
+        "i18next-xhr-backend": "^3.2.2",
+        "libphonenumber-js": "^1.7.49",
+        "luxon": "^1.22.2",
+        "node-sass": "^4.13.1",
+        "react": "^16.13.1",
+        "react-bootstrap": "^1.0.0-beta.17",
+        "react-dom": "^16.13.1",
+        "react-i18next": "^11.3.4",
+        "react-remarkable": "^1.1.3",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "3.4.0",
+        "styled-components": "^5.0.1",
+        "yup": "^0.28.3"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "deploy": "npm run build && firebase deploy --only hosting"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.0.3",
+        "eslint": "^6.8.0",
+        "eslint-plugin-react": "^7.19.0",
+        "firebase-tools": "^7.15.1",
+        "husky": "^4.2.5",
+        "lint-staged": "^10.1.3",
+        "prettier": "^2.0.4"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{ts,js,json,css,md}": [
+            "prettier --write"
+        ]
+    }
 }
