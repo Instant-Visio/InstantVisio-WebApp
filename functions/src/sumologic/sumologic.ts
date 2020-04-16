@@ -3,42 +3,39 @@ import * as functions from 'firebase-functions'
 
 export const logRoomCreated = () => {
     sendLog({
-        roomCreated: 1
+        roomCreated: 1,
     })
 }
 
 export const logRoomJoined = () => {
     sendLog({
-        roomJoined: 1
+        roomJoined: 1,
     })
 }
 
 export const logEmailSent = () => {
     sendLog({
-        emailSent: 1
+        emailSent: 1,
     })
 }
 
 export const logSmsSent = () => {
     sendLog({
-        smsSent: 1
+        smsSent: 1,
     })
 }
 
-const sendLog = (data: {[key: string]: number|string}) => {
-    const {sumologic} = functions.config()
+const sendLog = (data: { [key: string]: number | string }) => {
+    const { sumologic } = functions.config()
     if (!sumologic || !sumologic.collector) {
-        console.warn("No sumologic collector configured")
+        console.warn('No sumologic collector configured')
         return
     }
 
-    fetch(
-        sumologic.collector,
-        {
-            method: 'POST',
-            body: JSON.stringify(data)
-        })
-        .catch(error => {
-            console.log("Failed to send sumologic log", error)
-        })
+    fetch(sumologic.collector, {
+        method: 'POST',
+        body: JSON.stringify(data),
+    }).catch((error) => {
+        console.log('Failed to send sumologic log', error)
+    })
 }

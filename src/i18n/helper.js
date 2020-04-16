@@ -6,6 +6,6 @@ export const getLocale = () => {
 
     return {
         language,
-        country: language === 'en' ? countryCode : language
-    } 
+        country: language === 'en' ? countryCode : language,
+    }
 }

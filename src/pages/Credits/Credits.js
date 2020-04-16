@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import {SCREEN} from '../../styles/theme'
-
+import { SCREEN } from '../../styles/theme'
 
 const CreditsStyled = styled.div`
     display: flex;
@@ -9,7 +8,7 @@ const CreditsStyled = styled.div`
     text-align: center;
     .credits {
         &-title {
-            margin-bottom: ${({theme}) => theme.spacing.M};
+            margin-bottom: ${({ theme }) => theme.spacing.M};
         }
 
         &-link {
@@ -20,11 +19,10 @@ const CreditsStyled = styled.div`
     ${SCREEN.DESKTOP} {
         flex-flow: row wrap;
         justify-content: space-between;
-        padding: 0 ${({theme}) => theme.spacing.XXL};
+        padding: 0 ${({ theme }) => theme.spacing.XXL};
         align-items: flex-start;
-        text-align:left;
+        text-align: left;
     }
-
 `
 
 export default CreditsStyled

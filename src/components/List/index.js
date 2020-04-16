@@ -12,25 +12,28 @@ const Wrapper = styled.ol`
     margin-bottom: 0;
     margin-block-end: 0;
 
-    ${SCREEN.MOBILE}{
+    ${SCREEN.MOBILE} {
         padding: 0;
     }
-    ${ListItem}{
-        &:not(:last-child){
-            margin-bottom: ${({theme}) => theme.spacing.M};
+    ${ListItem} {
+        &:not(:last-child) {
+            margin-bottom: ${({ theme }) => theme.spacing.M};
         }
     }
 `
 
-export default function List({children, className}){
+export default function List({ children, className }) {
     return (
         <Wrapper className={className}>
-            {React.Children.map(children, (item, index) => (<ListItem key={`list-${index}`}>{item}</ListItem>))}
+            {React.Children.map(children, (item, index) => (
+                <ListItem key={`list-${index}`}>{item}</ListItem>
+            ))}
         </Wrapper>
     )
 }
 
 List.propTypes = {
     className: PropTypes.string,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.element]).isRequired
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.element])
+        .isRequired,
 }

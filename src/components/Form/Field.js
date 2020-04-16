@@ -1,16 +1,15 @@
 import React from 'react'
-import {Form, InputGroup} from 'react-bootstrap'
+import { Form, InputGroup } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { useField } from 'formik'
 
 export default function Field(props) {
-    
-    const {label, className, name, prepend, ...rest} = props
+    const { label, className, name, prepend, ...rest } = props
     const [field, meta, helper] = useField(name)
-    const {onChange} = field
-    const {error} = meta
-    const {setError} = helper
-    
+    const { onChange } = field
+    const { error } = meta
+    const { setError } = helper
+
     const onFocus = () => {
         if (error) {
             setError('')
@@ -29,13 +28,12 @@ export default function Field(props) {
                     name={name}
                     onFocus={onFocus}
                 />
-                {error &&
+                {error && (
                     <Form.Control.Feedback type="invalid">
                         {error}
                     </Form.Control.Feedback>
-                }
+                )}
             </InputGroup>
-
         </Form.Group>
     )
 }
