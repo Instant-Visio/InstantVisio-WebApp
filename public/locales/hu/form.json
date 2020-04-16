@@ -9,7 +9,7 @@
             "label": "E-mailen keresztül"
         },
         "submit": {
-            "label": "E-mailen keresztül"
+            "label": "Ismerősöm felhívása"
         }
     },
     "phone": {
@@ -31,7 +31,7 @@
       }
     },
     "personName": {
-        "label": "Quel est votre nom (ou surnom)* ?",
+        "label": "Mi a neve (beceneve)?*",
         "title": "Neve",
         "placeholder": "Pl.: Laura, Mama",
         "errors": {

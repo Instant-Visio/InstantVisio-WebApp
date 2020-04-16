@@ -72,7 +72,6 @@ Country.propTypes = {
     onSelect: PropTypes.func,
     defaultCountry: PropTypes.string,
     className: PropTypes.string,
-    selectedCountries: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default Country
