@@ -69,6 +69,9 @@ export const format = (values) => {
             phone.replace(/ /g, ''),
             country
         )
+        if (!phoneNumber) {
+            return
+        }
         return { ...values, phone: phoneNumber.formatInternational() }
     }
 
