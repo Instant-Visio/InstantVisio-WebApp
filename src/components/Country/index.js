@@ -29,10 +29,8 @@ const renderOption = ([code, country], index) => (
     </option>
 )
 
-function Country({ defaultCountry, selectedCountries, onSelect, className }) {
-    const countries = useMemo(() => getCountries(selectedCountries), [
-        selectedCountries,
-    ])
+function Country({ defaultCountry, onSelect, className }) {
+    const countries = useMemo(() => getCountries(), [])
 
     const [country, setCountry] = useState('')
 
