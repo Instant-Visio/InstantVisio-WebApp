@@ -67,8 +67,11 @@ export const format = (values) => {
     if (phone) {
         const phoneNumber = parsePhoneNumberFromString(
             phone.replace(/ /g, ''),
-            country
+            country.toUpperCase()
         )
+        if (!phoneNumber) {
+            return
+        }
         return { ...values, phone: phoneNumber.formatInternational() }
     }
 

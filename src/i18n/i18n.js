@@ -9,7 +9,6 @@ i18n.use(Backend)
     .init({
         fallbackLng: 'en',
         defaultNS: ['common'],
-        debug: process.env.NODE_ENV === 'development',
     })
 
 export default i18n
