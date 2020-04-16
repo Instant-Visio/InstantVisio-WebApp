@@ -119,10 +119,7 @@ export default function Form({ onSubmit, error }) {
                     /* eslint-disable react/prop-types */
                     const { isSubmitting, handleSubmit } = props
                     return (
-                        <BootstrapForm
-                            onSubmit={handleSubmit}
-                            noValidate
-                            autoComplete="off">
+                        <BootstrapForm onSubmit={handleSubmit} noValidate>
                             <Tabs activeKey={tab} onSelect={onSelectTab}>
                                 <Tab
                                     eventKey={tabs.phone}
