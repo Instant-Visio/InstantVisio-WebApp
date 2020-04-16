@@ -21,15 +21,15 @@
       "ro": "Română",
       "it": "Italiano"
     },
+    "url": {
+        "video-call": "visio",
+        "legal-mentions": "mentions-legales",
+        "personal-data": "donnees-personnelles",
+        "blog": "blog",
+        "credits": "credits"
+    },
     "message": {
         "title": "Richiesta URGENTE di videochiamata da parte di",
         "Message": "ti invita a una videochiamata. Unisciti ora alla conversazione cliccando sul link:"
-    },
-    "url": {
-        "legal-mentions": "note-legali",
-        "personal-data": "dati-personali",
-        "blog": "blog",
-        "blog-article": "blog/:articolo",
-        "credits": "credits"
     }
 }
