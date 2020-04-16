@@ -69,8 +69,8 @@ export const IframeContainer = styled.div`
 
     ${SCREEN.MOBILE} and (min-height: 501px) {
         .mute-camera {
-            width: 12rem;
-            height: 7rem;
+            width: 160px;
+            height: 110px;
         }
 
         .mute-camera-three {
@@ -94,8 +94,8 @@ export const IframeContainer = styled.div`
         }
 
         .mute-camera-two {
-            width: 9rem;
-            height: 6rem;
+            width: 162px;
+            height: 121px;
         }
 
         .waiting-participant {
@@ -128,6 +128,10 @@ export const Controls = styled.div`
         flex-direction: column;
         justify-content: center;
         margin-right: ${({theme}) => theme.spacing.XXXL}
+    }
+
+    .loader {
+        margin: 0 auto;
     }
 
     img {

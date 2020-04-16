@@ -114,8 +114,8 @@ export default `
 
     @media screen and (min-width: 500px) and (max-height: 500px) {
         .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
-            width: 9rem;
-            height: 6rem;
+            width: 162px;
+            height: 121px;
             border-radius: 0.5rem;
             position: absolute;
             z-index: 10;
@@ -124,8 +124,8 @@ export default `
         }
 
         .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
-            width: 9rem;
-            height: 6rem;
+            width: 162px;
+            height: 121px;
             border-radius: 0.5rem;
             position: absolute;
             z-index: 10;
@@ -136,8 +136,8 @@ export default `
     
     @media screen and (max-width: 767px) and (min-height: 501px) {
         .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
-            width: 12rem;
-            height: 7rem;
+            width: 160px;
+            height: 110px;
             border-radius: 0.5rem;
             position: absolute;
             z-index: 10;
@@ -147,8 +147,8 @@ export default `
     
         /** 2-person call **/
         .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
-            width: 12rem;
-            height: 7rem;
+            width: 160px;
+            height: 110px;
             border-radius: 0.5rem;
             position: absolute;
             z-index: 10;
