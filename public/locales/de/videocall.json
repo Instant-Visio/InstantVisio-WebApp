@@ -1,10 +1,10 @@
 {
     "cam": "Webcam",
-    "audio": "Mic",
-    "turn-on-cam-message": "Please turn on your webcam and your mic here under.",
-    "waiting-participant": "Please wait while your contact is about to join you.",
-    "participant-cam-off": "Your contact has joined the video call but has webcam turned off.",
-    "participant-left": "Your contact has left the call.",
-    "leave": "Leave",
-    "leave-confirmation": "You have left the call."
+    "audio": "Mikro",
+    "turn-on-cam-message": "Bitte schalten Sie ihre Webcam und ihr Mikrofon hier unten ein.",
+    "waiting-participant": "Bitte warten Sie, bis ihr Kontakt an diesem Anruf teilnehmt.",
+    "participant-cam-off": "Ihr Kontakt ist der Videoanruf beigetreten, aber seine Webcam ist ausgeschaltet.",
+    "participant-left": "Ihr Kontakt hat den Anruf verlassen.",
+    "leave": "Verlassen",
+    "leave-confirmation": "Sie haben den Anruf verlassen."
 }
