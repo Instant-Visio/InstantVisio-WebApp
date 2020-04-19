@@ -18,7 +18,7 @@
         "placeholder": "z.B. 171 1234567",
         "errors": {
             "required": "Bitte das Telefonnummer ihres Verwandters eingeben",
-            "invalid": "Das Telefonnummer ihrers Verwandters ist nicht gültich"
+            "invalid": "Das Telefonnummer ihrers Verwandters ist ungültich"
         }
     },
     "mail": {
@@ -26,8 +26,8 @@
         "title": "E-Mail-Addresse ihres Verwandters",
         "placeholder": "z.B. hans.mueller@gmail.com",
         "errors": {
-            "required": "Please enter the e-mail of your close one",
-            "invalid": "The entered e-mail is not valid"
+            "required": "Bitte die E-Mail-Adresse ihres Verwandters eingeben",
+            "invalid": "Die angegebene E-Mail-Adresse ist ungültich"
         }
     },
     "personName": {
@@ -35,12 +35,12 @@
         "title": "Ihr Name",
         "placeholder": "z. B. Anna, Oma",
         "errors": {
-            "required": "Please enter your name"
+            "required": "Bitte geben Sie ihren Namen"
         }
     },
     "errors": {
         "general": "Das SMS oder das E-Mail kann nicht gesendet werden. Bitte überprüfen Sie ihre Eingabe und wiederholen Sie den Vorgang.",
         "quotaSMS": "SMS Versand nicht möglich, unsere Kredit ist erschöpft.",
-        "resourceExausted": "Aufgrund fehlender Ressourcen ist es nicht möglich, Ihr Kontakt zu benachrichtigen."
+        "resourceExausted": "Aufgrund fehlender Ressourcen ist es nicht möglich, ihr Kontakt zu benachrichtigen."
     }
 }
