@@ -1,10 +1,7 @@
-import * as functions from 'firebase-functions'
 import * as sgMail from '@sendgrid/mail'
-import * as ovh from 'ovh'
-import { logEmailSent, logSmsSent } from '../../sumologic/sumologic'
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
-import { alert } from '../alerts/alert'
-import { ALERT_OVH_SMS_QUOTA_REACHED } from '../alerts/alertList'
+import { logEmailSent } from '../../sumologic/sumologic'
+import { sendSmsViaOVH } from './sms/ovh'
+import { sendSmsViaTwilio } from './sms/twilio'
 
 export interface OVHCredentials {
     consumerkey: string
@@ -63,67 +60,11 @@ export const sendSms = async (
     params: NotificationParams,
     messageBody: string
 ) => {
-    const ovhInstance = ovh({
-        appKey: params.ovhCredentials.appkey,
-        appSecret: params.ovhCredentials.appsecret,
-        consumerKey: params.ovhCredentials.consumerkey,
+    return sendSmsViaOVH(params, messageBody).catch((error) => {
+        if (error.code === 'resource-exhausted') {
+            console.warn('OVH SMS Exhausted, fallbacking to twilio')
+            return sendSmsViaTwilio(params, messageBody)
+        }
+        return error
     })
-
-    const phoneNumber = parsePhoneNumberFromString(
-        params.phone,
-        params.country as any
-    )
-
-    if (!phoneNumber) {
-        console.log(
-            `Warn: phone number parsing failed, country: ${params.country}`
-        )
-        return Promise.reject('Phone number parsing failed')
-    }
-
-    return ovhInstance
-        .requestPromised(
-            'POST',
-            `/sms/${params.ovhCredentials.servicename}/jobs`,
-            {
-                message: messageBody,
-                noStopClause: true,
-                receivers: [phoneNumber.formatInternational()],
-                sender: 'VisioPhone',
-                priority: 'high',
-                validityPeriod: 30, // 30 min
-            }
-        )
-        .then((result: any) => {
-            console.log('sms sent')
-            logSmsSent()
-        })
-        .catch((error: any) => {
-            console.error('Fail to send sms', error)
-            if (error.error && error.error === 402) {
-                alert(ALERT_OVH_SMS_QUOTA_REACHED)
-                throw new functions.https.HttpsError(
-                    'resource-exhausted',
-                    '402'
-                )
-            }
-            throw new functions.https.HttpsError('unknown', error.message)
-        })
 }
-
-// To get new credentials, we first need to use this method, then open the given url and authentificate manually
-// (mind the expiration delay)
-//
-// const getNewOVHConsumerKey = (ovhInstance:any) => {
-//     ovhInstance.requestPromised('POST', '/auth/credential', {
-//         'accessRules': [
-//             {'method': 'POST', 'path': '/sms/*/jobs'},
-//             {'method': 'GET', 'path': '/sms/*/outgoing'},
-//             {'method': 'DELETE', 'path': '/sms/*/outgoing/*'}
-//         ]
-//     }).then((credential: any) => {
-//         console.log('auth success, open the url below to validate them', credential)
-//     }).catch((error: any) => {
-//         console.log('auth error', error)
-//     })
-// }
