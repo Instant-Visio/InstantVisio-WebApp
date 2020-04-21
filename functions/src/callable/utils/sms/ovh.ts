@@ -1,48 +1,39 @@
-import ovh from 'ovh'
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import * as ovh from 'ovh'
 import { logSmsSent } from '../../../sumologic/sumologic'
 import { alert } from '../../alerts/alert'
 import { ALERT_OVH_SMS_QUOTA_REACHED } from '../../alerts/alertList'
 import * as functions from 'firebase-functions'
-import { NotificationParams } from '../notification'
+import { SMSParams } from '../../interfaces/SMSParams'
 
-export const sendSmsViaOVH = async (
-    params: NotificationParams,
-    messageBody: string
-) => {
+export const sendSmsViaOVH = async (params: SMSParams) => {
+    if (!params.ovhCredentials) {
+        throw new functions.https.HttpsError(
+            'failed-precondition',
+            'Config missing for OVH in order to send the SMS'
+        )
+    }
+
     const ovhInstance = ovh({
         appKey: params.ovhCredentials.appkey,
         appSecret: params.ovhCredentials.appsecret,
         consumerKey: params.ovhCredentials.consumerkey,
     })
 
-    const phoneNumber = parsePhoneNumberFromString(
-        params.phone,
-        params.country as any
-    )
-
-    if (!phoneNumber) {
-        console.log(
-            `Warn: phone number parsing failed, country: ${params.country}`
-        )
-        return Promise.reject('Phone number parsing failed')
-    }
-
     return ovhInstance
         .requestPromised(
             'POST',
             `/sms/${params.ovhCredentials.servicename}/jobs`,
             {
-                message: messageBody,
+                message: params.messageBody,
                 noStopClause: true,
-                receivers: [phoneNumber.formatInternational()],
+                receivers: [params.internationalPhoneNumber.replace(' ', '')],
                 sender: 'VisioPhone',
                 priority: 'high',
                 validityPeriod: 30, // 30 min
             }
         )
-        .then((result: any) => {
-            console.log('sms sent')
+        .then(() => {
+            console.log('SMS sent via OVH')
             logSmsSent()
         })
         .catch((error: any) => {

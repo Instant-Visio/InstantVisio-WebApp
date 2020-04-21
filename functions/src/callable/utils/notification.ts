@@ -2,27 +2,10 @@ import * as sgMail from '@sendgrid/mail'
 import { logEmailSent } from '../../sumologic/sumologic'
 import { sendSmsViaOVH } from './sms/ovh'
 import { sendSmsViaTwilio } from './sms/twilio'
-
-export interface OVHCredentials {
-    consumerkey: string
-    appsecret: string
-    appkey: string
-    servicename: string
-}
-
-export interface NotificationParams {
-    name: string
-    email: string
-    phone: string
-    roomUrl: string
-    country: string
-    emailFrom: string
-    lang: string
-    ovhCredentials: OVHCredentials
-    sendGridCredentials: {
-        apikey: string
-    }
-}
+import * as functions from 'firebase-functions'
+import { isEmpty } from 'lodash'
+import { NotificationParams } from '../interfaces/NotificationParams'
+import { SMSParams } from '../interfaces/SMSParams'
 
 export const sendEmail = async (
     params: NotificationParams,
@@ -56,15 +39,26 @@ export const sendEmail = async (
     return Promise.reject('Failed to send email')
 }
 
-export const sendSms = async (
-    params: NotificationParams,
-    messageBody: string
-) => {
-    return sendSmsViaOVH(params, messageBody).catch((error) => {
-        if (error.code === 'resource-exhausted') {
-            console.warn('OVH SMS Exhausted, fallbacking to twilio')
-            return sendSmsViaTwilio(params, messageBody)
-        }
-        return error
-    })
+export const sendSms = (params: SMSParams) => {
+    const ovhCredentialsOk = !isEmpty(params.ovhCredentials)
+    const twilioCredentialsOk = !isEmpty(params.twilioCredentials)
+
+    if (ovhCredentialsOk) {
+        return sendSmsViaOVH(params).catch((error) => {
+            if (error.code === 'resource-exhausted' && twilioCredentialsOk) {
+                console.warn('OVH SMS Exhausted, fallbacking to twilio')
+                return sendSmsViaTwilio(params)
+            }
+            return error
+        })
+    }
+
+    if (twilioCredentialsOk) {
+        return sendSmsViaTwilio(params)
+    }
+
+    throw new functions.https.HttpsError(
+        'failed-precondition',
+        'Config missing for OVH or Twilio in order to send the SMS'
+    )
 }
