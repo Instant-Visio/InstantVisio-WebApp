@@ -40,6 +40,7 @@ export const sendSmsViaTwilio = async (params: SMSParams) => {
                             error.message += `${message.error_message} ${message.error_code}`
                             error.alias += `${message.error_message}-${message.error_code}`
                             alert(error)
+                            break
                         default:
                             console.warn(
                                 `Reason: status:${message.status} error_message:${message.error_message} error_code:${message.error_code}`
