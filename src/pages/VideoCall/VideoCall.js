@@ -133,6 +133,10 @@ export const Controls = styled.div`
     .cam-audio {
         display: flex;
         flex-direction: row;
+
+        p {
+
+        }
     }
 
     .control {
@@ -157,8 +161,8 @@ export const Controls = styled.div`
         font-size: ${({ theme }) => theme.font.S};
     }
 
-    .black {
-        color: ${({ theme }) => theme.color.black};
+    .green {
+        color: ${({ theme }) => theme.color.green};
     }
 
     .red {

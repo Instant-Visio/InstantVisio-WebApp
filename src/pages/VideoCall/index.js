@@ -102,7 +102,6 @@ const VideoCallFrame = () => {
 
     return (
         <>
-            {/* <div className="loader">bla</div> */}
             <CallContainer>
                 <IframeContainer>
                     {!leftCallFrame && (
@@ -142,7 +141,7 @@ const VideoCallFrame = () => {
                                 ref={cam}
                                 className={classNames({
                                     control: true,
-                                    black: camOn,
+                                    green: camOn,
                                     red: !camOn,
                                 })}>
                                 <img
@@ -155,7 +154,7 @@ const VideoCallFrame = () => {
                                 ref={audio}
                                 className={classNames({
                                     control: true,
-                                    black: audioOn,
+                                    green: audioOn,
                                     red: !audioOn,
                                 })}>
                                 <img src={audioOn ? micOn : micOff} alt="" />
