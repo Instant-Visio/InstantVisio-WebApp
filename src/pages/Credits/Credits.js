@@ -18,10 +18,15 @@ const CreditsStyled = styled.div`
 
     ${SCREEN.DESKTOP} {
         flex-flow: row wrap;
-        justify-content: space-between;
         padding: 0 ${({ theme }) => theme.spacing.XXL};
         align-items: flex-start;
         text-align: left;
+        > div {
+            width: 25%;
+            &:not(:last-child){
+                margin-bottom: ${({ theme }) => theme.spacing.XXL};
+            }
+        }
     }
 `
 
