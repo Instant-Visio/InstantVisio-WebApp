@@ -34,7 +34,7 @@ export const sendSmsViaOVH = async (params: SMSParams) => {
         )
         .then(() => {
             console.log('SMS sent via OVH')
-            logSmsSent()
+            logSmsSent('ovh')
         })
         .catch((error: any) => {
             console.error('Fail to send sms', error)

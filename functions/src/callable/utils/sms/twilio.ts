@@ -3,6 +3,7 @@ import * as functions from 'firebase-functions'
 import * as twilio from 'twilio'
 import { alert } from '../../alerts/alert'
 import { ALERT_TWILIO_SMS_OTHER } from '../../alerts/alertList'
+import { logSmsSent } from '../../../sumologic/sumologic'
 
 export const sendSmsViaTwilio = async (params: SMSParams) => {
     if (!params.twilioCredentials) {
@@ -27,6 +28,7 @@ export const sendSmsViaTwilio = async (params: SMSParams) => {
             switch (message.status) {
                 case 'sent':
                     console.log('SMS sent via twilio')
+                    logSmsSent('twilio')
                     break
                 case 'failed':
                 case 'undelivered':
