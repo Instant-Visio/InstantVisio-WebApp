@@ -1,7 +1,7 @@
 {
     "cam": "Webcam",
     "audio": "Mikro",
-    "turn-on-cam-message": "Bitte schalten Sie ihre Webcam und ihr Mikrofon hier unten ein.",
+    "turn-on-cam-message": "Bitte schalten Sie ihre Webcam hier unten ein.",
     "waiting-participant": "Bitte warten Sie, bis ihr Kontakt an diesem Anruf teilnehmt.",
     "participant-cam-off": "Ihr Kontakt ist der Videoanruf beigetreten, aber seine Webcam ist ausgeschaltet.",
     "participant-left": "Ihr Kontakt hat den Anruf verlassen.",

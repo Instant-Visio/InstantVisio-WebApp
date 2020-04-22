@@ -1,7 +1,7 @@
 {
     "cam": "Webcam",
     "audio": "Mic",
-    "turn-on-cam-message": "Please turn on your webcam and your mic here under.",
+    "turn-on-cam-message": "Please turn on your webcam here under.",
     "waiting-participant": "Please wait while your contact is about to join you.",
     "participant-cam-off": "Your contact has joined the video call but has webcam turned off.",
     "participant-left": "Your contact has left the call.",

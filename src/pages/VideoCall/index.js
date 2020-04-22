@@ -78,6 +78,7 @@ const VideoCallFrame = () => {
 
         daily
             .on('joined-meeting', eventActions)
+            .on('participant-joined', eventActions)
             .on('participant-updated', eventActions)
             .on('participant-left', (event) => {
                 setParticipantStatus(
@@ -102,7 +103,6 @@ const VideoCallFrame = () => {
 
     return (
         <>
-            {/* <div className="loader">bla</div> */}
             <CallContainer>
                 <IframeContainer>
                     {!leftCallFrame && (
@@ -142,7 +142,7 @@ const VideoCallFrame = () => {
                                 ref={cam}
                                 className={classNames({
                                     control: true,
-                                    black: camOn,
+                                    green: camOn,
                                     red: !camOn,
                                 })}>
                                 <img
@@ -155,7 +155,7 @@ const VideoCallFrame = () => {
                                 ref={audio}
                                 className={classNames({
                                     control: true,
-                                    black: audioOn,
+                                    green: audioOn,
                                     red: !audioOn,
                                 })}>
                                 <img src={audioOn ? micOn : micOff} alt="" />
