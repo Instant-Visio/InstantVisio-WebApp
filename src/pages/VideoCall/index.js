@@ -78,6 +78,7 @@ const VideoCallFrame = () => {
 
         daily
             .on('joined-meeting', eventActions)
+            .on('participant-joined', eventActions)
             .on('participant-updated', eventActions)
             .on('participant-left', (event) => {
                 setParticipantStatus(
