@@ -31,6 +31,7 @@ export default function Home() {
             })
             .catch((error) => {
                 setError(error)
+                setSubmitting(false)
                 window.scrollTo({
                     top: formSubmissionMessage.current.offsetTop,
                     behavior: 'smooth',
@@ -38,7 +39,6 @@ export default function Home() {
             })
             .finally(() => {
                 setLoading(false)
-                setSubmitting(false)
             })
     }
     return (
