@@ -1,1 +1,35 @@
-{"_comment":"This file is generated and should NOT be updated manually. ","de":{"title":"URGENT video call request from","Message":"invites you to a video chat. Join the chat now at this link:"},"en":{"title":"URGENT video call request from","Message":"invites you to a video chat. Join the chat now at this link:"},"es":{"title":"Pedido URGENTE de visiotelefóno de","Message":"os invita a una charla video. Gracias por conectarse ya con este lazo"},"fr":{"title":"Demande URGENTE de visiophonie de","Message":"vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien :"},"gr":{"title":"ΕΡΩΤΗΣΕΙΣ για επειγον βίντεο","Message":"Σας προσκαλεί σε μια συνομιλία μέσω βίντεο. Συμμετοχή σε αυτόν τον σύνδεσμο"},"hu":{"title":"SÜRGŐS videókonferenciás kérés a kapcsolattartótól:","Message":"videokonferencias beszelgetesre hivja. A kovetkezo linkre kattintva tud csatlakozni a beszelgeteshez:"},"it":{"title":"Richiesta URGENTE di videochiamata da parte di","Message":"ti invita a una videochiamata. Unisciti ora alla conversazione cliccando sul link:"},"ro":{"title":"Cerere URGENTĂ de conversație video din partea lui","Message":"va invita la o videoconversatie. Intrati in dialog clicand pe link-ul urmator:"}}
+{
+    "_comment": "This file is generated and should NOT be updated manually. ",
+    "de": {
+        "title": "DRINGENDE Anfrage für einen Videoanruf von",
+        "Message": "lädt Sie zu einem Videoanruf ein. Folgen Sie jetzt diese Link, um an diesem Anruf teilzunehmen:"
+    },
+    "en": {
+        "title": "URGENT video call request from",
+        "Message": "invites you to a video chat. Join the chat now at this link:"
+    },
+    "es": {
+        "title": "Pedido URGENTE de visiotelefóno de",
+        "Message": "os invita a una charla video. Gracias por conectarse ya con este lazo"
+    },
+    "fr": {
+        "title": "Demande URGENTE de visiophonie de",
+        "Message": "vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien :"
+    },
+    "gr": {
+        "title": "ΕΡΩΤΗΣΕΙΣ για επειγον βίντεο",
+        "Message": "Σας προσκαλεί σε μια συνομιλία μέσω βίντεο. Συμμετοχή σε αυτόν τον σύνδεσμο"
+    },
+    "hu": {
+        "title": "SÜRGŐS videókonferenciás kérés a kapcsolattartótól:",
+        "Message": "videokonferencias beszelgetesre hivja. A kovetkezo linkre kattintva tud csatlakozni a beszelgeteshez:"
+    },
+    "it": {
+        "title": "Richiesta URGENTE di videochiamata da parte di",
+        "Message": "ti invita a una videochiamata. Unisciti ora alla conversazione cliccando sul link:"
+    },
+    "ro": {
+        "title": "Cerere URGENTĂ de conversație video din partea lui",
+        "Message": "va invita la o videoconversatie. Intrati in dialog clicand pe link-ul urmator:"
+    }
+}
