@@ -11,6 +11,8 @@ import cameraOff from '../../styles/assets/images/camOff.svg'
 import micOn from '../../styles/assets/images/audioOn.svg'
 import micOff from '../../styles/assets/images/audioOff.svg'
 import leave from '../../styles/assets/images/leave.svg'
+import Fullscreen from '../../components/Fullscreen'
+import sendCallLogs from '../../actions/sendCallLogs'
 import Footer from '../../components/Footer'
 
 const VideoCallFrame = () => {
@@ -51,7 +53,13 @@ const VideoCallFrame = () => {
             cssText: dailyCssText,
         })
 
+        const roomLogsToSend = (event) => {
+            sendCallLogs(videoName, event)
+        }
+
         const eventActions = (event) => {
+            sendCallLogs(videoName, event)
+
             setCamOn(daily.localVideo())
             setAudioOn(daily.localAudio())
 
@@ -77,10 +85,20 @@ const VideoCallFrame = () => {
         })
 
         daily
+            .on('loading', roomLogsToSend)
+            .on('loaded', roomLogsToSend)
+            .on('started-camera', roomLogsToSend)
+            .on('camera-error', roomLogsToSend)
+            .on('active-speaker-change', roomLogsToSend)
+            .on('active-speaker-mode-change', roomLogsToSend)
+            .on('error', roomLogsToSend)
             .on('joined-meeting', eventActions)
             .on('participant-joined', eventActions)
             .on('participant-updated', eventActions)
+            .on('network-connection', roomLogsToSend)
+            .on('network-quality-change', roomLogsToSend)
             .on('participant-left', (event) => {
+                sendCallLogs(videoName, event)
                 setParticipantStatus(
                     !event.participant.local &&
                         Object.keys(daily.participants()).length < 2
@@ -88,6 +106,7 @@ const VideoCallFrame = () => {
                         : ''
                 )
             })
+            .on('left-meeting', roomLogsToSend)
 
         leaving.current.addEventListener('click', () => {
             daily.leave()
@@ -104,6 +123,7 @@ const VideoCallFrame = () => {
     return (
         <>
             <CallContainer>
+                <Fullscreen />
                 <IframeContainer>
                     {!leftCallFrame && (
                         <iframe
