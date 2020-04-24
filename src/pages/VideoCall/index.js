@@ -3,14 +3,15 @@ import { useParams } from 'react-router-dom'
 import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import VideocamIcon from '@material-ui/icons/Videocam'
+import VideocamOffIcon from '@material-ui/icons/VideocamOff'
+import MicIcon from '@material-ui/icons/Mic'
+import MicOffIcon from '@material-ui/icons/MicOff'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+
 
 import dailyCssText from './dailyCssText'
 import { CallContainer, IframeContainer, Controls } from './VideoCall'
-import cameraOn from '../../styles/assets/images/camOn.svg'
-import cameraOff from '../../styles/assets/images/camOff.svg'
-import micOn from '../../styles/assets/images/audioOn.svg'
-import micOff from '../../styles/assets/images/audioOff.svg'
-import leave from '../../styles/assets/images/leave.svg'
 import Fullscreen from '../../components/Fullscreen'
 import sendCallLogs from '../../actions/sendCallLogs'
 import Footer from '../../components/Footer'
@@ -86,7 +87,7 @@ const VideoCallFrame = () => {
 
         daily
             .on('loading', roomLogsToSend)
-            .on('loaded', roomLogsToSend)
+            .on('loaded', eventActions)
             .on('started-camera', roomLogsToSend)
             .on('camera-error', roomLogsToSend)
             .on('active-speaker-change', roomLogsToSend)
@@ -165,10 +166,7 @@ const VideoCallFrame = () => {
                                     green: camOn,
                                     red: !camOn,
                                 })}>
-                                <img
-                                    src={camOn ? cameraOn : cameraOff}
-                                    alt=""
-                                />
+                                {camOn ? <VideocamIcon /> : <VideocamOffIcon />}
                                 <p>{t('cam')}</p>
                             </div>
                             <div
@@ -178,12 +176,15 @@ const VideoCallFrame = () => {
                                     green: audioOn,
                                     red: !audioOn,
                                 })}>
-                                <img src={audioOn ? micOn : micOff} alt="" />
+                                {audioOn ? <MicIcon /> : <MicOffIcon />}
                                 <p>{t('audio')}</p>
                             </div>
                         </div>
-                        <div ref={leaving} className="control red leave">
-                            <img src={leave} alt="" />
+                        <div
+                            ref={leaving}
+                            className="control red leave"
+                        >
+                            < ExitToAppIcon/>
                             <p>{t('leave')}</p>
                         </div>
                     </Controls>
