@@ -118,7 +118,7 @@ const VideoCallFrame = () => {
         return () => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
-    }, [url, t])
+    }, [url, t, videoName])
 
     return (
         <>
