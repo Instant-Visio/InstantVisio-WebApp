@@ -1,14 +1,11 @@
 export default async (roomName, log) => {
 
-    const logWithoutAction = () => {
-        delete log.action
-        return log
-    }
+    const { action, ...event } = log
 
     const roomLogInfo = {
         room: roomName,
-        action: log.action,
-        event: logWithoutAction()
+        action,
+        event
     }
 
     try {
