@@ -7,11 +7,13 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "deploy": "npm run build && firebase deploy --only hosting",
-        "deploy:all:prod": "npm run build && firebase use instantvisio && firebase deploy",
-        "deploy:all:dev": "env-cmd -f .env.development && firebase use instantvisio-dev && npm run build && firebase deploy",
-        "deploy:hosting:prod": "npm run build && firebase use instantvisio && firebase deploy --only hosting",
-        "deploy:hosting:dev": "env-cmd -f .env.development && firebase use instantvisio-dev && npm run build && firebase deploy --only hosting"
+        "release:all:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy && npm run tag:after",
+        "release:all:dev": "npm run tag:before:dev && env-cmd -f .env.development && firebase use instantvisio-dev && npm run build && firebase deploy && npm run tag:after",
+        "release:hosting:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy --only hosting && npm run tag:after",
+        "release:hosting:dev": "npm run tag:before:dev && env-cmd -f .env.development && firebase use instantvisio-dev && npm run build && firebase deploy --only hosting && npm run tag:after",
+        "tag:before:prod": "npm version minor",
+        "tag:before:dev": "npm version prerelease",
+        "tag:after": "git push && git push --tags"
     },
     "dependencies": {
         "@daily-co/daily-js": "^0.9.984",
