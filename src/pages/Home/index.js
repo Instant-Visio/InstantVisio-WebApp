@@ -42,7 +42,7 @@ export default function Home() {
             })
     }
     return (
-        <ColumnsLayout title={`${t('page-title')} - Instant Visio`}>
+        <ColumnsLayout title='Instant Visio'>
             <Description />
             <Form onSubmit={submit} isSending={loading} error={error} />
             <div ref={formSubmissionMessage}>

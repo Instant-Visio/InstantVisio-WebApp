@@ -3,14 +3,17 @@ import { useParams } from 'react-router-dom'
 import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import VideocamIcon from '@material-ui/icons/Videocam'
+import VideocamOffIcon from '@material-ui/icons/VideocamOff'
+import MicIcon from '@material-ui/icons/Mic'
+import MicOffIcon from '@material-ui/icons/MicOff'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+
 
 import dailyCssText from './dailyCssText'
 import { CallContainer, IframeContainer, Controls } from './VideoCall'
-import cameraOn from '../../styles/assets/images/camOn.svg'
-import cameraOff from '../../styles/assets/images/camOff.svg'
-import micOn from '../../styles/assets/images/audioOn.svg'
-import micOff from '../../styles/assets/images/audioOff.svg'
-import leave from '../../styles/assets/images/leave.svg'
+import Fullscreen from '../../components/Fullscreen'
+import sendCallLogs from '../../actions/sendCallLogs'
 import Footer from '../../components/Footer'
 
 const VideoCallFrame = () => {
@@ -18,9 +21,7 @@ const VideoCallFrame = () => {
 
     const [camOn, setCamOn] = useState(true)
     const [audioOn, setAudioOn] = useState(true)
-    const [participantStatus, setParticipantStatus] = useState(
-        t('waiting-participant')
-    )
+    const [participantStatus, setParticipantStatus] = useState('')
     const [participantNumber, setParticipantNumber] = useState(0)
     const [leftCallFrame, setLeftCallFrame] = useState(false)
     let { videoName } = useParams()
@@ -51,7 +52,13 @@ const VideoCallFrame = () => {
             cssText: dailyCssText,
         })
 
+        const roomLogsToSend = (event) => {
+            sendCallLogs(videoName, event)
+        }
+
         const eventActions = (event) => {
+            sendCallLogs(videoName, event)
+
             setCamOn(daily.localVideo())
             setAudioOn(daily.localAudio())
 
@@ -63,6 +70,8 @@ const VideoCallFrame = () => {
                 )
             } else if (participantsLength > 2) {
                 setParticipantStatus('')
+            } else if (participantsLength < 2) {
+                setParticipantStatus(t('waiting-participant'))
             }
 
             setParticipantNumber(participantsLength)
@@ -77,10 +86,20 @@ const VideoCallFrame = () => {
         })
 
         daily
+            .on('loading', roomLogsToSend)
+            .on('loaded', eventActions)
+            .on('started-camera', roomLogsToSend)
+            .on('camera-error', roomLogsToSend)
+            .on('active-speaker-change', roomLogsToSend)
+            .on('active-speaker-mode-change', roomLogsToSend)
+            .on('error', roomLogsToSend)
             .on('joined-meeting', eventActions)
             .on('participant-joined', eventActions)
             .on('participant-updated', eventActions)
+            .on('network-connection', roomLogsToSend)
+            .on('network-quality-change', roomLogsToSend)
             .on('participant-left', (event) => {
+                sendCallLogs(videoName, event)
                 setParticipantStatus(
                     !event.participant.local &&
                         Object.keys(daily.participants()).length < 2
@@ -88,6 +107,7 @@ const VideoCallFrame = () => {
                         : ''
                 )
             })
+            .on('left-meeting', roomLogsToSend)
 
         leaving.current.addEventListener('click', () => {
             daily.leave()
@@ -99,11 +119,12 @@ const VideoCallFrame = () => {
         return () => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
-    }, [url, t])
+    }, [url, t, videoName])
 
     return (
         <>
             <CallContainer>
+                <Fullscreen />
                 <IframeContainer>
                     {!leftCallFrame && (
                         <iframe
@@ -145,10 +166,7 @@ const VideoCallFrame = () => {
                                     green: camOn,
                                     red: !camOn,
                                 })}>
-                                <img
-                                    src={camOn ? cameraOn : cameraOff}
-                                    alt=""
-                                />
+                                {camOn ? <VideocamIcon /> : <VideocamOffIcon />}
                                 <p>{t('cam')}</p>
                             </div>
                             <div
@@ -158,12 +176,15 @@ const VideoCallFrame = () => {
                                     green: audioOn,
                                     red: !audioOn,
                                 })}>
-                                <img src={audioOn ? micOn : micOff} alt="" />
+                                {audioOn ? <MicIcon /> : <MicOffIcon />}
                                 <p>{t('audio')}</p>
                             </div>
                         </div>
-                        <div ref={leaving} className="control red leave">
-                            <img src={leave} alt="" />
+                        <div
+                            ref={leaving}
+                            className="control red leave"
+                        >
+                            < ExitToAppIcon/>
                             <p>{t('leave')}</p>
                         </div>
                     </Controls>

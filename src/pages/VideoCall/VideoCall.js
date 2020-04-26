@@ -145,6 +145,7 @@ export const Controls = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         margin-right: ${({ theme }) => theme.spacing.XXXL};
     }
 
@@ -152,7 +153,7 @@ export const Controls = styled.div`
         margin: 0 auto;
     }
 
-    img {
+    svg {
         margin-bottom: ${({ theme }) => theme.font.XXS};
     }
 
