@@ -192,9 +192,7 @@ const VideoCallFrame = () => {
                                 <ExitToAppIcon />
                                 <p>{t('leave')}</p>
                             </div>
-                            <div
-                                onClick={() => toggleSupport()}
-                                className="control">
+                            <div onClick={toggleSupport} className="control">
                                 <HelpIcon />
                                 <p>{t('help')}</p>
                             </div>
