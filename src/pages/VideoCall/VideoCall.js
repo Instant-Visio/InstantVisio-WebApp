@@ -26,7 +26,7 @@ export const IframeContainer = styled.div`
             #afafcc 83%,
             #948e90 87%
         ) !important;
-    height: 90%;
+    height: calc(100% - 80px);
     font-size: ${({ theme }) => theme.font.L};
     display: flex;
     align-items: center;
@@ -122,7 +122,7 @@ export const IframeContainer = styled.div`
 export const Controls = styled.div`
     padding: 0 ${({ theme }) => theme.spacing.XXL};
     width: 100vw;
-    height: 10%;
+    height: 80px;
     background: white;
     color: black;
     display: flex;
@@ -137,7 +137,7 @@ export const Controls = styled.div`
 
     .control {
         cursor: pointer;
-        width: fit-content;
+        width: 70px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -145,7 +145,6 @@ export const Controls = styled.div`
         padding: 16px;
         border-radius: 4px;
         transition: all 200ms ease-in-out;
-        margin-right: ${({ theme }) => theme.spacing.XL};
     }
 
     .control:hover {
@@ -155,10 +154,6 @@ export const Controls = styled.div`
     .control:focus,
     .control:active {
         background: #aaa;
-    }
-
-    .controlContainer .control:last-child {
-        margin-right: 0;
     }
 
     .loader {
@@ -182,7 +177,7 @@ export const Controls = styled.div`
         color: ${({ theme }) => theme.color.red};
     }
 
-    ${SCREEN.LANDSCAPE} {
-        height: 20%;
+    ${SCREEN.MOBILE} {
+        padding: 0 ${({ theme }) => theme.spacing.S};
     }
 `
