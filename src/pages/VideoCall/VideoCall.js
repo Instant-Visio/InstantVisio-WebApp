@@ -101,7 +101,7 @@ export const IframeContainer = styled.div`
 
         .mute-camera-three {
             border-radius: 0;
-            width: calc(100% / 3) !;
+            width: calc(100% / 3);
             height: 100%;
             bottom: 0;
             left: 0;
@@ -130,13 +130,9 @@ export const Controls = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    .cam-audio {
+    .controlContainer {
         display: flex;
         flex-direction: row;
-
-        p {
-
-        }
     }
 
     .control {
@@ -146,7 +142,23 @@ export const Controls = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-right: ${({ theme }) => theme.spacing.XXXL};
+        padding: 16px;
+        border-radius: 4px;
+        transition: all 200ms ease-in-out;
+        margin-right: ${({ theme }) => theme.spacing.XL};
+    }
+
+    .control:hover {
+        background: #eee;
+    }
+
+    .control:focus,
+    .control:active {
+        background: #aaa;
+    }
+
+    .controlContainer .control:last-child {
+        margin-right: 0;
     }
 
     .loader {
@@ -168,10 +180,6 @@ export const Controls = styled.div`
 
     .red {
         color: ${({ theme }) => theme.color.red};
-    }
-
-    .leave {
-        margin-right: 0;
     }
 
     ${SCREEN.LANDSCAPE} {

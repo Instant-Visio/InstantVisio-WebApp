@@ -5,16 +5,21 @@ import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import VideocamIcon from '@material-ui/icons/Videocam'
 import VideocamOffIcon from '@material-ui/icons/VideocamOff'
+import HelpIcon from '@material-ui/icons/LiveHelp'
 import MicIcon from '@material-ui/icons/Mic'
 import MicOffIcon from '@material-ui/icons/MicOff'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-
 
 import dailyCssText from './dailyCssText'
 import { CallContainer, IframeContainer, Controls } from './VideoCall'
 import Fullscreen from '../../components/Fullscreen'
 import sendCallLogs from '../../actions/sendCallLogs'
 import Footer from '../../components/Footer'
+import {
+    hideSupport,
+    setVideoCallExited,
+    toggleSupport,
+} from '../../utils/support'
 
 const VideoCallFrame = () => {
     const { t } = useTranslation('videocall')
@@ -51,6 +56,7 @@ const VideoCallFrame = () => {
             url,
             cssText: dailyCssText,
         })
+        hideSupport()
 
         const roomLogsToSend = (event) => {
             sendCallLogs(videoName, event)
@@ -111,11 +117,12 @@ const VideoCallFrame = () => {
 
         leaving.current.addEventListener('click', () => {
             daily.leave()
+            setVideoCallExited()
             setLeftCallFrame(true)
         })
 
         window.addEventListener('beforeunload', leavingCallPage)
-        // ComponentWillUnmount
+
         return () => {
             window.removeEventListener('beforeunload', leavingCallPage)
         }
@@ -158,7 +165,7 @@ const VideoCallFrame = () => {
 
                 {!leftCallFrame && (
                     <Controls>
-                        <div className="cam-audio">
+                        <div className="controlContainer">
                             <div
                                 ref={cam}
                                 className={classNames({
@@ -180,12 +187,17 @@ const VideoCallFrame = () => {
                                 <p>{t('audio')}</p>
                             </div>
                         </div>
-                        <div
-                            ref={leaving}
-                            className="control red leave"
-                        >
-                            < ExitToAppIcon/>
-                            <p>{t('leave')}</p>
+                        <div className="controlContainer">
+                            <div ref={leaving} className="control red leave">
+                                <ExitToAppIcon />
+                                <p>{t('leave')}</p>
+                            </div>
+                            <div
+                                onClick={() => toggleSupport()}
+                                className="control">
+                                <HelpIcon />
+                                <p>{t('help')}</p>
+                            </div>
                         </div>
                     </Controls>
                 )}

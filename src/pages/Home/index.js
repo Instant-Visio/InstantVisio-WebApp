@@ -7,6 +7,11 @@ import ColumnsLayout from '../../layout/Columns'
 import { createCall } from '../../actions/createCall'
 import Form from '../../components/Form'
 import Description from './Description'
+import {
+    setNewCall,
+    setNewCallError,
+    setNewCallRedirected,
+} from '../../utils/support'
 
 const DataMentions = styled.div`
     .cnil {
@@ -25,12 +30,14 @@ export default function Home() {
 
     const submit = (values, setSubmitting) => {
         setLoading(true)
+        setNewCall(values)
         createCall(values)
             .then((roomName) => {
                 setVideoCallId(roomName)
             })
             .catch((error) => {
                 setError(error)
+                setNewCallError(error)
                 setSubmitting(false)
                 window.scrollTo({
                     top: formSubmissionMessage.current.offsetTop,
@@ -42,13 +49,14 @@ export default function Home() {
             })
     }
     return (
-        <ColumnsLayout title='Instant Visio'>
+        <ColumnsLayout title="Instant Visio">
             <Description />
             <Form onSubmit={submit} isSending={loading} error={error} />
             <div ref={formSubmissionMessage}>
                 {videoCallId && (
                     <Route
                         render={() => {
+                            setNewCallRedirected()
                             window.location.pathname = `/${t(
                                 'common:url.video-call'
                             )}/${videoCallId}`
@@ -70,7 +78,8 @@ export default function Home() {
                         l'envoi, ces données sont effacées au bout d'un jour.
                         Pour en savoir plus sur la gestion des données
                         personnelles et pour exercer vos droits, veuillez vous
-                        reporter à la page <Link to="/donnees-personnelles">
+                        reporter à la page{' '}
+                        <Link to="/donnees-personnelles">
                             Données personnelles
                         </Link>
                         .

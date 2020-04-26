@@ -6,5 +6,6 @@
     "participant-cam-off": "Your contact has joined the video call but has webcam turned off.",
     "participant-left": "Your contact has left the call.",
     "leave": "Leave",
-    "leave-confirmation": "You have left the call."
+    "leave-confirmation": "You have left the call.",
+    "help": "Help"
 }
