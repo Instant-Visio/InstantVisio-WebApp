@@ -4,13 +4,13 @@ import 'firebase/analytics'
 const hasCookiebot = () => window.Cookiebot
 
 const cookieBotAcceptListener = () => {
-    if (hasCookiebot() && window.Cookiebot.consent.statistics) {
+    if (hasCookiebot() && window.Cookiebot.consent?.statistics) {
         firebase.analytics()
     }
 }
 
 const cookieBotDeclineListener = () => {
-    if (hasCookiebot() && window.Cookiebot.consent.statistics) {
+    if (hasCookiebot() && window.Cookiebot.consent?.statistics) {
         firebase.analytics().setAnalyticsCollectionEnabled(false)
     }
 }
