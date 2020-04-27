@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import About from '../../documents/Instant_Visio_Keynote.pdf'
 import FooterStyled from './Footer'
-import { showDialogPreferences } from '../../utils/cookies'
+import { showPreferencesDialog } from '../../utils/gdpr'
 
 const Footer = () => {
     const { t } = useTranslation()
@@ -61,7 +61,7 @@ const Footer = () => {
                 <li className="footer-link">
                     <button
                         className="footer-link-content"
-                        onClick={showDialogPreferences}>
+                        onClick={showPreferencesDialog}>
                         {t('footer.cookies')}
                     </button>
                 </li>

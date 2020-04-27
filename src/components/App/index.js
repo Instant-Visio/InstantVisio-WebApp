@@ -12,7 +12,7 @@ import {
     Credits,
     NotFound,
 } from '../../pages'
-import { cookieHandler } from '../../utils/cookies'
+import { gdprHandler } from '../../utils/gdpr'
 
 const App = () => {
     const { t } = useTranslation()
@@ -37,7 +37,7 @@ const App = () => {
             }, 300)
         }
 
-        cookieHandler()
+        gdprHandler()
     }, [])
 
     return (
