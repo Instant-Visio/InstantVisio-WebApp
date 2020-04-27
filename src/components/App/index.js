@@ -12,6 +12,7 @@ import {
     Credits,
     NotFound,
 } from '../../pages'
+import { cookieHandler } from '../../utils/cookies'
 
 const App = () => {
     const { t } = useTranslation()
@@ -35,6 +36,8 @@ const App = () => {
                 )
             }, 300)
         }
+
+        cookieHandler()
     }, [])
 
     return (
