@@ -2,22 +2,18 @@ export default `
     .daily-video-toplevel-div {
         position: relative;
     }
-    
+
     .scroll::-webkit-scrollbar {
         display: none;
     }
-    
-    .daily-video-element {
-        object-fit: cover;
-    }
-    
+
     .daily-videos-wrapper {
         position: relative;
         display: flex;
         flex-flow: row wrap;
         overflow: hidden;
     }
-    
+
     .daily-video-div {
         position: relative;
         visibility: visible;
@@ -37,7 +33,7 @@ export default `
         align-items: center;
         justify-content: center;
     }
-    
+
     /** Alone in call **/
     .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
         border-radius: 0.5rem;
@@ -48,7 +44,7 @@ export default `
         bottom: 2rem;
         left: 1rem;
     }
-    
+
     /** 2-person call **/
     .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
         border-radius: 0.5rem;
@@ -64,7 +60,7 @@ export default `
         height: 100%;
         width: 100%;
     }
-    
+
     /** 3-person call**/
     .daily-videos-wrapper.remote-cams-2 > .daily-video-div.local {
         border-radius: 0;
@@ -85,7 +81,7 @@ export default `
         width: calc(100%/3);
         height: 100%;
     }
-    
+
     /** 4-person call**/
     .daily-videos-wrapper.remote-cams-3 > .daily-video-div.local {
         border-radius: 0;
@@ -133,7 +129,7 @@ export default `
             left: 1rem;
         }
     }
-    
+
     @media screen and (max-width: 767px) and (min-height: 501px) {
         .daily-videos-wrapper.remote-cams-0 > .daily-video-div.local {
             width: 160px;
@@ -144,7 +140,7 @@ export default `
             bottom: 2rem;
             left: 1rem;
         }
-    
+
         /** 2-person call **/
         .daily-videos-wrapper.remote-cams-1 > .daily-video-div.local {
             width: 160px;
@@ -160,7 +156,7 @@ export default `
             height: 100%;
             width: 100%;
         }
-    
+
         /** 3-person call**/
         .daily-videos-wrapper.remote-cams-2 > .daily-video-div.local {
             border-radius: 0;
@@ -181,7 +177,7 @@ export default `
             width: 100%;
             height: calc(100%/3);
         }
-    
+
         /** 4-person call**/
         .daily-videos-wrapper.remote-cams-3 > .daily-video-div.local {
             border-radius: 0;

@@ -1,13 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import FooterStyled from './Footer'
 import { useTranslation } from 'react-i18next'
+import About from '../../documents/Instant_Visio_Keynote.pdf'
+import FooterStyled from './Footer'
+
 
 const Footer = () => {
     const { t } = useTranslation()
     return (
         <FooterStyled>
             <ul className="footer">
+                <li className="footer-link">
+                    <Link
+                        to={About}
+                        className="footer-link-content"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {t('footer.about')}
+                    </Link>
+                </li>
                 <li className="footer-link">
                     <Link
                         to={`/${t('url.legal-mentions')}`}
