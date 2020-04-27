@@ -8,9 +8,9 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "release:all:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy && npm run tag:after",
-        "release:all:dev": "npm run tag:before:dev && env-cmd -f .env.development && firebase use instantvisio-dev && npm run build && firebase deploy && npm run tag:after",
+        "release:all:dev": "npm run tag:before:dev && firebase use instantvisio-dev &&  env-cmd -f .env.development npm run build && firebase deploy && npm run tag:after",
         "release:hosting:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy --only hosting && npm run tag:after",
-        "release:hosting:dev": "npm run tag:before:dev && env-cmd -f .env.development && firebase use instantvisio-dev && npm run build && firebase deploy --only hosting && npm run tag:after",
+        "release:hosting:dev": "npm run tag:before:dev && firebase use instantvisio-dev && env-cmd -f .env.development npm run build && firebase deploy --only hosting && npm run tag:after",
         "tag:before:prod": "npm version minor",
         "tag:before:dev": "npm version prerelease",
         "tag:after": "git push && git push --tags"
@@ -65,7 +65,7 @@
         "env-cmd": "^10.1.0",
         "eslint": "^6.8.0",
         "eslint-plugin-react": "^7.19.0",
-        "firebase-tools": "^7.15.1",
+        "firebase-tools": "^8.1.1",
         "husky": "^4.2.5",
         "lint-staged": "^10.1.3",
         "prettier": "^2.0.4"
