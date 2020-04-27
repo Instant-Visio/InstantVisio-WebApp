@@ -1,17 +1,16 @@
 import firebase from 'firebase/app'
 import 'firebase/analytics'
-import get from 'lodash/get'
 
 const hasCookiebot = () => window.Cookiebot
 
 const cookieBotAcceptListener = () => {
-    if (hasCookiebot() && get(window, 'Cookiebot.consent.statistics')) {
+    if (hasCookiebot() && window.Cookiebot.consent.statistics) {
         firebase.analytics()
     }
 }
 
 const cookieBotDeclineListener = () => {
-    if (hasCookiebot() && get(window, 'Cookiebot.consent.statistics')) {
+    if (hasCookiebot() && window.Cookiebot.consent.statistics) {
         firebase.analytics().setAnalyticsCollectionEnabled(false)
     }
 }
