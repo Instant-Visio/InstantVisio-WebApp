@@ -10,6 +10,7 @@ import {
     PersonalData,
     Blog,
     Credits,
+    NotFound,
 } from '../../pages'
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
             <Route path={`/${t('url.blog')}`} exact component={Blog} />
             <Route path={`/${t('url.blog')}/:post`} exact component={Blog} />
             <Route path={`/${t('url.credits')}`} exact component={Credits} />
+            <Route component={NotFound} />
         </div>
     )
 }
