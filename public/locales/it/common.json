@@ -14,13 +14,13 @@
         "contact": "Contatti"
     },
     "lang": {
-      "fr": "Français",
-      "gb": "English",
-      "de": "Deutsch",
-      "gr": "Ελληνικά",
-      "hu": "Magyar",
-      "ro": "Română",
-      "it": "Italiano"
+        "fr": "Français",
+        "gb": "English",
+        "de": "Deutsch",
+        "gr": "Ελληνικά",
+        "hu": "Magyar",
+        "ro": "Română",
+        "it": "Italiano"
     },
     "message": {
         "title": "Richiesta URGENTE di videochiamata da parte di",
@@ -32,5 +32,9 @@
         "blog": "blog",
         "blog-article": "blog/:articolo",
         "credits": "credits"
+    },
+    "404": {
+        "title": "404 Page Not Found",
+        "button": "Go to the homepage"
     }
 }

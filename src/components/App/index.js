@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import './App.scss'
@@ -11,6 +11,7 @@ import {
     Blog,
     Credits,
 } from '../../pages'
+import Page404 from '../../pages/404/Page404'
 
 const App = () => {
     const { t } = useTranslation()
@@ -38,27 +39,27 @@ const App = () => {
 
     return (
         <div className="App">
-            <Route path="/" exact component={Home} />
-            <Route
-                path={`/${t('url.video-call')}/:videoName`}
-                component={VideoCall}
-            />
-            <Route
-                path={`/${t('url.legal-mentions')}`}
-                exact
-                component={LegalMentions}
-            />
-            <Route
-                path={`/${t('url.personal-data')}`}
-                exact
-                component={PersonalData}
-            />
-            <Route path={`/${t('url.blog')}`} exact component={Blog} />
-            <Route path={`/${t('url.blog')}/:post`} exact component={Blog} />
-            <Route path={`/${t('url.credits')}`} exact component={Credits} />
+            <Switch>
+                <Route path="/" exact component={Home} />
+                <Route
+                    path={`/${t('url.video-call')}/:videoName`}
+                    component={VideoCall}
+                />
+                <Route
+                    path={`/${t('url.legal-mentions')}`}
+                    component={LegalMentions}
+                />
+                <Route
+                    path={`/${t('url.personal-data')}`}
+                    component={PersonalData}
+                />
+                <Route path={`/${t('url.blog')}`} component={Blog} />
+                <Route path={`/${t('url.blog')}/:post`} component={Blog} />
+                <Route path={`/${t('url.credits')}`} component={Credits} />
+                <Route component={Page404} />
+            </Switch>
         </div>
     )
 }
 
-// withRouter to pass props to components
-export default withRouter(App)
+export default App

@@ -21,7 +21,7 @@
         "hu": "Magyar",
         "ro": "Română",
         "es": "Español",
-        "it":"Italiano"
+        "it": "Italiano"
     },
     "url": {
         "video-call": "visio",
@@ -31,7 +31,11 @@
         "credits": "credits"
     },
     "message": {
-      "title": "Cerere URGENTĂ de conversație video din partea lui",
-      "Message": "va invita la o videoconversatie. Intrati in dialog clicand pe link-ul urmator:"
+        "title": "Cerere URGENTĂ de conversație video din partea lui",
+        "Message": "va invita la o videoconversatie. Intrati in dialog clicand pe link-ul urmator:"
+    },
+    "404": {
+        "title": "404 Page Not Found",
+        "button": "Go to the homepage"
     }
 }

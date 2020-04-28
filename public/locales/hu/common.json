@@ -1,37 +1,41 @@
 {
-  "logo": {
-    "alt": "Az Instant Visio logója, amely egy kék színű mobiltelefont ábrázol, amelyben megjelenik egy arc egy narancssárga kör formájában, amely épp videókonferenciában társalog a telefon birtokosával, akinek arca egy narancssárga körvonalakkal rendelkező kör formájában jelenik meg."
-  },
-  "homeBaseline": "Érje el ismerőseit videókonferencián, egy kattintással, <1>ingyenesen.</1>",
-  "headerBaseline": "Érje el ismerőseit videókonferencián, egy kattintással, ingyenesen.",
-  "footer": {
-    "about": "About",
-    "contact-us": "Kapcsolat",
-    "legal-mentions": "Jogi közlemények",
-    "personal-data": "Személyes adatok",
-    "blog": "Blog",
-    "credits": "Közreműködők",
-    "contact": "Kapcsolatfelvétel"
-  },
-  "lang": {
-    "fr": "Français",
-    "gb": "English",
-    "de": "Deutsch",
-    "gr": "Ελληνικά",
-    "hu": "Magyar",
-    "ro": "Română",
-    "es": "Español",
-    "it":"Italiano"
-  },
-  "url": {
-    "video-call": "visio",
-    "legal-mentions": "mentions-legales",
-    "personal-data": "donnees-personnelles",
-    "blog": "blog",
-    "credits": "credits"
-  },
-  "message": {
-    "title": "SÜRGŐS videókonferenciás kérés a kapcsolattartótól:",
-    "Message": "videokonferencias beszelgetesre hivja. A kovetkezo linkre kattintva tud csatlakozni a beszelgeteshez:"
-  }
+    "logo": {
+        "alt": "Az Instant Visio logója, amely egy kék színű mobiltelefont ábrázol, amelyben megjelenik egy arc egy narancssárga kör formájában, amely épp videókonferenciában társalog a telefon birtokosával, akinek arca egy narancssárga körvonalakkal rendelkező kör formájában jelenik meg."
+    },
+    "homeBaseline": "Érje el ismerőseit videókonferencián, egy kattintással, <1>ingyenesen.</1>",
+    "headerBaseline": "Érje el ismerőseit videókonferencián, egy kattintással, ingyenesen.",
+    "footer": {
+        "about": "About",
+        "contact-us": "Kapcsolat",
+        "legal-mentions": "Jogi közlemények",
+        "personal-data": "Személyes adatok",
+        "blog": "Blog",
+        "credits": "Közreműködők",
+        "contact": "Kapcsolatfelvétel"
+    },
+    "lang": {
+        "fr": "Français",
+        "gb": "English",
+        "de": "Deutsch",
+        "gr": "Ελληνικά",
+        "hu": "Magyar",
+        "ro": "Română",
+        "es": "Español",
+        "it": "Italiano"
+    },
+    "url": {
+        "video-call": "visio",
+        "legal-mentions": "mentions-legales",
+        "personal-data": "donnees-personnelles",
+        "blog": "blog",
+        "credits": "credits"
+    },
+    "message": {
+        "title": "SÜRGŐS videókonferenciás kérés a kapcsolattartótól:",
+        "Message": "videokonferencias beszelgetesre hivja. A kovetkezo linkre kattintva tud csatlakozni a beszelgeteshez:"
+    },
+    "404": {
+        "title": "404 Page Not Found",
+        "button": "Go to the homepage"
+    }
 }
