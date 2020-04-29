@@ -15,7 +15,7 @@ const List = styled(BaseList)`
         overflow: hidden;
         transition: all 0.3s ease-in-out;
         ${({ collapsed }) =>
-            !collapsed &&
+        !collapsed &&
             css`
                 max-height: 300px;
                 margin-top: ${({ theme }) => theme.spacing.M};
