@@ -124,7 +124,7 @@ const Arrow = styled(BaseArrow)`
         margin-bottom: 0.5rem;
         transition: transform 0.3s ease-in-out;
         ${({ collapsed }) =>
-            !collapsed &&
+        !collapsed &&
             css`
                 transform: rotate(45deg);
             `}
@@ -160,10 +160,6 @@ function Description() {
                     <span>{t('information.steps.3')}</span>
                 </List>
             </Information>
-            <p className="details">{t('information.indications.landscape')}</p>
-            <p className="details">
-                {t('information.indications.multiple-people')}
-            </p>
         </Wrapper>
     )
 }
