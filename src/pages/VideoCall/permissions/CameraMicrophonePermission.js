@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
 import Check from './Check'
-import { useTranslation } from 'react-i18next'
 import useCameraMicrophonePermission, {
     STATE_GRANTED,
 } from '../../../hooks/useCameraMicrophonePermission'
 
 const CameraMicrophonePermission = ({ onGranted }) => {
-    const { t } = useTranslation('videocall')
     const permissionResult = useCameraMicrophonePermission('camera')
 
     useEffect(() => {
@@ -15,15 +13,7 @@ const CameraMicrophonePermission = ({ onGranted }) => {
         }
     }, [permissionResult, onGranted])
 
-    return (
-        <>
-            <Check
-                state={permissionResult}
-                i18nKey="permissions.camera"
-                i18nInstance={t}
-            />
-        </>
-    )
+    return <Check state={permissionResult} i18nKey="permissions.camera" />
 }
 
 export default CameraMicrophonePermission

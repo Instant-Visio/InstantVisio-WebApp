@@ -8,6 +8,7 @@ import {
     STATE_GRANTED,
     STATE_WAITING,
 } from '../../../hooks/useCameraMicrophonePermission'
+import { useTranslation } from 'react-i18next'
 
 export const CheckItem = styled.div`
     display: flex;
@@ -28,7 +29,8 @@ export const CheckItem = styled.div`
 `
 
 const iconSize = 1.5
-const Check = ({ state, i18nKey, i18nInstance }) => {
+const Check = ({ state, i18nKey }) => {
+    const { t } = useTranslation('videocall')
     const formatData = () => {
         switch (state) {
             default:
@@ -41,7 +43,7 @@ const Check = ({ state, i18nKey, i18nInstance }) => {
                             className="spinner"
                         />
                     ),
-                    text: i18nInstance(`${i18nKey}.waiting`),
+                    text: t(`${i18nKey}.waiting`),
                 }
             case STATE_GRANTED:
                 return {
@@ -52,7 +54,7 @@ const Check = ({ state, i18nKey, i18nInstance }) => {
                             color="green"
                         />
                     ),
-                    text: i18nInstance(`${i18nKey}.granted`),
+                    text: t(`${i18nKey}.granted`),
                 }
             case STATE_DENIED:
                 return {
@@ -63,7 +65,7 @@ const Check = ({ state, i18nKey, i18nInstance }) => {
                             color="red"
                         />
                     ),
-                    text: i18nInstance(`${i18nKey}.denied`),
+                    text: t(`${i18nKey}.denied`),
                 }
         }
     }
