@@ -13,7 +13,7 @@ const CameraMicrophonePermission = ({ onGranted }) => {
         if (permissionResult === STATE_GRANTED) {
             onGranted()
         }
-    }, [permissionResult])
+    }, [permissionResult, onGranted])
 
     return (
         <>

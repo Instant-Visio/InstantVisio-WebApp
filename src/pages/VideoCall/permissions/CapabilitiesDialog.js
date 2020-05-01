@@ -35,7 +35,7 @@ const CapabilitiesDialog = () => {
         return () => {
             window.iv.displayPermissionDialog = null
         }
-    }, [])
+    }, [grantedMap])
 
     return (
         <Modal
