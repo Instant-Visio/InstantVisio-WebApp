@@ -3,6 +3,11 @@ import Icon from '@mdi/react'
 import { mdiCheckCircle, mdiAlertCircle } from '@mdi/js'
 import styled from 'styled-components'
 import { Spinner } from 'react-bootstrap'
+import {
+    STATE_DENIED,
+    STATE_GRANTED,
+    STATE_WAITING,
+} from '../../../hooks/useCameraMicrophonePermission'
 
 export const CheckItem = styled.div`
     display: flex;
@@ -19,10 +24,6 @@ export const CheckItem = styled.div`
         height: 30px;
     }
 `
-
-export const STATE_WAITING = 0
-export const STATE_GRANTED = 1
-export const STATE_DENIED = 2
 
 const iconSize = 1.5
 const Check = ({ state, i18nKey, i18nInstance }) => {

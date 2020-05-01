@@ -10,18 +10,14 @@
     "help": "Help",
     "permissions": {
         "dialog": {
-            "title": "Permissions",
-            "description": "To ensure that video call work, we need the following permissions:"
+            "title": "Capabilities verification",
+            "description": "To ensure that video call work, we are verifying the following:",
+            "autoclose": "Everything seems to work, this dialog will be dismissed in a few seconds."
         },
         "camera": {
-            "granted": "The camera permission has been granted.",
-            "denied": "The camera permission has been denied.",
-            "waiting": "We need the camera permission to make the video call work."
-        },
-        "microphone": {
-            "granted": "The microphone permission has been granted.",
-            "denied": "The microphone permission has been denied.",
-            "waiting": "We need the microphone permission to make the video call work."
+            "granted": "The camera and microphone permission has been granted.",
+            "denied": "The camera and microphone permission has been denied.",
+            "waiting": "The camera and microphone permission is needed so you contact can see and hear you."
         }
     }
 }

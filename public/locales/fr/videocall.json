@@ -7,5 +7,16 @@
     "participant-left": "Votre proche a quitté l'appel.",
     "leave": "Quitter",
     "leave-confirmation": "Vous avez bien quitté l'appel.",
-    "help": "Aide"
+    "help": "Aide",
+    "permissions": {
+        "dialog": {
+            "title": "Permissions",
+            "description": "Pour assurer que l'appel vidéo marche, nous avons besoin des permissions suivantes:"
+        },
+        "camera": {
+            "granted": "L'accés à la caméra et au microphone a été autorisé.",
+            "denied": "L'accés à la caméra et au microphone a été bloqué.",
+            "waiting": "Nous avons besoin d'accéder à la caméra et au microphone pour que votre correspondant puisse vous voir et vous entendre."
+        }
+    }
 }
