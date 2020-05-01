@@ -8,8 +8,7 @@
             "3": "Il video si apre, puoi comunicare con il tuo familiare."
         },
         "indications": {
-            "landscape": "Dopo aver inviato il formulario, ti consigliamo di impostare il tuo dispositivo in modalità paesaggio. Potrai vedere meglio il tuo familiare.",
-            "multiple-people": "Una volta avviato il video, avrai accesso al link della chiamata nella barra degli indirizzi. Potrai inviarlo ad altri familiari, ma ti raccomandiamo un limite di 6 partecipanti a chiamata, per godere di un'esperienza ottimale."
+            "multiple-people": "Una volta avviato il video, avrai accesso al link della chiamata nella barra degli indirizzi. Potrai inviarlo ad altri familiari, ma ti raccomandiamo un limite di 4 partecipanti a chiamata, per godere di un'esperienza ottimale."
         },
         "data-mentions": {
             "mandatory": "I campi contrassegnati da un asterisco sono obbligatori.",

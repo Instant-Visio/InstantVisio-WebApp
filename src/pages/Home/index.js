@@ -81,6 +81,9 @@ export default function Home() {
                         reporter à la page <Link to="/donnees-personnelles">Données personnelles </Link>.
                     </Trans>
                 </p>
+                <p className="cnil">
+                    {t('information.indications.multiple-people')}
+                </p>
             </DataMentions>
         </ColumnsLayout>
     )

@@ -5,6 +5,7 @@ const CreditsStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     .credits {
         &-title {
@@ -22,7 +23,7 @@ const CreditsStyled = styled.div`
         align-items: flex-start;
         text-align: left;
         > div {
-            width: 25%;
+            margin: 0 ${({ theme }) => theme.spacing.XXXL};
             &:not(:last-child){
                 margin-bottom: ${({ theme }) => theme.spacing.XXL};
             }
