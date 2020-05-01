@@ -7,5 +7,21 @@
     "participant-left": "Your contact has left the call.",
     "leave": "Leave",
     "leave-confirmation": "You have left the call.",
-    "help": "Help"
+    "help": "Help",
+    "permissions": {
+        "dialog": {
+            "title": "Permissions",
+            "description": "To ensure that video call work, we need the following permissions:"
+        },
+        "camera": {
+            "granted": "The camera permission has been granted.",
+            "denied": "The camera permission has been denied.",
+            "waiting": "We need the camera permission to make the video call work."
+        },
+        "microphone": {
+            "granted": "The microphone permission has been granted.",
+            "denied": "The microphone permission has been denied.",
+            "waiting": "We need the microphone permission to make the video call work."
+        }
+    }
 }
