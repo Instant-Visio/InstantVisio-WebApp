@@ -25,7 +25,9 @@ const FooterStyled = styled.footer`
             &-content {
                 color: #7d7d7d;
                 text-decoration: none;
-
+                border: none;
+                background: none;
+                outline: none;
                 &:visited,
                 &:active {
                     color: #7d7d7d;

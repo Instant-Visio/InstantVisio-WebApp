@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import About from '../../documents/Instant_Visio_Keynote.pdf'
 import FooterStyled from './Footer'
-
+import { showPreferencesDialog } from '../../utils/gdpr'
 
 const Footer = () => {
     const { t } = useTranslation()
@@ -15,8 +15,7 @@ const Footer = () => {
                         to={About}
                         className="footer-link-content"
                         target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                        rel="noopener noreferrer">
                         {t('footer.about')}
                     </Link>
                 </li>
@@ -58,6 +57,13 @@ const Footer = () => {
                         rel="noopener noreferrer">
                         {t('footer.contact-us')}
                     </a>
+                </li>
+                <li className="footer-link">
+                    <button
+                        className="footer-link-content"
+                        onClick={showPreferencesDialog}>
+                        {t('footer.cookies')}
+                    </button>
                 </li>
             </ul>
         </FooterStyled>

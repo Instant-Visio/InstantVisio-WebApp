@@ -11,7 +11,8 @@
         "personal-data": "Personal data",
         "blog": "Blog",
         "credits": "Credits",
-        "contact": "Contact form"
+        "contact": "Contact form",
+        "cookies": "Cookies managment"
     },
     "lang": {
         "fr": "Français",
@@ -21,7 +22,7 @@
         "hu": "Magyar",
         "ro": "Română",
         "es": "Español",
-        "it":"Italiano"
+        "it": "Italiano"
     },
     "url": {
         "video-call": "visio",
@@ -31,7 +32,7 @@
         "credits": "credits"
     },
     "message": {
-      "title": "URGENT video call request from",
-      "Message": "invites you to a video chat. Join the chat now at this link:"
+        "title": "URGENT video call request from",
+        "Message": "invites you to a video chat. Join the chat now at this link:"
     }
 }

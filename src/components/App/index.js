@@ -12,6 +12,7 @@ import {
     Credits,
     NotFound,
 } from '../../pages'
+import { gdprHandler } from '../../utils/gdpr'
 
 const App = () => {
     const { t } = useTranslation()
@@ -35,6 +36,8 @@ const App = () => {
                 )
             }, 300)
         }
+
+        gdprHandler()
     }, [])
 
     return (

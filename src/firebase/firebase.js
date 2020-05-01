@@ -2,7 +2,6 @@ import firebase from 'firebase/app'
 
 import 'firebase/functions'
 import 'firebase/remote-config'
-import 'firebase/analytics'
 
 const firebaseConfig = {
     appId: process.env.REACT_APP_APPID,
@@ -26,5 +25,3 @@ if (process.env.NODE_ENV === 'development') {
 export const functions = {
     newCall: firebase.functions().httpsCallable('newCall'),
 }
-
-firebase.analytics()

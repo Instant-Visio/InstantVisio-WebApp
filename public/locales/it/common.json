@@ -11,16 +11,17 @@
         "personal-data": "Dati personali",
         "blog": "Blog",
         "credits": "Credits",
-        "contact": "Contatti"
+        "contact": "Contatti",
+        "cookies": "Cookies managment"
     },
     "lang": {
-      "fr": "Français",
-      "gb": "English",
-      "de": "Deutsch",
-      "gr": "Ελληνικά",
-      "hu": "Magyar",
-      "ro": "Română",
-      "it": "Italiano"
+        "fr": "Français",
+        "gb": "English",
+        "de": "Deutsch",
+        "gr": "Ελληνικά",
+        "hu": "Magyar",
+        "ro": "Română",
+        "it": "Italiano"
     },
     "message": {
         "title": "Richiesta URGENTE di videochiamata da parte di",
