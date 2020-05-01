@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import './App.scss'
@@ -10,7 +10,9 @@ import {
     PersonalData,
     Blog,
     Credits,
+    NotFound,
 } from '../../pages'
+import { gdprHandler } from '../../utils/gdpr'
 
 const App = () => {
     const { t } = useTranslation()
@@ -34,28 +36,41 @@ const App = () => {
                 )
             }, 300)
         }
+
+        gdprHandler()
     }, [])
 
     return (
         <div className="App">
-            <Route path="/" exact component={Home} />
-            <Route
-                path={`/${t('url.video-call')}/:videoName`}
-                component={VideoCall}
-            />
-            <Route
-                path={`/${t('url.legal-mentions')}`}
-                exact
-                component={LegalMentions}
-            />
-            <Route
-                path={`/${t('url.personal-data')}`}
-                exact
-                component={PersonalData}
-            />
-            <Route path={`/${t('url.blog')}`} exact component={Blog} />
-            <Route path={`/${t('url.blog')}/:post`} exact component={Blog} />
-            <Route path={`/${t('url.credits')}`} exact component={Credits} />
+            <Switch>
+                <Route path="/" exact component={Home} />
+                <Route
+                    path={`/${t('url.video-call')}/:videoName`}
+                    component={VideoCall}
+                />
+                <Route
+                    path={`/${t('url.legal-mentions')}`}
+                    exact
+                    component={LegalMentions}
+                />
+                <Route
+                    path={`/${t('url.personal-data')}`}
+                    exact
+                    component={PersonalData}
+                />
+                <Route path={`/${t('url.blog')}`} exact component={Blog} />
+                <Route
+                    path={`/${t('url.blog')}/:post`}
+                    exact
+                    component={Blog}
+                />
+                <Route
+                    path={`/${t('url.credits')}`}
+                    exact
+                    component={Credits}
+                />
+                <Route component={NotFound} />
+            </Switch>
         </div>
     )
 }

@@ -11,7 +11,8 @@
         "personal-data": "Date personale",
         "blog": "Blog",
         "credits": "Contribuții",
-        "contact": "Contact"
+        "contact": "Contact",
+        "cookies": "Cookies managment"
     },
     "lang": {
         "fr": "Français",
@@ -21,7 +22,7 @@
         "hu": "Magyar",
         "ro": "Română",
         "es": "Español",
-        "it":"Italiano"
+        "it": "Italiano"
     },
     "url": {
         "video-call": "visio",
@@ -31,7 +32,7 @@
         "credits": "credits"
     },
     "message": {
-      "title": "Cerere URGENTĂ de conversație video din partea lui",
-      "Message": "va invita la o videoconversatie. Intrati in dialog clicand pe link-ul urmator:"
+        "title": "Cerere URGENTĂ de conversație video din partea lui",
+        "Message": "va invita la o videoconversatie. Intrati in dialog clicand pe link-ul urmator:"
     }
 }

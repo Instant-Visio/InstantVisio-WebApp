@@ -11,7 +11,8 @@
         "personal-data": "Personenbezogene Daten",
         "blog": "Blog",
         "credits": "Nachweise",
-        "contact": "Kontaktaufnahme"
+        "contact": "Kontaktaufnahme",
+        "cookies": "Cookies managment"
     },
     "lang": {
         "fr": "Français",
@@ -21,7 +22,7 @@
         "hu": "Magyar",
         "ro": "Română",
         "es": "Español",
-        "it":"Italiano"
+        "it": "Italiano"
     },
     "url": {
         "video-call": "visio",
@@ -31,7 +32,7 @@
         "credits": "credits"
     },
     "message": {
-      "title": "DRINGENDE Anfrage für einen Videoanruf von",
-      "Message": "lädt Sie zu einem Videoanruf ein. Folgen Sie jetzt diese Link, um an diesem Anruf teilzunehmen:"
+        "title": "DRINGENDE Anfrage für einen Videoanruf von",
+        "Message": "lädt Sie zu einem Videoanruf ein. Folgen Sie jetzt diese Link, um an diesem Anruf teilzunehmen:"
     }
 }
