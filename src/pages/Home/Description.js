@@ -142,7 +142,8 @@ function Description() {
             <Baseline>
                 <Trans i18nKey="common:homeBaseline">
                     {/* prettier-ignore */}
-                    Joignez un proche en visio, en un clic, <span>gratuitement.</span>
+                    Joignez un proche en visio, en un clic,{' '}
+                    <span>gratuitement.</span>
                 </Trans>
             </Baseline>
 
@@ -160,10 +161,6 @@ function Description() {
                     <span>{t('information.steps.3')}</span>
                 </List>
             </Information>
-            <p className="details">{t('information.indications.landscape')}</p>
-            <p className="details">
-                {t('information.indications.multiple-people')}
-            </p>
         </Wrapper>
     )
 }
