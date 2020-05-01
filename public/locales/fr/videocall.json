@@ -11,7 +11,8 @@
     "permissions": {
         "dialog": {
             "title": "Permissions",
-            "description": "Pour assurer que l'appel vidéo marche, nous avons besoin des permissions suivantes:"
+            "description": "Pour assurer que l'appel vidéo marche, nous avons besoin des permissions suivantes:",
+            "autoclose": "Tout semble fonctionner, cette fenêtre via disparaitre dans quelques seconds."
         },
         "camera": {
             "granted": "L'accés à la caméra et au microphone a été autorisé.",
