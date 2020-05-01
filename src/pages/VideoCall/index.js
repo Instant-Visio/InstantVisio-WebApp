@@ -20,6 +20,7 @@ import {
     setVideoCallExited,
     toggleSupport,
 } from '../../utils/support'
+import CapabilitiesDialog from './permissions/CapabilitiesDialog'
 
 const VideoCallFrame = () => {
     const { t } = useTranslation('videocall')
@@ -200,6 +201,8 @@ const VideoCallFrame = () => {
                     </Controls>
                 )}
             </CallContainer>
+
+            <CapabilitiesDialog />
 
             {leftCallFrame && <Footer />}
         </>
