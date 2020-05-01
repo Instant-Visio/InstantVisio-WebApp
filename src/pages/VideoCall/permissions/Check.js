@@ -18,6 +18,8 @@ export const CheckItem = styled.div`
     }
 
     .spinner {
+        flex-shrink: 0;
+        flex-basis: auto;
         margin-right: 12px;
         margin-left: 4px;
         width: 30px;

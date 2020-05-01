@@ -18,10 +18,6 @@ export default function useCameraMicrophonePermission(name) {
             function (err) {
                 console.log('err', err)
                 setResult(STATE_DENIED)
-                alert(
-                    'Failed to get camera/microphone permission: ' +
-                        JSON.stringify(err)
-                )
                 // if(err === PERMISSION_DENIED) {
                 //     // Explain why you need permission and how to update the permission setting
                 // }
