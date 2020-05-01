@@ -40,6 +40,7 @@ const CapabilitiesDialog = () => {
     return (
         <Modal
             show={dialogDisplayed}
+            onHide={() => setDialogDisplay(false)}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered>
