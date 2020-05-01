@@ -13,10 +13,15 @@ const CapabilitiesDialog = () => {
     })
 
     const onCheckPass = (checkName) => {
-        setGrantedMap({
-            ...grantedMap,
-            [checkName]: true,
-        })
+        if (checksPass) {
+            return
+        }
+        if (!grantedMap[checkName]) {
+            setGrantedMap({
+                ...grantedMap,
+                [checkName]: true,
+            })
+        }
         if (Object.values(grantedMap).filter((value) => !!value)) {
             setCheckPass(true)
             setTimeout(() => {
