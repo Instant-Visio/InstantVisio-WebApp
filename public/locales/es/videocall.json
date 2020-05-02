@@ -6,5 +6,18 @@
     "participant-cam-off": "Su familiar se ha conectado perso su webcam esta apagada",
     "participant-left": "Su familiar a dejado la llamada",
     "leave": "Dejar",
-    "leave-confirmation": "Usted, ya, ha dejado la llamada."
+    "leave-confirmation": "Usted, ya, ha dejado la llamada.",
+    "help": "Help",
+    "permissions": {
+        "dialog": {
+            "title": "Capabilities verification",
+            "description": "To ensure that video call work, we are verifying the following:",
+            "autoclose": "Everything seems to work, this dialog will be dismissed in a few seconds."
+        },
+        "camera": {
+            "granted": "The camera and microphone permission has been granted.",
+            "denied": "The camera and microphone permission has been denied.",
+            "waiting": "The camera and microphone permission is needed so you contact can see and hear you."
+        }
+    }
 }
