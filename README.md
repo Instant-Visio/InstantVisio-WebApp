@@ -20,11 +20,13 @@ npm start # Run the app
 
 -   Make sure you have a correct version of `./functions/runtimeconfig.json`
 -   Your should be logged in with firebase-cli: `firebase login`
+-   Select the development project: `firebase use instantvisio-dev`
 -   The developer email should be added in firebase project in order to be able to locally run functions
 
 ```bash
 cd functions
 nvm use
 npm i
+export NODE_ENV=development
 npm run serve
 ```
