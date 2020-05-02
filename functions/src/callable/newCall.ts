@@ -9,7 +9,7 @@ import * as translations from '../translations.json'
 
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
-export const newCall = functions.https.onCall(async (data) => {
+export const newCall = functions.https.onCall(async (data, context) => {
     const { ovh, sendgrid, visio, app } = functions.config()
 
     if (isEmpty(data) || isEmpty(data.name)) {
@@ -42,6 +42,24 @@ export const newCall = functions.https.onCall(async (data) => {
     }
     if (isEmpty(ovh)) {
         console.warn('Warn: No credentials for OVH')
+    }
+
+    if (data.phone) {
+        const lastChar = data.phone.substring(data.phone.length - 1)
+        const countOfSameNbr = data.phone.split(lastChar).length - 1
+        if (countOfSameNbr > 6) {
+            console.warn(
+                'blocked number',
+                data.phone,
+                context.rawRequest.ip,
+                context.rawRequest.ips
+            )
+
+            throw new functions.https.HttpsError(
+                'failed-precondition',
+                'Blocked ip'
+            )
+        }
     }
 
     const room = await getRoomUrl(
