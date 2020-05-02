@@ -6,6 +6,25 @@ More info on the Hacking Health Camp 2020 slack, #instantvisio
 
 # Setup
 
-1. Use & setup `nvm` to use the correct node version depending of the project (functions or web app)
-2. Clone this repo and install dependencies using `npm i`
-3. Run the web app `npm start`
+## Front
+
+-   Make sure you have a correct version of `./.env.development`.
+
+```bash
+nvm use # Use correct node version
+npm i # Install dependencies
+npm start # Run the app
+```
+
+## Functions
+
+-   Make sure you have a correct version of `./functions/runtimeconfig.json`
+-   Your should be logged in with firebase-cli: `firebase login`
+-   The developer email should be added in firebase project in order to be able to locally run functions
+
+```bash
+cd functions
+nvm use
+npm i
+npm run serve
+```
