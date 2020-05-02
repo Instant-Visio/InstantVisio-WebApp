@@ -50,8 +50,7 @@
     },
     "browserslist": {
         "production": [
-            ">0.2%",
-            "not dead",
+            "since 2010",
             "not op_mini all"
         ],
         "development": [
