@@ -6,5 +6,18 @@
     "participant-cam-off": "Ihr Kontakt ist der Videoanruf beigetreten, aber seine Webcam ist ausgeschaltet.",
     "participant-left": "Ihr Kontakt hat den Anruf verlassen.",
     "leave": "Verlassen",
-    "leave-confirmation": "Sie haben den Anruf verlassen."
+    "leave-confirmation": "Sie haben den Anruf verlassen.",
+    "help": "Help",
+    "permissions": {
+        "dialog": {
+            "title": "Capabilities verification",
+            "description": "To ensure that video call work, we are verifying the following:",
+            "autoclose": "Everything seems to work, this dialog will be dismissed in a few seconds."
+        },
+        "camera": {
+            "granted": "The camera and microphone permission has been granted.",
+            "denied": "The camera and microphone permission has been denied.",
+            "waiting": "The camera and microphone permission is needed so you contact can see and hear you."
+        }
+    }
 }

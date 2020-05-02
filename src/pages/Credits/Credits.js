@@ -24,7 +24,7 @@ const CreditsStyled = styled.div`
         text-align: left;
         > div {
             margin: 0 ${({ theme }) => theme.spacing.XXXL};
-            &:not(:last-child){
+            &:not(:last-child) {
                 margin-bottom: ${({ theme }) => theme.spacing.XXL};
             }
         }

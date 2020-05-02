@@ -6,5 +6,18 @@
     "participant-cam-off": "Apropiatul dumneavoastră s-a conectat la apel, dar camera sa web este închisă.",
     "participant-left": "Apropiatul dumneavoastră s-a deconectat.",
     "leave": "Închidere",
-    "leave-confirmation": "V-ați deconectat de la apel."
+    "leave-confirmation": "V-ați deconectat de la apel.",
+    "help": "Help",
+    "permissions": {
+        "dialog": {
+            "title": "Capabilities verification",
+            "description": "To ensure that video call work, we are verifying the following:",
+            "autoclose": "Everything seems to work, this dialog will be dismissed in a few seconds."
+        },
+        "camera": {
+            "granted": "The camera and microphone permission has been granted.",
+            "denied": "The camera and microphone permission has been denied.",
+            "waiting": "The camera and microphone permission is needed so you contact can see and hear you."
+        }
+    }
 }

@@ -15,7 +15,7 @@ const List = styled(BaseList)`
         overflow: hidden;
         transition: all 0.3s ease-in-out;
         ${({ collapsed }) =>
-        !collapsed &&
+            !collapsed &&
             css`
                 max-height: 300px;
                 margin-top: ${({ theme }) => theme.spacing.M};
@@ -124,7 +124,7 @@ const Arrow = styled(BaseArrow)`
         margin-bottom: 0.5rem;
         transition: transform 0.3s ease-in-out;
         ${({ collapsed }) =>
-        !collapsed &&
+            !collapsed &&
             css`
                 transform: rotate(45deg);
             `}
@@ -141,8 +141,9 @@ function Description() {
             <Logo />
             <Baseline>
                 <Trans i18nKey="common:homeBaseline">
+                    Joignez un proche en visio, en un clic,
                     {/* prettier-ignore */}
-                    Joignez un proche en visio, en un clic, <span>gratuitement.</span>
+                    <span>gratuitement.</span>
                 </Trans>
             </Baseline>
 
