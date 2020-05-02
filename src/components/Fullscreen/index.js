@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import FullscreenIcon from '@material-ui/icons/Fullscreen'
-import FullscreenExitIcon from '@material-ui/icons/FullscreenExit'
+
+import Icon from '@mdi/react'
+import { mdiFullscreen, mdiFullscreenExit } from '@mdi/js'
 
 import FullscreenWrapper from './Fullscreen.js'
 
 const Fullscreen = () => {
-    const [ active, setActive ] = useState(false)
+    const [active, setActive] = useState(false)
 
     const toggleFullScreen = () => {
         if (!document.fullscreenElement) {
@@ -20,10 +21,12 @@ const Fullscreen = () => {
     }
 
     return (
-        <FullscreenWrapper
-            onClick={toggleFullScreen}
-        >
-            {active ? <FullscreenExitIcon /> : <FullscreenIcon />}
+        <FullscreenWrapper onClick={toggleFullScreen}>
+            {active ? (
+                <Icon size={2} path={mdiFullscreenExit} />
+            ) : (
+                <Icon size={2} path={mdiFullscreen} />
+            )}
         </FullscreenWrapper>
     )
 }
