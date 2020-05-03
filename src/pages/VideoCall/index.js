@@ -3,12 +3,15 @@ import { useParams } from 'react-router-dom'
 import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import VideocamIcon from '@material-ui/icons/Videocam'
-import VideocamOffIcon from '@material-ui/icons/VideocamOff'
-import HelpIcon from '@material-ui/icons/LiveHelp'
-import MicIcon from '@material-ui/icons/Mic'
-import MicOffIcon from '@material-ui/icons/MicOff'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import Icon from '@mdi/react'
+import {
+    mdiVideo,
+    mdiVideoOff,
+    mdiHelpCircle,
+    mdiMicrophone,
+    mdiMicrophoneOff,
+    mdiExitToApp,
+} from '@mdi/js'
 
 import dailyCssText from './dailyCssText'
 import { CallContainer, IframeContainer, Controls } from './VideoCall'
@@ -174,7 +177,11 @@ const VideoCallFrame = () => {
                                     green: camOn,
                                     red: !camOn,
                                 })}>
-                                {camOn ? <VideocamIcon /> : <VideocamOffIcon />}
+                                {camOn ? (
+                                    <Icon size={1} path={mdiVideo} />
+                                ) : (
+                                    <Icon size={1} path={mdiVideoOff} />
+                                )}
                                 <p>{t('cam')}</p>
                             </div>
                             <div
@@ -184,17 +191,21 @@ const VideoCallFrame = () => {
                                     green: audioOn,
                                     red: !audioOn,
                                 })}>
-                                {audioOn ? <MicIcon /> : <MicOffIcon />}
+                                {audioOn ? (
+                                    <Icon size={1} path={mdiMicrophone} />
+                                ) : (
+                                    <Icon size={1} path={mdiMicrophoneOff} />
+                                )}
                                 <p>{t('audio')}</p>
                             </div>
                         </div>
                         <div className="controlContainer">
                             <div ref={leaving} className="control red leave">
-                                <ExitToAppIcon />
+                                <Icon size={1} path={mdiExitToApp} />
                                 <p>{t('leave')}</p>
                             </div>
                             <div onClick={toggleSupport} className="control">
-                                <HelpIcon />
+                                <Icon size={1} path={mdiHelpCircle} />
                                 <p>{t('help')}</p>
                             </div>
                         </div>
