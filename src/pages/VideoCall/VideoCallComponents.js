@@ -119,7 +119,7 @@ export const IframeContainer = styled.div`
     }
 `
 
-export const Controls = styled.div`
+export const ControlsContainer = styled.div`
     padding: 0 ${({ theme }) => theme.spacing.XXL};
     width: 100vw;
     height: 80px;

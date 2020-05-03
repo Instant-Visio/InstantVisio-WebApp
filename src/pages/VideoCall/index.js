@@ -2,30 +2,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
-import classNames from 'classnames'
-import Icon from '@mdi/react'
-import {
-    mdiVideo,
-    mdiVideoOff,
-    mdiHelpCircle,
-    mdiMicrophone,
-    mdiMicrophoneOff,
-    mdiExitToApp,
-} from '@mdi/js'
 
 import dailyCssText from './dailyCssText'
-import { CallContainer, IframeContainer, Controls } from './VideoCall'
+import { CallContainer } from './VideoCallComponents'
 import Fullscreen from '../../components/Fullscreen'
 import sendCallLogs from '../../actions/sendCallLogs'
 import Footer from '../../components/Footer'
-import {
-    hideSupport,
-    setVideoCallExited,
-    toggleSupport,
-} from '../../utils/support'
+import { hideSupport, setVideoCallExited } from '../../utils/support'
 import CapabilitiesDialog from './permissions/CapabilitiesDialog'
+import Controls from './Controls'
+import VideoCallFrame from './VideoCallFrame'
 
-const VideoCallFrame = () => {
+const VideoCallPage = () => {
     const { t } = useTranslation('videocall')
 
     const [camOn, setCamOn] = useState(true)
@@ -33,46 +21,58 @@ const VideoCallFrame = () => {
     const [participantStatus, setParticipantStatus] = useState('')
     const [participantNumber, setParticipantNumber] = useState(0)
     const [leftCallFrame, setLeftCallFrame] = useState(false)
-    let { videoName } = useParams()
+    const { videoName } = useParams()
 
     const url = `https://instantvisio.daily.co/${videoName}`
 
     const videoFrame = useRef(null)
-    const cam = useRef(null)
-    const audio = useRef(null)
-    const leaving = useRef(null)
+    const dailyRef = useRef(null)
 
-    // to display confirmation message
-    // when user attempts leaving page
-    const leavingCallPage = (event) => {
-        // Cancel the event as stated by the standard.
-        event.preventDefault()
-        // Chrome requires returnValue to be set.
-        event.returnValue = ''
+    const cameraClick = () => {
+        if (!dailyRef.current) return
+        dailyRef.current.setLocalVideo(!dailyRef.current.localVideo())
+    }
+    const audioClick = () => {
+        if (!dailyRef.current) return
+        dailyRef.current.setLocalAudio(!dailyRef.current.localAudio())
+    }
+    const onLeaveClick = () => {
+        if (!dailyRef.current) return
+
+        dailyRef.current.leave()
+        setVideoCallExited()
+        setLeftCallFrame(true)
     }
 
     useEffect(() => {
-        const daily = DailyIframe.wrap(videoFrame.current, {
+        if (dailyRef.current) {
+            return
+        }
+        dailyRef.current = DailyIframe.wrap(videoFrame.current, {
             customLayout: true,
         })
 
-        daily.join({
+        dailyRef.current.join({
             url,
             cssText: dailyCssText,
         })
         hideSupport()
 
         const roomLogsToSend = (event) => {
+            // noinspection JSIgnoredPromiseFromCall
             sendCallLogs(videoName, event)
         }
 
         const eventActions = (event) => {
+            // noinspection JSIgnoredPromiseFromCall
             sendCallLogs(videoName, event)
 
-            setCamOn(daily.localVideo())
-            setAudioOn(daily.localAudio())
+            setCamOn(dailyRef.current.localVideo())
+            setAudioOn(dailyRef.current.localAudio())
 
-            const participantsLength = Object.keys(daily.participants()).length
+            const participantsLength = Object.keys(
+                dailyRef.current.participants()
+            ).length
 
             if (participantsLength === 2 && event && !event.participant.local) {
                 setParticipantStatus(
@@ -87,15 +87,7 @@ const VideoCallFrame = () => {
             setParticipantNumber(participantsLength)
         }
 
-        cam.current.addEventListener('click', () => {
-            daily.setLocalVideo(!daily.localVideo())
-        })
-
-        audio.current.addEventListener('click', () => {
-            daily.setLocalAudio(!daily.localAudio())
-        })
-
-        daily
+        dailyRef.current
             .on('loading', roomLogsToSend)
             .on('loaded', eventActions)
             .on('started-camera', roomLogsToSend)
@@ -107,23 +99,23 @@ const VideoCallFrame = () => {
             .on('participant-joined', eventActions)
             .on('participant-updated', eventActions)
             .on('network-connection', roomLogsToSend)
-            .on('network-quality-change', roomLogsToSend)
             .on('participant-left', (event) => {
+                // noinspection JSIgnoredPromiseFromCall
                 sendCallLogs(videoName, event)
                 setParticipantStatus(
                     !event.participant.local &&
-                        Object.keys(daily.participants()).length < 2
+                        Object.keys(dailyRef.current.participants()).length < 2
                         ? t('participant-left')
                         : ''
                 )
             })
             .on('left-meeting', roomLogsToSend)
 
-        leaving.current.addEventListener('click', () => {
-            daily.leave()
-            setVideoCallExited()
-            setLeftCallFrame(true)
-        })
+        const leavingCallPage = (event) => {
+            // Ask the browser to confirm exiting the call
+            event.preventDefault()
+            event.returnValue = ''
+        }
 
         window.addEventListener('beforeunload', leavingCallPage)
 
@@ -136,80 +128,22 @@ const VideoCallFrame = () => {
         <>
             <CallContainer>
                 <Fullscreen />
-                <IframeContainer>
-                    {!leftCallFrame && (
-                        <iframe
-                            className="iframe"
-                            title="video call iframe"
-                            ref={videoFrame}
-                            allow="microphone; camera; autoplay"
-                            allowFullScreen
-                        />
-                    )}
-                    {!camOn && !leftCallFrame && (
-                        <div
-                            className={classNames({
-                                'mute-camera': true,
-                                'mute-camera-two': participantNumber < 3,
-                                'mute-camera-three': participantNumber === 3,
-                                'mute-camera-four': participantNumber === 4,
-                            })}>
-                            {t('turn-on-cam-message')}
-                        </div>
-                    )}
-
-                    {!leftCallFrame && (
-                        <div className="waiting-participant">
-                            {participantStatus}
-                        </div>
-                    )}
-
-                    {leftCallFrame && <div>{t('leave-confirmation')}</div>}
-                </IframeContainer>
+                <VideoCallFrame
+                    participantsNumber={participantNumber}
+                    participantStatus={participantStatus}
+                    hasLeft={leftCallFrame}
+                    micOn={audioOn}
+                    videoFrame={videoFrame}
+                />
 
                 {!leftCallFrame && (
-                    <Controls>
-                        <div className="controlContainer">
-                            <div
-                                ref={cam}
-                                className={classNames({
-                                    control: true,
-                                    green: camOn,
-                                    red: !camOn,
-                                })}>
-                                {camOn ? (
-                                    <Icon size={1} path={mdiVideo} />
-                                ) : (
-                                    <Icon size={1} path={mdiVideoOff} />
-                                )}
-                                <p>{t('cam')}</p>
-                            </div>
-                            <div
-                                ref={audio}
-                                className={classNames({
-                                    control: true,
-                                    green: audioOn,
-                                    red: !audioOn,
-                                })}>
-                                {audioOn ? (
-                                    <Icon size={1} path={mdiMicrophone} />
-                                ) : (
-                                    <Icon size={1} path={mdiMicrophoneOff} />
-                                )}
-                                <p>{t('audio')}</p>
-                            </div>
-                        </div>
-                        <div className="controlContainer">
-                            <div ref={leaving} className="control red leave">
-                                <Icon size={1} path={mdiExitToApp} />
-                                <p>{t('leave')}</p>
-                            </div>
-                            <div onClick={toggleSupport} className="control">
-                                <Icon size={1} path={mdiHelpCircle} />
-                                <p>{t('help')}</p>
-                            </div>
-                        </div>
-                    </Controls>
+                    <Controls
+                        camOn={camOn}
+                        onCamClick={cameraClick}
+                        micOn={audioOn}
+                        onMicClick={audioClick}
+                        onLeaveClick={onLeaveClick}
+                    />
                 )}
             </CallContainer>
 
@@ -220,4 +154,4 @@ const VideoCallFrame = () => {
     )
 }
 
-export default VideoCallFrame
+export default VideoCallPage
