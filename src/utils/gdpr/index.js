@@ -1,7 +1,8 @@
 import * as consents from './consents'
 import { CONSENT_NECESSARY } from './constants'
 
-const hasCookiebot = () => window.Cookiebot
+export const hasCookiebot = () => window.Cookiebot
+export const getCookieBot = hasCookiebot
 const EVENT_LISTENER_ACCEPT = 'accept'
 const EVENT_LISTENER_DECLINE = 'decline'
 
@@ -10,7 +11,7 @@ const listener = (eventListenerType) => {
         return
     }
 
-    const cookiebotConsents = Object.entries(window.Cookiebot.consent)
+    const cookiebotConsents = Object.entries(getCookieBot().consent)
     const ivConsents = Object.values(consents)
 
     if (
@@ -50,6 +51,6 @@ export const gdprHandler = () => {
 
 export const showPreferencesDialog = () => {
     if (hasCookiebot()) {
-        window.Cookiebot.show()
+        getCookieBot().show()
     }
 }

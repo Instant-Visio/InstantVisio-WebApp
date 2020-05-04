@@ -3,12 +3,12 @@ import Icon from '@mdi/react'
 import { mdiCheckCircle, mdiAlertCircle } from '@mdi/js'
 import styled from 'styled-components'
 import { Spinner } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
 import {
     STATE_DENIED,
     STATE_GRANTED,
     STATE_WAITING,
-} from '../../../hooks/useCameraMicrophonePermission'
-import { useTranslation } from 'react-i18next'
+} from './PermissionConstants'
 
 export const CheckItem = styled.div`
     display: flex;

@@ -24,10 +24,6 @@ const CapabilitiesDialog = ({ onGranted, onSkip }) => {
                 [checkName]: true,
             })
         }
-        console.log(
-            grantedMap,
-            Object.values(grantedMap).filter((value) => !!value)
-        )
         if (
             Object.values(grantedMap).filter((value) => !!value).length ===
             Object.values(grantedMap).length

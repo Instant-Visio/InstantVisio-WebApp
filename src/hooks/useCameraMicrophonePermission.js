@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-
-export const STATE_WAITING = 0
-export const STATE_GRANTED = 1
-export const STATE_DENIED = 2
+import {
+    STATE_DENIED,
+    STATE_GRANTED,
+    STATE_WAITING,
+} from '../pages/VideoCall/permissions/PermissionConstants'
 
 export default function useCameraMicrophonePermission(name) {
     const [result, setResult] = React.useState(STATE_WAITING)
