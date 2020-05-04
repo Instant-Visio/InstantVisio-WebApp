@@ -27,6 +27,5 @@ npm start # Run the app
 cd functions
 nvm use
 npm i
-export NODE_ENV=development
 npm run serve
 ```
