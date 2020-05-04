@@ -26,11 +26,7 @@ const Controls = ({ camOn, onCamClick, micOn, onMicClick, onLeaveClick }) => {
                         green: camOn,
                         red: !camOn,
                     })}>
-                    {camOn ? (
-                        <Icon size={1} path={mdiVideo} />
-                    ) : (
-                        <Icon size={1} path={mdiVideoOff} />
-                    )}
+                    <Icon size={1} path={camOn ? mdiVideo : mdiVideoOff} />
                     <p>{t('cam')}</p>
                 </div>
                 <div
@@ -40,11 +36,10 @@ const Controls = ({ camOn, onCamClick, micOn, onMicClick, onLeaveClick }) => {
                         green: micOn,
                         red: !micOn,
                     })}>
-                    {micOn ? (
-                        <Icon size={1} path={mdiMicrophone} />
-                    ) : (
-                        <Icon size={1} path={mdiMicrophoneOff} />
-                    )}
+                    <Icon
+                        size={1}
+                        path={micOn ? mdiMicrophone : mdiMicrophoneOff}
+                    />
                     <p>{t('audio')}</p>
                 </div>
             </div>
