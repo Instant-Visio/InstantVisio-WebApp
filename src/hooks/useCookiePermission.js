@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getCookieBot, hasCookiebot } from '../utils/gdpr'
 import {
     STATE_DENIED,
