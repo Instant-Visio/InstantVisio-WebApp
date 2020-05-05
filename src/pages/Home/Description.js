@@ -41,6 +41,13 @@ const P = styled.p`
         justify-content: space-between;
         align-items: center;
     }
+
+    ${SCREEN.TABLET} {
+        span:first-child {
+            width: 100%;
+            text-align: center;
+        }
+    }
 `
 
 const Wrapper = styled.div`
