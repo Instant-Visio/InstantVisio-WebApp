@@ -20,8 +20,12 @@ function Logo() {
     }
 
     return (
-        <Link to="/">
-            <img src={logoToChoose} alt={t('logo.alt')} />
+        <Link to="/" className="logo-link">
+            <img
+                src={logoToChoose}
+                alt={t('logo.alt')}
+                className="logo-picture"
+            />
         </Link>
     )
 }

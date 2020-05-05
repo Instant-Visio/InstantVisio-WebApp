@@ -11,5 +11,5 @@ export default function useDetectMobile() {
             window.removeEventListener('resize', handleResize)
         }
     }, [])
-    return width < 768
+    return width < 1180
 }
