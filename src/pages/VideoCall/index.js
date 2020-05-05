@@ -14,6 +14,7 @@ import Controls from './Controls'
 import VideoCallFrame from './VideoCallFrame'
 import Dialog from '../../components/Dialog/Dialog'
 import { stringHash } from '../../utils/string'
+import ErrorDialog from './ErrorDialog'
 
 const VideoCallPage = () => {
     const { t } = useTranslation('videocall')
@@ -164,13 +165,7 @@ const VideoCallPage = () => {
             </CallContainer>
 
             {error && (
-                <Dialog
-                    show={!!error}
-                    title={t('errors.title')}
-                    onHide={() => setError(null)}>
-                    <p>{t('errors.desc')}</p>
-                    <p>{t(`errors.errors.${error.code}`)}</p>
-                </Dialog>
+                <ErrorDialog error={error} onHide={() => setError(null)} />
             )}
 
             <CapabilitiesDialog />

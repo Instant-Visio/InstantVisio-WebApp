@@ -25,7 +25,12 @@
         "desc": "Une erreur est survenue qui vous empêchera probablement de voir votre proche, voici le détail:",
         "errors": {
             "error-1655267250": "L'appel que vous avez rejoins a expiré (après 2 heures).",
-            "camera-error--621623973": "L'accés à la caméra ou au microphone n'a pas été autorisé."
+            "error--1494481250": "L'appel que vous avez rejoins n'est plus disponible (après 2 heures).",
+            "error-1189215202": "L'accés internet semble être indisponible ou pourrit.",
+            "error-763909797": "Une erreur inconnue est survenue",
+            "error--140619965": "L'appel est véroullé (trop de personne l'on rejoins ou il a expiré, en vrai j'en sais rien)",
+            "camera-error--621623973": "L'accés à la caméra ou au microphone n'a pas été autorisé.",
+            "camera-error--1412228987": "La caméra ou le microphone ont remonté un problème, c'est surement liée à votre périphérique."
         }
     }
 }
