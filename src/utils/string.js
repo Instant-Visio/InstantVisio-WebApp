@@ -1,5 +1,3 @@
-import React from 'react'
-
 // from https://stackoverflow.com/a/7616484/1377145
 export const stringHash = (input) => {
     if (!input || input.length === 0) return '0'

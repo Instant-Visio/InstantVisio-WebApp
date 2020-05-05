@@ -12,7 +12,6 @@ import { hideSupport, setVideoCallExited } from '../../utils/support'
 import CapabilitiesDialog from './permissions/CapabilitiesDialog'
 import Controls from './Controls'
 import VideoCallFrame from './VideoCallFrame'
-import Dialog from '../../components/Dialog/Dialog'
 import { stringHash } from '../../utils/string'
 import ErrorDialog from './ErrorDialog'
 
