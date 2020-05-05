@@ -19,5 +19,13 @@
             "denied": "The camera and microphone permission has been denied.",
             "waiting": "The camera and microphone permission is needed so you contact can see and hear you."
         }
+    },
+    "errors": {
+        "title": "An error has appeared",
+        "desc": "An error has appeared that will probably prevent you to see your loved one, here is the detail of the error:",
+        "errors": {
+            "error-1655267250": "The call you're trying to join has expired (after 2 hours).",
+            "camera-error--621623973": "The camera or microphone has not been allowed."
+        }
     }
 }

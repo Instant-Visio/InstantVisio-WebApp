@@ -19,5 +19,13 @@
             "denied": "L'accés à la caméra et au microphone a été bloqué.",
             "waiting": "Nous avons besoin d'accéder à la caméra et au microphone pour que votre correspondant puisse vous voir et vous entendre."
         }
+    },
+    "errors": {
+        "title": "Une erreur est survenue",
+        "desc": "Une erreur est survenue qui vous empêchera probablement de voir votre proche, voici le détail:",
+        "errors": {
+            "error-1655267250": "L'appel que vous avez rejoins a expiré (après 2 heures).",
+            "camera-error--621623973": "L'accés à la caméra ou au microphone n'a pas été autorisé."
+        }
     }
 }

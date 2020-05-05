@@ -12,6 +12,8 @@ import { hideSupport, setVideoCallExited } from '../../utils/support'
 import CapabilitiesDialog from './permissions/CapabilitiesDialog'
 import Controls from './Controls'
 import VideoCallFrame from './VideoCallFrame'
+import Dialog from '../../components/Dialog/Dialog'
+import { stringHash } from '../../utils/string'
 
 const VideoCallPage = () => {
     const { t } = useTranslation('videocall')
@@ -21,6 +23,7 @@ const VideoCallPage = () => {
     const [participantStatus, setParticipantStatus] = useState('')
     const [participantNumber, setParticipantNumber] = useState(0)
     const [leftCallFrame, setLeftCallFrame] = useState(false)
+    const [error, setError] = useState(null)
     const { videoName } = useParams()
 
     const url = `https://instantvisio.daily.co/${videoName}`
@@ -64,7 +67,6 @@ const VideoCallPage = () => {
         }
 
         const eventActions = (event) => {
-            // noinspection JSIgnoredPromiseFromCall
             sendCallLogs(videoName, event)
 
             setCamOn(dailyRef.current.localVideo())
@@ -87,14 +89,28 @@ const VideoCallPage = () => {
             setParticipantNumber(participantsLength)
         }
 
+        const onError = (event) => {
+            console.error(event)
+            const errorCode =
+                typeof event.errorMsg === 'object'
+                    ? event.errorMsg.errorMsg
+                    : event.errorMsg
+            setError({
+                code: `${event.action}-${stringHash(errorCode)}`,
+                msg: errorCode,
+            })
+            // noinspection JSIgnoredPromiseFromCall
+            sendCallLogs(videoName, event)
+        }
+
         dailyRef.current
             .on('loading', roomLogsToSend)
             .on('loaded', eventActions)
             .on('started-camera', roomLogsToSend)
-            .on('camera-error', roomLogsToSend)
             .on('active-speaker-change', roomLogsToSend)
             .on('active-speaker-mode-change', roomLogsToSend)
-            .on('error', roomLogsToSend)
+            .on('camera-error', onError)
+            .on('error', onError)
             .on('joined-meeting', eventActions)
             .on('participant-joined', eventActions)
             .on('participant-updated', eventActions)
@@ -146,6 +162,16 @@ const VideoCallPage = () => {
                     />
                 )}
             </CallContainer>
+
+            {error && (
+                <Dialog
+                    show={!!error}
+                    title={t('errors.title')}
+                    onHide={() => setError(null)}>
+                    <p>{t('errors.desc')}</p>
+                    <p>{t(`errors.errors.${error.code}`)}</p>
+                </Dialog>
+            )}
 
             <CapabilitiesDialog />
 
