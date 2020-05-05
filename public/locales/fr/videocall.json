@@ -15,9 +15,15 @@
             "autoclose": "Tout semble fonctionner, cette fenêtre va disparaitre dans quelques secondes."
         },
         "camera": {
-            "granted": "L'accés à la caméra et au microphone a été autorisé.",
-            "denied": "L'accés à la caméra et au microphone a été bloqué.",
+            "granted": "L'accès à la caméra et au microphone a été autorisé.",
+            "denied": "L'accès à la caméra et au microphone a été bloqué.",
             "waiting": "Nous avons besoin d'accéder à la caméra et au microphone pour que votre correspondant puisse vous voir et vous entendre."
+        },
+        "cookie": {
+            "granted": "L'accès aux cookies nécessaires a été autorisé.",
+            "denied": "L'accès aux cookies nécessaires a été refusé.",
+            "waiting": "L'accès aux cookie nécessaire est essentiel pour que notre partenaire de visio établisse l'appel.",
+            "renew": "Ré-ouvrir la fenêtre de cookie"
         }
     }
 }

@@ -3,13 +3,15 @@ import { Modal } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import CameraMicrophonePermission from './CameraMicrophonePermission'
 import styled from 'styled-components'
+import CookiePermission from './CookiePermission'
 
-const CapabilitiesDialog = () => {
+const CapabilitiesDialog = ({ onGranted, onSkip }) => {
     const { t } = useTranslation('videocall')
     const [dialogDisplayed, setDialogDisplay] = useState(true)
     const [checksPass, setCheckPass] = useState(false)
     const [grantedMap, setGrantedMap] = useState({
         cameraMicrophoneGranted: false,
+        cookieGranted: false,
     })
 
     const onCheckPass = (checkName) => {
@@ -22,12 +24,21 @@ const CapabilitiesDialog = () => {
                 [checkName]: true,
             })
         }
-        if (Object.values(grantedMap).filter((value) => !!value)) {
+        if (
+            Object.values(grantedMap).filter((value) => !!value).length ===
+            Object.values(grantedMap).length
+        ) {
             setCheckPass(true)
             setTimeout(() => {
                 setDialogDisplay(false)
+                onGranted && onGranted()
             }, 5000)
         }
+    }
+
+    const userHideDialog = () => {
+        setDialogDisplay(false)
+        onSkip && onSkip()
     }
 
     useEffect(() => {
@@ -45,7 +56,7 @@ const CapabilitiesDialog = () => {
     return (
         <Modal
             show={dialogDisplayed}
-            onHide={() => setDialogDisplay(false)}
+            onHide={userHideDialog}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered>
@@ -59,6 +70,11 @@ const CapabilitiesDialog = () => {
                 <CameraMicrophonePermission
                     onGranted={() => {
                         onCheckPass('cameraMicrophoneGranted')
+                    }}
+                />
+                <CookiePermission
+                    onGranted={() => {
+                        onCheckPass('cookieGranted')
                     }}
                 />
                 {checksPass && (
