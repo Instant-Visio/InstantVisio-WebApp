@@ -4,7 +4,7 @@ import VideoCallPage from './index'
 import Footer from '../../components/Footer'
 import { CallContainer } from './VideoCallComponents'
 
-const VideoCallPrecheck = ({}) => {
+const VideoCallPrecheck = () => {
     const [checkPass, setCheckPass] = useState(false)
 
     if (checkPass) {

@@ -19,5 +19,11 @@
             "denied": "The camera and microphone permission has been denied.",
             "waiting": "The camera and microphone permission is needed so you contact can see and hear you."
         }
+    },
+    "cookie": {
+        "granted": "The cookie permission has been granted.",
+        "denied": "The cookie permission has been denied.",
+        "waiting": "The necessary cookie permission is needed for our video call third party to establish the call.",
+        "renew": "Re-open cookie window"
     }
 }
