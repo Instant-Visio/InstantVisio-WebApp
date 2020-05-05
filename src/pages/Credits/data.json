@@ -1,7 +1,7 @@
 {
     "creators":[
        {
-          "name":"Stéphan Luçon",
+          "name":"Stéphane Luçon",
           "link":"https://fr.linkedin.com/in/stephanelucon"
        }
     ],
@@ -19,8 +19,16 @@
           "link":"http://twitter.com/hugogresse"
        },
        {
-          "name":"Stéphan Luçon",
+          "name":"Stéphane Luçon",
           "link":"https://fr.linkedin.com/in/stephanelucon"
+       },
+       {
+          "name":"Dominique Kanga",
+          "link":"https://www.linkedin.com/in/dominique-bernard-kanga-19214714a/"
+       },
+       {
+          "name":"Mattia Primavera",
+          "link":"https://www.linkedin.com/in/mattia-primavera/"
        }
     ],
     "ux-designers":[
@@ -31,7 +39,12 @@
        {
           "name":"Antoine Deglesne",
           "link":"https://fr.linkedin.com/in/antoinedeglesne"
+       },
+       {
+          "name":"Johan Ayache",
+          "link":"https://www.linkedin.com/in/ayachejohan/"
        }
+
     ],
     "graphic-designers":[
        {
@@ -42,11 +55,23 @@
     "partners":[
        {
           "name":"Daily.co",
-          "link":"https://www.daily.co3"
+          "link":"https://www.daily.co"
        },
        {
           "name":"OVHcloud",
           "link":"https://www.ovh.com"
+       },
+       {
+          "name":"SendGrid",
+          "link":"https://www.sendgrid.com"
+       },
+       {
+          "name":"Twilio",
+          "link":"https://www.twilio.com"
+       },
+       {
+          "name":"Crisp",
+          "link":"https://app.crisp.chat/"
        }
     ],
     "translator":[
