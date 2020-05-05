@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getCookieBot, hasCookiebot } from '../utils/gdpr'
 import {
     STATE_DENIED,
@@ -7,7 +7,7 @@ import {
 } from '../pages/VideoCall/permissions/PermissionConstants'
 
 export default function useCookiePermission(name) {
-    const [result, setResult] = React.useState(STATE_WAITING)
+    const [result, setResult] = useState(STATE_WAITING)
 
     useEffect(() => {
         if (window.location.hostname === 'localhost') {
