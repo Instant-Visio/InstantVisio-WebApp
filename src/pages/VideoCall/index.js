@@ -9,7 +9,6 @@ import Fullscreen from '../../components/Fullscreen'
 import sendCallLogs from '../../actions/sendCallLogs'
 import Footer from '../../components/Footer'
 import { hideSupport, setVideoCallExited } from '../../utils/support'
-import CapabilitiesDialog from './permissions/CapabilitiesDialog'
 import Controls from './Controls'
 import VideoCallFrame from './VideoCallFrame'
 import { stringHash } from '../../utils/string'
@@ -163,8 +162,6 @@ const VideoCallPage = () => {
             {error && (
                 <ErrorDialog error={error} onHide={() => setError(null)} />
             )}
-
-            <CapabilitiesDialog />
 
             {leftCallFrame && <Footer />}
         </>

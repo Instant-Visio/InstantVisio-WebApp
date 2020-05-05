@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import './App.scss'
 import {
     Home,
-    VideoCall,
     LegalMentions,
     PersonalData,
     Blog,
@@ -13,6 +12,7 @@ import {
     NotFound,
 } from '../../pages'
 import { gdprHandler } from '../../utils/gdpr'
+import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
 
 const App = () => {
     const { t } = useTranslation()
@@ -46,7 +46,7 @@ const App = () => {
                 <Route path="/" exact component={Home} />
                 <Route
                     path={`/${t('url.video-call')}/:videoName`}
-                    component={VideoCall}
+                    component={VideoCallPrecheck}
                 />
                 <Route
                     path={`/${t('url.legal-mentions')}`}
