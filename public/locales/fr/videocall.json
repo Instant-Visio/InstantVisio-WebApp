@@ -24,13 +24,13 @@
         "title": "Une erreur est survenue",
         "desc": "Une erreur est survenue qui vous empêchera probablement de voir votre proche, voici le détail:",
         "errors": {
-            "error-1655267250": "L'appel que vous avez rejoins a expiré (après 2 heures).",
-            "error--1494481250": "L'appel que vous avez rejoins n'est plus disponible (après 2 heures).",
-            "error-1189215202": "L'accés internet semble être indisponible ou pourrit.",
-            "error-763909797": "Une erreur inconnue est survenue",
-            "error--140619965": "L'appel est véroullé (trop de personne l'on rejoins ou il a expiré, en vrai j'en sais rien)",
-            "camera-error--621623973": "L'accés à la caméra ou au microphone n'a pas été autorisé.",
-            "camera-error--1412228987": "La caméra ou le microphone ont remonté un problème, c'est surement liée à votre périphérique."
+            "error-1655267250": "The call you're trying to join does not exist or has expired (after 2 hours).",
+            "error--1494481250": "The call you're trying to join does is no longer available (after 2 hours).",
+            "error-1189215202": "No internet available or stable.",
+            "error-763909797": "An unknown error happened during the call.",
+            "error--140619965": "The call is now locked (too much people or expired after 2 hours).",
+            "camera-error--621623973": "The camera or microphone has not been allowed.",
+            "camera-error--1412228987": "The camera or microphone reported an error (hardware or software issue on your device)."
         }
     }
 }

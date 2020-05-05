@@ -91,10 +91,7 @@ const VideoCallPage = () => {
 
         const onError = (event) => {
             console.error(event)
-            const errorCode =
-                typeof event.errorMsg === 'object'
-                    ? event.errorMsg.errorMsg
-                    : event.errorMsg
+            const errorCode = event.errorMsg.errorMsg || event.errorMsg
             setError({
                 code: `${event.action}-${stringHash(errorCode)}`,
                 msg: errorCode,
