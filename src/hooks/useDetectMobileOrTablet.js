@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function useDetectMobile() {
+export default function useDetectMobileOrTablet() {
     const [width, setWidth] = useState(window.innerWidth)
     useEffect(() => {
         const handleResize = () => {

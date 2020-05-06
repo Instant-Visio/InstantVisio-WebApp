@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import color from 'color'
 import { useTranslation, Trans } from 'react-i18next'
@@ -6,8 +6,7 @@ import { SCREEN } from '../../styles/theme'
 import BaseList from '../../components/List'
 import Logo from '../../components/Logo'
 import BaseArrow from '../../components/Arrow'
-import { useState } from 'react'
-import useDetectMobile from '../../hooks/useDetectMobile'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
 const List = styled(BaseList)`
     ${SCREEN.MOBILE_AND_TABLET} {
@@ -138,7 +137,7 @@ const Arrow = styled(BaseArrow)`
 
 function Description() {
     const { t } = useTranslation(['home'])
-    const isMobile = useDetectMobile()
+    const isMobile = useDetectMobileOrTablet()
     const [collapsed, setCollapsed] = useState(true)
 
     return (
