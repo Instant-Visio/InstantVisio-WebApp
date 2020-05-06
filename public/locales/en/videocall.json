@@ -27,14 +27,14 @@
         }
     },
     "errors": {
-        "title": "An error has appeared",
-        "desc": "An error has appeared that will probably prevent you to see your loved one, here is the detail of the error:",
+        "title": "Something didn't work",
+        "desc": "An error occured and will probably prevent you to see your contact, here is the detail of the error:",
         "errors": {
-            "error-1655267250": "The call you're trying to join does not exist or has expired (after 2 hours).",
-            "error--1494481250": "The call you're trying to join does is no longer available (after 2 hours).",
-            "error-1189215202": "No internet available or stable.",
+            "error-1655267250": "The call you're trying to join does not exist or has expired.",
+            "error--1494481250": "The call you're trying to join is no longer available.",
+            "error-1189215202": "Unstable Internet access",
             "error-763909797": "An unknown error happened during the call.",
-            "error--140619965": "The call is now locked (too much people or expired after 2 hours).",
+            "error--140619965": "The call is now locked (too many people already joined or call has expired).",
             "camera-error--621623973": "The camera or microphone has not been allowed.",
             "camera-error--1412228987": "The camera or microphone reported an error (hardware or software issue on your device)."
         }

@@ -28,15 +28,15 @@
     },
     "errors": {
         "title": "Une erreur est survenue",
-        "desc": "Une erreur est survenue, l'appel ne peut aboutir. Voici le détail:",
+        "desc": "Une erreur est survenue, l'appel ne peut aboutir. Voici le détail :",
         "errors": {
-            "error-1655267250": "L'appel que vous avez rejoint a expiré (après 2 heures).",
-            "error--1494481250": "L'appel que vous avez rejoint n'est plus disponible (après 2 heures).",
-            "error-1189215202": "Connexion interrompu, veuillez vérifier votre connexion internet.",
+            "error-1655267250": "L'appel que vous avez rejoint a expiré.",
+            "error--1494481250": "L'appel que vous avez rejoint n'est plus disponible.",
+            "error-1189215202": "Connexion interrompue, veuillez vérifier votre connexion internet.",
             "error-763909797": "Une erreur inconnue est survenue",
-            "error--140619965": "L'appel est vérouillé (trop de personne l'on rejoins ou il a expiré, en vrai j'en sais rien)",
+            "error--140619965": "L'appel est vérouillé (trop de personne l'ont rejoint ou bien l'appel a expiré)",
             "camera-error--621623973": "L'accés à la caméra ou au microphone n'a pas été autorisé.",
-            "camera-error--1412228987": "La caméra ou le microphone ont remonté un problème, c'est surement liée à votre périphérique."
+            "camera-error--1412228987": "La caméra ou le microphone ont rapporté un problème technique lié à leur fonctionnement."
         }
     }
 }
