@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next'
 import homeLogo from '../../styles/assets/images/homeLogo.svg'
 import logo from '../../styles/assets/images/logo.svg'
 import logoMobile from '../../styles/assets/images/logo_mobile.svg'
-import useDetectMobile from '../../hooks/useDetectMobile'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
 function Logo() {
     const { t } = useTranslation()
-    const isMobile = useDetectMobile()
+    const isMobile = useDetectMobileOrTablet()
     let logoToChoose = ''
 
     if (isMobile) {
@@ -20,8 +20,12 @@ function Logo() {
     }
 
     return (
-        <Link to="/">
-            <img src={logoToChoose} alt={t('logo.alt')} />
+        <Link to="/" className="logo-link">
+            <img
+                src={logoToChoose}
+                alt={t('logo.alt')}
+                className="logo-picture"
+            />
         </Link>
     )
 }
