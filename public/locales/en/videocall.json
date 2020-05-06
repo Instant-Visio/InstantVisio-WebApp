@@ -28,7 +28,7 @@
     },
     "errors": {
         "title": "Something didn't work",
-        "desc": "An error occured and will probably prevent you to see your contact, here is the detail of the error:",
+        "desc": "An error occurred and will probably prevent you to see your contact, here is the detail of the error:",
         "errors": {
             "error-1655267250": "The call you're trying to join does not exist or has expired.",
             "error--1494481250": "The call you're trying to join is no longer available.",
