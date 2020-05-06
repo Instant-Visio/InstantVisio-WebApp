@@ -10,7 +10,7 @@
         "release:all:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy && npm run tag:after",
         "release:all:dev": "npm run tag:before:dev && firebase use instantvisio-dev &&  env-cmd -f .env.development npm run build && firebase deploy && npm run tag:after",
         "release:hosting:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy --only hosting && npm run tag:after",
-        "release:hosting:dev": "npm run tag:before:dev && firebase use instantvisio-dev && env-cmd -f .env.development npm run build && firebase deploy --only hosting && npm run tag:after",
+        "release:hosting:dev": "firebase use instantvisio-dev && env-cmd -f .env.development npm run build && firebase deploy --only hosting",
         "tag:before:prod": "npm version minor",
         "tag:before:dev": "npm version prerelease",
         "tag:after": "git push && git push --tags"

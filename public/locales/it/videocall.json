@@ -18,12 +18,25 @@
             "granted": "The camera and microphone permission has been granted.",
             "denied": "The camera and microphone permission has been denied.",
             "waiting": "The camera and microphone permission is needed so you contact can see and hear you."
+        },
+        "cookie": {
+            "granted": "The cookie permission has been granted.",
+            "denied": "The cookie permission has been denied.",
+            "waiting": "The necessary cookie permission is needed for our video call third party to establish the call.",
+            "renew": "Re-open cookie window"
         }
     },
-    "cookie": {
-        "granted": "The cookie permission has been granted.",
-        "denied": "The cookie permission has been denied.",
-        "waiting": "The necessary cookie permission is needed for our video call third party to establish the call.",
-        "renew": "Re-open cookie window"
+    "errors": {
+        "title": "Something didn't work",
+        "desc": "An error occurred and will probably prevent you to see your contact, here is the detail of the error:",
+        "errors": {
+            "error-1655267250": "The call you're trying to join does not exist or has expired.",
+            "error--1494481250": "The call you're trying to join is no longer available.",
+            "error-1189215202": "Unstable Internet access",
+            "error-763909797": "An unknown error happened during the call.",
+            "error--140619965": "The call is now locked (too many people already joined or call has expired).",
+            "camera-error--621623973": "The camera or microphone has not been allowed.",
+            "camera-error--1412228987": "The camera or microphone reported an error (hardware or software issue on your device)."
+        }
     }
 }
