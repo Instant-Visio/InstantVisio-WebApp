@@ -16,7 +16,7 @@
         "tag:after": "git push && git push --tags"
     },
     "dependencies": {
-        "typescript": "3.8.3",
+        "@capacitor/android": "^2.1.0",
         "@capacitor/core": "2.1.0",
         "@daily-co/daily-js": "^0.9.984",
         "@mdi/js": "^5.1.45",
@@ -46,6 +46,7 @@
         "react-router-dom": "^5.1.2",
         "react-scripts": "3.4.1",
         "styled-components": "^5.0.1",
+        "typescript": "3.8.3",
         "yup": "^0.28.3"
     },
     "eslintConfig": {
