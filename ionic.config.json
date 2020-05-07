@@ -1,0 +1,7 @@
+{
+    "name": "Instant visio",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "react"
+}
