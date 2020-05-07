@@ -35,3 +35,4 @@ yarn.lock
 .project
 .settings
 /.firebase/
+.vscode
