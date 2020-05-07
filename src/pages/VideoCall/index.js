@@ -17,8 +17,8 @@ import ErrorDialog from './ErrorDialog'
 const VideoCallPage = () => {
     const { t } = useTranslation('videocall')
 
-    const [camOn, setCamOn] = useState(true)
-    const [audioOn, setAudioOn] = useState(true)
+    const [camOn, setCamOn] = useState(false)
+    const [audioOn, setAudioOn] = useState(false)
     const [participantStatus, setParticipantStatus] = useState('')
     const [participantNumber, setParticipantNumber] = useState(0)
     const [leftCallFrame, setLeftCallFrame] = useState(false)
@@ -32,11 +32,15 @@ const VideoCallPage = () => {
 
     const cameraClick = () => {
         if (!dailyRef.current) return
-        dailyRef.current.setLocalVideo(!dailyRef.current.localVideo())
+        const localVideo = dailyRef.current.localVideo()
+        setCamOn(!!localVideo)
+        dailyRef.current.setLocalVideo(!localVideo)
     }
     const audioClick = () => {
         if (!dailyRef.current) return
-        dailyRef.current.setLocalAudio(!dailyRef.current.localAudio())
+        const localAudio = dailyRef.current.localAudio()
+        setAudioOn(!!localAudio)
+        dailyRef.current.setLocalAudio(!localAudio)
     }
     const onLeaveClick = () => {
         if (!dailyRef.current) return
