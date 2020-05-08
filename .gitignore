@@ -36,3 +36,4 @@ yarn.lock
 .settings
 /.firebase/
 .vscode
+.gradle
