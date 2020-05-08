@@ -34,3 +34,4 @@ yarn-error.log*
 .settings
 /.firebase/
 .vscode
+.gradle
