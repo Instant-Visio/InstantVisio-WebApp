@@ -55,6 +55,7 @@ export const sendEmail = async (
         )
     } catch (err) {
         console.error(err)
+        console.log(JSON.stringify(err))
     }
     return Promise.reject('Failed to send email')
 }
