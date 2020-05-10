@@ -24,6 +24,7 @@ export interface NotificationParams {
     ovhCredentials: OVHCredentials
     sendGridCredentials: {
         apikey: string
+        ip_pool_name: string
     }
 }
 
@@ -38,6 +39,7 @@ export const sendEmail = async (
         from: `InstantVisio <${params.emailFrom}>`,
         subject: subject,
         text: messageBody,
+        ip_pool_name: params.sendGridCredentials.ip_pool_name,
     }
 
     try {
