@@ -45,7 +45,6 @@
         "react-router-dom": "^5.1.2",
         "react-scripts": "3.4.1",
         "styled-components": "^5.0.1",
-        "typescript": "3.8.3",
         "yup": "^0.28.3"
     },
     "eslintConfig": {
@@ -63,6 +62,7 @@
         ]
     },
     "devDependencies": {
+        "typescript": "3.8.3",
         "@capacitor/cli": "2.1.0",
         "@ionic/cli": "^6.8.0",
         "babel-eslint": "^10.1.0",
