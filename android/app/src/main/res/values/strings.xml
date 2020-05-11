@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">instant-visio</string>
+    <string name="app_name">Instant Visio</string>
     <string name="title_activity_main">instant-visio</string>
     <string name="package_name">com.instantvisio.app</string>
     <string name="custom_url_scheme">com.instantvisio.app</string>
