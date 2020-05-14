@@ -6,7 +6,9 @@
     "webDir": "build",
     "plugins": {
         "SplashScreen": {
-            "launchShowDuration": 0
+            "launchShowDuration": 1000,
+            "showSpinner": true,
+            "backgroundColor": "#ffffffff"
         }
     },
     "cordova": {}
