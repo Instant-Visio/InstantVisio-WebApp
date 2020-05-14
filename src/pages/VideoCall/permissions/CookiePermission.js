@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react'
 import Check from './Check'
-import { STATE_DENIED, STATE_GRANTED } from './PermissionConstants'
+import {
+    STATE_DENIED,
+    STATE_GRANTED,
+    STATE_WAITING,
+} from './PermissionConstants'
 import useCookiePermission from '../../../hooks/useCookiePermission'
 import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -15,6 +19,18 @@ const CookiePermission = ({ onGranted }) => {
             onGranted()
         }
     }, [permissionResult, onGranted])
+
+    useEffect(() => {
+        let timer = setTimeout(() => {
+            if (permissionResult === STATE_WAITING) {
+                onCookieRenewClick()
+            }
+        }, 10000)
+
+        return () => {
+            clearTimeout(timer)
+        }
+    }, [permissionResult])
 
     const onCookieRenewClick = () => {
         if (hasCookiebot()) {
