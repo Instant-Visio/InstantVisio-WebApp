@@ -25,7 +25,7 @@ const CookiePermission = ({ onGranted }) => {
             if (permissionResult === STATE_WAITING) {
                 onCookieRenewClick()
             }
-        }, 10000)
+        }, 5000)
 
         return () => {
             clearTimeout(timer)
