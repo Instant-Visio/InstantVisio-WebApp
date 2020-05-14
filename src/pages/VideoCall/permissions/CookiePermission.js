@@ -21,7 +21,7 @@ const CookiePermission = ({ onGranted }) => {
     }, [permissionResult, onGranted])
 
     useEffect(() => {
-        let timer = setTimeout(() => {
+        const timer = setTimeout(() => {
             if (permissionResult === STATE_WAITING) {
                 onCookieRenewClick()
             }
