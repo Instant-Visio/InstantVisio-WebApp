@@ -148,7 +148,7 @@ const VideoCallPage = () => {
                     participantsNumber={participantNumber}
                     participantStatus={participantStatus}
                     hasLeft={leftCallFrame}
-                    micOn={audioOn}
+                    camOn={camOn}
                     videoFrame={videoFrame}
                 />
 

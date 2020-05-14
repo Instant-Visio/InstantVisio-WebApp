@@ -7,7 +7,7 @@ const VideoCallFrame = ({
     participantsNumber,
     participantStatus,
     hasLeft,
-    micOn,
+    camOn,
     videoFrame,
 }) => {
     const { t } = useTranslation('videocall')
@@ -23,7 +23,7 @@ const VideoCallFrame = ({
                     allowFullScreen
                 />
             )}
-            {!micOn && !hasLeft && (
+            {!camOn && !hasLeft && (
                 <div
                     className={classNames({
                         'mute-camera': true,
