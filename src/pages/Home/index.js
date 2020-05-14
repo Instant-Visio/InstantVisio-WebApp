@@ -23,13 +23,11 @@ const DataMentions = styled.div`
 
 export default function Home() {
     const { t } = useTranslation(['home', 'common'])
-    const [loading, setLoading] = useState(false)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const formSubmissionMessage = useRef(null)
 
     const submit = (values, setSubmitting) => {
-        setLoading(true)
         setNewCall(values)
         createCall(values)
             .then((roomName) => {
@@ -44,14 +42,11 @@ export default function Home() {
                     behavior: 'smooth',
                 })
             })
-            .finally(() => {
-                setLoading(false)
-            })
     }
     return (
         <ColumnsLayout title="Instant Visio">
             <Description />
-            <Form onSubmit={submit} isSending={loading} error={error} />
+            <Form onSubmit={submit} error={error} />
             <div ref={formSubmissionMessage}>
                 {videoCallId && (
                     <Route
