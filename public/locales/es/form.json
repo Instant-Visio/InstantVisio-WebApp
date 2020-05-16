@@ -1,6 +1,6 @@
 {
     "title": "Conectarme con un familiar",
-    "description": "¿Como Ud desea avisar su familiar de su llamada ? ",
+    "description": "¿Cómo Ud desea avisar su familiar de su llamada ? ",
     "buttons": {
         "sms": {
             "label": "Por sms"
@@ -13,16 +13,16 @@
         }
     },
     "phone": {
-        "label": "Numero de telefono de su familiar *",
-        "title": "Numero de su familiar",
+        "label": "Número de teléfono de su familiar *",
+        "title": "Número de su familiar",
         "placeholder": "Ex. : 06 XX XX XX XX",
         "errors": {
             "required": "Gracias por teclar el numero de su familiar",
-            "invalid": " El numero teclado no es valido"
+            "invalid": " El número teclado no es válido"
         }
     },
     "mail": {
-        "label": "direccion e-mail de su familiar *",
+        "label": "dirección e-mail de su familiar *",
         "title": "E-mail de su familiar",
         "placeholder": "Ex. : jean.dupont@gmail.com",
         "errors": {

@@ -12,7 +12,7 @@
         "blog": "Blog",
         "credits": "Credits",
         "contact": "Contatti",
-        "cookies": "Cookies managment"
+        "cookies": "Cookies management"
     },
     "lang": {
         "fr": "Français",
@@ -22,7 +22,7 @@
         "hu": "Magyar",
         "ro": "Română",
         "it": "Italiano",
-        "pl":"Polski"
+        "pl": "Polski"
     },
     "message": {
         "title": "Richiesta URGENTE di videochiamata da parte di",

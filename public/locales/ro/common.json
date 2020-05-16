@@ -12,7 +12,7 @@
         "blog": "Blog",
         "credits": "Contribuții",
         "contact": "Contact",
-        "cookies": "Cookies managment"
+        "cookies": "Cookies management"
     },
     "lang": {
         "fr": "Français",
@@ -23,7 +23,7 @@
         "ro": "Română",
         "es": "Español",
         "it": "Italiano",
-        "pl":"Polski"
+        "pl": "Polski"
     },
     "url": {
         "video-call": "visio",
