@@ -22,7 +22,8 @@
         "hu": "Magyar",
         "ro": "Română",
         "es": "Español",
-        "it": "Italiano"
+        "it": "Italiano",
+        "pl": "Polski"
     },
     "url": {
         "video-call": "visio",

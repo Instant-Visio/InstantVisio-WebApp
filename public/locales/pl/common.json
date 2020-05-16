@@ -1,17 +1,17 @@
 {
     "logo": {
-        "alt": "InstantVisio's logo featuring a mobile phone's blue screen showing a face, figured by an orange circle, talking through video chat with the owner of the telephone, whose face appears as a circle outlined in orange."
+        "alt": "Logo InstantVisio przedstawia niebieski ekran telefonu komórkowego z pomarańczowym okręgiem z twarzą rozmówcy, prowadzącego czat wideo z właścicielem telefonu, z twarzą w kole obwiedzionym na pomarańczowo."
     },
-    "homeBaseline": "Video chat with your loved ones in a single click, and <1>for free.</1>",
-    "headerBaseline": "Video chat with your loved ones in a single click, and for free.",
+    "homeBaseline": "Połączenie wideo z bliskimi, jednym kliknięciem, i <1>bezpłatnie.</1>",
+    "headerBaseline": "Połączenie wideo z bliskimi, jednym kliknięciem, i bezpłatnie.",
     "footer": {
         "about": "About",
-        "contact-us": "Contact us",
-        "legal-mentions": "Legal mentions",
-        "personal-data": "Personal data",
+        "contact-us": "Skontaktuj nas",
+        "legal-mentions": "Regulamin",
+        "personal-data": "Dane osobowe",
         "blog": "Blog",
-        "credits": "Credits",
-        "contact": "Contact form",
+        "credits": "Informacje",
+        "contact": "Forma kontaktu",
         "cookies": "Cookies management"
     },
     "lang": {
