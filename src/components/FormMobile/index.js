@@ -35,17 +35,6 @@ const SubmitError = styled.p`
     color: ${({ theme }) => theme.color.red};
 `
 
-const FormCardHeader = styled.div`
-    & p {
-        &:first-child {
-            text-align: center;
-            font-weight: bold;
-            font-size: ${({ theme }) => theme.font.XL};
-            color: ${({ theme }) => theme.color.orange};
-        }
-    }
-`
-
 const FormSubmit = styled.div`
     text-align: center;
 `

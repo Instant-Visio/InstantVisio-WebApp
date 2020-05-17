@@ -7,6 +7,7 @@ import ColumnsLayout from '../../layout/Columns'
 import { createCall } from '../../actions/createCall'
 import FormMobile from '../../components/FormMobile'
 import Form from '../../components/Form'
+import MyVerticallyCenteredModal from '../../components/VerticallyCenteredModal'
 import Description from './Description'
 import {
     setNewCall,
@@ -14,6 +15,7 @@ import {
     setNewCallRedirected,
 } from '../../utils/support'
 import Logo from '../../components/Logo'
+import { Navbar } from 'react-bootstrap'
 
 const DataMentions = styled.div`
     .cnil {
@@ -34,8 +36,9 @@ const DescriptionMobile = styled.p`
     font-size: ${({ theme }) => theme.font.S};
 `
 
-const WrapperMobile = styled.div`
-    background: 'red';
+const WrapperMobile = styled.div``
+
+const MobileContent = styled.div`
     padding-left: 5%;
     padding-right: 5%;
     color: ${({ theme }) => theme.color.white};
@@ -52,7 +55,8 @@ export default function Home() {
     const [error, setError] = useState()
     const formSubmissionMessage = useRef(null)
 
-    const { store, dispatch } = useContext(Context)
+    const { store } = useContext(Context)
+    const [modalShow, setModalShow] = React.useState(false)
 
     const submit = (values, setSubmitting) => {
         setLoading(true)
@@ -116,35 +120,56 @@ export default function Home() {
                 </ColumnsLayout>
             ) : (
                 <WrapperMobile>
-                    <LogoContainer>
-                        <Logo />
-                    </LogoContainer>
-                    <DescriptionMobile>
-                        À la soumission du formulaire, vous serez redirigé-e
-                        vers la apge d'appel en visiophone. En parallèle, un sms
-                        et / ou un e-mail sera envoyé à votre proche et
-                        l'invitera à vous rejoindre directement sur la page pour
-                        échanger avec vous.
-                    </DescriptionMobile>
-                    <FormMobile
-                        onSubmit={submit}
-                        isSending={loading}
-                        error={error}
-                    />
-                    <div ref={formSubmissionMessage}>
-                        {videoCallId && (
-                            <Route
-                                render={() => {
-                                    setNewCallRedirected()
-                                    window.location.pathname = `/${t(
-                                        'common:url.video-call'
-                                    )}/${videoCallId}`
-                                    return null
-                                }}
-                            />
-                        )}
-                    </div>
-                    <KnowMoreMobile>En savoir plus</KnowMoreMobile>
+                    <Navbar bg="dark" variant="dark">
+                        <Navbar.Brand href="#home">
+                            <img
+                                alt=""
+                                src="/logo.svg"
+                                width="30"
+                                height="30"
+                                className="d-inline-block align-top"
+                            />{' '}
+                            React Bootstrap
+                        </Navbar.Brand>
+                    </Navbar>
+                    <MobileContent>
+                        <LogoContainer>
+                            <Logo />
+                        </LogoContainer>
+                        <DescriptionMobile>
+                            À la soumission du formulaire, vous serez redirigé-e
+                            vers la apge d'appel en visiophone. En parallèle, un
+                            sms et / ou un e-mail sera envoyé à votre proche et
+                            l'invitera à vous rejoindre directement sur la page
+                            pour échanger avec vous.
+                        </DescriptionMobile>
+                        <FormMobile
+                            onSubmit={submit}
+                            isSending={loading}
+                            error={error}
+                        />
+                        <div ref={formSubmissionMessage}>
+                            {videoCallId && (
+                                <Route
+                                    render={() => {
+                                        setNewCallRedirected()
+                                        window.location.pathname = `/${t(
+                                            'common:url.video-call'
+                                        )}/${videoCallId}`
+                                        return null
+                                    }}
+                                />
+                            )}
+                        </div>
+                        <KnowMoreMobile onClick={() => setModalShow(true)}>
+                            En savoir plus
+                        </KnowMoreMobile>
+                        <MyVerticallyCenteredModal
+                            show={modalShow}
+                            onHide={() =>
+                                setModalShow(false)
+                            }></MyVerticallyCenteredModal>
+                    </MobileContent>
                 </WrapperMobile>
             )}
         </div>
