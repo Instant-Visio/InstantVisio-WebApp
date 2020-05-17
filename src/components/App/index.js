@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Context } from '../../utils/global/context'
+import { reducer } from '../../utils/global/reducer'
 
 import './App.scss'
 import {
@@ -40,38 +42,57 @@ const App = () => {
         gdprHandler()
     }, [])
 
+    const initialState = {
+        width: window.innerWidth,
+        isMobile: window.innerWidth <= 500,
+    }
+    const [store, dispatch] = useReducer(reducer, initialState)
+
+    useEffect(() => {
+        const handleWindowSizeChange = () => {
+            dispatch({ type: 'resize', width: window.innerWidth })
+        }
+        window.addEventListener('resize', handleWindowSizeChange)
+
+        return function cleanupListener() {
+            window.removeEventListener('resize', handleWindowSizeChange)
+        }
+    })
+
     return (
-        <div className="App">
-            <Switch>
-                <Route path="/" exact component={Home} />
-                <Route
-                    path={`/${t('url.video-call')}/:videoName`}
-                    component={VideoCallPrecheck}
-                />
-                <Route
-                    path={`/${t('url.legal-mentions')}`}
-                    exact
-                    component={LegalMentions}
-                />
-                <Route
-                    path={`/${t('url.personal-data')}`}
-                    exact
-                    component={PersonalData}
-                />
-                <Route path={`/${t('url.blog')}`} exact component={Blog} />
-                <Route
-                    path={`/${t('url.blog')}/:post`}
-                    exact
-                    component={Blog}
-                />
-                <Route
-                    path={`/${t('url.credits')}`}
-                    exact
-                    component={Credits}
-                />
-                <Route component={NotFound} />
-            </Switch>
-        </div>
+        <Context.Provider value={{ store, dispatch }}>
+            <div className="App">
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route
+                        path={`/${t('url.video-call')}/:videoName`}
+                        component={VideoCallPrecheck}
+                    />
+                    <Route
+                        path={`/${t('url.legal-mentions')}`}
+                        exact
+                        component={LegalMentions}
+                    />
+                    <Route
+                        path={`/${t('url.personal-data')}`}
+                        exact
+                        component={PersonalData}
+                    />
+                    <Route path={`/${t('url.blog')}`} exact component={Blog} />
+                    <Route
+                        path={`/${t('url.blog')}/:post`}
+                        exact
+                        component={Blog}
+                    />
+                    <Route
+                        path={`/${t('url.credits')}`}
+                        exact
+                        component={Credits}
+                    />
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
+        </Context.Provider>
     )
 }
 
