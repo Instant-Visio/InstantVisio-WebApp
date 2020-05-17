@@ -16,7 +16,7 @@ import {
 } from '../../utils/support'
 import Logo from '../../components/Logo'
 import { Navbar } from 'react-bootstrap'
-
+import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
 const DataMentions = styled.div`
     .cnil {
         margin: ${({ theme }) => theme.spacing.XS} 0;
@@ -73,6 +73,7 @@ export default function Home() {
                 })
             })
     }
+
     return (
         <div>
             {!store.isMobile ? (
@@ -114,18 +115,9 @@ export default function Home() {
                     </DataMentions>
                 </ColumnsLayout>
             ) : (
-                <WrapperMobile>
+                <WrapperMobile key={'anchor-left'}>
                     <Navbar bg="dark" variant="dark">
-                        <Navbar.Brand href="#home">
-                            <img
-                                alt=""
-                                src="/logo.svg"
-                                width="30"
-                                height="30"
-                                className="d-inline-block align-top"
-                            />{' '}
-                            React Bootstrap
-                        </Navbar.Brand>
+                        <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
                     </Navbar>
                     <MobileContent>
                         <LogoContainer>
