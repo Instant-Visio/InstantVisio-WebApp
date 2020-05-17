@@ -40,6 +40,23 @@ const App = () => {
         gdprHandler()
     }, [])
 
+    const initialState = {
+        width: window.innerWidth,
+        isMobile: window.innerWidth <= 500,
+    }
+    const [store, dispatch] = useReducer(reducer, initialState)
+
+    useEffect(() => {
+        const handleWindowSizeChange = () => {
+            dispatch({ type: 'resize', width: window.innerWidth })
+        }
+        window.addEventListener('resize', handleWindowSizeChange)
+
+        return function cleanupListener() {
+            window.removeEventListener('resize', handleWindowSizeChange)
+        }
+    })
+
     return (
         <IonApp className="App">
             <IonReactRouter>

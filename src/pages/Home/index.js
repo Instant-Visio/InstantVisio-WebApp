@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import styled from 'styled-components'
 import { Link, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
@@ -56,6 +56,8 @@ export default function Home() {
     const isMobile = useDetectMobileOrTablet()
     const formSubmissionMessage = useRef(null)
     const [modalShow, setModalShow] = React.useState(false)
+
+    const { store, dispatch } = useContext(Context)
 
     const submit = (values, setSubmitting) => {
         setNewCall(values)
