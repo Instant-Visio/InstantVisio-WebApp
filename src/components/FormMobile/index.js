@@ -5,25 +5,17 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import Field from './Field'
-import CallError from './CallError'
-import { triggerValidation, format } from './validation'
-import PhoneField from './PhoneField'
+import Field from '../Form/Field'
+import CallError from '../Form/CallError'
+import { triggerValidation, format } from '../Form/validation'
+import PhoneField from '../Form/PhoneField'
 import { getLocale } from '../../i18n/helper'
 
 const BootstrapForm = styled(BaseForm)`
     width: 100%;
 `
 
-const FormFields = styled.div`
-    & > * {
-        margin: 0 0 ${({ theme }) => theme.spacing.XXL};
-    }
-
-    &:first-child {
-        margin-top: ${({ theme }) => theme.spacing.XXL};
-    }
-`
+const FormFields = styled.div``
 
 const FormCard = styled.div`
     background: ${({ theme }) => theme.color.white};
@@ -55,11 +47,10 @@ const FormCardHeader = styled.div`
 `
 
 const FormSubmit = styled.div`
-    margin-bottom: ${({ theme }) => theme.spacing.XXL};
     text-align: center;
 `
 
-export default function Form({ onSubmit, error }) {
+export default function FormMobile({ onSubmit, error }) {
     const { t, i18n } = useTranslation('form')
     const { country } = getLocale()
     const tabs = {
@@ -105,10 +96,6 @@ export default function Form({ onSubmit, error }) {
 
     return (
         <FormCard>
-            <FormCardHeader>
-                <p>{t('title')}</p>
-                <p>{t('description')}</p>
-            </FormCardHeader>
             <Formik
                 initialValues={initialValues}
                 validateOnBlur={false}
@@ -126,7 +113,7 @@ export default function Form({ onSubmit, error }) {
                                     title={t('buttons.sms.label')}>
                                     <FormFields>
                                         <PhoneField
-                                            showLabel={true}
+                                            showLabel={false}
                                             isSubmitting={isSubmitting}
                                         />
                                     </FormFields>
@@ -140,7 +127,6 @@ export default function Form({ onSubmit, error }) {
                                             type="email"
                                             disabled={isSubmitting}
                                             placeholder={t('mail.placeholder')}
-                                            label={t('mail.label')}
                                             title={t('mail.title')}
                                         />
                                     </FormFields>
@@ -152,7 +138,6 @@ export default function Form({ onSubmit, error }) {
                                     type="text"
                                     disabled={isSubmitting}
                                     placeholder={t('personName.placeholder')}
-                                    label={t('personName.label')}
                                     title={t('personName.title')}
                                 />
                             </FormFields>
@@ -179,7 +164,7 @@ export default function Form({ onSubmit, error }) {
     )
 }
 
-Form.propTypes = {
+FormMobile.propTypes = {
     onSubmit: PropTypes.func,
     error: PropTypes.object,
 }

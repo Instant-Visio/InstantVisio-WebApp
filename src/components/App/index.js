@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-// import CustomHeaders from '../CustomHeaders'
+import { reducer } from '../../utils/global/reducer'
 
 import './App.scss'
 import {
@@ -41,6 +41,23 @@ const App = () => {
 
         gdprHandler()
     }, [])
+
+    const initialState = {
+        width: window.innerWidth,
+        isMobile: window.innerWidth <= 500,
+    }
+    const [store, dispatch] = useReducer(reducer, initialState)
+
+    useEffect(() => {
+        const handleWindowSizeChange = () => {
+            dispatch({ type: 'resize', width: window.innerWidth })
+        }
+        window.addEventListener('resize', handleWindowSizeChange)
+
+        return function cleanupListener() {
+            window.removeEventListener('resize', handleWindowSizeChange)
+        }
+    })
 
     return (
         <div className="App">
