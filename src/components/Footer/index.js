@@ -48,6 +48,13 @@ const Footer = () => {
                     </Link>
                 </li>
                 <li className="footer-link">
+                    <Link
+                        to={`/${t('url.media')}`}
+                        className="footer-link-content">
+                        {t('footer.media')}
+                    </Link>
+                </li>
+                <li className="footer-link">
                     <a
                         className="footer-link-content"
                         href={`mailto:contact@instantvisio.com?Subject=${t(

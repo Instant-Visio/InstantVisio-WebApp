@@ -9,6 +9,7 @@ import {
     PersonalData,
     Blog,
     Credits,
+    MediaNews,
     NotFound,
 } from '../../pages'
 import { gdprHandler } from '../../utils/gdpr'
@@ -68,6 +69,11 @@ const App = () => {
                     path={`/${t('url.credits')}`}
                     exact
                     component={Credits}
+                />
+                <Route
+                    path={`/${t('url.media')}`}
+                    exact
+                    component={MediaNews}
                 />
                 <Route component={NotFound} />
             </Switch>

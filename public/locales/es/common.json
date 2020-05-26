@@ -10,7 +10,8 @@
         "legal-mentions": "Menciones legales",
         "personal-data": "Datos personales",
         "blog": "Blog",
-        "credits": "Creditos",
+        "credits": "Créditos",
+        "media": "On parle de nous",
         "contact": "Toma de contactos",
         "cookies": "Cookies management"
     },
@@ -30,7 +31,8 @@
         "legal-mentions": "mentions-legales",
         "personal-data": "donnees-personnelles",
         "blog": "blog",
-        "credits": "credits"
+        "credits": "credits",
+        "media": "on-parle-de-nous"
     },
     "message": {
         "title": "Pedido URGENTE de visiotelefóno de",

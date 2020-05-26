@@ -11,6 +11,7 @@
         "personal-data": "Données personnelles",
         "blog": "Blog",
         "credits": "Crédits",
+        "media": "On parle de nous",
         "contact": "Prise de contact",
         "cookies": "Gestion des cookies"
     },
@@ -30,7 +31,8 @@
         "legal-mentions": "mentions-legales",
         "personal-data": "donnees-personnelles",
         "blog": "blog",
-        "credits": "credits"
+        "credits": "credits",
+        "media": "on-parle-de-nous"
     },
     "message": {
         "title": "Demande URGENTE de visiophonie de",

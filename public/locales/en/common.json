@@ -11,6 +11,7 @@
         "personal-data": "Personal data",
         "blog": "Blog",
         "credits": "Credits",
+        "media": "On parle de nous",
         "contact": "Contact form",
         "cookies": "Cookies management"
     },
@@ -30,7 +31,8 @@
         "legal-mentions": "mentions-legales",
         "personal-data": "donnees-personnelles",
         "blog": "blog",
-        "credits": "credits"
+        "credits": "credits",
+        "media": "on-parle-de-nous"
     },
     "message": {
         "title": "URGENT video call request from",

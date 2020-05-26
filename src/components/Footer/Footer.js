@@ -10,6 +10,7 @@ const FooterStyled = styled.footer`
     font-size: 16px;
     width: 100%;
     .footer {
+        width: 70%;
         height: 80%;
         list-style: none;
         display: flex;
@@ -39,6 +40,9 @@ const FooterStyled = styled.footer`
     ${SCREEN.MOBILE_AND_TABLET} {
         .footer {
             padding-bottom: ${({ theme }) => theme.spacing.XXL};
+            &-link {
+                text-align: center;
+            }
         }
     }
 `
