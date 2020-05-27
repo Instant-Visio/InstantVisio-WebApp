@@ -16,13 +16,13 @@ export default function RatingModal(props) {
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Feedback
+                Votre avis
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <p>
-                        quel est votre niveau de satisfaction pour cette conf.?
+                    Quel a été le niveau de qualité de cette communication en visiophonie ?
                     </p>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
