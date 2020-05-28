@@ -18,7 +18,7 @@ export default function Field(props) {
 
     return (
         <Form.Group className={className}>
-            <Form.Label>{label}</Form.Label>
+            {label && <Form.Label>{label}</Form.Label>}
             <InputGroup>
                 {prepend && <InputGroup.Prepend>{prepend}</InputGroup.Prepend>}
                 <Form.Control

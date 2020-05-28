@@ -15,7 +15,9 @@ const BootstrapForm = styled(BaseForm)`
     width: 100%;
 `
 
-const FormFields = styled.div``
+const FormFields = styled.div`
+    padding-top: ${({ theme }) => theme.spacing.XS};
+`
 
 const FormCard = styled.div`
     background: ${({ theme }) => theme.color.white};
