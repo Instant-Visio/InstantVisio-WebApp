@@ -1,8 +1,7 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import { Link, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
-import { Context } from '../../utils/global/context'
 import ColumnsLayout from '../../layout/Columns'
 import { createCall } from '../../actions/createCall'
 import FormMobile from '../../components/FormMobile'
@@ -15,8 +14,8 @@ import {
     setNewCallRedirected,
 } from '../../utils/support'
 import Logo from '../../components/Logo'
-import { Navbar } from 'react-bootstrap'
-import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+
 const DataMentions = styled.div`
     .cnil {
         margin: ${({ theme }) => theme.spacing.XS} 0;
@@ -52,9 +51,8 @@ export default function Home() {
     const { t } = useTranslation(['home', 'common'])
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
+    const isMobile = useDetectMobileOrTablet()
     const formSubmissionMessage = useRef(null)
-
-    const { store } = useContext(Context)
     const [modalShow, setModalShow] = React.useState(false)
 
     const submit = (values, setSubmitting) => {
@@ -76,7 +74,7 @@ export default function Home() {
 
     return (
         <div>
-            {!store.isMobile ? (
+            {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">
                     <Description />
                     <Form onSubmit={submit} error={error} />
@@ -116,9 +114,6 @@ export default function Home() {
                 </ColumnsLayout>
             ) : (
                 <WrapperMobile key={'anchor-left'}>
-                    <Navbar bg="dark" variant="dark">
-                        <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
-                    </Navbar>
                     <MobileContent>
                         <LogoContainer>
                             <Logo />
