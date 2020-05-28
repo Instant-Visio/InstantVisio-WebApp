@@ -50,7 +50,6 @@ const KnowMoreMobile = styled.p`
 
 export default function Home() {
     const { t } = useTranslation(['home', 'common'])
-    const [loading, setLoading] = useState(false)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const formSubmissionMessage = useRef(null)
@@ -59,7 +58,6 @@ export default function Home() {
     const [modalShow, setModalShow] = React.useState(false)
 
     const submit = (values, setSubmitting) => {
-        setLoading(true)
         setNewCall(values)
         createCall(values)
             .then((roomName) => {
@@ -73,9 +71,6 @@ export default function Home() {
                     top: formSubmissionMessage.current.offsetTop,
                     behavior: 'smooth',
                 })
-            })
-            .finally(() => {
-                setLoading(false)
             })
     }
 

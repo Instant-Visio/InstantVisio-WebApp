@@ -24,6 +24,12 @@
             "denied": "The cookie permission has been denied.",
             "waiting": "The necessary cookie permission is needed for our video call third party to establish the call.",
             "renew": "Re-open cookie window"
+        },
+        "browser": {
+            "granted": "The browser is supported. If any, disable ad blocker or similar app on this website.",
+            "denied": "This browser is not supported or outdated. Please update it or install Chrome.",
+            "waiting": "Verifying browser and version.",
+            "install": "Install Chrome browser"
         }
     },
     "errors": {

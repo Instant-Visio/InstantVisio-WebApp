@@ -1,0 +1,18 @@
+{
+    "page-title": "Witaj",
+    "information": {
+        "title": "Jak to działa?",
+        "steps": {
+            "1": "Wypełnij formularz",
+            "2": "Potwierdź przyciskiem « Połącz z bliskim ».",
+            "3": "Start wideo, możesz rozmawiać z bliskim."
+        },
+        "indications": {
+            "multiple-people": "Po rozpoczęciu wideo, można zaprosić do rozmowy inne osoby, podając adres dostępny na pasku URL. Dla optymalnej jakości wideo, proponujemy ograniczyć liczbę uczestników do 4 na rozmowę."
+        },
+        "data-mentions": {
+            "mandatory": "Pola zaznaczone gwiazdką są obowiązkowe.",
+            "management": "Osoba odpowiedzialna za zebrane dane, Stéphane Luçon, upewnnia się o ich prawidłowym przetwarzaniu przed wysłaniem SMS-a lub e-maila do rozmówcy. Podane informacje są likwidowane dzień po ich przesłaniu. Informacje dodatkowe o ochronie danych osobowych lub prawach do prywatności zawarte są na stronie <1>Dane osobowe</1>."
+        }
+    }
+}

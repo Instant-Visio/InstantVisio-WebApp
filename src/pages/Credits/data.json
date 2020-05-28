@@ -1,103 +1,103 @@
 {
     "creators":[
        {
-          "name":"Stéphane Luçon",
+          "name": "Stéphane Luçon",
           "link":"https://fr.linkedin.com/in/stephanelucon"
        }
     ],
     "developers":[
        {
-          "name":"Abeba Ngwe",
+          "name": "Abeba Ngwe",
           "link":"https://abebangwe.com"
        },
        {
-          "name":"Nicolas Tchouanmou",
+          "name": "Nicolas Tchouanmou",
           "link":"https://fr.linkedin.com/in/nicolas-tchouanmou-7029a112"
        },
        {
-          "name":"Hugo Gresse",
+          "name": "Hugo Gresse",
           "link":"http://twitter.com/hugogresse"
        },
        {
-          "name":"Stéphane Luçon",
+          "name": "Stéphane Luçon",
           "link":"https://fr.linkedin.com/in/stephanelucon"
        },
        {
-          "name":"Dominique Kanga",
+          "name": "Dominique Kanga",
           "link":"https://www.linkedin.com/in/dominique-bernard-kanga-19214714a/"
        },
        {
-          "name":"Mattia Primavera",
+          "name": "Mattia Primavera",
           "link":"https://www.linkedin.com/in/mattia-primavera/"
        }
     ],
     "ux-designers":[
        {
-          "name":"Sébastien L'Hoste",
+          "name": "Sébastien L'Hoste",
           "link":"https://fr.linkedin.com/in/sebastienlhoste"
        },
        {
-          "name":"Antoine Deglesne",
+          "name": "Antoine Deglesne",
           "link":"https://fr.linkedin.com/in/antoinedeglesne"
        },
        {
-          "name":"Johan Ayache",
+          "name": "Johan Ayache",
           "link":"https://www.linkedin.com/in/ayachejohan/"
        }
 
     ],
     "graphic-designers":[
        {
-          "name":"Ophélie Strezlec",
+          "name": "Ophélie Strezlec",
           "link":"https://fr.linkedin.com/in/oph%C3%A9lie-strezlec-b40385103"
        }
     ],
     "partners":[
        {
-          "name":"Daily.co",
+          "name": "Daily.co",
           "link":"https://www.daily.co"
        },
        {
-          "name":"OVHcloud",
+          "name": "OVHcloud",
           "link":"https://www.ovh.com"
        },
        {
-          "name":"SendGrid",
+          "name": "SendGrid",
           "link":"https://www.sendgrid.com"
        },
        {
-          "name":"Twilio",
+          "name": "Twilio",
           "link":"https://www.twilio.com"
        },
        {
-          "name":"Crisp",
+          "name": "Crisp",
           "link":"https://app.crisp.chat/"
        }
     ],
     "translator":[
        {
-          "name":"Alexandru Mîţă"
+          "name": "Alexandru Mîţă"
        },
        {
-          "name":"Jérôme Pansanel"
+          "name": "Jérôme Pansanel"
        },
        {
-          "name":"Marek Bucki"
+          "name": "Marek Bucki"
        },
        {
-          "name":"Mattia Primavera"
+          "name": "Mattia Primavera"
        },
        {
-          "name":"Nora Agapi"
+          "name": "Nora Agapi"
        },
        {
-          "name":"Péter Orosz"
+          "name": "Péter Orosz"
        },
        {
-          "name":"Pierre Magendie"
+          "name": "Pierre Magendie"
        },
        {
-          "name":"Yves-Claude Llorca"
+          "name": "Yves-Claude Llorca"
        }
     ]
  }

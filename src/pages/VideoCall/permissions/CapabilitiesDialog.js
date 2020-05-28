@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import CameraMicrophonePermission from './CameraMicrophonePermission'
 import styled from 'styled-components'
 import CookiePermission from './CookiePermission'
+import BrowserCheck from './BrowserCheck'
 
 const CapabilitiesDialog = ({ onGranted, onSkip }) => {
     const { t } = useTranslation('videocall')
@@ -12,6 +13,7 @@ const CapabilitiesDialog = ({ onGranted, onSkip }) => {
     const [grantedMap, setGrantedMap] = useState({
         cameraMicrophoneGranted: false,
         cookieGranted: false,
+        browser: false,
     })
 
     const onCheckPass = (checkName) => {
@@ -75,6 +77,11 @@ const CapabilitiesDialog = ({ onGranted, onSkip }) => {
                 <CookiePermission
                     onGranted={() => {
                         onCheckPass('cookieGranted')
+                    }}
+                />
+                <BrowserCheck
+                    onGranted={() => {
+                        onCheckPass('browser')
                     }}
                 />
                 {checksPass && (

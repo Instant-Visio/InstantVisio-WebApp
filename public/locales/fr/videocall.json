@@ -24,6 +24,12 @@
             "denied": "L'accès aux cookies nécessaires a été refusé.",
             "waiting": "L'accès aux cookie nécessaire est essentiel pour que notre partenaire de visio établisse l'appel.",
             "renew": "Ré-ouvrir la fenêtre de cookie"
+        },
+        "browser": {
+            "granted": "Le navigateur est supporté. Merci de désactiver les bloqueurs de publicité.",
+            "denied": "Ce navigateur n'est pas supporté ou est trop ancien. Merci de le mettre à jour ou d'installer Chrome.",
+            "waiting": "Vérification du navigateur.",
+            "install": "Installer Chrome browser"
         }
     },
     "errors": {

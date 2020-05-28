@@ -12,7 +12,7 @@
         "blog": "Blog",
         "credits": "Közreműködők",
         "contact": "Kapcsolatfelvétel",
-        "cookies": "Cookies managment"
+        "cookies": "Cookies management"
     },
     "lang": {
         "fr": "Français",
@@ -22,7 +22,8 @@
         "hu": "Magyar",
         "ro": "Română",
         "es": "Español",
-        "it": "Italiano"
+        "it": "Italiano",
+        "pl": "Polski"
     },
     "url": {
         "video-call": "visio",
