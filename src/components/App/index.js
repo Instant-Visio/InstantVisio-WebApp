@@ -1,24 +1,16 @@
 import React, { useEffect, useReducer } from 'react'
-import { Route, withRouter, Switch } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { withRouter } from 'react-router-dom'
 import { Context } from '../../utils/global/context'
 import { reducer } from '../../utils/global/reducer'
+import { Navbar } from 'react-bootstrap'
+import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
 
 import './App.scss'
-import {
-    Home,
-    LegalMentions,
-    PersonalData,
-    Blog,
-    Credits,
-    NotFound,
-} from '../../pages'
 import { gdprHandler } from '../../utils/gdpr'
-import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
+import Router from './router'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
 const App = () => {
-    const { t } = useTranslation()
-
     useEffect(() => {
         // when using vh and vw units in css:
         // to make sure the height taken into account
@@ -47,50 +39,18 @@ const App = () => {
         isMobile: window.innerWidth <= 500,
     }
     const [store, dispatch] = useReducer(reducer, initialState)
-
-    useEffect(() => {
-        const handleWindowSizeChange = () => {
-            dispatch({ type: 'resize', width: window.innerWidth })
-        }
-        window.addEventListener('resize', handleWindowSizeChange)
-
-        return function cleanupListener() {
-            window.removeEventListener('resize', handleWindowSizeChange)
-        }
-    })
+    const isMobile = useDetectMobileOrTablet()
 
     return (
         <Context.Provider value={{ store, dispatch }}>
+            {isMobile && (
+                <Navbar bg="dark" variant="dark">
+                    <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
+                </Navbar>
+            )}
+
             <div className="App">
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route
-                        path={`/${t('url.video-call')}/:videoName`}
-                        component={VideoCallPrecheck}
-                    />
-                    <Route
-                        path={`/${t('url.legal-mentions')}`}
-                        exact
-                        component={LegalMentions}
-                    />
-                    <Route
-                        path={`/${t('url.personal-data')}`}
-                        exact
-                        component={PersonalData}
-                    />
-                    <Route path={`/${t('url.blog')}`} exact component={Blog} />
-                    <Route
-                        path={`/${t('url.blog')}/:post`}
-                        exact
-                        component={Blog}
-                    />
-                    <Route
-                        path={`/${t('url.credits')}`}
-                        exact
-                        component={Credits}
-                    />
-                    <Route component={NotFound} />
-                </Switch>
+                <Router />
             </div>
         </Context.Provider>
     )
