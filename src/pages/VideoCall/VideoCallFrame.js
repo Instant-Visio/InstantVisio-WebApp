@@ -2,6 +2,7 @@ import React from 'react'
 import { IframeContainer } from './VideoCallComponents'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import { Redirect } from 'react-router-dom'
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -39,7 +40,7 @@ const VideoCallFrame = ({
                 <div className="waiting-participant">{participantStatus}</div>
             )}
 
-            {hasLeft && <div>{t('leave-confirmation')}</div>}
+            {hasLeft && <Redirect to="/" />}
         </IframeContainer>
     )
 }
