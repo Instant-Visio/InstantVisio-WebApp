@@ -79,7 +79,7 @@ export default function Home() {
             {!store.isMobile ? (
                 <ColumnsLayout title="Instant Visio">
                     <Description />
-                    <Form onSubmit={submit} isSending={loading} error={error} />
+                    <Form onSubmit={submit} error={error} />
                     <div ref={formSubmissionMessage}>
                         {videoCallId && (
                             <Route
@@ -130,11 +130,7 @@ export default function Home() {
                             l'invitera à vous rejoindre directement sur la page
                             pour échanger avec vous.
                         </DescriptionMobile>
-                        <FormMobile
-                            onSubmit={submit}
-                            isSending={loading}
-                            error={error}
-                        />
+                        <FormMobile onSubmit={submit} error={error} />
                         <div ref={formSubmissionMessage}>
                             {videoCallId && (
                                 <Route
