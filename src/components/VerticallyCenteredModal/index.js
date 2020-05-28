@@ -22,7 +22,7 @@ export default function MyVerticallyCenteredModal(props) {
                     sur la gestion des données personnelles et pour exercer vos
                     droits, veuillez vous reporter à la page
                 </p>
-                <a>Données personnelles</a>
+                <a href="/donnees-personnelles">Données personnelles</a>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
