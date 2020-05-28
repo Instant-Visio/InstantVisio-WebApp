@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import { Link, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'

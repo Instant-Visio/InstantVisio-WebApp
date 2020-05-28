@@ -45,17 +45,7 @@ const App = () => {
         isMobile: window.innerWidth <= 500,
     }
     const [store, dispatch] = useReducer(reducer, initialState)
-
-    useEffect(() => {
-        const handleWindowSizeChange = () => {
-            dispatch({ type: 'resize', width: window.innerWidth })
-        }
-        window.addEventListener('resize', handleWindowSizeChange)
-
-        return function cleanupListener() {
-            window.removeEventListener('resize', handleWindowSizeChange)
-        }
-    })
+    const isMobile = useDetectMobileOrTablet()
 
     return (
         <IonApp className="App">
