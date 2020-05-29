@@ -44,7 +44,7 @@ const App = () => {
     return (
         <Context.Provider value={{ store, dispatch }}>
             {isMobile && (
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="light" variant="dark">
                     <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
                 </Navbar>
             )}

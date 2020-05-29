@@ -6,17 +6,11 @@ import DefaultLayout from '../../layout/Default'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
 const MarkdownContainer = styled.div`
-    p {
-        font-size: ${({ theme }) => theme.font.XS};
-    }
-    h1 {
-        font-size: ${({ theme }) => theme.font.M};
-    }
     h2 {
-        font-size: ${({ theme }) => theme.font.L};
+        font-size: ${({ theme }) => theme.font.XL};
     }
     h3 {
-        font-size: ${({ theme }) => theme.font.S};
+        font-size: ${({ theme }) => theme.font.L};
     }
 `
 
