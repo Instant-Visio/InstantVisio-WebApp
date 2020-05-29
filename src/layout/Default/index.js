@@ -59,11 +59,6 @@ const Container = styled.div`
         color: ${({ theme }) => theme.color.textGrey};
     }
 
-    ${SCREEN.MOBILE} {
-        margin: ${({ theme }) => theme.spacing.XS};
-        padding: ${({ theme }) => theme.spacing.XS};
-    }
-
     ${SCREEN.MOBILE_AND_TABLET} {
         margin: ${({ theme }) => theme.spacing.XXL};
         padding: ${({ theme }) => theme.spacing.XXL};
@@ -72,6 +67,11 @@ const Container = styled.div`
     ${SCREEN.DESKTOP} {
         margin: ${({ theme }) => theme.spacing.XXXL};
         padding: ${({ theme }) => theme.spacing.XXXL};
+    }
+
+    ${SCREEN.MOBILE} {
+        margin: ${({ theme }) => theme.spacing.M};
+        padding: ${({ theme }) => theme.spacing.M};
     }
 `
 
