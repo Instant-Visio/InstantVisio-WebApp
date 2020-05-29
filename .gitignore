@@ -37,3 +37,5 @@ yarn.lock
 /.firebase/
 .vscode
 .gradle
+
+android/app/google-services.json
