@@ -9,8 +9,11 @@ import './App.scss'
 import { gdprHandler } from '../../utils/gdpr'
 import Router from './router'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import { useTranslation } from 'react-i18next'
 
 const App = () => {
+    const { t } = useTranslation()
+
     useEffect(() => {
         // when using vh and vw units in css:
         // to make sure the height taken into account
@@ -41,9 +44,13 @@ const App = () => {
     const [store, dispatch] = useReducer(reducer, initialState)
     const isMobile = useDetectMobileOrTablet()
 
+    const isVideoCallPage = () => {
+        return window.location.pathname.indexOf(`/${t('url.video-call')}/`) >= 0
+    }
+
     return (
         <Context.Provider value={{ store, dispatch }}>
-            {isMobile && (
+            {isMobile && !isVideoCallPage() && (
                 <Navbar bg="light" variant="dark">
                     <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
                 </Navbar>
