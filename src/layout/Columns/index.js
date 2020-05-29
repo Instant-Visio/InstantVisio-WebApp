@@ -27,8 +27,7 @@ const Left = styled.div`
     width: 100%;
     background: ${({ theme }) => theme.color.white};
     ${SCREEN.DESKTOP} {
-        padding: ${({ theme }) =>
-            `${theme.spacing.XXXL} ${theme.spacing.M} ${theme.spacing.XXXL} ${theme.spacing.M}`};
+        padding: ${({ theme }) => `${theme.spacing.XXXL} ${theme.spacing.M} ${theme.spacing.XXXL} ${theme.spacing.M}`};
         width: 55%;
     }
 `

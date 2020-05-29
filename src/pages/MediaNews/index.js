@@ -10,7 +10,7 @@ const MediaNews = () => {
 
     return (
         <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
-            <MediaNewsTitle>On parle de nous</MediaNewsTitle>
+            <MediaNewsTitle>{t('page-title')}</MediaNewsTitle>
             <MediaNewsStyled>
                 {data.map(({ id, url, logo, alt }) => (
                     <div key={id}>
@@ -21,7 +21,7 @@ const MediaNews = () => {
                                     href={url}
                                     target="_blank"
                                     rel="noopener noreferrer">
-                                    [Lire l'article]
+                                    {t('read-article')}
                                 </a>
                             </Trans>
                         </p>
