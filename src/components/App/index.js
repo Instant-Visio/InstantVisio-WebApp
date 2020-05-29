@@ -9,6 +9,7 @@ import {
     PersonalData,
     Blog,
     Credits,
+    MediaNews,
     NotFound,
 } from '../../pages'
 import { gdprHandler } from '../../utils/gdpr'
@@ -43,7 +44,11 @@ const App = () => {
     return (
         <div className="App">
             <Switch>
-                <Route path="/" exact component={Home} />
+                <Route
+                    path="/"
+                    exact
+                    component={Home}
+                />
                 <Route
                     path={`/${t('url.video-call')}/:videoName`}
                     component={VideoCallPrecheck}
@@ -68,6 +73,11 @@ const App = () => {
                     path={`/${t('url.credits')}`}
                     exact
                     component={Credits}
+                />
+                <Route
+                    path={`/${t('url.media')}`}
+                    exact
+                    component={MediaNews}
                 />
                 <Route component={NotFound} />
             </Switch>

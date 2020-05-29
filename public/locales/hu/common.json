@@ -11,6 +11,7 @@
         "personal-data": "Személyes adatok",
         "blog": "Blog",
         "credits": "Közreműködők",
+        "media": "In the news",
         "contact": "Kapcsolatfelvétel",
         "cookies": "Cookies management"
     },
@@ -30,7 +31,8 @@
         "legal-mentions": "mentions-legales",
         "personal-data": "donnees-personnelles",
         "blog": "blog",
-        "credits": "credits"
+        "credits": "credits",
+        "media": "in-the-news"
     },
     "message": {
         "title": "SÜRGŐS videókonferenciás kérés a kapcsolattartótól:",

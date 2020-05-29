@@ -117,8 +117,6 @@ const Information = styled.div`
     ${SCREEN.MOBILE_AND_TABLET} {
         width: 100%;
     }
-
-
 `
 
 const Arrow = styled(BaseArrow)`

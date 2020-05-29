@@ -11,6 +11,7 @@
         "personal-data": "Dati personali",
         "blog": "Blog",
         "credits": "Credits",
+        "media": "In the news",
         "contact": "Contatti",
         "cookies": "Cookies management"
     },
@@ -33,6 +34,7 @@
         "personal-data": "dati-personali",
         "blog": "blog",
         "blog-article": "blog/:articolo",
-        "credits": "credits"
+        "credits": "credits",
+        "media": "in-the-news"
     }
 }
