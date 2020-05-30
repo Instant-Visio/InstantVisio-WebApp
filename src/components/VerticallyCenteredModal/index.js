@@ -1,6 +1,7 @@
 import { Modal, Button } from 'react-bootstrap'
 import React from 'react'
 import { Trans } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 export default function MyVerticallyCenteredModal(props) {
     return (
@@ -15,18 +16,16 @@ export default function MyVerticallyCenteredModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>
-                    <Trans i18nKey="home:information.data-mentions.management">
-                        Le responsable de traitement, Stéphane Luçon, s'assure
-                        du traitement des données recueillies pour effectuer
-                        l'envoi du SMS ou de l'e-mail au correspondant. Suite à
-                        l'envoi, ces données sont effacées au bout d'un jour.
-                        Pour en savoir plus sur la gestion des données
-                        personnelles et pour exercer vos droits, veuillez vous
-                        reporter à la page
-                    </Trans>
-                </p>
-                <a href="/donnees-personnelles">Données personnelles.</a>
+                <Trans i18nKey="home:information.data-mentions.management">
+                    Le responsable de traitement, Stéphane Luçon, s'assure du
+                    traitement des données recueillies pour effectuer l'envoi du
+                    SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces
+                    données sont effacées au bout d'un jour. Pour en savoir plus
+                    sur la gestion des données personnelles et pour exercer vos
+                    droits, veuillez vous reporter à la page
+                    <Link to="/donnees-personnelles">Données personnelles</Link>
+                    .
+                </Trans>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
