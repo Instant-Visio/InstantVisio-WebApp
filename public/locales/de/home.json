@@ -10,6 +10,8 @@
         "indications": {
             "multiple-people": "Wenn das Video gestartet ist, haben Sie zugang zum Anruflink durch der Addresseleiste. Sie können dieses Link von ihrer Seite mit anderen Verwandten teilen. Um die beste Erfahrung zu haben, empfelhen wir nicht mehr als vier Teilnehmer zu sein."
         },
+        "form-submit": "Wenn Sie das Formular abschicken, werden Sie zur Seite für Bildtelefonanrufe weitergeleitet. Parallel dazu werden eine SMS und / oder eine E-Mail an Ihre Liebsten gesendet und die eingeladen, sich Ihnen direkt auf der Seite anzuschließen, um mit Ihnen zu chatten.",
+        "know-more": "Erfahren Sie mehr",
         "data-mentions": {
             "mandatory": "Die mit einem Sternchen gekennzeichneten Felder sind Pflichtfelder.",
             "management": "Verantwortliche für Datenverarbeitung, Stéphane Luçon versichert die Verarbeitung des gesammelten Daten, die um SMS oder E-Mail zu versenden gebraucht sind. Nach die Absendung werden diese Daten für einen Tag gespeichert und dann gelöscht. Für weitere Informationen um Verwaltung von personenbezogenen Daten und ihre Rechte ausüben, beachten Sie Seite <1>Personenbezogene Daten</1>."

@@ -119,11 +119,7 @@ export default function Home() {
                             <Logo />
                         </LogoContainer>
                         <DescriptionMobile>
-                            À la soumission du formulaire, vous serez redirigé-e
-                            vers la apge d'appel en visiophone. En parallèle, un
-                            sms et / ou un e-mail sera envoyé à votre proche et
-                            l'invitera à vous rejoindre directement sur la page
-                            pour échanger avec vous.
+                            {t('information.form-submit')}
                         </DescriptionMobile>
                         <FormMobile onSubmit={submit} error={error} />
                         <div ref={formSubmissionMessage}>
@@ -140,7 +136,7 @@ export default function Home() {
                             )}
                         </div>
                         <KnowMoreMobile onClick={() => setModalShow(true)}>
-                            En savoir plus
+                            {t('information.know-more')}
                         </KnowMoreMobile>
                         <MyVerticallyCenteredModal
                             show={modalShow}
