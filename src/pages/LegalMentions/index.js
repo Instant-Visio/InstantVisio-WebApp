@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-remarkable'
 import styled from 'styled-components'
 import DefaultLayout from '../../layout/Default'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import { IonContent } from '@ionic/react'
 
 const MarkdownContainer = styled.div`
     h2 {
@@ -19,15 +20,17 @@ const LegalMentions = () => {
     const isMobile = useDetectMobileOrTablet()
 
     return (
-        <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
-            {isMobile ? (
-                <MarkdownContainer>
+        <IonContent>
+            <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
+                {isMobile ? (
+                    <MarkdownContainer>
+                        <ReactMarkdown source={t('page-content')} />
+                    </MarkdownContainer>
+                ) : (
                     <ReactMarkdown source={t('page-content')} />
-                </MarkdownContainer>
-            ) : (
-                <ReactMarkdown source={t('page-content')} />
-            )}
-        </DefaultLayout>
+                )}
+            </DefaultLayout>
+        </IonContent>
     )
 }
 
