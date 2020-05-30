@@ -2,17 +2,18 @@ import React, { useEffect, useReducer } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Context } from '../../utils/global/context'
 import { reducer } from '../../utils/global/reducer'
-import { Navbar } from 'react-bootstrap'
-import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
-
 import './App.scss'
 import { gdprHandler } from '../../utils/gdpr'
 import Router from './router'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import { useTranslation } from 'react-i18next'
+import { IonApp, IonHeader, IonContent } from '@ionic/react'
+import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
+import { Navbar } from 'react-bootstrap'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
 const App = () => {
     const { t } = useTranslation()
+    const isMobile = useDetectMobileOrTablet()
 
     useEffect(() => {
         // when using vh and vw units in css:
@@ -42,23 +43,24 @@ const App = () => {
         isMobile: window.innerWidth <= 500,
     }
     const [store, dispatch] = useReducer(reducer, initialState)
-    const isMobile = useDetectMobileOrTablet()
-
     const isVideoCallPage = () => {
         return window.location.pathname.indexOf(`/${t('url.video-call')}/`) >= 0
     }
 
     return (
         <Context.Provider value={{ store, dispatch }}>
-            {isMobile && !isVideoCallPage() && (
-                <Navbar bg="light" variant="dark">
-                    <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
-                </Navbar>
-            )}
-
-            <div className="App">
-                <Router />
-            </div>
+            <IonApp className="App">
+                {isMobile && !isVideoCallPage() && (
+                    <IonHeader>
+                        <Navbar bg="light" variant="dark">
+                            <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
+                        </Navbar>
+                    </IonHeader>
+                )}
+                <IonContent>
+                    <Router />
+                </IonContent>
+            </IonApp>
         </Context.Provider>
     )
 }
