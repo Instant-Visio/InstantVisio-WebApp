@@ -10,6 +10,8 @@
         "indications": {
             "multiple-people": "Una vez en la video, se tiene acesso a la linea de direcciones. Se puede por su lado, dirigirla a otros familiares. Recomandamos limitarse a 4 participantes, para un mejor experimiento."
         },
+        "form-submit": "Al enviar el formulario, será redirigido a la página de llamada de videoteléfono. Paralelamente, se enviará un SMS y / o un correo electrónico a su ser querido y los invitará a unirse a usted directamente en la página para conversar con usted.",
+        "know-more": "Más información",
         "data-mentions": {
             "mandatory": "Los campos señalados con un asterisco son obligatorios.",
             "management": "El encargado del tratamiento, Stéphane Luçon verifica los datos conseguidos para mandar el SMS o el e-mail al familiar. Despues del envio, los datos son borrados al final del dia. Para conseguir mas informaciones sobre la gestion de los datos y la proteccion de sus derechos, gracias por dirigirse a la pagina <1>Datos personales <|1>."

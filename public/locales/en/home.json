@@ -10,6 +10,8 @@
         "indications": {
             "multiple-people": "Once the video has started, you can invite other participants by sharing the address available in the address or URL bar. For an optimal experience, we recommend up to 4 participants per call."
         },
+        "form-submit": "When submitting the form, you will be redirected to the videophone call page. In parallel, an sms and / or an e-mail will be sent to your loved one and the invited to join you directly on the page to exchange with you.",
+        "know-more": "Find out more",
         "data-mentions": {
             "mandatory": "Fields marked by an asterisk are mandatory.",
             "management": "The person in charge of data, Stéphane Luçon, processes the collected information before sending the SMS or e-mail to your contact. Your information will be deleted one day after it has been sent. To learn more about data privacy or to exercise your rights regarding your personal data, please see section <1>Personal data</1>."
