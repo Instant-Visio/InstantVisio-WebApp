@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from 'react'
-import { withRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { Context } from '../../utils/global/context'
 import { reducer } from '../../utils/global/reducer'
 import './App.scss'
@@ -49,8 +49,8 @@ const App = () => {
     }
 
     return (
-        <Context.Provider value={{ store, dispatch }}>
-            <IonApp className="App">
+        <IonApp className="App">
+            <BrowserRouter>
                 {isMobile && !isVideoCallPage() && (
                     <IonHeader>
                         <Navbar bg="light" variant="dark">
@@ -59,13 +59,14 @@ const App = () => {
                         </Navbar>
                     </IonHeader>
                 )}
-                <IonContent>
-                    <Router />
-                </IonContent>
-            </IonApp>
-        </Context.Provider>
+                <Context.Provider value={{ store, dispatch }}>
+                    <IonContent>
+                        <Router />
+                    </IonContent>
+                </Context.Provider>
+            </BrowserRouter>
+        </IonApp>
     )
 }
 
-// withRouter to pass props to components
-export default withRouter(App)
+export default App

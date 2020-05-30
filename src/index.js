@@ -11,11 +11,9 @@ import './i18n/countries'
 
 const rootComponent = (
     <Suspense fallback={null}>
-        <BrowserRouter>
-            <ThemeProvider theme={theme}>
-                <App />
-            </ThemeProvider>
-        </BrowserRouter>
+        <ThemeProvider theme={theme}>
+            <App />
+        </ThemeProvider>
     </Suspense>
 )
 
