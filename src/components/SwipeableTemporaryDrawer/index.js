@@ -17,6 +17,7 @@ import DuoIcon from '@material-ui/icons/Duo'
 import SubjectIcon from '@material-ui/icons/Subject'
 import PersonIcon from '@material-ui/icons/Person'
 import InfoIcon from '@material-ui/icons/Info'
+import { useHistory } from 'react-router-dom'
 
 const LogoContainer = styled.div`
     padding-left: 25%;
@@ -35,6 +36,7 @@ const useStyles = makeStyles({
 export default function SwipeableTemporaryDrawer() {
     const classes = useStyles()
     const { t } = useTranslation()
+    const history = useHistory()
 
     const [state, setState] = React.useState({
         top: false,
@@ -56,7 +58,7 @@ export default function SwipeableTemporaryDrawer() {
     }
 
     const navigateTo = (url) => {
-        window.location.pathname = url
+        history.push(url)
     }
 
     const list = (anchor) => (

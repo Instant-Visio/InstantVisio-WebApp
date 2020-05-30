@@ -13,8 +13,6 @@ import {
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
 import { useTranslation } from 'react-i18next'
 import { Route } from 'react-router-dom'
-import { IonRouterOutlet } from '@ionic/react'
-import { IonReactRouter } from '@ionic/react-router'
 
 const Router = () => {
     const { t } = useTranslation()
