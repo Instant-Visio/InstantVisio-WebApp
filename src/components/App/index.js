@@ -6,7 +6,7 @@ import './App.scss'
 import { gdprHandler } from '../../utils/gdpr'
 import Router from './router'
 import { useTranslation } from 'react-i18next'
-import { IonApp, IonHeader, IonContent } from '@ionic/react'
+import { IonApp, IonHeader } from '@ionic/react'
 import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
 import { Navbar } from 'react-bootstrap'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
@@ -68,9 +68,7 @@ const App = () => {
                     </IonHeader>
                 )}
                 <Context.Provider value={{ store, dispatch }}>
-                    <IonContent>
-                        <Router />
-                    </IonContent>
+                    <Router />
                 </Context.Provider>
             </BrowserRouter>
         </IonApp>

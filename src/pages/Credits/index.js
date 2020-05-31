@@ -46,13 +46,9 @@ const Credits = () => {
     }
 
     return (
-        <IonContent>
-            <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
-                <CreditsStyled>
-                    {Object.entries(data).map(render)}
-                </CreditsStyled>
-            </DefaultLayout>
-        </IonContent>
+        <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
+            <CreditsStyled>{Object.entries(data).map(render)}</CreditsStyled>
+        </DefaultLayout>
     )
 }
 
