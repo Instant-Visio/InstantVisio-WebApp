@@ -11,6 +11,12 @@ import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
 import { Navbar } from 'react-bootstrap'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import Lang from '../Lang'
+import styled from 'styled-components'
+
+const NavbarContainer = styled.div`
+    position: 'relative';
+    margin-left: 40%;
+`
 
 const App = () => {
     const { t } = useTranslation()
@@ -55,7 +61,9 @@ const App = () => {
                     <IonHeader>
                         <Navbar bg="light" variant="dark">
                             <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
-                            <Lang />
+                            <NavbarContainer>
+                                <Lang />
+                            </NavbarContainer>
                         </Navbar>
                     </IonHeader>
                 )}
