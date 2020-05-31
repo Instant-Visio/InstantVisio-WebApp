@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep,allowobfuscation @interface com.getcapacitor.NativePlugin,com.getcapacitor.PluginMethod
+-keep @com.getcapacitor.NativePlugin class * { *; }
+-keepclasseswithmembernames class * {
+  @com.getcapacitor.PluginMethod public *;
+}
