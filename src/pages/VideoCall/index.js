@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import DailyIframe from '@daily-co/daily-js'
 import { useTranslation } from 'react-i18next'
-
 import dailyCssText from './dailyCssText'
 import { CallContainer } from './VideoCallComponents'
 import Fullscreen from '../../components/Fullscreen'
@@ -51,6 +50,14 @@ const VideoCallPage = () => {
     }
 
     useEffect(() => {
+        const showToolbar = (show) => {
+            document.getElementById('topbar').style.display = !show
+                ? 'none'
+                : 'block'
+        }
+
+        showToolbar(false)
+
         if (dailyRef.current) {
             return
         }
@@ -136,6 +143,7 @@ const VideoCallPage = () => {
         window.addEventListener('beforeunload', leavingCallPage)
 
         return () => {
+            showToolbar(true)
             window.removeEventListener('beforeunload', leavingCallPage)
         }
     }, [url, t, videoName])

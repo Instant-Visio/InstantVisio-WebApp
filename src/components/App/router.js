@@ -7,6 +7,7 @@ import {
     Blog,
     Credits,
     NotFound,
+    JoinVideoCall,
 } from '../../pages'
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
 import { useTranslation } from 'react-i18next'
@@ -23,6 +24,10 @@ const Router = () => {
                 <Route
                     path={`/${t('url.video-call')}/:videoName`}
                     component={VideoCallPrecheck}
+                />
+                <Route
+                    path={`/${t('url.video-call')}`}
+                    component={JoinVideoCall}
                 />
                 <Route
                     path={`/${t('url.legal-mentions')}`}

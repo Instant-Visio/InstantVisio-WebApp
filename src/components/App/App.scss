@@ -53,6 +53,10 @@ ion-content {
     ion-content {
         --padding-top: 2.5rem;
     }
+
+    ion-item {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 767px) {
