@@ -25,6 +25,12 @@ export const logSmsSent = () => {
     })
 }
 
+export const logCallRating = (rating: number) => {
+    sendLog({
+        callRating: rating,
+    })
+}
+
 const sendLog = (data: { [key: string]: number | string }) => {
     const { sumologic } = functions.config()
     if (!sumologic || !sumologic.collector) {

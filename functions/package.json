@@ -10,7 +10,7 @@
         "copyMessageTranslations": "node scripts/copyPublicMessageToFunctions.js"
     },
     "engines": {
-        "node": "8"
+        "node": "10"
     },
     "main": "lib/index.js",
     "dependencies": {

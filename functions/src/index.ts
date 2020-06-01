@@ -1,4 +1,5 @@
 export { newCall } from './callable/newCall'
+export { callRating } from './callable/callRating'
 export { roomJoined } from './callable/roomJoined'
 export { logCleaner } from './cron/logCleaner'
 export { triggerAlert } from './callable/alerts/alert'

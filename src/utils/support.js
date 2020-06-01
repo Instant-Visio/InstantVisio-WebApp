@@ -38,7 +38,7 @@ export const setNewCallError = (error = {}) => {
     if (!window.$crisp) return
     window.$crisp.push([
         'set',
-        'session:event',
+        'session:data',
         [[['videoCallCreationError', error, 'red']]],
     ])
 }
@@ -47,8 +47,8 @@ export const setNewCallRedirected = () => {
     if (!window.$crisp) return
     window.$crisp.push([
         'set',
-        'session:event',
-        [[['videoCallCreatedAndRedirected', null, 'green']]],
+        'session:data',
+        [[['videoCallCreatedAndRedirected', Date.now(), 'green']]],
     ])
 }
 
@@ -56,7 +56,7 @@ export const setVideoCallExited = () => {
     if (!window.$crisp) return
     window.$crisp.push([
         'set',
-        'session:event',
-        [[['videoCallExited', null, 'orange']]],
+        'session:data',
+        [[['videoCallExited', Date.now(), 'orange']]],
     ])
 }

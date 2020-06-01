@@ -1,8 +1,8 @@
 import React from 'react'
 import { IframeContainer } from './VideoCallComponents'
 import { useTranslation } from 'react-i18next'
-import RatingModal from '../../components/RatingModal'
 import classNames from 'classnames'
+import { RatingModal } from '../../components/RatingModal'
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -43,7 +43,7 @@ const VideoCallFrame = ({
             {hasLeft && (
                 <div>
                     {t('leave-confirmation')}
-                    <RatingModal hasLeft></RatingModal>
+                    <RatingModal hasLeft />
                 </div>
             )}
         </IframeContainer>
