@@ -50,6 +50,12 @@ ion-content {
 }
 
 @media screen and (max-width: 767px) {
+    ion-content {
+        --padding-top: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
     .logo {
         width: 30%;
         height: 30%;

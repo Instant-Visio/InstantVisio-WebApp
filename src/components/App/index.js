@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from 'react'
-import { BrowserRouter } from 'react-router-dom'
 import { Context } from '../../utils/global/context'
 import { reducer } from '../../utils/global/reducer'
 import './App.scss'

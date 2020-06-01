@@ -18,7 +18,7 @@ import SubjectIcon from '@material-ui/icons/Subject'
 import PersonIcon from '@material-ui/icons/Person'
 import InfoIcon from '@material-ui/icons/Info'
 import { useHistory } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { IonItem } from '@ionic/react'
 
 const LogoContainer = styled.div`
     padding-left: 25%;
@@ -95,10 +95,10 @@ export default function SwipeableTemporaryDrawer() {
                     },
                 ].map(({ title, icon, url }) => (
                     <ListItem button key={title}>
-                        <Link to={url}>
+                        <IonItem routerLink={url}>
                             <ListItemIcon>{icon}</ListItemIcon>
                             <ListItemText primary={title} />
-                        </Link>
+                        </IonItem>
                     </ListItem>
                 ))}
             </List>
