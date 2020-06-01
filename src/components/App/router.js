@@ -13,13 +13,14 @@ import {
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
 import { useTranslation } from 'react-i18next'
 import { Route } from 'react-router-dom'
+import { IonRouterOutlet } from '@ionic/react'
 
 const Router = () => {
     const { t } = useTranslation()
 
     return (
-        <IonReactRouter>
-            <IonRouterOutlet>
+        <IonRouterOutlet>
+            <Switch>
                 <Route path="/" exact component={Home} />
                 <Route
                     path={`/${t('url.video-call')}/:videoName`}
@@ -53,9 +54,8 @@ const Router = () => {
                     component={Credits}
                 />
                 <Route component={NotFound} />
-                <Route component={NotFound} />
-            </IonRouterOutlet>
-        </IonReactRouter>
+            </Switch>
+        </IonRouterOutlet>
     )
 }
 
