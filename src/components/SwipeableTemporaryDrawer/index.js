@@ -18,6 +18,7 @@ import SubjectIcon from '@material-ui/icons/Subject'
 import PersonIcon from '@material-ui/icons/Person'
 import InfoIcon from '@material-ui/icons/Info'
 import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const LogoContainer = styled.div`
     padding-left: 25%;
@@ -57,10 +58,6 @@ export default function SwipeableTemporaryDrawer() {
         setState({ ...state, [anchor]: open })
     }
 
-    const navigateTo = (url) => {
-        history.push(url)
-    }
-
     const list = (anchor) => (
         <div
             className={clsx(classes.list, {
@@ -97,12 +94,11 @@ export default function SwipeableTemporaryDrawer() {
                         url: `/${t('url.credits')}`,
                     },
                 ].map(({ title, icon, url }) => (
-                    <ListItem
-                        button
-                        key={title}
-                        onClick={() => navigateTo(url)}>
-                        <ListItemIcon>{icon}</ListItemIcon>
-                        <ListItemText primary={title} />
+                    <ListItem button key={title}>
+                        <Link to={url}>
+                            <ListItemIcon>{icon}</ListItemIcon>
+                            <ListItemText primary={title} />
+                        </Link>
                     </ListItem>
                 ))}
             </List>

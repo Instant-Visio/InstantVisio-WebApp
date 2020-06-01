@@ -12,6 +12,7 @@ import { Navbar } from 'react-bootstrap'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import Lang from '../Lang'
 import styled from 'styled-components'
+import { IonReactRouter } from '@ionic/react-router'
 
 const NavbarContainer = styled.div`
     position: 'relative';
@@ -56,7 +57,7 @@ const App = () => {
 
     return (
         <IonApp className="App">
-            <BrowserRouter>
+            <IonReactRouter>
                 {isMobile && !isVideoCallPage() && (
                     <IonHeader>
                         <Navbar bg="light" variant="dark">
@@ -70,7 +71,7 @@ const App = () => {
                 <Context.Provider value={{ store, dispatch }}>
                     <Router />
                 </Context.Provider>
-            </BrowserRouter>
+            </IonReactRouter>
         </IonApp>
     )
 }
