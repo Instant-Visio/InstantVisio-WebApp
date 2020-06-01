@@ -8,6 +8,7 @@ import {
     Credits,
     MediaNews,
     NotFound,
+    JoinVideoCall,
 } from '../../pages'
 
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
@@ -25,6 +26,10 @@ const Router = () => {
                 <Route
                     path={`/${t('url.video-call')}/:videoName`}
                     component={VideoCallPrecheck}
+                />
+                <Route
+                    path={`/${t('url.video-call')}`}
+                    component={JoinVideoCall}
                 />
                 <Route
                     path={`/${t('url.legal-mentions')}`}

@@ -16,6 +16,7 @@ import {
 import Logo from '../../components/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import { IonContent } from '@ionic/react'
+import * as LocalStorage from '../../services/local-storage'
 
 const DataMentions = styled.div`
     .cnil {
@@ -60,6 +61,7 @@ export default function Home() {
         setNewCall(values)
         createCall(values)
             .then((roomName) => {
+                LocalStorage.setLastVideoCallId(roomName)
                 setVideoCallId(roomName)
             })
             .catch((error) => {

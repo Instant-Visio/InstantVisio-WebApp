@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import MenuIcon from '@material-ui/icons/Menu'
-import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -17,8 +16,8 @@ import DuoIcon from '@material-ui/icons/Duo'
 import SubjectIcon from '@material-ui/icons/Subject'
 import PersonIcon from '@material-ui/icons/Person'
 import InfoIcon from '@material-ui/icons/Info'
-import { useHistory } from 'react-router-dom'
-import { IonItem } from '@ionic/react'
+import { IonItem, IonList } from '@ionic/react'
+import Lang from '../Lang'
 
 const LogoContainer = styled.div`
     padding-left: 25%;
@@ -32,12 +31,14 @@ const useStyles = makeStyles({
     fullList: {
         width: 'auto',
     },
+    languagePicker: {
+        marginLeft: '1rem',
+    },
 })
 
 export default function SwipeableTemporaryDrawer() {
     const classes = useStyles()
     const { t } = useTranslation()
-    const history = useHistory()
 
     const [state, setState] = React.useState({
         top: false,
@@ -59,50 +60,54 @@ export default function SwipeableTemporaryDrawer() {
     }
 
     const list = (anchor) => (
-        <div
-            className={clsx(classes.list, {
-                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-            })}
-            role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}>
+        <div>
             <LogoContainer>
                 <Logo />
             </LogoContainer>
 
-            <List>
-                {[
-                    { title: 'Acceuil', icon: <HomeIcon />, url: '/' },
-                    {
-                        title: 'Visio',
-                        icon: <DuoIcon />,
-                        url: `/${t('url.video-call')}/`,
-                    },
-                    {
-                        title: 'Mention légales',
-                        icon: <SubjectIcon />,
-                        url: `/${t('url.legal-mentions')}`,
-                    },
-                    {
-                        title: 'Données Personnelles',
-                        icon: <PersonIcon />,
-                        url: `/${t('url.personal-data')}`,
-                    },
-                    {
-                        title: 'À propos de nous',
-                        icon: <InfoIcon />,
-                        url: `/${t('url.credits')}`,
-                    },
-                ].map(({ title, icon, url }) => (
-                    <ListItem button key={title}>
-                        <IonItem routerLink={url}>
-                            <ListItemIcon>{icon}</ListItemIcon>
-                            <ListItemText primary={title} />
-                        </IonItem>
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
+            <Lang className={classes.languagePicker} />
+
+            <div
+                className={clsx(classes.list, {
+                    [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+                })}
+                role="presentation"
+                onClick={toggleDrawer(anchor, false)}
+                onKeyDown={toggleDrawer(anchor, false)}>
+                <IonList lines="none">
+                    {[
+                        { title: 'Acceuil', icon: <HomeIcon />, url: '/' },
+                        {
+                            title: 'Visio',
+                            icon: <DuoIcon />,
+                            url: `/${t('url.video-call')}/`,
+                        },
+                        {
+                            title: 'Mention légales',
+                            icon: <SubjectIcon />,
+                            url: `/${t('url.legal-mentions')}`,
+                        },
+                        {
+                            title: 'Données Personnelles',
+                            icon: <PersonIcon />,
+                            url: `/${t('url.personal-data')}`,
+                        },
+                        {
+                            title: 'À propos de nous',
+                            icon: <InfoIcon />,
+                            url: `/${t('url.credits')}`,
+                        },
+                    ].map(({ title, icon, url }) => (
+                        <ListItem button key={title}>
+                            <IonItem routerLink={url}>
+                                <ListItemIcon>{icon}</ListItemIcon>
+                                <ListItemText primary={title} />
+                            </IonItem>
+                        </ListItem>
+                    ))}
+                </IonList>
+                <Divider />
+            </div>
         </div>
     )
 

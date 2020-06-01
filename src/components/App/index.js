@@ -9,7 +9,6 @@ import { IonApp, IonHeader } from '@ionic/react'
 import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
 import { Navbar } from 'react-bootstrap'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
-import Lang from '../Lang'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 
@@ -45,29 +44,21 @@ const App = () => {
         gdprHandler()
     }, [])
 
-    const initialState = {
-        width: window.innerWidth,
-        isMobile: window.innerWidth <= 500,
-    }
+    const initialState = {}
     const [store, dispatch] = useReducer(reducer, initialState)
-    const isVideoCallPage = () => {
-        return window.location.pathname.indexOf(`/${t('url.video-call')}/`) >= 0
-    }
 
     return (
         <IonApp className="App">
             <IonReactRouter>
-                {isMobile && !isVideoCallPage() && (
-                    <IonHeader>
-                        <Navbar bg="light" variant="dark">
-                            <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer>
-                            <NavbarContainer>
-                                <Lang />
-                            </NavbarContainer>
-                        </Navbar>
-                    </IonHeader>
-                )}
                 <Context.Provider value={{ store, dispatch }}>
+                    {isMobile && (
+                        <IonHeader id="topbar">
+                            <Navbar bg="light" variant="dark">
+                                <SwipeableTemporaryDrawer />
+                                <NavbarContainer />
+                            </Navbar>
+                        </IonHeader>
+                    )}
                     <Router />
                 </Context.Provider>
             </IonReactRouter>
