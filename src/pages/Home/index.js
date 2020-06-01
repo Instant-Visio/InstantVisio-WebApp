@@ -15,6 +15,7 @@ import {
 } from '../../utils/support'
 import Logo from '../../components/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import { IonContent } from '@ionic/react'
 
 const DataMentions = styled.div`
     .cnil {
@@ -73,7 +74,7 @@ export default function Home() {
     }
 
     return (
-        <div>
+        <IonContent>
             {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">
                     <Description />
@@ -146,6 +147,6 @@ export default function Home() {
                     </MobileContent>
                 </WrapperMobile>
             )}
-        </div>
+        </IonContent>
     )
 }
