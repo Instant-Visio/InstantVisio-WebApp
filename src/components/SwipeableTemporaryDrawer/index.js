@@ -76,24 +76,28 @@ export default function SwipeableTemporaryDrawer() {
                 onKeyDown={toggleDrawer(anchor, false)}>
                 <IonList lines="none">
                     {[
-                        { title: 'Acceuil', icon: <HomeIcon />, url: '/' },
                         {
-                            title: 'Visio',
+                            title: t('footer.home'),
+                            icon: <HomeIcon />,
+                            url: '/',
+                        },
+                        {
+                            title: t('footer.visio'),
                             icon: <DuoIcon />,
                             url: `/${t('url.video-call')}/`,
                         },
                         {
-                            title: 'Mention légales',
+                            title: t('footer.legal-mentions'),
                             icon: <SubjectIcon />,
                             url: `/${t('url.legal-mentions')}`,
                         },
                         {
-                            title: 'Données Personnelles',
+                            title: t('footer.personal-data'),
                             icon: <PersonIcon />,
                             url: `/${t('url.personal-data')}`,
                         },
                         {
-                            title: 'À propos de nous',
+                            title: t('footer.about'),
                             icon: <InfoIcon />,
                             url: `/${t('url.credits')}`,
                         },
