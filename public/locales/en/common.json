@@ -5,6 +5,8 @@
     "homeBaseline": "Video chat with your loved ones in a single click, and <1>for free.</1>",
     "headerBaseline": "Video chat with your loved ones in a single click, and for free.",
     "footer": {
+        "home": "Home",
+        "visio": "Video",
         "about": "About",
         "contact-us": "Contact us",
         "legal-mentions": "Legal mentions",
