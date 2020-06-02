@@ -4,6 +4,11 @@ import DefaultLayout from '../../layout/Default'
 import { IonContent } from '@ionic/react'
 import { Redirect, Link } from 'react-router-dom'
 import * as LocalStorage from '../../services/local-storage'
+import styled from 'styled-components'
+
+const CenteredText = styled.div`
+    text-align: center;
+`
 
 const JoinVideoCall = () => {
     const { t } = useTranslation('join-last-call')
@@ -29,9 +34,11 @@ const JoinVideoCall = () => {
                 <Redirect to={`/visio/${lastVideoCallId}`} />
             ) : (
                 <DefaultLayout title="not-used-here">
-                    <h1>{`${t('page-title')}`}</h1>
-                    <h2>{t('page-content')}</h2>
-                    <Link to="/">{t('link-back-to-home')}</Link>
+                    <CenteredText>
+                        <h1>{`${t('page-title')}`}</h1>
+                        <h2>{t('page-content')}</h2>
+                        <Link to="/">{t('link-back-to-home')}</Link>
+                    </CenteredText>
                 </DefaultLayout>
             )}
         </IonContent>
