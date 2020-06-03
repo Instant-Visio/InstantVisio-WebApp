@@ -12,7 +12,6 @@ const CenteredText = styled.div`
 
 const JoinVideoCall = () => {
     const { t } = useTranslation('join-last-call')
-    const [showLoading, setShowLoading] = useState(true)
     const [lastVideoCallId, setLastVideoCallId] = useState(null)
 
     useEffect(() => {
@@ -21,12 +20,10 @@ const JoinVideoCall = () => {
             if (videoCallId) {
                 setLastVideoCallId(videoCallId)
             }
-
-            setShowLoading(false)
         }
 
         getCallId()
-    }, [LocalStorage.getLastVideoCallId, setLastVideoCallId, setShowLoading])
+    }, [LocalStorage.getLastVideoCallId, setLastVideoCallId])
 
     return (
         <IonContent>
@@ -35,8 +32,8 @@ const JoinVideoCall = () => {
             ) : (
                 <DefaultLayout title="not-used-here">
                     <CenteredText>
-                        <h1>{`${t('page-title')}`}</h1>
-                        <h2>{t('page-content')}</h2>
+                        <h2>{`${t('page-title')}`}</h2>
+                        <p>{t('page-content')}</p>
                         <Link to="/">{t('link-back-to-home')}</Link>
                     </CenteredText>
                 </DefaultLayout>
