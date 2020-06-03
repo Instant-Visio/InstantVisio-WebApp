@@ -23,7 +23,7 @@ const JoinVideoCall = () => {
         }
 
         getCallId()
-    }, [LocalStorage.getLastVideoCallId, setLastVideoCallId])
+    }, [setLastVideoCallId])
 
     return (
         <IonContent>
