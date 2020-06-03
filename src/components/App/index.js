@@ -4,7 +4,6 @@ import { reducer } from '../../utils/global/reducer'
 import './App.scss'
 import { gdprHandler } from '../../utils/gdpr'
 import Router from './router'
-import { useTranslation } from 'react-i18next'
 import { IonApp, IonHeader } from '@ionic/react'
 import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
 import { Navbar } from 'react-bootstrap'
@@ -18,7 +17,6 @@ const NavbarContainer = styled.div`
 `
 
 const App = () => {
-    const { t } = useTranslation()
     const isMobile = useDetectMobileOrTablet()
 
     useEffect(() => {
