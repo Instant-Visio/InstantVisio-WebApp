@@ -1,6 +1,6 @@
 {
     "appId": "com.instantvisio.app",
-    "appName": "instant-visio",
+    "appName": "Instant Visio",
     "bundledWebRuntime": false,
     "npmClient": "npm",
     "webDir": "build",
