@@ -1,6 +1,4 @@
-import React, { useEffect, useReducer } from 'react'
-import { Context } from '../../utils/global/context'
-import { reducer } from '../../utils/global/reducer'
+import React, { useEffect } from 'react'
 import './App.scss'
 import { gdprHandler } from '../../utils/gdpr'
 import Router from './router'
@@ -42,23 +40,18 @@ const App = () => {
         gdprHandler()
     }, [])
 
-    const initialState = {}
-    const [store, dispatch] = useReducer(reducer, initialState)
-
     return (
         <IonApp className="App">
             <IonReactRouter>
-                <Context.Provider value={{ store, dispatch }}>
-                    {isMobile && (
-                        <IonHeader id="topbar">
-                            <Navbar bg="light" variant="dark">
-                                <SwipeableTemporaryDrawer />
-                                <NavbarContainer />
-                            </Navbar>
-                        </IonHeader>
-                    )}
-                    <Router />
-                </Context.Provider>
+                {isMobile && (
+                    <IonHeader id="topbar">
+                        <Navbar bg="light" variant="dark">
+                            <SwipeableTemporaryDrawer />
+                            <NavbarContainer />
+                        </Navbar>
+                    </IonHeader>
+                )}
+                <Router />
             </IonReactRouter>
         </IonApp>
     )
