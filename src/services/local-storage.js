@@ -14,6 +14,6 @@ export const getLastVideoCallId = async () => {
     return value
 }
 
-export const removeItem = async () => {
+export const removeLastVideoCallId = async () => {
     return Storage.remove({ key: lastVideoCallKey })
 }

@@ -3,6 +3,7 @@ import { IframeContainer } from './VideoCallComponents'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { Redirect } from 'react-router-dom'
+import * as LocalStorage from '../../services/local-storage'
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -12,6 +13,10 @@ const VideoCallFrame = ({
     videoFrame,
 }) => {
     const { t } = useTranslation('videocall')
+
+    if (hasLeft) {
+        LocalStorage.removeLastVideoCallId()
+    }
 
     return (
         <IframeContainer>
