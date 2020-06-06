@@ -21,6 +21,7 @@
     "dependencies": {
         "@capacitor/android": "^2.1.0",
         "@capacitor/core": "2.1.0",
+        "@capacitor/ios": "^2.1.0",
         "@daily-co/daily-js": "^0.9.984",
         "@ionic/pwa-elements": "^1.5.2",
         "@ionic/react": "^5.1.1",
