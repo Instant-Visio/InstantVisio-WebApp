@@ -6,6 +6,8 @@ export default function Newsletter() {
             title="Newsletter"
             width="100%"
             height="500rem"
-            src={'http://eepurl.com/g5NddD'}></iframe>
+            src={
+                'https://instantvisio.us19.list-manage.com/subscribe?u=54f72daf5d7948c23e68e8acb&id=b8e26c1a9a'
+            }></iframe>
     )
 }
