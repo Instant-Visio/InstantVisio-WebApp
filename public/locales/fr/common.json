@@ -13,7 +13,8 @@
         "credits": "Crédits",
         "media": "On parle de nous",
         "contact": "Prise de contact",
-        "cookies": "Gestion des cookies"
+        "cookies": "Gestion des cookies",
+        "newsletter": "Newsletter"
     },
     "lang": {
         "fr": "Français",
@@ -32,7 +33,8 @@
         "personal-data": "donnees-personnelles",
         "blog": "blog",
         "credits": "credits",
-        "media": "on-parle-de-nous"
+        "media": "on-parle-de-nous",
+        "newsletter": "newsletter"
     },
     "message": {
         "title": "Demande URGENTE de visiophonie de",

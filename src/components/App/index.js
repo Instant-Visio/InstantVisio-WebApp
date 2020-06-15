@@ -44,11 +44,7 @@ const App = () => {
     return (
         <div className="App">
             <Switch>
-                <Route
-                    path="/"
-                    exact
-                    component={Home}
-                />
+                <Route path="/" exact component={Home} />
                 <Route
                     path={`/${t('url.video-call')}/:videoName`}
                     component={VideoCallPrecheck}
