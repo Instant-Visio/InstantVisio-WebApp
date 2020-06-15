@@ -1,37 +1,8 @@
 {
     "title": "Newsletter",
-    "description": "Voulez-vous vous inscrire à la newsletter ?",
     "buttons": {
-        "submit": {
-            "label": "S'inscrire"
+        "close": {
+            "label": "Fermer"
         }
-    },
-    "mail": {
-        "label": "Votre adresse E-mail*",
-        "title": "Votre adresse E-mail",
-        "placeholder": "E.g. jane.doe@gmail.com",
-        "errors": {
-            "required": "Veuillez insérer votre adresse e-mail",
-            "invalid": "L'adresse e-mail inseré n'est pas valide"
-        }
-    },
-    "firstName": {
-        "label": "Prénom*?",
-        "title": "Prénom",
-        "placeholder": "E.g. Jane, Grandpa",
-        "errors": {
-            "required": "Veuillez rentrer votre prénom"
-        }
-    },
-    "lastName": {
-        "label": "Nom*?",
-        "title": "Nom",
-        "placeholder": "E.g. Votre nom",
-        "errors": {
-            "required": "Veuillez rentrer votre nom"
-        }
-    },
-    "errors": {
-        "general": "Erreur d'inscription à la newsletter"
     }
 }

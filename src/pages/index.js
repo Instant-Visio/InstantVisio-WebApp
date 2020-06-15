@@ -6,7 +6,6 @@ import Blog from './Blog'
 import Credits from './Credits'
 import MediaNews from './MediaNews'
 import NotFound from './NotFound'
-import Newsletter from './Newsletter'
 
 export {
     Home,
@@ -16,6 +15,5 @@ export {
     Blog,
     Credits,
     MediaNews,
-    Newsletter,
     NotFound,
 }

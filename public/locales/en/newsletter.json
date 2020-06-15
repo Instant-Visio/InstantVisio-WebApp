@@ -1,29 +1,8 @@
 {
     "title": "Newsletter",
-    "description": "Would you like to subscribe to the newsletter ?",
     "buttons": {
-        "submit": {
-            "label": "Sign up"
+        "close": {
+            "label": "Close"
         }
-    },
-    "mail": {
-        "label": "Your E-mail address*",
-        "title": "Your E-mail address",
-        "placeholder": "E.g. jane.doe@gmail.com",
-        "errors": {
-            "required": "Please enter your e-mail",
-            "invalid": "The entered e-mail is not valid"
-        }
-    },
-    "personName": {
-        "label": "What is your name (or nickname)*?",
-        "title": "Your name",
-        "placeholder": "E.g. Jane, Grandpa",
-        "errors": {
-            "required": "Please enter your name"
-        }
-    },
-    "errors": {
-        "general": "Newsletter sign up process failed"
     }
 }

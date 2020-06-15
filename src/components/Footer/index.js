@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import About from '../../documents/Instant_Visio_Keynote.pdf'
 import FooterStyled from './Footer'
 import { showPreferencesDialog } from '../../utils/gdpr'
+import NewsletterModal from '../../pages/Newsletter/NewsletterModal'
 
 const Footer = () => {
     const { t } = useTranslation()
@@ -55,11 +56,7 @@ const Footer = () => {
                     </Link>
                 </li>
                 <li className="footer-link">
-                    <Link
-                        to={`/${t('url.newsletter')}`}
-                        className="footer-link-content">
-                        {t('footer.newsletter')}
-                    </Link>
+                    <NewsletterModal />
                 </li>
                 <li className="footer-link">
                     <a
