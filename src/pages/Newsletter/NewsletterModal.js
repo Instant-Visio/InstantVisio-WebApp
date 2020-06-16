@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
 import Newsletter from './index'
 import { useTranslation } from 'react-i18next'
 
@@ -18,17 +18,12 @@ export default function NewsletterModal() {
             </p>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title> {t('title')}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+                <Modal.Header
+                    style={{ padding: '0.5rem 0.5rem' }}
+                    closeButton></Modal.Header>
+                <Modal.Body style={{ padding: '0rem' }}>
                     <Newsletter />
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        {t('buttons.close.label')}
-                    </Button>
-                </Modal.Footer>
             </Modal>
         </>
     )
