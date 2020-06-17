@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Route, withRouter, Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import CustomHeaders from '../CustomHeaders'
 
 import './App.scss'
 import {
@@ -43,6 +44,7 @@ const App = () => {
 
     return (
         <div className="App">
+            <CustomHeaders />
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route
