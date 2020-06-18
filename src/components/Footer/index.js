@@ -56,7 +56,9 @@ const Footer = () => {
                     </Link>
                 </li>
                 <li className="footer-link">
-                    <NewsletterModal />
+                    <Link className="footer-link-content">
+                        <NewsletterModal />
+                    </Link>
                 </li>
                 <li className="footer-link">
                     <a
