@@ -33,10 +33,14 @@ const BlogArticle = ({
                 el.style.display = 'inline'
                 el.style.listStyle = 'none'
                 el.style.padding = '0'
-                Array.from(el.children).map((elChild) => { elChild.style.listStyle = 'none' })
+                Array.from(el.children).map((elChild) => {
+                    elChild.style.listStyle = 'none'
+                    return ''
+                })
             } else {
                 el.style.display = 'block'
             }
+            return ''
         })
     })
 
