@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { DateTime } from 'luxon'
 import ReactMarkdown from 'react-remarkable'
 import { useTranslation } from 'react-i18next'
+import { truncate } from 'lodash'
 
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import BlogArticleStyled from './BlogArticle'
@@ -20,18 +21,26 @@ const BlogArticle = ({
     const { t } = useTranslation(['common', 'blog'])
     const defaultTitle = 'Blog - Instant Visio'
 
+    const blogArticle = useRef(null)
+
     useDocumentTitle(
         pageTitle ? `${pageTitle} - ${defaultTitle}` : defaultTitle
     )
 
+    useEffect(() => {
+        Array.from(blogArticle.current.querySelector('span').children).map((el) => {
+            !pageTitle ? el.style.display = 'inline' : el.style.display = 'block'
+        })
+    })
+
     const formattedDate = t('blog:dateArticle')
         ? `${t('blog:dateArticle')} ${DateTime.fromISO(date).toLocaleString(
-              DateTime.DATE_FULL
-          )}`
+            DateTime.DATE_FULL
+        )}`
         : DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)
 
     return (
-        <BlogArticleStyled>
+        <BlogArticleStyled ref={blogArticle}>
             <Link
                 to={`/${t('common:url.blog')}/${slug}`}
                 className="article-title">
@@ -40,7 +49,11 @@ const BlogArticle = ({
             <p className="article-dateAuthor">
                 {formattedDate}, par {authors.join(` ${authorsAnd} `)}
             </p>
-            <ReactMarkdown source={content} />
+            {pageTitle && <ReactMarkdown source={content} />}
+            {!pageTitle &&
+            (<ReactMarkdown>{truncate(content, { length: 165, separator: /,?\.* +/})}
+                <Link to={`/${t('common:url.blog')}/${slug}`}>{t('blog:readArticle')}</Link>
+            </ReactMarkdown>)}
             <div className="article-forSharing">
                 <div className="article-forSharing-text">{t('blog:share')}</div>
                 {blog.socialMedia.map(
