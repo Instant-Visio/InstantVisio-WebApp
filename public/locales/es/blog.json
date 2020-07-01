@@ -17,8 +17,189 @@
             "authorsAnd": "et",
             "title": "Daily.co, un partenaire de la première heure",
             "content": "A la création de [Instant Visio](https://instantvisio.com), l'enjeu principal a tout de suite été de trouver une technologie de visioconférence à la fois fiable et simple d'utilisation, fonctionnant sur un maximum de dispositifs.\n\nIl était notamment indispensable pour nous de pouvoir entrer en visiophonie sans imposer de nouveaux téléchargements à l’utilisateur, mais également de nous assurer que les canaux vidéo et audio étaient sécurisés.\n\n[Daily.co](https://daily.co) étant la plateforme de visiophonie du programme de formation “[startupschool.org](https://startupschool.org)” mis en place par le célèbre Y Combinator, nous avons très tôt pensé à inclure leur outil dans notre liste de tests. Même si tout était techniquement parfait, nous nous sommes heurté initialement au fait que l’interface était en anglais et pourrait donc désorienter les utilisateurs non-anglophones.\n\nEn plein dimanche après-midi, nous avons tenté de poser les questions sur la bulle de contact client (« chat widget ») de [Daily.co](https://daily.co).\n\nEt là… « quelqu’un » (:) hello Nina) réponds à nos questions techniques en nous indiquant comment leur API va nous permettre de créer les séances de visiophonie à la volée et de personnaliser ces fameuses séances (y compris pour que l’interface soit dans d’autres langues). C’est sur leur formule payante.\n\nNous disons à Nina ce que nous sommes en train de bâtir et là, moment magique, intervention de quelqu’un d’autre sur la conversation, Kwin, qui nous accorde un compte premium avec toute la capacité d’offrir le service gratuitement pour, probablement, toutes les personnes qui pourraient avoir besoin d’Instant Visio.\n\nGrâce à la documentation très complète de l'API de [Daily.co](https://daily.co), nous avons réussi à mettre en place une solution adaptée aux besoins de nos utilisateurs en l'espace d'une journée.\n\nNous sommes reconnaissants de coopérer avec [Daily.co](https://daily.co) afin de mettre à la disposition des personnes vulnérables des outils leur permettant d'avoir un lien visuel avec leurs proches, surtout en ces temps très difficiles.\n\nPrenez soin de vous !"
+        },
+        {
+            "id": 3,
+            "slug": "prise-main-rapide-instant-visio",
+            "date": "2020-04-10",
+            "authors": ["Stéphane Luçon"],
+            "authorsAnd": "",
+            "title": "Prise en main rapide d'Instant Visio",
+            "content": "![Prise en main rapide d'Instant Visio](https://media-exp1.licdn.com/dms/image/C4D22AQEPdGARBtfuIA/feedshare-shrink_800/0?e=1596672000&v=beta&t=rcD9ZZRJIfykzJUB1AxRsHCJp9Lt6aw6hcVqunMsULQ)"
+        },
+        {
+            "id": 4,
+            "slug": "appels-utilisateurs",
+            "date": "2020-04-13",
+            "authors": ["Stéphane Luçon"],
+            "authorsAnd": "",
+            "title": "Appel aux utilisateurs de Instant Visio",
+            "content": "Nous avons besoin de vos retours d'expérience pour rendre Instant Visio encore plus simple, utile, pratique.\n\nComme Instant Visio est sans inscription ni stockage de données personnelles, nous n'avons que les sympathiques retours d'info spontanés pour échanger avec les soignants et aidants en CHU / EHPAD / au domicile (coucou aux amis du Bas-Rhin, Var, Rhône, Saône et Loire, Sarthe, Paris, Val-de-Marne qui se sont manifestés ces jours-ci)."
+        },
+        {
+            "id": 5,
+            "slug": "deploiement-28-tablettes-chu-strasbourg",
+            "date": "2020-04-14",
+            "authors": ["Stéphane Luçon"],
+            "authorsAnd": "",
+            "title": "Déploiement de Instant Visio sur 28 tablettes du CHU Strasbourg",
+            "content": "Instant Visio est déployé sur 28 tablettes du CHU Strasbourg (EHPAD - RÉA - URG) !\n\nJe rédigerai prochainement un article pour raconter comment un coup de fil à Stéphanie KOELL, ma cliente sur un projet de suivi de maladie chronique*, a été l'évènement déclencheur pour rejoindre le [Hacking Health Camp](https://www.linkedin.com/company/11808692) monté par Sébastien Letélié et y proposer de construire l'outil de visiophonie le plus simple possible dans le contexte du #covid19 : [https://instantvisio.com](https://instantvisio.com), gratuit, sans inscription, sans login, sans stockage de données personnelles et open source.\n\nMerci Stéphanie KOELL !\n\n*le projet de suivi de maladie chronique en question comprend Tabbya | L'Application + DOCAPOSTE appli de suivi santé + le MDM Samsung Knox"
+        },
+        {
+            "id": 6,
+            "slug": "presentation-instant-visio",
+            "date": "2020-04-15",
+            "authors": ["Abeba Ngwe"],
+            "authorsAnd": "",
+            "title": "Nouvelle présentation de Instant Visio",
+            "content": "Voici [une nouvelle présentation](https://instantvisio.com/static/media/Instant_Visio_Keynote.e243b3bd.pdf) à la fois complète et aérée de notre histoire, de notre mission et de notre équipe.\n\nUn grand merci à Ophélie Strezlec, Sébastien L'Hoste, David Brischoux, Carole Dolignon et à l'équipe d'avoir créé ce support !"
+        },
+        {
+            "id": 7,
+            "slug": "introducing-instant-visio",
+            "date": "2020-04-18",
+            "authors": ["Stéphane Luçon"],
+            "authorsAnd": "",
+            "title": "Introducing Instant Visio",
+            "content": "https://instantvisio.com video call is a free, no-register, no-login, no-install, no-personal-data-stored and open-sourced service.\n\nIt’s made to ease the work of nurses and caregivers who try to organize video calls between patients and their families: you just need to enter an SMS number or email of the person to join and everybody meets in a video call on their internet browser.\n\nBuilt by volunteers during a #hackathon started in Strasbourg, France. Now open to the world thanks to the support of [Daily.co](https://www.linkedin.com/company/dailyco/), [OVHcloud](https://www.linkedin.com/company/ovhgroup/), and [SendGrid-Twilio Inc](https://www.linkedin.com/company/sendgrid/).\n\nPlease help us reach the people who need to use it all over the world.\n\nBig thanks to the friends in the US, the UK, Italy, Spain, Greece, Romania, Hungary, Morocco, Belgium and Japan who have already been testing & using it prior to this official release in their countries/languages."
+        },
+        {
+            "id": 8,
+            "slug": "instant-visio-multilingue",
+            "date": "2020-04-21",
+            "authors": ["Abeba Ngwe"],
+            "authorsAnd": "",
+            "title": "Instant Visio est multilingue",
+            "content": "Et si on jouait au jeu des 7 différences ?\n\nEh oui, la nouvelle version de Instant Visio est désormais multilingue et utilisable avec un numéro étranger, pour faciliter l'accès aux proches à un maximum de personnes.\n\nUn grand merci à Nicolas Tchouanmou et à Hugo Gresse pour la mise en place de ces précieuses fonctionnalités ![Instant Visio multilingue](https://media-exp1.licdn.com/dms/image/C4D22AQFyyaRXJq1Aqw/feedshare-shrink_800/0?e=1596672000&v=beta&t=svhH02eszxLOSW_Fc29Lscbyt2L9D_Y7L0lwe1mbTN4)"
+        },
+        {
+            "id": 9,
+            "slug": "nouvelle-interface-appel",
+            "date": "2020-04-21",
+            "authors": ["Abeba Ngwe"],
+            "authorsAnd": "",
+            "title": "Une nouvelle interface d'appel",
+            "content": "Nous avons bien compris que nos utilisateurs souhaitaient voir leur proche en grand ; la page de l'appel visio a donc fait peau neuve. Désormais, la personne appelée apparaît dans l'ensemble de la page et ce sur tous les appareils.\n\nDe plus, nous avons épuré l'interface et explicité les messages à l'adresse des participants afin de faciliter la prise en main de l'outil.\n\nMerci à Abeba Ngwe et à Sébastien L'Hoste d'avoir mis en oeuvre ces améliorations.![Nouvelle interface d'appel Instant Visio](https://media-exp1.licdn.com/dms/image/C4E22AQGkQHuD0PzyPg/feedshare-shrink_800/0?e=1596672000&v=beta&t=gQBJTiAHwKojWIIfcsZtoQjKq1ORoR4lN175itWV5DU)"
+        },
+        {
+            "id": 10,
+            "slug": "voir-proches-droits",
+            "date": "2020-04-27",
+            "authors": ["Abeba Ngwe"],
+            "authorsAnd": "",
+            "title": "Voir ses proches est un droit",
+            "content": "Instant Visio est un outil qui permet aux individus de jouir d'un droit fondamental : celui de voir ses proches.\n\nStephane Lucon, à l'origine du projet, vous parle du propos de notre application et de notre avenir dans [cet article](https://blogs.mediapart.fr/stephanelucon/blog/260420/voir-ses-proches-est-un-droit)."
+        },
+        {
+            "id": 11,
+            "slug": "remerciements",
+            "date": "2020-04-28",
+            "authors": ["Abeba Ngwe"],
+            "authorsAnd": "",
+            "title": "Un grand merci à nos soutiens",
+            "content": "Aujourd'hui, nous voulons prendre le temps de remercier celles et ceux qui parlent de Instant Visio, que ce soit auprès de leurs contacts dans les EHPAD et hôpitaux, au sein d'un article, dans un commentaire ou à travers un partage de publication.\n\nMerci à Eric Fossoul, David Brischoux, Claire-Charlotte Gaulier, Patrick Ruyer, Carole Dolignon 💡🔎📲, Margot Micucci, frederic serriere, Laurent Bainier, Anne Taffin, REGUL'AID, Lab4Lab, ELA TECHNOLOGY, Guillaume Corp, Anaïs Schambil, Fredi Fernández, Bruno Barbagli, Bertrand Muller, Yan Schnell et à vous tous qui permettez à plusieurs centaines de personnes isolées de contacter leurs proches au quotidien.![Nuage de copies d'écran de partage de publication sur Instant Visio](https://media-exp1.licdn.com/dms/image/C4D22AQF6fUxyVQrKtg/feedshare-shrink_800/0?e=1596672000&v=beta&t=N86NrrIVuMVqyY93-espsABDVjF3VFB0_D1LQwniXB4)"
+        },
+        {
+            "id": 12,
+            "slug": "evolution-interface-appel",
+            "date": "2020-04-29",
+            "authors": ["Abeba Ngwe"],
+            "authorsAnd": "",
+            "title": "Notre interface d'appel évolue",
+            "content": "Notre interface évolue à nouveau pour toujours mieux guider nos utilisateurs :\n\n*   un support est désormais accessible via un chat Crisp, avec des opérateurs prêts à prendre la main sur les appels en cas de besoin*   les icônes Webcam et Micro apparaissent en vert lorsqu'elles sont actives*   un bouton facilite la mise en plein écran de l'appel\n\nUn grand merci à David Brischoux de nous faire régulièrement part des commentaires des utilisateurs, à Crisp de mettre à notre disposition un chat très abouti et à Hugo Gresse, Nicolas Tchouanmou et Abeba Ngwe.![Interface d'appel Instant Visio : chat Crisp, icônes Webcam et Micro, bouton de mise en plein écran](https://media-exp1.licdn.com/dms/image/C4D22AQE5W1Bm9dk2Kw/feedshare-shrink_2048_1536/0?e=1596672000&v=beta&t=LNwVGZg4698uQgxnxTg-j0cpp55dYvacjPSvEE1en3c)"
+        },
+        {
+            "id": 13,
+            "slug": "instant-visio-product-hunt",
+            "date": "2020-05-11",
+            "authors": ["Abeba Ngwe"],
+            "authorsAnd": "",
+            "title": "Instant Visio sur Product Hunt",
+            "content": "Ça y est, nous sommes sur Product Hunt ! Si vous souhaitez nous soutenir, vous pouvez nous y retrouver et [nous upvoter ici](https://www.producthunt.com/posts/instant-visio-video-calls)."
+        },
+        {
+            "id": 14,
+            "slug": "900-tablettes-service-aphp",
+            "date": "2020-05-16",
+            "authors": ["Büsra Dogan"],
+            "authorsAnd": "",
+            "title": "APHP : 900 tablettes en service",
+            "content": "Consciente de la charge de travail pour les personnels soignants, l’équipe d’Instant Visio a un but précis : permettre aux patients de voir leurs proches tout en facilitant la vie des soignants !\n\nNous remercions tous les collaborateurs qui ont permis le déploiement de notre projet !"
+        },
+        {
+            "id": 15,
+            "slug": "instant-visio-association",
+            "date": "2020-05-19",
+            "authors": ["Büsra Dogan"],
+            "authorsAnd": "",
+            "title": "Instant Visio devient une association",
+            "content": "Bonne nouvelle :)\n\nInstant Visio a créé une association pour garantir la pérennité du projet Instant Visio : la promesse d’un service ouvert, open-source et gratuit à long terme !\n\nC’est dans le cadre du #HackingHealthCamp, l’événement annuel visant la création d’innovation dans le domaine de la santé et grâce à une grande équipe de bénévoles qu’Instant Visio est dorénavant une association !\n\nCette application simple d’utilisation, totalement gratuite, sans inscription ni login, sans téléchargement, sans stockage de données personnelles et open source est la manière la plus rapide de se connecter à son entourage."
+        },
+        {
+            "id": 16,
+            "slug": "autorisation-camera-microphone",
+            "date": "2020-05-21",
+            "authors": ["Büsra Dogan"],
+            "authorsAnd": "",
+            "title": "Nouvelle version de Instant Visio",
+            "content": "Dorénavant, une autorisation vous sera demandé pour activer la caméra ainsi que le microphone, le tout pour vous connecter facilement à vos proches !\n\nUn grand merci aux développeurs. ![Fenêtre d'autorisation caméra et microphone](https://media-exp1.licdn.com/dms/image/C5622AQFwvtu2XJOvqg/feedshare-shrink_800/0?e=1596672000&v=beta&t=ZFBtvVdj8quJv5nnn9j5xqaW_TCdEBqEVUwHPh0R4y0)"
+        },
+        {
+            "id": 17,
+            "slug": "instant-visio-opensolidarity-ovhcloud",
+            "date": "2020-05-23",
+            "authors": ["Büsra Dogan"],
+            "authorsAnd": "",
+            "title": "Instant Visio sur Open Solidarity",
+            "content": "Nous sommes heureux de vous annoncer qu’Instant-Visio est en haut de page sur le site https://open-solidarity.com/fr/, qui propose des solutions technologiques solidaires et gratuites afin de lutter contre les pics de charge.\n\nUn grand merci à OVHcloud pour leur soutien et merci à Margot Mirucci pour leur accompagnement. ![Instant Visio sur le site d'Open Solidarity](https://media-exp1.licdn.com/dms/image/C5622AQGv6yzsdtqBsw/feedshare-shrink_800/0?e=1596672000&v=beta&t=-ZfbznpV-2HkxGSyI8omxt9Uuov1wDaskoFLFqdca7I)"
+        },
+        {
+            "id": 18,
+            "slug": "instant-visio-dailyco",
+            "date": "2020-05-26",
+            "authors": ["Büsra Dogan"],
+            "authorsAnd": "",
+            "title": "Instant Visio recommandé par Daily.co",
+            "content": "Daily.co change de business modèle et recommande Instant Visio comme solution grand-public dédiée au personnel soignant, aux patients et aux familles. Merci ! ![Instant Visio sur le site de Daily.co](https://media-exp1.licdn.com/dms/image/C5622AQHhbC9Ill1Gog/feedshare-shrink_800/0?e=1596672000&v=beta&t=4ImRapS2f_UAzzq-J1m7H1lCNlEEI38pDF23bzWmG5M)"
+        },
+        {
+            "id": 19,
+            "slug": "statuts-instant-visio",
+            "date": "2020-05-28",
+            "authors": ["Stéphane Luçon"],
+            "authorsAnd": "",
+            "title": "Statuts de l'association Instant Visio",
+            "content": "L'association INSTANT VISIO a pour objet de défendre le droit de voir ses proches sous toutes ses formes, notamment en assurant la gratuité de l’accès à des outils de visiophonie respectueux de la vie privée et des données personnelles des individus.\n\nL’association considère que le droit au lien social est un droit de l’homme, dérivé de la Déclaration universelle des droits de l’homme, notamment de l’article 12 (“Nul ne sera l'objet d'immixtions arbitraires dans sa vie privée, sa famille, son domicile ou sa correspondance, ni d'atteintes à son honneur et à sa réputation. Toute personne a droit à la protection de la loi contre de telles immixtions ou de telles atteintes.”), de l’article 19 (portant sur la liberté d’expression : “Tout individu a droit à la liberté d'opinion et d'expression, ce qui implique le droit de ne pas être inquiété pour ses opinions et celui de chercher, de recevoir et de répandre, sans considérations de frontières, les informations et les idées par quelque moyen d'expression que ce soit”) et de l’article 5 (“Nul ne sera soumis à la torture, ni à des peines ou traitements cruels, inhumains ou dégradants.”).\n\nLes projets soutenus par l’association s’inscrivent dans l’objectif d’apporter aux personnes des outils de visiophonie gratuits, sans inscription ni obligation d’utiliser un compte utilisateur, sans obligation de télécharger un logiciel autre qu’un navigateur internet si besoin, sans stockage de données personnelles au delà des périodes minimales imposées par les services tierces exploités, sans ré-exploitation de données personnelles ni en interne ni par des tiers, en logiciel libre.\n\nL’association n’a pas de but lucratif et s’interdit de soutenir tout projet qui ne permettrait pas d’assurer aux personnes un accès à un outil de visiophonie dans le respect des conditions suivantes : gratuit, sans stockage ni transfert ni ré-exploitation de données personnelles, sans obligation de créer un compte utilisateur.\n\nL’association peut soutenir la défense de la propriété intellectuelle des projets de logiciels libres qu’elle soutient.\n\nLe premier projet soutenu par l’association à sa création est le site https://instantvisio.com.\n\nLes moyens d’action de l’association sont :\n\n- la recherche de financements à destination d’actions concordant avec son objet, notamment en vue de prendre en charge les frais nécessaires à ce que les services puissent continuer d’être offerts conformément aux principes énoncés ci-dessus,\n\n- la diffusion des projets soutenus par l’association,\n\n- la promotion par tout moyen des objectifs de l’association,\n\n- la recherche de complémentarité avec d’autres associations ou institutions afin de favoriser des actions communes ou concertées,\n\n- la mise en avant par l'association de toutes solutions similaires à celles déjà soutenues par l’association, sous réserve que les conditions suivantes soient respectées : gratuité, absence de stockage, de transfert et de ré-exploitation de données personnelles, absence d’obligation de créer un compte utilisateur.\n\n- la défense des intérêts de ses membres et des personnes contre tout préjudice résultant d'une atteinte à l'intérêt collectif qu'elle s'est donné pour objet de défendre,\n\n- et de façon générale, toutes actions connexes et concourant aux mêmes objectifs.\n\n\n\nCes moyens d’action devront être impérativement respectueux de l’environnement et du développement durable, ainsi que des libertés individuelles - l’association présentera dans son rapport annuel d’activité un état des lieux des actions entreprises dans ce sens et des résultats obtenus."
+        },
+        {
+            "id": 20,
+            "slug": "don-tablettes-ehpad-boulanger-gmf-instant-visio",
+            "date": "2020-06-11",
+            "authors": ["Büsra Dogan"],
+            "authorsAnd": "",
+            "title": "Don de tablettes aux EHPAD par la Fondation Boulanger et la GMF",
+            "content": "La Fondation Boulanger et la GMF ont offert aux EHPAD plusieurs tablettes, sur lesquelles Instant Visio a été installée. Le maintien du lien entre les personnes isolées et leurs familles continue d'être notre priorité !\n\n L'annonce de cette nouvelle faite par le Groupe Hospitalier de la Haute-Saône est [accessible ici](https://www.linkedin.com/posts/activity-6675755392133402624-6EWR/)."
+        },
+        {
+            "id": 21,
+            "slug": "application-android",
+            "date": "2020-06-16",
+            "authors": ["Büsra Dogan"],
+            "authorsAnd": "",
+            "title": "Mise en ligne de l'application Android Instant Visio",
+            "content": "Bonne nouvelle !\n\nUne application Android a été mise en ligne précédemment pour faciliter la communication des personnes fragiles et favoriser l’accessibilité d’Instant Visio.\n\nL'application est [accessible ici](https://play.google.com/store/apps/details?id=com.instantvisio).\n\nUn grand merci à Mattia Primavera ! ![Application Instant Visio sur le Play Store](https://media-exp1.licdn.com/dms/image/C4D22AQEWJ4BbFqh7PQ/feedshare-shrink_800/0?e=1596672000&v=beta&t=BBXgmfqjw9da8SrRnTimDXPPJUFadYJ56wbaneRJa-c)"
+        },
+        {
+            "id": 22,
+            "slug": "instant-visio-acteur-economie-sociale-et-solidaire",
+            "date": "2020-06-27",
+            "authors": ["Stéphane Luçon"],
+            "authorsAnd": "",
+            "title": "Instant Visio, acteur de l'économie sociale et solidaire",
+            "content": "Nous avons lancé Instant Visio en mars, en pleine crise du COVID-19, alors que les unités de soin intensifs accueillaient des personnes âgées qui n'étaient pas équipées de smartphones pour communiquer avec leurs proches. Très vite, des soignants et animateurs en EHPAD se sont manifestés pour faire appel à l'outil que nous avions créé.\n\nLes principales raisons pour utiliser Instant Visio plutôt qu'un des outils de visio du marché :\n\n- Simplicité & rapidité - il suffit de saisir le téléphone ou l'email de la personne que l'on veut joindre et tout le monde se retrouve en visio dans le navigateur internet.\n\n- Universalité - pas besoin de créer un compte, fonctionne directement dans Chrome, Safari et Firefox.\n\nAujourd'hui l'aventure d'Instant Visio continue sous forme d'association car notre projet porte des valeurs :\n\n-> Voir ses proches est un droit !\n\nLe lien entre isolement et grand âge était déjà un problème de société avant la crise du Covid-10, nous considérons qu'il faut désormais redoubler d'effort\n\n-> Les données personnelles doivent rester personnelles !\n\nInstant Visio utilise un protocole de vidéos peer-to-peer cryptées end-to-end et permet d'éviter la création de compte dans les outils de visio des GAFAM et autres."
         }
     ],
     "share": "Partager sur :",
-    "dateArticle": "Le"
+    "dateArticle": "Le",
+    "readArticle": "[Lire l'article]"
 }

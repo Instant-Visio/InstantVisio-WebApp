@@ -29,7 +29,14 @@ const BlogArticle = ({
 
     useEffect(() => {
         Array.from(blogArticle.current.querySelector('span').children).map((el) => {
-            !pageTitle ? el.style.display = 'inline' : el.style.display = 'block'
+            if(!pageTitle) {
+                el.style.display = 'inline'
+                el.style.listStyle = 'none'
+                el.style.padding = '0'
+                Array.from(el.children).map((elChild) => { elChild.style.listStyle = 'none' })
+            } else {
+                el.style.display = 'block'
+            }
         })
     })
 
