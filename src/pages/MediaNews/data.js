@@ -6,7 +6,7 @@ import ticsante from '../../styles/assets/images/media/ticsante.jpg'
 import MarcheDesSeniors from '../../styles/assets/images/media/MarcheDesSeniors.jpg'
 import MedtechStrasbourg from '../../styles/assets/images/media/MedtechStrasbourg.jpg'
 import Caducee from '../../styles/assets/images/media/Caducee.jpg'
-
+import Makery from '../../styles/assets/images/media/Makery.jpg'
 export default [
     {
         id: 1,
@@ -63,5 +63,11 @@ export default [
             'https://www.caducee.net/actualite-medicale/14862/5-projets-operationnels-emergent-du-hackathon-hacking-covid-19-hhcamp.html',
         logo: Caducee,
         alt: 'caducee.net',
-    },
+    },  {
+          id: 9,
+          url:
+              'https://www.makery.info/2020/06/25/covid-19-lengagement-solidaire-des-fablabs-et-makers-du-grand-est/',
+          logo: Makery,
+          alt: 'Makery',
+      }
 ]
