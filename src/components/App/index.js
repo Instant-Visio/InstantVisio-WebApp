@@ -40,13 +40,6 @@ const App = () => {
         gdprHandler()
     }, [])
 
-    const initialState = {
-        width: window.innerWidth,
-        isMobile: window.innerWidth <= 500,
-    }
-    const [store, dispatch] = useReducer(reducer, initialState)
-    const isMobile = useDetectMobileOrTablet()
-
     return (
         <IonApp className="App">
             <IonReactRouter>
