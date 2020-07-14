@@ -8,6 +8,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
+        "build:android": "npm run build && npx cap sync android && npx cap copy android && npx cap open android",
+        "open:android": "npx cap open android",
         "release:all:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy && npm run tag:after",
         "release:all:dev": "npm run tag:before:dev && firebase use instantvisio-dev &&  env-cmd -f .env.development npm run build && firebase deploy && npm run tag:after",
         "release:hosting:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy --only hosting && npm run tag:after",
