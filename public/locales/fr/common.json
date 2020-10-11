@@ -5,6 +5,8 @@
     "homeBaseline": "Joignez un proche en visio, en un clic, <1>gratuitement.</1>",
     "headerBaseline": "Joignez un proche en visio, en un clic, gratuitement.",
     "footer": {
+        "home": "Accueil",
+        "visio": "Visio",
         "about": "À propos",
         "contact-us": "Nous contacter",
         "legal-mentions": "Mentions légales",

@@ -1,12 +1,15 @@
 {
     "name": "instant-visio",
-    "version": "0.5.0",
+    "version": "2.0.2",
     "private": true,
     "scripts": {
         "start": "react-scripts start",
+        "start-chrome": "BROWSER=\"google chrome\" react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
+        "build:android": "npm run build && npx cap sync android && npx cap copy android && npx cap open android",
+        "open:android": "npx cap open android",
         "release:all:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy && npm run tag:after",
         "release:all:dev": "npm run tag:before:dev && firebase use instantvisio-dev &&  env-cmd -f .env.development npm run build && firebase deploy && npm run tag:after",
         "release:hosting:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy --only hosting && npm run tag:after",
@@ -16,7 +19,15 @@
         "tag:after": "git push && git push --tags"
     },
     "dependencies": {
+        "@capacitor/android": "^2.1.0",
+        "@capacitor/core": "2.1.0",
         "@daily-co/daily-js": "^0.9.984",
+        "@ionic/pwa-elements": "^1.5.2",
+        "@ionic/react": "^5.1.1",
+        "@ionic/react-hooks": "0.0.8",
+        "@ionic/react-router": "^5.1.1",
+        "@material-ui/core": "^4.9.14",
+        "@material-ui/icons": "^4.9.1",
         "@mdi/js": "^5.1.45",
         "@mdi/react": "^1.4.0",
         "@testing-library/jest-dom": "^4.2.4",
@@ -42,7 +53,7 @@
         "react-i18next": "^11.3.4",
         "react-remarkable": "^1.1.3",
         "react-router-dom": "^5.1.2",
-        "react-scripts": "3.4.0",
+        "react-scripts": "3.4.1",
         "styled-components": "^5.0.1",
         "yup": "^0.28.3"
     },
@@ -61,13 +72,18 @@
         ]
     },
     "devDependencies": {
-        "babel-eslint": "^10.0.3",
+        "typescript": "3.8.3",
+        "@capacitor/cli": "2.1.0",
+        "@ionic/cli": "^6.8.0",
+        "babel-eslint": "^10.1.0",
+        "cordova-res": "^0.14.0",
         "env-cmd": "^10.1.0",
         "eslint": "^6.8.0",
         "eslint-plugin-react": "^7.19.0",
         "firebase-tools": "^8.1.1",
         "husky": "^4.2.5",
         "lint-staged": "^10.1.3",
+        "native-run": "^1.0.0",
         "prettier": "^2.0.4"
     },
     "husky": {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SCREEN } from '../../styles/theme'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import BaseLang from '../../components/Lang'
@@ -67,19 +68,25 @@ const Container = styled.div`
         margin: ${({ theme }) => theme.spacing.XXXL};
         padding: ${({ theme }) => theme.spacing.XXXL};
     }
+
+    ${SCREEN.MOBILE} {
+        margin: ${({ theme }) => theme.spacing.M};
+        padding: ${({ theme }) => theme.spacing.M};
+    }
 `
 
 export default function Default({ children, title }) {
     useDocumentTitle(title)
+    const isMobile = useDetectMobileOrTablet()
 
     return (
         <Wrapper>
-            <Lang />
-            <Header />
+            {!isMobile && <Lang />}
+            {!isMobile && <Header />}
             <Body>
                 <Container>{children}</Container>
             </Body>
-            <Footer />
+            {!isMobile && <Footer />}
         </Wrapper>
     )
 }

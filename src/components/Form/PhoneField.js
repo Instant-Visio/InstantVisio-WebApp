@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     }
 `
 
-export default function PhoneField({ isSubmitting }) {
+export default function PhoneField({ isSubmitting, showLabel }) {
     const { t } = useTranslation('form')
     const { country } = getLocale()
 
@@ -38,7 +38,7 @@ export default function PhoneField({ isSubmitting }) {
                 name="phone"
                 type="tel"
                 placeholder={t('phone.placeholder')}
-                label={t('phone.label')}
+                label={showLabel ? t('phone.label') : ''}
                 disabled={isSubmitting}
                 title={t('phone.title')}
             />

@@ -1,23 +1,21 @@
 import React, { useEffect } from 'react'
-import { Route, withRouter, Switch } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-// import CustomHeaders from '../CustomHeaders'
-
 import './App.scss'
-import {
-    Home,
-    LegalMentions,
-    PersonalData,
-    Blog,
-    Credits,
-    MediaNews,
-    NotFound,
-} from '../../pages'
 import { gdprHandler } from '../../utils/gdpr'
-import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
+import Router from './router'
+import { IonApp, IonHeader } from '@ionic/react'
+import SwipeableTemporaryDrawer from '../../components/SwipeableTemporaryDrawer'
+import { Navbar } from 'react-bootstrap'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import styled from 'styled-components'
+import { IonReactRouter } from '@ionic/react-router'
+
+const NavbarContainer = styled.div`
+    position: 'relative';
+    margin-left: 40%;
+`
 
 const App = () => {
-    const { t } = useTranslation()
+    const isMobile = useDetectMobileOrTablet()
 
     useEffect(() => {
         // when using vh and vw units in css:
@@ -43,45 +41,20 @@ const App = () => {
     }, [])
 
     return (
-        <div className="App">
-            {/* <CustomHeaders /> */}
-            <Switch>
-                <Route path="/" exact component={Home} />
-                <Route
-                    path={`/${t('url.video-call')}/:videoName`}
-                    component={VideoCallPrecheck}
-                />
-                <Route
-                    path={`/${t('url.legal-mentions')}`}
-                    exact
-                    component={LegalMentions}
-                />
-                <Route
-                    path={`/${t('url.personal-data')}`}
-                    exact
-                    component={PersonalData}
-                />
-                <Route path={`/${t('url.blog')}`} exact component={Blog} />
-                <Route
-                    path={`/${t('url.blog')}/:post`}
-                    exact
-                    component={Blog}
-                />
-                <Route
-                    path={`/${t('url.credits')}`}
-                    exact
-                    component={Credits}
-                />
-                <Route
-                    path={`/${t('url.media')}`}
-                    exact
-                    component={MediaNews}
-                />
-                <Route component={NotFound} />
-            </Switch>
-        </div>
+        <IonApp className="App">
+            <IonReactRouter>
+                {isMobile && (
+                    <IonHeader id="topbar">
+                        <Navbar bg="light" variant="dark">
+                            <SwipeableTemporaryDrawer />
+                            <NavbarContainer />
+                        </Navbar>
+                    </IonHeader>
+                )}
+                <Router />
+            </IonReactRouter>
+        </IonApp>
     )
 }
 
-// withRouter to pass props to components
-export default withRouter(App)
+export default App

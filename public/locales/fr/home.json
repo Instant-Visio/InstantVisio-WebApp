@@ -10,6 +10,8 @@
         "indications": {
             "multiple-people": "Une fois sur la vidéo, vous avez accès au lien de l'appel dans la barre d'adresses. Vous pouvez la communiquer à d'autres proches, de votre côté. Nous vous recommandons de vous limiter à 4 participants par appel, pour une expérience optimale."
         },
+        "form-submit": "À la soumission du formulaire, vous serez redirigé-e vers la page d'appel en visiophone. En parallèle, un sms et / ou un e-mail sera envoyé à votre proche et l'invitera à vous rejoindre directement sur la page pour échanger avec vous.",
+        "know-more": "En savoir plus",
         "data-mentions": {
             "mandatory": "Les champs marqués d'un astérisque sont obligatoires.",
             "management": "Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <1>Données personnelles</1>."

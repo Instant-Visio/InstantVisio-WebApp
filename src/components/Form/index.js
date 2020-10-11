@@ -126,6 +126,7 @@ export default function Form({ onSubmit, error }) {
                                     title={t('buttons.sms.label')}>
                                     <FormFields>
                                         <PhoneField
+                                            showLabel={true}
                                             isSubmitting={isSubmitting}
                                         />
                                     </FormFields>

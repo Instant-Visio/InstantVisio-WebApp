@@ -2,6 +2,8 @@ import React from 'react'
 import { IframeContainer } from './VideoCallComponents'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import { Redirect } from 'react-router-dom'
+import * as LocalStorage from '../../services/local-storage'
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -11,6 +13,10 @@ const VideoCallFrame = ({
     videoFrame,
 }) => {
     const { t } = useTranslation('videocall')
+
+    if (hasLeft) {
+        LocalStorage.removeLastVideoCallId()
+    }
 
     return (
         <IframeContainer>
@@ -39,7 +45,7 @@ const VideoCallFrame = ({
                 <div className="waiting-participant">{participantStatus}</div>
             )}
 
-            {hasLeft && <div>{t('leave-confirmation')}</div>}
+            {hasLeft && <Redirect to="/" />}
         </IframeContainer>
     )
 }
