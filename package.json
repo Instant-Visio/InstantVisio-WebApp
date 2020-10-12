@@ -8,7 +8,9 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "build:android": "npm run build && npx cap sync android && npx cap copy android && npx cap open android",
+        "build:ios": "npm run build && npx cap sync ios && npx cap copy ios && npm run open:ios",
+        "open:ios": "npx cap open ios",
+        "build:android": "npm run build && npx cap sync android && npx cap copy android && npm run open:android",
         "open:android": "npx cap open android",
         "release:all:prod": "npm run tag:before:prod && npm run build && firebase use instantvisio && firebase deploy && npm run tag:after",
         "release:all:dev": "npm run tag:before:dev && firebase use instantvisio-dev &&  env-cmd -f .env.development npm run build && firebase deploy && npm run tag:after",
@@ -21,6 +23,7 @@
     "dependencies": {
         "@capacitor/android": "^2.1.0",
         "@capacitor/core": "2.1.0",
+        "@capacitor/ios": "^2.1.0",
         "@daily-co/daily-js": "^0.9.984",
         "@ionic/pwa-elements": "^1.5.2",
         "@ionic/react": "^5.1.1",
