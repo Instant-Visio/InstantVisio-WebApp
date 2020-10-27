@@ -23,12 +23,12 @@
         "tag:after": "git push && git push --tags"
     },
     "dependencies": {
-        "@capacitor/android": "^2.1.0",
-        "@capacitor/core": "2.1.0",
-        "@capacitor/ios": "^2.1.0",
+        "@capacitor/android": "2.4.2",
+        "@capacitor/core": "2.4.2",
+        "@capacitor/ios": "2.4.2",
         "@daily-co/daily-js": "^0.9.984",
         "@ionic/pwa-elements": "^1.5.2",
-        "@ionic/react": "^5.1.1",
+        "@ionic/react": "5.4.0",
         "@ionic/react-hooks": "0.0.8",
         "@ionic/react-router": "^5.1.1",
         "@material-ui/core": "^4.9.14",
