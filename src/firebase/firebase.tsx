@@ -19,9 +19,9 @@ remoteConfig.settings = {
     minimumFetchIntervalMillis: 3600000,
 }
 
-if (process.env.NODE_ENV === 'development') {
-    firebase.functions().useFunctionsEmulator('http://localhost:5000')
-}
+// if (process.env.NODE_ENV === 'development') {
+//     firebase.functions().useFunctionsEmulator('http://localhost:5000')
+// }
 export const functions = {
     newCall: firebase.functions().httpsCallable('newCall'),
 }
