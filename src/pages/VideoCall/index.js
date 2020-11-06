@@ -12,9 +12,11 @@ import Controls from './Controls'
 import VideoCallFrame from './VideoCallFrame'
 import { stringHash } from '../../utils/string'
 import ErrorDialog from './ErrorDialog'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
 const VideoCallPage = () => {
     const { t } = useTranslation('videocall')
+    const isMobile = useDetectMobileOrTablet()
 
     const [camOn, setCamOn] = useState(false)
     const [audioOn, setAudioOn] = useState(false)
@@ -51,12 +53,12 @@ const VideoCallPage = () => {
 
     useEffect(() => {
         const showToolbar = (show) => {
-            document.getElementById('topbar').style.display = !show
-                ? 'none'
-                : 'block'
+            if (isMobile) {
+                document.getElementById('topbar').style.display = !show
+                    ? 'none'
+                    : 'block'
+            }
         }
-
-        showToolbar(false)
 
         if (dailyRef.current) {
             return
@@ -146,7 +148,7 @@ const VideoCallPage = () => {
             showToolbar(true)
             window.removeEventListener('beforeunload', leavingCallPage)
         }
-    }, [url, t, videoName])
+    }, [url, t, videoName, isMobile])
 
     return (
         <>

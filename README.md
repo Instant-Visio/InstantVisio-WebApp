@@ -29,3 +29,27 @@ nvm use
 npm i
 npm run serve
 ```
+
+## Mobile
+
+1. Considering `platform` is either `android` or `ios`, you can **build** the project with
+
+    ```bash
+    nvm use
+    npm i
+    npm run build:${PLATFORM} # ex: npm run build:ios
+    ```
+
+    This command will build the web app, synchronise native plugin & assets with the native platform and open the mobile platform default `IDE`. You can then build and run the app using your `IDE`.
+
+2. To only **open** the `IDE` you can use
+
+    ```bash
+    npm run open:${platform}
+    ```
+
+3. To build the app with livereload feature (for development purposes):
+
+    ```bash
+    npm run run:${PLATFORM}
+    ```
