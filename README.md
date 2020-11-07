@@ -53,3 +53,7 @@ npm run serve
     ```bash
     npm run run:${PLATFORM}
     ```
+
+# Tech notes
+
+-   Use interfaces to [define prop types](https://github.com/facebook/create-react-app/issues/8021) in typescript
