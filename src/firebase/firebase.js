@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 
 import 'firebase/functions'
 import 'firebase/remote-config'
+import 'firebase/auth'
 
 const firebaseConfig = {
     appId: process.env.REACT_APP_APPID,
@@ -12,8 +13,9 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 }
 
-firebase.initializeApp(firebaseConfig)
-
+const firebaseInstance = firebase.initializeApp(firebaseConfig)
+export const firebaseAuth = firebase.auth
+export const authInstance = firebaseInstance.auth()
 export const remoteConfig = firebase.remoteConfig()
 remoteConfig.settings = {
     minimumFetchIntervalMillis: 3600000,

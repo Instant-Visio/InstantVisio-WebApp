@@ -12,7 +12,6 @@ const options = {
 }
 
 const swaggerSpec = swaggerJSDoc(options)
-console.log(swaggerSpec)
 
 // API router v1 (/api/ is added on main index.ts export)
 app.use('/api/v1', routerV1)

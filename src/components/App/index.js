@@ -15,6 +15,7 @@ import {
 } from '../../pages'
 import { gdprHandler } from '../../utils/gdpr'
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
+import Login from '../Login'
 
 const App = () => {
     const { t } = useTranslation()
@@ -45,6 +46,7 @@ const App = () => {
     return (
         <div className="App">
             <CustomHeaders />
+            <Login />
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route
