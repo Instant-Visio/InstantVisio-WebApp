@@ -19,7 +19,7 @@
         "firebase-admin": "^8.6.0",
         "firebase-functions": "^3.3.0",
         "libphonenumber-js": "^1.7.48",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "node-fetch": "^2.6.1",
         "ovh": "^2.0.3"
     },
