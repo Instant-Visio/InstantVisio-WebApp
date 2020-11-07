@@ -4,9 +4,6 @@ import { useTranslation } from 'react-i18next'
 
 const ErrorDialog = ({ error, onHide }) => {
     const { t } = useTranslation('videocall')
-    if (!error) {
-        return ''
-    }
 
     return (
         <Dialog show={!!error} title={t('errors.title')} onHide={onHide}>

@@ -54,7 +54,7 @@ export default function Home() {
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const isMobile = useDetectMobileOrTablet()
-    const formSubmissionMessage = useRef(null)
+    const formSubmissionMessage: any = useRef(null)
     const [modalShow, setModalShow] = React.useState(false)
 
     const submit = (values, setSubmitting) => {
@@ -68,10 +68,12 @@ export default function Home() {
                 setError(error)
                 setNewCallError(error)
                 setSubmitting(false)
-                window.scrollTo({
-                    top: formSubmissionMessage.current.offsetTop,
-                    behavior: 'smooth',
-                })
+                if (formSubmissionMessage?.current) {
+                    window.scrollTo({
+                        top: formSubmissionMessage.current?.offsetTop,
+                        behavior: 'smooth',
+                    })
+                }
             })
     }
 

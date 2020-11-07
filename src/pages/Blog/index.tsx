@@ -10,12 +10,13 @@ const Blog = () => {
     let { post } = useParams()
     const { t } = useTranslation('blog')
 
+    // returnObjects key is necessary to be able to use objects and arrays
+    const blogPosts: [] = t('posts', { returnObjects: true })
     return (
         <>
             <IonContent>
                 <DefaultLayout>
-                    {/* returnObjects key is necessary to be able to use objects and arrays */}
-                    {t('posts', { returnObjects: true })
+                    {blogPosts
                         .reverse()
                         .map(
                             ({

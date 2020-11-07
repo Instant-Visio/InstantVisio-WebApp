@@ -12,7 +12,7 @@ const CenteredText = styled.div`
 
 const JoinVideoCall = () => {
     const { t } = useTranslation('join-last-call')
-    const [lastVideoCallId, setLastVideoCallId] = useState(null)
+    const [lastVideoCallId, setLastVideoCallId] = useState<string | null>()
 
     useEffect(() => {
         const getCallId = async () => {

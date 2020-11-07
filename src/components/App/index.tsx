@@ -9,6 +9,14 @@ import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 
+declare global {
+    interface Window {
+        iv: any
+        Cookiebot: any
+        $crisp: any
+    }
+}
+
 const NavbarContainer = styled.div`
     position: 'relative';
     margin-left: 40%;
@@ -30,7 +38,7 @@ const App = () => {
                 const viewheight = window.innerHeight
                 const viewwidth = window.innerWidth
                 const viewport = document.querySelector('meta[name=viewport]')
-                viewport.setAttribute(
+                viewport?.setAttribute(
                     'content',
                     `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`
                 )

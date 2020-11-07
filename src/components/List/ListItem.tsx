@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
 const Wrapper = styled.li`
     counter-increment: my-awesome-counter;
@@ -10,12 +9,12 @@ const Wrapper = styled.li`
         font-weight: bold;
     }
 `
-export default function ListItem({ children, className }) {
-    return <Wrapper className={className}>{children}</Wrapper>
+
+interface ListItemProps {
+    children: React.ReactNode | React.ReactElement
+    className?: string
 }
 
-ListItem.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.element])
-        .isRequired,
-    className: PropTypes.string,
+export default function ListItem({ children, className }: ListItemProps) {
+    return <Wrapper className={className}>{children}</Wrapper>
 }

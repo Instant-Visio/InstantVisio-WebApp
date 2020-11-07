@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import getCountries from './countries'
 import Flag from '../Flag'
 import BaseArrow from '../Arrow'
+import { BaseArrowProps } from '../Arrow'
 
 const Wrapper = styled.div`
     display: flex;
@@ -19,11 +20,11 @@ const Wrapper = styled.div`
     }
 `
 
-const Arrow = styled(BaseArrow)`
+const Arrow = styled(BaseArrow)<BaseArrowProps>`
     margin-bottom: 0.125rem;
 `
 
-const renderOption = ([code, country], index) => (
+const renderOption = ([code, country]: string[], index) => (
     <option key={`country-${index}`} value={code}>
         {country}
     </option>

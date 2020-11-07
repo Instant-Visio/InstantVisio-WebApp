@@ -59,7 +59,7 @@ const CapabilitiesDialog = ({ onGranted, onSkip }) => {
         <Modal
             show={dialogDisplayed}
             onHide={userHideDialog}
-            size="md"
+            size="sm"
             aria-labelledby="contained-modal-title-vcenter"
             centered>
             <Modal.Header closeButton>

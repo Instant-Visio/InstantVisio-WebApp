@@ -13,9 +13,8 @@ export default function NewsletterModal() {
 
     return (
         <>
-            <p variant="primary" onClick={handleShow}>
-                {t('title')}
-            </p>
+            {/* TODO check if we can use variant="primary" attr on a p element */}
+            <p onClick={handleShow}>{t('title')}</p>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header

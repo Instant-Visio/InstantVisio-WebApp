@@ -7,8 +7,8 @@ i18n.use(Backend)
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        fallbackLng: 'en',
-        defaultNS: ['common'],
+        fallbackLng: ['en'],
+        defaultNS: 'common',
     })
 
 export default i18n

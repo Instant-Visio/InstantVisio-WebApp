@@ -14,6 +14,12 @@ import { stringHash } from '../../utils/string'
 import ErrorDialog from './ErrorDialog'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
+// TODO Refactor: use a single Error interface
+interface Error {
+    code: string
+    msg: string
+}
+
 const VideoCallPage = () => {
     const { t } = useTranslation('videocall')
     const isMobile = useDetectMobileOrTablet()
@@ -23,30 +29,30 @@ const VideoCallPage = () => {
     const [participantStatus, setParticipantStatus] = useState('')
     const [participantNumber, setParticipantNumber] = useState(0)
     const [leftCallFrame, setLeftCallFrame] = useState(false)
-    const [error, setError] = useState(null)
+    const [error, setError] = useState<Error | null>(null)
     const { videoName } = useParams()
 
     const url = `https://instantvisio.daily.co/${videoName}`
 
     const videoFrame = useRef(null)
-    const dailyRef = useRef(null)
+    const dailyRef: any = useRef(null)
 
-    const cameraClick = () => {
-        if (!dailyRef.current) return
-        const localVideo = dailyRef.current.localVideo()
+    const cameraClick = (currentDailyRef) => {
+        if (!currentDailyRef) return
+        const localVideo = currentDailyRef.localVideo()
         setCamOn(!!localVideo)
-        dailyRef.current.setLocalVideo(!localVideo)
+        currentDailyRef.setLocalVideo(!localVideo)
     }
-    const audioClick = () => {
-        if (!dailyRef.current) return
-        const localAudio = dailyRef.current.localAudio()
+    const audioClick = (currentDailyRef) => {
+        if (!currentDailyRef) return
+        const localAudio = currentDailyRef.localAudio()
         setAudioOn(!!localAudio)
-        dailyRef.current.setLocalAudio(!localAudio)
+        currentDailyRef.setLocalAudio(!localAudio)
     }
-    const onLeaveClick = () => {
-        if (!dailyRef.current) return
+    const onLeaveClick = (currentDailyRef) => {
+        if (!currentDailyRef) return
 
-        dailyRef.current.leave()
+        currentDailyRef.leave()
         setVideoCallExited()
         setLeftCallFrame(true)
     }
@@ -54,9 +60,10 @@ const VideoCallPage = () => {
     useEffect(() => {
         const showToolbar = (show) => {
             if (isMobile) {
-                document.getElementById('topbar').style.display = !show
-                    ? 'none'
-                    : 'block'
+                const topbarElement = document.getElementById('topbar')
+                if (topbarElement) {
+                    topbarElement.style.display = !show ? 'none' : 'block'
+                }
             }
         }
 
@@ -165,10 +172,10 @@ const VideoCallPage = () => {
                 {!leftCallFrame && (
                     <Controls
                         camOn={camOn}
-                        onCamClick={cameraClick}
+                        onCamClick={() => cameraClick(dailyRef.current)}
                         micOn={audioOn}
-                        onMicClick={audioClick}
-                        onLeaveClick={onLeaveClick}
+                        onMicClick={() => audioClick(dailyRef.current)}
+                        onLeaveClick={() => onLeaveClick(dailyRef.current)}
                     />
                 )}
             </CallContainer>

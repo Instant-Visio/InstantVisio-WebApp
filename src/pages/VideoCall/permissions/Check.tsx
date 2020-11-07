@@ -32,7 +32,7 @@ export const CheckItem = styled.div`
 const iconSize = 1.5
 const Check = ({ state, i18nKey }) => {
     const { t } = useTranslation('videocall')
-    const formatData = () => {
+    const formatData = (state) => {
         switch (state) {
             default:
             case STATE_WAITING:

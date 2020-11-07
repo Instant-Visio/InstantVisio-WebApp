@@ -6,7 +6,7 @@ import {
     STATE_WAITING,
 } from '../pages/VideoCall/permissions/PermissionConstants'
 
-export default function useCookiePermission(name) {
+export default function useCookiePermission() {
     const [result, setResult] = useState(STATE_WAITING)
 
     useEffect(() => {
@@ -36,6 +36,6 @@ export default function useCookiePermission(name) {
             window.removeEventListener('CookiebotOnAccept', acceptListener)
             window.removeEventListener('CookiebotOnDecline', declineListener)
         }
-    }, [name])
+    })
     return result
 }

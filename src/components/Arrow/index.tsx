@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
-const Wrapper = styled.span`
+interface WrapperProps {
+    readonly width: number
+    readonly height: number
+}
+
+const Wrapper = styled.span<WrapperProps>`
     display: inline-block;
     width: ${({ width }) => width}px;
     height: ${({ height }) => height}px;
@@ -11,7 +15,19 @@ const Wrapper = styled.span`
     transform: rotate(225deg);
 `
 
-export default function Arrow({ height, width, className, color }) {
+export interface BaseArrowProps {
+    readonly width?: number
+    readonly height?: number
+    className?: string
+    color?: string
+}
+
+export default function Arrow({
+    height = 12,
+    width = 12,
+    className,
+    color,
+}: BaseArrowProps) {
     return (
         <Wrapper
             width={width}
@@ -20,16 +36,4 @@ export default function Arrow({ height, width, className, color }) {
             color={color}
         />
     )
-}
-
-Arrow.defaultProps = {
-    width: 12,
-    height: 12,
-}
-
-Arrow.propTypes = {
-    width: PropTypes.number,
-    height: PropTypes.number,
-    color: PropTypes.string,
-    className: PropTypes.string,
 }

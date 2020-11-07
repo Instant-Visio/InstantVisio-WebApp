@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Icon from '@mdi/react'
 import { mdiFullscreen, mdiFullscreenExit } from '@mdi/js'
 
-import FullscreenWrapper from './Fullscreen.js'
+import FullscreenWrapper from './Fullscreen'
 
 const Fullscreen = () => {
     const [active, setActive] = useState(false)

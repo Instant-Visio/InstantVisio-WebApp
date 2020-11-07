@@ -1,12 +1,14 @@
 import React from 'react'
 import { Modal } from 'react-bootstrap'
 
-const Dialog = ({ show, onHide, children, title, size = 'md' }) => {
+// TODO check 'md' value was passed as size, but it does not exist
+// size prop should not be hard-coded
+const Dialog = ({ show, onHide, children, title, size = 'sm' }) => {
     return (
         <Modal
             show={show}
             onHide={onHide}
-            size={size}
+            size={'sm'}
             aria-labelledby="contained-modal-title-vcenter"
             centered>
             <Modal.Header closeButton>

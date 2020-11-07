@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import BaseListItem from './ListItem'
-import PropTypes from 'prop-types'
 import { SCREEN } from '../../styles/theme'
 
 const ListItem = styled(BaseListItem)``
@@ -22,18 +21,17 @@ const Wrapper = styled.ol`
     }
 `
 
-export default function List({ children, className }) {
+interface BaseListProps {
+    children: React.ReactNode | React.ReactElement
+    className?: string
+}
+export default function List({ children, className }: BaseListProps) {
     return (
         <Wrapper className={className}>
-            {React.Children.map(children, (item, index) => (
-                <ListItem key={`list-${index}`}>{item}</ListItem>
-            ))}
+            {React.Children.map(children, (item, index) => {
+                const children = item
+                return <ListItem key={`list-${index}`}>{children}</ListItem>
+            })}
         </Wrapper>
     )
-}
-
-List.propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.element])
-        .isRequired,
 }
