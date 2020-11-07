@@ -36,6 +36,6 @@ export default function useCookiePermission() {
             window.removeEventListener('CookiebotOnAccept', acceptListener)
             window.removeEventListener('CookiebotOnDecline', declineListener)
         }
-    })
+    }, [setResult])
     return result
 }
