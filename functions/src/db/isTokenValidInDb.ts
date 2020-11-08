@@ -9,7 +9,7 @@ export const isTokenValidInDb = async (
 ): Promise<boolean> => {
     const result = await db.collection('users').doc(jwtData.uid).get()
 
-    if (!result || !result.exists) {
+    if (!result?.exists) {
         return false
     }
 

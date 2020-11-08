@@ -1,7 +1,7 @@
 import * as express from 'express'
 import * as cors from 'cors'
 import { getRooms } from './rooms/getRooms'
-import { authenticateJWT } from '../authentificateJWT'
+import { authenticateJWT } from '../authenticateJWT'
 
 const router = express.Router()
 

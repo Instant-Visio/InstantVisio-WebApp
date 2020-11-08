@@ -4,7 +4,7 @@ export const swaggerDefinition = {
         version: '1.0.0',
         title: 'InstantVisio API',
         description:
-            'Provide an open source API to create, joins, manage video rooms, and more',
+            'Provide an open source API to create, join, manage video rooms, and more',
         license: {
             name: 'MIT',
             url: 'https://opensource.org/licenses/MIT',

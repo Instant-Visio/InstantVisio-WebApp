@@ -1,23 +1,17 @@
 import * as jsonWebToken from 'jsonwebtoken'
 import { Request, Response } from 'express'
-import * as functions from 'firebase-functions'
 import { VerifyErrors } from 'jsonwebtoken'
 import { JWTData } from '../types/JWTData'
 import { JWTToken } from '../types/JWTToken'
 import { isTokenValidInDb } from '../db/isTokenValidInDb'
+import { assertJWTEnv } from '../utils/assertConfig'
 
 export const authenticateJWT = (
     req: Request,
     res: Response,
     next: Function
 ) => {
-    const { jwt } = functions.config()
-    if (!jwt.key) {
-        throw new functions.https.HttpsError(
-            'failed-precondition',
-            'Missing JWT Key'
-        )
-    }
+    const jwtKey = assertJWTEnv()
 
     const authHeader = req.headers.authorization
 
@@ -26,15 +20,12 @@ export const authenticateJWT = (
 
         jsonWebToken.verify(
             token,
-            jwt.key,
+            jwtKey,
             {
                 algorithms: ['HS256'],
             },
             async (err: VerifyErrors | null, data: {} | undefined) => {
-                if (err) {
-                    return res.sendStatus(403)
-                }
-                if (!data) {
+                if (err || !data) {
                     return res.sendStatus(403)
                 }
                 const jwtData: JWTData = <JWTData>data
