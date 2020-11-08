@@ -10,6 +10,8 @@
         "indications": {
             "multiple-people": "Ha elindul a videó, a címsorban hozzáférhet a hívás hivatkozásához. Ezt megoszthatja más ismerőseivel is. A legjobb teljesítmény elérése érdekében javasoljuk, hogy legfeljebb négy résztvevőre korlátozzák a hívásokat."
         },
+        "form-submit": "Amikor elküldi az űrlapot, átirányítja Önt a videohívás oldalára. Ezzel párhuzamosan SMS-t és / vagy e-mailt küldünk szeretteinknek, amelyben felkérjük őket, hogy csatlakozzanak hozzájuk közvetlenül a webhelyen, hogy veled beszélgetjen.",
+        "know-more": "Tudjon meg többet",
         "data-mentions": {
             "mandatory": "A csillaggal jelölt mezők kitöltése kötelező.",
             "management": "Stéphane Luçon, az datkezelés felelőse gondoskodik a begyűjtött adatok kezeléséről a címzetteknek történő SMS, vagy e-mail kiküldése végett. A kiküldést követően ezek az adatok egy napon belül törlésre kerülnek. További információ érdekében olvassa el a következő oldalon található tájékoztatást: <1>Személyes adatok</1>."

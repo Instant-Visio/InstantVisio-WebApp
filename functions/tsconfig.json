@@ -1,16 +1,15 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "resolveJsonModule": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "strict": true,
-    "target": "es2017"
-  },
-  "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+    "compilerOptions": {
+        "module": "commonjs",
+        "resolveJsonModule": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "outDir": "lib",
+        "sourceMap": true,
+        "strict": true,
+        "target": "es2017",
+        "typeRoots": ["./node_modules/@types"]
+    },
+    "compileOnSave": true,
+    "include": ["src"]
 }

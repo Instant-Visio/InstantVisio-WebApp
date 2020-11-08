@@ -10,6 +10,8 @@
         "indications": {
             "multiple-people": "Imediat ce ați comutat pe apel video, aveți acces la linkul apelului, pe bara de adrese. Puteți să-l distribuiți altor apropiați ai dumneavoastră, după dorință. Vă recomandăm totuși limitarea la cel mult 4 participanți, pentru menținerea unei calități optime a apelului."
         },
+        "form-submit": "Când trimiteți formularul, veți fi redirecționat către pagina de apel video. În paralel, un SMS și / sau un e-mail vor fi trimise persoanei dragi și îi va invita să se alăture direct dvs. pe pagină pentru a discuta cu dvs.",
+        "know-more": "Aflați mai multe",
         "data-mentions": {
             "mandatory": "Câmpurile marcate cu asterisc sunt obligatorii.",
             "management": "Responsabilul sistemului, Stéphane Luçon, se asigură de utilizarea datelor furnizate pentru trimiterea sms-ului sau emailului către apropiatul dumneavoastră. Pentru mai multe detalii referitoare la gestionarea datelor personale și exercitarea drepturilor dvs. mergeți pe pagina  <1>Date personale</1>."

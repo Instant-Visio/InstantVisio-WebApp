@@ -42,7 +42,21 @@ html {
 }
 
 .App {
-  height: 100%;
+    height: 100%;
+}
+
+ion-content {
+    --background: #323742;
+}
+
+@media screen and (max-width: 767px) {
+    ion-content {
+        --padding-top: 2.5rem;
+    }
+
+    ion-item {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 767px) {

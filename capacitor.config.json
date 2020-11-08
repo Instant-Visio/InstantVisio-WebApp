@@ -1,0 +1,15 @@
+{
+    "appId": "com.instantvisio.app",
+    "appName": "Instant Visio",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "build",
+    "plugins": {
+        "SplashScreen": {
+            "launchShowDuration": 1000,
+            "showSpinner": true,
+            "backgroundColor": "#ffffffff"
+        }
+    },
+    "cordova": {}
+}

@@ -1,0 +1,75 @@
+import React from 'react'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
+//todo get from firebase
+import config from './config.json'
+import { getLocale } from '../../i18n/helper'
+
+const Wrapper = styled.div`
+    & .btn {
+        background: none;
+        padding: 0;
+        border: none;
+        font-weight: bold;
+        color: ${({ theme }) => theme.color.logoGrey};
+        &.dropdown-toggle,
+        &.btn-primary {
+            background: none;
+            &:focus,
+            &:active {
+                color: ${({ theme }) => theme.color.logoGrey};
+                background: none;
+                box-shadow: none;
+            }
+        }
+    }
+`
+
+const Item = styled.div`
+    display: flex;
+    & :first-child {
+        margin-right: ${({ theme }) => theme.spacing.XS};
+    }
+`
+
+interface LangProps {
+    className?: string
+}
+
+export default function Lang({ className }: LangProps) {
+    const { availableLangs } = config
+    const { t, i18n } = useTranslation()
+    const { language } = getLocale()
+
+    const onSelect = (value) => {
+        i18n.changeLanguage(value)
+    }
+
+    const renderTitle = (value) => <span>{t(`lang.${value}`)}</span>
+
+    const items = availableLangs.map((value, index) => {
+        return (
+            language !== value && (
+                <Dropdown.Item key={`lang-${index}`} eventKey={value}>
+                    <Item>{renderTitle(value)}</Item>
+                </Dropdown.Item>
+            )
+        )
+    })
+
+    return (
+        <Wrapper className={className}>
+            {availableLangs.length > 1 ? (
+                <DropdownButton
+                    id="dropdown-lang-btn"
+                    title={renderTitle(language)}
+                    onSelect={onSelect}>
+                    {items}
+                </DropdownButton>
+            ) : (
+                renderTitle(language)
+            )}
+        </Wrapper>
+    )
+}
