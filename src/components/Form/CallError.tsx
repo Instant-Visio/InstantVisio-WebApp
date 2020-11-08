@@ -1,9 +1,14 @@
 import { useTranslation } from 'react-i18next'
 
-const CallError = (error) => {
+export interface Error {
+    code: string
+    message: string
+}
+
+const CallError = (error: Error) => {
     const { t } = useTranslation('form')
 
-    const e = error.error
+    const e = error
     if (e && e.code) {
         switch (e.code) {
             case 'resource-exhausted':

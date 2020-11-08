@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { SCREEN } from '../../styles/theme'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
@@ -75,7 +74,13 @@ const Container = styled.div`
     }
 `
 
-export default function Default({ children, title }) {
+interface DefaultProps {
+    children: React.ReactNode | React.ReactElement
+    className?: string
+    title?: string
+}
+
+export default function Default({ children, title }: DefaultProps) {
     useDocumentTitle(title)
     const isMobile = useDetectMobileOrTablet()
 
@@ -89,11 +94,4 @@ export default function Default({ children, title }) {
             {!isMobile && <Footer />}
         </Wrapper>
     )
-}
-
-Default.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.element])
-        .isRequired,
-    className: PropTypes.string,
-    title: PropTypes.string.isRequired,
 }

@@ -6,7 +6,10 @@ export default function getCountries() {
     let translatedCountries = isoCountries.getNames(language)
 
     if (!Object.entries(translatedCountries).length) {
-        translatedCountries = isoCountries.getNames(options.fallbackLng[0])
+        const { fallbackLng } = options
+        if (fallbackLng) {
+            translatedCountries = isoCountries.getNames(fallbackLng[0])
+        }
     }
 
     let countries = Object.entries(translatedCountries).map((country) => {

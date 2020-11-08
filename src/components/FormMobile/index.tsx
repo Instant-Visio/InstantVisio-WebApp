@@ -98,7 +98,10 @@ export default function FormMobile({ onSubmit, error }) {
                     const { isSubmitting, handleSubmit } = props
                     return (
                         <BootstrapForm onSubmit={handleSubmit} noValidate>
-                            <Tabs activeKey={tab} onSelect={onSelectTab}>
+                            <Tabs
+                                id="form-mobile-tabs"
+                                activeKey={tab}
+                                onSelect={onSelectTab}>
                                 <Tab
                                     eventKey={tabs.phone}
                                     title={t('buttons.sms.label')}>
@@ -143,9 +146,7 @@ export default function FormMobile({ onSubmit, error }) {
                                 </Button>
                             </FormSubmit>
                             {error && (
-                                <SubmitError>
-                                    <CallError error={error} />
-                                </SubmitError>
+                                <SubmitError>{CallError(error)}</SubmitError>
                             )}
                         </BootstrapForm>
                     )

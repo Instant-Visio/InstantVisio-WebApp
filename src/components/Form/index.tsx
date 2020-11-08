@@ -4,9 +4,8 @@ import { Form as BaseForm, Button, Tabs, Tab } from 'react-bootstrap'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import PropTypes from 'prop-types'
 import Field from './Field'
-import CallError from './CallError'
+import CallError, { Error } from './CallError'
 import { triggerValidation, format } from './validation'
 import PhoneField from './PhoneField'
 import { getLocale } from '../../i18n/helper'
@@ -59,7 +58,12 @@ const FormSubmit = styled.div`
     text-align: center;
 `
 
-export default function Form({ onSubmit, error }) {
+interface FormProps {
+    onSubmit: any
+    error: Error | undefined
+}
+
+export default function Form({ onSubmit, error }: FormProps) {
     const { t, i18n } = useTranslation('form')
     const { country } = getLocale()
     const tabs = {
@@ -120,7 +124,10 @@ export default function Form({ onSubmit, error }) {
                     const { isSubmitting, handleSubmit } = props
                     return (
                         <BootstrapForm onSubmit={handleSubmit} noValidate>
-                            <Tabs activeKey={tab} onSelect={onSelectTab}>
+                            <Tabs
+                                id="form-tabs"
+                                activeKey={tab}
+                                onSelect={onSelectTab}>
                                 <Tab
                                     eventKey={tabs.phone}
                                     title={t('buttons.sms.label')}>
@@ -167,9 +174,7 @@ export default function Form({ onSubmit, error }) {
                                 </Button>
                             </FormSubmit>
                             {error && (
-                                <SubmitError>
-                                    <CallError error={error} />
-                                </SubmitError>
+                                <SubmitError>{CallError(error)}</SubmitError>
                             )}
                         </BootstrapForm>
                     )
@@ -177,9 +182,4 @@ export default function Form({ onSubmit, error }) {
             </Formik>
         </FormCard>
     )
-}
-
-Form.propTypes = {
-    onSubmit: PropTypes.func,
-    error: PropTypes.object,
 }

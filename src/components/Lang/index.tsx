@@ -1,7 +1,6 @@
 import React from 'react'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 //todo get from firebase
 import config from './config.json'
@@ -34,7 +33,11 @@ const Item = styled.div`
     }
 `
 
-export default function Lang({ className }) {
+interface LangProps {
+    className?: string
+}
+
+export default function Lang({ className }: LangProps) {
     const { availableLangs } = config
     const { t, i18n } = useTranslation()
     const { language } = getLocale()
@@ -59,6 +62,7 @@ export default function Lang({ className }) {
         <Wrapper className={className}>
             {availableLangs.length > 1 ? (
                 <DropdownButton
+                    id="dropdown-lang-btn"
                     title={renderTitle(language)}
                     onSelect={onSelect}>
                     {items}
@@ -68,8 +72,4 @@ export default function Lang({ className }) {
             )}
         </Wrapper>
     )
-}
-
-Lang.propTypes = {
-    className: PropTypes.string,
 }

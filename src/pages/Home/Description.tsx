@@ -5,10 +5,14 @@ import { useTranslation, Trans } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
 import BaseList from '../../components/List'
 import Logo from '../../components/Logo'
-import BaseArrow from '../../components/Arrow'
+import BaseArrow, { BaseArrowProps } from '../../components/Arrow'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
-const List = styled(BaseList)`
+interface Collapsable {
+    collapsed: boolean
+}
+
+const List = styled(BaseList)<Collapsable>`
     ${SCREEN.MOBILE_AND_TABLET} {
         max-height: 0;
         overflow: hidden;
@@ -119,7 +123,7 @@ const Information = styled.div`
     }
 `
 
-const Arrow = styled(BaseArrow)`
+const Arrow = styled(BaseArrow)<BaseArrowProps & Collapsable>`
     display: none;
     ${SCREEN.MOBILE_AND_TABLET} {
         display: initial;

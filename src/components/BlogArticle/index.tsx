@@ -21,33 +21,37 @@ const BlogArticle = ({
     const { t } = useTranslation(['common', 'blog'])
     const defaultTitle = 'Blog - Instant Visio'
 
-    const blogArticle = useRef(null)
+    const blogArticle: any = useRef(null)
 
     useDocumentTitle(
         pageTitle ? `${pageTitle} - ${defaultTitle}` : defaultTitle
     )
 
     useEffect(() => {
-        Array.from(blogArticle.current.querySelector('span').children).map((el) => {
-            if(!pageTitle) {
-                el.style.display = 'inline'
-                el.style.listStyle = 'none'
-                el.style.padding = '0'
-                Array.from(el.children).map((elChild) => {
-                    elChild.style.listStyle = 'none'
+        if (blogArticle && blogArticle.current) {
+            Array.from(blogArticle.current.querySelector('span')?.children).map(
+                (el: any) => {
+                    if (!pageTitle) {
+                        el.style.display = 'inline'
+                        el.style.listStyle = 'none'
+                        el.style.padding = '0'
+                        Array.from(el.children).map((elChild: any) => {
+                            elChild.style.listStyle = 'none'
+                            return ''
+                        })
+                    } else {
+                        el.style.display = 'block'
+                    }
                     return ''
-                })
-            } else {
-                el.style.display = 'block'
-            }
-            return ''
-        })
+                }
+            )
+        }
     })
 
     const formattedDate = t('blog:dateArticle')
         ? `${t('blog:dateArticle')} ${DateTime.fromISO(date).toLocaleString(
-            DateTime.DATE_FULL
-        )}`
+              DateTime.DATE_FULL
+          )}`
         : DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)
 
     return (
@@ -61,10 +65,14 @@ const BlogArticle = ({
                 {formattedDate}, par {authors.join(` ${authorsAnd} `)}
             </p>
             {pageTitle && <ReactMarkdown source={content} />}
-            {!pageTitle &&
-            (<ReactMarkdown>{truncate(content, { length: 165, separator: /,?\.* +/})}
-                <Link to={`/${t('common:url.blog')}/${slug}`}>{t('blog:readArticle')}</Link>
-            </ReactMarkdown>)}
+            {!pageTitle && (
+                <ReactMarkdown>
+                    {truncate(content, { length: 165, separator: /,?\.* +/ })}
+                    <Link to={`/${t('common:url.blog')}/${slug}`}>
+                        {t('blog:readArticle')}
+                    </Link>
+                </ReactMarkdown>
+            )}
             <div className="article-forSharing">
                 <div className="article-forSharing-text">{t('blog:share')}</div>
                 {blog.socialMedia.map(
