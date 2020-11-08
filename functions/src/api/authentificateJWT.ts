@@ -4,7 +4,7 @@ import * as functions from 'firebase-functions'
 import { VerifyErrors } from 'jsonwebtoken'
 import { JWTData } from '../types/JWTData'
 import { JWTToken } from '../types/JWTToken'
-import { isTokenValidInDb } from './db/isTokenValidInDb'
+import { isTokenValidInDb } from '../db/isTokenValidInDb'
 
 export const authenticateJWT = (
     req: Request,

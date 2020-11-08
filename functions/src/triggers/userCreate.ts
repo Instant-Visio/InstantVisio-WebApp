@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
-import { db, serverTimestamp } from '../firebase/firebase'
 import * as jsonWebToken from 'jsonwebtoken'
+import { addTokenToUser } from '../db/addTokenToUser'
 
 export const userCreate = functions.auth.user().onCreate(async (user) => {
     const { jwt } = functions.config()
@@ -15,20 +15,7 @@ export const userCreate = functions.auth.user().onCreate(async (user) => {
         algorithm: 'HS256',
     })
 
-    await db
-        .collection('users')
-        .doc(user.uid)
-        .set(
-            {
-                tokens: {
-                    [newJWTToken]: {
-                        valid: true,
-                        createdAt: serverTimestamp(),
-                    },
-                },
-            },
-            { merge: true }
-        )
+    await addTokenToUser(user.uid, newJWTToken)
 
     return user
 })
