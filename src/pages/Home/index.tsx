@@ -17,6 +17,7 @@ import Logo from '../../components/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
+import Login from '../../components/Login'
 
 const DataMentions = styled.div`
     .cnil {
@@ -79,6 +80,7 @@ export default function Home() {
 
     return (
         <IonContent>
+            <Login/>
             {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">
                     <Description />
@@ -110,7 +112,7 @@ export default function Home() {
                         Pour en savoir plus sur la gestion des données
                         personnelles et pour exercer vos droits, veuillez vous
                         reporter à la page <Link to="/donnees-personnelles">Données personnelles </Link>.
-                    </Trans>
+                            </Trans>
                         </p>
                         <p className="cnil">
                             {t('information.indications.multiple-people')}

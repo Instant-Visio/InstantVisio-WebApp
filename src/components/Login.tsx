@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { authInstance, firebaseAuth } from '../firebase/firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
-import { Modal, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -16,7 +16,7 @@ const uiConfig = {
     },
 }
 
-const Login = ({}) => {
+const Login = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     useEffect(() => {
@@ -31,26 +31,13 @@ const Login = ({}) => {
     })
 
     return (
-        <>
-            <Modal.Dialog>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
-                </Modal.Header>
-
-                <Modal.Body>
-                    <StyledFirebaseAuth
-                        uiConfig={uiConfig}
-                        firebaseAuth={authInstance}
-                    />
-                    {isLoggedIn && <Button onClick={() => {}} />}
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="secondary">Close</Button>
-                    <Button variant="primary">Save changes</Button>
-                </Modal.Footer>
-            </Modal.Dialog>
-        </>
+        <div>
+            {!isLoggedIn && <StyledFirebaseAuth
+                uiConfig={uiConfig}
+                firebaseAuth={authInstance}
+            />}
+            {isLoggedIn && <Button onClick={() => { authInstance.signOut()}} >Sign out</Button>}
+        </div>
     )
 }
 
