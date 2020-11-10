@@ -1,17 +1,16 @@
 import * as jsonWebToken from 'jsonwebtoken'
 import { Request, Response } from 'express'
 import { VerifyErrors } from 'jsonwebtoken'
-import { JWTData } from '../types/JWTData'
-import { JWTToken } from '../types/JWTToken'
 import { isTokenValidInDb } from '../db/isTokenValidInDb'
-import { assertJWTEnv } from '../utils/assertConfig'
+import { getJWTEnv } from '../utils/assertConfig'
+import { JWTData, JWTToken } from '../types/JWT'
 
 export const authenticateJWT = (
     req: Request,
     res: Response,
     next: Function
 ) => {
-    const jwtKey = assertJWTEnv()
+    const jwtKey = getJWTEnv()
 
     const authHeader = req.headers.authorization
 

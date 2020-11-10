@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions'
-import { JWTKey } from '../types/JWTKey'
+import { JWTKey } from '../types/JWT'
 
-export const assertJWTEnv = (): JWTKey => {
+export const getJWTEnv = (): JWTKey => {
     const { jwt } = functions.config()
     if (!jwt.key) {
         throw new functions.https.HttpsError(
