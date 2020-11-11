@@ -9,6 +9,6 @@ export const assertValidToken = async (
     const isTokenValid = await isTokenValidInDb(jwtData, token)
 
     if (!isTokenValid) {
-        throw new ForbiddenError()
+        throw new ForbiddenError('Token disabled')
     }
 }

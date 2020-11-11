@@ -44,9 +44,13 @@ export const authenticateJWTMiddleware = (
             }
 
             const jwtData: JWTData = <JWTData>data
-            await assertValidToken(jwtData, token)
 
-            return next()
+            try {
+                await assertValidToken(jwtData, token)
+            } catch (error) {
+                next(error)
+            }
+            next()
         }
     )
 }
