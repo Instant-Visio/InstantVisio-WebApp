@@ -9,6 +9,12 @@ import { Request, Response } from 'express'
  *     responses:
  *       200:
  *         description: All the rooms linked to this token
+ *       401:
+ *         description: missing authorization bearer token
+ *       403:
+ *         description: authorization header present but not valid
+ *       412:
+ *         description: authorization header present but not formatted correctly
  */
 export const getRooms = async (req: Request, res: Response) => {
     try {
