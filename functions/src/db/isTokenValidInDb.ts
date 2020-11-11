@@ -6,13 +6,16 @@ export const isTokenValidInDb = async (
     jwtData: JWTData,
     token: JWTToken
 ): Promise<boolean> => {
-    const result = await db.collection('users').doc(jwtData.uid).get()
+    const userDocumentSnapshot = await db
+        .collection('users')
+        .doc(jwtData.uid)
+        .get()
 
-    if (!result?.exists) {
+    if (!userDocumentSnapshot?.exists) {
         return false
     }
 
-    const userData = <UserData>result.data()
+    const userData = <UserData>userDocumentSnapshot.data()
 
     return (
         userData.tokens &&

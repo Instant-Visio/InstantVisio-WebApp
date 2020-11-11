@@ -30,7 +30,7 @@ describe('authentificateJWTMiddleware', () => {
         }).toThrowError(UnauthorizedError)
     })
 
-    it('should fail due to authorization header wrongly formatted', () => {
+    it('should not be authorized due to authorization header wrongly formatted', () => {
         expect(() => {
             authenticateJWTMiddleware(
                 {
@@ -44,7 +44,7 @@ describe('authentificateJWTMiddleware', () => {
         }).toThrowError(PreconditionFailedError)
     })
 
-    it('should call next with an error due to token wrongly formatted token', () => {
+    it('should not be authorized due to token wrongly formatted', () => {
         authenticateJWTMiddleware(
             {
                 headers: {
@@ -61,7 +61,7 @@ describe('authentificateJWTMiddleware', () => {
         )
     })
 
-    it('should failed because token is not valid in database', (done) => {
+    it('should not be authorized because token is not valid in database', (done) => {
         const token =
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2OSIsImlhdCI6MTUxNjIzOTAyMn0.MboZ1PQYeouu9wnxfYrnk2XnPAgQBcL177e7bNbBMr0'
 
@@ -93,7 +93,7 @@ describe('authentificateJWTMiddleware', () => {
         )
     })
 
-    it('should success', (done) => {
+    it('should be authorized', (done) => {
         const token =
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2OSIsImlhdCI6MTUxNjIzOTAyMn0.MboZ1PQYeouu9wnxfYrnk2XnPAgQBcL177e7bNbBMr0'
 

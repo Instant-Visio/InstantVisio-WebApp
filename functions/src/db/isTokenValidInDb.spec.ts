@@ -31,7 +31,7 @@ describe('isTokenValidInDb', () => {
     it('should return false if nothing in db', async () => {
         const snapshot = {
             data: () => ({}),
-            exists: true,
+            exists: false,
         }
         firestoreGet.mockImplementation(() => Promise.resolve(snapshot))
 
