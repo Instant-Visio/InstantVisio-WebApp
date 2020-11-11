@@ -9,7 +9,7 @@ const adminInitStub = sinon.stub(admin, 'initializeApp')
 const functionTest = testProto()
 functionTest.mockConfig({ jwt: { key: '23wr42ewr34' } })
 // @ts-ignore
-import { authenticateJWT } from './authenticateJWT'
+import { authenticateJWTMiddleware } from './authenticateJWTMiddleware'
 
 describe('authentificateJWT', () => {
     it('should test that true === true', () => {
