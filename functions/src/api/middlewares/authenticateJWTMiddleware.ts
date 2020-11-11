@@ -49,6 +49,7 @@ export const authenticateJWTMiddleware = (
                 await assertValidToken(jwtData, token)
             } catch (error) {
                 next(error)
+                return
             }
             next()
         }

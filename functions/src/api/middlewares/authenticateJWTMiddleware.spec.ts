@@ -1,18 +1,29 @@
-// tslint:disable-next-line:no-implicit-dependencies
-import testProto from 'firebase-functions-test'
-import { firestoreStub } from '../../testUtils/firestoreStub'
+import {
+    firestoreFirestoreStub,
+    firestoreGet,
+} from '../../testUtils/firestoreStub'
 
 jest.mock('firebase-admin', () => ({
     ...(jest.requireActual('firebase-admin') as {}),
     initializeApp: jest.fn(),
-    firestore: () => {
-        console.log('called')
-        return firestoreStub
+}))
+
+jest.mock('firebase-functions', () => ({
+    ...(jest.requireActual('firebase-functions') as {}),
+    config: () => ({
+        jwt: {
+            key: '23wr42ewr34',
+        },
+    }),
+}))
+
+jest.mock('../../firebase/firebase.ts', () => ({
+    ...(jest.requireActual('../../firebase/firebase.ts') as {}),
+    db: {
+        ...firestoreFirestoreStub(),
     },
 }))
 
-const functionTest = testProto()
-functionTest.mockConfig({ jwt: { key: '23wr42ewr34' } })
 import { authenticateJWTMiddleware } from './authenticateJWTMiddleware'
 import {
     ForbiddenError,
@@ -65,25 +76,33 @@ describe('authentificateJWTMiddleware', () => {
             mockRes as any,
             mockNext
         )
-        expect(mockNext.mock.calls.length).toBe(1)
+        expect(mockNext.mock.calls).toHaveLength(1)
         expect(mockNext.mock.calls[0][0]).toBeInstanceOf(ForbiddenError)
+        expect(mockNext.mock.calls[0][0].message).toBe(
+            'Unable to verify the JWT Token'
+        )
     })
 
-    // TODO : token not valid
-
-    it('should failed because token is invalid', () => {
+    it('should failed because token is not valid in database', (done) => {
         const token =
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2OSIsImlhdCI6MTUxNjIzOTAyMn0.MboZ1PQYeouu9wnxfYrnk2XnPAgQBcL177e7bNbBMr0'
 
-        // const snapshot = {
-        //     data: () => ({tokens: {
-        //             token: {
-        //                 valid: false
-        //             }
-        //         }}),
-        //     exists: true
-        // }
-        // get.mockImplementation(() => Promise.resolve(snapshot))
+        const snapshot = {
+            data: () => ({
+                tokens: {
+                    [token]: {
+                        valid: false,
+                    },
+                },
+            }),
+            exists: true,
+        }
+        firestoreGet.mockImplementation(() => Promise.resolve(snapshot))
+
+        const mockNextWithDone = (params: any) => {
+            expect(params.message).not.toBe('Unable to verify the JWT Token')
+            done()
+        }
 
         authenticateJWTMiddleware(
             {
@@ -92,8 +111,39 @@ describe('authentificateJWTMiddleware', () => {
                 },
             } as any,
             mockRes as any,
-            mockNext
+            mockNextWithDone
         )
-        expect(mockNext.mock.calls.length).toBe(1)
+    })
+
+    it('should success', (done) => {
+        const token =
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2OSIsImlhdCI6MTUxNjIzOTAyMn0.MboZ1PQYeouu9wnxfYrnk2XnPAgQBcL177e7bNbBMr0'
+
+        const snapshot = {
+            data: () => ({
+                tokens: {
+                    [token]: {
+                        valid: true,
+                    },
+                },
+            }),
+            exists: true,
+        }
+        firestoreGet.mockImplementation(() => Promise.resolve(snapshot))
+
+        const mockNextWithDone = (params: any) => {
+            expect(params).toBeUndefined()
+            done()
+        }
+
+        authenticateJWTMiddleware(
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                },
+            } as any,
+            mockRes as any,
+            mockNextWithDone
+        )
     })
 })
