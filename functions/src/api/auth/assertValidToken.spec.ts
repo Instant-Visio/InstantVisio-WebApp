@@ -12,7 +12,7 @@ describe('assertValidToken', () => {
         iat: 1544455,
     }
 
-    it('should assert because token is valid in DB', async () => {
+    it('should not throw exception because token is valid in DB', async () => {
         const snapshot = {
             data: () => ({
                 tokens: {
@@ -30,7 +30,7 @@ describe('assertValidToken', () => {
         expect(result).toBeUndefined()
     })
 
-    it('should not assert because token is valid in DB', async () => {
+    it('should throw exception because token is NOT valid in DB', async () => {
         const snapshot = {
             data: () => ({}),
             exists: true,
