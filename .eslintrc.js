@@ -25,7 +25,7 @@ module.exports = {
     overrides: [
         {
             files: ['src/*.*'],
-            excludedFiles: 'functions/*.ts',
+            excludedFiles: ['functions/**/*.ts'],
         },
     ],
 }
