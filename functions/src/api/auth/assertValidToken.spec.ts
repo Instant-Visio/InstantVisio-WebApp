@@ -12,7 +12,7 @@ describe('assertValidToken', () => {
         iat: 1544455,
     }
 
-    it('should not assert because token is valid in DB', async () => {
+    it('should assert because token is valid in DB', async () => {
         const snapshot = {
             data: () => ({
                 tokens: {
