@@ -1,5 +1,5 @@
 ## Compiled JavaScript files
-**/*.js
+src/**/*.js
 **/*.js.map
 
 lib/**

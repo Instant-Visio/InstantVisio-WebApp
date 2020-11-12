@@ -35,6 +35,7 @@ yarn.lock
 .project
 .settings
 /.firebase/
+firestore-debug.log
 .vscode
 .gradle
 

@@ -22,4 +22,10 @@ module.exports = {
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
     },
+    overrides: [
+        {
+            files: ['src/*.*'],
+            excludedFiles: ['functions/**/*.ts'],
+        },
+    ],
 }
