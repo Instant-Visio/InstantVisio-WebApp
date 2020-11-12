@@ -1,13 +1,9 @@
-import { useTranslation } from 'react-i18next'
-
 export interface Error {
     code: string
     message: string
 }
 
-const CallError = (error: Error) => {
-    const { t } = useTranslation('form')
-
+const CallError = (error: Error, t: any) => {
     const e = error
     if (e && e.code) {
         switch (e.code) {

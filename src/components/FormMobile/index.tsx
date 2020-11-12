@@ -146,7 +146,7 @@ export default function FormMobile({ onSubmit, error }) {
                                 </Button>
                             </FormSubmit>
                             {error && (
-                                <SubmitError>{CallError(error)}</SubmitError>
+                                <SubmitError>{CallError(error, t)}</SubmitError>
                             )}
                         </BootstrapForm>
                     )

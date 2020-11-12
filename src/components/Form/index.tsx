@@ -174,7 +174,7 @@ export default function Form({ onSubmit, error }: FormProps) {
                                 </Button>
                             </FormSubmit>
                             {error && (
-                                <SubmitError>{CallError(error)}</SubmitError>
+                                <SubmitError>{CallError(error, t)}</SubmitError>
                             )}
                         </BootstrapForm>
                     )
