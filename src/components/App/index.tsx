@@ -9,6 +9,13 @@ import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import rootReducer from '../../reducers'
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
+
 declare global {
     interface Window {
         iv: any
@@ -50,17 +57,19 @@ const App = () => {
 
     return (
         <IonApp className="App">
-            <IonReactRouter>
-                {isMobile && (
-                    <IonHeader id="topbar">
-                        <Navbar bg="light" variant="dark">
-                            <SwipeableTemporaryDrawer />
-                            <NavbarContainer />
-                        </Navbar>
-                    </IonHeader>
-                )}
-                <Router />
-            </IonReactRouter>
+            <Provider store={store}>
+                <IonReactRouter>
+                    {isMobile && (
+                        <IonHeader id="topbar">
+                            <Navbar bg="light" variant="dark">
+                                <SwipeableTemporaryDrawer />
+                                <NavbarContainer />
+                            </Navbar>
+                        </IonHeader>
+                    )}
+                    <Router />
+                </IonReactRouter>
+            </Provider>
         </IonApp>
     )
 }
