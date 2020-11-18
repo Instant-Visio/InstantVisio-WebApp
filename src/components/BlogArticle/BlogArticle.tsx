@@ -1,91 +1,106 @@
-import styled from 'styled-components'
-import { SCREEN } from '../../styles/theme'
+import React, { useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import { DateTime } from 'luxon'
+import ReactMarkdown from 'react-remarkable'
+import { useTranslation } from 'react-i18next'
+import { truncate } from 'lodash'
 
-const BlogArticleStyled = styled.div`
-    p img, p > img {
-        display: block;
-        margin-top: 1rem;
-        width: 100%;
+import useDocumentTitle from '../../hooks/useDocumentTitle'
+import BlogArticleStyled from './BlogArticleStyled'
+import blog from '../../data/js/blog'
 
-        ${SCREEN.DESKTOP} {
-            width: 60%;
-        }
-    }
+const BlogArticle = ({
+    slug,
+    title,
+    pageTitle,
+    date,
+    authors,
+    authorsAnd,
+    content,
+}) => {
+    const { t } = useTranslation(['common', 'blog'])
+    const defaultTitle = 'Blog - Instant Visio'
 
-    .article {
-        &-title {
-            text-decoration: none;
+    const blogArticle: any = useRef(null)
 
-            h2 {
-                color: ${({ theme }) => theme.color.textBlue};
-                margin-bottom: ${({ theme }) => theme.spacing.M};
-            }
-        }
+    useDocumentTitle(
+        pageTitle ? `${pageTitle} - ${defaultTitle}` : defaultTitle
+    )
 
-        &-dateAuthor {
-            color: #787886;
-        }
-
-        &-forSharing {
-            margin-bottom: ${({ theme }) => theme.font.XXXL};
-
-            &-text {
-                font-size: ${({ theme }) => theme.font.L};
-                color: ${({ theme }) => theme.color.black};
-                margin-right: ${({ theme }) => theme.spacing.S};
-            }
-
-            &-link {
-                margin: 0 ${({ theme }) => theme.spacing.XXS};
-                &-img {
-                    width: 2rem;
-                }
-            }
-        }
-    }
-
-    ${SCREEN.MOBILE_AND_TABLET} {
-        .article {
-            &-forSharing {
-                &-text {
-                    margin-bottom: ${({ theme }) => theme.spacing.S};
-                }
-
-                &-link {
-                    &-img {
-                        margin-bottom: 1rem;
+    useEffect(() => {
+        if (blogArticle && blogArticle.current) {
+            Array.from(blogArticle.current.querySelector('span')?.children).map(
+                (el: any) => {
+                    if (!pageTitle) {
+                        el.style.display = 'inline'
+                        el.style.listStyle = 'none'
+                        el.style.padding = '0'
+                        Array.from(el.children).map((elChild: any) => {
+                            elChild.style.listStyle = 'none'
+                            return ''
+                        })
+                    } else {
+                        el.style.display = 'block'
                     }
+                    return ''
                 }
-            }
+            )
         }
-    }
+    })
 
-    ${SCREEN.DESKTOP} {
-        .article {
-            &-forSharing {
-                margin: 1.5rem 0 4rem;
+    const formattedDate = t('blog:dateArticle')
+        ? `${t('blog:dateArticle')} ${DateTime.fromISO(date).toLocaleString(
+              DateTime.DATE_FULL
+          )}`
+        : DateTime.fromISO(date).toLocaleString(DateTime.DATE_FULL)
 
-                &-text {
-                    display: inline-block;
-                    margin-bottom: 0;
-                }
-
-                &-link {
-                    &-img {
-                        margin-bottom: 0;
+    return (
+        <BlogArticleStyled ref={blogArticle}>
+            <Link
+                to={`/${t('common:url.blog')}/${slug}`}
+                className="article-title">
+                <h2 className="default-title">{title}</h2>
+            </Link>
+            <p className="article-dateAuthor">
+                {formattedDate}, par {authors.join(` ${authorsAnd} `)}
+            </p>
+            {pageTitle && <ReactMarkdown source={content} />}
+            {!pageTitle && (
+                <ReactMarkdown>
+                    {truncate(content, { length: 165, separator: /,?\.* +/ })}
+                    <Link to={`/${t('common:url.blog')}/${slug}`}>
+                        {t('blog:readArticle')}
+                    </Link>
+                </ReactMarkdown>
+            )}
+            <div className="article-forSharing">
+                <div className="article-forSharing-text">{t('blog:share')}</div>
+                {blog.socialMedia.map(
+                    ({ id, name, sharer, addedSharer, picture }) => {
+                        const checkAddedSharer = addedSharer
+                            ? addedSharer + encodeURI(title)
+                            : ''
+                        return (
+                            <a
+                                className="article-forSharing-link"
+                                key={id}
+                                href={`${sharer}https://instantvisio.com/${t(
+                                    'common:url.blog'
+                                )}/${slug}${checkAddedSharer}`}
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                <img
+                                    className="article-forSharing-link-img"
+                                    src={picture}
+                                    alt={name}
+                                />
+                            </a>
+                        )
                     }
-                }
-            }
-        }
-    }
+                )}
+            </div>
+        </BlogArticleStyled>
+    )
+}
 
-    &:last-of-type {
-        .article {
-            &-forSharing {
-                margin-bottom: 0;
-            }
-        }
-    }
-`
-
-export default BlogArticleStyled
+export default BlogArticle

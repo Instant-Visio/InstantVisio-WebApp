@@ -2,18 +2,18 @@ import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import { Link, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
-import ColumnsLayout from '../../layout/Columns'
+import ColumnsLayout from '../../layout/Columns/Columns'
 import { createCall } from '../../actions/createCall'
-import FormMobile from '../../components/FormMobile'
-import Form from '../../components/Form'
-import MyVerticallyCenteredModal from '../../components/VerticallyCenteredModal'
+import FormMobile from '../../components/FormMobile/FormMobile'
+import Form from '../../components/Form/Form'
+import VerticallyCenteredModal from '../../components/VerticallyCenteredModal/VerticallyCenteredModal'
 import Description from './Description'
 import {
     setNewCall,
     setNewCallError,
     setNewCallRedirected,
 } from '../../utils/support'
-import Logo from '../../components/Logo'
+import Logo from '../../components/Logo/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
@@ -80,7 +80,7 @@ export default function Home() {
 
     return (
         <IonContent>
-            <Login/>
+            <Login />
             {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">
                     <Description />
@@ -145,11 +145,11 @@ export default function Home() {
                         <KnowMoreMobile onClick={() => setModalShow(true)}>
                             {t('information.know-more')}
                         </KnowMoreMobile>
-                        <MyVerticallyCenteredModal
+                        <VerticallyCenteredModal
                             show={modalShow}
                             onHide={() =>
                                 setModalShow(false)
-                            }></MyVerticallyCenteredModal>
+                            }></VerticallyCenteredModal>
                     </MobileContent>
                 </WrapperMobile>
             )}

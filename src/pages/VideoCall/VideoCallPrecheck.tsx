@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CapabilitiesDialog from './permissions/CapabilitiesDialog'
-import VideoCallPage from './index'
-import Footer from '../../components/Footer'
+import VideoCallPage from './VideoCall'
+import Footer from '../../components/Footer/Footer'
 import { CallContainer } from './VideoCallComponents'
 
 const VideoCallPrecheck = () => {

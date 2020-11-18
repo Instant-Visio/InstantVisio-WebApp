@@ -1,60 +1,59 @@
-import styled from 'styled-components'
-import { SCREEN } from '../../styles/theme'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import DefaultLayout from '../../layout/Default/Default'
+import CreditsStyled from './CreditsStyled'
+import data from './data.json'
+import { IonContent } from '@ionic/react'
 
-const CreditsStyled = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    .credits {
-        &-title {
-            margin-bottom: ${({ theme }) => theme.spacing.M};
-        }
-
-        &-link {
-            text-decoration: none;
-        }
+const sort = ({ name: aName }, { name: bName }) => {
+    const [, aLastname] = aName.split(' ')
+    const [, bLastname] = bName.split(' ')
+    if (bLastname && aLastname) {
+        return aLastname.localeCompare(bLastname)
     }
 
-    ${SCREEN.DESKTOP} {
-        flex-flow: row wrap;
-        padding: 0 ${({ theme }) => theme.spacing.XXL};
-        align-items: flex-start;
-        text-align: left;
-        > div {
-            margin: 0 ${({ theme }) => theme.spacing.XXXL};
-            &:not(:last-child) {
-                margin-bottom: ${({ theme }) => theme.spacing.XXL};
-            }
-        }
+    return 0
+}
+
+// eslint-disable-next-line react/prop-types
+const renderName = ({ name, link }, index) => {
+    return (
+        <p key={`person-${index}`}>
+            {!link && <span>{name}</span>}
+            {link && (
+                <a
+                    className="credits-link"
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    {name}
+                </a>
+            )}
+        </p>
+    )
+}
+
+const Credits = () => {
+    const { t } = useTranslation('credits')
+
+    const render = ([type, values], index) => {
+        return (
+            <div key={`credit-type-${index}`}>
+                <h3 className="credits-title">{t(type)}</h3>
+                {values.sort(sort).map(renderName)}
+            </div>
+        )
     }
 
-    ${SCREEN.MOBILE} {
-        padding: 0 ${({ theme }) => theme.spacing.S};
-        > div {
-            margin: 0;
-            &:not(:last-child) {
-                margin-bottom: 0;
-            }
-        }
+    return (
+        <IonContent>
+            <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
+                <CreditsStyled>
+                    {Object.entries(data).map(render)}
+                </CreditsStyled>
+            </DefaultLayout>
+        </IonContent>
+    )
+}
 
-        p {
-            margin-bottom: ${({ theme }) => theme.spacing.XXS};
-        }
-
-        h3 {
-            margin-top: ${({ theme }) => theme.spacing.S};
-            margin-bottom: ${({ theme }) => theme.spacing.S};
-        }
-
-        .credits {
-        &-title {
-            margin-top: ${({ theme }) => theme.spacing.XS};
-            margin-bottom: ${({ theme }) => theme.spacing.XS};
-        }
-
-    }
-`
-
-export default CreditsStyled
+export default Credits

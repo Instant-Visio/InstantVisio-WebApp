@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import DefaultLayout from '../../layout/Default'
+import DefaultLayout from '../../layout/Default/Default'
 import { IonContent } from '@ionic/react'
 import { Redirect, Link } from 'react-router-dom'
 import * as LocalStorage from '../../services/local-storage'

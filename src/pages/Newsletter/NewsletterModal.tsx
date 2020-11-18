@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
-import Newsletter from './index'
+import Newsletter from './Newsletter'
 import { useTranslation } from 'react-i18next'
 
 export default function NewsletterModal() {

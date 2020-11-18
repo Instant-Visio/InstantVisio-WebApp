@@ -3,7 +3,7 @@ import React from 'react'
 import { Trans } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
-export default function MyVerticallyCenteredModal(props) {
+export default function VerticallyCenteredModal(props) {
     return (
         <Modal
             {...props}

@@ -1,38 +1,35 @@
-import styled from 'styled-components'
-import { SCREEN } from '../../styles/theme'
+import React from 'react'
+import { useTranslation, Trans } from 'react-i18next'
+import { MediaNewsTitle, MediaNewsStyled } from './MediaNewsStyled'
+import data from './data'
 
-export const MediaNewsTitle = styled.h2`
-    display: flex;
-    justify-content: center;
-    text-align: center;
-`
-export const MediaNewsStyled = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    .media {
-        &-link {
-            color: ${({ theme }) => theme.color.black};
-        }
-    }
+import DefaultLayout from '../../layout/Default/Default'
 
-    div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: ${({ theme }) => theme.spacing.XL} 0;
-    }
+const MediaNews = () => {
+    const { t } = useTranslation('media')
 
-    ${SCREEN.DESKTOP} {
-        flex-flow: row wrap;
-        padding: 0 ${({ theme }) => theme.spacing.XL};
-        align-items: flex-start;
-        text-align: left;
-        > div {
-            margin: ${({ theme }) => theme.spacing.XXXL};
-        }
-    }
-`
+    return (
+        <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
+            <MediaNewsTitle>{t('page-title')}</MediaNewsTitle>
+            <MediaNewsStyled>
+                {data.map(({ id, url, logo, alt }) => (
+                    <div key={id}>
+                        <img src={logo} alt={alt} />
+                        <p>
+                            <Trans i18nKey="read-article">
+                                <a
+                                    href={url}
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    {t('read-article')}
+                                </a>
+                            </Trans>
+                        </p>
+                    </div>
+                ))}
+            </MediaNewsStyled>
+        </DefaultLayout>
+    )
+}
+
+export default MediaNews
