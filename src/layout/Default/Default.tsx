@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { SCREEN } from '../../styles/theme'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-import BaseLang from '../../components/Lang'
+import Header from '../../components/Header/Header'
+import Footer from '../../components/Footer/Footer'
+import BaseLang from '../../components/Lang/Lang'
 
 const Lang = styled(BaseLang)`
     position: absolute;

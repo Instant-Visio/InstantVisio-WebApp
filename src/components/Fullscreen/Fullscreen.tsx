@@ -1,19 +1,34 @@
-import styled from 'styled-components'
+import React, { useState } from 'react'
 
-const FullscreenWrapper = styled.div`
-    position: absolute;
-    z-index: 1;
-    color: #ffffff80;
-    cursor: pointer;
-    right: ${({ theme }) => theme.spacing.XXS};
-    top: ${({ theme }) => theme.spacing.XS};
-    width: ${({ theme }) => theme.spacing.XXXL};
-    height: ${({ theme }) => theme.spacing.XXXL};
+import Icon from '@mdi/react'
+import { mdiFullscreen, mdiFullscreenExit } from '@mdi/js'
 
-    svg {
-        width: 100%;
-        height: 100%;
+import FullscreenWrapper from './FullscreenWrapper'
+
+const Fullscreen = () => {
+    const [active, setActive] = useState(false)
+
+    const toggleFullScreen = () => {
+        if (!document.fullscreenElement) {
+            setActive(true)
+            document.documentElement.requestFullscreen()
+        } else {
+            if (document.exitFullscreen) {
+                setActive(false)
+                document.exitFullscreen()
+            }
+        }
     }
-`
 
-export default FullscreenWrapper
+    return (
+        <FullscreenWrapper onClick={toggleFullScreen}>
+            {active ? (
+                <Icon size={2} path={mdiFullscreenExit} />
+            ) : (
+                <Icon size={2} path={mdiFullscreen} />
+            )}
+        </FullscreenWrapper>
+    )
+}
+
+export default Fullscreen

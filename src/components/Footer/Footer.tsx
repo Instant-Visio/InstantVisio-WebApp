@@ -1,50 +1,86 @@
-import styled from 'styled-components'
-import { SCREEN } from '../../styles/theme'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import About from '../../documents/Instant_Visio_Keynote.pdf'
+import FooterStyled from './FooterStyled'
+import { showPreferencesDialog } from '../../utils/gdpr'
+import NewsletterModal from '../../pages/Newsletter/NewsletterModal'
 
-const FooterStyled = styled.footer`
-    background: #222222;
-    padding: ${({ theme }) => theme.spacing.XXL};
-    display: flex;
-    justify-content: center;
-    color: #7d7d7d;
-    font-size: 16px;
-    width: 100%;
-    .footer {
-        width: 70%;
-        height: 80%;
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
-        flex-wrap: wrap;
-        justify-content: center;
-        &-link {
-            list-style: none;
-            margin: 0 ${({ theme }) => theme.spacing.M};
-            padding: ${({ theme }) => theme.spacing.XXS} 0;
+const Footer = () => {
+    const { t } = useTranslation()
+    return (
+        <FooterStyled>
+            <ul className="footer">
+                <li className="footer-link">
+                    <Link
+                        to={About}
+                        className="footer-link-content"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        {t('footer.about')}
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link
+                        to={`/${t('url.legal-mentions')}`}
+                        className="footer-link-content">
+                        {t('footer.legal-mentions')}
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link
+                        to={`/${t('url.personal-data')}`}
+                        className="footer-link-content">
+                        {t('footer.personal-data')}
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link
+                        to={`/${t('url.blog')}`}
+                        className="footer-link-content">
+                        {t('footer.blog')}
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link
+                        to={`/${t('url.credits')}`}
+                        className="footer-link-content">
+                        {t('footer.credits')}
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link
+                        to={`/${t('url.media')}`}
+                        className="footer-link-content">
+                        {t('footer.media')}
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link className="footer-link-content">
+                        <NewsletterModal />
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <a
+                        className="footer-link-content"
+                        href={`mailto:contact@instantvisio.com?Subject=${t(
+                            'footer.contact'
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        {t('footer.contact-us')}
+                    </a>
+                </li>
+                <li className="footer-link">
+                    <button
+                        className="footer-link-content"
+                        onClick={showPreferencesDialog}>
+                        {t('footer.cookies')}
+                    </button>
+                </li>
+            </ul>
+        </FooterStyled>
+    )
+}
 
-            &-content {
-                color: #7d7d7d;
-                text-decoration: none;
-                border: none;
-                background: none;
-                outline: none;
-                &:visited,
-                &:active {
-                    color: #7d7d7d;
-                }
-            }
-        }
-    }
-
-    ${SCREEN.MOBILE_AND_TABLET} {
-        .footer {
-            padding-bottom: ${({ theme }) => theme.spacing.XXL};
-            &-link {
-                text-align: center;
-            }
-        }
-    }
-`
-
-export default FooterStyled
+export default Footer

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import DefaultLayout from '../../layout/Default'
+import DefaultLayout from '../../layout/Default/Default'
 import { Link } from 'react-router-dom'
 import { IonContent } from '@ionic/react'
 

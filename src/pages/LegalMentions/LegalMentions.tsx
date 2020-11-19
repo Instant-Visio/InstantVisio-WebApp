@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-remarkable'
 import styled from 'styled-components'
-import DefaultLayout from '../../layout/Default'
+import DefaultLayout from '../../layout/Default/Default'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import { IonContent } from '@ionic/react'
 const MarkdownContainer = styled.div`

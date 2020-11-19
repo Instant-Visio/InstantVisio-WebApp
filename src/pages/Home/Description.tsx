@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components'
 import color from 'color'
 import { useTranslation, Trans } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
-import BaseList from '../../components/List'
-import Logo from '../../components/Logo'
-import BaseArrow, { BaseArrowProps } from '../../components/Arrow'
+import BaseList from '../../components/List/List'
+import Logo from '../../components/Logo/Logo'
+import BaseArrow, { BaseArrowProps } from '../../components/Arrow/Arrow'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
 interface Collapsable {

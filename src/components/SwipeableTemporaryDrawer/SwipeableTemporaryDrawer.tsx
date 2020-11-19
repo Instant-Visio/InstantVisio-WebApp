@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import Logo from '../Logo'
+import Logo from '../Logo/Logo'
 import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'
@@ -17,7 +17,7 @@ import SubjectIcon from '@material-ui/icons/Subject'
 import PersonIcon from '@material-ui/icons/Person'
 import InfoIcon from '@material-ui/icons/Info'
 import { IonItem, IonList } from '@ionic/react'
-import Lang from '../Lang'
+import Lang from '../Lang/Lang'
 
 const LogoContainer = styled.div`
     padding-left: 25%;
