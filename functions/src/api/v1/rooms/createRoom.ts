@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { addRoom } from '../../../db/addRoom'
 import { createTwilioRoom } from './service/createTwilioRoom'
 import { updateRoom } from '../../../db/updateRoom'
+import { RoomId, RoomSid } from '../../../types/Room'
 
 /**
  * @swagger
@@ -27,8 +28,8 @@ import { updateRoom } from '../../../db/updateRoom'
  *           application/json:
  *             schema:
  *               example: {
- *                   id: "aZxo2xskI",
- *                   password: "390FJZDms"
+ *                   roomSid: "aZxo2xskIaZxo2xskI",
+ *                   roomId: "390FJZDms390FJZDms"
  *               }
  *       401:
  *         description: missing authorization bearer token
@@ -51,5 +52,10 @@ export const createRoom = async (req: Request, res: Response) => {
     res.send({
         roomId,
         roomSid,
-    })
+    } as NewRoomResponse)
+}
+
+export interface NewRoomResponse {
+    roomId: RoomId
+    roomSid: RoomSid
 }
