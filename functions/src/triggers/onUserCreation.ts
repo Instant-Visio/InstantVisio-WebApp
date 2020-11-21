@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions'
 import * as jsonWebToken from 'jsonwebtoken'
 import { addTokenToUser } from '../db/addTokenToUser'
-import { getJWTEnv } from '../firebase/assertConfig'
+import { getJWTEnv } from '../firebase/env'
 
 export const onUserCreation = functions.auth.user().onCreate(async (user) => {
     const jwtKey = getJWTEnv()

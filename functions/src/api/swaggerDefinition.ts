@@ -10,6 +10,7 @@ export const swaggerDefinition = {
             url: 'https://opensource.org/licenses/MIT',
         },
     },
+    schemes: ['https'],
     consumes: ['application/json'],
     produces: ['application/json'],
 }
