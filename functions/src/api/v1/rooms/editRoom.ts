@@ -1,13 +1,7 @@
 import { Request, Response } from 'express'
 import { RoomEditData, updateRoom } from '../../../db/updateRoom'
-import { RoomId, RoomSid } from '../../../types/Room'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { wrap } from 'async-middleware'
-
-export interface NewRoomResponse {
-    roomId: RoomId
-    roomSid: RoomSid
-}
 
 /**
  * @swagger
