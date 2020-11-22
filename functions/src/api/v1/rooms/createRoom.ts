@@ -45,11 +45,10 @@ export interface NewRoomResponse {
  *         description: authorization header present but not formatted correctly
  */
 export const createRoom = wrap(async (req: Request, res: Response) => {
-    const roomPassword =
+    const roomId = await addRoom(
+        res.locals.uid,
         req.body.password || ~~(Math.random() * 999999)
-            ? req.body.password
-            : Math.floor(Math.random() * 999999)
-    const roomId = await addRoom(res.locals.uid, roomPassword)
+    )
     const roomSid = await createTwilioRoom(roomId)
     await updateRoom({
         roomId,
