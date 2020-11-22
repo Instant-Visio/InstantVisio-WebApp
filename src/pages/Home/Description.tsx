@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import color from 'color'
 import { useTranslation, Trans } from 'react-i18next'
-import { SCREEN } from '../../styles/theme'
-import BaseList from '../../components/List/List'
-import Logo from '../../components/Logo/Logo'
-import BaseArrow, { BaseArrowProps } from '../../components/Arrow/Arrow'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import { SCREEN } from 'src/styles/theme'
+import BaseList from 'src/components/List/List'
+import Logo from 'src/components/Logo/Logo'
+import BaseArrow, { BaseArrowProps } from 'src/components/Arrow/Arrow'
+import useDetectMobileOrTablet from 'src/hooks/useDetectMobileOrTablet'
 
 interface Collapsable {
     collapsed: boolean

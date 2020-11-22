@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import About from '../../documents/Instant_Visio_Keynote.pdf'
+import About from 'src/documents/Instant_Visio_Keynote.pdf'
 import FooterStyled from './FooterStyled'
-import { showPreferencesDialog } from '../../utils/gdpr'
-import NewsletterModal from '../../pages/Newsletter/NewsletterModal'
+import { showPreferencesDialog } from 'src/utils/gdpr'
+import NewsletterModal from 'src/pages/Newsletter/NewsletterModal'
 
 const Footer = () => {
     const { t } = useTranslation()

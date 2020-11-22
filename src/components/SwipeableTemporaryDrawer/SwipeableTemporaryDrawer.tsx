@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import Logo from '../Logo/Logo'
+import Logo from 'src/components/Logo/Logo'
 import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'

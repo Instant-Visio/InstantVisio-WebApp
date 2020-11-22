@@ -8,7 +8,7 @@ import {
 import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import DailyIframe from '@daily-co/daily-js'
-import { getLocale } from '../../../i18n/helper'
+import { getLocale } from 'src/i18n/helper'
 
 const BrowserCheck = ({ onGranted }) => {
     const { t } = useTranslation('videocall')

@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-remarkable'
 import { useTranslation } from 'react-i18next'
 import { truncate } from 'lodash'
 
-import useDocumentTitle from '../../hooks/useDocumentTitle'
+import useDocumentTitle from 'src/hooks/useDocumentTitle'
 import BlogArticleStyled from './BlogArticleStyled'
 import blog from '../../data/js/blog'
 

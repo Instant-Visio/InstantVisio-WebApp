@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BaseListItem from './ListItem'
-import { SCREEN } from '../../styles/theme'
+import { SCREEN } from 'src/styles/theme'
 
 const ListItem = styled(BaseListItem)``
 

@@ -1,4 +1,4 @@
-import { functions } from '../firebase/firebase'
+import { functions } from 'src/firebase/firebase'
 
 export const createCall = async (values) => {
     try {

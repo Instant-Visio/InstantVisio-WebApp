@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container } from 'react-bootstrap'
 import { HeaderStyled, HeaderLogoBaseline } from './HeaderStyled'
 import { useTranslation } from 'react-i18next'
-import Logo from '../Logo/Logo'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import Logo from 'src/components/Logo/Logo'
+import useDetectMobileOrTablet from 'src/hooks/useDetectMobileOrTablet'
 
 const Header = () => {
     const { t } = useTranslation()

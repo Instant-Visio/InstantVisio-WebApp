@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { authInstance, firebaseAuth } from '../firebase/firebase'
+import { authInstance, firebaseAuth } from 'src/firebase/firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import { Button } from 'react-bootstrap'
 

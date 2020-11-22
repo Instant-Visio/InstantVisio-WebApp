@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import homeLogo from '../../styles/assets/images/homeLogo.svg'
-import logo from '../../styles/assets/images/logo.svg'
-import logoMobile from '../../styles/assets/images/logo_mobile.svg'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import homeLogo from 'src/styles/assets/images/homeLogo.svg'
+import logo from 'src/styles/assets/images/logo.svg'
+import logoMobile from 'src/styles/assets/images/logo_mobile.svg'
+import useDetectMobileOrTablet from 'src/hooks/useDetectMobileOrTablet'
 
 function Logo() {
     const { t } = useTranslation()

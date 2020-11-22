@@ -17,6 +17,7 @@ const firebaseInstance = firebase.initializeApp(firebaseConfig)
 export const firebaseAuth = firebase.auth
 export const authInstance = firebaseInstance.auth()
 export const remoteConfig = firebase.remoteConfig()
+
 remoteConfig.settings = {
     minimumFetchIntervalMillis: 3600000,
     fetchTimeoutMillis: 60000, // default value used here: https://firebase.google.com/docs/reference/js/firebase.remoteconfig.Settings#fetchtimeoutmillis

@@ -3,7 +3,7 @@ import { useTranslation, Trans } from 'react-i18next'
 import { MediaNewsTitle, MediaNewsStyled } from './MediaNewsStyled'
 import data from './data'
 
-import DefaultLayout from '../../layout/Default/Default'
+import DefaultLayout from 'src/layout/Default/Default'
 
 const MediaNews = () => {
     const { t } = useTranslation('media')

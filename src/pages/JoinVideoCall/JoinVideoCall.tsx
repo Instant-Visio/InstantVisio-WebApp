@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import DefaultLayout from '../../layout/Default/Default'
+import DefaultLayout from 'src/layout/Default/Default'
 import { IonContent } from '@ionic/react'
 import { Redirect, Link } from 'react-router-dom'
-import * as LocalStorage from '../../services/local-storage'
+import * as LocalStorage from 'src/services/local-storage'
 import styled from 'styled-components'
 
 const CenteredText = styled.div`

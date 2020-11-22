@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Check from './Check'
-import useCameraMicrophonePermission from '../../../hooks/useCameraMicrophonePermission'
+import useCameraMicrophonePermission from 'src/hooks/useCameraMicrophonePermission'
 import { STATE_GRANTED } from './PermissionConstants'
 
 const CameraMicrophonePermission = ({ onGranted }) => {

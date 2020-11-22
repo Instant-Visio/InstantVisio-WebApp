@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-remarkable'
 
-import DefaultLayout from '../../layout/Default/Default'
+import DefaultLayout from 'src/layout/Default/Default'
 import { IonContent } from '@ionic/react'
 
 const PersonalData = () => {

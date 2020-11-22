@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import './App.scss'
-import { gdprHandler } from '../../utils/gdpr'
+import { gdprHandler } from 'src/utils/gdpr'
 import Router from './router'
 import { IonApp, IonHeader } from '@ionic/react'
-import SwipeableTemporaryDrawer from '../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
+import SwipeableTemporaryDrawer from 'src/components/SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
 import { Navbar } from 'react-bootstrap'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import useDetectMobileOrTablet from 'src/hooks/useDetectMobileOrTablet'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import rootReducer from '../../reducers'
+import rootReducer from 'src/reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const store = createStore(

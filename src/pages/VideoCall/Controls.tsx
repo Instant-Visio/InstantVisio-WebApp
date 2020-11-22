@@ -9,7 +9,7 @@ import {
     mdiVideo,
     mdiVideoOff,
 } from '@mdi/js'
-import { toggleSupport } from '../../utils/support'
+import { toggleSupport } from 'src/utils/support'
 import { ControlsContainer } from './VideoCallComponents'
 import { useTranslation } from 'react-i18next'
 

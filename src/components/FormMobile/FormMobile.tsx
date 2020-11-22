@@ -5,11 +5,11 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import Field from '../Form/Field'
-import CallError from '../Form/CallError'
-import { triggerValidation, format } from '../Form/validation'
-import PhoneField from '../Form/PhoneField'
-import { getLocale } from '../../i18n/helper'
+import Field from 'src/components/Form/Field'
+import CallError from 'src/components/Form/CallError'
+import { triggerValidation, format } from 'src/components/Form/validation'
+import PhoneField from 'src/components/Form/PhoneField'
+import { getLocale } from 'src/i18n/helper'
 
 const BootstrapForm = styled(BaseForm)`
     width: 100%;

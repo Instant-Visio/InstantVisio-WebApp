@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { SCREEN } from '../../styles/theme'
+import { SCREEN } from 'src/styles/theme'
 
 export const CallContainer = styled.div`
     width: 100vw;

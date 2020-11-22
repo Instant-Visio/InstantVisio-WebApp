@@ -9,9 +9,9 @@ import {
     MediaNews,
     NotFound,
     JoinVideoCall,
-} from '../../pages'
+} from 'src/pages'
 
-import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
+import VideoCallPrecheck from 'src/pages/VideoCall/VideoCallPrecheck'
 import { useTranslation } from 'react-i18next'
 import { Route } from 'react-router-dom'
 import { IonRouterOutlet } from '@ionic/react'

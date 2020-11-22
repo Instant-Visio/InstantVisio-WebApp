@@ -2,8 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-import DefaultLayout from '../../layout/Default/Default'
-import BlogArticle from '../../components/BlogArticle/BlogArticle'
+import DefaultLayout from 'src/layout/Default/Default'
+import BlogArticle from 'src/components/BlogArticle/BlogArticle'
 import { IonContent } from '@ionic/react'
 
 const Blog = () => {
