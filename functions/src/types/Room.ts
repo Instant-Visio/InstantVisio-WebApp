@@ -9,5 +9,6 @@ export interface Room {
     id: RoomId
     sid: RoomSid
     uid: UID
+    password: string
     parameters?: RoomParameters
 }
