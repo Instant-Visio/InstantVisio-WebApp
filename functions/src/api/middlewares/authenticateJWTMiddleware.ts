@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import * as jsonWebToken from 'jsonwebtoken'
-import { getJWTEnv } from '../../firebase/assertConfig'
+import { getJWTEnv } from '../../firebase/env'
 import { JWTData, JWTToken } from '../../types/JWT'
 import {
     ForbiddenError,
@@ -47,6 +47,7 @@ export const authenticateJWTMiddleware = (
 
             try {
                 await assertValidToken(jwtData, token)
+                res.locals.uid = jwtData.uid
             } catch (error) {
                 next(error)
                 return

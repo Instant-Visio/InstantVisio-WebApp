@@ -9,13 +9,16 @@ import {
     UnauthorizedError,
 } from '../errors/HttpError'
 
+const DEFAULT_RES = {
+    locals: {},
+}
 describe('authentificateJWTMiddleware', () => {
     const mockNext = jest.fn()
-    const mockRes = jest.fn()
+    let mockRes = DEFAULT_RES
 
     afterEach(() => {
         mockNext.mockClear()
-        mockRes.mockClear()
+        mockRes = DEFAULT_RES
     })
 
     it('should not be authorized due to missing authorization header', () => {
