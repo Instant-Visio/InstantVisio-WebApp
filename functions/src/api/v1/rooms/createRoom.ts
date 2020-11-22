@@ -4,6 +4,11 @@ import { createTwilioRoom } from './service/createTwilioRoom'
 import { updateRoom } from '../../../db/updateRoom'
 import { RoomId, RoomSid } from '../../../types/Room'
 
+export interface NewRoomResponse {
+    roomId: RoomId
+    roomSid: RoomSid
+}
+
 /**
  * @swagger
  * /v1/rooms/new:
@@ -39,23 +44,18 @@ import { RoomId, RoomSid } from '../../../types/Room'
  *         description: authorization header present but not formatted correctly
  */
 export const createRoom = async (req: Request, res: Response) => {
-    const roomPassword = req.body.password
-        ? req.body.password
-        : Math.floor(Math.random() * 999999)
+    const roomPassword =
+        req.body.password || ~~(Math.random() * 999999)
+            ? req.body.password
+            : Math.floor(Math.random() * 999999)
     const roomId = await addRoom(res.locals.uid, roomPassword)
     const roomSid = await createTwilioRoom(roomId)
     await updateRoom({
         roomId,
         roomSid,
-        parameters: {},
     })
     res.send({
         roomId,
         roomSid,
     } as NewRoomResponse)
-}
-
-export interface NewRoomResponse {
-    roomId: RoomId
-    roomSid: RoomSid
 }
