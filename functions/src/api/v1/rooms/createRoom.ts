@@ -3,6 +3,7 @@ import { addRoom } from '../../../db/addRoom'
 import { createTwilioRoom } from './service/createTwilioRoom'
 import { updateRoom } from '../../../db/updateRoom'
 import { RoomId, RoomSid } from '../../../types/Room'
+import { wrap } from 'async-middleware'
 
 export interface NewRoomResponse {
     roomId: RoomId
@@ -43,7 +44,7 @@ export interface NewRoomResponse {
  *       412:
  *         description: authorization header present but not formatted correctly
  */
-export const createRoom = async (req: Request, res: Response) => {
+export const createRoom = wrap(async (req: Request, res: Response) => {
     const roomPassword =
         req.body.password || ~~(Math.random() * 999999)
             ? req.body.password
@@ -58,4 +59,4 @@ export const createRoom = async (req: Request, res: Response) => {
         roomId,
         roomSid,
     } as NewRoomResponse)
-}
+})

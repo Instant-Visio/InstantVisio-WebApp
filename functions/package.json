@@ -17,6 +17,7 @@
     "dependencies": {
         "@sendgrid/mail": "^6.5.5",
         "@types/jest": "^26.0.15",
+        "async-middleware": "^1.2.1",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "firebase-admin": "^9.3.0",
