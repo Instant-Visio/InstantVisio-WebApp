@@ -6,8 +6,8 @@ export type RoomSid = string
 export interface RoomParameters {}
 
 export interface Room {
-    roomId: RoomId
-    roomSid: RoomSid
+    id: RoomId
+    sid: RoomSid
     uid: UID
     parameters?: RoomParameters
 }
