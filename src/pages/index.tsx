@@ -7,6 +7,7 @@ import Credits from './Credits/Credits'
 import MediaNews from './MediaNews/MediaNews'
 import NotFound from './NotFound/NotFound'
 import JoinVideoCall from './JoinVideoCall/JoinVideoCall'
+import License from './License/License'
 
 export {
     Home,
@@ -17,5 +18,6 @@ export {
     Credits,
     MediaNews,
     JoinVideoCall,
+    License,
     NotFound,
 }

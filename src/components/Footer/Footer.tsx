@@ -78,6 +78,13 @@ const Footer = () => {
                         {t('footer.cookies')}
                     </button>
                 </li>
+                <li className="footer-link">
+                    <Link
+                        to={`/${t('url.license')}`}
+                        className="footer-link-content">
+                        {t('footer.license')}
+                    </Link>
+                </li>
             </ul>
         </FooterStyled>
     )
