@@ -37,7 +37,7 @@ export interface JoinRoomResponse {
  *             schema:
  *               example: {
  *                   jwtAccessToken: "aZxo2xsk.IaZxo.2xskI",
- *                   ttl: 1440"
+ *                   ttl: 1440
  *               }
  *       401:
  *         description: missing authorization bearer token
@@ -60,7 +60,6 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
         throw new ForbiddenError('Wrong password to join the room')
     }
 
-    // TODO: test what's the behavior when the twilio room is deleted after 5minutes
     const accessToken = createTwilioClientToken(participantUID, room)
 
     res.send({
