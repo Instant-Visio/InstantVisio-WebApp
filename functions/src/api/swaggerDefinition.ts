@@ -13,4 +13,34 @@ export const swaggerDefinition = {
     schemes: ['https'],
     consumes: ['application/json'],
     produces: ['application/json'],
+    components: {
+        schemas: {
+            Room: {
+                properties: {
+                    id: {
+                        type: 'string',
+                    },
+                    createdAt: {
+                        type: 'string',
+                    },
+                    updatedAt: {
+                        type: 'string',
+                    },
+                },
+            },
+        },
+        securitySchemes: {
+            bearerAuth: {
+                type: 'http',
+                scheme: 'bearer',
+                description: 'Enter JWT Bearer token **_only_**',
+                bearerFormat: 'JWT',
+            },
+        },
+    },
+    security: [
+        {
+            bearerAuth: [],
+        },
+    ],
 }

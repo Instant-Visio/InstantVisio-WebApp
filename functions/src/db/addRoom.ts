@@ -1,3 +1,4 @@
+import { COLLECTION_ROOMS } from './constants'
 import { RoomId } from '../types/Room'
 import { db, serverTimestamp } from '../firebase/firebase'
 import { UID } from '../types/uid'
@@ -6,7 +7,7 @@ export const addRoom = async (
     userId: UID,
     password: string
 ): Promise<RoomId> => {
-    const documentReference = await db.collection('rooms').add({
+    const documentReference = await db.collection(COLLECTION_ROOMS).add({
         uid: userId,
         password: password,
         createdAt: serverTimestamp(),
