@@ -13,11 +13,20 @@ export const getJWTEnv = (): JWTKey => {
 
 export const getTwilioEnv = (): TwilioEnv => {
     const { twilio } = functions.config()
-    if (!twilio.sid || !twilio.authtoken) {
-        throw new InternalServerError('Missing Twilio sid or authtoken')
+    if (
+        !twilio.sid ||
+        !twilio.authtoken ||
+        !twilio.apikeysid ||
+        !twilio.apikeysecret
+    ) {
+        throw new InternalServerError(
+            'Missing Twilio sid or authtoken or apikeysid or apikeysecret'
+        )
     }
     return {
         sid: twilio.sid,
         authToken: twilio.authtoken,
+        apiKeySid: twilio.apikeysid,
+        apiKeySecret: twilio.apikeysecret,
     }
 }

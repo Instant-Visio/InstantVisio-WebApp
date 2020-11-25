@@ -15,6 +15,8 @@ export const errorMiddleware = (
         })
     }
 
+    console.error(`API ERROR ${req.url}`, error)
+
     return res.status(500).send({
         error: 'Internal Server Error',
     })
