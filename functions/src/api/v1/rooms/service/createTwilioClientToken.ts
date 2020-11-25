@@ -4,7 +4,7 @@ import * as AccessToken from 'twilio/lib/jwt/AccessToken'
 import { getTwilioEnv } from '../../../../firebase/env'
 
 const VideoGrant = AccessToken.VideoGrant
-export const TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS = 1440 // 24 hours
+export const TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS = 14400 // 4 hours
 
 export const createTwilioClientToken = (
     participantUID: UID,
