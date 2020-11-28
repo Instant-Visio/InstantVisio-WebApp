@@ -21,7 +21,7 @@ import { wrap } from 'async-middleware'
  *         required: false
  *         type: string
  *     responses:
- *       200:
+ *       204:
  *         description: Room edited with success
  *       401:
  *         description: missing authorization bearer token
