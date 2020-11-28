@@ -1,14 +1,14 @@
 import * as functions from 'firebase-functions'
-import { OVHCredentials } from '../callable/utils/notification'
 import * as ovh from 'ovh'
 import { isEmpty } from 'lodash'
+import { OVHCredentials } from '../types/OVHCredentials'
 
 export const logCleaner = functions
     .runWith({
         timeoutSeconds: 540,
         memory: '2GB',
     })
-    .pubsub// Every day at 03:00 CET
+    .pubsub // Every day at 03:00 CET
     .schedule('0 3 * * *')
     .onRun(async () => {
         const { ovh } = functions.config()
