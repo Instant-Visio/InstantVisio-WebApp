@@ -9,7 +9,7 @@ export const getRooms = async (userId: UID): Promise<(Response | null)[]> => {
     const query = await db
         .collection(COLLECTION_ROOMS)
         .where('uid', '==', userId)
-    //        .orderBy('createdAt')
+        .orderBy('createdAt', 'desc')
 
     const results = await query.get()
 
