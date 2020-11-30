@@ -1,7 +1,5 @@
 import { InvitationDestination } from '../types/InvitationDestination'
 import { NotificationContent } from '../types/Notification'
-import { OVHCredentials } from '../types/OVHCredentials'
-import { SendGridEnv } from '../types/SendGridEnv'
 import { getAppEnv } from '../firebase/env'
 import { sendNotification } from './sendNotification'
 
@@ -12,9 +10,7 @@ export interface SendNotificationsResult {
 
 export const sendNotifications = async (
     destinations: InvitationDestination[],
-    notificationContent: NotificationContent,
-    ovhCredentials?: OVHCredentials,
-    sendGridEnv?: SendGridEnv
+    notificationContent: NotificationContent
 ): Promise<SendNotificationsResult> => {
     // Just some quick prefilters
     const emailDestinations = destinations.filter(
@@ -38,7 +34,6 @@ export const sendNotifications = async (
                     country: emailDest.country,
                     lang: emailDest.lang,
                     email: emailDest.email,
-                    ovhCredentials: ovhCredentials,
                     emailFrom: appEnv.emailFrom,
                 })
                 emailsSent.push(emailDest.email)
@@ -57,7 +52,6 @@ export const sendNotifications = async (
                     country: smsDest.country,
                     lang: smsDest.lang,
                     phone: smsDest.phone,
-                    sendGridCredentials: sendGridEnv,
                 })
                 smssSent.push(smsDest.phone)
             } catch (error) {

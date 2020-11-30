@@ -1,23 +1,27 @@
 import { NotificationParams } from '../types/Notification'
 import * as sgMail from '@sendgrid/mail'
 import { logEmailSent } from '../sumologic/sumologic'
+import { getSendGridEnv } from '../firebase/env'
+import { SendGridEnv } from '../types/SendGridEnv'
 
-export const sendEmail = async (
+export const sendEmailWithCustomEnv = async (
     params: NotificationParams,
     messageBody: string,
-    subject: string
+    subject: string,
+    sendGridEnv: SendGridEnv
 ) => {
-    if (!params.sendGridCredentials) {
+    if (!sendGridEnv) {
         return Promise.reject('Missing SendGrid env')
     }
 
-    sgMail.setApiKey(params.sendGridCredentials.apikey)
+    sgMail.setApiKey(sendGridEnv.apiKey)
+
     const msg = {
         to: params.email,
         from: `InstantVisio <${params.emailFrom}>`,
         subject: subject,
         text: messageBody,
-        ip_pool_name: params.sendGridCredentials.ip_pool_name,
+        ip_pool_name: sendGridEnv.ipPoolName,
     }
 
     try {
@@ -38,4 +42,17 @@ export const sendEmail = async (
         console.log(JSON.stringify(err))
     }
     return Promise.reject('Failed to send email')
+}
+
+export const sendEmail = async (
+    params: NotificationParams,
+    messageBody: string,
+    subject: string
+) => {
+    return sendEmailWithCustomEnv(
+        params,
+        messageBody,
+        subject,
+        getSendGridEnv()
+    )
 }

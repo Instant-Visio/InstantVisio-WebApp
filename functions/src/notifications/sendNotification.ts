@@ -11,10 +11,10 @@ export const sendNotification = async (params: NotificationParams) => {
     const subject = `${langData.title} ${params.name}`
     const message = `${name} ${langData.Message} ${params.roomUrl}`
 
-    if (!isEmpty(params.email) && !isEmpty(params.sendGridCredentials)) {
+    if (!isEmpty(params.email)) {
         await sendEmail(params, message, subject)
     }
-    if (!isEmpty(params.phone) && !isEmpty(params.ovhCredentials)) {
+    if (!isEmpty(params.phone)) {
         await sendSms(params, message)
     }
 }

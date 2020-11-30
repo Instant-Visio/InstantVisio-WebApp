@@ -1,6 +1,6 @@
 export interface OVHCredentials {
-    consumerkey: string
-    appsecret: string
-    appkey: string
-    servicename: string
+    consumerKey: string
+    appSecret: string
+    appKey: string
+    serviceName: string
 }

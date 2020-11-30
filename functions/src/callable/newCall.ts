@@ -9,7 +9,7 @@ import { sendNotification } from '../notifications/sendNotification'
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
 export const newCall = functions.https.onCall(async (data, context) => {
-    const { ovh, sendgrid, visio, app } = functions.config()
+    const { visio, app } = functions.config()
 
     if (isEmpty(data) || isEmpty(data.name)) {
         throw new functions.https.HttpsError(
@@ -34,13 +34,6 @@ export const newCall = functions.https.onCall(async (data, context) => {
             'failed-precondition',
             'Config missing for app (domain/emailfrom)'
         )
-    }
-
-    if (isEmpty(sendgrid)) {
-        console.warn('Warn: No credentials for SendGrid')
-    }
-    if (isEmpty(ovh)) {
-        console.warn('Warn: No credentials for OVH')
     }
 
     if (data.phone) {
@@ -76,8 +69,6 @@ export const newCall = functions.https.onCall(async (data, context) => {
             phone: data.phone,
             country: data.country || 'FR',
             roomUrl: room.roomUrl,
-            ovhCredentials: ovh,
-            sendGridCredentials: sendgrid,
             emailFrom: app.emailfrom,
             lang: data.lang ? data.lang.trim().toLowerCase() : 'en',
         })

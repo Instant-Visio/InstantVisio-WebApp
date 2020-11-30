@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 import { BadRequestError } from '../../errors/HttpError'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { InvitationDestination } from '../../../types/InvitationDestination'
-import { getAppEnv, getOVHEnv, getSendGridEnv } from '../../../firebase/env'
+import { getAppEnv } from '../../../firebase/env'
 import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
 import { UID } from '../../../types/uid'
@@ -113,8 +113,6 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
     // manual test
 
     const appEnv = getAppEnv()
-    const ovhEnv = getOVHEnv()
-    const sendGridEnv = getSendGridEnv()
 
     const roomUrl = `https://${appEnv.domain}/room/${roomId}?pwd=${room.password}`
 
@@ -125,9 +123,7 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
 
     const notificationSentResult = await sendNotifications(
         invitationsDestinations,
-        notificationContent,
-        ovhEnv,
-        sendGridEnv
+        notificationContent
     )
 
     if (

@@ -53,10 +53,10 @@ export const getOVHEnv = (): OVHCredentials => {
         )
     }
     return {
-        consumerkey: ovh.consumerkey,
-        servicename: ovh.servicename,
-        appsecret: ovh.appsecret,
-        appkey: ovh.appkey,
+        consumerKey: ovh.consumerkey,
+        serviceName: ovh.servicename,
+        appSecret: ovh.appsecret,
+        appKey: ovh.appkey,
     }
 }
 
@@ -68,7 +68,7 @@ export const getSendGridEnv = (): SendGridEnv => {
         )
     }
     return {
-        apikey: sendgrid.apikey,
-        ip_pool_name: sendgrid.ip_pool_name,
+        apiKey: sendgrid.apikey,
+        ipPoolName: sendgrid.ip_pool_name,
     }
 }

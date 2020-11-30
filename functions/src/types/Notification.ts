@@ -1,5 +1,3 @@
-import { OVHCredentials } from './OVHCredentials'
-
 export interface NotificationParams {
     name: string
     roomUrl: string
@@ -8,11 +6,6 @@ export interface NotificationParams {
     email?: string
     phone?: string
     emailFrom?: string
-    ovhCredentials?: OVHCredentials
-    sendGridCredentials?: {
-        apikey: string
-        ip_pool_name: string
-    }
 }
 
 export interface NotificationContent {
