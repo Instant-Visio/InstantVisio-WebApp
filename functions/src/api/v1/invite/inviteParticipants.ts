@@ -10,7 +10,7 @@ import { UID } from '../../../types/uid'
 
 /**
  * @swagger
- * /v1/rooms/{roomId}/sendInvites:
+ * /v1/rooms/{roomId}/inviteParticipants:
  *   post:
  *     description: Send an invitation to one or many participants, via email and/or sms. It can combine email and sms destinations, as well as specific lang for each participants. Email & phone can be used at the same time, email will be sent first. <br/> Default lang is "en". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improve the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
  *     tags:
@@ -66,7 +66,7 @@ import { UID } from '../../../types/uid'
  *             schema:
  *               example: {
  *                   emailsSent: ["participant@example.com", "anotherParticipant@example.com"],
- *                   smsSent: ["+33600000000"],
+ *                   smssSent: ["+33600000000"],
  *               }
  *       400:
  *         description: request content (x-www-form-urlencoded) not correct, or zero invitation delivered
@@ -84,11 +84,12 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
     const userId: UID = res.locals.uid
     const room = await assertRightToEditRoom(roomId, userId)
 
-    const hostName = req.body.hostname
-    const destinations = req.body.destinations
+    const {
+        body: { hostname, destinations },
+    } = req.body
 
     if (
-        !hostName ||
+        !hostname ||
         !destinations ||
         !Array.isArray(destinations) ||
         destinations.length === 0
@@ -108,33 +109,28 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         }
     )
 
-    // TODO :
-    // - check pricing maybe ot log email & sms sent on user account
-    // manual test
+    // TODO: aggregate the notification sent count by user
 
     const appEnv = getAppEnv()
 
     const roomUrl = `https://${appEnv.domain}/room/${roomId}?pwd=${room.password}`
 
     const notificationContent: NotificationContent = {
-        name: hostName,
+        name: hostname,
         roomUrl: roomUrl,
     }
 
-    const notificationSentResult = await sendNotifications(
+    const { emailsSent, smssSent } = await sendNotifications(
         invitationsDestinations,
         notificationContent
     )
 
-    if (
-        notificationSentResult.emailsSent.length === 0 &&
-        notificationSentResult.smssSent.length === 0
-    ) {
+    if (emailsSent.length === 0 && smssSent.length === 0) {
         throw new BadRequestError('No emails or SMS delivered')
     }
 
     res.send({
-        emailsSent: notificationSentResult.emailsSent,
-        smsSent: notificationSentResult.smssSent,
+        emailsSent: emailsSent,
+        smssSent: smssSent,
     })
 })
