@@ -1,5 +1,5 @@
 import { InvitationDestination } from '../types/InvitationDestination'
-import { NotificationContent } from '../types/Notification'
+import { NotificationContent, NotificationType } from '../types/Notification'
 import { getAppEnv } from '../firebase/env'
 import { sendNotification } from './sendNotification'
 
@@ -31,7 +31,7 @@ export const sendNotifications = async (
             try {
                 await sendNotification({
                     ...notificationContent,
-                    country: emailDest.country,
+                    type: NotificationType.EmailNotificationType,
                     lang: emailDest.lang,
                     email: emailDest.email,
                     emailFrom: appEnv.emailFrom,
@@ -49,6 +49,7 @@ export const sendNotifications = async (
             try {
                 await sendNotification({
                     ...notificationContent,
+                    type: NotificationType.SmsNotificationType,
                     country: smsDest.country,
                     lang: smsDest.lang,
                     phone: smsDest.phone,

@@ -5,6 +5,7 @@ import { logRoomCreated } from '../sumologic/sumologic'
 import { alert } from './alerts/alert'
 import { ALERT_ROOM_NOT_CREATED } from './alerts/alertList'
 import { sendNotification } from '../notifications/sendNotification'
+import { NotificationType } from '../types/Notification'
 
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
@@ -63,15 +64,26 @@ export const newCall = functions.https.onCall(async (data, context) => {
     )
 
     if (!isEmpty(data.name)) {
-        await sendNotification({
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            country: data.country || 'FR',
-            roomUrl: room.roomUrl,
-            emailFrom: app.emailfrom,
-            lang: data.lang ? data.lang.trim().toLowerCase() : 'en',
-        })
+        const lang = data.lang ? data.lang.trim().toLowerCase() : 'en'
+        if (data.phone) {
+            await sendNotification({
+                type: NotificationType.SmsNotificationType,
+                name: data.name,
+                phone: data.phone,
+                country: data.country || 'FR',
+                roomUrl: room.roomUrl,
+                lang: lang,
+            })
+        } else {
+            await sendNotification({
+                type: NotificationType.EmailNotificationType,
+                name: data.name,
+                email: data.email,
+                roomUrl: room.roomUrl,
+                emailFrom: app.emailfrom,
+                lang: lang,
+            })
+        }
     }
 
     return room

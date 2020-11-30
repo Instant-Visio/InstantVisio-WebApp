@@ -1,4 +1,4 @@
-import { NotificationParams } from '../types/Notification'
+import { SmsNotificationParams } from '../types/Notification'
 import ovh from 'ovh'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { logSmsSent } from '../sumologic/sumologic'
@@ -26,7 +26,7 @@ import { getOVHEnv } from '../firebase/env'
 // }
 
 export const sendSmsWithCustomEnv = async (
-    params: NotificationParams,
+    params: SmsNotificationParams,
     messageBody: string,
     ovhEnv: OVHCredentials
 ) => {
@@ -78,6 +78,6 @@ export const sendSmsWithCustomEnv = async (
 }
 
 export const sendSms = async (
-    params: NotificationParams,
+    params: SmsNotificationParams,
     messageBody: string
 ) => sendSmsWithCustomEnv(params, messageBody, getOVHEnv())

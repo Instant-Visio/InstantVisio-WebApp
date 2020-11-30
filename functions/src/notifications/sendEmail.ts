@@ -1,11 +1,11 @@
-import { NotificationParams } from '../types/Notification'
+import { EmailNotificationParams } from '../types/Notification'
 import * as sgMail from '@sendgrid/mail'
 import { logEmailSent } from '../sumologic/sumologic'
 import { getSendGridEnv } from '../firebase/env'
 import { SendGridEnv } from '../types/SendGridEnv'
 
 export const sendEmailWithCustomEnv = async (
-    params: NotificationParams,
+    params: EmailNotificationParams,
     messageBody: string,
     subject: string,
     sendGridEnv: SendGridEnv
@@ -45,7 +45,7 @@ export const sendEmailWithCustomEnv = async (
 }
 
 export const sendEmail = async (
-    params: NotificationParams,
+    params: EmailNotificationParams,
     messageBody: string,
     subject: string
 ) => {
