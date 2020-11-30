@@ -31,7 +31,7 @@ export const sendSmsWithCustomEnv = async (
     ovhEnv: OVHCredentials
 ) => {
     if (!ovhEnv || !params.phone) {
-        return Promise.reject('Missing OVH env or phone')
+        throw new Error('Missing OVH env or phone')
     }
     const ovhInstance = ovh({
         appKey: ovhEnv.appKey,
@@ -48,7 +48,7 @@ export const sendSmsWithCustomEnv = async (
         console.log(
             `Warn: phone number parsing failed, country: ${params.country}`
         )
-        return Promise.reject('Phone number parsing failed')
+        throw new Error('Phone number parsing failed')
     }
 
     return ovhInstance

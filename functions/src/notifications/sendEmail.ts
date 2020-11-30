@@ -11,7 +11,7 @@ export const sendEmailWithCustomEnv = async (
     sendGridEnv: SendGridEnv
 ) => {
     if (!sendGridEnv) {
-        return Promise.reject('Missing SendGrid env')
+        throw new Error('Missing SendGrid env')
     }
 
     sgMail.setApiKey(sendGridEnv.apiKey)
@@ -25,11 +25,10 @@ export const sendEmailWithCustomEnv = async (
     }
 
     try {
-        const result = await sgMail.send(msg)
-        const response = result && result[0]
-        if (response.statusCode > 200 && response.statusCode < 400) {
+        const [response] = await sgMail.send(msg)
+        if (isResponseSuccessful(response)) {
             logEmailSent()
-            return Promise.resolve()
+            return
         }
         console.log(
             `Fail to send email for room ${params.roomUrl}`,
@@ -41,7 +40,7 @@ export const sendEmailWithCustomEnv = async (
         console.error(err)
         console.log(JSON.stringify(err))
     }
-    return Promise.reject('Failed to send email')
+    throw new Error('Failed to send email')
 }
 
 export const sendEmail = async (
@@ -56,3 +55,6 @@ export const sendEmail = async (
         getSendGridEnv()
     )
 }
+
+const isResponseSuccessful = (response: { statusCode: number }) =>
+    response.statusCode > 200 && response.statusCode < 400
