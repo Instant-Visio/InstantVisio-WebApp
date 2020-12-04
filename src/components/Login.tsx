@@ -2,24 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { authInstance, firebaseAuth } from '../firebase/firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import { Button } from 'react-bootstrap'
-import fetchToken from '../hooks/fetchToken'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actions'
 import { authEmulatorHost } from '../constants'
+import { fetchToken } from '../services/fetch-token'
+import { auth as firebaseuiAuth } from 'firebaseui'
 
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
     // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
     signInSuccessUrl: '/',
+    autoUpgradeAnonymousUsers: true,
     // We will display Google and Facebook as auth providers.
     signInOptions: [
         firebaseAuth.GoogleAuthProvider.PROVIDER_ID,
         firebaseAuth.EmailAuthProvider.PROVIDER_ID,
+        firebaseuiAuth.AnonymousAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
         // Avoid redirects after sign-in.
         signInSuccessWithAuthResult: () => false,
+        signInFailure: async function (error) {
+            console.log('Signin failure error: ', error)
+        },
     },
 }
 
@@ -35,18 +41,22 @@ const Login = ({ token, setToken }) => {
             if (user) {
                 console.log('User uid: ', user.uid)
                 if (!token) {
-                    fetchToken(user.uid).then((token) => {
-                        console.log('Token saved: ', token)
-                        setToken(token)
-                        setIsLoggedIn(true)
-                        console.log('user logged in', user)
-                    })
-                } else {
-                    setIsLoggedIn(true)
-                    console.log('user logged in', user)
-                }
+                    fetchToken(user.uid)
+                        .then((token) => {
+                            console.log('Token saved: ', token)
+                            setToken(token)
+                        })
+                        .then(() => setIsLoggedIn(true))
+                        .catch((err) => {
+                            console.log('Error fetching jwtToken: ', err)
+                            authInstance.signOut()
+                            setIsLoggedIn(false)
+                        })
+                } else setIsLoggedIn(true)
+                console.log('user logged in', user)
             } else {
                 // Logged out
+                setIsLoggedIn(false)
             }
         })
     }, [])

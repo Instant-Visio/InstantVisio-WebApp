@@ -6,6 +6,7 @@ import { IonApp, IonHeader } from '@ionic/react'
 import SwipeableTemporaryDrawer from '../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
 import { Navbar } from 'react-bootstrap'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+import useAnonymousLogin from '../../hooks/useAnonymousLogin'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 
@@ -58,6 +59,8 @@ const App = () => {
 
         gdprHandler()
     }, [])
+
+    useAnonymousLogin()
 
     return (
         <IonApp className="App">
