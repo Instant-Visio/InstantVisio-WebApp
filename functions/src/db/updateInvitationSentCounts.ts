@@ -12,8 +12,8 @@ export const updateInvitationSentCounts = async (
         .doc(userId)
         .set(
             {
-                smsSent: increment(smssSentCount),
-                emailsSent: increment(emailsSentCount),
+                sentEmails: increment(smssSentCount),
+                sentSMSs: increment(emailsSentCount),
                 updatedAt: serverTimestamp(),
             },
             { merge: true }
