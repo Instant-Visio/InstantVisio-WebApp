@@ -85,9 +85,9 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
     const userId: UID = res.locals.uid
     const room = await assertRightToEditRoom(roomId, userId)
 
-    const {
-        body: { hostname, destinations },
-    } = req.body
+    const body = req.body
+    const hostname = body.hostname
+    const destinations = JSON.parse(body.destinations)
 
     if (
         !hostname ||
@@ -95,7 +95,7 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         !Array.isArray(destinations) ||
         destinations.length === 0
     ) {
-        throw new BadRequestError('Request content not formatted correctly')
+        throw new BadRequestError('Request body not formatted correctly')
     }
 
     const invitationsDestinations: InvitationDestination[] = destinations.map(
