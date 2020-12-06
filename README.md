@@ -16,6 +16,23 @@ npm i # Install dependencies
 npm start # Run the app
 ```
 
+### Local Emulator
+
+If you want to use Firebase Emulators to run the app locally:
+
+```bash
+cd functions;
+export FIREBASE_AUTH_EMULATOR_HOST="localhost:9099"
+nvm use; npm run serve-emulators
+```
+
+Furthermore, you need to change your `.env.development` file to set the following information:
+
+```
+REACT_APP_LOCAL_DEVELOPMENT=true
+REACT_APP_API_URL=http://localhost:5050/.../api # Check the URL exposed by firebase functions emulator
+```
+
 ## Functions
 
 -   Make sure you have a correct version of `./functions/runtimeconfig.json`
