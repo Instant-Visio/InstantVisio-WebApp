@@ -1,31 +1,34 @@
-import { NotificationParams } from '../types/Notification'
+import { EmailNotificationParams } from '../types/Notification'
 import * as sgMail from '@sendgrid/mail'
 import { logEmailSent } from '../sumologic/sumologic'
+import { getSendGridEnv } from '../firebase/env'
+import { SendGridEnv } from '../types/SendGridEnv'
 
-export const sendEmail = async (
-    params: NotificationParams,
+export const sendEmailWithCustomEnv = async (
+    params: EmailNotificationParams,
     messageBody: string,
-    subject: string
+    subject: string,
+    sendGridEnv: SendGridEnv
 ) => {
-    if (!params.sendGridCredentials) {
-        return Promise.reject('Missing SendGrid env')
+    if (!sendGridEnv) {
+        throw new Error('Missing SendGrid env')
     }
 
-    sgMail.setApiKey(params.sendGridCredentials.apikey)
+    sgMail.setApiKey(sendGridEnv.apiKey)
+
     const msg = {
         to: params.email,
         from: `InstantVisio <${params.emailFrom}>`,
         subject: subject,
         text: messageBody,
-        ip_pool_name: params.sendGridCredentials.ip_pool_name,
+        ip_pool_name: sendGridEnv.ipPoolName,
     }
 
     try {
-        const result = await sgMail.send(msg)
-        const response = result && result[0]
-        if (response.statusCode > 200 && response.statusCode < 400) {
+        const [response] = await sgMail.send(msg)
+        if (isResponseSuccessful(response)) {
             logEmailSent()
-            return Promise.resolve()
+            return
         }
         console.log(
             `Fail to send email for room ${params.roomUrl}`,
@@ -37,5 +40,21 @@ export const sendEmail = async (
         console.error(err)
         console.log(JSON.stringify(err))
     }
-    return Promise.reject('Failed to send email')
+    throw new Error('Failed to send email')
 }
+
+export const sendEmail = async (
+    params: EmailNotificationParams,
+    messageBody: string,
+    subject: string
+) => {
+    return sendEmailWithCustomEnv(
+        params,
+        messageBody,
+        subject,
+        getSendGridEnv()
+    )
+}
+
+const isResponseSuccessful = (response: { statusCode: number }) =>
+    response.statusCode > 200 && response.statusCode < 400

@@ -1,10 +1,12 @@
-import { NotificationParams } from '../types/Notification'
+import { SmsNotificationParams } from '../types/Notification'
 import ovh from 'ovh'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { logSmsSent } from '../sumologic/sumologic'
 import { alert } from '../callable/alerts/alert'
 import { ALERT_OVH_SMS_QUOTA_REACHED } from '../callable/alerts/alertList'
 import * as functions from 'firebase-functions'
+import { OVHCredentials } from '../types/OVHCredentials'
+import { getOVHEnv } from '../firebase/env'
 
 // To get new credentials, we first need to use this method, then open the given url and authentificate manually
 // (mind the expiration delay)
@@ -23,17 +25,18 @@ import * as functions from 'firebase-functions'
 //     })
 // }
 
-export const sendSms = async (
-    params: NotificationParams,
-    messageBody: string
+export const sendSmsWithCustomEnv = async (
+    params: SmsNotificationParams,
+    messageBody: string,
+    ovhEnv: OVHCredentials
 ) => {
-    if (!params.ovhCredentials || !params.phone) {
-        return Promise.reject('Missing OVH env')
+    if (!ovhEnv || !params.phone) {
+        throw new Error('Missing OVH env or phone')
     }
     const ovhInstance = ovh({
-        appKey: params.ovhCredentials.appkey,
-        appSecret: params.ovhCredentials.appsecret,
-        consumerKey: params.ovhCredentials.consumerkey,
+        appKey: ovhEnv.appKey,
+        appSecret: ovhEnv.appSecret,
+        consumerKey: ovhEnv.consumerKey,
     })
 
     const phoneNumber = parsePhoneNumberFromString(
@@ -45,23 +48,19 @@ export const sendSms = async (
         console.log(
             `Warn: phone number parsing failed, country: ${params.country}`
         )
-        return Promise.reject('Phone number parsing failed')
+        throw new Error('Phone number parsing failed')
     }
 
     return ovhInstance
-        .requestPromised(
-            'POST',
-            `/sms/${params.ovhCredentials.servicename}/jobs`,
-            {
-                message: messageBody,
-                noStopClause: true,
-                receivers: [phoneNumber.formatInternational()],
-                sender: 'VisioPhone',
-                priority: 'high',
-                validityPeriod: 30, // 30 min
-            }
-        )
-        .then((result: any) => {
+        .requestPromised('POST', `/sms/${ovhEnv.serviceName}/jobs`, {
+            message: messageBody,
+            noStopClause: true,
+            receivers: [phoneNumber.formatInternational()],
+            sender: 'VisioPhone',
+            priority: 'high',
+            validityPeriod: 30, // 30 min
+        })
+        .then(() => {
             console.log('sms sent')
             logSmsSent()
         })
@@ -77,3 +76,8 @@ export const sendSms = async (
             throw new functions.https.HttpsError('unknown', error.message)
         })
 }
+
+export const sendSms = async (
+    params: SmsNotificationParams,
+    messageBody: string
+) => sendSmsWithCustomEnv(params, messageBody, getOVHEnv())

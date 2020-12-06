@@ -37,18 +37,18 @@ export const logCleaner = functions
 
 const cleanupOVHLogs = async (ovhCredentials: OVHCredentials) => {
     const ovhInstance = ovh({
-        appKey: ovhCredentials.appkey,
-        appSecret: ovhCredentials.appsecret,
-        consumerKey: ovhCredentials.consumerkey,
+        appKey: ovhCredentials.appKey,
+        appSecret: ovhCredentials.appSecret,
+        consumerKey: ovhCredentials.consumerKey,
     })
 
     return await ovhInstance
-        .requestPromised('GET', `/sms/${ovhCredentials.servicename}/outgoing`)
+        .requestPromised('GET', `/sms/${ovhCredentials.serviceName}/outgoing`)
         .then(async (ids: string[]) => {
             for (const id of ids) {
                 await ovhInstance.requestPromised(
                     'DELETE',
-                    `/sms/${ovhCredentials.servicename}/outgoing/${id}`
+                    `/sms/${ovhCredentials.serviceName}/outgoing/${id}`
                 )
             }
             console.log('OVH Cleaned')
