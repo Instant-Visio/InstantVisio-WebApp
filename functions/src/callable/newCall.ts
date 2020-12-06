@@ -1,16 +1,16 @@
 import * as functions from 'firebase-functions'
 import { isEmpty } from 'lodash'
 import fetch from 'node-fetch'
-import { NotificationParams, sendEmail, sendSms } from './utils/notification'
 import { logRoomCreated } from '../sumologic/sumologic'
 import { alert } from './alerts/alert'
 import { ALERT_ROOM_NOT_CREATED } from './alerts/alertList'
-import * as translations from '../translations.json'
+import { sendNotification } from '../notifications/sendNotification'
+import { NotificationType } from '../types/Notification'
 
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
 export const newCall = functions.https.onCall(async (data, context) => {
-    const { ovh, sendgrid, visio, app } = functions.config()
+    const { visio, app } = functions.config()
 
     if (isEmpty(data) || isEmpty(data.name)) {
         throw new functions.https.HttpsError(
@@ -37,13 +37,6 @@ export const newCall = functions.https.onCall(async (data, context) => {
         )
     }
 
-    if (isEmpty(sendgrid)) {
-        console.warn('Warn: No credentials for SendGrid')
-    }
-    if (isEmpty(ovh)) {
-        console.warn('Warn: No credentials for OVH')
-    }
-
     if (data.phone) {
         const lastChar = data.phone.substring(data.phone.length - 1)
         const countOfSameNbr = data.phone.split(lastChar).length - 1
@@ -62,7 +55,7 @@ export const newCall = functions.https.onCall(async (data, context) => {
         }
     }
 
-    const room = await getRoomUrl(
+    const room = await getFreeRoomUrl(
         {
             apikey: visio.apikey,
             api: visio.api,
@@ -71,17 +64,26 @@ export const newCall = functions.https.onCall(async (data, context) => {
     )
 
     if (!isEmpty(data.name)) {
-        await triggerNotification({
-            name: data.name,
-            email: data.email,
-            phone: data.phone,
-            country: data.country || 'FR',
-            roomUrl: room.roomUrl,
-            ovhCredentials: ovh,
-            sendGridCredentials: sendgrid,
-            emailFrom: app.emailfrom,
-            lang: data.lang ? data.lang.trim().toLowerCase() : 'en',
-        })
+        const lang = data.lang ? data.lang.trim().toLowerCase() : 'en'
+        if (data.phone) {
+            await sendNotification({
+                type: NotificationType.SmsNotificationType,
+                name: data.name,
+                phone: data.phone,
+                country: data.country || 'FR',
+                roomUrl: room.roomUrl,
+                lang: lang,
+            })
+        } else {
+            await sendNotification({
+                type: NotificationType.EmailNotificationType,
+                name: data.name,
+                email: data.email,
+                roomUrl: room.roomUrl,
+                emailFrom: app.emailfrom,
+                lang: lang,
+            })
+        }
     }
 
     return room
@@ -102,7 +104,7 @@ interface Room {
     config: any
 }
 
-const getRoomUrl = async (
+const getFreeRoomUrl = async (
     credentials: VisioCredentials,
     domainName: string
 ): Promise<Room> => {
@@ -130,19 +132,4 @@ const getRoomUrl = async (
     }
     await alert(ALERT_ROOM_NOT_CREATED)
     throw new functions.https.HttpsError('resource-exhausted', '400')
-}
-
-export const triggerNotification = async (params: NotificationParams) => {
-    const name = params.name.replace(/(.{20})..+/, '$1…')
-    // @ts-ignore
-    const langData = translations[params.lang]
-    const subject = `${langData.title} ${params.name}`
-    const message = `${name} ${langData.Message} ${params.roomUrl}`
-
-    if (!isEmpty(params.email) && !isEmpty(params.sendGridCredentials)) {
-        await sendEmail(params, message, subject)
-    }
-    if (!isEmpty(params.phone) && !isEmpty(params.ovhCredentials)) {
-        await sendSms(params, message)
-    }
 }

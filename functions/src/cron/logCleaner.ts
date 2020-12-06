@@ -1,14 +1,14 @@
 import * as functions from 'firebase-functions'
-import { OVHCredentials } from '../callable/utils/notification'
 import * as ovh from 'ovh'
 import { isEmpty } from 'lodash'
+import { OVHCredentials } from '../types/OVHCredentials'
 
 export const logCleaner = functions
     .runWith({
         timeoutSeconds: 540,
         memory: '2GB',
     })
-    .pubsub// Every day at 03:00 CET
+    .pubsub // Every day at 03:00 CET
     .schedule('0 3 * * *')
     .onRun(async () => {
         const { ovh } = functions.config()
@@ -37,18 +37,18 @@ export const logCleaner = functions
 
 const cleanupOVHLogs = async (ovhCredentials: OVHCredentials) => {
     const ovhInstance = ovh({
-        appKey: ovhCredentials.appkey,
-        appSecret: ovhCredentials.appsecret,
-        consumerKey: ovhCredentials.consumerkey,
+        appKey: ovhCredentials.appKey,
+        appSecret: ovhCredentials.appSecret,
+        consumerKey: ovhCredentials.consumerKey,
     })
 
     return await ovhInstance
-        .requestPromised('GET', `/sms/${ovhCredentials.servicename}/outgoing`)
+        .requestPromised('GET', `/sms/${ovhCredentials.serviceName}/outgoing`)
         .then(async (ids: string[]) => {
             for (const id of ids) {
                 await ovhInstance.requestPromised(
                     'DELETE',
-                    `/sms/${ovhCredentials.servicename}/outgoing/${id}`
+                    `/sms/${ovhCredentials.serviceName}/outgoing/${id}`
                 )
             }
             console.log('OVH Cleaned')
