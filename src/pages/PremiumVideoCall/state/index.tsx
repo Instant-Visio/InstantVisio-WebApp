@@ -20,7 +20,12 @@ import { User } from 'firebase'
 export interface StateContextType {
     error: TwilioError | null
     setError(error: TwilioError | null): void
-    getToken(name: string, room: string, passcode?: string): Promise<string>
+    getToken(
+        instantVisioToken: string,
+        name: string,
+        room: string,
+        passcode?: string
+    ): Promise<string>
     user?:
         | User
         | null
@@ -95,10 +100,14 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
         }
     }
 
-    const getToken: StateContextType['getToken'] = (name, room) => {
+    const getToken: StateContextType['getToken'] = (
+        instantVisioToken,
+        name,
+        room
+    ) => {
         setIsFetching(true)
         return contextValue
-            .getToken(name, room)
+            .getToken(instantVisioToken, name, room)
             .then((res) => {
                 setIsFetching(false)
                 return res

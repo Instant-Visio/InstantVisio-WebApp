@@ -11,6 +11,7 @@ import {
     JoinVideoCall,
 } from '../../pages'
 
+import { PremiumVideoPage } from '../../pages/PremiumVideoCall'
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
 import { useTranslation } from 'react-i18next'
 import { Route } from 'react-router-dom'
@@ -64,6 +65,9 @@ const Router = () => {
                     exact
                     component={License}
                 />
+
+                <Route path={`/premium-video`} component={PremiumVideoPage} />
+
                 <Route component={NotFound} />
             </Switch>
         </IonRouterOutlet>

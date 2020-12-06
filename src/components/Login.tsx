@@ -39,27 +39,26 @@ const Login = ({ token, setToken }) => {
     useEffect(() => {
         return authInstance.onAuthStateChanged((user) => {
             if (user) {
-                console.log('User uid: ', user.uid)
                 if (!token) {
                     fetchToken(user.uid)
-                        .then((token) => {
-                            console.log('Token saved: ', token)
+                        .then(({ token }) => {
                             setToken(token)
                         })
                         .then(() => setIsLoggedIn(true))
                         .catch((err) => {
-                            console.log('Error fetching jwtToken: ', err)
                             authInstance.signOut()
                             setIsLoggedIn(false)
                         })
-                } else setIsLoggedIn(true)
-                console.log('user logged in', user)
+                } else {
+                    setToken(token)
+                    setIsLoggedIn(true)
+                }
             } else {
                 // Logged out
                 setIsLoggedIn(false)
             }
         })
-    }, [])
+    }, [setToken, setIsLoggedIn, token])
 
     return (
         <div>

@@ -12,6 +12,7 @@ import ProgressIndicator from './ProgressIndicator/ProgressIndicator'
 import { SuccessIcon } from '../../../icons/SuccessIcon'
 import WarningIcon from '../../../icons/WarningIcon'
 import ErrorIcon from '../../../icons/ErrorIcon'
+import { connect } from 'react-redux'
 
 export const TEST_DURATION = 10000
 
@@ -95,10 +96,10 @@ export function Result({
     return null
 }
 
-export default function PreflightTest() {
+function PreflightTest({ token }) {
     const classes = useStyles()
 
-    const { tokens, tokenError } = useGetPreflightTokens()
+    const { tokens, tokenError } = useGetPreflightTokens(token)
     const { testFailure, testReport } = usePreflightTest(
         tokens?.[0],
         tokens?.[1]
@@ -128,3 +129,11 @@ export default function PreflightTest() {
         </Grid>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        token: state.token,
+    }
+}
+
+export default connect(mapStateToProps)(PreflightTest)

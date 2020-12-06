@@ -19,6 +19,8 @@ import ToggleAudioButton from '../../Buttons/ToggleAudioButton/ToggleAudioButton
 import ToggleVideoButton from '../../Buttons/ToggleVideoButton/ToggleVideoButton'
 import { useAppState } from '../../../state'
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext'
+import { connect } from 'react-redux'
+import { Api } from '../../../../../services/api'
 
 const useStyles = makeStyles((theme: Theme) => ({
     gutterBottom: {
@@ -66,20 +68,32 @@ interface DeviceSelectionScreenProps {
     name: string
     roomName: string
     setStep: (step: Steps) => void
+    token: string
 }
 
-export default function DeviceSelectionScreen({
+function DeviceSelectionScreen({
     name,
     roomName,
     setStep,
+    token,
 }: DeviceSelectionScreenProps) {
     const classes = useStyles()
-    const { getToken, isFetching } = useAppState()
+    const { isFetching } = useAppState()
     const { connect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
     const disableButtons = isFetching || isAcquiringLocalTracks || isConnecting
 
     const handleJoin = () => {
-        getToken(name, roomName).then((token) => connect(token))
+        const api = new Api(token)
+        api.createRoom()
+            .then((response) => response.roomId)
+            .then((roomId) => {
+                return api.joinRoom(roomId)
+            })
+            .then((response) => {
+                const { jwtAccessToken } = response
+                return jwtAccessToken
+            })
+            .then((jwtAccessToken) => connect(jwtAccessToken))
     }
 
     return (
@@ -149,3 +163,11 @@ export default function DeviceSelectionScreen({
         </>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        token: state.token,
+    }
+}
+
+export default connect(mapStateToProps)(DeviceSelectionScreen)

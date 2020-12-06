@@ -9,17 +9,8 @@ import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import useAnonymousLogin from '../../hooks/useAnonymousLogin'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
-
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-import rootReducer from '../../reducers'
-import { composeWithDevTools } from 'redux-devtools-extension'
-
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
-)
+import Login from '../Login'
+import { connect } from 'react-redux'
 
 declare global {
     interface Window {
@@ -34,7 +25,7 @@ const NavbarContainer = styled.div`
     margin-left: 40%;
 `
 
-const App = () => {
+const App = ({ token }) => {
     const isMobile = useDetectMobileOrTablet()
 
     useEffect(() => {
@@ -52,7 +43,7 @@ const App = () => {
                 const viewport = document.querySelector('meta[name=viewport]')
                 viewport?.setAttribute(
                     'content',
-                    `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`
+                    `height=${viewheight}, width=${viewwidth}, initial-scale=1.0`
                 )
             }, 300)
         }
@@ -60,11 +51,12 @@ const App = () => {
         gdprHandler()
     }, [])
 
-    useAnonymousLogin()
+    useAnonymousLogin(token)
 
     return (
         <IonApp className="App">
-            <Provider store={store}>
+            {!token && <Login />}
+            {token && (
                 <IonReactRouter>
                     {isMobile && (
                         <IonHeader id="topbar">
@@ -76,9 +68,15 @@ const App = () => {
                     )}
                     <Router />
                 </IonReactRouter>
-            </Provider>
+            )}
         </IonApp>
     )
 }
 
-export default App
+const mapStateToProps = (state) => {
+    return {
+        token: state.token,
+    }
+}
+
+export default connect(mapStateToProps)(App)

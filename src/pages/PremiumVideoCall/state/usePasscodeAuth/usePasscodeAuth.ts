@@ -6,6 +6,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { RoomType } from '../../types'
+import { Api } from '../../../../services/api'
 
 export function getPasscode() {
     const match = window.location.search.match(/passcode=(.*)&?/)
@@ -16,41 +17,29 @@ export function getPasscode() {
 }
 
 export function fetchToken(
+    instantVisioToken: string,
     name: string,
     room: string,
     passcode: string,
     create_room = true
 ) {
-    return fetch(`/token`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            user_identity: name,
-            room_name: room,
-            passcode,
-            create_room,
-        }),
-    })
+    const api = new Api(instantVisioToken)
+    return api
+        .createRoom()
+        .then((response) => {
+            return response.roomId
+        })
+        .then((roomId) => {
+            return api.joinRoom(roomId)
+        })
+        .then((response) => {
+            const { jwtAccessToken } = response
+            return jwtAccessToken
+        })
 }
 
 export function verifyPasscode(passcode: string) {
-    return fetchToken(
-        'temp-name',
-        'temp-room',
-        passcode,
-        false /* create_room */
-    ).then(async (res) => {
-        const jsonResponse = await res.json()
-        if (res.status === 401) {
-            return { isValid: false, error: jsonResponse.error?.message }
-        }
-
-        if (res.ok && jsonResponse.token) {
-            return { isValid: true }
-        }
-    })
+    return Promise.resolve({ isValid: true, error: '' })
 }
 
 export function getErrorMessage(message: string) {
@@ -76,23 +65,16 @@ export default function usePasscodeAuth() {
     const [roomType, setRoomType] = useState<RoomType>()
 
     const getToken = useCallback(
-        (name: string, room: string) => {
-            return fetchToken(name, room, user!.passcode)
-                .then(async (res) => {
-                    if (res.ok) {
-                        return res
-                    }
-                    const json = await res.json()
-                    const errorMessage = getErrorMessage(
-                        json.error?.message || res.statusText
-                    )
-                    throw Error(errorMessage)
-                })
-                .then((res) => res.json())
-                .then((res) => {
-                    setRoomType(res.room_type)
-                    return res.token as string
-                })
+        (instantVisioToken: string, name: string, room: string) => {
+            return fetchToken(
+                instantVisioToken,
+                name,
+                room,
+                user!.passcode
+            ).then((token) => {
+                setRoomType('group')
+                return token as string
+            })
         },
         [user]
     )

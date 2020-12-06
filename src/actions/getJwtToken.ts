@@ -6,7 +6,6 @@ export const getJwtToken = async (uid) => {
             uid,
         })
 
-        console.log(`Jwt token fetched ${result}`)
         const jwtToken = result?.data
         if (!jwtToken) {
             throw new Error('JwtToken could not be fetched')

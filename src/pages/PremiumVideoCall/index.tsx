@@ -4,7 +4,6 @@
  */
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 import { CssBaseline } from '@material-ui/core'
 import { MuiThemeProvider } from '@material-ui/core/styles'
@@ -26,7 +25,7 @@ import { VideoProvider } from './components/VideoProvider'
 import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions'
 import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning'
 
-const VideoApp = () => {
+const TwilioVideoApp = () => {
     const { error, setError } = useAppState()
     const connectionOptions = useConnectionOptions()
 
@@ -43,25 +42,26 @@ const VideoApp = () => {
     )
 }
 
-ReactDOM.render(
-    <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <Router>
-            <AppStateProvider>
-                <Switch>
-                    <PrivateRoute exact path="/">
-                        <VideoApp />
-                    </PrivateRoute>
-                    <PrivateRoute path="/room/:URLRoomName">
-                        <VideoApp />
-                    </PrivateRoute>
-                    <Route path="/login">
-                        <LoginPage />
-                    </Route>
-                    <Redirect to="/" />
-                </Switch>
-            </AppStateProvider>
-        </Router>
-    </MuiThemeProvider>,
-    document.getElementById('root')
-)
+export const PremiumVideoPage = () => {
+    return (
+        <MuiThemeProvider theme={theme}>
+            <CssBaseline />
+            <Router>
+                <AppStateProvider>
+                    <Switch>
+                        <PrivateRoute exact path="/premium-video">
+                            <TwilioVideoApp />
+                        </PrivateRoute>
+                        <PrivateRoute path="/premium-video/room/:URLRoomName">
+                            <TwilioVideoApp />
+                        </PrivateRoute>
+                        <Route path="/premium-video/login">
+                            <LoginPage />
+                        </Route>
+                        <Redirect to="/" />
+                    </Switch>
+                </AppStateProvider>
+            </Router>
+        </MuiThemeProvider>
+    )
+}

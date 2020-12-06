@@ -8,6 +8,7 @@ import MediaNews from './MediaNews/MediaNews'
 import NotFound from './NotFound/NotFound'
 import JoinVideoCall from './JoinVideoCall/JoinVideoCall'
 import License from './License/License'
+import { PremiumVideoPage } from './PremiumVideoCall'
 
 export {
     Home,
@@ -20,4 +21,5 @@ export {
     JoinVideoCall,
     License,
     NotFound,
+    PremiumVideoPage,
 }

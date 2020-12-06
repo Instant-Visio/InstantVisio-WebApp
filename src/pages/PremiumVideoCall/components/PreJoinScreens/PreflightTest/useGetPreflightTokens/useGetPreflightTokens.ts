@@ -7,7 +7,7 @@ import { nanoid } from 'nanoid'
 import { useAppState } from '../../../../state'
 import { useState, useEffect } from 'react'
 
-export default function useGetPreflightTokens() {
+export default function useGetPreflightTokens(instantVisioToken: string) {
     const { getToken } = useAppState()
     const [tokens, setTokens] = useState<[string, string]>()
     const [tokenError, setTokenError] = useState<Error>()
@@ -23,8 +23,8 @@ export default function useGetPreflightTokens() {
             const subscriberIdentity = 'participant-' + nanoid()
 
             Promise.all([
-                getToken(publisherIdentity, roomName),
-                getToken(subscriberIdentity, roomName),
+                getToken(instantVisioToken, publisherIdentity, roomName),
+                getToken(instantVisioToken, subscriberIdentity, roomName),
             ])
                 .then((tokens) => {
                     setTokens(tokens)
@@ -32,7 +32,7 @@ export default function useGetPreflightTokens() {
                 })
                 .catch((error) => setTokenError(error))
         }
-    }, [getToken, isFetching, tokens])
+    }, [getToken, isFetching, tokens, instantVisioToken])
 
     return { tokens, tokenError }
 }
