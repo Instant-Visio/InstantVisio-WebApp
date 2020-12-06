@@ -24,6 +24,12 @@ export class UnauthorizedError extends HttpError {
     }
 }
 
+export class PaymentRequiredError extends HttpError {
+    constructor(message?: string) {
+        super(402, message || 'Payment Required')
+    }
+}
+
 export class ForbiddenError extends HttpError {
     constructor(message?: string) {
         super(403, message || 'Forbidden')

@@ -82,7 +82,6 @@ const getOrCreateRoom = async (
         return await getRoom(roomId)
     } catch (error) {
         if (error instanceof RoomNotFoundError) {
-            console.log('room missing')
             await createRoom(participantUID, roomPassword, roomId)
             return await getRoom(roomId)
         } else {

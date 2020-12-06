@@ -6,6 +6,7 @@ import { RoomId, RoomSid } from '../../../types/Room'
 import { wrap } from 'async-middleware'
 import { UID } from '../../../types/uid'
 import { setRoom } from '../../../db/setRoom'
+import { assertNewRoomCreationGranted } from '../subscription/assertNewRoomCreationGranted'
 
 export interface NewRoomResponse {
     roomId: RoomId
@@ -56,6 +57,8 @@ export const createRoom = async (
     roomRequestedPassword?: string,
     specificRoomId?: RoomId
 ): Promise<NewRoomResponse> => {
+    await assertNewRoomCreationGranted(userId)
+
     let roomId: RoomId
     const roomPassword =
         roomRequestedPassword || `${~~(Math.random() * 999999)}`
