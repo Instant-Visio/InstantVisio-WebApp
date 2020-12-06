@@ -36,6 +36,12 @@ export class NotFoundError extends HttpError {
     }
 }
 
+export class RoomNotFoundError extends NotFoundError {
+    constructor(message?: string) {
+        super(message || 'Room Not Found')
+    }
+}
+
 export class PreconditionFailedError extends HttpError {
     constructor(message?: string) {
         super(412, message || 'PreconditionFailed')

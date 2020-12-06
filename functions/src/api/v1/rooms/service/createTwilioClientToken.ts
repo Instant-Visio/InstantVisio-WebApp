@@ -1,4 +1,4 @@
-import { Room } from '../../../../types/Room'
+import { RoomId } from '../../../../types/Room'
 import { UID } from '../../../../types/uid'
 import * as AccessToken from 'twilio/lib/jwt/AccessToken'
 import { getTwilioEnv } from '../../../../firebase/env'
@@ -8,7 +8,7 @@ export const TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS = 14400 // 4 hours
 
 export const createTwilioClientToken = (
     participantUID: UID,
-    room: Room
+    roomId: RoomId
 ): AccessToken => {
     const { sid, apiKeySid, apiKeySecret } = getTwilioEnv()
     const token = new AccessToken(sid, apiKeySid, apiKeySecret, {
@@ -16,7 +16,7 @@ export const createTwilioClientToken = (
     })
     // @ts-ignore we need to set the identify in the access token
     token.identity = participantUID
-    const videoGrant = new VideoGrant({ room: room.id })
+    const videoGrant = new VideoGrant({ room: roomId })
     token.addGrant(videoGrant)
 
     return token
