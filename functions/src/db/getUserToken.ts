@@ -3,9 +3,13 @@ import { JWTToken } from '../types/JWT'
 import { db } from '../firebase/firebase'
 import { UserData } from '../types/UserData'
 import { BadRequestError, NotFoundError } from '../api/errors/HttpError'
+import { COLLECTION_USERS } from './constants'
 
 export const getUserToken = async (userId: UID): Promise<JWTToken | null> => {
-    const userDocumentSnapshot = await db.collection('users').doc(userId).get()
+    const userDocumentSnapshot = await db
+        .collection(COLLECTION_USERS)
+        .doc(userId)
+        .get()
 
     if (!userDocumentSnapshot?.exists) {
         throw new NotFoundError('Resource does not exist')

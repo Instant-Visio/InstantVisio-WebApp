@@ -7,6 +7,7 @@ import { getAppEnv } from '../../../firebase/env'
 import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
 import { UID } from '../../../types/uid'
+import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCounts'
 
 /**
  * @swagger
@@ -109,8 +110,6 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         }
     )
 
-    // TODO: aggregate the notification sent count by user
-
     const appEnv = getAppEnv()
 
     const roomUrl = `https://${appEnv.domain}/room/${roomId}?pwd=${room.password}`
@@ -133,4 +132,6 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         emailsSent: emailsSent,
         smssSent: smssSent,
     })
+
+    await updateInvitationSentCounts(userId, smssSent.length, emailsSent.length)
 })
