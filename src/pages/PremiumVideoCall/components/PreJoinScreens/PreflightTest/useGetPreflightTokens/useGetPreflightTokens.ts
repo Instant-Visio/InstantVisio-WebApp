@@ -6,8 +6,9 @@
 import { nanoid } from 'nanoid'
 import { useAppState } from '../../../../state'
 import { useState, useEffect } from 'react'
+import { JWTToken } from '../../../../../../../functions/src/types/JWT'
 
-export default function useGetPreflightTokens(instantVisioToken: string) {
+export default function useGetPreflightTokens(instantVisioToken: JWTToken) {
     const { getToken } = useAppState()
     const [tokens, setTokens] = useState<[string, string]>()
     const [tokenError, setTokenError] = useState<Error>()

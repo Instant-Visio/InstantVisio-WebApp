@@ -3,17 +3,15 @@ import 'firebase/firestore'
 import 'firebase/functions'
 import 'firebase/remote-config'
 import 'firebase/auth'
-import {
-    authEmulatorHost,
-    functionsEmulatorHost,
-    dbEmulatorHost,
-} from '../constants'
+import { EMULATORS } from '../constants'
+
+import { isAuthEmulatorEnabled } from '../utils/emulators'
 
 const firebaseConfig = {
     appId: process.env.REACT_APP_APPID,
     apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_LOCAL_DEVELOPMENT
-        ? authEmulatorHost
+    authDomain: isAuthEmulatorEnabled()
+        ? EMULATORS.hosts.auth
         : process.env.REACT_APP_AUTH_DOMAIN,
     databaseURL: process.env.REACT_APP_DATABASE_URL,
     projectId: process.env.REACT_APP_PROJECT_ID,
@@ -34,9 +32,9 @@ remoteConfig.settings = {
 export const db = firebaseInstance.firestore()
 
 if (process.env.NODE_ENV === 'development') {
-    firebase.functions().useFunctionsEmulator(functionsEmulatorHost)
+    firebase.functions().useFunctionsEmulator(EMULATORS.hosts.functions)
     db.settings({
-        host: dbEmulatorHost,
+        host: EMULATORS.hosts.db,
         ssl: false,
     })
 }

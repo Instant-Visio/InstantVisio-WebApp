@@ -1,6 +1,10 @@
-import { testUser } from '../constants'
-export const signInWithAuthEmulator = async (authInstance) => {
-    const { email, password } = testUser
+import { TEST_USER } from '../constants'
+import 'firebase/auth'
+
+export const signInWithAuthEmulator = async (
+    authInstance: firebase.auth.Auth
+): Promise<void> => {
+    const { email, password } = TEST_USER
     try {
         const signInResult = await authInstance.createUserWithEmailAndPassword(
             email,
@@ -24,4 +28,8 @@ export const signInWithAuthEmulator = async (authInstance) => {
         }
         console.log('SignIn error', error)
     }
+}
+
+export const isAuthEmulatorEnabled = (): boolean => {
+    return Boolean(process.env.REACT_APP_AUTH_EMULATOR_ENABLED)
 }

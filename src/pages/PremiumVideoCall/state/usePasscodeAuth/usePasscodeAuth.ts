@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { RoomType } from '../../types'
 import { Api } from '../../../../services/api'
+import { JWTToken } from '../../../../../functions/src/types/JWT'
 
 export function getPasscode() {
     const match = window.location.search.match(/passcode=(.*)&?/)
@@ -17,7 +18,7 @@ export function getPasscode() {
 }
 
 export function fetchToken(
-    instantVisioToken: string,
+    instantVisioToken: JWTToken,
     name: string,
     room: string,
     passcode: string,
@@ -38,8 +39,8 @@ export function fetchToken(
         })
 }
 
-export function verifyPasscode(passcode: string) {
-    return Promise.resolve({ isValid: true, error: '' })
+export async function verifyPasscode(passcode: string) {
+    return { isValid: true, error: '' }
 }
 
 export function getErrorMessage(message: string) {

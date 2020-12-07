@@ -16,12 +16,13 @@ import useActiveSinkId from './useActiveSinkId/useActiveSinkId'
 import useFirebaseAuth from './useFirebaseAuth/useFirebaseAuth'
 import usePasscodeAuth from './usePasscodeAuth/usePasscodeAuth'
 import { User } from 'firebase'
+import { JWTToken } from '../../../../functions/src/types/JWT'
 
 export interface StateContextType {
     error: TwilioError | null
     setError(error: TwilioError | null): void
     getToken(
-        instantVisioToken: string,
+        instantVisioToken: JWTToken,
         name: string,
         room: string,
         passcode?: string

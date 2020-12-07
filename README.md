@@ -29,7 +29,7 @@ nvm use; npm run serve-emulators
 Furthermore, you need to change your `.env.development` file to set the following information:
 
 ```
-REACT_APP_LOCAL_DEVELOPMENT=true
+REACT_APP_AUTH_EMULATOR_ENABLED=true
 REACT_APP_API_URL=http://localhost:5050/.../api # Check the URL exposed by firebase functions emulator
 ```
 

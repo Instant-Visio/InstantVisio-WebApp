@@ -4,9 +4,11 @@ import { StyledFirebaseAuth } from 'react-firebaseui'
 import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import * as actions from '../actions/actions'
-import { authEmulatorHost } from '../constants'
+import { EMULATORS } from '../constants'
 import { fetchToken } from '../services/fetch-token'
 import { auth as firebaseuiAuth } from 'firebaseui'
+import { isAuthEmulatorEnabled } from '../utils/emulators'
+import { JWTToken } from '../../functions/src/types/JWT'
 
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -32,30 +34,39 @@ const uiConfig = {
 const Login = ({ token, setToken }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    if (process.env.REACT_APP_LOCAL_DEVELOPMENT) {
-        authInstance.useEmulator(authEmulatorHost)
+    if (isAuthEmulatorEnabled()) {
+        authInstance.useEmulator(EMULATORS.hosts.auth)
+    }
+
+    const login = (token: JWTToken) => {
+        setToken(token)
+        setIsLoggedIn(true)
+    }
+
+    const logout = () => {
+        authInstance.signOut()
+        setIsLoggedIn(false)
     }
 
     useEffect(() => {
+        const fetchTokenHandleLoginState = async (user: firebase.User) => {
+            try {
+                const token = await fetchToken(user.uid)
+                login(token)
+            } catch (err) {
+                logout()
+            }
+        }
+
         return authInstance.onAuthStateChanged((user) => {
             if (user) {
-                if (!token) {
-                    fetchToken(user.uid)
-                        .then(({ token }) => {
-                            setToken(token)
-                        })
-                        .then(() => setIsLoggedIn(true))
-                        .catch((err) => {
-                            authInstance.signOut()
-                            setIsLoggedIn(false)
-                        })
+                if (token) {
+                    login(token)
                 } else {
-                    setToken(token)
-                    setIsLoggedIn(true)
+                    fetchTokenHandleLoginState(user)
                 }
             } else {
-                // Logged out
-                setIsLoggedIn(false)
+                logout()
             }
         })
     }, [setToken, setIsLoggedIn, token])

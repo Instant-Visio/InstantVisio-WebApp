@@ -19,7 +19,10 @@ import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
 import Login from '../../components/Login'
 import { authInstance } from '../../firebase/firebase'
-import { signInWithAuthEmulator } from '../../utils/emulators'
+import {
+    signInWithAuthEmulator,
+    isAuthEmulatorEnabled,
+} from '../../utils/emulators'
 
 const DataMentions = styled.div`
     .cnil {
@@ -82,14 +85,14 @@ export default function Home() {
 
     return (
         <IonContent>
-            {process.env.REACT_APP_LOCAL_DEVELOPMENT && (
-                <React.Fragment>
+            {isAuthEmulatorEnabled() && (
+                <>
                     <button
                         onClick={() => signInWithAuthEmulator(authInstance)}>
                         EMULATOR SIGN-IN
                     </button>
                     <Link to="premium-video">Go to Twilio Video</Link>
-                </React.Fragment>
+                </>
             )}
 
             <Login />

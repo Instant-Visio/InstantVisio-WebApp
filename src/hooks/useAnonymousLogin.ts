@@ -1,13 +1,15 @@
 import firebase from 'firebase/app'
 import { authInstance } from '../firebase/firebase'
-import { authEmulatorHost } from '../constants'
+import { EMULATORS } from '../constants'
+import { isAuthEmulatorEnabled } from '../utils/emulators'
+import { JWTToken } from '../../functions/src/types/JWT'
 
-export default async (token: string) => {
+export default async (token: JWTToken): Promise<void> => {
     if (!token) {
         try {
-            if (process.env.REACT_APP_LOCAL_DEVELOPMENT) {
+            if (isAuthEmulatorEnabled()) {
                 console.log('Using auth emulator')
-                authInstance.useEmulator(authEmulatorHost)
+                authInstance.useEmulator(EMULATORS.hosts.auth)
             }
             await firebase.auth().signInAnonymously()
             console.log('User signed up anonymously...')

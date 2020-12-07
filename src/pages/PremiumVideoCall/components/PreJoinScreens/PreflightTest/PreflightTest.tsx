@@ -13,6 +13,7 @@ import { SuccessIcon } from '../../../icons/SuccessIcon'
 import WarningIcon from '../../../icons/WarningIcon'
 import ErrorIcon from '../../../icons/ErrorIcon'
 import { connect } from 'react-redux'
+import { JWTToken } from '../../../../../../functions/src/types/JWT'
 
 export const TEST_DURATION = 10000
 
@@ -96,7 +97,7 @@ export function Result({
     return null
 }
 
-function PreflightTest({ token }) {
+function PreflightTest({ token }: { token: JWTToken }) {
     const classes = useStyles()
 
     const { tokens, tokenError } = useGetPreflightTokens(token)

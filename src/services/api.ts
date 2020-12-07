@@ -1,7 +1,10 @@
+import { JWTToken } from '../../functions/src/types/JWT'
+import { NewRoomResponse } from '../../functions/src/api/v1/rooms/createRoom'
+import { JoinRoomResponse } from '../../functions/src/api/v1/rooms/joinRoom'
 export class Api {
     baseUrl: string | undefined
     jwtToken: string
-    constructor(jwtToken) {
+    constructor(jwtToken: JWTToken) {
         this.baseUrl = process.env.REACT_APP_API_URL
         if (!this.baseUrl) {
             throw new Error('API url is missing from env configuration')
@@ -9,22 +12,22 @@ export class Api {
         this.jwtToken = jwtToken
     }
 
-    async createRoom() {
+    async createRoom(): Promise<NewRoomResponse> {
         const data = {
             password: 'password=test-password',
         }
 
-        return this.post('/rooms/new', data) // NO PASSWORD
+        return this.post('/rooms/new', data)
     }
 
-    async joinRoom(roomId: string) {
+    async joinRoom(roomId: string): Promise<JoinRoomResponse> {
         const data = {
             password: 'password=test-password',
         }
         return this.post(`/rooms/${roomId}/join`, data)
     }
 
-    async post(apiUrl: string, data: any) {
+    async post(apiUrl: string, data: any): Promise<any> {
         const response = await fetch(`${this.baseUrl}${apiUrl}`, {
             method: 'POST',
             headers: {
