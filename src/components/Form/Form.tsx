@@ -8,7 +8,7 @@ import Field from './Field'
 import CallError, { Error } from './CallError'
 import { triggerValidation, format } from './validation'
 import PhoneField from './PhoneField'
-import { getLocale } from '../../i18n/helper'
+import { getLocale } from 'src/i18n/helper'
 
 const BootstrapForm = styled(BaseForm)`
     width: 100%;

@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
-import Country from '../Country/Country'
+import Country from 'src/components/Country/Country'
 import Field from './Field'
 import { useField } from 'formik'
-import { getLocale } from '../../i18n/helper'
+import { getLocale } from 'src/i18n/helper'
 
 const Wrapper = styled.div`
     & .input-group-prepend {

@@ -1,5 +1,5 @@
 import isoCountries from 'i18n-iso-countries'
-import i18n from '../../i18n/i18n'
+import i18n from 'src/i18n/i18n'
 
 export default function getCountries() {
     const { language, options } = i18n

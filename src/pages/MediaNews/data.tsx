@@ -1,12 +1,12 @@
-import VingtMinutes from '../../styles/assets/images/media/20Minutes.jpg'
-import LesEchosStart from '../../styles/assets/images/media/LesEchosStart.jpg'
-import Maddyness from '../../styles/assets/images/media/Maddyness.jpg'
-import JCM from '../../styles/assets/images/media/JCM.jpg'
-import ticsante from '../../styles/assets/images/media/ticsante.jpg'
-import MarcheDesSeniors from '../../styles/assets/images/media/MarcheDesSeniors.jpg'
-import MedtechStrasbourg from '../../styles/assets/images/media/MedtechStrasbourg.jpg'
-import Caducee from '../../styles/assets/images/media/Caducee.jpg'
-import Makery from '../../styles/assets/images/media/Makery.jpg'
+import VingtMinutes from 'src/styles/assets/images/media/20Minutes.jpg'
+import LesEchosStart from 'src/styles/assets/images/media/LesEchosStart.jpg'
+import Maddyness from 'src/styles/assets/images/media/Maddyness.jpg'
+import JCM from 'src/styles/assets/images/media/JCM.jpg'
+import ticsante from 'src/styles/assets/images/media/ticsante.jpg'
+import MarcheDesSeniors from 'src/styles/assets/images/media/MarcheDesSeniors.jpg'
+import MedtechStrasbourg from 'src/styles/assets/images/media/MedtechStrasbourg.jpg'
+import Caducee from 'src/styles/assets/images/media/Caducee.jpg'
+import Makery from 'src/styles/assets/images/media/Makery.jpg'
 export default [
     {
         id: 1,

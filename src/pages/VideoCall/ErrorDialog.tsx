@@ -1,5 +1,5 @@
 import React from 'react'
-import Dialog from '../../components/Dialog/Dialog'
+import Dialog from 'src/components/Dialog/Dialog'
 import { useTranslation } from 'react-i18next'
 
 const ErrorDialog = ({ error, onHide }) => {

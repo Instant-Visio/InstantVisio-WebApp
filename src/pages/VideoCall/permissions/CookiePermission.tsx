@@ -5,10 +5,10 @@ import {
     STATE_GRANTED,
     STATE_WAITING,
 } from './PermissionConstants'
-import useCookiePermission from '../../../hooks/useCookiePermission'
+import useCookiePermission from 'src/hooks/useCookiePermission'
 import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { getCookieBot, hasCookiebot } from '../../../utils/gdpr'
+import { getCookieBot, hasCookiebot } from 'src/utils/gdpr'
 
 const CookiePermission = ({ onGranted }) => {
     const { t } = useTranslation('videocall')

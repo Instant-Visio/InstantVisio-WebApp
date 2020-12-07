@@ -4,7 +4,7 @@ import {
     STATE_DENIED,
     STATE_GRANTED,
     STATE_WAITING,
-} from '../pages/VideoCall/permissions/PermissionConstants'
+} from 'src/pages/VideoCall/permissions/PermissionConstants'
 
 export default function useCookiePermission() {
     const [result, setResult] = useState(STATE_WAITING)

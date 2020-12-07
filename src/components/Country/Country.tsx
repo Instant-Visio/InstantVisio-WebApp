@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { FormControl } from 'react-bootstrap'
 import styled from 'styled-components'
 import getCountries from './countries'
-import Flag from '../Flag/Flag'
-import BaseArrow from '../Arrow/Arrow'
-import { BaseArrowProps } from '../Arrow/Arrow'
+import Flag from 'src/components/Flag/Flag'
+import BaseArrow from 'src/components/Arrow/Arrow'
+import { BaseArrowProps } from 'src/components/Arrow/Arrow'
 
 const Wrapper = styled.div`
     display: flex;

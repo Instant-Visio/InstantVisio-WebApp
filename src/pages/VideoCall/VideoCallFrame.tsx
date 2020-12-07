@@ -3,7 +3,7 @@ import { IframeContainer } from './VideoCallComponents'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { Redirect } from 'react-router-dom'
-import * as LocalStorage from '../../services/local-storage'
+import * as LocalStorage from 'src/services/local-storage'
 
 const VideoCallFrame = ({
     participantsNumber,

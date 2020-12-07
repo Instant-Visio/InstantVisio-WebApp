@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 //todo get from firebase
 import config from './config.json'
-import { getLocale } from '../../i18n/helper'
+import { getLocale } from 'src/i18n/helper'
 
 const Wrapper = styled.div`
     & .btn {

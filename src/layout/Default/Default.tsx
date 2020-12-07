@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { SCREEN } from '../../styles/theme'
-import useDocumentTitle from '../../hooks/useDocumentTitle'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
-import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
-import BaseLang from '../../components/Lang/Lang'
+import { SCREEN } from 'src/styles/theme'
+import useDocumentTitle from 'src/hooks/useDocumentTitle'
+import useDetectMobileOrTablet from 'src/hooks/useDetectMobileOrTablet'
+import Header from 'src/components/Header/Header'
+import Footer from 'src/components/Footer/Footer'
+import BaseLang from 'src/components/Lang/Lang'
 
 const Lang = styled(BaseLang)`
     position: absolute;

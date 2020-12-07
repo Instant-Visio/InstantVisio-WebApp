@@ -2,22 +2,22 @@ import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import { Link, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
-import ColumnsLayout from '../../layout/Columns/Columns'
+import ColumnsLayout from 'src/layout/Columns/Columns'
 import { createCall } from '../../actions/createCall'
-import FormMobile from '../../components/FormMobile/FormMobile'
-import Form from '../../components/Form/Form'
-import VerticallyCenteredModal from '../../components/VerticallyCenteredModal/VerticallyCenteredModal'
+import FormMobile from 'src/components/FormMobile/FormMobile'
+import Form from 'src/components/Form/Form'
+import VerticallyCenteredModal from 'src/components/VerticallyCenteredModal/VerticallyCenteredModal'
 import Description from './Description'
 import {
     setNewCall,
     setNewCallError,
     setNewCallRedirected,
-} from '../../utils/support'
-import Logo from '../../components/Logo/Logo'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+} from 'src/utils/support'
+import Logo from 'src/components//Logo/Logo'
+import useDetectMobileOrTablet from 'src/hooks/useDetectMobileOrTablet'
 import { IonContent } from '@ionic/react'
-import * as LocalStorage from '../../services/local-storage'
-import Login from '../../components/Login'
+import * as LocalStorage from 'src/services/local-storage'
+import Login from 'src/components/Login'
 
 const DataMentions = styled.div`
     .cnil {

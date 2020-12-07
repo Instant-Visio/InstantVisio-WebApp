@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { SCREEN } from '../../styles/theme'
+import { SCREEN } from 'src/styles/theme'
 
 const FooterStyled = styled.footer`
     background: #222222;

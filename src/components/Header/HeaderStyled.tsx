@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { SCREEN } from '../../styles/theme'
+import { SCREEN } from 'src/styles/theme'
 
 export const HeaderStyled = styled.header`
     background-color: ${({ theme }) => theme.color.white};

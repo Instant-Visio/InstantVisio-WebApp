@@ -3,7 +3,7 @@ import {
     STATE_DENIED,
     STATE_GRANTED,
     STATE_WAITING,
-} from '../pages/VideoCall/permissions/PermissionConstants'
+} from 'src/pages/VideoCall/permissions/PermissionConstants'
 
 export default function useCameraMicrophonePermission(name) {
     const [result, setResult] = React.useState(STATE_WAITING)

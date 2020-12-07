@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import DefaultLayout from '../../layout/Default/Default'
+import DefaultLayout from 'src/layout/Default/Default'
 import CreditsStyled from './CreditsStyled'
 import data from './data.json'
 import { IonContent } from '@ionic/react'
