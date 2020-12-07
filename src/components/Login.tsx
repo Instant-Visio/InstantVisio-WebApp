@@ -8,7 +8,7 @@ import { EMULATORS } from '../constants'
 import { fetchToken } from '../services/fetch-token'
 import { auth as firebaseuiAuth } from 'firebaseui'
 import { isAuthEmulatorEnabled } from '../utils/emulators'
-import { JWTToken } from '../../functions/src/types/JWT'
+import { JWTToken } from '../../types/JWT'
 
 const uiConfig = {
     // Popup signin flow rather than redirect flow.

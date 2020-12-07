@@ -1,6 +1,6 @@
 import { functions } from '../firebase/firebase'
-import { UID } from '../../functions/src/types/uid'
-import { JWTToken } from '../../functions/src/types/JWT'
+import { UID } from '../../types/uid'
+import { JWTToken } from '../../types/JWT'
 
 export const getJwtToken = async (uid: UID): Promise<JWTToken> => {
     try {

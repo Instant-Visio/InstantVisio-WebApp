@@ -6,11 +6,7 @@ import {
     createTwilioClientToken,
     TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS,
 } from './service/createTwilioClientToken'
-
-export interface JoinRoomResponse {
-    jwtAccessToken: string
-    ttl: number
-}
+import { JoinRoomResponse } from '../../../../../types/JoinRoomResponse'
 
 /**
  * @swagger

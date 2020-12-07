@@ -1,6 +1,6 @@
-import { JWTToken } from '../../functions/src/types/JWT'
-import { NewRoomResponse } from '../../functions/src/api/v1/rooms/createRoom'
-import { JoinRoomResponse } from '../../functions/src/api/v1/rooms/joinRoom'
+import { JWTToken } from '../../types/JWT'
+import { NewRoomResponse } from '../../types/NewRoomResponse'
+import { JoinRoomResponse } from '../../types/JoinRoomResponse'
 export class Api {
     baseUrl: string | undefined
     jwtToken: string

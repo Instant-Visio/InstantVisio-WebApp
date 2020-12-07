@@ -13,7 +13,7 @@ import { SuccessIcon } from '../../../icons/SuccessIcon'
 import WarningIcon from '../../../icons/WarningIcon'
 import ErrorIcon from '../../../icons/ErrorIcon'
 import { connect } from 'react-redux'
-import { JWTToken } from '../../../../../../functions/src/types/JWT'
+import { JWTToken } from '../../../../../../types/JWT'
 
 export const TEST_DURATION = 10000
 

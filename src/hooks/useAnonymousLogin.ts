@@ -2,7 +2,7 @@ import firebase from 'firebase/app'
 import { authInstance } from '../firebase/firebase'
 import { EMULATORS } from '../constants'
 import { isAuthEmulatorEnabled } from '../utils/emulators'
-import { JWTToken } from '../../functions/src/types/JWT'
+import { JWTToken } from '../../types/JWT'
 
 export default async (token: JWTToken): Promise<void> => {
     if (!token) {

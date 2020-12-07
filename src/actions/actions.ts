@@ -1,4 +1,4 @@
-import { JWTToken } from '../../functions/src/types/JWT'
+import { JWTToken } from '../../types/JWT'
 
 export const setToken = (token: JWTToken) => {
     return { type: 'setToken', token }

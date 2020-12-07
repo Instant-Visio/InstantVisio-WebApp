@@ -16,7 +16,7 @@ import useActiveSinkId from './useActiveSinkId/useActiveSinkId'
 import useFirebaseAuth from './useFirebaseAuth/useFirebaseAuth'
 import usePasscodeAuth from './usePasscodeAuth/usePasscodeAuth'
 import { User } from 'firebase'
-import { JWTToken } from '../../../../functions/src/types/JWT'
+import { JWTToken } from '../../../../types/JWT'
 
 export interface StateContextType {
     error: TwilioError | null

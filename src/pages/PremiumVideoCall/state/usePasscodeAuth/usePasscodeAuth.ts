@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { RoomType } from '../../types'
 import { Api } from '../../../../services/api'
-import { JWTToken } from '../../../../../functions/src/types/JWT'
+import { JWTToken } from '../../../../../types/JWT'
 
 export function getPasscode() {
     const match = window.location.search.match(/passcode=(.*)&?/)
