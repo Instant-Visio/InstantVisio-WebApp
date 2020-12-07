@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { authInstance, firebaseAuth } from '../firebase/firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import { Button } from 'react-bootstrap'
@@ -38,15 +38,18 @@ const Login = ({ token, setToken }) => {
         authInstance.useEmulator(EMULATORS.hosts.auth)
     }
 
-    const login = (token: JWTToken) => {
-        setToken(token)
-        setIsLoggedIn(true)
-    }
+    const login = useCallback(
+        (token: JWTToken) => {
+            setToken(token)
+            setIsLoggedIn(true)
+        },
+        [setToken, setIsLoggedIn]
+    )
 
-    const logout = () => {
+    const logout = useCallback(() => {
         authInstance.signOut()
         setIsLoggedIn(false)
-    }
+    }, [setIsLoggedIn])
 
     useEffect(() => {
         const fetchTokenHandleLoginState = async (user: firebase.User) => {
@@ -69,7 +72,7 @@ const Login = ({ token, setToken }) => {
                 logout()
             }
         })
-    }, [setToken, setIsLoggedIn, token])
+    }, [token, login, logout])
 
     return (
         <div>
