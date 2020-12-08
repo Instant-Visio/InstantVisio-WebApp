@@ -55,7 +55,7 @@ const App = ({ token }) => {
 
     return (
         <IonApp className="App">
-            {!token && <Login />}
+            <Login />
             {token && (
                 <IonReactRouter>
                     {isMobile && (

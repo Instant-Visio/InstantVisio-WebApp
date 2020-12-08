@@ -17,7 +17,6 @@ import Logo from '../../components/Logo/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
-import Login from '../../components/Login'
 import { authInstance } from '../../firebase/firebase'
 import {
     signInWithAuthEmulator,
@@ -95,7 +94,6 @@ export default function Home() {
                 </>
             )}
 
-            <Login />
             {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">
                     <Description />
