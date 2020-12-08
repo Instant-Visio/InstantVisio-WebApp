@@ -79,6 +79,7 @@
         "redux": "^4.0.5",
         "redux-devtools-extension": "^2.13.8",
         "redux-thunk": "^2.3.0",
+        "reselect": "^4.0.0",
         "styled-components": "^5.0.1",
         "twilio": "^3.39.3",
         "twilio-video": "2.8.0-beta.2",

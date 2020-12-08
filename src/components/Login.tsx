@@ -2,13 +2,14 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { authInstance, firebaseAuth } from '../firebase/firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import { Button } from 'react-bootstrap'
-import { connect } from 'react-redux'
 import * as actions from '../actions/actions'
 import { EMULATORS } from '../constants'
 import { fetchToken } from '../services/fetch-token'
 import { auth as firebaseuiAuth } from 'firebaseui'
 import { isAuthEmulatorEnabled } from '../utils/emulators'
 import { JWTToken } from '../../types/JWT'
+import { selectToken } from '../utils/selectors'
+import { useDispatch, useSelector } from 'react-redux'
 
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -31,8 +32,10 @@ const uiConfig = {
     },
 }
 
-const Login = ({ token, setToken }) => {
+const Login = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const token = useSelector(selectToken)
+    const dispatch = useDispatch()
 
     if (isAuthEmulatorEnabled()) {
         authInstance.useEmulator(EMULATORS.hosts.auth)
@@ -40,10 +43,10 @@ const Login = ({ token, setToken }) => {
 
     const login = useCallback(
         (token: JWTToken) => {
-            setToken(token)
+            dispatch(actions.setToken(token))
             setIsLoggedIn(true)
         },
-        [setToken, setIsLoggedIn]
+        [dispatch, setIsLoggedIn]
     )
 
     const logout = useCallback(() => {
@@ -94,16 +97,4 @@ const Login = ({ token, setToken }) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        token: state.token,
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setToken: (token) => dispatch(actions.setToken(token)),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login
