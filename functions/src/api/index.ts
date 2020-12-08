@@ -16,7 +16,7 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options)
 
-app.use(cors({ origin: 'http://localhost:3000' }))
+app.use(cors({ origin: true }))
 
 // API router v1 (/api/ is added on main index.ts export)
 app.use('/api/v1', routerV1)
