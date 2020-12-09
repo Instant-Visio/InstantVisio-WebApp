@@ -1,4 +1,4 @@
-import { JWTData, JWTToken } from '../../types/JWT'
+import { JWTData, JWTToken } from '../../../../types/JWT'
 import { isTokenValidInDb } from '../../db/isTokenValidInDb'
 import { ForbiddenError } from '../errors/HttpError'
 

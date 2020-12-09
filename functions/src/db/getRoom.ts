@@ -1,5 +1,5 @@
 import { COLLECTION_ROOMS } from './constants'
-import { Room, RoomId } from '../types/Room'
+import { Room, RoomId } from '../../../types/Room'
 import { db } from '../firebase/firebase'
 import { RoomNotFoundError } from '../api/errors/HttpError'
 

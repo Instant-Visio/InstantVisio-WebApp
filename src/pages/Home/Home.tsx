@@ -17,7 +17,11 @@ import Logo from '../../components/Logo/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
-import Login from '../../components/Login'
+import { authInstance } from '../../firebase/firebase'
+import {
+    signInWithAuthEmulator,
+    isAuthEmulatorEnabled,
+} from '../../utils/emulators'
 
 const DataMentions = styled.div`
     .cnil {
@@ -80,7 +84,16 @@ export default function Home() {
 
     return (
         <IonContent>
-            <Login />
+            {isAuthEmulatorEnabled() && (
+                <>
+                    <button
+                        onClick={() => signInWithAuthEmulator(authInstance)}>
+                        EMULATOR SIGN-IN
+                    </button>
+                    <Link to="premium-video">Go to Twilio Video</Link>
+                </>
+            )}
+
             {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">
                     <Description />

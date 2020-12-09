@@ -7,13 +7,9 @@ import {
     TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS,
 } from './service/createTwilioClientToken'
 import { createRoom } from './createRoom'
-import { UID } from '../../../types/uid'
-import { Room, RoomId } from '../../../types/Room'
-
-export interface JoinRoomResponse {
-    jwtAccessToken: string
-    ttl: number
-}
+import { UID } from '../../../../../types/uid'
+import { Room, RoomId } from '../../../../../types/Room'
+import { JoinRoomResponse } from '../../../../../types/JoinRoomResponse'
 
 /**
  * @swagger
