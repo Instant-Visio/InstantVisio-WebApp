@@ -10,7 +10,8 @@ import useAnonymousLogin from '../../hooks/useAnonymousLogin'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 import Login from '../Login'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { selectToken } from '../../utils/selectors'
 
 declare global {
     interface Window {
@@ -25,8 +26,9 @@ const NavbarContainer = styled.div`
     margin-left: 40%;
 `
 
-const App = ({ token }) => {
+const App = () => {
     const isMobile = useDetectMobileOrTablet()
+    const token = useSelector(selectToken)
 
     useEffect(() => {
         // when using vh and vw units in css:
@@ -73,10 +75,4 @@ const App = ({ token }) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        token: state.token,
-    }
-}
-
-export default connect(mapStateToProps)(App)
+export default App

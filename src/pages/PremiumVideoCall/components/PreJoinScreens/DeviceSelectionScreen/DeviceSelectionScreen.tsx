@@ -19,8 +19,9 @@ import ToggleAudioButton from '../../Buttons/ToggleAudioButton/ToggleAudioButton
 import ToggleVideoButton from '../../Buttons/ToggleVideoButton/ToggleVideoButton'
 import { useAppState } from '../../../state'
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext'
-import { connect } from 'react-redux'
 import { Api } from '../../../../../services/api'
+import { selectToken } from '../../../../../utils/selectors'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme: Theme) => ({
     gutterBottom: {
@@ -68,17 +69,16 @@ interface DeviceSelectionScreenProps {
     name: string
     roomName: string
     setStep: (step: Steps) => void
-    token: string
 }
 
-function DeviceSelectionScreen({
+export default function DeviceSelectionScreen({
     name,
     roomName,
     setStep,
-    token,
 }: DeviceSelectionScreenProps) {
     const classes = useStyles()
     const { isFetching } = useAppState()
+    const token = useSelector(selectToken)
     const { connect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
     const disableButtons = isFetching || isAcquiringLocalTracks || isConnecting
 
@@ -163,11 +163,3 @@ function DeviceSelectionScreen({
         </>
     )
 }
-
-const mapStateToProps = (state) => {
-    return {
-        token: state.token,
-    }
-}
-
-export default connect(mapStateToProps)(DeviceSelectionScreen)

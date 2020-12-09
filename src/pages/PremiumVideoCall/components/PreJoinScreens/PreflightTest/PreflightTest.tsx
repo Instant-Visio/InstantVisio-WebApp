@@ -12,8 +12,8 @@ import ProgressIndicator from './ProgressIndicator/ProgressIndicator'
 import { SuccessIcon } from '../../../icons/SuccessIcon'
 import WarningIcon from '../../../icons/WarningIcon'
 import ErrorIcon from '../../../icons/ErrorIcon'
-import { connect } from 'react-redux'
-import { JWTToken } from '../../../../../../types/JWT'
+import { useSelector } from 'react-redux'
+import { selectToken } from '../../../../../utils/selectors'
 
 export const TEST_DURATION = 10000
 
@@ -97,9 +97,9 @@ export function Result({
     return null
 }
 
-function PreflightTest({ token }: { token: JWTToken }) {
+export default function PreflightTest() {
     const classes = useStyles()
-
+    const token = useSelector(selectToken)
     const { tokens, tokenError } = useGetPreflightTokens(token)
     const { testFailure, testReport } = usePreflightTest(
         tokens?.[0],
@@ -130,11 +130,3 @@ function PreflightTest({ token }: { token: JWTToken }) {
         </Grid>
     )
 }
-
-const mapStateToProps = (state) => {
-    return {
-        token: state.token,
-    }
-}
-
-export default connect(mapStateToProps)(PreflightTest)
