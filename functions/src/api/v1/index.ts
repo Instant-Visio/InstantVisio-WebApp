@@ -1,5 +1,4 @@
 import * as express from 'express'
-import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
 import { getRooms } from './rooms/getRooms'
 import { authenticateJWTMiddleware } from '../middlewares/authenticateJWTMiddleware'
@@ -9,8 +8,6 @@ import { joinRoom } from './rooms/joinRoom'
 import { inviteParticipants } from './invite/inviteParticipants'
 
 const router = express.Router()
-
-router.use(cors({ origin: true }))
 router.use(authenticateJWTMiddleware)
 router.use(bodyParser.urlencoded({ extended: false }))
 

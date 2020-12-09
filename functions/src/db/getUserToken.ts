@@ -1,5 +1,5 @@
-import { UID } from '../types/uid'
-import { JWTToken } from '../types/JWT'
+import { UID } from '../../../types/uid'
+import { JWTToken } from '../../../types/JWT'
 import { db } from '../firebase/firebase'
 import { UserData } from '../types/UserData'
 import { BadRequestError, NotFoundError } from '../api/errors/HttpError'

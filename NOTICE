@@ -1,0 +1,8 @@
+# Notice
+
+Instant Visio premium video call features are built on [Twilio Video React App](https://github.com/twilio/twilio-video-app-react):
+the original project source code (almost all the files) was copied into this repository and all copied files were modified through `prettier`, to adapt to our formatting
+conventions. Further modifications were made to the files in order to adapt the original app behavior to our needs.
+
+All files contained in the directory `<projectRoot>/src/pages/PremiumVideoCall` are under Apache 2.0 license, the license **Twilio Inc.**
+distributed the original source code with. You can read the full text of the license [here](./src/pages/PremiumVideoCall/LICENSE).

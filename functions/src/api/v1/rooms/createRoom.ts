@@ -2,13 +2,8 @@ import { Request, Response } from 'express'
 import { addRoom } from '../../../db/addRoom'
 import { createTwilioRoom } from './service/createTwilioRoom'
 import { updateRoom } from '../../../db/updateRoom'
-import { RoomId, RoomSid } from '../../../types/Room'
+import { NewRoomResponse } from '../../../../../types/NewRoomResponse'
 import { wrap } from 'async-middleware'
-
-export interface NewRoomResponse {
-    roomId: RoomId
-    roomSid: RoomSid
-}
 
 /**
  * @swagger

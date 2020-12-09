@@ -9,7 +9,7 @@ export const getToken = functions.https.onCall(async (data, context) => {
         )
     }
 
-    const token = getUserToken(context.auth.uid)
+    const token = await getUserToken(context.auth.uid)
 
     return {
         token,
