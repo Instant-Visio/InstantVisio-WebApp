@@ -2,13 +2,12 @@ import { Request, Response } from 'express'
 import { addRoom } from '../../../db/addRoom'
 import { createTwilioRoom } from './service/createTwilioRoom'
 import { updateRoom } from '../../../db/updateRoom'
-import { RoomId, RoomSid } from '../../../types/Room'
+import { NewRoomResponse } from '../../../../../types/NewRoomResponse'
 import { wrap } from 'async-middleware'
-
-export interface NewRoomResponse {
-    roomId: RoomId
-    roomSid: RoomSid
-}
+import { UID } from '../../../../../types/uid'
+import { setRoom } from '../../../db/setRoom'
+import { assertNewRoomCreationGranted } from '../subscription/assertNewRoomCreationGranted'
+import { RoomId } from '../../../../../types/Room'
 
 /**
  * @swagger
@@ -44,18 +43,35 @@ export interface NewRoomResponse {
  *       412:
  *         description: authorization header present but not formatted correctly
  */
-export const createRoom = wrap(async (req: Request, res: Response) => {
-    const roomId = await addRoom(
-        res.locals.uid,
-        req.body.password || ~~(Math.random() * 999999)
-    )
+export const createRoomAPI = wrap(async (req: Request, res: Response) => {
+    const newRoomResponse = await createRoom(res.locals.uid, req.body.password)
+    res.send(newRoomResponse)
+})
+
+export const createRoom = async (
+    userId: UID,
+    roomRequestedPassword?: string,
+    specificRoomId?: RoomId
+): Promise<NewRoomResponse> => {
+    await assertNewRoomCreationGranted(userId)
+
+    let roomId: RoomId
+    const roomPassword =
+        roomRequestedPassword || `${~~(Math.random() * 999999)}`
+
+    if (specificRoomId) {
+        roomId = await setRoom(userId, specificRoomId, roomPassword)
+    } else {
+        roomId = await addRoom(userId, roomPassword)
+    }
+
     const roomSid = await createTwilioRoom(roomId)
     await updateRoom({
         roomId,
         roomSid,
     })
-    res.send({
+    return {
         roomId,
         roomSid,
-    } as NewRoomResponse)
-})
+    }
+}

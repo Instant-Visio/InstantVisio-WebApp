@@ -1,6 +1,6 @@
 import { COLLECTION_ROOMS } from './constants'
-import { UID } from '../types/uid'
-import { Room } from '../types/Room'
+import { UID } from '../../../types/uid'
+import { Room } from '../../../types/Room'
 import { db } from '../firebase/firebase'
 
 type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt'>

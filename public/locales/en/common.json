@@ -16,7 +16,8 @@
         "media": "In the news",
         "contact": "Contact form",
         "cookies": "Cookies management",
-        "newsletter": "Newsletter"
+        "newsletter": "Newsletter",
+        "license": "License"
     },
     "lang": {
         "fr": "Français",
@@ -36,7 +37,8 @@
         "blog": "blog",
         "credits": "credits",
         "media": "in-the-news",
-        "newsletter": "newsletter"
+        "newsletter": "newsletter",
+        "license": "license"
     },
     "message": {
         "title": "URGENT video call request from",

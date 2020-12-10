@@ -5,6 +5,8 @@ import * as swaggerUi from 'swagger-ui-express'
 import * as swaggerJSDoc from 'swagger-jsdoc'
 import { swaggerDefinition } from './swaggerDefinition'
 import { errorMiddleware } from './middlewares/errorMiddleware'
+import * as cors from 'cors'
+
 const app = express()
 
 const options = {
@@ -13,6 +15,8 @@ const options = {
 }
 
 const swaggerSpec = swaggerJSDoc(options)
+
+app.use(cors({ origin: true }))
 
 // API router v1 (/api/ is added on main index.ts export)
 app.use('/api/v1', routerV1)

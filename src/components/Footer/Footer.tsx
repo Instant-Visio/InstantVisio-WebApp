@@ -56,7 +56,7 @@ const Footer = () => {
                     </Link>
                 </li>
                 <li className="footer-link">
-                    <Link className="footer-link-content">
+                    <Link to="" className="footer-link-content">
                         <NewsletterModal />
                     </Link>
                 </li>
@@ -77,6 +77,13 @@ const Footer = () => {
                         onClick={showPreferencesDialog}>
                         {t('footer.cookies')}
                     </button>
+                </li>
+                <li className="footer-link">
+                    <Link
+                        to={`/${t('url.license')}`}
+                        className="footer-link-content">
+                        {t('footer.license')}
+                    </Link>
                 </li>
             </ul>
         </FooterStyled>
