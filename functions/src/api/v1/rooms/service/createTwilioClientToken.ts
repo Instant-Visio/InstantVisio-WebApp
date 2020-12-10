@@ -1,4 +1,4 @@
-import { Room } from '../../../../../../types/Room'
+import { RoomId } from '../../../../../../types/Room'
 import { UID } from '../../../../../../types/uid'
 import * as AccessToken from 'twilio/lib/jwt/AccessToken'
 import { getTwilioEnv } from '../../../../firebase/env'

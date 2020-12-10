@@ -9,7 +9,6 @@ import {
 import { createRoom } from './createRoom'
 import { UID } from '../../../../../types/uid'
 import { Room, RoomId } from '../../../../../types/Room'
-import { JoinRoomResponse } from '../../../../../types/JoinRoomResponse'
 
 /**
  * @swagger

@@ -2,7 +2,6 @@ import { BadRequestError } from '../api/errors/HttpError'
 import { getUser } from './getUser'
 import { UID } from '../../../types/uid'
 import { JWTToken } from '../../../types/JWT'
-import { UserData } from '../types/UserData'
 
 export const getUserToken = async (userId: UID): Promise<JWTToken | null> => {
     const userData = await getUser(userId)
