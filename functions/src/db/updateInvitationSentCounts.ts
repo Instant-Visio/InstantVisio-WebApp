@@ -7,7 +7,7 @@ export const updateInvitationSentCounts = async (
     smssSentCount: number,
     emailsSentCount: number
 ) => {
-    return await db
+    return db
         .collection(COLLECTION_USERS)
         .doc(userId)
         .set(
