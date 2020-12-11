@@ -24,6 +24,12 @@ export class UnauthorizedError extends HttpError {
     }
 }
 
+export class PaymentRequiredError extends HttpError {
+    constructor(message?: string) {
+        super(402, message || 'Payment Required')
+    }
+}
+
 export class ForbiddenError extends HttpError {
     constructor(message?: string) {
         super(403, message || 'Forbidden')
@@ -33,6 +39,12 @@ export class ForbiddenError extends HttpError {
 export class NotFoundError extends HttpError {
     constructor(message?: string) {
         super(404, message || 'Not Found')
+    }
+}
+
+export class RoomNotFoundError extends NotFoundError {
+    constructor(message?: string) {
+        super(message || 'Room Not Found')
     }
 }
 

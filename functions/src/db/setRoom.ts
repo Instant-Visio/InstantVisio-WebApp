@@ -3,11 +3,12 @@ import { RoomId } from '../../../types/Room'
 import { db, serverTimestamp } from '../firebase/firebase'
 import { UID } from '../../../types/uid'
 
-export const addRoom = async (
+export const setRoom = async (
     userId: UID,
+    roomId: RoomId,
     password: string
 ): Promise<RoomId> => {
-    const documentReference = await db.collection(COLLECTION_ROOMS).add({
+    await db.collection(COLLECTION_ROOMS).doc(roomId).set({
         uid: userId,
         password: password,
         createdAt: serverTimestamp(),
@@ -15,5 +16,5 @@ export const addRoom = async (
         service: DEFAULT_ROOM_TYPE,
     })
 
-    return documentReference.id
+    return roomId
 }
