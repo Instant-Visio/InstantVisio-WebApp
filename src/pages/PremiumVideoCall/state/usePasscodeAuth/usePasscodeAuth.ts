@@ -24,7 +24,7 @@ export async function fetchTwilioVideoToken(
     password: string
 ) {
     const api = new Api(instantVisioToken)
-    const response = await api.joinRoom(roomId, password)
+    const  { jwtAccessToken } = await api.joinRoom(roomId, password)
     const { jwtAccessToken } = response
     return jwtAccessToken
 }
