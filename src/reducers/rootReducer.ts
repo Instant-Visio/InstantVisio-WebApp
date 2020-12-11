@@ -2,11 +2,11 @@ import { JWTToken } from '../../types/JWT'
 import { SetTokenAction, SET_TOKEN } from '../actions/types'
 
 export interface AppState {
-    token: JWTToken
+    token: JWTToken | null
 }
 
 const initialState = {
-    token: '',
+    token: null,
 }
 
 const rootReducer = (

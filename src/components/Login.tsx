@@ -52,6 +52,7 @@ const Login = () => {
     const logout = useCallback(() => {
         authInstance.signOut()
         setIsLoggedIn(false)
+        dispatch(actions.setToken(null))
     }, [setIsLoggedIn])
 
     useEffect(() => {
