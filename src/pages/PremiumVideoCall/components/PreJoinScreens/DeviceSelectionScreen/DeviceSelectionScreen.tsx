@@ -85,8 +85,7 @@ export default function DeviceSelectionScreen({
 
     const handleJoin = async () => {
         const api = new Api(token)
-        const response = await api.joinRoom(roomId, 'test-password') // TODO pass the password variable
-        const { jwtAccessToken } = response
+        const { jwtAccessToken } = await api.joinRoom(roomId, 'test-password') // TODO pass the password variable
         connect(jwtAccessToken, roomId)
     }
 
