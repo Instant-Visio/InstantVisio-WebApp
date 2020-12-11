@@ -1,5 +1,6 @@
 import { JWTToken } from '../../types/JWT'
 import { JoinRoomResponse } from '../../types/JoinRoomResponse'
+import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { RoomId } from '../../types/Room'
 export class Api {
     baseUrl: string | undefined
@@ -10,6 +11,10 @@ export class Api {
             throw new Error('API url is missing from env configuration')
         }
         this.jwtToken = jwtToken
+    }
+
+    async createRoom(password?: string): Promise<NewRoomResponse> {
+        return this.post('/rooms/new', password ? { password } : null)
     }
 
     async joinRoom(
