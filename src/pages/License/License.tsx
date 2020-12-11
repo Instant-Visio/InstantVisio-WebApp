@@ -44,6 +44,17 @@ const License = () => {
                             </li>
                         </ul>
                     </p>
+                    <p>
+                        We make use of{' '}
+                        <a href="https://github.com/mui-org/material-ui">
+                            material-ui library
+                        </a>
+                        . You can find its license and copyright notice{' '}
+                        <a href="https://github.com/mui-org/material-ui/blob/next/LICENSE">
+                            here
+                        </a>
+                        .
+                    </p>
                 </LicenseStyled>
             </DefaultLayout>
         </IonContent>

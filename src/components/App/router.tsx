@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next'
 import { Route } from 'react-router-dom'
 import { IonRouterOutlet } from '@ionic/react'
 import License from '../../pages/License/License'
+import WelcomeCall from '../../pages/WelcomeCall/WelcomeCall'
 
 const Router = () => {
     const { t } = useTranslation()
@@ -67,6 +68,7 @@ const Router = () => {
                 />
 
                 <Route path={`/premium-video`} component={PremiumVideoPage} />
+                <Route path={`/welcome`} component={WelcomeCall} />
 
                 <Route component={NotFound} />
             </Switch>
