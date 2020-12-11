@@ -28,11 +28,12 @@ export default function useRoom(
     }, [options])
 
     const connect = useCallback(
-        (token) => {
+        (token, roomId) => {
             setIsConnecting(true)
             return Video.connect(token, {
                 ...optionsRef.current,
                 tracks: localTracks,
+                name: roomId,
             }).then(
                 (newRoom) => {
                     setRoom(newRoom)

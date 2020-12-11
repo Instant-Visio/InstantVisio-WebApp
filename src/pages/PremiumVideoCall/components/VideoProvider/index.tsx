@@ -34,7 +34,7 @@ export interface IVideoContext {
     room: Room
     localTracks: (LocalAudioTrack | LocalVideoTrack)[]
     isConnecting: boolean
-    connect: (token: string) => Promise<void>
+    connect: (token: string, roomId: string) => Promise<void>
     onError: ErrorCallback
     onDisconnect: Callback
     getLocalVideoTrack: (

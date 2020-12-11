@@ -22,6 +22,7 @@ import useVideoContext from '../../../hooks/useVideoContext/useVideoContext'
 import { Api } from '../../../../../services/api'
 import { selectToken } from '../../../../../utils/selectors'
 import { useSelector } from 'react-redux'
+import { RoomId } from '../../../../../../types/Room'
 
 const useStyles = makeStyles((theme: Theme) => ({
     gutterBottom: {
@@ -67,13 +68,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface DeviceSelectionScreenProps {
     name: string
-    roomName: string
+    roomId: RoomId
     setStep: (step: Steps) => void
 }
 
 export default function DeviceSelectionScreen({
     name,
-    roomName,
+    roomId,
     setStep,
 }: DeviceSelectionScreenProps) {
     const classes = useStyles()
@@ -82,24 +83,17 @@ export default function DeviceSelectionScreen({
     const { connect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
     const disableButtons = isFetching || isAcquiringLocalTracks || isConnecting
 
-    const handleJoin = () => {
+    const handleJoin = async () => {
         const api = new Api(token)
-        api.createRoom()
-            .then((response) => response.roomId)
-            .then((roomId) => {
-                return api.joinRoom(roomId)
-            })
-            .then((response) => {
-                const { jwtAccessToken } = response
-                return jwtAccessToken
-            })
-            .then((jwtAccessToken) => connect(jwtAccessToken))
+        const response = await api.joinRoom(roomId, 'test-password') // TODO pass the password variable
+        const { jwtAccessToken } = response
+        connect(jwtAccessToken, roomId)
     }
 
     return (
         <>
             <Typography variant="h5" className={classes.gutterBottom}>
-                Join {roomName}
+                Join {roomId}
             </Typography>
 
             <Grid container justify="center">
@@ -152,7 +146,7 @@ export default function DeviceSelectionScreen({
                                 variant="contained"
                                 color="primary"
                                 data-cy-join-now
-                                onClick={handleJoin}
+                                onClick={() => handleJoin()}
                                 disabled={disableButtons}>
                                 Join Now
                             </Button>

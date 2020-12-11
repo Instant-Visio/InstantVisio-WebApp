@@ -1,6 +1,6 @@
 import { JWTToken } from '../../types/JWT'
-import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { JoinRoomResponse } from '../../types/JoinRoomResponse'
+import { RoomId } from '../../types/Room'
 export class Api {
     baseUrl: string | undefined
     jwtToken: string
@@ -12,19 +12,11 @@ export class Api {
         this.jwtToken = jwtToken
     }
 
-    async createRoom(): Promise<NewRoomResponse> {
-        const data = {
-            password: 'password=test-password',
-        }
-
-        return this.post('/rooms/new', data)
-    }
-
-    async joinRoom(roomId: string): Promise<JoinRoomResponse> {
-        const data = {
-            password: 'password=test-password',
-        }
-        return this.post(`/rooms/${roomId}/join`, data)
+    async joinRoom(
+        roomId: RoomId,
+        password: string
+    ): Promise<JoinRoomResponse> {
+        return this.post(`/rooms/${roomId}/join`, { password })
     }
 
     async post(apiUrl: string, data: any): Promise<any> {
