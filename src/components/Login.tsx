@@ -53,7 +53,7 @@ const Login = () => {
         authInstance.signOut()
         setIsLoggedIn(false)
         dispatch(actions.setToken(null))
-    }, [setIsLoggedIn])
+    }, [dispatch, setIsLoggedIn])
 
     useEffect(() => {
         const fetchTokenHandleLoginState = async (user: firebase.User) => {

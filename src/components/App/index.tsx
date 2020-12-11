@@ -9,8 +9,6 @@ import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 import Login from '../Login'
-import { useSelector } from 'react-redux'
-import { selectToken } from '../../utils/selectors'
 
 declare global {
     interface Window {
@@ -27,7 +25,6 @@ const NavbarContainer = styled.div`
 
 const App = () => {
     const isMobile = useDetectMobileOrTablet()
-    const token = useSelector(selectToken)
 
     useEffect(() => {
         // when using vh and vw units in css:
