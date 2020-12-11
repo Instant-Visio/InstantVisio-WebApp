@@ -1,7 +1,7 @@
 // tslint:disable-next-line
 import '../../testUtils/mockFirebaseAdminAndFunctions'
 import { firestoreGet } from '../../testUtils/firestoreStub'
-import { JWTData } from '../../../../types/JWT'
+import { JWTData } from '../../types/JWT'
 import { assertValidToken } from './assertValidToken'
 import { ForbiddenError } from '../errors/HttpError'
 

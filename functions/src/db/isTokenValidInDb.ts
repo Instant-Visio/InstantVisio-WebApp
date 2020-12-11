@@ -1,6 +1,6 @@
 import { db } from '../firebase/firebase'
 import { UserData } from '../types/UserData'
-import { JWTData, JWTToken } from '../../../types/JWT'
+import { JWTData, JWTToken } from '../types/JWT'
 
 export const isTokenValidInDb = async (
     jwtData: JWTData,

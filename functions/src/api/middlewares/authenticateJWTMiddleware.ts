@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import * as jsonWebToken from 'jsonwebtoken'
 import { getJWTEnv } from '../../firebase/env'
-import { JWTData, JWTToken } from '../../../../types/JWT'
+import { JWTData, JWTToken } from '../../types/JWT'
 import {
     ForbiddenError,
     PreconditionFailedError,
