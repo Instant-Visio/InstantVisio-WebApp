@@ -17,7 +17,11 @@ import Logo from '../../components/Logo/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
-import Login from '../../components/Login'
+import { authInstance } from '../../firebase/firebase'
+import { isAuthEmulatorEnabled } from '../../utils/emulators'
+import { selectToken } from '../../utils/selectors'
+import { useSelector } from 'react-redux'
+import { EmulatorLogin } from './EmulatorLogin'
 
 const DataMentions = styled.div`
     .cnil {
@@ -52,6 +56,7 @@ const KnowMoreMobile = styled.p`
 
 export default function Home() {
     const { t } = useTranslation(['home', 'common'])
+    const token = useSelector(selectToken)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const isMobile = useDetectMobileOrTablet()
@@ -80,7 +85,10 @@ export default function Home() {
 
     return (
         <IonContent>
-            <Login />
+            {isAuthEmulatorEnabled() && (
+                <EmulatorLogin authInstance={authInstance} token={token} />
+            )}
+
             {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">
                     <Description />

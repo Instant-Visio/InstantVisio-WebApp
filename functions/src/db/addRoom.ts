@@ -1,4 +1,4 @@
-import { COLLECTION_ROOMS } from './constants'
+import { COLLECTION_ROOMS, DEFAULT_ROOM_TYPE } from './constants'
 import { RoomId } from '../types/Room'
 import { db, serverTimestamp } from '../firebase/firebase'
 import { UID } from '../types/uid'
@@ -12,7 +12,7 @@ export const addRoom = async (
         password: password,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
-        service: 'twilio-group',
+        service: DEFAULT_ROOM_TYPE,
     })
 
     return documentReference.id

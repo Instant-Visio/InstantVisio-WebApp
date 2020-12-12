@@ -11,10 +11,13 @@ import {
     JoinVideoCall,
 } from '../../pages'
 
+import { PremiumVideoPage } from '../../pages/PremiumVideoCall'
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
 import { useTranslation } from 'react-i18next'
 import { Route } from 'react-router-dom'
 import { IonRouterOutlet } from '@ionic/react'
+import License from '../../pages/License/License'
+import WelcomeCall from '../../pages/WelcomeCall/WelcomeCall'
 
 const Router = () => {
     const { t } = useTranslation()
@@ -58,6 +61,15 @@ const Router = () => {
                     exact
                     component={Credits}
                 />
+                <Route
+                    path={`/${t('url.license')}`}
+                    exact
+                    component={License}
+                />
+
+                <Route path={`/premium-video`} component={PremiumVideoPage} />
+                <Route path={`/welcome`} component={WelcomeCall} />
+
                 <Route component={NotFound} />
             </Switch>
         </IonRouterOutlet>

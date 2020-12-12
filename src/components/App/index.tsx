@@ -8,17 +8,7 @@ import { Navbar } from 'react-bootstrap'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
-
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-import rootReducer from '../../reducers'
-import { composeWithDevTools } from 'redux-devtools-extension'
-
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
-)
+import Login from '../Login'
 
 declare global {
     interface Window {
@@ -51,7 +41,7 @@ const App = () => {
                 const viewport = document.querySelector('meta[name=viewport]')
                 viewport?.setAttribute(
                     'content',
-                    `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`
+                    `height=${viewheight}, width=${viewwidth}, initial-scale=1.0`
                 )
             }, 300)
         }
@@ -61,19 +51,19 @@ const App = () => {
 
     return (
         <IonApp className="App">
-            <Provider store={store}>
-                <IonReactRouter>
-                    {isMobile && (
-                        <IonHeader id="topbar">
-                            <Navbar bg="light" variant="dark">
-                                <SwipeableTemporaryDrawer />
-                                <NavbarContainer />
-                            </Navbar>
-                        </IonHeader>
-                    )}
-                    <Router />
-                </IonReactRouter>
-            </Provider>
+            <Login />
+
+            <IonReactRouter>
+                {isMobile && (
+                    <IonHeader id="topbar">
+                        <Navbar bg="light" variant="dark">
+                            <SwipeableTemporaryDrawer />
+                            <NavbarContainer />
+                        </Navbar>
+                    </IonHeader>
+                )}
+                <Router />
+            </IonReactRouter>
         </IonApp>
     )
 }
