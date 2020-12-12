@@ -4,8 +4,10 @@ import { UID } from '../types/uid'
 
 export interface UserData {
     id: UID
-    subscriptionActive: boolean
-    quotaReached: boolean
+    subscription: {
+        isActive: boolean
+        isQuotaReached: boolean
+    }
     tokens: {
         [key: string]: {
             createdAt: Timestamp

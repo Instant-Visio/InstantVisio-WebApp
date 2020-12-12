@@ -4,12 +4,12 @@ import { PaymentRequiredError } from '../../errors/HttpError'
 
 export const assertNewRoomCreationGranted = async (userId: UID) => {
     const user = await getUser(userId)
-    if (!user.subscriptionActive) {
+    if (!user.subscription.isActive) {
         throw new PaymentRequiredError(
             'No active subscription, payment required'
         )
     }
-    if (user.quotaReached) {
+    if (user.subscription.isQuotaReached) {
         throw new PaymentRequiredError('Quota reached')
     }
 }
