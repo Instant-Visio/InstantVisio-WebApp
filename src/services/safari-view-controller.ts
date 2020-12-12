@@ -16,11 +16,7 @@ export const openWithSafariViewController = async (url: string) => {
             enterReaderModeIfAvailable: true,
             tintColor: '#ff0000',
         }).subscribe(
-            (result: any) => {
-                if (result.event === 'opened') console.log('Opened')
-                else if (result.event === 'loaded') console.log('Loaded')
-                else if (result.event === 'closed') console.log('Closed')
-            },
+            (result: any) => console.log(result.event),
             (error: any) => console.error(error)
         )
     } else {
