@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin'
 import Timestamp = admin.firestore.Timestamp
-import { UID } from '../../../types/uid'
+import { UID } from '../types/uid'
 
 export interface UserData {
     id: UID

@@ -6,12 +6,9 @@ import { IonApp, IonHeader } from '@ionic/react'
 import SwipeableTemporaryDrawer from '../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
 import { Navbar } from 'react-bootstrap'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
-import useAnonymousLogin from '../../hooks/useAnonymousLogin'
 import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 import Login from '../Login'
-import { useSelector } from 'react-redux'
-import { selectToken } from '../../utils/selectors'
 
 declare global {
     interface Window {
@@ -28,7 +25,6 @@ const NavbarContainer = styled.div`
 
 const App = () => {
     const isMobile = useDetectMobileOrTablet()
-    const token = useSelector(selectToken)
 
     useEffect(() => {
         // when using vh and vw units in css:
@@ -53,24 +49,21 @@ const App = () => {
         gdprHandler()
     }, [])
 
-    useAnonymousLogin(token)
-
     return (
         <IonApp className="App">
             <Login />
-            {token && (
-                <IonReactRouter>
-                    {isMobile && (
-                        <IonHeader id="topbar">
-                            <Navbar bg="light" variant="dark">
-                                <SwipeableTemporaryDrawer />
-                                <NavbarContainer />
-                            </Navbar>
-                        </IonHeader>
-                    )}
-                    <Router />
-                </IonReactRouter>
-            )}
+
+            <IonReactRouter>
+                {isMobile && (
+                    <IonHeader id="topbar">
+                        <Navbar bg="light" variant="dark">
+                            <SwipeableTemporaryDrawer />
+                            <NavbarContainer />
+                        </Navbar>
+                    </IonHeader>
+                )}
+                <Router />
+            </IonReactRouter>
         </IonApp>
     )
 }

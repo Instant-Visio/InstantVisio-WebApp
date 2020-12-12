@@ -21,7 +21,7 @@ import { JWTToken } from '../../../../types/JWT'
 export interface StateContextType {
     error: TwilioError | null
     setError(error: TwilioError | null): void
-    getToken(
+    getTwilioVideoToken(
         instantVisioToken: JWTToken,
         name: string,
         room: string,
@@ -85,7 +85,7 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
     } else {
         contextValue = {
             ...contextValue,
-            getToken: async (identity, roomName) => {
+            getTwilioVideoToken: async (identity, roomName) => {
                 const headers = new window.Headers()
                 const endpoint =
                     process.env.REACT_APP_TOKEN_ENDPOINT || '/token'
@@ -101,14 +101,14 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
         }
     }
 
-    const getToken: StateContextType['getToken'] = (
+    const getTwilioVideoToken: StateContextType['getTwilioVideoToken'] = (
         instantVisioToken,
         name,
         room
     ) => {
         setIsFetching(true)
         return contextValue
-            .getToken(instantVisioToken, name, room)
+            .getTwilioVideoToken(instantVisioToken, name, room)
             .then((res) => {
                 setIsFetching(false)
                 return res
@@ -121,7 +121,7 @@ export default function AppStateProvider(props: React.PropsWithChildren<{}>) {
     }
 
     return (
-        <StateContext.Provider value={{ ...contextValue, getToken }}>
+        <StateContext.Provider value={{ ...contextValue, getTwilioVideoToken }}>
             {props.children}
         </StateContext.Provider>
     )

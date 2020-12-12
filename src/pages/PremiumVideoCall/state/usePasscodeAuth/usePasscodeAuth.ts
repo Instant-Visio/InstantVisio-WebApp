@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom'
 import { RoomType } from '../../types'
 import { Api } from '../../../../services/api'
 import { JWTToken } from '../../../../../types/JWT'
+import { RoomId } from '../../../../../types/Room'
 
 export function getPasscode() {
     const match = window.location.search.match(/passcode=(.*)&?/)
@@ -17,26 +18,14 @@ export function getPasscode() {
     return passcode
 }
 
-export function fetchToken(
+export async function fetchTwilioVideoToken(
     instantVisioToken: JWTToken,
-    name: string,
-    room: string,
-    passcode: string,
-    create_room = true
+    roomId: RoomId,
+    password: string
 ) {
     const api = new Api(instantVisioToken)
-    return api
-        .createRoom()
-        .then((response) => {
-            return response.roomId
-        })
-        .then((roomId) => {
-            return api.joinRoom(roomId)
-        })
-        .then((response) => {
-            const { jwtAccessToken } = response
-            return jwtAccessToken
-        })
+    const  { jwtAccessToken } = await api.joinRoom(roomId, password)
+    return jwtAccessToken
 }
 
 export async function verifyPasscode(passcode: string) {
@@ -65,17 +54,23 @@ export default function usePasscodeAuth() {
     const [isAuthReady, setIsAuthReady] = useState(false)
     const [roomType, setRoomType] = useState<RoomType>()
 
-    const getToken = useCallback(
-        (instantVisioToken: string, name: string, room: string) => {
-            return fetchToken(
+    const getTwilioVideoToken = useCallback(
+        (instantVisioToken: string, roomId: RoomId) => {
+            const fetchTokenAndSetRoomType = async (
                 instantVisioToken,
-                name,
-                room,
-                user!.passcode
-            ).then((token) => {
+                roomId
+            ) => {
+                const token = await fetchTwilioVideoToken(
+                    instantVisioToken,
+                    roomId,
+                    user!.passcode
+                )
+
                 setRoomType('group')
                 return token as string
-            })
+            }
+
+            return fetchTokenAndSetRoomType(instantVisioToken, roomId)
         },
         [user]
     )
@@ -115,5 +110,5 @@ export default function usePasscodeAuth() {
         return Promise.resolve()
     }, [])
 
-    return { user, isAuthReady, getToken, signIn, signOut, roomType }
+    return { user, isAuthReady, getTwilioVideoToken, signIn, signOut, roomType }
 }

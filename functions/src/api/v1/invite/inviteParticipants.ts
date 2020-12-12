@@ -6,7 +6,7 @@ import { InvitationDestination } from '../../../types/InvitationDestination'
 import { getAppEnv } from '../../../firebase/env'
 import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
-import { UID } from '../../../../../types/uid'
+import { UID } from '../../../types/uid'
 
 /**
  * @swagger

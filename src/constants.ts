@@ -6,4 +6,13 @@ export const EMULATORS = {
     },
 }
 
-export const TEST_USER = { email: 'test@email.com', password: 'test-password' }
+export const TEST_ACCOUNTS = [
+    {
+        email: 'test-account-1@gmail.com',
+        password: 'test-password-1',
+    },
+    {
+        email: 'test-account-2@gmail.com',
+        password: 'test-password-1',
+    },
+]

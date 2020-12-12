@@ -1,6 +1,6 @@
-import { UID } from '../../../types/uid'
+import { UID } from '../types/uid'
 import { db, serverTimestamp } from '../firebase/firebase'
-import { JWTToken } from '../../../types/JWT'
+import { JWTToken } from '../types/JWT'
 
 export const addTokenToUser = async (
     userId: UID,

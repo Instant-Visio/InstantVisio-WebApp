@@ -1,4 +1,4 @@
-import { UID } from '../../../../../types/uid'
+import { UID } from '../../../types/uid'
 import { getUser } from '../../../db/getUser'
 import { PaymentRequiredError } from '../../errors/HttpError'
 

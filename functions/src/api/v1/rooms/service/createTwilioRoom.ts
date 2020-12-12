@@ -1,5 +1,5 @@
 import { twilioClient } from './twilioClient'
-import { RoomId } from '../../../../../../types/Room'
+import { RoomId } from '../../../../types/Room'
 
 export const createTwilioRoom = async (roomId: RoomId) => {
     const room = await twilioClient.video.rooms.create({

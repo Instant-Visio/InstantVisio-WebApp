@@ -2,12 +2,12 @@ import { Request, Response } from 'express'
 import { addRoom } from '../../../db/addRoom'
 import { createTwilioRoom } from './service/createTwilioRoom'
 import { updateRoom } from '../../../db/updateRoom'
-import { NewRoomResponse } from '../../../../../types/NewRoomResponse'
+import { NewRoomResponse } from '../../../types/NewRoomResponse'
 import { wrap } from 'async-middleware'
-import { UID } from '../../../../../types/uid'
+import { UID } from '../../../types/uid'
 import { setRoom } from '../../../db/setRoom'
 import { assertNewRoomCreationGranted } from '../subscription/assertNewRoomCreationGranted'
-import { RoomId } from '../../../../../types/Room'
+import { RoomId } from '../../../types/Room'
 
 /**
  * @swagger

@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react'
 import { JWTToken } from '../../../../../../../types/JWT'
 
 export default function useGetPreflightTokens(instantVisioToken: JWTToken) {
-    const { getToken } = useAppState()
+    const { getTwilioVideoToken } = useAppState()
     const [tokens, setTokens] = useState<[string, string]>()
     const [tokenError, setTokenError] = useState<Error>()
     const [isFetching, setIsFetching] = useState(false)
@@ -24,8 +24,16 @@ export default function useGetPreflightTokens(instantVisioToken: JWTToken) {
             const subscriberIdentity = 'participant-' + nanoid()
 
             Promise.all([
-                getToken(instantVisioToken, publisherIdentity, roomName),
-                getToken(instantVisioToken, subscriberIdentity, roomName),
+                getTwilioVideoToken(
+                    instantVisioToken,
+                    publisherIdentity,
+                    roomName
+                ),
+                getTwilioVideoToken(
+                    instantVisioToken,
+                    subscriberIdentity,
+                    roomName
+                ),
             ])
                 .then((tokens) => {
                     setTokens(tokens)
@@ -33,7 +41,7 @@ export default function useGetPreflightTokens(instantVisioToken: JWTToken) {
                 })
                 .catch((error) => setTokenError(error))
         }
-    }, [getToken, isFetching, tokens, instantVisioToken])
+    }, [getTwilioVideoToken, isFetching, tokens, instantVisioToken])
 
     return { tokens, tokenError }
 }
