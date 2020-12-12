@@ -5,3 +5,4 @@ admin.initializeApp()
 
 export const db = admin.firestore()
 export const serverTimestamp = admin.firestore.FieldValue.serverTimestamp
+export const increment = admin.firestore.FieldValue.increment
