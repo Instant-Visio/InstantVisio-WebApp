@@ -1,4 +1,4 @@
-import { COLLECTION_ROOMS } from './constants'
+import { COLLECTIONS } from './constants'
 import { UID } from '../types/uid'
 import { Room } from '../types/Room'
 import { db } from '../firebase/firebase'
@@ -7,7 +7,7 @@ type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt'>
 
 export const getRooms = async (userId: UID): Promise<(Response | null)[]> => {
     const query = await db
-        .collection(COLLECTION_ROOMS)
+        .collection(COLLECTIONS.rooms)
         .where('uid', '==', userId)
         .orderBy('createdAt', 'desc')
 

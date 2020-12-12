@@ -1,5 +1,5 @@
 import { db, increment, serverTimestamp } from '../firebase/firebase'
-import { COLLECTION_USERS } from './constants'
+import { COLLECTIONS } from './constants'
 import { UID } from '../types/uid'
 
 export const updateInvitationSentCounts = async (
@@ -8,7 +8,7 @@ export const updateInvitationSentCounts = async (
     emailsSentCount: number
 ) => {
     return db
-        .collection(COLLECTION_USERS)
+        .collection(COLLECTIONS.users)
         .doc(userId)
         .set(
             {
