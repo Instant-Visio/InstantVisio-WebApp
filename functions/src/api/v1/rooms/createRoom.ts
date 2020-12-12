@@ -43,7 +43,7 @@ import { RoomId } from '../../../types/Room'
  *       412:
  *         description: authorization header present but not formatted correctly
  */
-export const createRoomAPI = wrap(async (req: Request, res: Response) => {
+export const createRoomRoute = wrap(async (req: Request, res: Response) => {
     const newRoomResponse = await createRoom(res.locals.uid, req.body.password)
     res.send(newRoomResponse)
 })
