@@ -1,13 +1,14 @@
-import { UID } from '../../../types/uid'
+import { UID } from '../types/uid'
 import { db, serverTimestamp } from '../firebase/firebase'
-import { JWTToken } from '../../../types/JWT'
+import { JWTToken } from '../types/JWT'
+import { COLLECTION_USERS } from './constants'
 
 export const addTokenToUser = async (
     userId: UID,
     token: JWTToken
 ): Promise<void> => {
     await db
-        .collection('users')
+        .collection(COLLECTION_USERS)
         .doc(userId)
         .set(
             {

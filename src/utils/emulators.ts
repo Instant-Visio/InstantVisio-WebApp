@@ -1,10 +1,8 @@
-import { TEST_USER } from '../constants'
-import 'firebase/auth'
-
-export const signInWithAuthEmulator = async (
-    authInstance: firebase.auth.Auth
-): Promise<void> => {
-    const { email, password } = TEST_USER
+export const signInEmulatorEmailPassword = async (
+    authInstance: firebase.auth.Auth,
+    email: string,
+    password: string
+): Promise<firebase.auth.UserCredential | undefined> => {
     try {
         const signInResult = await authInstance.createUserWithEmailAndPassword(
             email,
@@ -12,6 +10,7 @@ export const signInWithAuthEmulator = async (
         )
 
         console.log('SignIn Success:', signInResult)
+        return signInResult
     } catch (error) {
         if (error.code === 'auth/email-already-in-use') {
             console.log('SignIn error: account already exists ', error)
@@ -21,7 +20,7 @@ export const signInWithAuthEmulator = async (
                     password
                 )
                 console.log('Login Success:', loginResult)
-                return
+                return loginResult
             } catch (error) {
                 console.log('Login error:', error)
             }

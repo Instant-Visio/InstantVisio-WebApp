@@ -52,7 +52,8 @@ const Login = () => {
     const logout = useCallback(() => {
         authInstance.signOut()
         setIsLoggedIn(false)
-    }, [setIsLoggedIn])
+        dispatch(actions.setToken(null))
+    }, [dispatch, setIsLoggedIn])
 
     useEffect(() => {
         const fetchTokenHandleLoginState = async (user: firebase.User) => {

@@ -1,5 +1,5 @@
 import { SmsNotificationParams } from '../types/Notification'
-import ovh from 'ovh'
+import * as ovh from 'ovh'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { logSmsSent } from '../sumologic/sumologic'
 import { alert } from '../callable/alerts/alert'

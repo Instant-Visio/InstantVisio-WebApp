@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions'
-import { JWTKey } from '../../../types/JWT'
+import { JWTKey } from '../types/JWT'
 import { InternalServerError } from '../api/errors/HttpError'
 import { TwilioEnv } from '../types/TwilioEnv'
 import { AppEnv } from '../types/AppEnv'

@@ -6,7 +6,8 @@ import { InvitationDestination } from '../../../types/InvitationDestination'
 import { getAppEnv } from '../../../firebase/env'
 import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
-import { UID } from '../../../../../types/uid'
+import { UID } from '../../../types/uid'
+import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCounts'
 
 /**
  * @swagger
@@ -84,9 +85,9 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
     const userId: UID = res.locals.uid
     const room = await assertRightToEditRoom(roomId, userId)
 
-    const {
-        body: { hostname, destinations },
-    } = req.body
+    const body = req.body
+    const hostname = body.hostname
+    const destinations = JSON.parse(body.destinations)
 
     if (
         !hostname ||
@@ -94,7 +95,7 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         !Array.isArray(destinations) ||
         destinations.length === 0
     ) {
-        throw new BadRequestError('Request content not formatted correctly')
+        throw new BadRequestError('Request body not formatted correctly')
     }
 
     const invitationsDestinations: InvitationDestination[] = destinations.map(
@@ -108,8 +109,6 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
             }
         }
     )
-
-    // TODO: aggregate the notification sent count by user
 
     const appEnv = getAppEnv()
 
@@ -133,4 +132,6 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         emailsSent: emailsSent,
         smssSent: smssSent,
     })
+
+    await updateInvitationSentCounts(userId, smssSent.length, emailsSent.length)
 })

@@ -1,4 +1,4 @@
-import { UID } from '../../../types/uid'
+import { UID } from '../types/uid'
 import { db } from '../firebase/firebase'
 import { NotFoundError } from '../api/errors/HttpError'
 import { UserData } from '../types/UserData'

@@ -1,5 +1,5 @@
 import { COLLECTION_ROOMS } from './constants'
-import { RoomId } from '../../../types/Room'
+import { RoomId } from '../types/Room'
 import { db } from '../firebase/firebase'
 
 export const doesRoomExist = async (roomId: RoomId): Promise<boolean> => {

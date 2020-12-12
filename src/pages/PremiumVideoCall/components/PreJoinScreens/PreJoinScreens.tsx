@@ -87,7 +87,7 @@ export default function PreJoinScreens() {
             {step === Steps.deviceSelectionStep && (
                 <DeviceSelectionScreen
                     name={name}
-                    roomName={roomName}
+                    roomId={roomName}
                     setStep={setStep}
                 />
             )}

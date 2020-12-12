@@ -1,5 +1,5 @@
-import { RoomId, Room } from '../../../types/Room'
-import { UID } from '../../../types/uid'
+import { RoomId, Room } from '../types/Room'
+import { UID } from '../types/uid'
 import { ForbiddenError } from '../api/errors/HttpError'
 import { getRoom } from './getRoom'
 
