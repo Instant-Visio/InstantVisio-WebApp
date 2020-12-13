@@ -20,6 +20,11 @@ import { assertTimestampInFuture } from './assertTimestampInFuture'
  *     produces:
  *     - application/json
  *     parameters:
+ *       - name: hostName
+ *         description: The name or organisation which sent the invite(s)
+ *         in: x-www-form-urlencoded
+ *         required: true
+ *         type: string
  *       - name: sendAt
  *         description: The UTC timestamp in seconds at which the reminder is scheduled to be sent.
  *         in: x-www-form-urlencoded
@@ -61,9 +66,14 @@ export const newReminder = wrap(async (req: Request, res: Response) => {
 
     const body = req.body
     const sendAt = parseInt(body.sendAt) * 1000
+    const hostName = req.body.hostName
     const destinations = JSON.parse(body.destinations || '[]')
 
-    if (!sendAt || !isDestinationsCorrectlyFormatted(destinations)) {
+    if (
+        !sendAt ||
+        !hostName ||
+        !isDestinationsCorrectlyFormatted(destinations)
+    ) {
         throw new BadRequestError('Request body not formatted correctly')
     }
 
@@ -73,7 +83,8 @@ export const newReminder = wrap(async (req: Request, res: Response) => {
     const reminderId = await addReminderDb(
         roomId,
         sendAtTimestamp,
-        destinations
+        destinations,
+        hostName
     )
 
     res.send({

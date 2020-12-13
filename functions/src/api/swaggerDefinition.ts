@@ -52,6 +52,9 @@ export const swaggerDefinition = {
                     id: {
                         type: 'string',
                     },
+                    hostName: {
+                        type: 'integer',
+                    },
                     sendAt: {
                         type: 'integer',
                     },

@@ -18,6 +18,7 @@ export const getReminderListDb = async (
     return snapshot.docs.map((doc) => {
         const {
             destinations,
+            hostName,
             sendAt,
             isSent,
             createdAt,
@@ -26,6 +27,7 @@ export const getReminderListDb = async (
         return {
             id: doc.id,
             destinations,
+            hostName,
             sendAt: sendAt.seconds,
             isSent,
             createdAt: createdAt.seconds,
@@ -46,12 +48,13 @@ export const getReminderDb = async (
         throw new ReminderNotFoundError('Resource does not exist')
     }
 
-    const { destinations, sendAt, isSent, createdAt, updatedAt } = <Reminder>(
-        snapshot.data()
-    )
+    const { destinations, hostName, sendAt, isSent, createdAt, updatedAt } = <
+        Reminder
+    >snapshot.data()
     return {
         id: snapshot.id,
         destinations,
+        hostName,
         sendAt: sendAt.seconds,
         isSent,
         createdAt: createdAt.seconds,
@@ -62,12 +65,14 @@ export const getReminderDb = async (
 export const addReminderDb = async (
     roomId: RoomId,
     sendAt: Timestamp,
-    destinations: InvitationDestination[]
+    destinations: InvitationDestination[],
+    hostName: string
 ) => {
     const documentReference = await db.collection(COLLECTIONS.reminders).add({
         roomId,
         sendAt,
         destinations,
+        hostName,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
         isSent: false,
@@ -77,6 +82,7 @@ export const addReminderDb = async (
 
 export interface ReminderEditData {
     reminderId: ReminderId
+    hostName?: string
     destinations?: InvitationDestination[]
     sendAt?: Timestamp
 }
