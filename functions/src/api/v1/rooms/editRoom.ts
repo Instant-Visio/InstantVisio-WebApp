@@ -2,6 +2,8 @@ import { Request, Response } from 'express'
 import { RoomEditData, updateRoom } from '../../../db/updateRoom'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { wrap } from 'async-middleware'
+import { firestore } from 'firebase-admin/lib/firestore'
+import Timestamp = firestore.Timestamp
 
 /**
  * @swagger
@@ -20,7 +22,7 @@ import { wrap } from 'async-middleware'
  *         in: x-www-form-urlencoded
  *         required: false
  *         type: string
- *       - name: startTimestamp
+ *       - name: startAt
  *         description: (optional) The UTC timestamp in seconds at which the meeting is scheduled to start.
  *         in: x-www-form-urlencoded
  *         required: false
@@ -49,7 +51,9 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
         dataToEdit['password'] = req.body.password
     }
     if (req.body.startTimestamp) {
-        dataToEdit['startTimestamp'] = req.body.startTimestamp
+        dataToEdit['startAt'] = Timestamp.fromMillis(
+            parseInt(req.body.startAt) * 1000
+        )
     }
 
     await updateRoom(dataToEdit)

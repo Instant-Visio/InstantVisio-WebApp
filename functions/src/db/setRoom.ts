@@ -2,12 +2,14 @@ import { COLLECTIONS, DEFAULT_ROOM_TYPE } from './constants'
 import { RoomId } from '../types/Room'
 import { db, serverTimestamp } from '../firebase/firebase'
 import { UID } from '../types/uid'
+import { firestore } from 'firebase-admin/lib/firestore'
+import Timestamp = firestore.Timestamp
 
 export const setRoom = async (
     userId: UID,
     roomId: RoomId,
     password: string,
-    startTimestamp: number
+    startAt: Timestamp
 ): Promise<RoomId> => {
     await db.collection(COLLECTIONS.rooms).doc(roomId).set({
         uid: userId,
@@ -15,7 +17,7 @@ export const setRoom = async (
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
         service: DEFAULT_ROOM_TYPE,
-        startTimestamp,
+        startAt,
     })
 
     return roomId

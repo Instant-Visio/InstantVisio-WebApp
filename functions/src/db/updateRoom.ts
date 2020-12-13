@@ -2,13 +2,15 @@ import { COLLECTIONS } from './constants'
 import { RoomId, RoomSid } from '../types/Room'
 import { db, serverTimestamp } from '../firebase/firebase'
 import { UID } from '../types/uid'
+import { firestore } from 'firebase-admin/lib/firestore'
+import Timestamp = firestore.Timestamp
 
 export interface RoomEditData {
     roomId: RoomId
     roomSid?: RoomSid
     uid?: UID
     password?: string
-    startTimestamp?: number
+    startAt?: Timestamp
 }
 
 export const updateRoom = async (room: RoomEditData) => {
