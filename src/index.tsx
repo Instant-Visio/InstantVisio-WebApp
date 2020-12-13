@@ -8,15 +8,12 @@ import theme from './styles/theme'
 import './i18n/i18n'
 import './i18n/countries'
 import thunk from 'redux-thunk'
-import rootReducer from './reducers/rootReducer'
+import reducers from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
-)
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
 
 const rootComponent = (
     <Suspense fallback={null}>

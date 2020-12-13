@@ -32,11 +32,11 @@ remoteConfig.settings = {
 export const db = firebaseInstance.firestore()
 
 if (process.env.NODE_ENV === 'development') {
-    firebase.functions().useFunctionsEmulator(EMULATORS.hosts.functions)
+    /*firebase.functions().useFunctionsEmulator(EMULATORS.hosts.functions)
     db.settings({
         host: EMULATORS.hosts.db,
         ssl: false,
-    })
+    })*/
 }
 
 export const functions = {
