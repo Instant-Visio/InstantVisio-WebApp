@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import Field from '../Form/Field'
-import CallError, { Error } from '../Form/CallError'
+import CallError from '../Form/CallError'
 
 const BootstrapForm = styled(BaseForm)`
     width: 100%;
