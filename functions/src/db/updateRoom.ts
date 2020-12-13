@@ -1,9 +1,7 @@
 import { COLLECTIONS } from './constants'
 import { RoomId, RoomSid } from '../types/Room'
-import { db, serverTimestamp } from '../firebase/firebase'
+import { db, serverTimestamp, Timestamp } from '../firebase/firebase'
 import { UID } from '../types/uid'
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
 
 export interface RoomEditData {
     roomId: RoomId

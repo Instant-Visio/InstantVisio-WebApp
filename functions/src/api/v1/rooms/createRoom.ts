@@ -8,8 +8,7 @@ import { UID } from '../../../types/uid'
 import { setRoom } from '../../../db/setRoom'
 import { assertNewRoomCreationGranted } from '../subscription/assertNewRoomCreationGranted'
 import { RoomId } from '../../../types/Room'
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
+import { Timestamp } from '../../../firebase/firebase'
 
 /**
  * @swagger

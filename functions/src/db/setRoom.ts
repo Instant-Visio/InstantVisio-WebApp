@@ -1,9 +1,7 @@
 import { COLLECTIONS, DEFAULT_ROOM_TYPE } from './constants'
 import { RoomId } from '../types/Room'
-import { db, serverTimestamp } from '../firebase/firebase'
+import { db, serverTimestamp, Timestamp } from '../firebase/firebase'
 import { UID } from '../types/uid'
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
 
 export const setRoom = async (
     userId: UID,

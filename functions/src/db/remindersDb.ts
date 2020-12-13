@@ -1,10 +1,8 @@
 import { InvitationDestination } from '../types/InvitationDestination'
 import { RoomId } from '../types/Room'
-import { db, serverTimestamp } from '../firebase/firebase'
+import { db, serverTimestamp, Timestamp } from '../firebase/firebase'
 import { COLLECTIONS } from './constants'
 import { Reminder, ReminderId, ReminderResponse } from '../types/Reminder'
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
 import { ReminderNotFoundError } from '../api/errors/HttpError'
 
 export const getReminderListDb = async (

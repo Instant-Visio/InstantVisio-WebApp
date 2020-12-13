@@ -1,5 +1,4 @@
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
+import { Timestamp } from '../../../firebase/firebase'
 import { BadRequestError } from '../../errors/HttpError'
 
 export const assertTimestampInFuture = (timestamp: Timestamp) => {

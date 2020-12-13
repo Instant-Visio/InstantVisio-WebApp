@@ -2,8 +2,7 @@ import { Request, Response } from 'express'
 import { RoomEditData, updateRoom } from '../../../db/updateRoom'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { wrap } from 'async-middleware'
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
+import { Timestamp } from '../../../firebase/firebase'
 
 /**
  * @swagger

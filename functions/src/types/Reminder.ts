@@ -1,6 +1,5 @@
 import { InvitationDestination } from './InvitationDestination'
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
+import { Timestamp } from '../firebase/firebase'
 
 export interface ReminderResponse {
     id: string

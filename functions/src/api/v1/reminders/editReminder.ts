@@ -8,8 +8,7 @@ import {
 } from '../../../db/remindersDb'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
 import { BadRequestError } from '../../errors/HttpError'
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
+import { Timestamp } from '../../../firebase/firebase'
 import { assertTimestampInFuture } from './assertTimestampInFuture'
 
 /**

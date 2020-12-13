@@ -4,8 +4,7 @@ import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { BadRequestError } from '../../errors/HttpError'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
 import { addReminderDb } from '../../../db/remindersDb'
-import { firestore } from 'firebase-admin/lib/firestore'
-import Timestamp = firestore.Timestamp
+import { Timestamp } from '../../../firebase/firebase'
 import { assertTimestampInFuture } from './assertTimestampInFuture'
 
 /**
