@@ -27,13 +27,11 @@ import { addReminderDb } from '../../../db/remindersDb'
  *         in: x-www-form-urlencoded
  *         required: true
  *         examples:
- *            mixedTypeAndLang:
+ *            mixed:
  *                summary: Mixed email, sms and languages
- *                value: [{email: "user@example.com", lang: "en"}, {phone: "+33600000000", lang:"fr"}, {phone: "+33600000000", lang:"fr", country:"en"}]
- *            emailInvite:
- *                summary: One email invite with French lang
- *                value: [{email: "user@example.com", lang: "fr"}]
- *         type: array
+ *                $ref: '#/components/examples/Destinations'
+ *         schema:
+ *            type: string
  *         items:
  *            $ref: '#/components/schemas/Destination'
  *     responses:
@@ -41,12 +39,11 @@ import { addReminderDb } from '../../../db/remindersDb'
  *         description: Reminder created with success
  *         content:
  *           application/json:
- *             schema:
- *               example: {
- *                   reminderId: "aZxo2xskIaZxo2xskI",
- *               }
+ *             example: {
+ *               reminderId: "aZxo2xskIaZxo2xskI"
+ *             }
  *       400:
- *         request content (x-www-form-urlencoded) not correct
+ *         description: request content (x-www-form-urlencoded) not correct
  *       401:
  *         description: missing authorization bearer token
  *       403:

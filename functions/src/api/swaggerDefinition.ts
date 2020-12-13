@@ -81,6 +81,13 @@ export const swaggerDefinition = {
                 bearerFormat: 'JWT',
             },
         },
+        examples: {
+            Destinations: {
+                summary: 'Mixed email, sms and languages',
+                value:
+                    '[{"email": "user@example.com", "lang": "en"}, {"phone": "+33600000000", "lang":"fr"}, {"phone": "+33600000000", lang:"fr", country:"en"}]',
+            },
+        },
     },
     security: [
         {

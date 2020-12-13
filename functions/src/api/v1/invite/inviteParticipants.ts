@@ -32,34 +32,11 @@ import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrect
  *         in: x-www-form-urlencoded
  *         required: true
  *         examples:
- *            mixedTypeAndLang:
+ *            mixed:
  *                summary: Mixed email, sms and languages
- *                value: '[{email: "user@example.com", lang: "en"}, {phone: "+33600000000", lang:"fr"}, {phone: "+33600000000", lang:"fr", country:"en"}]'
- *            emailInvite:
- *                summary: One email invite with French lang
- *                value: "[{'email': 'user@example.com', 'lang': 'fr'}]"
+ *                $ref: '#/components/examples/Destinations'
  *         schema:
- *            type: array
- *            items:
- *                type: object
- *                properties:
- *                   email:
- *                       type: string
- *                   phone:
- *                       type: string
- *                   lang:
- *                       type: string
- *                       default: en
- *                       enum:
- *                           - en
- *                           - fr
- *                           - de
- *                           - es
- *                           - gr
- *                           - hu
- *                           - it
- *                           - ro
- *
+ *            type: string
  *     responses:
  *       200:
  *         description: One or many invites were sent successfully. It will return a 2xx if some invitation where not able to be sent (malformed email or phone number for eg).

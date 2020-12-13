@@ -27,13 +27,10 @@ import { BadRequestError } from '../../errors/HttpError'
  *         in: x-www-form-urlencoded
  *         required: false
  *         examples:
- *            mixedTypeAndLang:
+ *            mixed:
  *                summary: Mixed email, sms and languages
- *                value: [{email: "user@example.com", lang: "en"}, {phone: "+33600000000", lang:"fr"}, {phone: "+33600000000", lang:"fr", country:"en"}]
- *            emailInvite:
- *                summary: One email invite with French lang
- *                value: [{email: "user@example.com", lang: "fr"}]
- *         type: array
+ *                $ref: '#/components/examples/Destinations'
+ *         type: string
  *         items:
  *            $ref: '#/components/schemas/Destination'
  *     responses:
