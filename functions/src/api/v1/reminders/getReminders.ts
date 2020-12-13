@@ -23,7 +23,7 @@ import { getReminderListDb } from '../../../db/remindersDb'
  *                 createdAt: 1605969562,
  *                 updatedAt: 1605969562,
  *                 destinations: [],
- *                 sendTimestamp: 1605969562,
+ *                 sendAt: 1605969562,
  *                 isSent: false
  *               }]
  *             }

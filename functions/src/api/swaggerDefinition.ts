@@ -52,7 +52,7 @@ export const swaggerDefinition = {
                     id: {
                         type: 'string',
                     },
-                    sendTimestamp: {
+                    sendAt: {
                         type: 'integer',
                     },
                     createdAt: {

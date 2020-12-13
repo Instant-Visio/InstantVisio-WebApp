@@ -1,9 +1,16 @@
 import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
-import { ReminderEditData, updateReminderDb } from '../../../db/remindersDb'
+import {
+    ReminderEditData,
+    updateReminderDb,
+    getReminderDb,
+} from '../../../db/remindersDb'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
 import { BadRequestError } from '../../errors/HttpError'
+import { firestore } from 'firebase-admin/lib/firestore'
+import Timestamp = firestore.Timestamp
+import { assertTimestampInFuture } from './assertTimestampInFuture'
 
 /**
  * @swagger
@@ -17,7 +24,7 @@ import { BadRequestError } from '../../errors/HttpError'
  *     produces:
  *     - application/json
  *     parameters:
- *       - name: sendTimestamp
+ *       - name: sendAt
  *         description: (optional) The UTC timestamp in seconds at which the reminder is scheduled to be sent.
  *         in: x-www-form-urlencoded
  *         required: false
@@ -54,7 +61,7 @@ export const editReminder = wrap(async (req: Request, res: Response) => {
         reminderId,
     }
 
-    const { destinations, sendTimestamp } = req.body
+    const { destinations, sendAt } = req.body
     if (destinations) {
         const parsedDestinations = JSON.parse(destinations)
         if (isDestinationsCorrectlyFormatted(parsedDestinations)) {
@@ -63,13 +70,17 @@ export const editReminder = wrap(async (req: Request, res: Response) => {
             throw new BadRequestError('Request body not formatted correctly')
         }
     }
-    if (sendTimestamp) {
-        dataToEdit['sendTimestamp'] = parseInt(sendTimestamp)
+    if (sendAt) {
+        const sendAtTs = Timestamp.fromMillis(parseInt(sendAt) * 1000)
+        assertTimestampInFuture(sendAtTs)
+        dataToEdit['sendAt'] = sendAtTs
     }
 
     await updateReminderDb(dataToEdit)
 
+    const reminder = await getReminderDb(reminderId)
+
     res.send({
-        success: true,
+        reminder,
     })
 })

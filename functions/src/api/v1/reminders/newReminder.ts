@@ -4,6 +4,9 @@ import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { BadRequestError } from '../../errors/HttpError'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
 import { addReminderDb } from '../../../db/remindersDb'
+import { firestore } from 'firebase-admin/lib/firestore'
+import Timestamp = firestore.Timestamp
+import { assertTimestampInFuture } from './assertTimestampInFuture'
 
 /**
  * @swagger
@@ -17,7 +20,7 @@ import { addReminderDb } from '../../../db/remindersDb'
  *     produces:
  *     - application/json
  *     parameters:
- *       - name: sendTimestamp
+ *       - name: sendAt
  *         description: The UTC timestamp in seconds at which the reminder is scheduled to be sent.
  *         in: x-www-form-urlencoded
  *         required: true
@@ -57,19 +60,21 @@ export const newReminder = wrap(async (req: Request, res: Response) => {
     await assertRightToEditRoom(roomId, userId)
 
     const body = req.body
-    const sendTimestamp = parseInt(body.sendTimestamp)
+    const sendAt = parseInt(body.sendAt) * 1000
     const destinations = JSON.parse(body.destinations || '[]')
 
-    if (!sendTimestamp || !isDestinationsCorrectlyFormatted(destinations)) {
+    if (!sendAt || !isDestinationsCorrectlyFormatted(destinations)) {
         throw new BadRequestError('Request body not formatted correctly')
     }
 
-    const currentTime = Date.now() / 1000
-    if (currentTime > sendTimestamp) {
-        throw new BadRequestError('Request sendTimestamp is in the past')
-    }
+    const sendAtTimestamp = Timestamp.fromMillis(sendAt)
+    assertTimestampInFuture(sendAtTimestamp)
 
-    const reminderId = await addReminderDb(roomId, sendTimestamp, destinations)
+    const reminderId = await addReminderDb(
+        roomId,
+        sendAtTimestamp,
+        destinations
+    )
 
     res.send({
         reminderId,

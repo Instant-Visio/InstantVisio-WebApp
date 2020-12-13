@@ -2,7 +2,10 @@ import { InvitationDestination } from '../types/InvitationDestination'
 import { RoomId } from '../types/Room'
 import { db, serverTimestamp } from '../firebase/firebase'
 import { COLLECTIONS } from './constants'
-import { Reminder, ReminderId } from '../types/Reminder'
+import { Reminder, ReminderId, ReminderResponse } from '../types/Reminder'
+import { firestore } from 'firebase-admin/lib/firestore'
+import Timestamp = firestore.Timestamp
+import { ReminderNotFoundError } from '../api/errors/HttpError'
 
 export const getReminderListDb = async (
     roomId: RoomId
@@ -15,7 +18,7 @@ export const getReminderListDb = async (
     return snapshot.docs.map((doc) => {
         const {
             destinations,
-            sendTimestamp,
+            sendAt,
             isSent,
             createdAt,
             updatedAt,
@@ -23,22 +26,47 @@ export const getReminderListDb = async (
         return {
             id: doc.id,
             destinations,
-            sendTimestamp,
+            sendAt: sendAt.seconds,
             isSent,
-            createdAt: createdAt._seconds,
-            updatedAt: updatedAt._seconds,
+            createdAt: createdAt.seconds,
+            updatedAt: updatedAt.seconds,
         }
     })
 }
 
+export const getReminderDb = async (
+    reminderId: ReminderId
+): Promise<ReminderResponse> => {
+    const snapshot = await db
+        .collection(COLLECTIONS.reminders)
+        .doc(reminderId)
+        .get()
+
+    if (!snapshot.exists) {
+        throw new ReminderNotFoundError('Resource does not exist')
+    }
+
+    const { destinations, sendAt, isSent, createdAt, updatedAt } = <Reminder>(
+        snapshot.data()
+    )
+    return {
+        id: snapshot.id,
+        destinations,
+        sendAt: sendAt.seconds,
+        isSent,
+        createdAt: createdAt.seconds,
+        updatedAt: updatedAt.seconds,
+    }
+}
+
 export const addReminderDb = async (
     roomId: RoomId,
-    sendTimestamp: number,
+    sendAt: Timestamp,
     destinations: InvitationDestination[]
 ) => {
     const documentReference = await db.collection(COLLECTIONS.reminders).add({
         roomId,
-        sendTimestamp,
+        sendAt,
         destinations,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
@@ -50,7 +78,7 @@ export const addReminderDb = async (
 export interface ReminderEditData {
     reminderId: ReminderId
     destinations?: InvitationDestination[]
-    sendTimestamp?: number
+    sendAt?: Timestamp
 }
 
 export const updateReminderDb = async (reminder: ReminderEditData) => {
