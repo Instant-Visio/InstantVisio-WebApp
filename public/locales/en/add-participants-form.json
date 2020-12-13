@@ -8,6 +8,6 @@
     },
     "placeholder": "Type participants addresses ...",
     "errors": {
-        "inviteParticipants": "An error occurred while trying to send invites"
+        "general": "An error occurred while trying to send invites"
     }
 }

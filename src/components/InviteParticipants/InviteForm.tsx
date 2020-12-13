@@ -44,12 +44,8 @@ const FormSubmit = styled.div`
     }
 `
 
-export default function InviteForm({ onSubmit }) {
+export default function InviteForm({ onSubmit, error }) {
     const { t } = useTranslation('add-participants-form')
-    const error: Error = {
-        code: '500',
-        message: t('errors.inviteParticipants'),
-    }
 
     const initialValues = {
         participantAddresses: [],
