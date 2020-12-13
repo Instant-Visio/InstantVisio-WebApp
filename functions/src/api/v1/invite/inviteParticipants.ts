@@ -8,6 +8,7 @@ import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
 import { UID } from '../../../types/uid'
 import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCounts'
+import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
 
 /**
  * @swagger
@@ -33,10 +34,10 @@ import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCoun
  *         examples:
  *            mixedTypeAndLang:
  *                summary: Mixed email, sms and languages
- *                value: [{email: "user@example.com", lang: "en"}, {phone: "+33600000000", lang:"fr"}, {phone: "+33600000000", lang:"fr", country:"en"}]
+ *                value: '[{email: "user@example.com", lang: "en"}, {phone: "+33600000000", lang:"fr"}, {phone: "+33600000000", lang:"fr", country:"en"}]'
  *            emailInvite:
  *                summary: One email invite with French lang
- *                value: [{email: "user@example.com", lang: "fr"}]
+ *                value: "[{'email': 'user@example.com', 'lang': 'fr'}]"
  *         schema:
  *            type: array
  *            items:
@@ -87,14 +88,9 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
 
     const body = req.body
     const hostname = body.hostname
-    const destinations = JSON.parse(body.destinations)
+    const destinations = <InvitationDestination[]>JSON.parse(body.destinations)
 
-    if (
-        !hostname ||
-        !destinations ||
-        !Array.isArray(destinations) ||
-        destinations.length === 0
-    ) {
+    if (!hostname || !isDestinationsCorrectlyFormatted(destinations)) {
         throw new BadRequestError('Request body not formatted correctly')
     }
 

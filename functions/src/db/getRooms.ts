@@ -3,7 +3,7 @@ import { UID } from '../types/uid'
 import { Room } from '../types/Room'
 import { db } from '../firebase/firebase'
 
-type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt'>
+type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt' | 'startTimestamp'>
 
 export const getRooms = async (userId: UID): Promise<(Response | null)[]> => {
     const query = await db

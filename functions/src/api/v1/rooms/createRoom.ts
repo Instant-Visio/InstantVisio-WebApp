@@ -30,7 +30,7 @@ import { RoomId } from '../../../types/Room'
  *         description: (optional) The UTC timestamp in seconds at which the meeting is scheduled to start.
  *         in: x-www-form-urlencoded
  *         required: false
- *         type: number
+ *         type: integer
  *     responses:
  *       201:
  *         description: Room created with success

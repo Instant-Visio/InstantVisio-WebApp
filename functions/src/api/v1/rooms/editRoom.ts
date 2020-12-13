@@ -24,7 +24,7 @@ import { wrap } from 'async-middleware'
  *         description: (optional) The UTC timestamp in seconds at which the meeting is scheduled to start.
  *         in: x-www-form-urlencoded
  *         required: false
- *         type: number
+ *         type: integer
  *     responses:
  *       204:
  *         description: Room edited with success

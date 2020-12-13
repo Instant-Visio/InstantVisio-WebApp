@@ -21,10 +21,54 @@ export const swaggerDefinition = {
                         type: 'string',
                     },
                     createdAt: {
-                        type: 'string',
+                        type: 'integer',
                     },
                     updatedAt: {
+                        type: 'integer',
+                    },
+                    startTimestamp: {
+                        type: 'integer',
+                    },
+                },
+            },
+            Destination: {
+                properties: {
+                    email: {
                         type: 'string',
+                    },
+                    phone: {
+                        type: 'string',
+                    },
+                    lang: {
+                        type: 'string',
+                    },
+                    country: {
+                        type: 'string',
+                    },
+                },
+            },
+            Reminder: {
+                properties: {
+                    id: {
+                        type: 'string',
+                    },
+                    sendTimestamp: {
+                        type: 'integer',
+                    },
+                    createdAt: {
+                        type: 'integer',
+                    },
+                    updatedAt: {
+                        type: 'integer',
+                    },
+                    isSent: {
+                        type: 'boolean',
+                    },
+                    destinations: {
+                        type: 'array',
+                        items: {
+                            $ref: '#/components/schemas/Destination',
+                        },
                     },
                 },
             },
