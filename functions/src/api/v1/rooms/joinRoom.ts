@@ -74,8 +74,7 @@ const getOrCreateRoom = async (
     roomPassword: string
 ): Promise<Room> => {
     try {
-        const room = await getRoom(roomId)
-        return room
+        return await await getRoom(roomId)
     } catch (error) {
         if (error instanceof RoomNotFoundError) {
             await createRoom(participantUID, roomPassword, roomId)
