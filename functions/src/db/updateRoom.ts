@@ -8,6 +8,7 @@ export interface RoomEditData {
     roomSid?: RoomSid
     uid?: UID
     password?: string
+    startTimestamp?: number
 }
 
 export const updateRoom = async (room: RoomEditData) => {

@@ -20,6 +20,11 @@ import { wrap } from 'async-middleware'
  *         in: x-www-form-urlencoded
  *         required: false
  *         type: string
+ *       - name: startTimestamp
+ *         description: (optional) The UTC timestamp in seconds at which the meeting is scheduled to start.
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         type: number
  *     responses:
  *       204:
  *         description: Room edited with success
@@ -42,6 +47,9 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
 
     if (req.body.password) {
         dataToEdit['password'] = req.body.password
+    }
+    if (req.body.startTimestamp) {
+        dataToEdit['startTimestamp'] = req.body.startTimestamp
     }
 
     await updateRoom(dataToEdit)

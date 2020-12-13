@@ -5,7 +5,8 @@ import { UID } from '../types/uid'
 
 export const addRoom = async (
     userId: UID,
-    password: string
+    password: string,
+    startTimestamp: number
 ): Promise<RoomId> => {
     const documentReference = await db.collection(COLLECTIONS.rooms).add({
         uid: userId,
@@ -13,6 +14,7 @@ export const addRoom = async (
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
         service: DEFAULT_ROOM_TYPE,
+        startTimestamp,
     })
 
     return documentReference.id

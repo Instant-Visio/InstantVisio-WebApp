@@ -6,7 +6,8 @@ import { UID } from '../types/uid'
 export const setRoom = async (
     userId: UID,
     roomId: RoomId,
-    password: string
+    password: string,
+    startTimestamp: number
 ): Promise<RoomId> => {
     await db.collection(COLLECTIONS.rooms).doc(roomId).set({
         uid: userId,
@@ -14,6 +15,7 @@ export const setRoom = async (
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
         service: DEFAULT_ROOM_TYPE,
+        startTimestamp,
     })
 
     return roomId

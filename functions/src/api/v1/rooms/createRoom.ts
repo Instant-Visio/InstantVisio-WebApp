@@ -13,7 +13,7 @@ import { RoomId } from '../../../types/Room'
  * @swagger
  * /v1/rooms/new:
  *   post:
- *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 chat) and a random password if none provided. The room will have an infinite lifetime though it will probably change in the future.
+ *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 chat) and a random password if none provided. The room will have an infinite lifetime though it will probably change in the future. <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before of after and will be used to fill the date on the UI & reminders.
  *     tags:
  *       - rooms
  *     consumes:
@@ -26,6 +26,11 @@ import { RoomId } from '../../../types/Room'
  *         in: x-www-form-urlencoded
  *         required: false
  *         type: string
+ *       - name: startTimestamp
+ *         description: (optional) The UTC timestamp in seconds at which the meeting is scheduled to start.
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         type: number
  *     responses:
  *       201:
  *         description: Room created with success
@@ -44,25 +49,37 @@ import { RoomId } from '../../../types/Room'
  *         description: authorization header present but not formatted correctly
  */
 export const createRoomRoute = wrap(async (req: Request, res: Response) => {
-    const newRoomResponse = await createRoom(res.locals.uid, req.body.password)
+    const newRoomResponse = await createRoom(
+        res.locals.uid,
+        req.body.password,
+        undefined,
+        req.body.startTimestampMs
+    )
     res.send(newRoomResponse)
 })
 
 export const createRoom = async (
     userId: UID,
     roomRequestedPassword?: string,
-    specificRoomId?: RoomId
+    specificRoomId?: RoomId,
+    startTimestamp?: number
 ): Promise<NewRoomResponse> => {
     await assertNewRoomCreationGranted(userId)
 
     let roomId: RoomId
     const roomPassword =
         roomRequestedPassword || `${~~(Math.random() * 999999)}`
+    const roomStartTimestamp = startTimestamp || ~~(Date.now() / 1000)
 
     if (specificRoomId) {
-        roomId = await setRoom(userId, specificRoomId, roomPassword)
+        roomId = await setRoom(
+            userId,
+            specificRoomId,
+            roomPassword,
+            roomStartTimestamp
+        )
     } else {
-        roomId = await addRoom(userId, roomPassword)
+        roomId = await addRoom(userId, roomPassword, roomStartTimestamp)
     }
 
     const roomSid = await createTwilioRoom(roomId)
