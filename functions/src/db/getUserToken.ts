@@ -1,4 +1,4 @@
-import { getUserDb } from './getUserDb'
+import { getUserDb } from './userDb'
 import { JWTToken } from '../types/JWT'
 import { UID } from '../types/uid'
 import { BadRequestError } from '../api/errors/HttpError'

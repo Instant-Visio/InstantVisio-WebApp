@@ -27,11 +27,12 @@ export const swaggerDefinition = {
                             isQuotaReached: 'boolean',
                         },
                     },
-                    sentEmails: {
-                        type: 'integer',
-                    },
-                    sentSMSs: {
-                        type: 'integer',
+                    usage: {
+                        type: 'object',
+                        properties: {
+                            sentEmails: 'integer',
+                            sentSMSs: 'integer',
+                        },
                     },
                     updatedAt: {
                         type: 'integer',

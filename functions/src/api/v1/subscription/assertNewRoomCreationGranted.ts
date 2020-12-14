@@ -1,5 +1,5 @@
 import { UID } from '../../../types/uid'
-import { getUserDb } from '../../../db/getUserDb'
+import { getUserDb } from '../../../db/userDb'
 import { PaymentRequiredError } from '../../errors/HttpError'
 
 export const assertNewRoomCreationGranted = async (userId: UID) => {

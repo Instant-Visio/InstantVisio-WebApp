@@ -4,3 +4,6 @@ export const COLLECTIONS = {
     rooms: 'rooms',
     users: 'users',
 }
+export const SUBSCRIPTIONS = {
+    manual: 'manual',
+}

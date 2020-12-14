@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { ForbiddenError } from '../../errors/HttpError'
-import { getUserDb } from '../../../db/getUserDb'
+import { getUserDb } from '../../../db/userDb'
 
 /**
  * @swagger
@@ -22,8 +22,10 @@ import { getUserDb } from '../../../db/getUserDb'
  *                   isActive: true,
  *                   isQuotaReached: false
  *               },
- *               sentEmails: 1,
- *               sentSMSs: 2
+ *               usage: {
+ *                  sentEmails: 1,
+ *                  sentSMSs: 2
+ *               }
  *             }
  *             schema:
  *               type: object
@@ -49,9 +51,8 @@ export const getUser = async (req: Request, res: Response) => {
         user: {
             id: user.id,
             subscription: user.subscription,
-            sentSMSs: user.sentSMSs,
-            sentEmails: user.sentEmails,
-            updatedAt: user.updatedAt.seconds,
+            usage: user.usage,
+            updatedAt: user.updatedAt?.seconds,
         },
     })
 }

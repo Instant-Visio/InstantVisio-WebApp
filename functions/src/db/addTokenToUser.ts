@@ -18,6 +18,7 @@ export const addTokenToUser = async (
                         createdAt: serverTimestamp(),
                     },
                 },
+                updatedAt: serverTimestamp(),
             },
             { merge: true }
         )

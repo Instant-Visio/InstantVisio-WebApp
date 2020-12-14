@@ -8,8 +8,10 @@ export interface User {
         isActive: boolean
         isQuotaReached: boolean
     }
-    sentSMSs: number
-    sentEmails: number
+    usage: {
+        sentSMSs: number
+        sentEmails: number
+    }
     updatedAt: Timestamp
     tokens: {
         [key: string]: {
