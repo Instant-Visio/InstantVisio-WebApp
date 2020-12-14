@@ -30,5 +30,5 @@ export const signInEmulatorEmailPassword = async (
 }
 
 export const isAuthEmulatorEnabled = (): boolean => {
-    return Boolean(process.env.REACT_APP_AUTH_EMULATOR_ENABLED)
+    return process.env.REACT_APP_AUTH_EMULATOR_ENABLED === 'true'
 }

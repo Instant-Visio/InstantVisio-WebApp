@@ -79,7 +79,13 @@ const Login = () => {
     }, [token, login, logout])
 
     return (
-        <div>
+        <div
+            style={{
+                position: 'absolute',
+                left: 0,
+                background: '#4444FF55',
+                zIndex: 50,
+            }}>
             {!isLoggedIn && (
                 <StyledFirebaseAuth
                     uiConfig={uiConfig}
@@ -94,6 +100,7 @@ const Login = () => {
                     Sign out
                 </Button>
             )}
+            Temporary LOGIN UI
         </div>
     )
 }
