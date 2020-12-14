@@ -33,9 +33,9 @@ import { getUserDb } from '../../../db/userDb'
  *       401:
  *         description: missing authorization bearer token
  *       403:
- *         description: authorization header present but not valid
+ *         description: invalid authorization header
  *       412:
- *         description: authorization header present but not formatted correctly
+ *         description: authorization header wrong format
  */
 export const getUser = async (req: Request, res: Response) => {
     const currentUid = res.locals.uid
