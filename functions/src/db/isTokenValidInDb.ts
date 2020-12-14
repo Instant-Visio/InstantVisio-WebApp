@@ -1,5 +1,5 @@
 import { db } from '../firebase/firebase'
-import { UserData } from '../types/UserData'
+import { User } from '../types/User'
 import { JWTData, JWTToken } from '../types/JWT'
 import { COLLECTIONS } from './constants'
 
@@ -16,7 +16,7 @@ export const isTokenValidInDb = async (
         return false
     }
 
-    const userData = <UserData>userDocumentSnapshot.data()
+    const userData = <User>userDocumentSnapshot.data()
 
     return (
         userData.tokens &&

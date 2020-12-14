@@ -74,11 +74,11 @@ import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCoun
  *       401:
  *         description: missing authorization bearer token
  *       403:
- *         description: token not valid
+ *         description: invalid authorization header
  *       404:
  *         description: room does not exist
  *       412:
- *         description: authorization header present but not formatted correctly
+ *         description: authorization header wrong format
  */
 export const inviteParticipants = wrap(async (req: Request, res: Response) => {
     const roomId = req.params.roomId

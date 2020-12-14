@@ -3,11 +3,6 @@ import { UID } from '../types/uid'
 import { ForbiddenError } from '../api/errors/HttpError'
 import { getRoom } from './getRoom'
 
-export interface RightsResult {
-    roomNotFound: boolean
-    hasRights: boolean
-}
-
 export const assertRightToEditRoom = async (
     roomId: RoomId,
     userId: UID
