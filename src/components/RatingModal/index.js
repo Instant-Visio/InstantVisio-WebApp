@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import BeautyStars from 'beauty-stars'
 import { addCallRating } from '../../actions/addCallRating'
 
-export const RatingModal = ({ hasLeft }) => {
+export const RatingModal = ({ hasLeft, redirectToRoot }) => {
     const [value, setValue] = useState(0)
     const [modalShow, setModalShow] = React.useState(hasLeft)
 
@@ -43,6 +43,7 @@ export const RatingModal = ({ hasLeft }) => {
                         // noinspection JSIgnoredPromiseFromCall
                         addCallRating(value)
                         setModalShow(false)
+                        redirectToRoot(true)
                     }}>
                     VALIDER
                 </Button>

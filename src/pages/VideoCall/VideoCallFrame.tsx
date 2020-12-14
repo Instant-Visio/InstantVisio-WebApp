@@ -14,6 +14,7 @@ const VideoCallFrame = ({
     videoFrame,
 }) => {
     const { t } = useTranslation('videocall')
+    const [redirectToRoot, setRedirectToRoot] = React.useState(false)
 
     if (hasLeft) {
         LocalStorage.removeLastVideoCallId()
@@ -46,12 +47,17 @@ const VideoCallFrame = ({
                 <div className="waiting-participant">{participantStatus}</div>
             )}
 
-            {/*hasLeft && <Redirect to="/" />*/}
+            {redirectToRoot && <Redirect to="/" />}
 
             {hasLeft && (
                 <div>
                     {t('leave-confirmation')}
-                    <RatingModal hasLeft />
+                    <RatingModal
+                        hasLeft
+                        redirectToRoot={(val) => {
+                            setRedirectToRoot(val)
+                        }}
+                    />
                 </div>
             )}
         </IframeContainer>
