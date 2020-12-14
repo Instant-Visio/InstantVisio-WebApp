@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { Redirect } from 'react-router-dom'
 import * as LocalStorage from '../../services/local-storage'
+import { RatingModal } from '../../components/RatingModal'
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -45,7 +46,14 @@ const VideoCallFrame = ({
                 <div className="waiting-participant">{participantStatus}</div>
             )}
 
-            {hasLeft && <Redirect to="/" />}
+            {/*hasLeft && <Redirect to="/" />*/}
+
+            {hasLeft && (
+                <div>
+                    {t('leave-confirmation')}
+                    <RatingModal hasLeft />
+                </div>
+            )}
         </IframeContainer>
     )
 }
