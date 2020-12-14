@@ -7,13 +7,24 @@ export const updateInvitationSentCounts = async (
     smssSentCount: number,
     emailsSentCount: number
 ) => {
+    const month = new Date().getMonth() + 1
+
+    const sentInvitations = {
+        sentEmails: increment(smssSentCount),
+        sentSMSs: increment(emailsSentCount),
+    }
+
     return db
         .collection(COLLECTIONS.users)
         .doc(userId)
         .set(
             {
-                sentEmails: increment(smssSentCount),
-                sentSMSs: increment(emailsSentCount),
+                usage: sentInvitations,
+                subscription: {
+                    [month]: {
+                        usage: sentInvitations,
+                    },
+                },
                 updatedAt: serverTimestamp(),
             },
             { merge: true }
