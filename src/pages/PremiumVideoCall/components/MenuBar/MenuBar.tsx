@@ -18,7 +18,7 @@ import ToggleAudioButton from '../Buttons/ToggleAudioButton/ToggleAudioButton'
 import ToggleVideoButton from '../Buttons/ToggleVideoButton/ToggleVideoButton'
 import ToggleScreenShareButton from '../Buttons/ToogleScreenShareButton/ToggleScreenShareButton'
 import InviteParticipants from '../../../../components/InviteParticipants/InviteParticipants'
-import { selectRoomId, selectHostName } from '../../../../utils/selectors'
+import { selectRoomId, selectHostName } from '../../roomSelector'
 import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme: Theme) =>
