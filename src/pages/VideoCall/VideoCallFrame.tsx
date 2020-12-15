@@ -5,6 +5,8 @@ import classNames from 'classnames'
 import { Redirect } from 'react-router-dom'
 import * as LocalStorage from '../../services/local-storage'
 import { RatingModal } from '../../components/RatingModal'
+import { Button } from 'react-bootstrap'
+import image from '../../styles/assets/images/media/present2.png'
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -51,13 +53,38 @@ const VideoCallFrame = ({
 
             {hasLeft && (
                 <div>
-                    {t('leave-confirmation')}
-                    <RatingModal
-                        hasLeft
-                        redirectToRoot={(val) => {
-                            setRedirectToRoot(val)
-                        }}
-                    />
+                    <p>
+                        <img
+                            src={image}
+                            alt="Joyeux noel"
+                            height="300"
+                            width="300"
+                        />
+                    </p>
+                    <p
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignSelf: 'center',
+                        }}>
+                        {t('leave-confirmation')}
+                    </p>
+                    <p
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignSelf: 'center',
+                        }}>
+                        <Button
+                            variant="primary"
+                            onClick={() => {
+                                // noinspection JSIgnoredPromiseFromCall
+                                setRedirectToRoot(true)
+                            }}>
+                            Merci
+                        </Button>
+                    </p>
+                    <RatingModal hasLeft />
                 </div>
             )}
         </IframeContainer>
