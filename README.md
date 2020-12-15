@@ -84,13 +84,20 @@ npm run serve
 - JS & Typescript: 
     - use destructuring
     - use TS types & interfaces 
-    - small to medium (1 -> ~400 lines) components
+    - small to medium (1 -> ~300 lines) components
     - reusable components should be within `src/components`
-    - reducers/actions/selectors should live alongside and be scoped the the domain (possible domains: room/call, dashboard/stats, group)
+    - reducers/actions/selectors should live alongside and be scoped the domain (possible domains: room/call, dashboard/stats, group)
     - actions,reducers, props should be typed
 - Libraries:
-    - keep the amount of libraries to a minimum to have the lower possible bundle size
+    - keep the amount of libraries to a minimum to have the lowest possible bundle size
     - form: Formik, Yup
+    - UI: Material UI
     - state: Redux & redux-thunk for async actions
     - routing: Ionic Router
+- Code organization
+    - draft Pull Request for early on review if needed
+    - branch name: you can use `issueNumber_feature-desc` but you are free to choose what you need
+    - review: add 2 or more reviewers, one of them being either [MattiaPrimavera](https://github.com/MattiaPrimavera) or [HugoGresse](https://github.com/HugoGresse). At least one approve for the PR to be considered as accepted and ready to be merged 
+    - Pull Request are merged using `Squash & merge`
+    - Pull Request description: details what youthink is necessary to understand the code scope, linked issue, and any other things
 - Use interfaces to [define prop types](https://github.com/facebook/create-react-app/issues/8021) in typescript
