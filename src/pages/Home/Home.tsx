@@ -19,7 +19,7 @@ import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
 import { authInstance } from '../../firebase/firebase'
 import { isAuthEmulatorEnabled } from '../../utils/emulators'
-import { selectToken } from '../../utils/selectors'
+import { selectToken } from '../../components/App/userSelector'
 import { useSelector } from 'react-redux'
 import { EmulatorLogin } from './EmulatorLogin'
 
