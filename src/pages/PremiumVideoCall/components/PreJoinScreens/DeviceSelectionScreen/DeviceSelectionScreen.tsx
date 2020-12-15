@@ -20,7 +20,7 @@ import ToggleVideoButton from '../../Buttons/ToggleVideoButton/ToggleVideoButton
 import { useAppState } from '../../../state'
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext'
 import { Api } from '../../../../../services/api'
-import { selectToken } from '../../../../../utils/selectors'
+import { selectToken } from '../../../../../components/App/userSelector'
 import { useSelector, useDispatch } from 'react-redux'
 import { RoomId } from '../../../../../../types/Room'
 import * as actions from '../../../../../actions/actions'

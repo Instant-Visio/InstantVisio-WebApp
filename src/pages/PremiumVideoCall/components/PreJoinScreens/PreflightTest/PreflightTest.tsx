@@ -13,7 +13,7 @@ import { SuccessIcon } from '../../../icons/SuccessIcon'
 import WarningIcon from '../../../icons/WarningIcon'
 import ErrorIcon from '../../../icons/ErrorIcon'
 import { useSelector } from 'react-redux'
-import { selectToken } from '../../../../../utils/selectors'
+import { selectToken } from '../../../../../components/App/userSelector'
 
 export const TEST_DURATION = 10000
 
