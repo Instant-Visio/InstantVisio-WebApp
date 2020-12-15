@@ -81,6 +81,7 @@ npm run serve
 
 # Guidelines
 
+### Dev
 - JS & Typescript: 
     - use destructuring
     - use TS types & interfaces 
@@ -94,10 +95,13 @@ npm run serve
     - UI: Material UI
     - state: Redux & redux-thunk for async actions
     - routing: Ionic Router
-- Code organization
-    - draft Pull Request for early on review if needed
+- Use interfaces to [define prop types](https://github.com/facebook/create-react-app/issues/8021) in typescript
+
+### Code organization
     - branch name: you can use `issueNumber_feature-desc` but you are free to choose what you need
-    - review: add 2 or more reviewers, one of them being either [MattiaPrimavera](https://github.com/MattiaPrimavera) or [HugoGresse](https://github.com/HugoGresse). At least one approve for the PR to be considered as accepted and ready to be merged 
+    - draft Pull Request for early on WIP codes (if needed
+    - public the PR and submit it for the review
+    - review: add 2 or more reviewers, one of them being either [MattiaPrimavera](https://github.com/MattiaPrimavera) or [HugoGresse](https://github.com/HugoGresse). At least one approve for the PR to be considered as accepted and ready to be merged. Review comments should be marked as resolved after change made if agreed to. If needed, re-request te review after change made. 
     - Pull Request are merged using `Squash & merge`
     - Pull Request description: details what youthink is necessary to understand the code scope, linked issue, and any other things
-- Use interfaces to [define prop types](https://github.com/facebook/create-react-app/issues/8021) in typescript
+    - Responsability: the the PR asignee is responsible for updating the branch, iterating on review and merging the branch 
