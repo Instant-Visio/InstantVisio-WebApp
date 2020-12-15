@@ -21,8 +21,9 @@ import { useAppState } from '../../../state'
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext'
 import { Api } from '../../../../../services/api'
 import { selectToken } from '../../../../../utils/selectors'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RoomId } from '../../../../../../types/Room'
+import * as actions from '../../../../../actions/actions'
 
 const useStyles = makeStyles((theme: Theme) => ({
     gutterBottom: {
@@ -80,12 +81,15 @@ export default function DeviceSelectionScreen({
     const classes = useStyles()
     const { isFetching } = useAppState()
     const token = useSelector(selectToken)
+    const dispatch = useDispatch()
     const { connect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
     const disableButtons = isFetching || isAcquiringLocalTracks || isConnecting
 
     const handleJoin = async () => {
         const api = new Api(token)
         const { jwtAccessToken } = await api.joinRoom(roomId, 'test-password') // TODO pass the password variable
+        dispatch(actions.setRoomId(roomId))
+        dispatch(actions.setHostName(name))
         connect(jwtAccessToken, roomId)
     }
 
