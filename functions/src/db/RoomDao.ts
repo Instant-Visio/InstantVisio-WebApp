@@ -27,7 +27,7 @@ export class RoomDao {
         return <Room>documentSnapshot.data()
     }
 
-    public static async getListByUserId(
+    public static async listByUserId(
         userId: UID
     ): Promise<(Response | null)[]> {
         const query = await db

@@ -33,7 +33,7 @@ import { RoomDao } from '../../../db/RoomDao'
  */
 export const getRooms = async (_: Request, res: Response) => {
     const uid = res.locals.uid
-    const rooms = await RoomDao.getListByUserId(uid)
+    const rooms = await RoomDao.listByUserId(uid)
 
     res.send(rooms)
 }

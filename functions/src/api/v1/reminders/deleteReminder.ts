@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
-import { deleteReminderDb } from '../../../db/remindersDb'
+import { ReminderDao } from '../../../db/ReminderDao'
 
 /**
  * @swagger
@@ -29,7 +29,7 @@ export const deleteReminder = wrap(async (req: Request, res: Response) => {
     const { roomId, reminderId } = req.params
     await assertRightToEditRoom(roomId, userId)
 
-    await deleteReminderDb(reminderId)
+    await ReminderDao.delete(reminderId)
 
     res.status(204).send()
 })

@@ -3,7 +3,7 @@ import { wrap } from 'async-middleware'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { BadRequestError } from '../../errors/HttpError'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
-import { addReminderDb } from '../../../db/remindersDb'
+import { ReminderDao } from '../../../db/ReminderDao'
 import { Timestamp } from '../../../firebase/firebase'
 import { assertTimestampInFuture } from './assertTimestampInFuture'
 
@@ -79,7 +79,7 @@ export const createReminder = wrap(async (req: Request, res: Response) => {
     const sendAtTimestamp = Timestamp.fromMillis(sendAt)
     assertTimestampInFuture(sendAtTimestamp)
 
-    const reminderId = await addReminderDb(
+    const reminderId = await ReminderDao.add(
         roomId,
         sendAtTimestamp,
         destinations,
