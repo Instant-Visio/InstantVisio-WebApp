@@ -4,6 +4,14 @@ Instant Visio is a no-app one to one video conference created to help medical wo
 
 More info on the Hacking Health Camp 2020 slack, #instantvisio
 
+# API
+
+_Current API Version: **v1**_
+
+Currently in development and deployed for development propose only
+- [API Documentation](https://instantvisio-dev.web.app/api/v1-docs/)
+- [API Endpoint](https://instantvisio-dev.web.app/api/v1/)
+
 # Setup
 
 ## Front
@@ -71,6 +79,18 @@ npm run serve
     npm run run:${PLATFORM}
     ```
 
-# Tech notes
+# Guidelines
 
--   Use interfaces to [define prop types](https://github.com/facebook/create-react-app/issues/8021) in typescript
+- JS & Typescript: 
+    - use destructuring
+    - use TS types & interfaces 
+    - small to medium (1 -> ~400 lines) components
+    - reusable components should be within `src/components`
+    - reducers/actions/selectors should live alongside and be scoped the the domain (possible domains: room/call, dashboard/stats, group)
+    - actions,reducers, props should be typed
+- Libraries:
+    - keep the amount of libraries to a minimum to have the lower possible bundle size
+    - form: Formik, Yup
+    - state: Redux & redux-thunk for async actions
+    - routing: Ionic Router
+- Use interfaces to [define prop types](https://github.com/facebook/create-react-app/issues/8021) in typescript
