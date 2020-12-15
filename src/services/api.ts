@@ -24,6 +24,17 @@ export class Api {
         return this.post(`/rooms/${roomId}/join`, { password })
     }
 
+    async inviteParticipants(
+        roomId: RoomId,
+        hostname: string,
+        destinations: [any]
+    ): Promise<any> {
+        return this.post(`/rooms/${roomId}/inviteParticipants`, {
+            hostname,
+            destinations,
+        })
+    }
+
     async post(apiUrl: string, data: any): Promise<any> {
         const response = await fetch(`${this.baseUrl}${apiUrl}`, {
             method: 'POST',
