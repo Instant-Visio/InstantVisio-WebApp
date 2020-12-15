@@ -17,7 +17,8 @@ import { getRooms as getRoomsList } from '../../../db/getRooms'
  *             example: [{
  *               id: 'vXIUuaGkH4kukbwRH5cU',
  *               createdAt: 1605969562,
- *               updatedAt: 1605969562
+ *               updatedAt: 1605969562,
+ *               startTimestamp: 1605969562
  *             }]
  *             schema:
  *               type: array
