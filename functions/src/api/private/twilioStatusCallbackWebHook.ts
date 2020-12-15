@@ -15,25 +15,14 @@ export const twilioStatusCallbackWebHook = wrap(
         assertTwilioRequestValid(req)
 
         const { StatusCallbackEvent, RoomName, ParticipantDuration } = req.body
-        const month = new Date().getMonth() + 1
 
         switch (StatusCallbackEvent) {
             case PARTICIPANT_DISCONNECTED_EVENT:
                 const room = await RoomDao.get(RoomName)
                 const participantDuration = parseInt(ParticipantDuration)
-                await UserDao.update(room.uid, {
-                    usage: {
-                        participantSeconds: increment(participantDuration),
-                    },
-                    subscription: {
-                        [month]: {
-                            usage: {
-                                participantSeconds: increment(
-                                    participantDuration
-                                ),
-                            },
-                        },
-                    },
+
+                await UserDao.updateUsage(room.uid, {
+                    participantSeconds: increment(participantDuration),
                 })
                 break
             default:

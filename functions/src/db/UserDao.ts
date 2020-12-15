@@ -4,6 +4,8 @@ import { db, serverTimestamp } from '../firebase/firebase'
 import { COLLECTIONS } from './constants'
 import { BadRequestError, NotFoundError } from '../api/errors/HttpError'
 import { User } from '../types/User'
+import admin from 'firebase-admin'
+import FieldValue = admin.firestore.FieldValue
 
 export class UserDao {
     public static async get(userId: UID): Promise<User> {
@@ -78,5 +80,25 @@ export class UserDao {
                 throw error
             }
         }
+    }
+
+    public static async updateUsage(
+        userId: UID,
+        usage: {
+            participantSeconds?: FieldValue
+            sentEmails?: FieldValue
+            sentSMSs?: FieldValue
+        }
+    ) {
+        const month = new Date().getMonth() + 1
+        return UserDao.update(userId, {
+            usage: usage,
+            subscription: {
+                [month]: {
+                    usage,
+                },
+            },
+            updatedAt: serverTimestamp(),
+        })
     }
 }

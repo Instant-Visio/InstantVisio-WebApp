@@ -7,8 +7,9 @@ import { getAppEnv } from '../../../firebase/env'
 import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
 import { UID } from '../../../types/uid'
-import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCounts'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
+import { UserDao } from '../../../db/UserDao'
+import { increment } from '../../../firebase/firebase'
 
 /**
  * @swagger
@@ -106,5 +107,8 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         smssSent: smssSent,
     })
 
-    await updateInvitationSentCounts(userId, smssSent.length, emailsSent.length)
+    await UserDao.updateUsage(userId, {
+        sentSMSs: increment(smssSent.length),
+        sentEmails: increment(emailsSent.length),
+    })
 })
