@@ -57,7 +57,9 @@ export default function PreJoinScreens() {
                 null,
                 '',
                 window.encodeURI(
-                    `/room/${roomName}${window.location.search || ''}`
+                    `/premium-video/room/${roomName}${
+                        window.location.search || ''
+                    }`
                 )
             )
         }

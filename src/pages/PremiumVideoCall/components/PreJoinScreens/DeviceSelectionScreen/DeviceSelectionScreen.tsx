@@ -90,7 +90,7 @@ export default function DeviceSelectionScreen({
         const { jwtAccessToken } = await api.joinRoom(roomId, 'test-password') // TODO pass the password variable
         dispatch(actions.setRoomId(roomId))
         dispatch(actions.setHostName(name))
-        connect(jwtAccessToken, roomId)
+        connect(jwtAccessToken, name)
     }
 
     return (
