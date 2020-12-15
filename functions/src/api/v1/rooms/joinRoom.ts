@@ -77,7 +77,11 @@ const getOrCreateRoom = async (
         return await getRoom(roomId)
     } catch (error) {
         if (error instanceof RoomNotFoundError) {
-            await createRoom(participantUID, roomPassword, roomId)
+            await createRoom({
+                userId: participantUID,
+                roomRequestedPassword: roomPassword,
+                specificRoomId: roomId,
+            })
             return getRoom(roomId)
         } else {
             throw error
