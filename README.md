@@ -86,7 +86,7 @@ npm run serve
     - use TS types & interfaces 
     - small to medium (1 -> ~300 lines) components
     - reusable components should be within `src/components`
-    - reducers/actions/selectors should live alongside and be scoped the domain (possible domains: room/call, dashboard/stats, group)
+    - reducers/actions/selectors should live alongside and be scoped to the domain (possible domains: room/call, dashboard/stats, group)
     - actions,reducers, props should be typed
 - Libraries:
     - keep the amount of libraries to a minimum to have the lowest possible bundle size
