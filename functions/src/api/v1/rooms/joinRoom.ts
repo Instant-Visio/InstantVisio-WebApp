@@ -44,7 +44,7 @@ import { Room, RoomId } from '../../../types/Room'
  *       404:
  *         description: room does not exist
  *       412:
- *         description: authorization header present but not formatted correctly
+ *         description: authorization header wrong format
  */
 export const joinRoom = wrap(async (req: Request, res: Response) => {
     const roomPassword = req.body.password

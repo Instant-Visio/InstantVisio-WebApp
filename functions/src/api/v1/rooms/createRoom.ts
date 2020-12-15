@@ -45,9 +45,9 @@ import { Timestamp } from '../../../firebase/firebase'
  *       401:
  *         description: missing authorization bearer token
  *       403:
- *         description: authorization header present but not valid
+ *         description: invalid authorization header
  *       412:
- *         description: authorization header present but not formatted correctly
+ *         description: authorization header wrong format
  */
 export const createRoomRoute = wrap(async (req: Request, res: Response) => {
     const newRoomResponse = await createRoom({

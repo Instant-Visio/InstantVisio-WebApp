@@ -15,6 +15,30 @@ export const swaggerDefinition = {
     produces: ['application/json'],
     components: {
         schemas: {
+            User: {
+                properties: {
+                    id: {
+                        type: 'string',
+                    },
+                    subscription: {
+                        type: 'object',
+                        properties: {
+                            isActive: 'boolean',
+                            isQuotaReached: 'boolean',
+                        },
+                    },
+                    usage: {
+                        type: 'object',
+                        properties: {
+                            sentEmails: 'integer',
+                            sentSMSs: 'integer',
+                        },
+                    },
+                    updatedAt: {
+                        type: 'integer',
+                    },
+                },
+            },
             Room: {
                 properties: {
                     id: {

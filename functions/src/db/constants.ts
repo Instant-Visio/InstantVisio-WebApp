@@ -4,3 +4,6 @@ export const COLLECTIONS = {
     users: 'users',
     reminders: 'reminders',
 }
+export const SUBSCRIPTIONS = {
+    manual: 'manual',
+}

@@ -27,9 +27,9 @@ import { getRooms as getRoomsList } from '../../../db/getRooms'
  *       401:
  *         description: missing authorization bearer token
  *       403:
- *         description: authorization header present but not valid
+ *         description: invalid authorization header
  *       412:
- *         description: authorization header present but not formatted correctly
+ *         description: authorization header wrong format
  */
 export const getRooms = async (_: Request, res: Response) => {
     const uid = res.locals.uid
