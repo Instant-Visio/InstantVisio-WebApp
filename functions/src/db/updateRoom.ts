@@ -1,6 +1,6 @@
 import { COLLECTIONS } from './constants'
 import { RoomId, RoomSid } from '../types/Room'
-import { db, serverTimestamp } from '../firebase/firebase'
+import { db, serverTimestamp, Timestamp } from '../firebase/firebase'
 import { UID } from '../types/uid'
 
 export interface RoomEditData {
@@ -8,6 +8,7 @@ export interface RoomEditData {
     roomSid?: RoomSid
     uid?: UID
     password?: string
+    startAt?: Timestamp
 }
 
 export const updateRoom = async (room: RoomEditData) => {
