@@ -4,9 +4,9 @@ import * as twilio from 'twilio'
 import { getTwilioEnv } from '../../firebase/env'
 import { ForbiddenError, UnauthorizedError } from '../errors/HttpError'
 import { getPublicRequestURL } from '../utils/getPublicRequestURL'
-import { getRoom } from '../../db/getRoom'
 import { updateUserDb } from '../../db/userDb'
 import { increment } from '../../firebase/firebase'
+import { RoomDao } from '../../db/RoomDao'
 
 const PARTICIPANT_DISCONNECTED_EVENT = 'participant-disconnected'
 
@@ -19,7 +19,7 @@ export const twilioStatusCallbackWebHook = wrap(
 
         switch (StatusCallbackEvent) {
             case PARTICIPANT_DISCONNECTED_EVENT:
-                const room = await getRoom(RoomName)
+                const room = await RoomDao.get(RoomName)
                 const participantDuration = parseInt(ParticipantDuration)
                 await updateUserDb(room.uid, {
                     usage: {

@@ -1,14 +1,12 @@
 import { Request, Response } from 'express'
-import { addRoom } from '../../../db/addRoom'
 import { createTwilioRoom } from './service/createTwilioRoom'
-import { updateRoom } from '../../../db/updateRoom'
 import { NewRoomResponse } from '../../../types/NewRoomResponse'
 import { wrap } from 'async-middleware'
 import { UID } from '../../../types/uid'
-import { setRoom } from '../../../db/setRoom'
 import { assertNewRoomCreationGranted } from '../subscription/assertNewRoomCreationGranted'
 import { RoomId } from '../../../types/Room'
 import { Timestamp } from '../../../firebase/firebase'
+import { RoomDao } from '../../../db/RoomDao'
 
 /**
  * @swagger
@@ -79,18 +77,18 @@ export const createRoom = async ({
     )
 
     if (specificRoomId) {
-        roomId = await setRoom(
+        roomId = await RoomDao.set(
             userId,
             specificRoomId,
             roomPassword,
             roomStartAt
         )
     } else {
-        roomId = await addRoom(userId, roomPassword, roomStartAt)
+        roomId = await RoomDao.add(userId, roomPassword, roomStartAt)
     }
 
     const roomSid = await createTwilioRoom(roomId)
-    await updateRoom({
+    await RoomDao.update({
         roomId,
         roomSid,
     })

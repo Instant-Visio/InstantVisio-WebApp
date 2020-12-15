@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
-import { getRoom } from '../../../db/getRoom'
 import { ForbiddenError, RoomNotFoundError } from '../../errors/HttpError'
 import {
     createTwilioClientToken,
@@ -9,6 +8,7 @@ import {
 import { createRoom } from './createRoom'
 import { UID } from '../../../types/uid'
 import { Room, RoomId } from '../../../types/Room'
+import { RoomDao } from '../../../db/RoomDao'
 
 /**
  * @swagger
@@ -74,7 +74,7 @@ const getOrCreateRoom = async (
     roomPassword: string
 ): Promise<Room> => {
     try {
-        return await getRoom(roomId)
+        return await RoomDao.get(roomId)
     } catch (error) {
         if (error instanceof RoomNotFoundError) {
             await createRoom({
@@ -82,7 +82,7 @@ const getOrCreateRoom = async (
                 roomRequestedPassword: roomPassword,
                 specificRoomId: roomId,
             })
-            return getRoom(roomId)
+            return RoomDao.get(roomId)
         } else {
             throw error
         }

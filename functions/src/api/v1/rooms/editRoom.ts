@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import { RoomEditData, updateRoom } from '../../../db/updateRoom'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { wrap } from 'async-middleware'
 import { Timestamp } from '../../../firebase/firebase'
+import { RoomDao, RoomEditData } from '../../../db/RoomDao'
 
 /**
  * @swagger
@@ -55,7 +55,7 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
         )
     }
 
-    await updateRoom(dataToEdit)
+    await RoomDao.update(dataToEdit)
 
     res.send()
 })
