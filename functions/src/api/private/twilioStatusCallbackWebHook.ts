@@ -52,6 +52,6 @@ const assertTwilioRequestValid = (req: Request) => {
         throw new UnauthorizedError('Missing Twilio Signature')
     }
     if (!twilio.validateRequest(authToken, twilioSignature, url, req.body)) {
-        throw new ForbiddenError('Request not valid')
+        throw new ForbiddenError('Twilio request integrity verification failed')
     }
 }
