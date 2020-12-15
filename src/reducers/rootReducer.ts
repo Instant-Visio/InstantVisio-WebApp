@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux'
-import { userReducer } from '../components/App/userReducer'
-import { roomReducer } from '../pages/PremiumVideoCall/roomReducer'
+import { userReducer, UserState } from '../components/App/userReducer'
+import { roomReducer, RoomState } from '../pages/PremiumVideoCall/roomReducer'
+
+export interface AppState {
+    user: UserState
+    room: RoomState
+}
 
 const rootReducer = combineReducers({
     user: userReducer,

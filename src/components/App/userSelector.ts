@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
-import { User } from './userReducer'
+import { User, UserState } from './userReducer'
 
 export const selectToken = createSelector(
-    (state: any) => state.user,
+    (state: UserState) => state.user,
     (user: User) => user.token
 )

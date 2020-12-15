@@ -1,8 +1,8 @@
-import { Room } from './roomReducer'
+import { Room, RoomState } from './roomReducer'
 import { createSelector } from 'reselect'
 
 export const selectRoomId = createSelector(
-    (state: any) => state.room,
+    (state: RoomState) => state.room,
     (room: Room) => room.roomId
 )
 
