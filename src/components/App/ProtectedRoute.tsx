@@ -1,20 +1,19 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router'
-import { getTokenSelector, isLoadingSelector } from '../../utils/userSelectors'
+import { isLoading as isLoadingSelector } from '../../components/App/userSelector'
 import { useSelector } from 'react-redux'
-import { authInstance } from '../../firebase/firebase'
 
 interface ProtectedRouteProps {
     component: React.ElementType
+    isAuthorized: boolean
     [x: string]: any
 }
 
 const ProtectedRoute = ({
     component: Component,
+    isAuthorized,
     ...rest
 }: ProtectedRouteProps) => {
-    const isAnonymous = authInstance.currentUser?.isAnonymous
-    const token = useSelector(getTokenSelector)
     const isLoading = useSelector(isLoadingSelector)
 
     if (isLoading) return null
@@ -23,7 +22,7 @@ const ProtectedRoute = ({
         <Route
             {...rest}
             render={(props) => {
-                return !isAnonymous && token ? (
+                return isAuthorized ? (
                     <Component {...props} />
                 ) : (
                     <Redirect to="/" />

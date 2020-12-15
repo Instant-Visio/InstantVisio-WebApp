@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect } from 'react'
 import { authInstance, firebaseAuth } from '../firebase/firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import { Button } from 'react-bootstrap'
@@ -7,10 +7,9 @@ import { EMULATORS } from '../constants'
 import { auth as firebaseuiAuth } from 'firebaseui'
 import { isAuthEmulatorEnabled } from '../utils/emulators'
 import {
-    getLoginErrorSelector,
-    getTokenSelector,
-    isLoadingSelector,
-} from '../utils/userSelectors'
+    selectToken,
+    isLoading as isLoadingSelector,
+} from '../components/App/userSelector'
 import { useDispatch, useSelector } from 'react-redux'
 
 const uiConfig = {
@@ -36,8 +35,7 @@ const uiConfig = {
 }
 
 const Login = () => {
-    const hasToken = useSelector(getTokenSelector)
-    const loginError = useSelector(getLoginErrorSelector)
+    const hasToken = useSelector(selectToken)
     const isLoading = useSelector(isLoadingSelector)
     const dispatch = useDispatch()
 

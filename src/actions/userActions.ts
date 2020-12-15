@@ -1,46 +1,47 @@
-import { State } from './../reducers/index'
+import { AppState } from './../reducers/rootReducer'
 import { fetchToken } from './../services/fetch-token'
 import { JWTToken } from '../../types/JWT'
 import {
     SIGNOUT,
     SIGNIN_SUCCESS,
     SIGNIN_ERROR,
-    SetSignInAction,
-    SetSignInError,
-    SetSignOut,
+    UserActionsTypes,
 } from './userActionsTypes'
 import { authInstance } from '../firebase/firebase'
+import { UID } from '../../types/uid'
 
 type DidSignIn = (
     user: firebase.User | null
-) => (dispatch, getState: () => State) => Promise<void>
+) => (dispatch, getState: () => AppState) => Promise<void>
 
 const setSignInSuccess = (
     token: JWTToken,
-    isAnonymous: boolean
-): SetSignInAction => ({
+    isAnonymous: boolean,
+    userId: UID
+): UserActionsTypes => ({
     type: SIGNIN_SUCCESS,
     payload: {
         token,
         isAnonymous,
+        userId,
     },
 })
 
-const setSignInError = (error): SetSignInError => ({
+const setSignInError = (error): UserActionsTypes => ({
     type: SIGNIN_ERROR,
     payload: {
         error,
     },
 })
 
-const setSignOut = (): SetSignOut => ({
+const setSignOut = (): UserActionsTypes => ({
     type: SIGNOUT,
 })
 
 export const didSignin: DidSignIn = (user) => async (dispatch, getState) => {
     const { user: userState } = getState()
 
-    if (userState.token) {
+    if (userState.user.token) {
         return
     }
 
@@ -50,10 +51,12 @@ export const didSignin: DidSignIn = (user) => async (dispatch, getState) => {
             dispatch(
                 setSignInSuccess(
                     token,
-                    Boolean(authInstance.currentUser?.isAnonymous)
+                    Boolean(authInstance.currentUser?.isAnonymous),
+                    user.uid
                 )
             )
         } catch (error) {
+            //TODO handle errors
             dispatch(setSignInError(error))
         }
     } else {
