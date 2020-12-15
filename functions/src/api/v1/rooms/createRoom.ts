@@ -50,21 +50,25 @@ import { Timestamp } from '../../../firebase/firebase'
  *         description: authorization header present but not formatted correctly
  */
 export const createRoomRoute = wrap(async (req: Request, res: Response) => {
-    const newRoomResponse = await createRoom(
-        res.locals.uid,
-        req.body.password,
-        undefined,
-        req.body.startAt
-    )
+    const newRoomResponse = await createRoom({
+        userId: res.locals.uid,
+        roomRequestedPassword: req.body.password,
+        startAt: req.body.startAt,
+    })
     res.send(newRoomResponse)
 })
 
-export const createRoom = async (
-    userId: UID,
-    roomRequestedPassword?: string,
-    specificRoomId?: RoomId,
+export const createRoom = async ({
+    userId,
+    roomRequestedPassword,
+    specificRoomId,
+    startAt,
+}: {
+    userId: UID
+    roomRequestedPassword?: string
+    specificRoomId?: RoomId
     startAt?: string
-): Promise<NewRoomResponse> => {
+}): Promise<NewRoomResponse> => {
     await assertNewRoomCreationGranted(userId)
 
     let roomId: RoomId

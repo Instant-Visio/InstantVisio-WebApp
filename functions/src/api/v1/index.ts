@@ -6,7 +6,7 @@ import { createRoomRoute } from './rooms/createRoom'
 import { editRoom } from './rooms/editRoom'
 import { joinRoom } from './rooms/joinRoom'
 import { inviteParticipants } from './invite/inviteParticipants'
-import { newReminder } from './reminders/newReminder'
+import { createReminder } from './reminders/createReminder'
 import { editReminder } from './reminders/editReminder'
 import { deleteReminder } from './reminders/deleteReminder'
 import { getReminders } from './reminders/getReminders'
@@ -21,7 +21,7 @@ router.patch('/rooms/:roomId', editRoom)
 router.post('/rooms/:roomId/join', joinRoom)
 router.post('/rooms/:roomId/inviteParticipants', inviteParticipants)
 router.get('/rooms/:roomId/reminders/', getReminders)
-router.post('/rooms/:roomId/reminders/', newReminder)
+router.post('/rooms/:roomId/reminders/', createReminder)
 router.patch('/rooms/:roomId/reminders/:reminderId', editReminder)
 router.delete('/rooms/:roomId/reminders/:reminderId', deleteReminder)
 

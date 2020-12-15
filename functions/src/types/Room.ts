@@ -10,6 +10,6 @@ export interface Room {
     createdAt: number
     updatedAt: number
     password: string
-    startTimestamp: number
+    startAt: number
     parameters?: Record<string | number, unknown>
 }

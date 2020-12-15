@@ -58,7 +58,7 @@ import { assertTimestampInFuture } from './assertTimestampInFuture'
  *       412:
  *         description: authorization header present but not formatted correctly
  */
-export const newReminder = wrap(async (req: Request, res: Response) => {
+export const createReminder = wrap(async (req: Request, res: Response) => {
     const userId = res.locals.uid
     const roomId = req.params.roomId
     await assertRightToEditRoom(roomId, userId)

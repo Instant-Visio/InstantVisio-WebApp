@@ -26,7 +26,7 @@ export const swaggerDefinition = {
                     updatedAt: {
                         type: 'integer',
                     },
-                    startTimestamp: {
+                    startAt: {
                         type: 'integer',
                     },
                 },

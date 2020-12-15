@@ -93,10 +93,10 @@ export const editReminder = wrap(async (req: Request, res: Response) => {
     if (sendAt) {
         const sendAtTs = Timestamp.fromMillis(parseInt(sendAt) * 1000)
         assertTimestampInFuture(sendAtTs)
-        dataToEdit['sendAt'] = sendAtTs
+        dataToEdit.sendAt = sendAtTs
     }
     if (hostName) {
-        dataToEdit['hostName'] = hostName
+        dataToEdit.hostName = hostName
     }
 
     await updateReminderDb(dataToEdit)
