@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions'
 import * as express from 'express'
 import routerV1 from './v1'
+import routerPrivate from './private'
 import * as swaggerUi from 'swagger-ui-express'
 import * as swaggerJSDoc from 'swagger-jsdoc'
 import { swaggerDefinition } from './swaggerDefinition'
@@ -20,6 +21,7 @@ app.use(cors({ origin: true }))
 
 // API router v1 (/api/ is added on main index.ts export)
 app.use('/api/v1', routerV1)
+app.use('/api/v1-private', routerPrivate)
 app.use('/api/v1-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 app.use(errorMiddleware)
