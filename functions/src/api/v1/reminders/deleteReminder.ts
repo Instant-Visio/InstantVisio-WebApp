@@ -31,5 +31,5 @@ export const deleteReminder = wrap(async (req: Request, res: Response) => {
 
     await deleteReminderDb(reminderId)
 
-    res.send()
+    res.status(204).send()
 })
