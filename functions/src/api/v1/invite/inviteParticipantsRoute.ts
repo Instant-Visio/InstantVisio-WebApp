@@ -10,6 +10,7 @@ import { UID } from '../../../types/uid'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
 import { UserDao } from '../../../db/UserDao'
 import { increment } from '../../../firebase/firebase'
+import { RoomId } from '../../../types/Room'
 
 /**
  * @swagger
@@ -59,16 +60,40 @@ import { increment } from '../../../firebase/firebase'
  *       412:
  *         description: authorization header wrong format
  */
-export const inviteParticipants = wrap(async (req: Request, res: Response) => {
-    const roomId = req.params.roomId
-    const userId: UID = res.locals.uid
+export const inviteParticipantsRoute = wrap(
+    async (req: Request, res: Response) => {
+        const roomId = req.params.roomId
+        const userId: UID = res.locals.uid
+        const { hostName, destinations } = req.body
+
+        const invitationsSent = await inviteParticipant({
+            roomId,
+            userId,
+            hostName,
+            destinationsParameter: destinations,
+        })
+
+        res.send(invitationsSent)
+    }
+)
+
+export const inviteParticipant = async ({
+    roomId,
+    userId,
+    hostName,
+    destinationsParameter,
+}: {
+    roomId: RoomId
+    userId: UID
+    hostName: string
+    destinationsParameter: string
+}): Promise<InviteParticipantsResponse> => {
     const room = await assertRightToEditRoom(roomId, userId)
+    const destinations = <InvitationDestination[]>(
+        JSON.parse(destinationsParameter)
+    )
 
-    const body = req.body
-    const hostname = body.hostname
-    const destinations = <InvitationDestination[]>JSON.parse(body.destinations)
-
-    if (!hostname || !isDestinationsCorrectlyFormatted(destinations)) {
+    if (!hostName || !isDestinationsCorrectlyFormatted(destinations)) {
         throw new BadRequestError('Request body not formatted correctly')
     }
 
@@ -89,7 +114,7 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
     const roomUrl = `https://${appEnv.domain}/room/${roomId}?pwd=${room.password}`
 
     const notificationContent: NotificationContent = {
-        name: hostname,
+        name: hostName,
         roomUrl: roomUrl,
     }
 
@@ -102,13 +127,18 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         throw new BadRequestError('No emails or SMS delivered')
     }
 
-    res.send({
-        emailsSent: emailsSent,
-        smssSent: smssSent,
-    })
-
     await UserDao.updateUsage(userId, {
         sentSMSs: increment(smssSent.length),
         sentEmails: increment(emailsSent.length),
     })
-})
+
+    return {
+        emailsSent,
+        smssSent,
+    }
+}
+
+export interface InviteParticipantsResponse {
+    emailsSent: string[]
+    smssSent: string[]
+}

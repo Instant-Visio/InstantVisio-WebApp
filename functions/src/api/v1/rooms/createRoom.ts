@@ -7,6 +7,12 @@ import { assertNewRoomCreationGranted } from '../subscription/assertNewRoomCreat
 import { RoomId } from '../../../types/Room'
 import { Timestamp } from '../../../firebase/firebase'
 import { RoomDao } from '../../../db/RoomDao'
+import { ReminderId } from '../../../types/Reminder'
+import { createReminder } from '../reminders/createReminderRoute'
+import {
+    inviteParticipant,
+    InviteParticipantsResponse,
+} from '../invite/inviteParticipantsRoute'
 
 /**
  * @swagger
@@ -25,21 +31,57 @@ import { RoomDao } from '../../../db/RoomDao'
  *         in: x-www-form-urlencoded
  *         required: false
  *         type: string
+ *       - name: name
+ *         description: (optional) The room name. If not supplied, the roomName will be the room id.
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         type: string
  *       - name: startAt
  *         description: (optional) The UTC timestamp in seconds at which the meeting is scheduled to start. If not set, it will be the current time.
  *         in: x-www-form-urlencoded
  *         required: false
  *         type: integer
+ *       - name: destinations
+ *         description: An array of destinations
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         examples:
+ *            mixed:
+ *                summary: Mixed email, sms and languages
+ *                $ref: '#/components/examples/Destinations'
+ *         schema:
+ *            type: string
+ *         items:
+ *            $ref: '#/components/schemas/Destination'
+ *       - name: hostName
+ *         description: The name or organisation which sent the invite(s)
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         type: string
+ *       - name: sendsAt
+ *         description: An array of UTC timestamp(s) in seconds at which the reminder(s) are scheduled to be sent. If not supplied, the invitation will be sent upon request process, otherwise reminders will be created.
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         type: string
+ *         examples:
+ *            mixed:
+ *                summary: Multiple sendAt dates
+ *                value: '[1708118298, 1808118298]'
  *     responses:
  *       201:
- *         description: Room created with success
+ *         description: Room created with success. Depending of the parameters, will either have a list of created reminders ids OR the emails & SMSs sent list.
  *         content:
  *           application/json:
  *             schema:
  *               example: {
  *                   roomSid: "aZxo2xskIaZxo2xskI",
- *                   roomId: "390FJZDms390FJZDms"
+ *                   roomId: "390FJZDms390FJZDms",
+ *                   remindersIds: ["dza5cv8zzDAza882"],
+ *                   emailsSent: ["hi@example.com"],
+ *                   smssSent: ["+3300000000"]
  *               }
+ *       400:
+ *         description: unable to add a reminder before the current time (in the past)
  *       401:
  *         description: missing authorization bearer token
  *       403:
@@ -52,6 +94,10 @@ export const createRoomRoute = wrap(async (req: Request, res: Response) => {
         userId: res.locals.uid,
         roomRequestedPassword: req.body.password,
         startAt: req.body.startAt,
+        name: req.body.name,
+        hostName: req.body.hostName,
+        destinations: req.body.destinations,
+        sendsAt: req.body.sendsAt,
     })
     res.send(newRoomResponse)
 })
@@ -61,11 +107,19 @@ export const createRoom = async ({
     roomRequestedPassword,
     specificRoomId,
     startAt,
+    name,
+    hostName,
+    destinations,
+    sendsAt,
 }: {
     userId: UID
     roomRequestedPassword?: string
     specificRoomId?: RoomId
     startAt?: string
+    name?: string
+    hostName?: string
+    destinations?: string
+    sendsAt?: string
 }): Promise<NewRoomResponse> => {
     await assertNewRoomCreationGranted(userId)
 
@@ -91,9 +145,66 @@ export const createRoom = async ({
     await RoomDao.update({
         roomId,
         roomSid,
+        name: name || roomId,
     })
+
+    let processDestinationsResults = {}
+    if (hostName && destinations) {
+        processDestinationsResults = await processDestinations(
+            roomId,
+            userId,
+            hostName,
+            destinations,
+            sendsAt
+        )
+    }
+
     return {
         roomId,
         roomSid,
+        ...processDestinationsResults,
     }
+}
+
+const processDestinations = async (
+    roomId: RoomId,
+    userId: UID,
+    hostName: string,
+    destinations: string,
+    sendsAt?: string
+): Promise<ProcessDestinationsResponse> => {
+    if (sendsAt) {
+        const sendsAtValues = parseSendsAt(sendsAt)
+        const reminderIds: ReminderId[] = []
+        for (const sendAt of sendsAtValues) {
+            const id = await createReminder({
+                roomId,
+                userId,
+                sendAtParameter: sendAt,
+                hostName,
+                destinationsParameter: destinations,
+            })
+            reminderIds.push(id)
+        }
+        return {
+            reminderIds,
+        }
+    }
+
+    return inviteParticipant({
+        roomId,
+        userId,
+        hostName,
+        destinationsParameter: destinations,
+    })
+}
+
+type ProcessDestinationsResponse =
+    | InviteParticipantsResponse
+    | {
+          reminderIds: ReminderId[]
+      }
+
+const parseSendsAt = (sendsAt: string): string[] => {
+    return Array.isArray(sendsAt) ? sendsAt : JSON.parse(sendsAt)
 }

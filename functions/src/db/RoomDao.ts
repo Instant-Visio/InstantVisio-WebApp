@@ -11,6 +11,7 @@ export interface RoomEditData {
     uid?: UID
     password?: string
     startAt?: Timestamp
+    name?: string
 }
 
 export class RoomDao {

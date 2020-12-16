@@ -6,6 +6,9 @@ import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrect
 import { ReminderDao } from '../../../db/ReminderDao'
 import { Timestamp } from '../../../firebase/firebase'
 import { assertTimestampInFuture } from './assertTimestampInFuture'
+import { RoomId } from '../../../types/Room'
+import { UID } from '../../../types/uid'
+import { ReminderId } from '../../../types/Reminder'
 
 /**
  * @swagger
@@ -58,15 +61,41 @@ import { assertTimestampInFuture } from './assertTimestampInFuture'
  *       412:
  *         description: authorization header present but not formatted correctly
  */
-export const createReminder = wrap(async (req: Request, res: Response) => {
+export const createReminderRoute = wrap(async (req: Request, res: Response) => {
     const userId = res.locals.uid
     const roomId = req.params.roomId
+    const { hostName, destinations, sendAt } = req.body
+
+    const reminderId = await createReminder({
+        roomId,
+        userId,
+        hostName,
+        sendAtParameter: sendAt,
+        destinationsParameter: destinations,
+    })
+
+    res.send({
+        reminderId,
+    })
+})
+
+export const createReminder = async ({
+    roomId,
+    userId,
+    sendAtParameter,
+    hostName,
+    destinationsParameter,
+}: {
+    roomId: RoomId
+    userId: UID
+    sendAtParameter: string
+    hostName: string
+    destinationsParameter: string
+}): Promise<ReminderId> => {
     await assertRightToEditRoom(roomId, userId)
 
-    const body = req.body
-    const sendAt = parseInt(body.sendAt) * 1000
-    const hostName = req.body.hostName
-    const destinations = JSON.parse(body.destinations || '[]')
+    const sendAt = parseInt(sendAtParameter) * 1000
+    const destinations = JSON.parse(destinationsParameter || '[]')
 
     if (
         !sendAt ||
@@ -79,14 +108,10 @@ export const createReminder = wrap(async (req: Request, res: Response) => {
     const sendAtTimestamp = Timestamp.fromMillis(sendAt)
     assertTimestampInFuture(sendAtTimestamp)
 
-    const reminderId = await ReminderDao.add(
+    return await ReminderDao.add(
         roomId,
         sendAtTimestamp,
         destinations,
         hostName
     )
-
-    res.send({
-        reminderId,
-    })
-})
+}
