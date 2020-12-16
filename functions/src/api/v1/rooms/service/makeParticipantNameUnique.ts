@@ -27,7 +27,7 @@ export const makeParticipantNameUnique = async (
     )
 
     if (connectedParticipantNames.includes(participantName)) {
-        // Participant name is not unique
+        // Participant name must be uniq to prevent other participants having the same name to be disconnected.
         return `${participantName}${~~(Math.random() * 10000)}`
     }
 
