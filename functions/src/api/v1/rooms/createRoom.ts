@@ -18,7 +18,7 @@ import {
  * @swagger
  * /v1/rooms/new:
  *   post:
- *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 chat) and a random password if none provided. The room will have an infinite lifetime though it will probably change in the future. <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before of after and will be used to fill the date on the UI & reminders.
+ *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 chat) and a random password if none provided. The room will have an infinite lifetime though it will probably change in the future. <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before of after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allow sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
  *     tags:
  *       - rooms
  *     consumes:
@@ -26,21 +26,9 @@ import {
  *     produces:
  *     - application/json
  *     parameters:
- *       - name: password
- *         description: (optional) The room password. If no password, a random one will be generated.
- *         in: x-www-form-urlencoded
- *         required: false
- *         type: string
- *       - name: name
- *         description: (optional) The room name. If not supplied, the roomName will be the room id.
- *         in: x-www-form-urlencoded
- *         required: false
- *         type: string
- *       - name: startAt
- *         description: (optional) The UTC timestamp in seconds at which the meeting is scheduled to start. If not set, it will be the current time.
- *         in: x-www-form-urlencoded
- *         required: false
- *         type: integer
+ *       - $ref: '#/components/parameters/room/password'
+ *       - $ref: '#/components/parameters/room/name'
+ *       - $ref: '#/components/parameters/room/startAt'
  *       - name: destinations
  *         description: An array of destinations
  *         in: x-www-form-urlencoded

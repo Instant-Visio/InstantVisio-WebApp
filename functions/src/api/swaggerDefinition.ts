@@ -53,6 +53,9 @@ export const swaggerDefinition = {
                     startAt: {
                         type: 'integer',
                     },
+                    name: {
+                        type: 'string',
+                    },
                 },
             },
             Destination: {
@@ -113,6 +116,34 @@ export const swaggerDefinition = {
                 summary: 'Mixed email, sms and languages',
                 value:
                     '[{"email": "user@example.com", "lang": "en"}, {"phone": "+33600000000", "lang":"fr"}, {"phone": "+33600000000", lang:"fr", country:"en"}]',
+            },
+        },
+        parameters: {
+            room: {
+                name: {
+                    name: 'name',
+                    description:
+                        '(optional) The room name. If not supplied, the roomName will be the room id.',
+                    in: 'x-www-form-urlencoded',
+                    required: false,
+                    type: 'string',
+                },
+                startAt: {
+                    name: 'startAt',
+                    description:
+                        '(optional) The UTC timestamp in seconds at which the meeting is scheduled to start. If not set, it will be the current time.',
+                    in: 'x-www-form-urlencoded',
+                    required: false,
+                    type: 'integer',
+                },
+                password: {
+                    name: 'password',
+                    description:
+                        '(optional) The room password. If no password on room creation, a random one is generated.',
+                    in: 'x-www-form-urlencoded',
+                    required: false,
+                    type: 'string',
+                },
             },
         },
     },

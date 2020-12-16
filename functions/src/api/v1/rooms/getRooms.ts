@@ -16,6 +16,7 @@ import { RoomDao } from '../../../db/RoomDao'
  *           application/json:
  *             example: [{
  *               id: 'vXIUuaGkH4kukbwRH5cU',
+ *               name: 'Monday meeting',
  *               createdAt: 1605969562,
  *               updatedAt: 1605969562,
  *               startTimestamp: 1605969562
