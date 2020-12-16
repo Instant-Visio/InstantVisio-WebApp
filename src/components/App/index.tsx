@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import './App.scss'
 import { gdprHandler } from '../../utils/gdpr'
-import Router from './router'
+import Router from './Router'
 import { IonApp, IonHeader } from '@ionic/react'
 import SwipeableTemporaryDrawer from '../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
 import { Navbar } from 'react-bootstrap'
@@ -52,7 +52,6 @@ const App = () => {
     return (
         <IonApp className="App">
             <Login />
-
             <IonReactRouter>
                 {isMobile && (
                     <IonHeader id="topbar">

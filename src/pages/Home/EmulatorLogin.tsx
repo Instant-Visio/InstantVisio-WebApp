@@ -3,10 +3,13 @@ import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { TEST_ACCOUNTS } from '../../constants'
 import { signInEmulatorEmailPassword } from '../../utils/emulators'
+import { useHistory } from 'react-router-dom'
 
 const { paidUser, unpaidUser, overQuotaUser } = TEST_ACCOUNTS
 
 export const EmulatorLogin = ({ authInstance, token }) => {
+    const history = useHistory()
+    const isAnonymous = authInstance.currentUser?.isAnonymous
     const signInWithEmailAndPassword = async ({ email, password }) => {
         try {
             const user = await signInEmulatorEmailPassword(
@@ -27,12 +30,19 @@ export const EmulatorLogin = ({ authInstance, token }) => {
                 Anonymous
             </Button>
             {token && (
-                <Button
-                    onClick={() => {
-                        authInstance.signOut()
-                    }}>
-                    Sign out
-                </Button>
+                <>
+                    {!isAnonymous && (
+                        <Button onClick={() => history.push('/admin')}>
+                            Admin
+                        </Button>
+                    )}
+                    <Button
+                        onClick={() => {
+                            authInstance.signOut()
+                        }}>
+                        Sign out
+                    </Button>
+                </>
             )}
             <Button onClick={() => signInWithEmailAndPassword(paidUser)}>
                 Paid
