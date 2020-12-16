@@ -1,8 +1,7 @@
 import * as functions from 'firebase-functions'
 import * as jsonWebToken from 'jsonwebtoken'
-import { addTokenToUser } from '../db/addTokenToUser'
 import { getJWTEnv } from '../firebase/env'
-import { updateUserDb } from '../db/userDb'
+import { UserDao } from '../db/UserDao'
 import { SUBSCRIPTIONS, TEST_ACCOUNTS } from '../db/constants'
 import * as admin from 'firebase-admin'
 
@@ -52,10 +51,8 @@ export const onUserCreation = functions.auth.user().onCreate(async (user) => {
         algorithm: 'HS256',
     })
 
-    await addTokenToUser(uid, newJWTToken)
-
-    const userData = getUserData(user)
-    await updateUserDb(uid, userData)
+    await UserDao.addToken(uid, newJWTToken)
+    await UserDao.update(uid, getUserData(user))
 
     return user
 })

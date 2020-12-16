@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getRooms as getRoomsList } from '../../../db/getRooms'
+import { RoomDao } from '../../../db/RoomDao'
 
 /**
  * @swagger
@@ -33,7 +33,7 @@ import { getRooms as getRoomsList } from '../../../db/getRooms'
  */
 export const getRooms = async (_: Request, res: Response) => {
     const uid = res.locals.uid
-    const rooms = await getRoomsList(uid)
+    const rooms = await RoomDao.listByUserId(uid)
 
     res.send(rooms)
 }

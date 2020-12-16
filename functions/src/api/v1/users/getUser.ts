@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { ForbiddenError } from '../../errors/HttpError'
-import { getUserDb } from '../../../db/userDb'
+import { UserDao } from '../../../db/UserDao'
 
 /**
  * @swagger
@@ -45,7 +45,7 @@ export const getUser = async (req: Request, res: Response) => {
         throw new ForbiddenError('Not authorized to get this resource')
     }
 
-    const user = await getUserDb(currentUid)
+    const user = await UserDao.get(currentUid)
 
     res.send({
         user: {
