@@ -65,26 +65,21 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
     if (room.password !== roomPassword && !isCurrentAdmin) {
         throw new ForbiddenError('Wrong password to join the room')
     }
+    const participantName = await makeParticipantNameUnique(
+        roomId,
+        req.body.participantName
+    )
+    const accessToken = createTwilioClientToken(
+        participantUID,
+        room.id,
+        participantName
+    )
 
-    const accessToken = createTwilioClientToken(participantUID, room.id)
-
-    const response: {
-        jwtAccessToken: string
-        ttl: number
-        participantName?: string
-    } = {
+    res.send({
         jwtAccessToken: accessToken.toJwt(),
         ttl: TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS,
-    }
-
-    if (req.body.participantName) {
-        response.participantName = await makeParticipantNameUnique(
-            roomId,
-            req.body.participantName
-        )
-    }
-
-    res.send(response)
+        participantName,
+    })
 })
 
 const getOrCreateRoom = async (
