@@ -2,7 +2,7 @@
 import '../testUtils/mockFirebaseAdminAndFunctions'
 import { JWTData } from '../types/JWT'
 import { firestoreGet } from '../testUtils/firestoreStub'
-import { isTokenValidInDb } from './isTokenValidInDb'
+import { UserDao } from './UserDao'
 
 describe('isTokenValidInDb', () => {
     const token = 'tokenValue'
@@ -24,7 +24,7 @@ describe('isTokenValidInDb', () => {
         }
         firestoreGet.mockImplementation(() => Promise.resolve(snapshot))
 
-        const result = await isTokenValidInDb(jwtData, token)
+        const result = await UserDao.isTokenValid(jwtData.uid, token)
         expect(result).toBeTruthy()
     })
 
@@ -35,7 +35,7 @@ describe('isTokenValidInDb', () => {
         }
         firestoreGet.mockImplementation(() => Promise.resolve(snapshot))
 
-        const result = await isTokenValidInDb(jwtData, token)
+        const result = await UserDao.isTokenValid(jwtData.uid, token)
         expect(result).toBeFalsy()
     })
     it('should return false if token is not existing in db', async () => {
@@ -51,7 +51,7 @@ describe('isTokenValidInDb', () => {
         }
         firestoreGet.mockImplementation(() => Promise.resolve(snapshot))
 
-        const result = await isTokenValidInDb(jwtData, token)
+        const result = await UserDao.isTokenValid(jwtData.uid, token)
         expect(result).toBeFalsy()
     })
     it('should return false if token exist in db but is no longer valid', async () => {
@@ -67,7 +67,7 @@ describe('isTokenValidInDb', () => {
         }
         firestoreGet.mockImplementation(() => Promise.resolve(snapshot))
 
-        const result = await isTokenValidInDb(jwtData, token)
+        const result = await UserDao.isTokenValid(jwtData.uid, token)
         expect(result).toBeFalsy()
     })
 })

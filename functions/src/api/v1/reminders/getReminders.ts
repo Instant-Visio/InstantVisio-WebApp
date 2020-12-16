@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
-import { getReminderListDb } from '../../../db/remindersDb'
+import { ReminderDao } from '../../../db/ReminderDao'
 
 /**
  * @swagger
@@ -43,7 +43,7 @@ export const getReminders = wrap(async (req: Request, res: Response) => {
     const roomId = req.params.roomId
     await assertRightToEditRoom(roomId, userId)
 
-    const reminders = await getReminderListDb(roomId)
+    const reminders = await ReminderDao.listByRoomId(roomId)
 
     res.send({
         reminders,

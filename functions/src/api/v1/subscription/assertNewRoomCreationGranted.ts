@@ -1,9 +1,9 @@
 import { UID } from '../../../types/uid'
-import { getUserDb } from '../../../db/userDb'
 import { PaymentRequiredError } from '../../errors/HttpError'
+import { UserDao } from '../../../db/UserDao'
 
 export const assertNewRoomCreationGranted = async (userId: UID) => {
-    const user = await getUserDb(userId)
+    const user = await UserDao.get(userId)
     if (!user.subscription.isActive) {
         throw new PaymentRequiredError(
             'No active subscription, payment required'

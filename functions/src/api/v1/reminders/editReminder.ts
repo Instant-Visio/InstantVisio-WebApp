@@ -1,11 +1,7 @@
 import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
-import {
-    ReminderEditData,
-    updateReminderDb,
-    getReminderDb,
-} from '../../../db/remindersDb'
+import { ReminderEditData, ReminderDao } from '../../../db/ReminderDao'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
 import { BadRequestError } from '../../errors/HttpError'
 import { Timestamp } from '../../../firebase/firebase'
@@ -45,7 +41,7 @@ import { assertTimestampInFuture } from './assertTimestampInFuture'
  *         items:
  *            $ref: '#/components/schemas/Destination'
  *     responses:
- *       204:
+ *       200:
  *         description: Reminder updated with success
  *         content:
  *           application/json:
@@ -99,9 +95,9 @@ export const editReminder = wrap(async (req: Request, res: Response) => {
         dataToEdit.hostName = hostName
     }
 
-    await updateReminderDb(dataToEdit)
+    await ReminderDao.update(dataToEdit)
 
-    const reminder = await getReminderDb(reminderId)
+    const reminder = await ReminderDao.get(reminderId)
 
     res.send({
         reminder,
