@@ -8,11 +8,11 @@ import { RoomId } from '../../../types/Room'
 import { Timestamp } from '../../../firebase/firebase'
 import { RoomDao } from '../../../db/RoomDao'
 import { ReminderId } from '../../../types/Reminder'
-import { createReminder } from '../reminders/createReminderRoute'
+import { createReminder } from '../reminders/createReminder'
 import {
     inviteParticipant,
     InviteParticipantsResponse,
-} from '../invite/inviteParticipantsRoute'
+} from '../invite/inviteParticipants'
 
 /**
  * @swagger
