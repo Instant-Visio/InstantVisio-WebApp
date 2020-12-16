@@ -38,13 +38,19 @@ export class RoomDao {
         const results = await query.get()
 
         return results.docs.map((doc) => {
-            const { roomId, createdAt, updatedAt, startAt } = doc.data()
-            return {
+            const { roomId, createdAt, updatedAt, startAt, name } = doc.data()
+            const room = {
                 id: roomId,
+                name,
                 createdAt: createdAt._seconds,
                 updatedAt: updatedAt._seconds,
                 startAt,
             }
+
+            if (startAt) {
+                room.startAt = startAt._seconds
+            }
+            return room
         })
     }
 

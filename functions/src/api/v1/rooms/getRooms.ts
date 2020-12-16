@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { RoomDao } from '../../../db/RoomDao'
+import { wrap } from 'async-middleware'
 
 /**
  * @swagger
@@ -31,9 +32,9 @@ import { RoomDao } from '../../../db/RoomDao'
  *       412:
  *         description: authorization header wrong format
  */
-export const getRooms = async (_: Request, res: Response) => {
+export const getRooms = wrap(async (_: Request, res: Response) => {
     const uid = res.locals.uid
     const rooms = await RoomDao.listByUserId(uid)
 
     res.send(rooms)
-}
+})
