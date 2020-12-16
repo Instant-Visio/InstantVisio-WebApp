@@ -41,7 +41,7 @@ import { assertTimestampInFuture } from './assertTimestampInFuture'
  *         items:
  *            $ref: '#/components/schemas/Destination'
  *     responses:
- *       204:
+ *       200:
  *         description: Reminder updated with success
  *         content:
  *           application/json:

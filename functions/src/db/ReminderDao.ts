@@ -67,7 +67,7 @@ export class ReminderDao {
         sendAt: Timestamp,
         destinations: InvitationDestination[],
         hostName: string
-    ) {
+    ): Promise<ReminderId> {
         const documentReference = await db
             .collection(COLLECTIONS.reminders)
             .add({
@@ -84,7 +84,7 @@ export class ReminderDao {
 
     public static async update(reminder: ReminderEditData) {
         const { reminderId, ...editData } = reminder
-        return db
+        await db
             .collection(COLLECTIONS.reminders)
             .doc(reminderId)
             .set(
@@ -96,8 +96,8 @@ export class ReminderDao {
             )
     }
 
-    public static async delete(reminderId: string) {
-        return db.collection(COLLECTIONS.reminders).doc(reminderId).delete()
+    public static async delete(reminderId: string): Promise<void> {
+        await db.collection(COLLECTIONS.reminders).doc(reminderId).delete()
     }
 }
 

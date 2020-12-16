@@ -83,7 +83,7 @@ export class RoomDao {
         return roomId
     }
 
-    public static async update(room: RoomEditData) {
+    public static async update(room: RoomEditData): Promise<void> {
         await db
             .collection(COLLECTIONS.rooms)
             .doc(room.roomId)

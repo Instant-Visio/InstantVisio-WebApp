@@ -23,7 +23,7 @@ export class UserDao {
         }
     }
 
-    public static async update(userId: UID, data: object) {
+    public static async update(userId: UID, data: object): Promise<void> {
         await db
             .collection(COLLECTIONS.users)
             .doc(userId)
@@ -89,9 +89,9 @@ export class UserDao {
             sentEmails?: FieldValue
             sentSMSs?: FieldValue
         }
-    ) {
+    ): Promise<void> {
         const month = new Date().getMonth() + 1
-        return UserDao.update(userId, {
+        await UserDao.update(userId, {
             usage: usage,
             subscription: {
                 [month]: {
