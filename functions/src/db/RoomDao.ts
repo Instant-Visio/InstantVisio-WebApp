@@ -28,14 +28,20 @@ export class RoomDao {
     }
 
     public static async listByUserId(
-        userId: UID
+        userId: UID,
+        startingAfter?: number
     ): Promise<(Response | null)[]> {
-        const query = await db
+        let query = await db
             .collection(COLLECTIONS.rooms)
             .where('uid', '==', userId)
-            .orderBy('createdAt', 'desc')
 
-        const results = await query.get()
+        if (startingAfter) {
+            query = query
+                .where('startAt', '>=', new Date(startingAfter * 1000))
+                .orderBy('startAt', 'asc')
+        }
+
+        const results = await query.orderBy('createdAt', 'desc').get()
 
         return results.docs.map((doc) => {
             const { roomId, createdAt, updatedAt, startAt, name } = doc.data()
