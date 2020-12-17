@@ -43,7 +43,7 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
     await assertRightToEditRoom(roomId, res.locals.uid)
 
     const dataToEdit: RoomEditData = {
-        roomId: roomId,
+        id: roomId,
     }
 
     if (req.body.password) {

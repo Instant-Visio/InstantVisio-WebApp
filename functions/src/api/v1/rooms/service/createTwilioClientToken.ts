@@ -8,14 +8,15 @@ export const TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS = 14400 // 4 hours
 
 export const createTwilioClientToken = (
     participantUID: UID,
-    roomId: RoomId
+    roomId: RoomId,
+    participantName: string
 ): AccessToken => {
     const { sid, apiKeySid, apiKeySecret } = getTwilioEnv()
     const token = new AccessToken(sid, apiKeySid, apiKeySecret, {
         ttl: TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS,
     })
     // @ts-ignore we need to set the identify in the access token
-    token.identity = participantUID
+    token.identity = participantName
     const videoGrant = new VideoGrant({ room: roomId })
     token.addGrant(videoGrant)
 
