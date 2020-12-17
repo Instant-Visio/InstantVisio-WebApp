@@ -4,7 +4,6 @@ import { SCREEN } from '../../styles/theme'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import Header from '../../components/Header/Header'
-import Footer from '../../components/Footer/Footer'
 import BaseLang from '../../components/Lang/Lang'
 
 const Lang = styled(BaseLang)`
@@ -91,7 +90,6 @@ export default function Default({ children, title }: DefaultProps) {
             <Body>
                 <Container>{children}</Container>
             </Body>
-            {!isMobile && <Footer />}
         </Wrapper>
     )
 }
