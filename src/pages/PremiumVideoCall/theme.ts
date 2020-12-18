@@ -21,12 +21,12 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     interface ThemeOptions {
         sidebarWidth?: number
         sidebarMobileHeight?: number
-        brand: string
-        footerHeight: number
-        mobileTopBarHeight: number
-        mobileFooterHeight: number
-        sidebarMobilePadding: number
-        participantBorderWidth: number
+        brand?: string
+        footerHeight?: number
+        mobileTopBarHeight?: number
+        mobileFooterHeight?: number
+        sidebarMobilePadding?: number
+        participantBorderWidth?: number
     }
 }
 
