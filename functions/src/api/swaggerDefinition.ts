@@ -115,6 +115,18 @@ export const swaggerDefinition = {
                     '[{"email": "user@example.com", "lang": "en"}, {"phone": "+33600000000", "lang":"fr"}, {"phone": "+33600000000", lang:"fr", country:"en"}]',
             },
         },
+        parameters: {
+            room: {
+                hideChatbot: {
+                    name: 'hideChatbot',
+                    description:
+                        '(optional) Hide the chatbot button & features which will prevent users to get help and assistance from there. The chatbot is visible by default. The current chatbot provider is Crisp.chat.',
+                    required: false,
+                    type: 'boolean',
+                    in: 'x-www-form-urlencoded',
+                },
+            },
+        },
     },
     security: [
         {

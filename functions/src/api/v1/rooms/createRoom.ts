@@ -30,6 +30,7 @@ import { RoomDao } from '../../../db/RoomDao'
  *         in: x-www-form-urlencoded
  *         required: false
  *         type: integer
+ *       - $ref: '#/components/parameters/room/hideChatbot'
  *     responses:
  *       201:
  *         description: Room created with success
@@ -52,6 +53,7 @@ export const createRoomRoute = wrap(async (req: Request, res: Response) => {
         userId: res.locals.uid,
         roomRequestedPassword: req.body.password,
         startAt: req.body.startAt,
+        hideChatbot: req.body.hideChatbot === 'true',
     })
     res.send(newRoomResponse)
 })
@@ -61,8 +63,10 @@ export const createRoom = async ({
     roomRequestedPassword,
     specificRoomId,
     startAt,
+    hideChatbot = false,
 }: {
     userId: UID
+    hideChatbot?: boolean
     roomRequestedPassword?: string
     specificRoomId?: RoomId
     startAt?: string
@@ -81,10 +85,16 @@ export const createRoom = async ({
             userId,
             specificRoomId,
             roomPassword,
-            roomStartAt
+            roomStartAt,
+            hideChatbot
         )
     } else {
-        roomId = await RoomDao.add(userId, roomPassword, roomStartAt)
+        roomId = await RoomDao.add(
+            userId,
+            roomPassword,
+            roomStartAt,
+            hideChatbot
+        )
     }
 
     const roomSid = await createTwilioRoom(roomId)

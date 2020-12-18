@@ -11,6 +11,7 @@ export interface RoomEditData {
     uid?: UID
     password?: string
     startAt?: Timestamp
+    hideChatbot?: boolean
 }
 
 export class RoomDao {
@@ -44,13 +45,21 @@ export class RoomDao {
         const results = await query.orderBy('createdAt', 'desc').get()
 
         return results.docs.map((doc) => {
-            const { roomId, createdAt, updatedAt, startAt, name } = doc.data()
+            const {
+                roomId,
+                createdAt,
+                updatedAt,
+                startAt,
+                name,
+                hideChatbot,
+            } = doc.data()
             const room = {
                 id: roomId,
                 name,
                 createdAt: createdAt._seconds,
                 updatedAt: updatedAt._seconds,
                 startAt,
+                hideChatbot,
             }
 
             if (startAt) {
@@ -63,7 +72,8 @@ export class RoomDao {
     public static async add(
         userId: UID,
         password: string,
-        startAt: Timestamp
+        startAt: Timestamp,
+        hideChatbot: boolean
     ): Promise<RoomId> {
         const documentReference = await db.collection(COLLECTIONS.rooms).add({
             uid: userId,
@@ -72,6 +82,7 @@ export class RoomDao {
             updatedAt: serverTimestamp(),
             service: DEFAULT_ROOM_TYPE,
             startAt,
+            hideChatbot,
         })
 
         return documentReference.id
@@ -81,7 +92,8 @@ export class RoomDao {
         userId: UID,
         roomId: RoomId,
         password: string,
-        startAt: Timestamp
+        startAt: Timestamp,
+        hideChatbot: boolean
     ): Promise<RoomId> {
         await db.collection(COLLECTIONS.rooms).doc(roomId).set({
             uid: userId,
@@ -90,6 +102,7 @@ export class RoomDao {
             updatedAt: serverTimestamp(),
             service: DEFAULT_ROOM_TYPE,
             startAt,
+            hideChatbot,
         })
 
         return roomId

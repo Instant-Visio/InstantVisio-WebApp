@@ -79,6 +79,7 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
         jwtAccessToken: accessToken.toJwt(),
         ttl: TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS,
         participantName,
+        hideChatbot: room.hideChatbot,
     })
 })
 
