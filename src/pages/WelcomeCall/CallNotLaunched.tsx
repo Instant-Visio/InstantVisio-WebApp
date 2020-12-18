@@ -15,18 +15,23 @@ const InformationBlock = styled.div`
     width: 80%;
     margin-left: 10%;
 
+    h1 {
+        font-weight: 800;
+    }
     h2 {
         font-weight: 'bold';
     }
-    h3:nth-of-type(2) {
+    h3:nth-of-type(3) {
         margin-bottom: 4rem;
     }
-    h4 {
-        margin-bottom: 2rem;
+    h3:nth-of-type(4) {
+        margin-bottom: ${({ theme }) => theme.spacing.XXL};
     }
     a {
         color: black;
         text-decoration: underline;
+        font-size: ${({ theme }) => theme.font.XL};
+        margin-bottom: ${({ theme }) => theme.spacing.S};
     }
 `
 const CenteredText = styled.div`
@@ -56,10 +61,11 @@ export default function CallNotLaunched() {
             <InformationBlock title="not-used-here">
                 <CenteredText>
                     <AccessTimeIcon style={{ fontSize: 110 }} />
-                    <h2>{t('discussion-is-not-launched')}</h2>
+                    <h1>{t('hello-welcome')}</h1>
+                    <h3>{t('discussion-is-not-launched')}</h3>
                     <h3>{t('takes-places-at')}</h3>
                     <h3>{t('too-early')}</h3>
-                    <h4>{t('enjoy')}</h4>
+                    <h3>{t('enjoy')}</h3>
                     <MenuList>
                         <Link to="/pages/join-last-call">
                             {t('discover-join')}
