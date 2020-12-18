@@ -10,5 +10,7 @@ export interface Room {
     createdAt: number
     updatedAt: number
     password: string
+    startAt: number
+    hideChatbot: boolean
     parameters?: Record<string | number, unknown>
 }

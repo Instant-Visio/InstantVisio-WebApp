@@ -1,27 +1,15 @@
-import { JWTToken } from '../../types/JWT'
-import { SetTokenAction, SET_TOKEN } from '../actions/types'
+import { combineReducers } from 'redux'
+import { userReducer, UserState } from '../components/App/userReducer'
+import { roomReducer, RoomState } from '../pages/PremiumVideoCall/roomReducer'
 
 export interface AppState {
-    token: JWTToken | null
+    user: UserState
+    room: RoomState
 }
 
-const initialState = {
-    token: null,
-}
-
-const rootReducer = (
-    state: AppState = initialState,
-    action: SetTokenAction
-): AppState => {
-    switch (action.type) {
-        case SET_TOKEN:
-            return {
-                ...state,
-                token: action.payload.token,
-            }
-        default:
-            return state
-    }
-}
+const rootReducer = combineReducers({
+    user: userReducer,
+    room: roomReducer,
+})
 
 export default rootReducer

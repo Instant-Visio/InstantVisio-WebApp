@@ -1,5 +1,5 @@
 import { Switch } from 'react-router-dom'
-import React from 'react'
+import React, { lazy } from 'react'
 import {
     Home,
     LegalMentions,
@@ -18,9 +18,15 @@ import { Route } from 'react-router-dom'
 import { IonRouterOutlet } from '@ionic/react'
 import License from '../../pages/License/License'
 import WelcomeCall from '../../pages/WelcomeCall/WelcomeCall'
+import ProtectedRoute from './ProtectedRoute'
+import { selectUser } from './userSelector'
+import { useSelector } from 'react-redux'
+
+const Dashboard = lazy(() => import('../../pages/Admin/Dashboard'))
 
 const Router = () => {
     const { t } = useTranslation()
+    const { isAnonymous } = useSelector(selectUser)
 
     return (
         <IonRouterOutlet>
@@ -70,6 +76,11 @@ const Router = () => {
                 <Route path={`/premium-video`} component={PremiumVideoPage} />
                 <Route path={`/welcome`} component={WelcomeCall} />
 
+                <ProtectedRoute
+                    path="/admin"
+                    isAuthorized={!isAnonymous}
+                    component={Dashboard}
+                />
                 <Route component={NotFound} />
             </Switch>
         </IonRouterOutlet>

@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
-import { getRoom } from '../../../db/getRoom'
 import { ForbiddenError, RoomNotFoundError } from '../../errors/HttpError'
 import {
     createTwilioClientToken,
@@ -9,6 +8,8 @@ import {
 import { createRoom } from './createRoom'
 import { UID } from '../../../types/uid'
 import { Room, RoomId } from '../../../types/Room'
+import { RoomDao } from '../../../db/RoomDao'
+import { makeParticipantNameUnique } from './service/makeParticipantNameUnique'
 
 /**
  * @swagger
@@ -27,6 +28,11 @@ import { Room, RoomId } from '../../../types/Room'
  *         in: x-www-form-urlencoded
  *         required: true
  *         type: string
+ *       - name: participantName
+ *         description: The participant name. This is used to ensure the participant name is unique
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         type: string
  *     responses:
  *       200:
  *         description: Room access granted
@@ -35,7 +41,8 @@ import { Room, RoomId } from '../../../types/Room'
  *             schema:
  *               example: {
  *                   jwtAccessToken: "aZxo2xsk.IaZxo.2xskI",
- *                   ttl: 14400
+ *                   ttl: 14400,
+ *                   participantName: "Gandalf1"
  *               }
  *       401:
  *         description: missing authorization bearer token
@@ -50,21 +57,29 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
     const roomPassword = req.body.password
     const participantUID = res.locals.uid
     const roomId = req.params.roomId
-    if (!roomPassword) {
-        throw new ForbiddenError('Unable to join a room without a password')
-    }
 
     const room = await getOrCreateRoom(roomId, participantUID, roomPassword)
 
-    if (room.password !== roomPassword) {
+    const isCurrentAdmin = room.uid === participantUID
+
+    if (room.password !== roomPassword && !isCurrentAdmin) {
         throw new ForbiddenError('Wrong password to join the room')
     }
-
-    const accessToken = createTwilioClientToken(participantUID, room.id)
+    const participantName = await makeParticipantNameUnique(
+        roomId,
+        req.body.participantName
+    )
+    const accessToken = createTwilioClientToken(
+        participantUID,
+        room.id,
+        participantName
+    )
 
     res.send({
         jwtAccessToken: accessToken.toJwt(),
         ttl: TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS,
+        participantName,
+        hideChatbot: room.hideChatbot,
     })
 })
 
@@ -74,11 +89,15 @@ const getOrCreateRoom = async (
     roomPassword: string
 ): Promise<Room> => {
     try {
-        return await getRoom(roomId)
+        return await RoomDao.get(roomId)
     } catch (error) {
         if (error instanceof RoomNotFoundError) {
-            await createRoom(participantUID, roomPassword, roomId)
-            return getRoom(roomId)
+            await createRoom({
+                userId: participantUID,
+                roomRequestedPassword: roomPassword,
+                specificRoomId: roomId,
+            })
+            return RoomDao.get(roomId)
         } else {
             throw error
         }

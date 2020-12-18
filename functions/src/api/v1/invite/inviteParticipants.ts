@@ -7,7 +7,9 @@ import { getAppEnv } from '../../../firebase/env'
 import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
 import { UID } from '../../../types/uid'
-import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCounts'
+import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
+import { UserDao } from '../../../db/UserDao'
+import { increment } from '../../../firebase/firebase'
 
 /**
  * @swagger
@@ -31,34 +33,11 @@ import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCoun
  *         in: x-www-form-urlencoded
  *         required: true
  *         examples:
- *            mixedTypeAndLang:
+ *            mixed:
  *                summary: Mixed email, sms and languages
- *                value: [{email: "user@example.com", lang: "en"}, {phone: "+33600000000", lang:"fr"}, {phone: "+33600000000", lang:"fr", country:"en"}]
- *            emailInvite:
- *                summary: One email invite with French lang
- *                value: [{email: "user@example.com", lang: "fr"}]
+ *                $ref: '#/components/examples/Destinations'
  *         schema:
- *            type: array
- *            items:
- *                type: object
- *                properties:
- *                   email:
- *                       type: string
- *                   phone:
- *                       type: string
- *                   lang:
- *                       type: string
- *                       default: en
- *                       enum:
- *                           - en
- *                           - fr
- *                           - de
- *                           - es
- *                           - gr
- *                           - hu
- *                           - it
- *                           - ro
- *
+ *            type: string
  *     responses:
  *       200:
  *         description: One or many invites were sent successfully. It will return a 2xx if some invitation where not able to be sent (malformed email or phone number for eg).
@@ -87,14 +66,9 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
 
     const body = req.body
     const hostname = body.hostname
-    const destinations = JSON.parse(body.destinations)
+    const destinations = <InvitationDestination[]>JSON.parse(body.destinations)
 
-    if (
-        !hostname ||
-        !destinations ||
-        !Array.isArray(destinations) ||
-        destinations.length === 0
-    ) {
+    if (!hostname || !isDestinationsCorrectlyFormatted(destinations)) {
         throw new BadRequestError('Request body not formatted correctly')
     }
 
@@ -133,5 +107,8 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
         smssSent: smssSent,
     })
 
-    await updateInvitationSentCounts(userId, smssSent.length, emailsSent.length)
+    await UserDao.updateUsage(userId, {
+        sentSMSs: increment(smssSent.length),
+        sentEmails: increment(emailsSent.length),
+    })
 })

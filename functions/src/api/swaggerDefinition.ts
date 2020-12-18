@@ -45,10 +45,57 @@ export const swaggerDefinition = {
                         type: 'string',
                     },
                     createdAt: {
-                        type: 'string',
+                        type: 'integer',
                     },
                     updatedAt: {
+                        type: 'integer',
+                    },
+                    startAt: {
+                        type: 'integer',
+                    },
+                },
+            },
+            Destination: {
+                properties: {
+                    email: {
                         type: 'string',
+                    },
+                    phone: {
+                        type: 'string',
+                    },
+                    lang: {
+                        type: 'string',
+                    },
+                    country: {
+                        type: 'string',
+                    },
+                },
+            },
+            Reminder: {
+                properties: {
+                    id: {
+                        type: 'string',
+                    },
+                    hostName: {
+                        type: 'integer',
+                    },
+                    sendAt: {
+                        type: 'integer',
+                    },
+                    createdAt: {
+                        type: 'integer',
+                    },
+                    updatedAt: {
+                        type: 'integer',
+                    },
+                    isSent: {
+                        type: 'boolean',
+                    },
+                    destinations: {
+                        type: 'array',
+                        items: {
+                            $ref: '#/components/schemas/Destination',
+                        },
                     },
                 },
             },
@@ -59,6 +106,25 @@ export const swaggerDefinition = {
                 scheme: 'bearer',
                 description: 'Enter JWT Bearer token **_only_**',
                 bearerFormat: 'JWT',
+            },
+        },
+        examples: {
+            Destinations: {
+                summary: 'Mixed email, sms and languages',
+                value:
+                    '[{"email": "user@example.com", "lang": "en"}, {"phone": "+33600000000", "lang":"fr"}, {"phone": "+33600000000", lang:"fr", country:"en"}]',
+            },
+        },
+        parameters: {
+            room: {
+                hideChatbot: {
+                    name: 'hideChatbot',
+                    description:
+                        '(optional) Hide the chatbot button & features which will prevent users to get help and assistance from there. The chatbot is visible by default. The current chatbot provider is Crisp.chat.',
+                    required: false,
+                    type: 'boolean',
+                    in: 'x-www-form-urlencoded',
+                },
             },
         },
     },

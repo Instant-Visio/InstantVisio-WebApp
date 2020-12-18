@@ -6,13 +6,17 @@ export const EMULATORS = {
     },
 }
 
-export const TEST_ACCOUNTS = [
-    {
-        email: 'test-account-1@gmail.com',
-        password: 'test-password-1',
+export const TEST_ACCOUNTS = {
+    paidUser: {
+        email: 'paid-user@instantvisio.com',
+        password: 'test-password',
     },
-    {
-        email: 'test-account-2@gmail.com',
-        password: 'test-password-1',
+    unpaidUser: {
+        email: 'unpaid-user@instantvisio.com',
+        password: 'test-password',
     },
-]
+    overQuotaUser: {
+        email: 'over-quota-user@instantvisio.com',
+        password: 'test-password',
+    },
+}

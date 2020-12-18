@@ -48,6 +48,12 @@ export class RoomNotFoundError extends NotFoundError {
     }
 }
 
+export class ReminderNotFoundError extends NotFoundError {
+    constructor(message?: string) {
+        super(message || 'Reminder Not Found')
+    }
+}
+
 export class PreconditionFailedError extends HttpError {
     constructor(message?: string) {
         super(412, message || 'PreconditionFailed')
