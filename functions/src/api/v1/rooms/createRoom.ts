@@ -89,8 +89,8 @@ export const createRoom = async ({
 
     const roomSid = await createTwilioRoom(roomId)
     await RoomDao.update({
-        roomId,
-        roomSid,
+        id: roomId,
+        sid: roomSid,
     })
     return {
         roomId,
