@@ -37,7 +37,7 @@ export class RoomDao {
 
         if (startingAfter) {
             query = query
-                .where('startAt', '>=', new Date(startingAfter * 1000))
+                .where('startAt', '>', new Date(startingAfter * 1000))
                 .orderBy('startAt', 'asc')
         }
 

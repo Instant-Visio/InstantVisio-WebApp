@@ -13,7 +13,7 @@ import { wrap } from 'async-middleware'
  *     parameters:
  *       - in: query
  *         name: startingAfter
- *         description: Only return the room starting at or after the given timestamp in seconds (startAt)
+ *         description: Only return the room starting after the given timestamp in seconds (startAt)
  *         schema:
  *           type: integer
  *     responses:
