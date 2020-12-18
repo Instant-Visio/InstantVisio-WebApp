@@ -18,6 +18,7 @@ import { Route } from 'react-router-dom'
 import { IonRouterOutlet } from '@ionic/react'
 import License from '../../pages/License/License'
 import WelcomeCall from '../../pages/WelcomeCall/WelcomeCall'
+import PermissionVideoAudio from '../../pages/PermissionVideoAudio/PermissionVideoAudio'
 import ProtectedRoute from './ProtectedRoute'
 import { selectUser } from './userSelector'
 import { useSelector } from 'react-redux'
@@ -75,6 +76,10 @@ const Router = () => {
 
                 <Route path={`/premium-video`} component={PremiumVideoPage} />
                 <Route path={`/welcome`} component={WelcomeCall} />
+                <Route
+                    path={'/permissions-audio-video'}
+                    component={PermissionVideoAudio}
+                />
 
                 <ProtectedRoute
                     path="/admin"
