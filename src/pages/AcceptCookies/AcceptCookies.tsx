@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { IonContent } from '@ionic/react'
 import Button from '@material-ui/core/Button'
 import styled from 'styled-components'
-import GroupWorkOutlinedIcon from '@material-ui/icons/GroupWorkOutlined'
 
 const InformationBlock = styled.div`
     height: 100%;
@@ -22,6 +21,9 @@ const InformationBlock = styled.div`
     h6:nth-of-type(2) {
         margin-bottom: 2rem;
     }
+    #icon {
+        font-size: 4rem;
+    }
 `
 
 export default function AcceptCookies() {
@@ -30,14 +32,15 @@ export default function AcceptCookies() {
     return (
         <IonContent style={{ '--background': 'white' }}>
             <InformationBlock>
-                {/* Find a better Icon - didn't find cookies in Mui */}
-                <GroupWorkOutlinedIcon fontSize="large" />
+                <span id="icon" aria-label="a cookie" role="img">
+                    🍪
+                </span>
                 <h1>{t('info-message')}</h1>
                 <h6>{t('data-to-connect')}</h6>
                 <h6>{t('just-one-day')}</h6>
 
                 <Button variant="contained" color="primary">
-                    {t('accept-cookies')}
+                    {t('accept-cookies')}🍪
                 </Button>
             </InformationBlock>
         </IonContent>
