@@ -11,6 +11,7 @@ import {
     JoinVideoCall,
 } from '../../pages'
 
+import AdminDashboardPage from '../../pages/AdminDashboard/AdminDashboard'
 import { PremiumVideoPage } from '../../pages/PremiumVideoCall'
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
 import { useTranslation } from 'react-i18next'
@@ -66,7 +67,11 @@ const Router = () => {
                     exact
                     component={License}
                 />
-
+                <Route
+                    path={`/admin`}
+                    exact
+                    component={AdminDashboardPage}
+                />
                 <Route path={`/premium-video`} component={PremiumVideoPage} />
                 <Route path={`/welcome`} component={WelcomeCall} />
 
