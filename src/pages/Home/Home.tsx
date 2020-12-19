@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
@@ -22,6 +22,7 @@ import { isAuthEmulatorEnabled } from '../../utils/emulators'
 import { selectToken } from '../../components/App/userSelector'
 import { useSelector } from 'react-redux'
 import { EmulatorLogin } from './EmulatorLogin'
+import { PushNotificationsService } from '../../services/push-notifications'
 
 const DataMentions = styled.div`
     .cnil {
@@ -82,6 +83,12 @@ export default function Home() {
                 }
             })
     }
+
+    useEffect(() => {
+        console.log('Running push notifications service')
+        PushNotificationsService.requestPermissions()
+        PushNotificationsService.listenForRegistration()
+    }, [PushNotificationsService])
 
     return (
         <IonContent>
