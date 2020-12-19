@@ -3,13 +3,14 @@
  * Mattia Primavera <sconqua@gmail.com>
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import {
     makeStyles,
     Typography,
     Grid,
     Button,
     Theme,
+    CircularProgress,
     Hidden,
 } from '@material-ui/core'
 import LocalVideoPreview from './LocalVideoPreview/LocalVideoPreview'
@@ -65,6 +66,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: '0.8em 0',
         margin: 0,
     },
+    joinLoadingIndicator: {
+        position: 'absolute',
+    },
 }))
 
 interface DeviceSelectionScreenProps {
@@ -83,14 +87,18 @@ export default function DeviceSelectionScreen({
     const token = useSelector(selectToken)
     const dispatch = useDispatch()
     const { connect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
-    const disableButtons = isFetching || isAcquiringLocalTracks || isConnecting
+    const [isLoading, setIsLoading] = useState(false)
+    const disableButtons =
+        isFetching || isAcquiringLocalTracks || isConnecting || isLoading
 
     const handleJoin = async () => {
+        setIsLoading(true)
         const api = new Api(token)
         const { jwtAccessToken } = await api.joinRoom(roomId, 'test-password') // TODO pass the password variable
         dispatch(actions.setRoomId(roomId))
         dispatch(actions.setHostName(name))
         connect(jwtAccessToken, roomId)
+        setIsLoading(false)
     }
 
     return (
@@ -152,6 +160,12 @@ export default function DeviceSelectionScreen({
                                 onClick={() => handleJoin()}
                                 disabled={disableButtons}>
                                 Join Now
+                                {isLoading && (
+                                    <CircularProgress
+                                        className={classes.joinLoadingIndicator}
+                                        size={20}
+                                    />
+                                )}
                             </Button>
                         </div>
                     </Grid>
