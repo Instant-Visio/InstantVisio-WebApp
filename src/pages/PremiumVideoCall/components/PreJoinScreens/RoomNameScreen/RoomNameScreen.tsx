@@ -73,7 +73,7 @@ export default function RoomNameScreen({
     return (
         <>
             <Typography variant="h5" className={classes.gutterBottom}>
-                Join a Room
+                Rejoindre une visio de groupe
             </Typography>
             <Typography variant="body1">
                 {hasUsername
@@ -85,7 +85,7 @@ export default function RoomNameScreen({
                     {!hasUsername && (
                         <div className={classes.textFieldContainer}>
                             <InputLabel shrink htmlFor="input-user-name">
-                                Your Name
+                                Votre nom
                             </InputLabel>
                             <TextField
                                 id="input-user-name"
@@ -99,7 +99,7 @@ export default function RoomNameScreen({
                     )}
                     <div className={classes.textFieldContainer}>
                         <InputLabel shrink htmlFor="input-room-name">
-                            Room Name
+                            Votre Groupe
                         </InputLabel>
                         <TextField
                             autoCapitalize="false"
