@@ -101,7 +101,7 @@ const VideoCallFrame = ({
                             precision={1}
                             onChange={(event, value) => {
                                 setValue(value)
-                                addCallRating(value)
+                                value && addCallRating(value)
                             }}
                         />
                     </Grid>
