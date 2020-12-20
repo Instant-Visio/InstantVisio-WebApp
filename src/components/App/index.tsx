@@ -7,6 +7,8 @@ import { IonReactRouter } from '@ionic/react-router'
 import Login from '../Login'
 import AppBar from './AppBar/AppBar'
 import styled from 'styled-components'
+import { PushNotificationsService } from '../../services/push-notifications'
+
 declare global {
     interface Window {
         iv: any
@@ -41,6 +43,16 @@ const App = () => {
         }
 
         gdprHandler()
+    }, [])
+
+    useEffect(() => {
+        const setupPushNotifications = () => {
+            PushNotificationsService.requestPermissions()
+            PushNotificationsService.listenForRegistration()
+            PushNotificationsService.listenForNotificationClick()
+        }
+
+        setupPushNotifications()
     }, [])
 
     return (

@@ -5,6 +5,8 @@ import {
     PushNotificationActionPerformed,
 } from '@capacitor/core'
 import { FCM } from '@capacitor-community/fcm'
+import { LocalNotificationsService } from './local-notifications'
+import { isForeground } from './platform'
 const fcm = new FCM()
 const { PushNotifications } = Plugins
 
@@ -16,7 +18,6 @@ export class PushNotificationsService {
                 // Register with Apple / Google to receive push via APNS/FCM
                 PushNotifications.register()
             } else {
-                // Show some error
                 console.log('Error registering for notifications')
             }
         })
@@ -61,6 +62,14 @@ export class PushNotificationsService {
             'pushNotificationReceived',
             (notification: PushNotification) => {
                 console.log('Push received: ' + JSON.stringify(notification))
+                console.log('Payload: ', notification.data)
+
+                if (isForeground()) {
+                    this.redirectToCallPage()
+                } else {
+                    console.log('Scheduling notification')
+                    LocalNotificationsService.schedule()
+                }
             }
         )
     }
@@ -73,7 +82,12 @@ export class PushNotificationsService {
                 console.log(
                     'Push action performed: ' + JSON.stringify(notification)
                 )
+                this.redirectToCallPage()
             }
         )
+    }
+
+    static redirectToCallPage() {
+        window.location.pathname = `/premium-video/room/test`
     }
 }
