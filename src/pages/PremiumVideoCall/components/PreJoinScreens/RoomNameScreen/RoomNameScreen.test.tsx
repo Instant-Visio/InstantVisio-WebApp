@@ -46,7 +46,7 @@ describe('the RoomNameScreen component', () => {
         )
 
         expect(wrapper.text()).toContain(
-            "Veuillez saisir le nom du groupe que vous vous allez rejoindre"
+            "Veuillez saisir le nom de la réunion que vous vous allez rejoindre"
         )
         expect(wrapper.find(TextField).length).toBe(1)
     })

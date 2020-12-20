@@ -99,7 +99,7 @@ export default function RoomNameScreen({
                     )}
                     <div className={classes.textFieldContainer}>
                         <InputLabel shrink htmlFor="input-room-name">
-                            Votre Groupe
+                            Votre Réunion de Groupe
                         </InputLabel>
                         <TextField
                             autoCapitalize="false"
