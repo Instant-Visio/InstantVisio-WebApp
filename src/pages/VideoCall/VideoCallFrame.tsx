@@ -97,6 +97,7 @@ const VideoCallFrame = ({
                     </Grid>
                     <Grid container justify="center" alignItems="center">
                         <StyledRating
+                            name="instantvisio-feedback"
                             value={value}
                             precision={1}
                             onChange={(event, value) => {
