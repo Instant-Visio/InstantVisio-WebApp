@@ -30,7 +30,6 @@ const VideoCallFrame = ({
     const { t } = useTranslation('videocall')
     const [redirectToRoot, setRedirectToRoot] = React.useState(false)
     const [value, setValue] = React.useState<number | null>(0)
-    const [hover, setHover] = React.useState(-1)
     const classes = useStyles()
     if (hasLeft) {
         LocalStorage.removeLastVideoCallId()
@@ -88,9 +87,6 @@ const VideoCallFrame = ({
                             onChange={(event, value) => {
                                 setValue(value)
                                 addCallRating(value)
-                            }}
-                            onChangeActive={(event, newHover) => {
-                                setHover(newHover)
                             }}
                         />
                     </Grid>
