@@ -4,9 +4,21 @@ import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { Redirect } from 'react-router-dom'
 import * as LocalStorage from '../../services/local-storage'
-import { RatingModal } from '../../components/RatingModal'
-import { Button } from 'react-bootstrap'
-import image from '../../styles/assets/images/media/present2.png'
+import Card from '../../components/Card/Card'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import Rating from '@material-ui/lab/Rating'
+import { addCallRating } from '../../actions/addCallRating'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        maxWidth: 1500,
+        [theme.breakpoints.down('md')]: {
+            maxWidth: 300,
+        },
+    },
+}))
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -17,7 +29,9 @@ const VideoCallFrame = ({
 }) => {
     const { t } = useTranslation('videocall')
     const [redirectToRoot, setRedirectToRoot] = React.useState(false)
-
+    const [value, setValue] = React.useState<number | null>(0)
+    const [hover, setHover] = React.useState(-1)
+    const classes = useStyles()
     if (hasLeft) {
         LocalStorage.removeLastVideoCallId()
     }
@@ -53,38 +67,33 @@ const VideoCallFrame = ({
 
             {hasLeft && (
                 <div>
-                    <p>
-                        <img
-                            src={image}
-                            alt="Joyeux noel"
-                            height="300"
-                            width="300"
+                    <Card onClick={(val) => setRedirectToRoot(val)} />
+                    <Grid
+                        container
+                        justify="center"
+                        alignItems="center"
+                        className={classes.root}>
+                        <Typography
+                            style={{ textAlign: 'center', marginTop: 20 }}
+                            variant="h5"
+                            component="h6">
+                            Pour nous aider à Améliorer notre service, vous
+                            pouvez noter la qualité de votre visio.
+                        </Typography>
+                    </Grid>
+                    <Grid container justify="center" alignItems="center">
+                        <Rating
+                            value={value}
+                            precision={1}
+                            onChange={(event, value) => {
+                                setValue(value)
+                                addCallRating(value)
+                            }}
+                            onChangeActive={(event, newHover) => {
+                                setHover(newHover)
+                            }}
                         />
-                    </p>
-                    <p
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignSelf: 'center',
-                        }}>
-                        {t('leave-confirmation')}
-                    </p>
-                    <p
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignSelf: 'center',
-                        }}>
-                        <Button
-                            variant="primary"
-                            onClick={() => {
-                                // noinspection JSIgnoredPromiseFromCall
-                                setRedirectToRoot(true)
-                            }}>
-                            Merci
-                        </Button>
-                    </p>
-                    <RatingModal hasLeft />
+                    </Grid>
                 </div>
             )}
         </IframeContainer>
