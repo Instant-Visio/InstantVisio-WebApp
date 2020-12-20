@@ -42,7 +42,7 @@ const VideoCallFrame = ({
     const [value, setValue] = React.useState<number | null>(0)
     const classes = useStyles()
     
-    const onChange = (value) => {
+    const onChange = (_, value) => {
         setValue(value)
         value && addCallRating(value)
     }  
@@ -106,7 +106,7 @@ const VideoCallFrame = ({
                             name="instantvisio-feedback"
                             value={value}
                             precision={1}
-                            onChange={(event, value) => onChange(value)}
+                            onChange={onChange}
                         />
                     </Grid>
                 </div>
