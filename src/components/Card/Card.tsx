@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-export default function SimpleCard({ onClick }) {
+export default function SimpleCard({ onClick,title, messageOne, messageTwo, labelBtnNewCall }) {
     const classes = useStyles()
     return (
         <Card className={classes.root}>
@@ -47,12 +47,12 @@ export default function SimpleCard({ onClick }) {
                 <EmojiEmotionsIcon className={classes.icon} />
             </Grid>
             <CardContent>
-                <Typography className={classes.title}>À BIENTÔT !</Typography>
+                <Typography className={classes.title}>{title}</Typography>
                 <Typography className={classes.pos} component="p">
-                    Nous espérons que votre InstantVisio s'est bien passé.
+                    {messageOne}
                 </Typography>
                 <Typography className={classes.pos} component="p">
-                    Prenez soin de vous.
+                    {messageTwo}
                 </Typography>
             </CardContent>
             <Grid container justify="center" alignItems="center">
@@ -62,7 +62,7 @@ export default function SimpleCard({ onClick }) {
                     color="primary"
                     className={classes.button}
                     startIcon={<VideocamIcon style={{ fontSize: 30 }} />}>
-                    Lancer un nouvel instantVisio
+                     {labelBtnNewCall}
                 </Button>
             </Grid>
         </Card>

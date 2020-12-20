@@ -76,7 +76,13 @@ const VideoCallFrame = ({
 
             {hasLeft && (
                 <div>
-                    <Card onClick={(val) => setRedirectToRoot(val)} />
+                    <Card 
+                        title={t('leave-title-card')} 
+                        messageOne={t('leave-messageOne-card')} 
+                        messageTwo={t('leave-messageTwo-card')} 
+                        labelBtnNewCall={t('leave-labelBtnNewCall-card')}
+                        onClick={(val) => setRedirectToRoot(val)} 
+                    />
                     <Grid
                         container
                         justify="center"
@@ -86,8 +92,7 @@ const VideoCallFrame = ({
                             style={{ textAlign: 'center', marginTop: 20 }}
                             variant="h5"
                             component="h6">
-                            Pour nous aider à Améliorer notre service, vous
-                            pouvez noter la qualité de votre visio.
+                            {t('leave-help-us-message')}
                         </Typography>
                     </Grid>
                     <Grid container justify="center" alignItems="center">
