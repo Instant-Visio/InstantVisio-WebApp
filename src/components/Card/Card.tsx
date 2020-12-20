@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied'
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import VideocamIcon from '@material-ui/icons/Videocam'
 import Typography from '@material-ui/core/Typography'
 
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
         width: theme.spacing(10),
         height: theme.spacing(10),
         left: '50%',
+        color: '#566777',
     },
     button: {
         margin: theme.spacing(1),
@@ -43,10 +44,10 @@ export default function SimpleCard({ onClick }) {
     return (
         <Card className={classes.root}>
             <Grid container justify="center" alignItems="center">
-                <SentimentVerySatisfiedIcon className={classes.icon} />
+                <EmojiEmotionsIcon className={classes.icon} />
             </Grid>
             <CardContent>
-                <Typography className={classes.title}>A BIENTÔT !</Typography>
+                <Typography className={classes.title}>À BIENTÔT !</Typography>
                 <Typography className={classes.pos} component="p">
                     Nous espérons que votre InstantVisio s'est bien passé.
                 </Typography>
