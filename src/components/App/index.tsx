@@ -8,7 +8,8 @@ import Login from '../Login'
 import AppBar from './AppBar/AppBar'
 import styled from 'styled-components'
 import { PushNotificationsService } from '../../services/push-notifications'
-
+import { isAndroid } from '../../services/platform'
+import Snackbar from './Snackbar/Snackbar'
 declare global {
     interface Window {
         iv: any
@@ -46,17 +47,15 @@ const App = () => {
     }, [])
 
     useEffect(() => {
-        const setupPushNotifications = () => {
-            PushNotificationsService.requestPermissions()
-            PushNotificationsService.listenForRegistration()
-            PushNotificationsService.listenForNotificationClick()
+        if (isAndroid()) {
+            PushNotificationsService.init()
         }
-
-        setupPushNotifications()
-    }, [])
+    }, [isAndroid])
 
     return (
         <IonApp className="App">
+            <Snackbar />
+
             <Login />
             <IonReactRouter>
                 <IonHeader id="topbar">

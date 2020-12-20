@@ -3,14 +3,30 @@ import {
     PushNotification,
     PushNotificationToken,
     PushNotificationActionPerformed,
+    NotificationChannel,
 } from '@capacitor/core'
 import { FCM } from '@capacitor-community/fcm'
 import { LocalNotificationsService } from './local-notifications'
-import { isForeground } from './platform'
 const fcm = new FCM()
 const { PushNotifications } = Plugins
 
 export class PushNotificationsService {
+    static init() {
+        PushNotificationsService.requestPermissions()
+        const notificationChannel: NotificationChannel = {
+            id: 'visio-call-notifications', // id must match android/app/src/main/res/values/strings.xml's default_notification_channel_id
+            name: 'Visio call notifications',
+            description: 'Visio call notifications',
+            importance: 5,
+            visibility: 1,
+        }
+
+        PushNotificationsService.createChannel(notificationChannel)
+        LocalNotificationsService.createChannel(notificationChannel)
+        PushNotificationsService.listenForRegistration()
+        PushNotificationsService.listenForNotificationClick()
+    }
+
     static requestPermissions() {
         PushNotifications.requestPermission().then((result) => {
             if (result.granted) {
@@ -63,13 +79,9 @@ export class PushNotificationsService {
             (notification: PushNotification) => {
                 console.log('Push received: ' + JSON.stringify(notification))
                 console.log('Payload: ', notification.data)
+                const { title, body } = notification
 
-                if (isForeground()) {
-                    this.redirectToCallPage()
-                } else {
-                    console.log('Scheduling notification')
-                    LocalNotificationsService.schedule()
-                }
+                LocalNotificationsService.schedule(title, body)
             }
         )
     }
@@ -89,5 +101,9 @@ export class PushNotificationsService {
 
     static redirectToCallPage() {
         window.location.pathname = `/premium-video/room/test`
+    }
+
+    static createChannel(notificationChannel: NotificationChannel) {
+        PushNotifications.createChannel(notificationChannel)
     }
 }
