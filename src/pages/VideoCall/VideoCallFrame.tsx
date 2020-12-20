@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import { Redirect } from 'react-router-dom'
 import * as LocalStorage from '../../services/local-storage'
 import Card from '../../components/Card/Card'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Rating from '@material-ui/lab/Rating'
@@ -19,6 +19,16 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 }))
+
+const StyledRating = withStyles({
+    iconFilled: {
+      color: 'white',
+    },
+    iconHover: {
+      color: '#724BDD',
+    },
+  })(Rating);
+
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -81,7 +91,7 @@ const VideoCallFrame = ({
                         </Typography>
                     </Grid>
                     <Grid container justify="center" alignItems="center">
-                        <Rating
+                        <StyledRating
                             value={value}
                             precision={1}
                             onChange={(event, value) => {
