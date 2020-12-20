@@ -41,6 +41,12 @@ const VideoCallFrame = ({
     const [redirectToRoot, setRedirectToRoot] = React.useState(false)
     const [value, setValue] = React.useState<number | null>(0)
     const classes = useStyles()
+    
+    const onChange = (value) => {
+        setValue(value)
+        value && addCallRating(value)
+    }  
+
     if (hasLeft) {
         LocalStorage.removeLastVideoCallId()
     }
@@ -100,10 +106,7 @@ const VideoCallFrame = ({
                             name="instantvisio-feedback"
                             value={value}
                             precision={1}
-                            onChange={(event, value) => {
-                                setValue(value)
-                                value && addCallRating(value)
-                            }}
+                            onChange={(event, value) => onChange(value)}
                         />
                     </Grid>
                 </div>
