@@ -32,9 +32,7 @@ export const snackbarReducer = produce(
                 }
                 break
             case HIDE_SNACKBAR:
-                draft.snackbar = {
-                    isDisplayed: false,
-                }
+                draft.snackbar.isDisplayed = false
                 break
         }
     },
