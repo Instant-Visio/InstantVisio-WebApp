@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import SwipeableTemporaryDrawer from '../../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -30,6 +31,7 @@ const WhiteAppBar = styled.div`
 
 export default function AppBar() {
     const classes = useStyles()
+    const { t } = useTranslation('common')
 
     return (
         <div className={classes.root}>
@@ -40,10 +42,14 @@ export default function AppBar() {
                             color="primary"
                             variant="h6"
                             className={classes.title}>
-                            Instant Visio
+                            {t('appBar.appName')}
                         </Typography>
-                        <Button color="primary">Join Visio</Button>
-                        <Button color="primary">Login</Button>
+                        <Button color="primary">
+                            {t('appBar.joinVisioButton')}
+                        </Button>
+                        <Button color="primary">
+                            {t('appBar.loginButton')}
+                        </Button>
                         <SwipeableTemporaryDrawer />
                     </Toolbar>
                 </MaterialAppBar>
