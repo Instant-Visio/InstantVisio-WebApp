@@ -11,6 +11,7 @@ export interface RoomEditData {
     uid?: UID
     password?: string
     startAt?: Timestamp
+    hideChatbot?: boolean
 }
 
 export class RoomDao {
@@ -28,30 +29,51 @@ export class RoomDao {
     }
 
     public static async listByUserId(
-        userId: UID
+        userId: UID,
+        startingAfter?: number
     ): Promise<(Response | null)[]> {
-        const query = await db
+        let query = await db
             .collection(COLLECTIONS.rooms)
             .where('uid', '==', userId)
-            .orderBy('createdAt', 'desc')
 
-        const results = await query.get()
+        if (startingAfter) {
+            query = query
+                .where('startAt', '>', new Date(startingAfter * 1000))
+                .orderBy('startAt', 'asc')
+        }
+
+        const results = await query.orderBy('createdAt', 'desc').get()
 
         return results.docs.map((doc) => {
-            const { roomId, createdAt, updatedAt, startAt } = doc.data()
-            return {
+            const {
+                roomId,
+                createdAt,
+                updatedAt,
+                startAt,
+                name,
+                hideChatbot,
+            } = doc.data()
+            const room = {
                 id: roomId,
+                name,
                 createdAt: createdAt._seconds,
                 updatedAt: updatedAt._seconds,
                 startAt,
+                hideChatbot,
             }
+
+            if (startAt) {
+                room.startAt = startAt._seconds
+            }
+            return room
         })
     }
 
     public static async add(
         userId: UID,
         password: string,
-        startAt: Timestamp
+        startAt: Timestamp,
+        hideChatbot: boolean
     ): Promise<RoomId> {
         const documentReference = await db.collection(COLLECTIONS.rooms).add({
             uid: userId,
@@ -60,6 +82,7 @@ export class RoomDao {
             updatedAt: serverTimestamp(),
             service: DEFAULT_ROOM_TYPE,
             startAt,
+            hideChatbot,
         })
 
         return documentReference.id
@@ -69,7 +92,8 @@ export class RoomDao {
         userId: UID,
         roomId: RoomId,
         password: string,
-        startAt: Timestamp
+        startAt: Timestamp,
+        hideChatbot: boolean
     ): Promise<RoomId> {
         await db.collection(COLLECTIONS.rooms).doc(roomId).set({
             uid: userId,
@@ -78,6 +102,7 @@ export class RoomDao {
             updatedAt: serverTimestamp(),
             service: DEFAULT_ROOM_TYPE,
             startAt,
+            hideChatbot,
         })
 
         return roomId

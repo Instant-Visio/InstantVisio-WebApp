@@ -26,6 +26,7 @@ import { RoomDao, RoomEditData } from '../../../db/RoomDao'
  *         in: x-www-form-urlencoded
  *         required: false
  *         type: integer
+ *       - $ref: '#/components/parameters/room/hideChatbot'
  *     responses:
  *       204:
  *         description: Room edited with success
@@ -48,6 +49,9 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
 
     if (req.body.password) {
         dataToEdit['password'] = req.body.password
+    }
+    if (req.body.hideChatbot) {
+        dataToEdit['hideChatbot'] = req.body.hideChatbot === 'true'
     }
     if (req.body.startTimestamp) {
         dataToEdit['startAt'] = Timestamp.fromMillis(
