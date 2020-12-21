@@ -34,7 +34,9 @@ const getUserData = (user: admin.auth.UserRecord) => {
                 userData = makeUserData(true, true)
                 break
             default:
-                throw new Error('Test user does not exist')
+                // anonymous login case
+                userData = makeUserData(false, false)
+                break
         }
     } else {
         userData = makeUserData(false, false)

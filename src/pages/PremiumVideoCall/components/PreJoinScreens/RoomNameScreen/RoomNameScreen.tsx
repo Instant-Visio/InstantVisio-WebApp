@@ -14,6 +14,8 @@ import {
     Theme,
 } from '@material-ui/core'
 import { useAppState } from '../../../state'
+import { useSelector } from 'react-redux'
+import { selectToken } from '../../../../../components/App/userSelector'
 
 const useStyles = makeStyles((theme: Theme) => ({
     gutterBottom: {
@@ -57,6 +59,8 @@ export default function RoomNameScreen({
 }: RoomNameScreenProps) {
     const classes = useStyles()
     const { user } = useAppState()
+    const token = useSelector(selectToken)
+    const disableButtons = !name || !roomName || !token
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value)
@@ -117,7 +121,7 @@ export default function RoomNameScreen({
                         variant="contained"
                         type="submit"
                         color="primary"
-                        disabled={!name || !roomName}
+                        disabled={disableButtons}
                         className={classes.continueButton}>
                         Continue
                     </Button>
