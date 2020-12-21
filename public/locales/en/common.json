@@ -38,7 +38,9 @@
         "credits": "credits",
         "media": "in-the-news",
         "newsletter": "newsletter",
-        "license": "license"
+        "license": "license",
+        "premiumVideo": "premium-video",
+        "room": "room"
     },
     "message": {
         "title": "URGENT video call request from",

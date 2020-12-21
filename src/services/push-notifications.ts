@@ -11,8 +11,7 @@ const fcm = new FCM()
 const { PushNotifications } = Plugins
 
 export class PushNotificationsService {
-    static init() {
-        PushNotificationsService.requestPermissions()
+    static createDefaultChannel() {
         const notificationChannel: NotificationChannel = {
             id: 'visio-call-notifications', // id must match android/app/src/main/res/values/strings.xml's default_notification_channel_id
             name: 'Visio call notifications',
@@ -23,29 +22,25 @@ export class PushNotificationsService {
 
         PushNotificationsService.createChannel(notificationChannel)
         LocalNotificationsService.createChannel(notificationChannel)
-        PushNotificationsService.listenForRegistration()
-        PushNotificationsService.listenForNotificationClick()
     }
 
-    static requestPermissions() {
-        PushNotifications.requestPermission().then((result) => {
-            if (result.granted) {
-                console.log('Permissions granted')
-                // Register with Apple / Google to receive push via APNS/FCM
-                PushNotifications.register()
-            } else {
-                console.log('Error registering for notifications')
-            }
-        })
+    static async requestPermissions() {
+        const { granted } = await PushNotifications.requestPermission()
+        if (granted) return true
+        else return false
     }
 
-    static listenForRegistration() {
+    static register() {
+        // Register with Apple / Google to receive push via APNS/FCM
+        PushNotifications.register()
+    }
+
+    static listenForRegistration(errorHandler: () => void) {
         this.listenForRegistrationSuccess()
-        this.listenForRegistrationError()
+        this.listenForRegistrationError(errorHandler)
     }
 
     static listenForRegistrationSuccess() {
-        // On success, we should be able to receive notifications
         PushNotifications.addListener(
             'registration',
             (token: PushNotificationToken) => {
@@ -65,10 +60,11 @@ export class PushNotificationsService {
         }
     }
 
-    static listenForRegistrationError() {
+    static listenForRegistrationError(errorHandler: () => void) {
         // Some issue with our setup and push will not work
         PushNotifications.addListener('registrationError', (error: any) => {
             console.log('Error on registration: ' + JSON.stringify(error))
+            errorHandler()
         })
     }
 
@@ -86,7 +82,9 @@ export class PushNotificationsService {
         )
     }
 
-    static listenForNotificationClick() {
+    static listenForNotificationClick(
+        redirectHandler: (roomId: string) => void
+    ) {
         // Method called when tapping on a notification
         PushNotifications.addListener(
             'pushNotificationActionPerformed',
@@ -94,13 +92,10 @@ export class PushNotificationsService {
                 console.log(
                     'Push action performed: ' + JSON.stringify(notification)
                 )
-                this.redirectToCallPage()
+                const { roomId } = notification.notification.data
+                redirectHandler(roomId)
             }
         )
-    }
-
-    static redirectToCallPage() {
-        window.location.pathname = `/premium-video/room/test`
     }
 
     static createChannel(notificationChannel: NotificationChannel) {

@@ -7,9 +7,8 @@ import { IonReactRouter } from '@ionic/react-router'
 import Login from '../Login'
 import AppBar from './AppBar/AppBar'
 import styled from 'styled-components'
-import { PushNotificationsService } from '../../services/push-notifications'
-import { isAndroid } from '../../services/platform'
 import Snackbar from './Snackbar/Snackbar'
+import { PushNotifications } from './PushNotifications/PushNotifications'
 declare global {
     interface Window {
         iv: any
@@ -46,14 +45,9 @@ const App = () => {
         gdprHandler()
     }, [])
 
-    useEffect(() => {
-        if (isAndroid()) {
-            PushNotificationsService.init()
-        }
-    }, [isAndroid])
-
     return (
         <IonApp className="App">
+            <PushNotifications />
             <Snackbar />
 
             <Login />
