@@ -22,7 +22,6 @@ export const snackbarReducer = produce(
                     isError: true,
                     isDisplayed: true,
                 }
-                break
             case SHOW_SUCCESS_SNACKBAR:
                 return {
                     ...draft,
@@ -30,13 +29,11 @@ export const snackbarReducer = produce(
                     isError: false,
                     isDisplayed: true,
                 }
-                break
             case HIDE_SNACKBAR:
                 return {
                     ...draft,
                     isDisplayed: false,
                 }
-                break
         }
     },
     initialState
