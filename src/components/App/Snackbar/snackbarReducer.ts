@@ -7,32 +7,30 @@ import {
 import { SnackbarState } from './snackbarSelector'
 
 const initialState = {
-    snackbar: {
-        isDisplayed: false,
-        message: '',
-        isError: false,
-    },
+    isDisplayed: false,
+    message: '',
+    isError: false,
 }
 
 export const snackbarReducer = produce(
     (draft: Draft<SnackbarState>, { type, payload }) => {
         switch (type) {
             case SHOW_ERROR_SNACKBAR:
-                draft.snackbar = {
+                draft = {
                     message: payload.message,
                     isError: true,
                     isDisplayed: true,
                 }
                 break
             case SHOW_SUCCESS_SNACKBAR:
-                draft.snackbar = {
+                draft = {
                     message: payload.message,
                     isError: false,
                     isDisplayed: true,
                 }
                 break
             case HIDE_SNACKBAR:
-                draft.snackbar.isDisplayed = false
+                draft.isDisplayed = false
                 break
         }
     },

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function Snackbar() {
     const classes = useStyles()
-    const { snackbar } = useSelector(selectSnackbar)
+    const { isDisplayed, message, isError } = useSelector(selectSnackbar)
     const dispatch = useDispatch()
 
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -35,16 +35,16 @@ export default function Snackbar() {
     return (
         <div id="snackbar" className={classes.root}>
             <MaterialSnackbar
-                open={snackbar.isDisplayed}
+                open={isDisplayed}
                 autoHideDuration={3000}
                 onClose={handleClose}>
-                {snackbar.isError ? (
+                {isError ? (
                     <Alert onClose={handleClose} severity="error">
-                        {snackbar.message}
+                        {message}
                     </Alert>
                 ) : (
                     <Alert onClose={handleClose} severity="success">
-                        {snackbar.message}
+                        {message}
                     </Alert>
                 )}
             </MaterialSnackbar>
