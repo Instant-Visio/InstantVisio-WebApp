@@ -16,21 +16,26 @@ export const snackbarReducer = produce(
     (draft: Draft<SnackbarState>, { type, payload }) => {
         switch (type) {
             case SHOW_ERROR_SNACKBAR:
-                draft = {
+                return {
+                    ...draft,
                     message: payload.message,
                     isError: true,
                     isDisplayed: true,
                 }
                 break
             case SHOW_SUCCESS_SNACKBAR:
-                draft = {
+                return {
+                    ...draft,
                     message: payload.message,
                     isError: false,
                     isDisplayed: true,
                 }
                 break
             case HIDE_SNACKBAR:
-                draft.isDisplayed = false
+                return {
+                    ...draft,
+                    isDisplayed: false,
+                }
                 break
         }
     },
