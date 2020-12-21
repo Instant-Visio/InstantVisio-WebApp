@@ -43,7 +43,7 @@ export const PushNotifications = () => {
 
             initPushNotifications()
         }
-    }, [])
+    }, [dispatch, t])
 
     return <></>
 }
