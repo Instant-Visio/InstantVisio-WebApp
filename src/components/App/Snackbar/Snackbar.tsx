@@ -40,11 +40,11 @@ export default function Snackbar() {
                 onClose={handleClose}>
                 {snackbar.isError ? (
                     <Alert onClose={handleClose} severity="error">
-                        error
+                        {snackbar.message}
                     </Alert>
                 ) : (
                     <Alert onClose={handleClose} severity="success">
-                        success message hey
+                        {snackbar.message}
                     </Alert>
                 )}
             </MaterialSnackbar>
