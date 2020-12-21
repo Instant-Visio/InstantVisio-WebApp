@@ -4,8 +4,16 @@ import { Link } from 'react-router-dom'
 import { TEST_ACCOUNTS } from '../../constants'
 import { signInEmulatorEmailPassword } from '../../utils/emulators'
 import { useHistory } from 'react-router-dom'
+import styled from 'styled-components'
 
 const { paidUser, unpaidUser, overQuotaUser } = TEST_ACCOUNTS
+
+const StyledEmulatorLogin = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+`
 
 export const EmulatorLogin = ({ authInstance, token }) => {
     const history = useHistory()
@@ -24,7 +32,7 @@ export const EmulatorLogin = ({ authInstance, token }) => {
         }
     }
     return (
-        <>
+        <StyledEmulatorLogin>
             <span>Emulator Signin: </span>
             <Button onClick={() => authInstance.signInAnonymously()}>
                 Anonymous
@@ -54,6 +62,6 @@ export const EmulatorLogin = ({ authInstance, token }) => {
                 OverQuota
             </Button>
             <Link to="premium-video">Go to Premium Video</Link>
-        </>
+        </StyledEmulatorLogin>
     )
 }

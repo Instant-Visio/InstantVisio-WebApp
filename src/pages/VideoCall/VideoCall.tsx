@@ -6,7 +6,6 @@ import dailyCssText from './dailyCssText'
 import { CallContainer } from './VideoCallComponents'
 import Fullscreen from '../../components/Fullscreen/Fullscreen'
 import sendCallLogs from '../../actions/sendCallLogs'
-import Footer from '../../components/Footer/Footer'
 import { hideSupport, setVideoCallExited } from '../../utils/support'
 import Controls from './Controls'
 import VideoCallFrame from './VideoCallFrame'
@@ -183,8 +182,6 @@ const VideoCallPage = () => {
             {error && (
                 <ErrorDialog error={error} onHide={() => setError(null)} />
             )}
-
-            {leftCallFrame && <Footer />}
         </>
     )
 }

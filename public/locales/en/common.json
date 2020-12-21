@@ -43,5 +43,10 @@
     "message": {
         "title": "URGENT video call request from",
         "Message": "invites you to a video chat. Join the chat now at this link:"
+    },
+    "appBar": {
+        "appName": "Instant Visio",
+        "joinVisioButton": "Join Visio",
+        "loginButton": "Login"
     }
 }
