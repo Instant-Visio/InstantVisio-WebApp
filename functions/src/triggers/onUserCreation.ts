@@ -4,6 +4,7 @@ import { getJWTEnv } from '../firebase/env'
 import { UserDao } from '../db/UserDao'
 import { SUBSCRIPTIONS, TEST_ACCOUNTS } from '../db/constants'
 import * as admin from 'firebase-admin'
+import { isUsingEmulator } from '../api/utils/isUsingEmulator'
 
 const makeUserData = (
     isSubscriptionActive: boolean,
@@ -22,7 +23,7 @@ const makeUserData = (
 
 const getUserData = (user: admin.auth.UserRecord) => {
     let userData
-    if (process.env.FIREBASE_AUTH_EMULATOR_HOST) {
+    if (isUsingEmulator()) {
         switch (user.email) {
             case TEST_ACCOUNTS.paidUser.email:
                 userData = makeUserData(true, false)
