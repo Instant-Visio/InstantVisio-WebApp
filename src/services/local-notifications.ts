@@ -18,6 +18,7 @@ export class LocalNotificationsService {
                     attachments: undefined,
                     actionTypeId: '',
                     extra,
+                    smallIcon: 'ic_logo_mobile',
                     channelId: 'visio-call-notifications',
                 },
             ],
