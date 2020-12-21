@@ -7,8 +7,7 @@ import { getPublicRequestURL } from '../utils/getPublicRequestURL'
 import { increment } from '../../firebase/firebase'
 import { RoomDao } from '../../db/RoomDao'
 import { UserDao } from '../../db/UserDao'
-
-const PARTICIPANT_DISCONNECTED_EVENT = 'participant-disconnected'
+import { TwilioConstants } from '../v1/rooms/service/TwilioConstants'
 
 export const twilioStatusCallbackWebHook = wrap(
     async (req: Request, res: Response) => {
@@ -17,7 +16,7 @@ export const twilioStatusCallbackWebHook = wrap(
         const { StatusCallbackEvent, RoomName, ParticipantDuration } = req.body
 
         switch (StatusCallbackEvent) {
-            case PARTICIPANT_DISCONNECTED_EVENT:
+            case TwilioConstants.Event.PARTICIPANT_DISCONNECTED_EVENT:
                 const room = await RoomDao.get(RoomName)
                 const participantDuration = parseInt(ParticipantDuration)
 

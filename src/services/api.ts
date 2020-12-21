@@ -31,7 +31,7 @@ export class Api {
     ): Promise<any> {
         return this.post(`/rooms/${roomId}/inviteParticipants`, {
             hostname,
-            destinations,
+            destinations: JSON.stringify(destinations),
         })
     }
 

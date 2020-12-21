@@ -4,6 +4,15 @@ Instant Visio is a no-app one to one video conference created to help medical wo
 
 More info on the Hacking Health Camp 2020 slack, #instantvisio
 
+# API
+
+_Current API Version: **v1**_
+
+Currently in development and deployed for development propose only
+
+-   [API Documentation](https://instantvisio-dev.web.app/api/v1-docs/)
+-   [API Endpoint](https://instantvisio-dev.web.app/api/v1/)
+
 # Setup
 
 ## Front
@@ -71,6 +80,34 @@ npm run serve
     npm run run:${PLATFORM}
     ```
 
-# Tech notes
+# Guidelines
 
+### Dev
+
+-   JS & Typescript:
+    -   use destructuring
+    -   use TS types & interfaces
+    -   small to medium (1 -> ~300 lines) components
+    -   reusable components should be within `src/components`
+    -   reducers/actions/selectors should live alongside and be scoped to the domain (possible domains: room/call, dashboard/stats, group)
+    -   actions,reducers, props should be typed
+    -   i18n for translation of every text
+-   Libraries:
+    -   keep the amount of libraries to a minimum to have the lowest possible bundle size
+    -   form: Formik, Yup
+    -   UI: Material UI, styled-components for customization
+    -   state: Redux & redux-thunk for async actions, Immer JS for immutability
+    -   routing: Ionic Router
 -   Use interfaces to [define prop types](https://github.com/facebook/create-react-app/issues/8021) in typescript
+-   Testing:
+    -   front & back: test suite are setup but not actively used. We may move the project to a totally different idea, so it reduces the pain on this side
+
+### Code organization
+
+    - branch name: you can use `issueNumber_feature-desc` but you are free to choose what you need
+    - draft Pull Request for early on WIP codes (if needed)
+    - public the PR and submit it for the review
+    - review: add 2 or more reviewers, one of them being either [MattiaPrimavera](https://github.com/MattiaPrimavera) or [HugoGresse](https://github.com/HugoGresse). At least one approve for the PR to be considered as accepted and ready to be merged. Review comments should be marked as resolved after change made if agreed to. If needed, re-request the review after change mades.
+    - Pull Request are merged using `Squash & merge`
+    - Pull Request description: anything you think is necessary to understand the code scope, linked issue, etc. Add how to review notes if needed
+    - Responsability: the PR assignee is responsible for updating the branch, iterating on review and merging the branch

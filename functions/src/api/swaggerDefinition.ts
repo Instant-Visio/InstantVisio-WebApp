@@ -144,6 +144,14 @@ export const swaggerDefinition = {
                     required: false,
                     type: 'string',
                 },
+                hideChatbot: {
+                    name: 'hideChatbot',
+                    description:
+                        '(optional) Hide the chatbot button & features which will prevent users to get help and assistance from there. The chatbot is visible by default. The current chatbot provider is Crisp.chat.',
+                    required: false,
+                    type: 'boolean',
+                    in: 'x-www-form-urlencoded',
+                },
             },
         },
     },

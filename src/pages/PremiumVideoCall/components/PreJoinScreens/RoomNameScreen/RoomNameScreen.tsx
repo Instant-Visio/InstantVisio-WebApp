@@ -14,6 +14,8 @@ import {
     Theme,
 } from '@material-ui/core'
 import { useAppState } from '../../../state'
+import { useSelector } from 'react-redux'
+import { selectToken } from '../../../../../components/App/userSelector'
 
 const useStyles = makeStyles((theme: Theme) => ({
     gutterBottom: {
@@ -57,6 +59,8 @@ export default function RoomNameScreen({
 }: RoomNameScreenProps) {
     const classes = useStyles()
     const { user } = useAppState()
+    const token = useSelector(selectToken)
+    const disableButtons = !name || !roomName || !token
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value)
@@ -73,7 +77,7 @@ export default function RoomNameScreen({
     return (
         <>
             <Typography variant="h5" className={classes.gutterBottom}>
-                Join a Room
+                Rejoindre une visio de groupe
             </Typography>
             <Typography variant="body1">
                 {hasUsername
@@ -85,7 +89,7 @@ export default function RoomNameScreen({
                     {!hasUsername && (
                         <div className={classes.textFieldContainer}>
                             <InputLabel shrink htmlFor="input-user-name">
-                                Your Name
+                                Votre nom
                             </InputLabel>
                             <TextField
                                 id="input-user-name"
@@ -99,7 +103,7 @@ export default function RoomNameScreen({
                     )}
                     <div className={classes.textFieldContainer}>
                         <InputLabel shrink htmlFor="input-room-name">
-                            Room Name
+                            Votre Réunion de Groupe
                         </InputLabel>
                         <TextField
                             autoCapitalize="false"
@@ -117,7 +121,7 @@ export default function RoomNameScreen({
                         variant="contained"
                         type="submit"
                         color="primary"
-                        disabled={!name || !roomName}
+                        disabled={disableButtons}
                         className={classes.continueButton}>
                         Continue
                     </Button>

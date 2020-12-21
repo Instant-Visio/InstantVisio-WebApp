@@ -7,12 +7,12 @@ import React, { useState, useEffect, FormEvent } from 'react'
 import DeviceSelectionScreen from './DeviceSelectionScreen/DeviceSelectionScreen'
 import IntroContainer from '../IntroContainer/IntroContainer'
 import MediaErrorSnackbar from './MediaErrorSnackbar/MediaErrorSnackbar'
-import PreflightTest from './PreflightTest/PreflightTest'
+// import PreflightTest from './PreflightTest/PreflightTest'
 import RoomNameScreen from './RoomNameScreen/RoomNameScreen'
 import { useAppState } from '../../state'
 import { useParams } from 'react-router-dom'
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext'
-import Video from 'twilio-video'
+// import Video from 'twilio-video'
 
 export enum Steps {
     roomNameStep,
@@ -68,7 +68,7 @@ export default function PreJoinScreens() {
 
     const SubContent = (
         <>
-            {Video.testPreflight && <PreflightTest />}
+            {/* {Video.testPreflight && <PreflightTest />} */}
             <MediaErrorSnackbar error={mediaError} />
         </>
     )

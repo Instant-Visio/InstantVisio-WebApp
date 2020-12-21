@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { RoomDao } from '../../../db/RoomDao'
+import { wrap } from 'async-middleware'
 
 /**
  * @swagger
@@ -9,6 +10,12 @@ import { RoomDao } from '../../../db/RoomDao'
  *     tags: ['rooms']
  *     produces:
  *       - application/json
+ *     parameters:
+ *       - in: query
+ *         name: startingAfter
+ *         description: Only return the room starting after the given timestamp in seconds (startAt)
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: All the rooms linked to this token
@@ -32,9 +39,14 @@ import { RoomDao } from '../../../db/RoomDao'
  *       412:
  *         description: authorization header wrong format
  */
-export const getRooms = async (_: Request, res: Response) => {
+export const getRooms = wrap(async (req: Request, res: Response) => {
     const uid = res.locals.uid
-    const rooms = await RoomDao.listByUserId(uid)
+    const startingAfter = <string>req.query.startingAfter
+
+    const rooms = await RoomDao.listByUserId(
+        uid,
+        startingAfter ? parseInt(startingAfter) : 0
+    )
 
     res.send(rooms)
-}
+})

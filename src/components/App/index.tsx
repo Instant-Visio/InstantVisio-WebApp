@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react'
 import './App.scss'
 import { gdprHandler } from '../../utils/gdpr'
-import Router from './router'
+import Router from './Router'
 import { IonApp, IonHeader } from '@ionic/react'
-import SwipeableTemporaryDrawer from '../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
-import { Navbar } from 'react-bootstrap'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
-import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
 import Login from '../Login'
-
+import AppBar from './AppBar/AppBar'
+import styled from 'styled-components'
 declare global {
     interface Window {
         iv: any
@@ -18,14 +15,11 @@ declare global {
     }
 }
 
-const NavbarContainer = styled.div`
-    position: 'relative';
-    margin-left: 40%;
+const StyledRouter = styled.div`
+    margin-top: 1rem;
 `
 
 const App = () => {
-    const isMobile = useDetectMobileOrTablet()
-
     useEffect(() => {
         // when using vh and vw units in css:
         // to make sure the height taken into account
@@ -52,17 +46,13 @@ const App = () => {
     return (
         <IonApp className="App">
             <Login />
-
             <IonReactRouter>
-                {isMobile && (
-                    <IonHeader id="topbar">
-                        <Navbar bg="light" variant="dark">
-                            <SwipeableTemporaryDrawer />
-                            <NavbarContainer />
-                        </Navbar>
-                    </IonHeader>
-                )}
-                <Router />
+                <IonHeader id="topbar">
+                    <AppBar />
+                </IonHeader>
+                <StyledRouter>
+                    <Router />
+                </StyledRouter>
             </IonReactRouter>
         </IonApp>
     )

@@ -56,6 +56,7 @@ import { JSONParse } from '../utils/JSONParse'
  *            mixed:
  *                summary: Multiple sendAt dates
  *                value: '[1708118298, 1808118298]'
+ *       - $ref: '#/components/parameters/room/hideChatbot'
  *     responses:
  *       201:
  *         description: Room created with success. Depending on the parameters, it will either be a list of created reminders ids OR the emails & SMSs sent list.
@@ -94,7 +95,6 @@ export const createRoomRoute = wrap(async (req: Request, res: Response) => {
 
 export const createRoom = async ({
     userId,
-    hideChatbot = false,
     roomRequestedPassword,
     specificRoomId,
     startAt,
@@ -102,6 +102,7 @@ export const createRoom = async ({
     hostName,
     destinations,
     sendsAt,
+    hideChatbot = false,
 }: {
     userId: UID
     hideChatbot?: boolean

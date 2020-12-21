@@ -19,6 +19,7 @@ import { RoomDao, RoomEditData } from '../../../db/RoomDao'
  *       - $ref: '#/components/parameters/room/password'
  *       - $ref: '#/components/parameters/room/startAt'
  *       - $ref: '#/components/parameters/room/name'
+ *       - $ref: '#/components/parameters/room/hideChatbot'
  *     responses:
  *       204:
  *         description: Room edited with success
@@ -41,6 +42,9 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
 
     if (req.body?.password?.length) {
         dataToEdit.password = req.body.password
+    }
+    if (req.body.hideChatbot) {
+        dataToEdit['hideChatbot'] = req.body.hideChatbot === 'true'
     }
     if (req.body.startTimestamp) {
         dataToEdit.startAt = Timestamp.fromMillis(+req.body.startAt * 1000)
