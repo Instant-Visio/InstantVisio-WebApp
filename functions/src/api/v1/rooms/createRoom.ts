@@ -13,12 +13,13 @@ import {
     inviteParticipant,
     InviteParticipantsResponse,
 } from '../invite/inviteParticipants'
+import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
  * /v1/rooms/new:
  *   post:
- *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 chat) and a random password if none provided. The room will have an infinite lifetime though it will probably change in the future. <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before of after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allow sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
+ *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 chat) and a random password if none provided. The room will have an infinite lifetime though it will probably change in the future. <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before of after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allows sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
  *     tags:
  *       - rooms
  *     consumes:
@@ -57,7 +58,7 @@ import {
  *                value: '[1708118298, 1808118298]'
  *     responses:
  *       201:
- *         description: Room created with success. Depending of the parameters, will either have a list of created reminders ids OR the emails & SMSs sent list.
+ *         description: Room created with success. Depending on the parameters, it will either be a list of created reminders ids OR the emails & SMSs sent list.
  *         content:
  *           application/json:
  *             schema:
@@ -82,6 +83,7 @@ export const createRoomRoute = wrap(async (req: Request, res: Response) => {
         userId: res.locals.uid,
         roomRequestedPassword: req.body.password,
         startAt: req.body.startAt,
+        hideChatbot: req.body.hideChatbot === 'true',
         name: req.body.name,
         hostName: req.body.hostName,
         destinations: req.body.destinations,
@@ -92,6 +94,7 @@ export const createRoomRoute = wrap(async (req: Request, res: Response) => {
 
 export const createRoom = async ({
     userId,
+    hideChatbot = false,
     roomRequestedPassword,
     specificRoomId,
     startAt,
@@ -101,6 +104,7 @@ export const createRoom = async ({
     sendsAt,
 }: {
     userId: UID
+    hideChatbot?: boolean
     roomRequestedPassword?: string
     specificRoomId?: RoomId
     startAt?: string
@@ -123,16 +127,22 @@ export const createRoom = async ({
             userId,
             specificRoomId,
             roomPassword,
-            roomStartAt
+            roomStartAt,
+            hideChatbot
         )
     } else {
-        roomId = await RoomDao.add(userId, roomPassword, roomStartAt)
+        roomId = await RoomDao.add(
+            userId,
+            roomPassword,
+            roomStartAt,
+            hideChatbot
+        )
     }
 
     const roomSid = await createTwilioRoom(roomId)
     await RoomDao.update({
-        roomId,
-        roomSid,
+        id: roomId,
+        sid: roomSid,
         name: name || roomId,
     })
 
@@ -193,6 +203,6 @@ type ProcessDestinationsResponse =
           reminderIds: ReminderId[]
       }
 
-const parseSendsAt = (sendsAt: string): string[] => {
-    return Array.isArray(sendsAt) ? sendsAt : JSON.parse(sendsAt)
+const parseSendsAt = (sendsAt: string | Array<string>): string[] => {
+    return Array.isArray(sendsAt) ? sendsAt : JSONParse(sendsAt)
 }

@@ -9,6 +9,7 @@ import { assertTimestampInFuture } from './assertTimestampInFuture'
 import { RoomId } from '../../../types/Room'
 import { UID } from '../../../types/uid'
 import { ReminderId } from '../../../types/Reminder'
+import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
@@ -95,7 +96,7 @@ export const createReminder = async ({
     await assertRightToEditRoom(roomId, userId)
 
     const sendAt = parseInt(sendAtParameter) * 1000
-    const destinations = JSON.parse(destinationsParameter || '[]')
+    const destinations = JSONParse(destinationsParameter || '[]')
 
     if (
         !sendAt ||

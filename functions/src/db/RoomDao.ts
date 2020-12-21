@@ -6,8 +6,8 @@ import { UID } from '../types/uid'
 
 type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt' | 'startAt'>
 export interface RoomEditData {
-    roomId: RoomId
-    roomSid?: RoomSid
+    id: RoomId
+    sid?: RoomSid
     uid?: UID
     password?: string
     startAt?: Timestamp
@@ -52,11 +52,13 @@ export class RoomDao {
     public static async add(
         userId: UID,
         password: string,
-        startAt: Timestamp
+        startAt: Timestamp,
+        hideChatbot: boolean
     ): Promise<RoomId> {
         const documentReference = await db.collection(COLLECTIONS.rooms).add({
             uid: userId,
             password: password,
+            hideChatbot,
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
             service: DEFAULT_ROOM_TYPE,
@@ -70,11 +72,13 @@ export class RoomDao {
         userId: UID,
         roomId: RoomId,
         password: string,
-        startAt: Timestamp
+        startAt: Timestamp,
+        hideChatbot: boolean
     ): Promise<RoomId> {
         await db.collection(COLLECTIONS.rooms).doc(roomId).set({
             uid: userId,
             password: password,
+            hideChatbot,
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
             service: DEFAULT_ROOM_TYPE,
@@ -87,7 +91,7 @@ export class RoomDao {
     public static async update(room: RoomEditData): Promise<void> {
         await db
             .collection(COLLECTIONS.rooms)
-            .doc(room.roomId)
+            .doc(room.id)
             .set(
                 {
                     ...room,

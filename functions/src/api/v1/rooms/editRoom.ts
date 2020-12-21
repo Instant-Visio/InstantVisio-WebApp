@@ -36,16 +36,14 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
     await assertRightToEditRoom(roomId, res.locals.uid)
 
     const dataToEdit: RoomEditData = {
-        roomId: roomId,
+        id: roomId,
     }
 
-    if (req.body.password && req.body.password.length > 0) {
+    if (req.body?.password?.length) {
         dataToEdit.password = req.body.password
     }
     if (req.body.startTimestamp) {
-        dataToEdit.startAt = Timestamp.fromMillis(
-            parseInt(req.body.startAt) * 1000
-        )
+        dataToEdit.startAt = Timestamp.fromMillis(+req.body.startAt * 1000)
     }
     if (req.body.name) {
         dataToEdit.startAt = req.body.name

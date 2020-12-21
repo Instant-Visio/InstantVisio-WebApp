@@ -6,6 +6,7 @@ import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrect
 import { BadRequestError } from '../../errors/HttpError'
 import { Timestamp } from '../../../firebase/firebase'
 import { assertTimestampInFuture } from './assertTimestampInFuture'
+import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
@@ -79,7 +80,7 @@ export const editReminder = wrap(async (req: Request, res: Response) => {
 
     const { destinations, hostName, sendAt } = req.body
     if (destinations) {
-        const parsedDestinations = JSON.parse(destinations)
+        const parsedDestinations = JSONParse(destinations)
         if (isDestinationsCorrectlyFormatted(parsedDestinations)) {
             dataToEdit['destinations'] = parsedDestinations
         } else {

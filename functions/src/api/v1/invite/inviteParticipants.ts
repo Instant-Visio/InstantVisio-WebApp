@@ -11,6 +11,7 @@ import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrect
 import { UserDao } from '../../../db/UserDao'
 import { increment } from '../../../firebase/firebase'
 import { RoomId } from '../../../types/Room'
+import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
@@ -90,7 +91,7 @@ export const inviteParticipant = async ({
 }): Promise<InviteParticipantsResponse> => {
     const room = await assertRightToEditRoom(roomId, userId)
     const destinations = <InvitationDestination[]>(
-        JSON.parse(destinationsParameter)
+        JSONParse(destinationsParameter)
     )
 
     if (!hostName || !isDestinationsCorrectlyFormatted(destinations)) {
