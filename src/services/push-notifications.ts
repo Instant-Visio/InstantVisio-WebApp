@@ -77,7 +77,11 @@ export class PushNotificationsService {
                 console.log('Payload: ', notification.data)
                 const { title, body } = notification
 
-                LocalNotificationsService.schedule(title, body)
+                LocalNotificationsService.schedule(
+                    title,
+                    body,
+                    notification.data
+                )
             }
         )
     }
@@ -85,7 +89,6 @@ export class PushNotificationsService {
     static listenForNotificationClick(
         redirectHandler: (roomId: string) => void
     ) {
-        // Method called when tapping on a notification
         PushNotifications.addListener(
             'pushNotificationActionPerformed',
             (notification: PushNotificationActionPerformed) => {

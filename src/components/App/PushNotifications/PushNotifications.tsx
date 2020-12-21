@@ -4,6 +4,7 @@ import { PushNotificationsService } from '../../../services/push-notifications'
 import { useDispatch } from 'react-redux'
 import { showErrorMessage } from '../Snackbar/snackbarActions'
 import { useTranslation } from 'react-i18next'
+import { LocalNotificationsService } from '../../../services/local-notifications'
 
 export const PushNotifications = () => {
     const dispatch = useDispatch()
@@ -29,6 +30,9 @@ export const PushNotifications = () => {
                         window.location.pathname = `/premium-video/
                             room/${roomId}`
                     }
+                    LocalNotificationsService.listenForNotificationClick(
+                        redirectHandler
+                    )
                     PushNotificationsService.listenForNotificationClick(
                         redirectHandler
                     )
