@@ -54,6 +54,18 @@ export class ReminderNotFoundError extends NotFoundError {
     }
 }
 
+export class GoneError extends HttpError {
+    constructor(message?: string) {
+        super(410, message || 'Gone')
+    }
+}
+
+export class RoomGoneError extends HttpError {
+    constructor() {
+        super(410, 'Room ended')
+    }
+}
+
 export class PreconditionFailedError extends HttpError {
     constructor(message?: string) {
         super(412, message || 'PreconditionFailed')
