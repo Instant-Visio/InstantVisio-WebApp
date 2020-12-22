@@ -7,6 +7,11 @@ import Button from '@material-ui/core/Button'
 import SwipeableTemporaryDrawer from '../../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { showLoginModal } from '../../LoginModal/loginModalActions'
+import { signOut } from '../../../actions/userActions'
+import { selectToken } from '../userSelector'
+import { authInstance } from '../../../firebase/firebase'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -29,9 +34,11 @@ const WhiteAppBar = styled.div`
     }
 `
 
-export default function AppBar() {
+const AppBar = () => {
     const classes = useStyles()
+    const hasToken = useSelector(selectToken)
     const { t } = useTranslation('common')
+    const dispatch = useDispatch()
 
     return (
         <div className={classes.root}>
@@ -47,9 +54,21 @@ export default function AppBar() {
                         <Button color="primary">
                             {t('appBar.joinVisioButton')}
                         </Button>
-                        <Button color="primary">
-                            {t('appBar.loginButton')}
-                        </Button>
+                        {hasToken ? (
+                            <Button
+                                onClick={() => {
+                                    dispatch(signOut())
+                                }}>
+                                Sign out
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={() => dispatch(showLoginModal())}
+                                color="primary">
+                                {t('appBar.loginButton')}
+                            </Button>
+                        )}
+
                         <SwipeableTemporaryDrawer />
                     </Toolbar>
                 </MaterialAppBar>
@@ -57,3 +76,5 @@ export default function AppBar() {
         </div>
     )
 }
+
+export default AppBar

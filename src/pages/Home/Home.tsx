@@ -86,7 +86,7 @@ export default function Home() {
     return (
         <IonContent>
             {isAuthEmulatorEnabled() && (
-                <EmulatorLogin authInstance={authInstance} token={token} />
+                <EmulatorLogin authInstance={authInstance} />
             )}
 
             {!isMobile ? (
