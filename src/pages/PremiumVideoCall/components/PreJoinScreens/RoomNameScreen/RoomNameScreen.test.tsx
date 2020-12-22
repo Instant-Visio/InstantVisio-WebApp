@@ -26,7 +26,7 @@ describe('the RoomNameScreen component', () => {
         )
 
         expect(wrapper.text()).toContain(
-            "Saisissez votre nom pour rejoindre la visio de groupe"
+            'Saisissez votre nom pour rejoindre la visio de groupe'
         )
         expect(wrapper.find(TextField).length).toBe(2)
     })
@@ -46,7 +46,7 @@ describe('the RoomNameScreen component', () => {
         )
 
         expect(wrapper.text()).toContain(
-            "Veuillez saisir le nom de la réunion que vous vous allez rejoindre"
+            'Veuillez saisir le nom de la réunion que vous vous allez rejoindre'
         )
         expect(wrapper.find(TextField).length).toBe(1)
     })
@@ -73,7 +73,7 @@ describe('the RoomNameScreen component', () => {
         )
 
         expect(wrapper.text()).toContain(
-            "Saisissez votre nom pour rejoindre la visio de groupe"
+            'Saisissez votre nom pour rejoindre la visio de groupe'
         )
         expect(wrapper.find(TextField).length).toBe(2)
     })

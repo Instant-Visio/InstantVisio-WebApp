@@ -5,8 +5,8 @@ import { authenticateJWTMiddleware } from '../middlewares/authenticateJWTMiddlew
 import { createRoomRoute } from './rooms/createRoom'
 import { editRoom } from './rooms/editRoom'
 import { joinRoom } from './rooms/joinRoom'
-import { inviteParticipants } from './invite/inviteParticipants'
-import { createReminder } from './reminders/createReminder'
+import { inviteParticipantsRoute } from './invite/inviteParticipants'
+import { createReminderRoute } from './reminders/createReminder'
 import { editReminder } from './reminders/editReminder'
 import { deleteReminder } from './reminders/deleteReminder'
 import { getReminders } from './reminders/getReminders'
@@ -20,9 +20,9 @@ router.get('/rooms/', getRooms)
 router.post('/rooms/new', createRoomRoute)
 router.patch('/rooms/:roomId', editRoom)
 router.post('/rooms/:roomId/join', joinRoom)
-router.post('/rooms/:roomId/inviteParticipants', inviteParticipants)
+router.post('/rooms/:roomId/inviteParticipants', inviteParticipantsRoute)
 router.get('/rooms/:roomId/reminders/', getReminders)
-router.post('/rooms/:roomId/reminders/', createReminder)
+router.post('/rooms/:roomId/reminders/', createReminderRoute)
 router.patch('/rooms/:roomId/reminders/:reminderId', editReminder)
 router.delete('/rooms/:roomId/reminders/:reminderId', deleteReminder)
 router.get('/users/:userId/', getUser)
