@@ -179,7 +179,7 @@ const processDestinations = async (
             const id = await createReminder({
                 roomId,
                 userId,
-                sendAtParameter: sendAt,
+                sendAtSeconds: sendAt,
                 hostName,
                 destinationsParameter: destinations,
             })
@@ -194,7 +194,7 @@ const processDestinations = async (
         roomId,
         userId,
         hostName,
-        destinationsParameter: destinations,
+        destinations,
     })
 }
 

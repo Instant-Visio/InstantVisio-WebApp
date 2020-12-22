@@ -71,7 +71,7 @@ export const createReminderRoute = wrap(async (req: Request, res: Response) => {
         roomId,
         userId,
         hostName,
-        sendAtParameter: sendAt,
+        sendAtSeconds: sendAt,
         destinationsParameter: destinations,
     })
 
@@ -83,30 +83,30 @@ export const createReminderRoute = wrap(async (req: Request, res: Response) => {
 export const createReminder = async ({
     roomId,
     userId,
-    sendAtParameter,
+    sendAtSeconds,
     hostName,
     destinationsParameter,
 }: {
     roomId: RoomId
     userId: UID
-    sendAtParameter: string
+    sendAtSeconds: string
     hostName: string
     destinationsParameter: string
 }): Promise<ReminderId> => {
     await assertRightToEditRoom(roomId, userId)
 
-    const sendAt = parseInt(sendAtParameter) * 1000
+    const sendAtMillis = parseInt(sendAtSeconds) * 1000
     const destinations = JSONParse(destinationsParameter || '[]')
 
     if (
-        !sendAt ||
+        !sendAtMillis ||
         !hostName ||
         !isDestinationsCorrectlyFormatted(destinations)
     ) {
         throw new BadRequestError('Request body not formatted correctly')
     }
 
-    const sendAtTimestamp = Timestamp.fromMillis(sendAt)
+    const sendAtTimestamp = Timestamp.fromMillis(sendAtMillis)
     assertTimestampInFuture(sendAtTimestamp)
 
     return await ReminderDao.add(

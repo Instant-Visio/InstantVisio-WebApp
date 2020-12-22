@@ -71,7 +71,7 @@ export const inviteParticipantsRoute = wrap(
             roomId,
             userId,
             hostName,
-            destinationsParameter: destinations,
+            destinations,
         })
 
         res.send(invitationsSent)
@@ -82,23 +82,21 @@ export const inviteParticipant = async ({
     roomId,
     userId,
     hostName,
-    destinationsParameter,
+    destinations,
 }: {
     roomId: RoomId
     userId: UID
     hostName: string
-    destinationsParameter: string
+    destinations: string
 }): Promise<InviteParticipantsResponse> => {
     const room = await assertRightToEditRoom(roomId, userId)
-    const destinations = <InvitationDestination[]>(
-        JSONParse(destinationsParameter)
-    )
+    const destinationArray = <InvitationDestination[]>JSONParse(destinations)
 
-    if (!hostName || !isDestinationsCorrectlyFormatted(destinations)) {
+    if (!hostName || !isDestinationsCorrectlyFormatted(destinationArray)) {
         throw new BadRequestError('Request body not formatted correctly')
     }
 
-    const invitationsDestinations: InvitationDestination[] = destinations.map(
+    const invitationsDestinations: InvitationDestination[] = destinationArray.map(
         (dest) => {
             const lang = dest.lang || 'en'
             const country = dest.country || 'fr'
