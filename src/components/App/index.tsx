@@ -7,6 +7,8 @@ import { IonReactRouter } from '@ionic/react-router'
 import Login from '../Login'
 import AppBar from './AppBar/AppBar'
 import styled from 'styled-components'
+import Snackbar from './Snackbar/Snackbar'
+import { PushNotifications } from './PushNotifications/PushNotifications'
 declare global {
     interface Window {
         iv: any
@@ -45,6 +47,9 @@ const App = () => {
 
     return (
         <IonApp className="App">
+            <PushNotifications />
+            <Snackbar />
+
             <Login />
             <IonReactRouter>
                 <IonHeader id="topbar">
