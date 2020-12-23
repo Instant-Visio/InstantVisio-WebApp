@@ -54,15 +54,15 @@ export class ReminderNotFoundError extends NotFoundError {
     }
 }
 
-export class GoneError extends HttpError {
+class GoneError extends HttpError {
     constructor(message?: string) {
         super(410, message || 'Gone')
     }
 }
 
-export class RoomGoneError extends HttpError {
+export class RoomEndedError extends GoneError {
     constructor() {
-        super(410, 'Room ended')
+        super('Room ended')
     }
 }
 

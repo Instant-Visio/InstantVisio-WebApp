@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
 import {
     ForbiddenError,
-    RoomGoneError,
+    RoomEndedError,
     RoomNotFoundError,
 } from '../../errors/HttpError'
 import {
@@ -83,7 +83,7 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
                 ...twilioResponse,
             })
         } else {
-            throw new RoomGoneError()
+            throw new RoomEndedError()
         }
     }
     const participantName = await makeParticipantNameUnique(
