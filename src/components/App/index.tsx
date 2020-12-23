@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import Snackbar from './Snackbar/Snackbar'
 import { PushNotifications } from './PushNotifications/PushNotifications'
 import LoginModal from '../LoginModal/LoginModal'
-import LoginState from './LoginState/LoginState'
+import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
 declare global {
     interface Window {
         iv: any
@@ -50,7 +50,7 @@ const App = () => {
         <IonApp className="App">
             <PushNotifications />
             <Snackbar />
-            <LoginState />
+            <AuthStateChangedListener />
             <LoginModal />
             <IonReactRouter>
                 <IonHeader id="topbar">

@@ -2,7 +2,7 @@ import { AppState } from '../../reducers/rootReducer'
 import { createSelector } from 'reselect'
 
 export interface LoginModalState {
-    isDisplayed: false
+    isDisplayed: boolean
 }
 
 export const selectLoginModal = createSelector(

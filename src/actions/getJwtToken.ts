@@ -7,19 +7,23 @@ const RETRY = {
     interval: 300,
 }
 
+async function sleep(intervalMillis: number) {
+    return new Promise((resolve) => {
+        setTimeout(function () {
+            resolve(true)
+        }, intervalMillis)
+    })
+}
+
 async function tryAtMost(promise, maxRetries, retryInterval) {
     let retriesNumber = 0
     while (retriesNumber <= maxRetries) {
         try {
+            retriesNumber++
             const result = await promise
             return result
         } catch (err) {
-            retriesNumber++
-            await new Promise((resolve) => {
-                setTimeout(function () {
-                    resolve(true)
-                }, retryInterval)
-            })
+            await sleep(RETRY.interval + RETRY.number ** 1.3)
         }
     }
 
@@ -33,7 +37,7 @@ export const getJwtToken = async (uid: UID): Promise<JWTToken> => {
         })
 
         /*
-            tryAtMost is needed because before a token can exist, firebase functions hook
+            tryAtMost is needed because before a token can exist, Firebase user create trigger
             need to successfully complete execution. Since this call is made right after login,
             the hook might have not finished executing yet
         */

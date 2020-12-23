@@ -10,15 +10,11 @@ export const loginModalReducer = produce(
     (draft: Draft<LoginModalState>, { type, payload }) => {
         switch (type) {
             case HIDE_LOGIN_MODAL:
-                return {
-                    ...draft,
-                    isDisplayed: false,
-                }
+                draft.isDisplayed = false
+                break
             case SHOW_LOGIN_MODAL:
-                return {
-                    ...draft,
-                    isDisplayed: true,
-                }
+                draft.isDisplayed = true
+                break
         }
     },
     initialState

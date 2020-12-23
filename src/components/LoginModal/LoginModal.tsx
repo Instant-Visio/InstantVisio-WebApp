@@ -31,36 +31,30 @@ export default function LoginModal() {
     }
 
     return (
-        <>
-            <Modal
-                isOpened={isDisplayed}
-                onClose={() => {
-                    dispatch(hideLoginModal())
-                }}>
-                <Login />
-                {isAuthEmulatorEnabled() && (
-                    <>
-                        <Button
-                            onClick={() =>
-                                signInWithEmailAndPassword(paidUser)
-                            }>
-                            Paid
-                        </Button>
-                        <Button
-                            onClick={() =>
-                                signInWithEmailAndPassword(unpaidUser)
-                            }>
-                            Unpaid
-                        </Button>
-                        <Button
-                            onClick={() =>
-                                signInWithEmailAndPassword(overQuotaUser)
-                            }>
-                            OverQuota
-                        </Button>
-                    </>
-                )}
-            </Modal>
-        </>
+        <Modal
+            isOpened={isDisplayed}
+            onClose={() => {
+                dispatch(hideLoginModal())
+            }}>
+            <Login />
+            {isAuthEmulatorEnabled() && (
+                <>
+                    <Button
+                        onClick={() => signInWithEmailAndPassword(paidUser)}>
+                        Paid
+                    </Button>
+                    <Button
+                        onClick={() => signInWithEmailAndPassword(unpaidUser)}>
+                        Unpaid
+                    </Button>
+                    <Button
+                        onClick={() =>
+                            signInWithEmailAndPassword(overQuotaUser)
+                        }>
+                        OverQuota
+                    </Button>
+                </>
+            )}
+        </Modal>
     )
 }
