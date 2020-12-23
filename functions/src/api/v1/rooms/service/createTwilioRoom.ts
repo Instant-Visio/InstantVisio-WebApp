@@ -15,6 +15,6 @@ export const createTwilioRoom = async (roomId: RoomId) => {
     })
     return {
         sid: room.sid,
-        twilioRoomId: twilioRoomId,
+        twilioRoomId,
     }
 }

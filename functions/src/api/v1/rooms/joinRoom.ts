@@ -11,7 +11,7 @@ import {
 } from './service/createTwilioClientToken'
 import { createRoom } from './createRoom'
 import { UID } from '../../../types/uid'
-import { Room, RoomId, StatusEnded } from '../../../types/Room'
+import { isStatusEnded, Room, RoomId } from '../../../types/Room'
 import { RoomDao } from '../../../db/RoomDao'
 import { makeParticipantNameUnique } from './service/makeParticipantNameUnique'
 import { createTwilioRoom } from './service/createTwilioRoom'
@@ -72,7 +72,7 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
     if (room.password !== roomPassword && !isCurrentAdmin) {
         throw new ForbiddenError('Wrong password to join the room')
     }
-    if (room?.status === StatusEnded) {
+    if (isStatusEnded(room)) {
         if (isRoomCreationRecent(room)) {
             // Twilio room are "ended" after 5 min without activity.
             // We allow up to 24hours after creation time re-creating a new twilio room to simplify the user experience.

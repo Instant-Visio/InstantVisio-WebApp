@@ -19,7 +19,7 @@ import { JSONParse } from '../utils/JSONParse'
  * @swagger
  * /v1/rooms/new:
  *   post:
- *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 chat) and a random password if none provided. The room will have an a 24 hours lifetime after its startAt time (if not supplied, the creation time). <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before of after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allows sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
+ *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 chat) and a random password if none provided. The room will have a 24 hours lifetime after its startAt time (if not supplied, the creation time). <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before or after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allows sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
  *     tags:
  *       - rooms
  *     consumes:
@@ -120,7 +120,7 @@ export const createRoom = async ({
     const roomPassword =
         roomRequestedPassword || `${~~(Math.random() * 999999)}`
     const roomStartAt = Timestamp.fromMillis(
-        startAt ? parseInt(startAt) * 1000 : Date.now()
+        startAt ? +startAt * 1000 : Date.now()
     )
 
     if (specificRoomId) {

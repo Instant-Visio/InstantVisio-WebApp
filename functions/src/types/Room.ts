@@ -25,3 +25,6 @@ export interface Room {
     parameters?: Record<string | number, unknown>
     status?: RoomStatus
 }
+
+export const isStatusEnded = (room?: Room): boolean =>
+    room?.status === StatusEnded
