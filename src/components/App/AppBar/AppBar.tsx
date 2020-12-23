@@ -10,8 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { showLoginModal } from '../../LoginModal/loginModalActions'
 import { signOut } from '../../../actions/userActions'
-import { selectToken } from '../userSelector'
-import { authInstance } from '../../../firebase/firebase'
+import { selectToken, selectUser } from '../userSelector'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,6 +36,7 @@ const WhiteAppBar = styled.div`
 const AppBar = () => {
     const classes = useStyles()
     const hasToken = useSelector(selectToken)
+    const user = useSelector(selectUser)
     const { t } = useTranslation('common')
     const dispatch = useDispatch()
 
@@ -54,7 +54,7 @@ const AppBar = () => {
                         <Button color="primary">
                             {t('appBar.joinVisioButton')}
                         </Button>
-                        {hasToken ? (
+                        {hasToken && !user.isAnonymous ? (
                             <Button
                                 onClick={() => {
                                     dispatch(signOut())
