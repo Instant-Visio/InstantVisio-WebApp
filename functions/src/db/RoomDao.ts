@@ -1,4 +1,4 @@
-import { Room, RoomId, RoomSid } from '../types/Room'
+import { Room, RoomId, RoomSid, RoomStatus, TwilioRoomId } from '../types/Room'
 import { db, serverTimestamp, Timestamp } from '../firebase/firebase'
 import { COLLECTIONS, DEFAULT_ROOM_TYPE } from './constants'
 import { RoomNotFoundError } from '../api/errors/HttpError'
@@ -7,6 +7,8 @@ import { UID } from '../types/uid'
 type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt' | 'startAt'>
 export interface RoomEditData {
     id: RoomId
+    twilioRoomId?: TwilioRoomId
+    status?: RoomStatus
     sid?: RoomSid
     uid?: UID
     password?: string
