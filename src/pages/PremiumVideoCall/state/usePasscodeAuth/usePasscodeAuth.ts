@@ -75,7 +75,7 @@ export default function usePasscodeAuth() {
             ) => {
                 const roomPassword = user!.passcode
                 const passwordSpecified =
-                    !instantVisioUser.isAnonymous && roomPassword == 'admin'
+                    !instantVisioUser.isAnonymous && roomPassword === 'admin'
                         ? null
                         : roomPassword
                 const token = await fetchTwilioVideoToken(
@@ -94,7 +94,7 @@ export default function usePasscodeAuth() {
                 participantName
             )
         },
-        [user]
+        [user, instantVisioUser]
     )
 
     useEffect(() => {

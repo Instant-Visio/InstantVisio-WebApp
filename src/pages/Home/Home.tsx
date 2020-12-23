@@ -19,8 +19,6 @@ import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
 import { authInstance } from '../../firebase/firebase'
 import { isAuthEmulatorEnabled } from '../../utils/emulators'
-import { selectToken } from '../../components/App/userSelector'
-import { useSelector } from 'react-redux'
 import { EmulatorLogin } from './EmulatorLogin'
 
 const DataMentions = styled.div`
@@ -56,7 +54,6 @@ const KnowMoreMobile = styled.p`
 
 export default function Home() {
     const { t } = useTranslation(['home', 'common'])
-    const token = useSelector(selectToken)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const isMobile = useDetectMobileOrTablet()

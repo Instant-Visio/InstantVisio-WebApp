@@ -8,7 +8,7 @@ import {
     selectToken,
     isLoading as isLoadingSelector,
 } from '../App/userSelector'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 export const isUsingEmulator = () => {
     return process.env.FIREBASE_AUTH_EMULATOR_HOST
