@@ -19,9 +19,20 @@ export class Api {
 
     async joinRoom(
         roomId: RoomId,
-        password: string
+        participantName: string,
+        password: string | null
     ): Promise<JoinRoomResponse> {
-        return this.post(`/rooms/${roomId}/join`, { password })
+        try {
+            const joinResponse = await this.post(`/rooms/${roomId}/join`, {
+                participantName,
+                password,
+            })
+            return joinResponse
+        } catch (err) {
+            throw new Error(
+                'Connection error, maybe the room has not been created yet. Pls try again later'
+            )
+        }
     }
 
     async inviteParticipants(
@@ -44,6 +55,10 @@ export class Api {
             },
             body: data ? JSON.stringify(data) : null,
         })
+
+        if (response.status !== 200 && response.status !== 204) {
+            throw new Error(`Post request failed: ${response.statusText}`)
+        }
         return response.json()
     }
 }
