@@ -1,15 +1,15 @@
 import { wrap } from 'async-middleware'
 import { Request, Response } from 'express'
-import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { UID } from '../../../types/uid'
+import { assertGroupEditAllowed } from './assertGroupEditAllowed'
+import { GroupId } from '../../../types/Group'
 import { GroupDao } from '../../../db/GroupDao'
-import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
- * /v1/groups/:
+ * /v1/groups/{groupId}/:
  *   post:
- *     description: Create a new group. The user within the token will be the group owner (not editable yet).
+ *     description: Edit an existing group, only allowed for the group owner. This is not to edit the members of the group (for that, use add/removeMembers route)
  *     tags:
  *       - groups
  *     consumes:
@@ -22,15 +22,9 @@ import { JSONParse } from '../utils/JSONParse'
  *         in: x-www-form-urlencoded
  *         required: true
  *         type: string
- *       - $ref: '#/components/parameters/group/members'
  *     responses:
- *       201:
- *         description: Group created with success
- *         content:
- *           application/json:
- *             example: {
- *               groupId: "aZxo2xskIaZxo2xskI"
- *             }
+ *       200:
+ *         description: Group edited with success
  *       400:
  *         $ref: '#/components/responses/400'
  *       401:
@@ -40,19 +34,17 @@ import { JSONParse } from '../utils/JSONParse'
  *       412:
  *         $ref: '#/components/responses/412'
  */
-export const createGroup = wrap(async (req: Request, res: Response) => {
+export const editGroup = wrap(async (req: Request, res: Response) => {
     const userId: UID = res.locals.uid
-    await assertNewResourceCreationGranted(userId)
+    const groupId: GroupId = req.params.groupId
+    await assertGroupEditAllowed(userId, groupId)
 
     const name = req.body.name
-    const members = JSONParse(req.body.members || '[]')
 
-    const groupId = await GroupDao.add(userId, name, members)
     await GroupDao.update({
         id: groupId,
+        name,
     })
 
-    res.send({
-        groupId,
-    })
+    res.status(200).send()
 })

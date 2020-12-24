@@ -11,7 +11,7 @@ import { UID } from '../types/uid'
 
 export interface GroupEditData {
     id: GroupId
-    name: string
+    name?: string
 }
 
 export class GroupDao {
