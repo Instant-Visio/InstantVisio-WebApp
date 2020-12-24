@@ -117,6 +117,11 @@ export const swaggerDefinition = {
                 value:
                     '[{"email": "user@example.com", "lang": "en"}, {"phone": "+33600000000", "lang":"fr"}, {"phone": "+33600000000", lang:"fr", country:"en"}]',
             },
+            Members: {
+                summary: 'Members',
+                value:
+                    '["aeffokp234cxLE2cm9kf9gdlnc2", "po9ALC30dzJZ1ocan13dkczk3"]',
+            },
         },
         parameters: {
             room: {
@@ -152,6 +157,37 @@ export const swaggerDefinition = {
                     type: 'boolean',
                     in: 'x-www-form-urlencoded',
                 },
+            },
+            group: {
+                members: {
+                    name: 'members',
+                    description:
+                        'Group members user ids (initial or to add/remove)',
+                    in: 'x-www-form-urlencoded',
+                    required: false,
+                    type: 'string',
+                    examples: {
+                        example: {
+                            $ref: '#/components/examples/Members',
+                        },
+                    },
+                },
+            },
+        },
+        responses: {
+            400: {
+                description:
+                    'request content (x-www-form-urlencoded) not correct',
+            },
+            401: {
+                description: 'missing authorization bearer token',
+            },
+            403: {
+                description: 'authorization header present but not valid',
+            },
+            412: {
+                description:
+                    'authorization header present but not formatted correctly',
             },
         },
     },

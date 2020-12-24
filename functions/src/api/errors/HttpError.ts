@@ -36,6 +36,12 @@ export class ForbiddenError extends HttpError {
     }
 }
 
+export class GroupEditForbiddenError extends ForbiddenError {
+    constructor() {
+        super('Group edit forbidden')
+    }
+}
+
 export class NotFoundError extends HttpError {
     constructor(message?: string) {
         super(404, message || 'Not Found')
@@ -45,6 +51,12 @@ export class NotFoundError extends HttpError {
 export class RoomNotFoundError extends NotFoundError {
     constructor(message?: string) {
         super(message || 'Room Not Found')
+    }
+}
+
+export class GroupNotFoundError extends NotFoundError {
+    constructor() {
+        super('Group Not Found')
     }
 }
 

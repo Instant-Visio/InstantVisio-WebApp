@@ -3,7 +3,7 @@ import { createTwilioRoom } from './service/createTwilioRoom'
 import { NewRoomResponse } from '../../../types/NewRoomResponse'
 import { wrap } from 'async-middleware'
 import { UID } from '../../../types/uid'
-import { assertNewRoomCreationGranted } from '../subscription/assertNewRoomCreationGranted'
+import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { RoomId } from '../../../types/Room'
 import { Timestamp } from '../../../firebase/firebase'
 import { RoomDao } from '../../../db/RoomDao'
@@ -114,7 +114,7 @@ export const createRoom = async ({
     destinations?: string
     sendsAt?: string
 }): Promise<NewRoomResponse> => {
-    await assertNewRoomCreationGranted(userId)
+    await assertNewResourceCreationGranted(userId)
 
     let roomId: RoomId
     const roomPassword =

@@ -3,6 +3,7 @@ export const COLLECTIONS = {
     rooms: 'rooms',
     users: 'users',
     reminders: 'reminders',
+    groups: 'groups',
 }
 export const SUBSCRIPTIONS = {
     manual: 'manual',
