@@ -107,7 +107,7 @@ npm run serve
     - branch name: you can use `issueNumber_feature-desc` but you are free to choose what you need
     - draft Pull Request for early on WIP codes (if needed)
     - public the PR and submit it for the review
-    - review: add 2 or more reviewers, one of them being either [MattiaPrimavera](https://github.com/MattiaPrimavera) or [HugoGresse](https://github.com/HugoGresse). At least one approve for the PR to be considered as accepted and ready to be merged. Review comments should be marked as resolved after change made if agreed to. If needed, re-request the review after change mades.
+    - review: add 2 or more reviewers, one of them being either [MattiaPrimavera](https://github.com/MattiaPrimavera) or [HugoGresse](https://github.com/HugoGresse). At least one approve for the PR to be considered as accepted and ready to be merged. Review comments should be marked as resolved after change made if agreed to. If needed, re-request the review after change mades. Review submit should be `Request change` or `Approve`, only use `Comment` if this is just light discussion which are not important. 
     - Pull Request are merged using `Squash & merge`
     - Pull Request description: anything you think is necessary to understand the code scope, linked issue, etc. Add how to review notes if needed
     - Responsability: the PR assignee is responsible for updating the branch, iterating on review and merging the branch
