@@ -42,4 +42,5 @@ if (process.env.NODE_ENV === 'development') {
 export const functions = {
     newCall: firebase.functions().httpsCallable('newCall'),
     getToken: firebase.functions().httpsCallable('getToken'),
+    callRating: firebase.functions().httpsCallable('callRating'),
 }

@@ -4,6 +4,31 @@ import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { Redirect } from 'react-router-dom'
 import * as LocalStorage from '../../services/local-storage'
+import Card from '../../components/Card/Card'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import Rating from '@material-ui/lab/Rating'
+import { addCallRating } from '../../actions/addCallRating'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        maxWidth: 1500,
+        [theme.breakpoints.down('md')]: {
+            maxWidth: 300,
+        },
+    },
+}))
+
+const StyledRating = withStyles({
+    iconFilled: {
+      color: 'white',
+    },
+    iconHover: {
+      color: '#724BDD',
+    },
+  })(Rating);
+
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -13,6 +38,14 @@ const VideoCallFrame = ({
     videoFrame,
 }) => {
     const { t } = useTranslation('videocall')
+    const [redirectToRoot, setRedirectToRoot] = React.useState(false)
+    const [value, setValue] = React.useState<number | null>(0)
+    const classes = useStyles()
+    
+    const onChange = (_, value) => {
+        setValue(value)
+        value && addCallRating(value)
+    }  
 
     if (hasLeft) {
         LocalStorage.removeLastVideoCallId()
@@ -45,7 +78,39 @@ const VideoCallFrame = ({
                 <div className="waiting-participant">{participantStatus}</div>
             )}
 
-            {hasLeft && <Redirect to="/" />}
+            {redirectToRoot && <Redirect to="/" />}
+
+            {hasLeft && (
+                <div>
+                    <Card 
+                        title={t('leave-title-card')} 
+                        messageOne={t('leave-messageOne-card')} 
+                        messageTwo={t('leave-messageTwo-card')} 
+                        labelBtnNewCall={t('leave-labelBtnNewCall-card')}
+                        onClick={(val) => setRedirectToRoot(val)} 
+                    />
+                    <Grid
+                        container
+                        justify="center"
+                        alignItems="center"
+                        className={classes.root}>
+                        <Typography
+                            style={{ textAlign: 'center', marginTop: 20 }}
+                            variant="h5"
+                            component="h6">
+                            {t('leave-help-us-message')}
+                        </Typography>
+                    </Grid>
+                    <Grid container justify="center" alignItems="center">
+                        <StyledRating
+                            name="instantvisio-feedback"
+                            value={value}
+                            precision={1}
+                            onChange={onChange}
+                        />
+                    </Grid>
+                </div>
+            )}
         </IframeContainer>
     )
 }
