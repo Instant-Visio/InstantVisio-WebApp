@@ -11,6 +11,11 @@ import { editReminder } from './reminders/editReminder'
 import { deleteReminder } from './reminders/deleteReminder'
 import { getReminders } from './reminders/getReminders'
 import { getUser } from './users/getUser'
+import { createGroup } from './group/createGroup'
+import { editGroup } from './group/editGroup'
+import { getGroup } from './group/getGroup'
+import { addMembersToGroup } from './group/addMembersToGroup'
+import { removeMembersFromGroup } from './group/removeMembersFromGroup'
 
 const router = express.Router()
 router.use(authenticateJWTMiddleware)
@@ -26,5 +31,12 @@ router.post('/rooms/:roomId/reminders/', createReminderRoute)
 router.patch('/rooms/:roomId/reminders/:reminderId', editReminder)
 router.delete('/rooms/:roomId/reminders/:reminderId', deleteReminder)
 router.get('/users/:userId/', getUser)
+
+// Group
+router.post('/groups/', createGroup)
+router.patch('/groups/:groupId', editGroup)
+router.get('/groups/:groupId', getGroup)
+router.post('/groups/:groupId/addMembers', addMembersToGroup)
+router.delete('/groups/:groupId/removeMembers', removeMembersFromGroup)
 
 export default router

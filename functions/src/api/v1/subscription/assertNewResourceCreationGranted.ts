@@ -2,7 +2,7 @@ import { UID } from '../../../types/uid'
 import { PaymentRequiredError } from '../../errors/HttpError'
 import { UserDao } from '../../../db/UserDao'
 
-export const assertNewRoomCreationGranted = async (userId: UID) => {
+export const assertNewResourceCreationGranted = async (userId: UID) => {
     const user = await UserDao.get(userId)
     if (!user.subscription.isActive) {
         throw new PaymentRequiredError(
