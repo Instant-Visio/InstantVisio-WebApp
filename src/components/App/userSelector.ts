@@ -9,3 +9,9 @@ export const selectUser = createSelector(
 )
 export const selectToken = createSelector(selectUser, ({ token }) => token)
 export const isLoading = ({ user }) => user.isLoading
+
+export const selectIsPremiumUser = createSelector(
+    selectUser,
+    selectToken,
+    (user, token) => token && !user.isAnonymous
+)
