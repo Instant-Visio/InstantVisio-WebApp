@@ -162,7 +162,7 @@ export const swaggerDefinition = {
                 members: {
                     name: 'members',
                     description:
-                        'Group members (object with name & user id) (initial or to add/remove). Name not needed fr remove operations',
+                        'Group members (object with name & user id) (initial or to add/remove). Name not needed for remove operations',
                     in: 'x-www-form-urlencoded',
                     required: false,
                     type: 'string',

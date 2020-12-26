@@ -11,7 +11,7 @@ import { JSONParse } from '../utils/JSONParse'
  * @swagger
  * /v1/groups/{groupId}/addMembers:
  *   post:
- *     description: Add members an existing group, only allowed for the group owner. It will not check if the user id is existing.
+ *     description: Add members an existing group, only allowed for the group owner. It will not check if the user id exist.
  *     tags:
  *       - groups
  *     consumes:

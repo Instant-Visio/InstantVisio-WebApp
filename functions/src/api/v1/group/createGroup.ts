@@ -54,7 +54,6 @@ export const createGroup = wrap(async (req: Request, res: Response) => {
         id: groupId,
     })
 
-    // Add new names array
     res.send({
         groupId,
     })
