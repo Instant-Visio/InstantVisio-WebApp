@@ -4,11 +4,12 @@ import { gdprHandler } from '../../utils/gdpr'
 import Router from './Router'
 import { IonApp, IonHeader } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
-import Login from '../Login'
 import AppBar from './AppBar/AppBar'
 import styled from 'styled-components'
 import Snackbar from './Snackbar/Snackbar'
 import { PushNotifications } from './PushNotifications/PushNotifications'
+import LoginModal from '../LoginModal/LoginModal'
+import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
 declare global {
     interface Window {
         iv: any
@@ -49,8 +50,8 @@ const App = () => {
         <IonApp className="App">
             <PushNotifications />
             <Snackbar />
-
-            <Login />
+            <AuthStateChangedListener />
+            <LoginModal />
             <IonReactRouter>
                 <IonHeader id="topbar">
                     <AppBar />

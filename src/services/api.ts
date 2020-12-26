@@ -19,9 +19,13 @@ export class Api {
 
     async joinRoom(
         roomId: RoomId,
-        password: string
+        participantName: string,
+        password: string | null
     ): Promise<JoinRoomResponse> {
-        return this.post(`/rooms/${roomId}/join`, { password })
+        return this.post(`/rooms/${roomId}/join`, {
+            participantName,
+            password,
+        })
     }
 
     async inviteParticipants(
@@ -44,6 +48,10 @@ export class Api {
             },
             body: data ? JSON.stringify(data) : null,
         })
+
+        if (response.status !== 200 && response.status !== 204) {
+            throw new Error(response.statusText)
+        }
         return response.json()
     }
 }

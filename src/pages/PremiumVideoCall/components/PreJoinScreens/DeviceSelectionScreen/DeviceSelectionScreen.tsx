@@ -20,7 +20,6 @@ import ToggleAudioButton from '../../Buttons/ToggleAudioButton/ToggleAudioButton
 import ToggleVideoButton from '../../Buttons/ToggleVideoButton/ToggleVideoButton'
 import { useAppState } from '../../../state'
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext'
-import { Api } from '../../../../../services/api'
 import { selectToken } from '../../../../../components/App/userSelector'
 import { useSelector, useDispatch } from 'react-redux'
 import { RoomId } from '../../../../../../types/Room'
@@ -83,7 +82,7 @@ export default function DeviceSelectionScreen({
     setStep,
 }: DeviceSelectionScreenProps) {
     const classes = useStyles()
-    const { isFetching } = useAppState()
+    const { isFetching, getTwilioVideoToken } = useAppState()
     const token = useSelector(selectToken)
     const dispatch = useDispatch()
     const { connect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
@@ -93,12 +92,20 @@ export default function DeviceSelectionScreen({
 
     const handleJoin = async () => {
         setIsLoading(true)
-        const api = new Api(token)
-        const { jwtAccessToken } = await api.joinRoom(roomId, 'test-password') // TODO pass the password variable
-        dispatch(actions.setRoomId(roomId))
-        dispatch(actions.setHostName(name))
-        connect(jwtAccessToken, roomId)
-        setIsLoading(false)
+        try {
+            const twilioVideoToken = await getTwilioVideoToken(
+                token,
+                roomId,
+                name
+            )
+
+            dispatch(actions.setRoomId(roomId))
+            dispatch(actions.setHostName(name))
+            connect(twilioVideoToken, roomId)
+            setIsLoading(false)
+        } catch (err) {
+            setIsLoading(false)
+        }
     }
 
     return (
