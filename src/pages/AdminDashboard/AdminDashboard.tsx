@@ -1,49 +1,48 @@
 import React from 'react'
 import { IonContent } from '@ionic/react'
-import Typography from '@material-ui/core/Typography';
-import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from '@material-ui/core/Typography'
+import { ThemeProvider } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../../styles/muiTheme'
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import RestaurantIcon from '@material-ui/icons/Restaurant';
-import FingerprintIcon from '@material-ui/icons/Fingerprint';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Link from '@material-ui/core/Link';
-import CreateRoomForm from './CreateRoomForm';
-
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+import Paper from '@material-ui/core/Paper'
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
+import RestaurantIcon from '@material-ui/icons/Restaurant'
+import FingerprintIcon from '@material-ui/icons/Fingerprint'
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Link from '@material-ui/core/Link'
+import CreateRoomForm from './CreateRoomForm'
 
 const AdminDashboard = () => {
-
-    const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
+    const preventDefault = (event: React.SyntheticEvent) =>
+        event.preventDefault()
 
     const useStyles = makeStyles((theme: Theme) =>
         createStyles({
             icon: {
-                marginLeft: theme.spacing(2)
+                marginLeft: theme.spacing(2),
             },
             textRight: {
-                textAlign : 'right'
+                textAlign: 'right',
             },
-            list : {
-                paddingTop : 0,
-                paddingBottom : 0,
+            list: {
+                paddingTop: 0,
+                paddingBottom: 0,
             },
-            listItem : {
-                paddingTop : 0,
-                paddingBottom : 0,
-            }
-        }),    
-    );
+            listItem: {
+                paddingTop: 0,
+                paddingBottom: 0,
+            },
+        })
+    )
 
-    const classes = useStyles();
+    const classes = useStyles()
 
     return (
         <ThemeProvider theme={theme}>
@@ -59,7 +58,9 @@ const AdminDashboard = () => {
                             <Paper elevation={0}>
                                 <Grid container alignItems="center" spacing={2}>
                                     <Grid item>
-                                        <ChatBubbleOutlineIcon className={classes.icon}/>
+                                        <ChatBubbleOutlineIcon
+                                            className={classes.icon}
+                                        />
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="h6">
@@ -70,21 +71,33 @@ const AdminDashboard = () => {
                                 <Divider />
                                 <List component="nav" className={classes.list}>
                                     <ListItem className={classes.listItem}>
-                                        <ListItemText primary="Comité de pilotage"/>
-                                        <ListItemText primary="30 mai" primaryTypographyProps={{align:"right"}}/>
+                                        <ListItemText primary="Comité de pilotage" />
+                                        <ListItemText
+                                            primary="30 mai"
+                                            primaryTypographyProps={{
+                                                align: 'right',
+                                            }}
+                                        />
                                     </ListItem>
-                                    <Divider variant="middle"/>
+                                    <Divider variant="middle" />
                                     <ListItem className={classes.list}>
-                                        <ListItemText primary="Comité de pilotage"/>
-                                        <ListItemText primary="30 mai" primaryTypographyProps={{align:"right"}}/>
+                                        <ListItemText primary="Comité de pilotage" />
+                                        <ListItemText
+                                            primary="30 mai"
+                                            primaryTypographyProps={{
+                                                align: 'right',
+                                            }}
+                                        />
                                     </ListItem>
                                 </List>
                             </Paper>
-                            <Box m={6}/>
+                            <Box m={6} />
                             <Paper elevation={0}>
                                 <Grid container alignItems="center" spacing={2}>
                                     <Grid item>
-                                        <RestaurantIcon className={classes.icon}/>
+                                        <RestaurantIcon
+                                            className={classes.icon}
+                                        />
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="h6">
@@ -93,17 +106,19 @@ const AdminDashboard = () => {
                                     </Grid>
                                 </Grid>
                                 <Divider />
-                                <ListItem className={classes.list} >
-                                    <ListItemText primary="250 SMS consommés sur 500 disponibles"/>
+                                <ListItem className={classes.list}>
+                                    <ListItemText primary="250 SMS consommés sur 500 disponibles" />
                                 </ListItem>
                             </Paper>
 
-                            <Box m={6}/>
+                            <Box m={6} />
 
                             <Paper elevation={0}>
                                 <Grid container alignItems="center" spacing={2}>
                                     <Grid item>
-                                        <FingerprintIcon className={classes.icon}/>
+                                        <FingerprintIcon
+                                            className={classes.icon}
+                                        />
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="h6">
@@ -111,14 +126,18 @@ const AdminDashboard = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs className={classes.textRight}>
-                                        <Link href="#" onClick={preventDefault} variant="body2">
-                                            Cliquez ici pour copier le lien du token
+                                        <Link
+                                            href="#"
+                                            onClick={preventDefault}
+                                            variant="body2">
+                                            Cliquez ici pour copier le lien du
+                                            token
                                         </Link>
                                     </Grid>
                                 </Grid>
                                 <Divider />
                                 <ListItem className={classes.list}>
-                                    <ListItemText primary="fjqdkjvq7gjhqdjfd9fsdf767"/>
+                                    <ListItemText primary="fjqdkjvq7gjhqdjfd9fsdf767" />
                                 </ListItem>
                             </Paper>
                         </Grid>
