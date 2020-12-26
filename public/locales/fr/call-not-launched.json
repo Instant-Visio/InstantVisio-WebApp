@@ -1,0 +1,5 @@
+{
+    "discussion-is-not-launched": "La discussion en visio de ${ROOM(id).name} n'est pas commencée",
+    "takes-places-at": "Elle aura lieu le vendredi 8 octobre à ${ROOM(id).time}",
+    "too-early": "Vous êtes arrivé un peu tôt."
+}
