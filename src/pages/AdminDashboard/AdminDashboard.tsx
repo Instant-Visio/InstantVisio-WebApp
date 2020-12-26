@@ -47,7 +47,7 @@ const AdminDashboard = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <IonContent>
+            <IonContent style={{ '--background': 'white' }}>
                 <Container maxWidth="lg">
                     <Box m={6} />
                     <Grid container spacing={3}>
