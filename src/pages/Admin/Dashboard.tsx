@@ -1,5 +1,4 @@
 import React from 'react'
-import { IonContent } from '@ionic/react'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { Button } from '@material-ui/core'
@@ -24,13 +23,9 @@ export default function Dashboard() {
     }
 
     return (
-        <IonContent style={{ '--background': 'white' }}>
-            <InformationBlock>
-                {t('dashboard.welcome')}
-                <Button onClick={() => startPremiumVideoCall()}>
-                    Start Call
-                </Button>
-            </InformationBlock>
-        </IonContent>
+        <InformationBlock>
+            {t('dashboard.welcome')}
+            <Button onClick={() => startPremiumVideoCall()}>Start Call</Button>
+        </InformationBlock>
     )
 }

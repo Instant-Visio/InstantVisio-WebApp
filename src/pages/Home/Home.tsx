@@ -15,12 +15,10 @@ import {
 } from '../../utils/support'
 import Logo from '../../components/Logo/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
-import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
 import { authInstance } from '../../firebase/firebase'
 import { isAuthEmulatorEnabled } from '../../utils/emulators'
-import { selectToken } from '../../components/App/userSelector'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { EmulatorLogin } from './EmulatorLogin'
 import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
 
@@ -57,7 +55,6 @@ const KnowMoreMobile = styled.p`
 
 export default function Home({ location }) {
     const { t } = useTranslation(['home', 'common', 'premium-video'])
-    const token = useSelector(selectToken)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const isMobile = useDetectMobileOrTablet()
@@ -94,7 +91,7 @@ export default function Home({ location }) {
     }
 
     return (
-        <IonContent>
+        <>
             {isAuthEmulatorEnabled() && (
                 <EmulatorLogin authInstance={authInstance} />
             )}
@@ -171,6 +168,6 @@ export default function Home({ location }) {
                     </MobileContent>
                 </WrapperMobile>
             )}
-        </IonContent>
+        </>
     )
 }

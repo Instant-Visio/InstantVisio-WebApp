@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { showLoginModal } from '../../LoginModal/loginModalActions'
 import { signOut } from '../../../actions/userActions'
 import { selectToken, selectUser } from '../userSelector'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -39,6 +40,8 @@ const AppBar = () => {
     const user = useSelector(selectUser)
     const { t } = useTranslation('common')
     const dispatch = useDispatch()
+    const history = useHistory()
+    const isPremiumUser = hasToken && !user.isAnonymous
 
     return (
         <div className={classes.root}>
@@ -54,10 +57,11 @@ const AppBar = () => {
                         <Button color="primary">
                             {t('appBar.joinVisioButton')}
                         </Button>
-                        {hasToken && !user.isAnonymous ? (
+                        {isPremiumUser ? (
                             <Button
                                 onClick={() => {
                                     dispatch(signOut())
+                                    history.replace('/')
                                 }}>
                                 Sign out
                             </Button>

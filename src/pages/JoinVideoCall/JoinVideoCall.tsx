@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import DefaultLayout from '../../layout/Default/Default'
-import { IonContent } from '@ionic/react'
 import { Redirect, Link } from 'react-router-dom'
 import * as LocalStorage from '../../services/local-storage'
 import styled from 'styled-components'
@@ -26,7 +25,7 @@ const JoinVideoCall = () => {
     }, [setLastVideoCallId])
 
     return (
-        <IonContent>
+        <>
             {lastVideoCallId ? (
                 <Redirect to={`/visio/${lastVideoCallId}`} />
             ) : (
@@ -38,7 +37,7 @@ const JoinVideoCall = () => {
                     </CenteredText>
                 </DefaultLayout>
             )}
-        </IonContent>
+        </>
     )
 }
 
