@@ -25,6 +25,7 @@ import ProtectedRoute from './ProtectedRoute'
 import { selectUser } from './userSelector'
 import { useSelector } from 'react-redux'
 import { IonContent } from '@ionic/react'
+import AcceptCookies from '../../pages/AcceptCookies/AcceptCookies'
 
 const Dashboard = lazy(() => import('../../pages/Admin/Dashboard'))
 
@@ -87,6 +88,7 @@ const Router = () => {
                         component={PremiumVideoPage}
                     />
                     <Route path={`/welcome`} component={WelcomeCall} />
+                    <Route path={'/accept-cookies'} component={AcceptCookies} />
                     <Route
                         path={'/permissions-audio-video'}
                         component={PermissionVideoAudio}
