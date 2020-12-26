@@ -16,16 +16,9 @@ import { RoomDao, RoomEditData } from '../../../db/RoomDao'
  *     produces:
  *     - application/json
  *     parameters:
- *       - name: password
- *         description: (optional) The room password
- *         in: x-www-form-urlencoded
- *         required: false
- *         type: string
- *       - name: startAt
- *         description: (optional) The UTC timestamp in seconds at which the meeting is scheduled to start.
- *         in: x-www-form-urlencoded
- *         required: false
- *         type: integer
+ *       - $ref: '#/components/parameters/room/password'
+ *       - $ref: '#/components/parameters/room/startAt'
+ *       - $ref: '#/components/parameters/room/name'
  *       - $ref: '#/components/parameters/room/hideChatbot'
  *     responses:
  *       204:
@@ -47,16 +40,17 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
         id: roomId,
     }
 
-    if (req.body.password) {
-        dataToEdit['password'] = req.body.password
+    if (req.body?.password?.length) {
+        dataToEdit.password = req.body.password
     }
     if (req.body.hideChatbot) {
         dataToEdit['hideChatbot'] = req.body.hideChatbot === 'true'
     }
     if (req.body.startTimestamp) {
-        dataToEdit['startAt'] = Timestamp.fromMillis(
-            parseInt(req.body.startAt) * 1000
-        )
+        dataToEdit.startAt = Timestamp.fromMillis(+req.body.startAt * 1000)
+    }
+    if (req.body.name) {
+        dataToEdit.startAt = req.body.name
     }
 
     await RoomDao.update(dataToEdit)
