@@ -1,15 +1,17 @@
 import { wrap } from 'async-middleware'
 import { Request, Response } from 'express'
-import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { UID } from '../../../types/uid'
+import { assertGroupEditAllowed } from './groupRights'
+import { GroupId } from '../../../types/Group'
 import { GroupDao } from '../../../db/GroupDao'
+import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
- * /v1/groups/:
+ * /v1/groups/{groupId}/addMembers:
  *   post:
- *     description: Create a new group. The user within the token will be the group owner (not editable yet).
+ *     description: Add members an existing group, only allowed for the group owner. It will not check if the user id is existing.
  *     tags:
  *       - groups
  *     consumes:
@@ -17,20 +19,10 @@ import { JSONParse } from '../utils/JSONParse'
  *     produces:
  *     - application/json
  *     parameters:
- *       - name: name
- *         description: The group name
- *         in: x-www-form-urlencoded
- *         required: true
- *         type: string
  *       - $ref: '#/components/parameters/group/members'
  *     responses:
- *       201:
- *         description: Group created with success
- *         content:
- *           application/json:
- *             example: {
- *               groupId: "aZxo2xskIaZxo2xskI"
- *             }
+ *       200:
+ *         description: Members added with success
  *       400:
  *         $ref: '#/components/responses/400'
  *       401:
@@ -42,20 +34,15 @@ import { JSONParse } from '../utils/JSONParse'
  *       412:
  *         $ref: '#/components/responses/412'
  */
-export const createGroup = wrap(async (req: Request, res: Response) => {
+export const addMembersToGroup = wrap(async (req: Request, res: Response) => {
     const userId: UID = res.locals.uid
+    const groupId: GroupId = req.params.groupId
     await assertNewResourceCreationGranted(userId)
+    await assertGroupEditAllowed(userId, groupId)
 
-    const name = req.body.name
     const members = JSONParse(req.body.members || '[]')
 
-    const groupId = await GroupDao.add(userId, name, members)
-    await GroupDao.update({
-        id: groupId,
-    })
+    await GroupDao.addMembers(groupId, members)
 
-    // Add new names array
-    res.send({
-        groupId,
-    })
+    res.status(200).send()
 })

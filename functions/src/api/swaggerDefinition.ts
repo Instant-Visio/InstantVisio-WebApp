@@ -120,7 +120,7 @@ export const swaggerDefinition = {
             Members: {
                 summary: 'Members',
                 value:
-                    '["aeffokp234cxLE2cm9kf9gdlnc2", "po9ALC30dzJZ1ocan13dkczk3"]',
+                    '[{"name":"Aragorn", "id": "aeffokp234cxLE2cm9kf9gdlnc2"}, {"name": "Fili", "id": "po9ALC30dzJZ1ocan13dkczk3"}]',
             },
         },
         parameters: {
@@ -162,7 +162,7 @@ export const swaggerDefinition = {
                 members: {
                     name: 'members',
                     description:
-                        'Group members user ids (initial or to add/remove)',
+                        'Group members (object with name & user id) (initial or to add/remove). Name not needed fr remove operations',
                     in: 'x-www-form-urlencoded',
                     required: false,
                     type: 'string',
@@ -182,8 +182,13 @@ export const swaggerDefinition = {
             401: {
                 description: 'missing authorization bearer token',
             },
+            402: {
+                description:
+                    'Payment required, quota exceeded or subscription period ended',
+            },
             403: {
-                description: 'authorization header present but not valid',
+                description:
+                    'authorization header present but not valid, or access forbidden',
             },
             412: {
                 description:

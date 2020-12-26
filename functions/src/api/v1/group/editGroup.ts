@@ -1,14 +1,14 @@
 import { wrap } from 'async-middleware'
 import { Request, Response } from 'express'
 import { UID } from '../../../types/uid'
-import { assertGroupEditAllowed } from './assertGroupEditAllowed'
+import { assertGroupEditAllowed } from './groupRights'
 import { GroupId } from '../../../types/Group'
 import { GroupDao } from '../../../db/GroupDao'
 
 /**
  * @swagger
  * /v1/groups/{groupId}/:
- *   post:
+ *   patch:
  *     description: Edit an existing group, only allowed for the group owner. This is not to edit the members of the group (for that, use add/removeMembers route)
  *     tags:
  *       - groups

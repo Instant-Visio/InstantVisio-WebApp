@@ -42,6 +42,12 @@ export class GroupEditForbiddenError extends ForbiddenError {
     }
 }
 
+export class GroupReadForbiddenError extends ForbiddenError {
+    constructor() {
+        super('Group read forbidden')
+    }
+}
+
 export class NotFoundError extends HttpError {
     constructor(message?: string) {
         super(404, message || 'Not Found')
