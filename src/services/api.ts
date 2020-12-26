@@ -2,6 +2,7 @@ import { JWTToken } from '../../types/JWT'
 import { JoinRoomResponse } from '../../types/JoinRoomResponse'
 import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { RoomId } from '../../types/Room'
+import axios from 'axios'
 export class Api {
     baseUrl: string | undefined
     jwtToken: string
@@ -40,18 +41,22 @@ export class Api {
     }
 
     async post(apiUrl: string, data: any): Promise<any> {
-        const response = await fetch(`${this.baseUrl}${apiUrl}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${this.jwtToken}`,
-            },
-            body: data ? JSON.stringify(data) : null,
-        })
-
-        if (response.status !== 200 && response.status !== 204) {
-            throw new Error(response.statusText)
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.jwtToken}`,
         }
-        return response.json()
+
+        try {
+            const { data: responseData } = await axios({
+                headers,
+                method: 'post',
+                url: `${this.baseUrl}${apiUrl}`,
+                data,
+            })
+            return responseData
+        } catch (err) {
+            const { error: errorMessage } = err.response.data
+            throw new Error(errorMessage)
+        }
     }
 }

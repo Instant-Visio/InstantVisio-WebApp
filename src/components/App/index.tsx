@@ -5,7 +5,6 @@ import Router from './Router'
 import { IonApp, IonHeader } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import AppBar from './AppBar/AppBar'
-import styled from 'styled-components'
 import Snackbar from './Snackbar/Snackbar'
 import { PushNotifications } from './PushNotifications/PushNotifications'
 import LoginModal from '../LoginModal/LoginModal'
@@ -17,10 +16,6 @@ declare global {
         $crisp: any
     }
 }
-
-const StyledRouter = styled.div`
-    margin-top: 1rem;
-`
 
 const App = () => {
     useEffect(() => {
@@ -56,9 +51,7 @@ const App = () => {
                 <IonHeader id="topbar">
                     <AppBar />
                 </IonHeader>
-                <StyledRouter>
-                    <Router />
-                </StyledRouter>
+                <Router />
             </IonReactRouter>
         </IonApp>
     )

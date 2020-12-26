@@ -11,13 +11,12 @@ import { MuiThemeProvider } from '@material-ui/core/styles'
 import App from './App'
 import AppStateProvider, { useAppState } from './state'
 import {
-    BrowserRouter as Router,
+    // BrowserRouter as Router,
     Redirect,
-    Route,
     Switch,
 } from 'react-router-dom'
 import ErrorDialog from './components/ErrorDialog/ErrorDialog'
-import LoginPage from './components/LoginPage/LoginPage'
+// import LoginPage from './components/LoginPage/LoginPage'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import theme from './theme'
 import './types'
@@ -46,22 +45,25 @@ export const PremiumVideoPage = () => {
     return (
         <MuiThemeProvider theme={theme}>
             <CssBaseline />
-            <Router>
-                <AppStateProvider>
-                    <Switch>
+            <AppStateProvider>
+                <Switch>
+                    {/*
+                        Temporarily commented, since we only access PremiumVideo page through a link
+                        containing the room name and password for the moment
+
                         <PrivateRoute exact path="/premium-video">
                             <TwilioVideoApp />
                         </PrivateRoute>
-                        <PrivateRoute path="/premium-video/room/:URLRoomName">
-                            <TwilioVideoApp />
-                        </PrivateRoute>
-                        <Route path="/premium-video/login">
-                            <LoginPage />
-                        </Route>
-                        <Redirect to="/" />
-                    </Switch>
-                </AppStateProvider>
-            </Router>
+                    */}
+                    <PrivateRoute path="/premium-video/room/:URLRoomName">
+                        <TwilioVideoApp />
+                    </PrivateRoute>
+                    {/* <Route path="/premium-video/login">
+                        <LoginPage />
+                    </Route> */}
+                    <Redirect to="/" />
+                </Switch>
+            </AppStateProvider>
         </MuiThemeProvider>
     )
 }

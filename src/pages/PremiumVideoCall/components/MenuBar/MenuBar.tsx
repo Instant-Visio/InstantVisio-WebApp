@@ -70,6 +70,10 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 )
 
+const formatRoomName = (roomName) => {
+    return roomName.indexOf('#') ? roomName.split('#')[0] : roomName
+}
+
 export default function MenuBar() {
     const classes = useStyles()
     const { isSharingScreen, toggleScreenShare } = useVideoContext()
@@ -78,6 +82,7 @@ export default function MenuBar() {
     const { room } = useVideoContext()
     const roomId = useSelector(selectRoomId)
     const hostName = useSelector(selectHostName)
+    const roomName = formatRoomName(room.name)
 
     return (
         <>
@@ -99,7 +104,7 @@ export default function MenuBar() {
                 <Grid container justify="space-around" alignItems="center">
                     <Hidden smDown>
                         <Grid style={{ flex: 1 }}>
-                            <Typography variant="body1">{room.name}</Typography>
+                            <Typography variant="body1">{roomName}</Typography>
                         </Grid>
                     </Hidden>
                     <Grid item>

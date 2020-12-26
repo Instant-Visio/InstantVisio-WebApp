@@ -22,6 +22,7 @@ import PermissionVideoAudio from '../../pages/PermissionVideoAudio/PermissionVid
 import ProtectedRoute from './ProtectedRoute'
 import { selectUser } from './userSelector'
 import { useSelector } from 'react-redux'
+import { IonContent } from '@ionic/react'
 
 const Dashboard = lazy(() => import('../../pages/Admin/Dashboard'))
 
@@ -31,63 +32,68 @@ const Router = () => {
 
     return (
         <IonRouterOutlet>
-            <Switch>
-                <Route path="/" exact component={Home} />
-                <Route
-                    path={`/${t('url.video-call')}/:videoName`}
-                    component={VideoCallPrecheck}
-                />
-                <Route
-                    path={`/${t('url.video-call')}`}
-                    component={JoinVideoCall}
-                />
-                <Route
-                    path={`/${t('url.legal-mentions')}`}
-                    exact
-                    component={LegalMentions}
-                />
-                <Route
-                    path={`/${t('url.personal-data')}`}
-                    exact
-                    component={PersonalData}
-                />
-                <Route path={`/${t('url.blog')}`} exact component={Blog} />
-                <Route
-                    path={`/${t('url.blog')}/:post`}
-                    exact
-                    component={Blog}
-                />
-                <Route
-                    path={`/${t('url.media')}`}
-                    exact
-                    component={MediaNews}
-                />
+            <IonContent>
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route
+                        path={`/${t('url.video-call')}/:videoName`}
+                        component={VideoCallPrecheck}
+                    />
+                    <Route
+                        path={`/${t('url.video-call')}`}
+                        component={JoinVideoCall}
+                    />
+                    <Route
+                        path={`/${t('url.legal-mentions')}`}
+                        exact
+                        component={LegalMentions}
+                    />
+                    <Route
+                        path={`/${t('url.personal-data')}`}
+                        exact
+                        component={PersonalData}
+                    />
+                    <Route path={`/${t('url.blog')}`} exact component={Blog} />
+                    <Route
+                        path={`/${t('url.blog')}/:post`}
+                        exact
+                        component={Blog}
+                    />
+                    <Route
+                        path={`/${t('url.media')}`}
+                        exact
+                        component={MediaNews}
+                    />
 
-                <Route
-                    path={`/${t('url.credits')}`}
-                    exact
-                    component={Credits}
-                />
-                <Route
-                    path={`/${t('url.license')}`}
-                    exact
-                    component={License}
-                />
+                    <Route
+                        path={`/${t('url.credits')}`}
+                        exact
+                        component={Credits}
+                    />
+                    <Route
+                        path={`/${t('url.license')}`}
+                        exact
+                        component={License}
+                    />
 
-                <Route path={`/premium-video`} component={PremiumVideoPage} />
-                <Route path={`/welcome`} component={WelcomeCall} />
-                <Route
-                    path={'/permissions-audio-video'}
-                    component={PermissionVideoAudio}
-                />
+                    <Route
+                        path={`/premium-video`}
+                        component={PremiumVideoPage}
+                    />
+                    <Route path={`/welcome`} component={WelcomeCall} />
+                    <Route
+                        path={'/permissions-audio-video'}
+                        component={PermissionVideoAudio}
+                    />
 
-                <ProtectedRoute
-                    path="/admin"
-                    isAuthorized={!isAnonymous}
-                    component={Dashboard}
-                />
-                <Route component={NotFound} />
-            </Switch>
+                    <ProtectedRoute
+                        path="/admin"
+                        isAuthorized={!isAnonymous}
+                        component={Dashboard}
+                    />
+                    <Route component={NotFound} />
+                </Switch>
+            </IonContent>
         </IonRouterOutlet>
     )
 }
