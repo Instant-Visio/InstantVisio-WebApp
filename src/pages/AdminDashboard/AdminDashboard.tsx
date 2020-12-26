@@ -18,8 +18,10 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Link from '@material-ui/core/Link'
 import CreateRoomForm from './CreateRoomForm'
+import { useTranslation } from 'react-i18next'
 
 const AdminDashboard = () => {
+    const { t } = useTranslation('dashboard')
     const preventDefault = (event: React.SyntheticEvent) =>
         event.preventDefault()
 
@@ -64,7 +66,7 @@ const AdminDashboard = () => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="h6">
-                                            Vos discussions planifiées
+                                            {t('planned-discussions')}
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -101,13 +103,17 @@ const AdminDashboard = () => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="h6">
-                                            Votre conso
+                                            {t('consumption')}
                                         </Typography>
                                     </Grid>
                                 </Grid>
                                 <Divider />
                                 <ListItem className={classes.list}>
-                                    <ListItemText primary="250 SMS consommés sur 500 disponibles" />
+                                    <ListItemText
+                                        primary={`250 SMS ${t('consumed')} ${t(
+                                            'on'
+                                        )} 500 ${t('available')}`}
+                                    />
                                 </ListItem>
                             </Paper>
 
@@ -122,7 +128,7 @@ const AdminDashboard = () => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="h6">
-                                            Votre identifiant API
+                                            {t('api-identifier')}
                                         </Typography>
                                     </Grid>
                                     <Grid item xs className={classes.textRight}>
@@ -130,8 +136,7 @@ const AdminDashboard = () => {
                                             href="#"
                                             onClick={preventDefault}
                                             variant="body2">
-                                            Cliquez ici pour copier le lien du
-                                            token
+                                            {t('click-to-copy')}
                                         </Link>
                                     </Grid>
                                 </Grid>

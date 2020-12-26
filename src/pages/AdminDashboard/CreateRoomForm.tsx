@@ -27,10 +27,12 @@ import {
 } from '@material-ui/core/styles'
 import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
+import { useTranslation } from 'react-i18next'
 
 const Button = styled(MuiButton)(spacing)
 
 const CreateRoomForm = () => {
+    const { t } = useTranslation('dashboard')
     interface Values {
         roomName: string
         participants: Array<any>
@@ -173,15 +175,14 @@ const CreateRoomForm = () => {
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
                     <Form>
                         <Typography variant="h5" component="h1">
-                            Créer une discussion en visio
+                            {t('form.create-visio')}
                         </Typography>
                         <Box m={4} />
                         <Typography variant="h6" component="h2">
-                            Nom de la discussion
+                            {t('form.visio-name.title')}
                         </Typography>
                         <Typography variant="body1">
-                            Donner un nom à votre discussion pour la retrouver
-                            plus facilement.
+                            {t('form.visio-name.description')}
                         </Typography>
                         <Box m={2} />
                         <Field
@@ -189,21 +190,18 @@ const CreateRoomForm = () => {
                             component={TextField}
                             variant="outlined"
                             name="roomName"
-                            label="Réunion de rédaction"
+                            label={t('form.visio-name.placeholder')}
                         />
                         <Box m={4} />
                         <Typography variant="h6" component="h2">
-                            Liste des participants
+                            {t('form.participants.title')}
                         </Typography>
                         <Typography variant="body1">
-                            Notez ici les numéros de téléphone, les adresses
-                            email et les groupes de contact à qui vous souhaitez
-                            envoyer une invitation.
+                            {t('form.participants.description')}
                         </Typography>
                         <Box m={2} />
                         <Typography variant="body2">
-                            Les numéros de téléphone ne doivent pas contenir
-                            d'espace.
+                            {t('form.participants.description2')}
                         </Typography>
                         <Field
                             size="small"
@@ -227,7 +225,9 @@ const CreateRoomForm = () => {
                                         {...params}
                                         error={false}
                                         helperText={false}
-                                        label="Autocomplete"
+                                        label={t(
+                                            'form.participants.placeholder'
+                                        )}
                                         variant="outlined"
                                     />
                                 )
@@ -235,11 +235,10 @@ const CreateRoomForm = () => {
                         />
                         <Box m={4} />
                         <Typography variant="h6" component="h2">
-                            Planifier votre RDV en visio
+                            {t('form.plan-visio.title')}
                         </Typography>
                         <Typography variant="body1">
-                            Choisissez la date et l'heurede début de votre
-                            visio.
+                            {t('form.plan-visio.description')}
                         </Typography>
                         <Box m={2} />
                         <Field
@@ -247,7 +246,7 @@ const CreateRoomForm = () => {
                             size="small"
                             component={DateTimePicker}
                             inputVariant="outlined"
-                            placeholder="Cliquez pour choisir la date et l'heure"
+                            placeholder={t('form.date.placeholder')}
                             fullWidth
                             locale="fr"
                             format="dd MMMM yyyy à HH:MM"
@@ -261,7 +260,7 @@ const CreateRoomForm = () => {
                                 color="primary"
                                 disabled={isSubmitting}
                                 onClick={submitForm}>
-                                Je crée le RDV
+                                {t('form.submit')}
                             </Button>
                         </Box>
                     </Form>

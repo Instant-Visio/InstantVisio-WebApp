@@ -1,0 +1,31 @@
+{
+    "planned-discussinos": "Your planned visio",
+    "consumption": "Your consumption",
+    "api-identifier": "Your API identifier",
+    "click-to-copy": "Click here to copy the token link",
+    "on": "on",
+    "consumed": "consumed",
+    "available": "available",
+    "form": {
+        "create-visio": "Create Visio",
+        "visio-name": {
+            "title": "Visio title",
+            "description": "Give a title to your Visio to find it more easily.",
+            "placeholder": "Example meeting"
+        },
+        "participants": {
+            "title": "Participants list",
+            "description": "Write here the telephone numbers, email addresses and contact groups you wish to send an invitation to.",
+            "description2": "Telephone numbers must not contain any 'space' character.",
+            "placeholder": "Autocomplete"
+        },
+        "plan-visio": {
+            "title": "Plan your Visio Meeting",
+            "description": "Pick date and time to start your Visio."
+        },
+        "date": {
+            "placeholder": "Click here to pick the date and time"
+        },
+        "submit": "Create Visio"
+    }
+}
