@@ -11,6 +11,7 @@ export type InvitationLangs =
 export interface InvitationDestination {
     email?: string
     phone?: string
+    topic?: string
     lang: InvitationLangs
     country: string
 }

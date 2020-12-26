@@ -1,6 +1,7 @@
 export enum NotificationType {
     SmsNotificationType = 1,
     EmailNotificationType,
+    PushNotificationType,
 }
 
 export interface BaseNotificationParams {
@@ -20,6 +21,14 @@ export interface EmailNotificationParams extends BaseNotificationParams {
     type: NotificationType.EmailNotificationType
     email: string
     emailFrom: string
+}
+
+export interface PushNotificationParams extends BaseNotificationParams {
+    type: NotificationType.PushNotificationType
+    topic: string
+    additionalData: {
+        [key: string]: string
+    }
 }
 
 export interface NotificationContent {

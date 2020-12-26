@@ -17,7 +17,7 @@ import { JSONParse } from '../utils/JSONParse'
  * @swagger
  * /v1/rooms/{roomId}/inviteParticipants:
  *   post:
- *     description: Send an invitation to one or many participants, via email and/or sms. It can combine email and sms destinations, as well as specific lang for each participants. Email & phone can be used at the same time, email will be sent first. <br/> Default lang is "en". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improve the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
+ *     description: Send an invitation to one or many participants, via email and/or sms and/or push notification with a given groupId. It can combine all notification types, as well as specific lang for each participants. <br/> Default lang is "en". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improve the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
  *     tags:
  *       - rooms
  *     consumes:
@@ -36,7 +36,7 @@ import { JSONParse } from '../utils/JSONParse'
  *         required: true
  *         examples:
  *            mixed:
- *                summary: Mixed email, sms and languages
+ *                summary: Mixed email, sms, groupId and languages
  *                $ref: '#/components/examples/Destinations'
  *         schema:
  *            type: string
@@ -49,6 +49,7 @@ import { JSONParse } from '../utils/JSONParse'
  *               example: {
  *                   emailsSent: ["participant@example.com", "anotherParticipant@example.com"],
  *                   smssSent: ["+33600000000"],
+ *                   pushsSent: ["groupId"],
  *               }
  *       400:
  *         description: request content (x-www-form-urlencoded) not correct, or zero invitation delivered
@@ -117,9 +118,10 @@ export const inviteParticipant = async ({
         roomUrl: roomUrl,
     }
 
-    const { emailsSent, smssSent } = await sendNotifications(
+    const { emailsSent, smssSent, pushsSent } = await sendNotifications(
         invitationsDestinations,
-        notificationContent
+        notificationContent,
+        roomId
     )
 
     if (emailsSent.length === 0 && smssSent.length === 0) {
@@ -129,15 +131,18 @@ export const inviteParticipant = async ({
     await UserDao.updateUsage(userId, {
         sentSMSs: increment(smssSent.length),
         sentEmails: increment(emailsSent.length),
+        pushsSent: increment(pushsSent.length),
     })
 
     return {
         emailsSent,
         smssSent,
+        pushsSent,
     }
 }
 
 export interface InviteParticipantsResponse {
     emailsSent: string[]
     smssSent: string[]
+    pushsSent: string[]
 }
