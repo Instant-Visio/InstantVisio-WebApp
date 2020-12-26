@@ -52,15 +52,16 @@ html {
 
 ion-content {
     --background: #323742;
-}
-
-ion-content {
     --padding-top: 5rem;
 }
 
 @media screen and (max-width: 767px) {
     ion-content {
         --padding-top: 4rem;
+    }
+
+    ion-item {
+        width: 100%;
     }
 }
 
