@@ -12,6 +12,12 @@ export class InternalServerError extends HttpError {
     }
 }
 
+export class MessagingServerError extends HttpError {
+    constructor(message?: string) {
+        super(500, message || 'Messaging Internal Server Error')
+    }
+}
+
 export class BadRequestError extends HttpError {
     constructor(message?: string) {
         super(400, message || 'Bad Request')
