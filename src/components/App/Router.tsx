@@ -20,6 +20,7 @@ import { IonRouterOutlet } from '@ionic/react'
 import License from '../../pages/License/License'
 import WelcomeCall from '../../pages/WelcomeCall/WelcomeCall'
 import PermissionVideoAudio from '../../pages/PermissionVideoAudio/PermissionVideoAudio'
+import CallNotLaunched from '../../pages/WelcomeCall/CallNotLaunched'
 import ProtectedRoute from './ProtectedRoute'
 import { selectUser } from './userSelector'
 import { useSelector } from 'react-redux'
@@ -91,6 +92,16 @@ const Router = () => {
                     <Route
                         path={'/permissions-audio-video'}
                         component={PermissionVideoAudio}
+                    />
+
+                    <Route
+                        path={`/premium-video`}
+                        component={PremiumVideoPage}
+                    />
+                    <Route path={`/welcome`} component={WelcomeCall} />
+                    <Route
+                        path={'/call-not-launched'}
+                        component={CallNotLaunched}
                     />
 
                     <ProtectedRoute
