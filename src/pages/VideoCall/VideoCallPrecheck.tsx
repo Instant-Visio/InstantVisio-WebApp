@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import CapabilitiesDialog from './permissions/CapabilitiesDialog'
 import VideoCallPage from './VideoCall'
-import Footer from '../../components/Footer/Footer'
 import { CallContainer } from './VideoCallComponents'
 
 const VideoCallPrecheck = () => {
@@ -18,8 +17,6 @@ const VideoCallPrecheck = () => {
                 onGranted={() => setCheckPass(true)}
                 onSkip={() => setCheckPass(true)}
             />
-
-            <Footer />
         </>
     )
 }

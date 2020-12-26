@@ -8,6 +8,8 @@ import { increment } from '../../firebase/firebase'
 import { RoomDao } from '../../db/RoomDao'
 import { UserDao } from '../../db/UserDao'
 import { TwilioConstants } from '../v1/rooms/service/TwilioConstants'
+import { StatusCreated, StatusEnded } from '../../types/Room'
+import { convertTwilioId } from '../v1/rooms/service/twilioUtils'
 
 export const twilioStatusCallbackWebHook = wrap(
     async (req: Request, res: Response) => {
@@ -15,13 +17,29 @@ export const twilioStatusCallbackWebHook = wrap(
 
         const { StatusCallbackEvent, RoomName, ParticipantDuration } = req.body
 
+        const roomId = convertTwilioId(RoomName)
+
+        // Keep it there until development is done
+        console.log(roomId + ' - ' + StatusCallbackEvent)
         switch (StatusCallbackEvent) {
             case TwilioConstants.Event.PARTICIPANT_DISCONNECTED_EVENT:
-                const room = await RoomDao.get(RoomName)
+                const room = await RoomDao.get(roomId)
                 const participantDuration = parseInt(ParticipantDuration)
 
                 await UserDao.updateUsage(room.uid, {
                     participantSeconds: increment(participantDuration),
+                })
+                break
+            case TwilioConstants.Event.ROOM_CREATED:
+                await RoomDao.update({
+                    id: roomId,
+                    status: StatusCreated,
+                })
+                break
+            case TwilioConstants.Event.ROOM_ENDED:
+                await RoomDao.update({
+                    id: roomId,
+                    status: StatusEnded,
                 })
                 break
             default:

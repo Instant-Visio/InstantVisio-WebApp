@@ -3,13 +3,14 @@
  * Mattia Primavera <sconqua@gmail.com>
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import {
     makeStyles,
     Typography,
     Grid,
     Button,
     Theme,
+    CircularProgress,
     Hidden,
 } from '@material-ui/core'
 import LocalVideoPreview from './LocalVideoPreview/LocalVideoPreview'
@@ -19,7 +20,6 @@ import ToggleAudioButton from '../../Buttons/ToggleAudioButton/ToggleAudioButton
 import ToggleVideoButton from '../../Buttons/ToggleVideoButton/ToggleVideoButton'
 import { useAppState } from '../../../state'
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext'
-import { Api } from '../../../../../services/api'
 import { selectToken } from '../../../../../components/App/userSelector'
 import { useSelector, useDispatch } from 'react-redux'
 import { RoomId } from '../../../../../../types/Room'
@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: '0.8em 0',
         margin: 0,
     },
+    joinLoadingIndicator: {
+        position: 'absolute',
+    },
 }))
 
 interface DeviceSelectionScreenProps {
@@ -79,18 +82,30 @@ export default function DeviceSelectionScreen({
     setStep,
 }: DeviceSelectionScreenProps) {
     const classes = useStyles()
-    const { isFetching } = useAppState()
+    const { isFetching, getTwilioVideoToken } = useAppState()
     const token = useSelector(selectToken)
     const dispatch = useDispatch()
     const { connect, isAcquiringLocalTracks, isConnecting } = useVideoContext()
-    const disableButtons = isFetching || isAcquiringLocalTracks || isConnecting
+    const [isLoading, setIsLoading] = useState(false)
+    const disableButtons =
+        isFetching || isAcquiringLocalTracks || isConnecting || isLoading
 
     const handleJoin = async () => {
-        const api = new Api(token)
-        const { jwtAccessToken } = await api.joinRoom(roomId, 'test-password') // TODO pass the password variable
-        dispatch(actions.setRoomId(roomId))
-        dispatch(actions.setHostName(name))
-        connect(jwtAccessToken, roomId)
+        setIsLoading(true)
+        try {
+            const twilioVideoToken = await getTwilioVideoToken(
+                token,
+                roomId,
+                name
+            )
+
+            dispatch(actions.setRoomId(roomId))
+            dispatch(actions.setHostName(name))
+            connect(twilioVideoToken, roomId)
+            setIsLoading(false)
+        } catch (err) {
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -152,6 +167,12 @@ export default function DeviceSelectionScreen({
                                 onClick={() => handleJoin()}
                                 disabled={disableButtons}>
                                 Join Now
+                                {isLoading && (
+                                    <CircularProgress
+                                        className={classes.joinLoadingIndicator}
+                                        size={20}
+                                    />
+                                )}
                             </Button>
                         </div>
                     </Grid>

@@ -3,15 +3,6 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import { SCREEN } from '../../styles/theme'
-import Footer from '../../components/Footer/Footer'
-import BaseLang from '../../components/Lang/Lang'
-
-const Lang = styled(BaseLang)`
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    z-index: 1;
-`
 
 const Wrapper = styled.div`
     display: flex;
@@ -53,11 +44,9 @@ export default function Columns({ children, title }) {
     return (
         <>
             <Wrapper>
-                <Lang />
                 <Left>{first}</Left>
                 <Right>{second}</Right>
             </Wrapper>
-            <Footer />
         </>
     )
 }

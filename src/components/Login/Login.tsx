@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react'
-import { authInstance, firebaseAuth } from '../firebase/firebase'
+import React from 'react'
+import { authInstance, firebaseAuth } from '../../firebase/firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
-import { Button } from 'react-bootstrap'
-import { didSignin, signOut } from '../actions/userActions'
-import { EMULATORS } from '../constants'
+import { EMULATORS } from '../../constants'
 import { auth as firebaseuiAuth } from 'firebaseui'
-import { isAuthEmulatorEnabled } from '../utils/emulators'
+import { isAuthEmulatorEnabled } from '../../utils/emulators'
 import {
     selectToken,
     isLoading as isLoadingSelector,
-} from '../components/App/userSelector'
-import { useDispatch, useSelector } from 'react-redux'
+} from '../App/userSelector'
+import { useSelector } from 'react-redux'
+
+export const isUsingEmulator = () => {
+    return process.env.FIREBASE_AUTH_EMULATOR_HOST
+}
 
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -26,6 +28,7 @@ const uiConfig = {
     ],
     callbacks: {
         signInSuccessWithAuthResult: ({ user }) => {
+            console.log('signInSuccessWithAuthResult called')
             return !user.isAnonymous
         },
         signInFailure: async function (error) {
@@ -37,47 +40,24 @@ const uiConfig = {
 const Login = () => {
     const hasToken = useSelector(selectToken)
     const isLoading = useSelector(isLoadingSelector)
-    const dispatch = useDispatch()
 
     if (isAuthEmulatorEnabled()) {
         authInstance.useEmulator(EMULATORS.hosts.auth)
     }
-
-    useEffect(() => {
-        return authInstance.onAuthStateChanged((user) => {
-            dispatch(didSignin(user))
-        })
-    }, [dispatch])
 
     if (isLoading) {
         //todo loading
         return <div>...loading</div>
     }
 
-    //temporary ui
     return (
-        <div
-            style={{
-                position: 'absolute',
-                left: 0,
-                background: '#4444FF55',
-                zIndex: 50,
-            }}>
+        <div>
             {!hasToken && (
                 <StyledFirebaseAuth
                     uiConfig={uiConfig}
                     firebaseAuth={authInstance}
                 />
             )}
-            {hasToken && (
-                <Button
-                    onClick={() => {
-                        dispatch(signOut())
-                    }}>
-                    Sign out
-                </Button>
-            )}
-            Temporary LOGIN UI
         </div>
     )
 }

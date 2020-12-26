@@ -1,0 +1,6 @@
+{
+    "errors": {
+        "register": "Error registering to push notifications, pls restart the app",
+        "permissions": "Missing push notification permissions"
+    }
+}

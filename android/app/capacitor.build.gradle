@@ -9,7 +9,7 @@ android {
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
-
+    implementation project(':capacitor-community-fcm')
     implementation "com.android.support:customtabs:23.2.0"
 }
 apply from: "../../node_modules/cordova-plugin-safariviewcontroller/build/android/SafariViewController-java18.gradle"
