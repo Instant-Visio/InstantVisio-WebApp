@@ -54,7 +54,7 @@ export const createGroup = wrap(async (req: Request, res: Response) => {
         id: groupId,
     })
 
-    res.send({
+    res.status(201).send({
         groupId,
     })
 })

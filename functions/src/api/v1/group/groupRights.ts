@@ -13,7 +13,12 @@ export const assertGroupEditAllowed = async (userId: UID, groupId: GroupId) => {
     }
 }
 
-export const assertGroupReadAllowed = async (userId: UID, groupId: GroupId) => {
+export const assertGroupReadAllowed = async (
+    userId: UID,
+    groupId: GroupId
+): Promise<{
+    isOwner: boolean
+}> => {
     const group = await GroupDao.get(groupId)
 
     if (group.members.includes(userId)) {

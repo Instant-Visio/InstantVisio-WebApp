@@ -9,7 +9,7 @@ import { GroupDao } from '../../../db/GroupDao'
  * @swagger
  * /v1/groups/{groupId}/:
  *   get:
- *     description: Get the given group. Members user ids will be returned for regular members and all members details will be returned for the owner.
+ *     description: Get the given group. Members count will be returned for regular members and all members details will be returned for the owner.
  *     tags:
  *       - groups
  *     consumes:

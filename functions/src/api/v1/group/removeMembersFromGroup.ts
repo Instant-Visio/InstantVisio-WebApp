@@ -4,7 +4,6 @@ import { UID } from '../../../types/uid'
 import { assertGroupEditAllowed } from './groupRights'
 import { GroupId } from '../../../types/Group'
 import { GroupDao } from '../../../db/GroupDao'
-import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { JSONParse } from '../utils/JSONParse'
 
 /**
@@ -38,7 +37,6 @@ export const removeMembersFromGroup = wrap(
     async (req: Request, res: Response) => {
         const userId: UID = res.locals.uid
         const groupId: GroupId = req.params.groupId
-        await assertNewResourceCreationGranted(userId)
         await assertGroupEditAllowed(userId, groupId)
 
         const members = JSONParse(req.body.members || '[]')

@@ -12,7 +12,7 @@ export interface Group {
     updatedAt: Timestamp
 }
 
-export interface PubicGroup {
+export interface PublicGroup {
     id: GroupId
     name: string
     ownerUserId: UID

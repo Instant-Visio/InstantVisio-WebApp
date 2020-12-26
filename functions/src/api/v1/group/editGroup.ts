@@ -23,7 +23,7 @@ import { GroupDao } from '../../../db/GroupDao'
  *         required: true
  *         type: string
  *     responses:
- *       200:
+ *       204:
  *         description: Group edited with success
  *       400:
  *         $ref: '#/components/responses/400'
@@ -46,5 +46,5 @@ export const editGroup = wrap(async (req: Request, res: Response) => {
         name,
     })
 
-    res.status(200).send()
+    res.status(204).send()
 })

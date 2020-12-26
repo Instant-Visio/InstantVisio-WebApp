@@ -7,7 +7,7 @@ import {
 } from '../firebase/firebase'
 import { COLLECTIONS } from './constants'
 import { GroupNotFoundError } from '../api/errors/HttpError'
-import { Group, GroupId, PubicGroup } from '../types/Group'
+import { Group, GroupId, PublicGroup } from '../types/Group'
 import { UID } from '../types/uid'
 import { Member } from '../types/Member'
 
@@ -34,7 +34,7 @@ export class GroupDao {
         return <DatabaseGroup>documentSnapshot.data()
     }
 
-    public static async listByUserId(userId: UID): Promise<PubicGroup[]> {
+    public static async listByUserId(userId: UID): Promise<PublicGroup[]> {
         const querySnapshots = await db
             .collection(COLLECTIONS.groups)
             .where('destinations', 'array-contains', userId)
@@ -70,7 +70,7 @@ export class GroupDao {
             name,
             ownerUserId,
             members: members ? members.map((member) => member.id) : [],
-            membersDetails: members ? members : {},
+            membersDetails: members || {},
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
         })
