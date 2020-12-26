@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
@@ -19,7 +19,10 @@ import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
 import { authInstance } from '../../firebase/firebase'
 import { isAuthEmulatorEnabled } from '../../utils/emulators'
+import { selectToken } from '../../components/App/userSelector'
+import { useSelector, useDispatch } from 'react-redux'
 import { EmulatorLogin } from './EmulatorLogin'
+import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
 
 const DataMentions = styled.div`
     .cnil {
@@ -52,13 +55,23 @@ const KnowMoreMobile = styled.p`
     text-align: center;
 `
 
-export default function Home() {
-    const { t } = useTranslation(['home', 'common'])
+export default function Home({ location }) {
+    const { t } = useTranslation(['home', 'common', 'premium-video'])
+    const token = useSelector(selectToken)
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const isMobile = useDetectMobileOrTablet()
     const formSubmissionMessage: any = useRef(null)
     const [modalShow, setModalShow] = React.useState(false)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (location.state?.isPremiumVideoPasswordSet === false) {
+            dispatch(
+                showErrorMessage(t('premium-video:errors.missing-password'))
+            )
+        }
+    })
 
     const submit = (values, setSubmitting) => {
         setNewCall(values)

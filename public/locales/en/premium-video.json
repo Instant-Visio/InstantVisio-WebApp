@@ -1,0 +1,5 @@
+{
+    "errors": {
+        "missing-password": "You need to provide a password within the link in order to join a room"
+    }
+}

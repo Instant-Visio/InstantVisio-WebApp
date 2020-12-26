@@ -25,8 +25,11 @@ export default function PrivateRoute({ children, ...rest }: RouteProps) {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: '/login',
-                            state: { from: location },
+                            pathname: '/',
+                            state: {
+                                from: location,
+                                isPremiumVideoPasswordSet: renderChildren,
+                            },
                         }}
                     />
                 )
