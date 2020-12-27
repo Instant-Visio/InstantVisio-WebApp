@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import * as admin from 'firebase-admin'
 
-export const sendTopicNotification = async (req: Request, res: Response) => {
-    var message = {
+export const sendTestPushNotification = async (req: Request, res: Response) => {
+    const message = {
         data: {
             roomId: 'test',
         },
@@ -13,7 +13,6 @@ export const sendTopicNotification = async (req: Request, res: Response) => {
         topic: 'test',
     }
 
-    // Send a message to devices subscribed to the provided topic.
     try {
         const response = await admin.messaging().send(message)
         console.log('Successfully sent message:', response)

@@ -11,3 +11,5 @@ export const arrayRemove = admin.firestore.FieldValue.arrayRemove
 export const deleteField = admin.firestore.FieldValue.delete
 export type Timestamp = admin.firestore.Timestamp
 export const Timestamp = admin.firestore.Timestamp
+
+export const messaging = admin.messaging

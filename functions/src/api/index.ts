@@ -7,8 +7,8 @@ import * as swaggerJSDoc from 'swagger-jsdoc'
 import { swaggerDefinition } from './swaggerDefinition'
 import { errorMiddleware } from './middlewares/errorMiddleware'
 import * as cors from 'cors'
-import { sendTopicNotification } from './v1/notification/sendTopicNotification'
 import { isUsingEmulator } from './utils/isUsingEmulator'
+import { sendTestPushNotification } from './v1/invite/sendTestPushNotification'
 
 const app = express()
 
@@ -27,11 +27,10 @@ app.use('/api/v1-private', routerPrivate)
 app.use('/api/v1-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 if (isUsingEmulator()) {
-    app.get('/api/send-topic-notification', (req, res) =>
-        sendTopicNotification(req, res)
+    app.get('/api/v1-tests/notification/push', (req, res) =>
+        sendTestPushNotification(req, res)
     )
 }
-
 app.use(errorMiddleware)
 
 export const api = functions.runWith({}).https.onRequest(app)

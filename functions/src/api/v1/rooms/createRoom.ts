@@ -68,7 +68,8 @@ import { JSONParse } from '../utils/JSONParse'
  *                   roomId: "390FJZDms390FJZDms",
  *                   remindersIds: ["dza5cv8zzDAza882"],
  *                   emailsSent: ["hi@example.com"],
- *                   smssSent: ["+3300000000"]
+ *                   smssSent: ["+3300000000"],
+ *                   pushsSent: ["groupId"]
  *               }
  *       400:
  *         description: unable to add a reminder before the current time (in the past)

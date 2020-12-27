@@ -2,13 +2,18 @@ import * as translations from '../translations.json'
 import {
     EmailNotificationParams,
     NotificationType,
+    PushNotificationParams,
     SmsNotificationParams,
 } from '../types/Notification'
 import { sendEmail } from './sendEmail'
 import { sendSms } from './sendSMS'
+import { sendPush } from './sendPush'
 
 export const sendNotification = async (
-    params: SmsNotificationParams | EmailNotificationParams
+    params:
+        | SmsNotificationParams
+        | EmailNotificationParams
+        | PushNotificationParams
 ) => {
     const name = params.name.replace(/(.{20})..+/, '$1…')
     // @ts-ignore
@@ -21,5 +26,8 @@ export const sendNotification = async (
     }
     if (params.type === NotificationType.SmsNotificationType) {
         await sendSms(params, message)
+    }
+    if (params.type === NotificationType.PushNotificationType) {
+        await sendPush(params, message, subject)
     }
 }

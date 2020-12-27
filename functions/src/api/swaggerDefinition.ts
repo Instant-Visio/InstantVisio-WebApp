@@ -113,9 +113,9 @@ export const swaggerDefinition = {
         },
         examples: {
             Destinations: {
-                summary: 'Mixed email, sms and languages',
+                summary: 'Mixed email, sms, groupId',
                 value:
-                    '[{"email": "user@example.com", "lang": "en"}, {"phone": "+33600000000", "lang":"fr"}, {"phone": "+33600000000", lang:"fr", country:"en"}]',
+                    '[{"email": "user@example.com", "lang": "en"}, {"phone": "+33600000000", "lang":"fr"}, {"groupId": "ji81sXmrpm91AkcZNf", lang:"fr"}]',
             },
             Members: {
                 summary: 'Members',
