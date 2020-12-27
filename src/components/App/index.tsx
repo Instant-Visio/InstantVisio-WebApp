@@ -42,6 +42,10 @@ const App = () => {
         gdprHandler()
     }, [])
 
+    const isPremiumVideoPage = () => {
+        return window.location.pathname.includes('premium-video')
+    }
+
     return (
         <IonApp className="App">
             <Backdrop />
@@ -50,9 +54,11 @@ const App = () => {
             <AuthStateChangedListener />
             <LoginModal />
             <IonReactRouter>
-                <IonHeader id="topbar">
-                    <AppBar />
-                </IonHeader>
+                {!isPremiumVideoPage() && (
+                    <IonHeader id="topbar">
+                        <AppBar />
+                    </IonHeader>
+                )}
                 <Router />
             </IonReactRouter>
         </IonApp>
