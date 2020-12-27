@@ -19,9 +19,12 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Link from '@material-ui/core/Link'
 import CreateRoomForm from './CreateRoomForm'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
+import { openPremiumVideoCall } from '../../services/safari-view-controller'
 
 const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
+    const history = useHistory()
     const preventDefault = (event: React.SyntheticEvent) =>
         event.preventDefault()
 
@@ -46,6 +49,10 @@ const AdminDashboard = () => {
 
     const classes = useStyles()
 
+    const onFormSubmit = () => {
+        openPremiumVideoCall(history)
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -54,7 +61,7 @@ const AdminDashboard = () => {
                     <Box m={6} />
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
-                            <CreateRoomForm />
+                            <CreateRoomForm onFormSubmit={onFormSubmit} />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Paper elevation={0}>

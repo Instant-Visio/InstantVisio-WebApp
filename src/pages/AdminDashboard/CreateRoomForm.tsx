@@ -31,7 +31,7 @@ import { useTranslation } from 'react-i18next'
 
 const Button = styled(MuiButton)(spacing)
 
-const CreateRoomForm = () => {
+const CreateRoomForm = ({ onFormSubmit }) => {
     const { t } = useTranslation('dashboard')
     interface Values {
         roomName: string
@@ -169,6 +169,7 @@ const CreateRoomForm = () => {
                 setTimeout(() => {
                     setSubmitting(false)
                     alert(JSON.stringify(values, null, 2))
+                    onFormSubmit()
                 }, 500)
             }}>
             {({ submitForm, isSubmitting }) => (

@@ -12,6 +12,7 @@ import { showLoginModal } from '../../LoginModal/loginModalActions'
 import { signOut } from '../../../actions/userActions'
 import { useHistory } from 'react-router-dom'
 import { selectIsPremiumUser } from '../userSelector'
+import { openPremiumVideoCall } from '../../../services/safari-view-controller'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -52,7 +53,9 @@ const AppBar = () => {
                             className={classes.title}>
                             {t('appBar.appName')}
                         </Typography>
-                        <Button color="primary">
+                        <Button
+                            onClick={() => openPremiumVideoCall(history)}
+                            color="primary">
                             {t('appBar.joinVisioButton')}
                         </Button>
                         {isPremiumUser ? (
