@@ -13,6 +13,7 @@ import { signOut } from '../../../actions/userActions'
 import { useHistory } from 'react-router-dom'
 import { selectIsPremiumUser } from '../userSelector'
 import { openPremiumVideoCall } from '../../../services/safari-view-controller'
+import { isMobile } from '../../../services/platform'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -42,6 +43,26 @@ const AppBar = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const renderLoginLogoutBtn = () => {
+        if (!isMobile()) {
+            return isPremiumUser ? (
+                <Button
+                    onClick={() => {
+                        dispatch(signOut())
+                        history.replace('/')
+                    }}>
+                    Sign out
+                </Button>
+            ) : (
+                <Button
+                    onClick={() => dispatch(showLoginModal())}
+                    color="primary">
+                    {t('appBar.loginButton')}
+                </Button>
+            )
+        }
+    }
+
     return (
         <div className={classes.root}>
             <WhiteAppBar>
@@ -58,21 +79,7 @@ const AppBar = () => {
                             color="primary">
                             {t('appBar.joinVisioButton')}
                         </Button>
-                        {isPremiumUser ? (
-                            <Button
-                                onClick={() => {
-                                    dispatch(signOut())
-                                    history.replace('/')
-                                }}>
-                                Sign out
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() => dispatch(showLoginModal())}
-                                color="primary">
-                                {t('appBar.loginButton')}
-                            </Button>
-                        )}
+                        {renderLoginLogoutBtn()}
 
                         <SwipeableTemporaryDrawer />
                     </Toolbar>
