@@ -17,7 +17,7 @@ import { JSONParse } from '../utils/JSONParse'
  * @swagger
  * /v1/rooms/{roomId}/inviteParticipants:
  *   post:
- *     description: Send an invitation to one or many participants, via email and/or sms and/or push notification with a given groupId. It can combine all notification types, as well as specific lang for each participants. <br/> Default lang is "en". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improve the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
+ *     description: Send an invitation to one or many participants, via email and/or sms and/or push notification with a given groupId. It can combine all notification types, as well as specific lang for each participants. <br/> Default lang is "en". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improves the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
  *     tags:
  *       - rooms
  *     consumes:

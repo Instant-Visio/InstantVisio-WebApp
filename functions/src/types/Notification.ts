@@ -31,6 +31,11 @@ export interface PushNotificationParams extends BaseNotificationParams {
     }
 }
 
+export type NotificationParams =
+    | SmsNotificationParams
+    | EmailNotificationParams
+    | PushNotificationParams
+
 export interface NotificationContent {
     name: string
     roomUrl: string

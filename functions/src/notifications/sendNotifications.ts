@@ -1,5 +1,14 @@
-import { InvitationDestination } from '../types/InvitationDestination'
-import { NotificationContent, NotificationType } from '../types/Notification'
+import {
+    EmailInvitationDestination,
+    InvitationDestination,
+    PushInvitationDestination,
+    SmsInvitationDestination,
+} from '../types/InvitationDestination'
+import {
+    NotificationContent,
+    NotificationParams,
+    NotificationType,
+} from '../types/Notification'
 import { getAppEnv } from '../firebase/env'
 import { sendNotification } from './sendNotification'
 import { RoomId } from '../types/Room'
@@ -15,76 +24,140 @@ export const sendNotifications = async (
     notificationContent: NotificationContent,
     roomId: RoomId
 ): Promise<SendNotificationsResult> => {
-    // Just some quick prefilters
-    const emailDestinations = destinations.filter(
-        (dest) => dest.email && dest.email.length > 4
+    const emailsSent: string[] = await processEmailDestinations(
+        notificationContent,
+        destinations
     )
-    const smsDestinations = destinations.filter(
-        (dest) => dest.phone && dest.phone.length > 4
+    const smssSent: string[] = await processSmsDestinations(
+        notificationContent,
+        destinations
     )
-    const pushDestinations = destinations.filter(
-        (dest) => dest.topic && dest.topic.length > 4
+    const pushsSent: string[] = await processPushDestinations(
+        notificationContent,
+        destinations,
+        roomId
     )
-
-    const emailsSent: string[] = []
-    const smssSent: string[] = []
-    const pushsSent: string[] = []
-
-    const appEnv = getAppEnv()
-
-    for (const emailDest of emailDestinations) {
-        if (!emailDest.email) continue
-        try {
-            await sendNotification({
-                ...notificationContent,
-                type: NotificationType.EmailNotificationType,
-                lang: emailDest.lang,
-                email: emailDest.email,
-                emailFrom: appEnv.emailFrom,
-            })
-            emailsSent.push(emailDest.email)
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    for (const smsDest of smsDestinations) {
-        if (!smsDest.phone) continue
-        try {
-            await sendNotification({
-                ...notificationContent,
-                type: NotificationType.SmsNotificationType,
-                country: smsDest.country,
-                lang: smsDest.lang,
-                phone: smsDest.phone,
-            })
-            smssSent.push(smsDest.phone)
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    for (const pushDest of pushDestinations) {
-        if (!pushDest.topic) continue
-        try {
-            await sendNotification({
-                ...notificationContent,
-                type: NotificationType.PushNotificationType,
-                lang: pushDest.lang,
-                topic: pushDest.topic,
-                additionalData: {
-                    roomId: roomId,
-                },
-            })
-            pushsSent.push(pushDest.topic)
-        } catch (error) {
-            console.error(error)
-        }
-    }
 
     return Promise.resolve({
         emailsSent,
         smssSent,
         pushsSent,
     })
+}
+
+type formatNotificationParamsType = (
+    notificationContent: NotificationContent,
+    destination: InvitationDestination
+) => {
+    successField: string
+    params: NotificationParams
+}
+
+const processDestinations = async (
+    notificationContent: NotificationContent,
+    destinations: InvitationDestination[],
+    formatNotificationParams: formatNotificationParamsType
+): Promise<string[]> => {
+    const sent = []
+
+    for (const dest of destinations) {
+        try {
+            const { params, successField } = formatNotificationParams(
+                notificationContent,
+                dest
+            )
+            await sendNotification(params)
+            sent.push(successField)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    return sent
+}
+
+const processEmailDestinations = async (
+    notificationContent: NotificationContent,
+    destinations: InvitationDestination[]
+) => {
+    const emailDestinations = destinations.filter(
+        (dest) => dest.email && dest.email.length > 4
+    )
+
+    const appEnv = getAppEnv()
+
+    return processDestinations(
+        notificationContent,
+        emailDestinations,
+        (content: NotificationContent, destination) => {
+            const dest = <EmailInvitationDestination>destination
+            return {
+                params: {
+                    ...content,
+                    type: NotificationType.EmailNotificationType,
+                    lang: dest.lang,
+                    email: dest.email,
+                    emailFrom: appEnv.emailFrom,
+                },
+                successField: dest.email,
+            }
+        }
+    )
+}
+
+const processSmsDestinations = async (
+    notificationContent: NotificationContent,
+    destinations: InvitationDestination[]
+) => {
+    const smsDestinations = destinations.filter(
+        (dest) => dest.phone && dest.phone.length > 4
+    )
+
+    return processDestinations(
+        notificationContent,
+        smsDestinations,
+        (content: NotificationContent, destination) => {
+            const dest = <SmsInvitationDestination>destination
+            return {
+                params: {
+                    ...content,
+                    type: NotificationType.SmsNotificationType,
+                    country: dest.country,
+                    lang: dest.lang,
+                    phone: dest.phone,
+                },
+                successField: dest.phone,
+            }
+        }
+    )
+}
+
+const processPushDestinations = async (
+    notificationContent: NotificationContent,
+    destinations: InvitationDestination[],
+    roomId: RoomId
+) => {
+    const pushDestinations = destinations.filter(
+        (dest) => dest.topic && dest.topic.length > 4
+    )
+
+    return processDestinations(
+        notificationContent,
+        pushDestinations,
+        (content: NotificationContent, destination) => {
+            const dest = <PushInvitationDestination>destination
+            return {
+                params: {
+                    ...content,
+                    type: NotificationType.PushNotificationType,
+                    lang: dest.lang,
+                    topic: dest.topic,
+                    additionalData: {
+                        roomId: roomId,
+                    },
+                },
+                successField: dest.topic,
+            }
+        }
+    )
 }

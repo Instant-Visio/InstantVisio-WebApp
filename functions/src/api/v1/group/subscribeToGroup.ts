@@ -11,7 +11,7 @@ import { MessagingServerError } from '../../errors/HttpError'
  * @swagger
  * /v1/groups/{groupId}/subscribe:
  *   post:
- *     description: Subscribe a device from a user to a group in order to receive push notifications.<br/>Warning! The user does not need to be in the group yet (it will be automatically added), but this will change later on. Also, the group owner accounts/subscription status need to be valid.
+ *     description: Subscribe a user's device to a group in order to receive push notifications.<br/>Warning! The user does not need to be in the group yet (it will be automatically added), but this will change later on. Also, the group owner accounts/subscription status need to be valid.
  *     tags:
  *       - groups
  *     consumes:
