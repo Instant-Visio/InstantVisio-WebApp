@@ -9,6 +9,7 @@ import Snackbar from './Snackbar/Snackbar'
 import { PushNotifications } from './PushNotifications/PushNotifications'
 import LoginModal from '../LoginModal/LoginModal'
 import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
+import Backdrop from './Backdrop/Backdrop'
 declare global {
     interface Window {
         iv: any
@@ -43,6 +44,7 @@ const App = () => {
 
     return (
         <IonApp className="App">
+            <Backdrop />
             <PushNotifications />
             <Snackbar />
             <AuthStateChangedListener />
