@@ -14,6 +14,7 @@
         "build:android": "npm run build && npx cap sync android && npx cap copy android && npm run open:android",
         "open:android": "npx cap open android",
         "run:android": "npm run build:android && ionic capacitor run android --livereload --external",
+        "jetifier": "jetifier",
         "deploy:all:prod": "npm run build && firebase use instantvisio && firebase deploy",
         "deploy:all:dev": "firebase use instantvisio-dev && env-cmd -f .env.development npm run build && firebase deploy",
         "release:all:prod": "npm run tag:before:prod && npm run deploy:all:prod && npm run tag:after",
