@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import defaultLogo from '../../styles/assets/images/logo.svg'
 import mobileLogo from '../../styles/assets/images/logo_mobile.svg'
-import { isAndroid, isIos } from '../../services/platform'
 import styled from 'styled-components'
+import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
 const Img = styled.img`
     width: 100%;
@@ -21,7 +21,7 @@ const StyledLink = styled(Link)`
 
 function Logo() {
     const { t } = useTranslation()
-    const isMobile = isIos() || isAndroid()
+    const isMobile = useDetectMobileOrTablet()
     let logo = mobileLogo
 
     if (!isMobile) {

@@ -31,12 +31,21 @@ const LogoWrapper = styled.div`
     display: flex;
     flex-grow: 1;
     align-items: center;
+    @media screen and (max-width: 1023px) {
+        a {
+            width: 60px;
+        }
+    }
 `
 
 const WhiteAppBar = styled.div`
     .MuiAppBar-colorPrimary {
         background-color: white;
-        padding: 16px 0;
+        padding: 8px 0;
+
+        @media screen and (min-width: 1024px) {
+            padding: 16px 0;
+        }
     }
 `
 
