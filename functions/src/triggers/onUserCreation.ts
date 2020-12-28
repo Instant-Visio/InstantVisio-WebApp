@@ -14,6 +14,12 @@ const makeUserData = (
         isActive: isSubscriptionActive,
         isQuotaReached,
         type: SUBSCRIPTIONS.manual,
+        quotas: {
+            sms: 100,
+            email: 100,
+            push: 100,
+            minutes: 10000,
+        },
     },
     usage: {
         sentSMSs: 0,

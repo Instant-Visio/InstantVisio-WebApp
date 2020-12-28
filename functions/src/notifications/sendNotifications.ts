@@ -1,7 +1,7 @@
 import {
     EmailInvitationDestination,
     InvitationDestination,
-    PushInvitationDestination,
+    PushGroupInvitationDestination,
     SmsInvitationDestination,
 } from '../types/InvitationDestination'
 import {
@@ -12,6 +12,8 @@ import {
 import { getAppEnv } from '../firebase/env'
 import { sendNotification } from './sendNotification'
 import { RoomId } from '../types/Room'
+import { RoomDao } from '../db/RoomDao'
+import { UserDao } from '../db/UserDao'
 
 export interface SendNotificationsResult {
     emailsSent: string[]
@@ -48,10 +50,10 @@ export const sendNotifications = async (
 type formatNotificationParamsType = (
     notificationContent: NotificationContent,
     destination: InvitationDestination
-) => {
+) => Promise<{
     successField: string
     params: NotificationParams
-}
+}>
 
 const processDestinations = async (
     notificationContent: NotificationContent,
@@ -62,7 +64,7 @@ const processDestinations = async (
 
     for (const dest of destinations) {
         try {
-            const { params, successField } = formatNotificationParams(
+            const { params, successField } = await formatNotificationParams(
                 notificationContent,
                 dest
             )
@@ -89,7 +91,7 @@ const processEmailDestinations = async (
     return processDestinations(
         notificationContent,
         emailDestinations,
-        (content: NotificationContent, destination) => {
+        async (content: NotificationContent, destination) => {
             const dest = <EmailInvitationDestination>destination
             return {
                 params: {
@@ -116,7 +118,7 @@ const processSmsDestinations = async (
     return processDestinations(
         notificationContent,
         smsDestinations,
-        (content: NotificationContent, destination) => {
+        async (content: NotificationContent, destination) => {
             const dest = <SmsInvitationDestination>destination
             return {
                 params: {
@@ -138,25 +140,31 @@ const processPushDestinations = async (
     roomId: RoomId
 ) => {
     const pushDestinations = destinations.filter(
-        (dest) => dest.topic && dest.topic.length > 4
+        (dest) => dest.groupId && dest.groupId.length > 0
     )
+
+    const room = await RoomDao.get(roomId)
 
     return processDestinations(
         notificationContent,
         pushDestinations,
-        (content: NotificationContent, destination) => {
-            const dest = <PushInvitationDestination>destination
+        async (content: NotificationContent, destination) => {
+            const dest = <PushGroupInvitationDestination>destination
+            const tokens = await UserDao.getRegistrationTokensForGroup(
+                dest.groupId
+            )
             return {
                 params: {
                     ...content,
                     type: NotificationType.PushNotificationType,
                     lang: dest.lang,
-                    topic: dest.topic,
+                    tokens,
                     additionalData: {
                         roomId: roomId,
+                        password: room.password,
                     },
                 },
-                successField: dest.topic,
+                successField: dest.groupId,
             }
         }
     )
