@@ -46,6 +46,7 @@
         "appName": "Instant Visio",
         "joinVisioButton": "Rejoindre une visio",
         "joinGroupButton": "Rejoindre un groupe",
-        "loginButton": "Connexion"
+        "loginButton": "Connexion",
+        "signOutButton": "Se déconnecter"
     }
 }

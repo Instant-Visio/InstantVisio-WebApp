@@ -8,26 +8,31 @@ import MuiButton from '@material-ui/core/Button'
 import { Formik, Form, Field } from 'formik'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
 import { useTranslation } from 'react-i18next'
+import { selectToken } from '../App/userSelector'
+import { useSelector } from 'react-redux'
 const Button = styled(MuiButton)(spacing)
 
-interface JoinGroupValues {
-    name: string
+export interface JoinGroupValues {
+    id: string
     password: string
+    username: string
 }
 
 const JoinGroupForm = ({ onFormSubmit }) => {
     const { t } = useTranslation('join-group-form')
+    const token = useSelector(selectToken)
 
     return (
         <Formik
             initialValues={{
-                name: '',
+                id: '',
                 password: '',
+                username: '',
             }}
             validate={(values) => {
                 const errors: Partial<JoinGroupValues> = {}
-                if (!values.name) {
-                    errors.name = 'Required'
+                if (!values.id) {
+                    errors.id = 'Required'
                 }
                 return errors
             }}
@@ -43,19 +48,36 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                         {t('title')}
                     </Typography>
                     <Box m={4} />
+
                     <Typography variant="h6" component="h2">
-                        {t('fields.name.title')}
+                        {t('fields.username.title')}
                     </Typography>
                     <Typography variant="body1">
-                        {t('fields.name.description')}
+                        {t('fields.username.description')}
                     </Typography>
                     <Box m={2} />
                     <Field
                         size="small"
                         component={TextField}
                         variant="outlined"
-                        name="name"
-                        label={t('fields.name.placeholder')}
+                        name="username"
+                        label={t('fields.username.placeholder')}
+                    />
+                    <Box m={4} />
+
+                    <Typography variant="h6" component="h2">
+                        {t('fields.id.title')}
+                    </Typography>
+                    <Typography variant="body1">
+                        {t('fields.id.description')}
+                    </Typography>
+                    <Box m={2} />
+                    <Field
+                        size="small"
+                        component={TextField}
+                        variant="outlined"
+                        name="id"
+                        label={t('fields.id.placeholder')}
                     />
                     <Box m={4} />
 
@@ -79,7 +101,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                             startIcon={<CheckBoxIcon />}
                             variant="contained"
                             color="primary"
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || !token}
                             onClick={submitForm}>
                             {t('submit')}
                         </Button>

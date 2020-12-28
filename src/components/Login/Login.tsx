@@ -56,7 +56,6 @@ const Login = () => {
         authInstance.useEmulator(EMULATORS.hosts.auth)
     }
 
-    //todo loading
     if (isLoading) {
         dispatch(showBackdrop())
     } else {

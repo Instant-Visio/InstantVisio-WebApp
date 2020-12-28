@@ -29,7 +29,18 @@ export class Api {
         })
     }
 
-    async joinGroup(
+    async subscribeToGroup(
+        groupId: string,
+        username: string,
+        password: string
+    ): Promise<void> {
+        return this.post(`/groups/${groupId}/join`, {
+            username,
+            password,
+        })
+    }
+
+    async subscribePushNotifs(
         groupId: string,
         password: string,
         registrationToken: string

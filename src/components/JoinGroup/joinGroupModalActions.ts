@@ -1,3 +1,8 @@
+import { Api } from '../../services/api'
+import {
+    showErrorMessage,
+    showSuccessMessage,
+} from '../App/Snackbar/snackbarActions'
 import {
     HIDE_JOIN_GROUP_MODAL,
     SHOW_JOIN_GROUP_MODAL,
@@ -13,3 +18,19 @@ export const hideJoinGroupModal = (): JoinGroupModalActionTypes => ({
     type: HIDE_JOIN_GROUP_MODAL,
     payload: {},
 })
+
+export const joinGroup = (t, joinGroupParams) => async (dispatch, getState) => {
+    const { id: groupId, password: groupPassword, username } = joinGroupParams
+    const { user: userState } = getState()
+    const { token } = userState.user
+
+    try {
+        const api = new Api(token)
+        await api.subscribeToGroup(groupId, username, groupPassword)
+        dispatch(showSuccessMessage(t('success', { groupId })))
+        setTimeout(() => dispatch(hideJoinGroupModal()), 250)
+    } catch (e) {
+        console.log('Join group error: ', e)
+        dispatch(showErrorMessage(t('error', { groupId })))
+    }
+}

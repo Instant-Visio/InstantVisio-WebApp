@@ -11,6 +11,7 @@ import LoginModal from '../LoginModal/LoginModal'
 import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
 import Backdrop from './Backdrop/Backdrop'
 import JoinGroupModal from '../JoinGroup/JoinGroupModal'
+import useAnonymousLogin from '../../hooks/useAnonymousLogin'
 declare global {
     interface Window {
         iv: any
@@ -20,6 +21,8 @@ declare global {
 }
 
 const App = () => {
+    useAnonymousLogin()
+
     useEffect(() => {
         // when using vh and vw units in css:
         // to make sure the height taken into account
