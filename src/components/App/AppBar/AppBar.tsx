@@ -12,7 +12,6 @@ import { showLoginModal } from '../../LoginModal/loginModalActions'
 import { signOut } from '../../../actions/userActions'
 import { useHistory } from 'react-router-dom'
 import { selectIsPremiumUser } from '../userSelector'
-import { openPremiumVideoCall } from '../../../services/safari-view-controller'
 import { isMobile } from '../../../services/platform'
 import { showJoinGroupModal } from '../../JoinGroup/joinGroupModalActions'
 
@@ -79,9 +78,7 @@ const AppBar = () => {
                             className={classes.title}>
                             {t('appBar.appName')}
                         </Typography>
-                        <Button
-                            onClick={openJoinGroupModal} //openPremiumVideoCall(history)}
-                            color="primary">
+                        <Button onClick={openJoinGroupModal} color="primary">
                             {t('appBar.joinGroupButton')}
                         </Button>
                         {renderLoginLogoutBtn()}

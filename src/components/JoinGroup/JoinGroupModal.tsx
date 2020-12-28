@@ -12,7 +12,7 @@ import {
 } from '../App/Snackbar/snackbarActions'
 import { useTranslation } from 'react-i18next'
 
-const JoinGroupModal = ({}) => {
+const JoinGroupModal = () => {
     const { isDisplayed } = useSelector(selectJoinGroupModal)
     const dispatch = useDispatch()
     const { t } = useTranslation('join-group-form')
