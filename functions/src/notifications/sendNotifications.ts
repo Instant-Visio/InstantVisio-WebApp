@@ -158,7 +158,7 @@ const processPushDestinations = async (
                     ...content,
                     type: NotificationType.PushNotificationType,
                     lang: dest.lang,
-                    tokens: tokens,
+                    tokens,
                     additionalData: {
                         roomId: roomId,
                         password: room.password,
