@@ -13,7 +13,6 @@ import {
     setNewCallError,
     setNewCallRedirected,
 } from '../../utils/support'
-import Logo from '../../components/Logo/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import * as LocalStorage from '../../services/local-storage'
 import { authInstance } from '../../firebase/firebase'
@@ -28,11 +27,6 @@ const DataMentions = styled.div`
         color: ${({ theme }) => theme.color.white};
         font-size: ${({ theme }) => theme.font.S};
     }
-`
-
-const LogoContainer = styled.div`
-    padding-left: 25%;
-    padding-right: 25%;
 `
 
 const DescriptionMobile = styled.p`
@@ -137,9 +131,6 @@ export default function Home({ location }) {
             ) : (
                 <WrapperMobile key={'anchor-left'}>
                     <MobileContent>
-                        <LogoContainer>
-                            <Logo />
-                        </LogoContainer>
                         <DescriptionMobile>
                             {t('information.form-submit')}
                         </DescriptionMobile>
