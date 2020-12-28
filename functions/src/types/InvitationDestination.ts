@@ -11,7 +11,7 @@ export type InvitationLangs =
 export interface InvitationDestination {
     email?: string
     phone?: string
-    topic?: string
+    groupId?: string
     lang: InvitationLangs
     country: string
 }
@@ -24,6 +24,6 @@ export interface SmsInvitationDestination extends InvitationDestination {
     phone: string
 }
 
-export interface PushInvitationDestination extends InvitationDestination {
-    topic: string
+export interface PushGroupInvitationDestination extends InvitationDestination {
+    groupId: string
 }
