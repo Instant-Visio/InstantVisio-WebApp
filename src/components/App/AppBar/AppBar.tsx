@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom'
 import { selectIsPremiumUser } from '../userSelector'
 import { openPremiumVideoCall } from '../../../services/safari-view-controller'
 import { isMobile } from '../../../services/platform'
+import { showJoinGroupModal } from '../../JoinGroup/joinGroupModalActions'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -63,6 +64,10 @@ const AppBar = () => {
         }
     }
 
+    const openJoinGroupModal = () => {
+        dispatch(showJoinGroupModal())
+    }
+
     return (
         <div className={classes.root}>
             <WhiteAppBar>
@@ -75,9 +80,9 @@ const AppBar = () => {
                             {t('appBar.appName')}
                         </Typography>
                         <Button
-                            onClick={() => openPremiumVideoCall(history)}
+                            onClick={openJoinGroupModal} //openPremiumVideoCall(history)}
                             color="primary">
-                            {t('appBar.joinVisioButton')}
+                            {t('appBar.joinGroupButton')}
                         </Button>
                         {renderLoginLogoutBtn()}
 

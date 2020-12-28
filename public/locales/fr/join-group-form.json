@@ -1,0 +1,19 @@
+{
+    "title": "Rejoindre groupe",
+    "fields": {
+        "name": {
+            "title": "Nom du groupe",
+            "description": "Taper ici le nom du groupe à rejoindre",
+            "placeholder": "Nom du groupe"
+        },
+        "password": {
+            "title": "Mot de passe du groupe",
+            "description": "Taper ici le mot de passe du groupe",
+            "placeholder": "Mot de passe"
+        }
+    },
+    "submit": "Rejoindre",
+    "success": "Vous faites maintenant partie du groupe {{groupName}}",
+    "error": "Erreur: Impossible de rejoindre le groupe {{groupName}}",
+    "missing-registration-token": "Impossible de joindre un groupe. Veuillez ressayer plus tard"
+}

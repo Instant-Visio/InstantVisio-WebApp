@@ -29,6 +29,17 @@ export class Api {
         })
     }
 
+    async joinGroup(
+        groupId: string,
+        password: string,
+        registrationToken: string
+    ): Promise<void> {
+        return this.post(`/groups/${groupId}/subscribe`, {
+            registrationToken,
+            password,
+        })
+    }
+
     async inviteParticipants(
         roomId: RoomId,
         hostname: string,

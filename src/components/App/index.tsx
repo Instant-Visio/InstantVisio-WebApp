@@ -10,6 +10,7 @@ import { PushNotifications } from './PushNotifications/PushNotifications'
 import LoginModal from '../LoginModal/LoginModal'
 import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
 import Backdrop from './Backdrop/Backdrop'
+import JoinGroupModal from '../JoinGroup/JoinGroupModal'
 declare global {
     interface Window {
         iv: any
@@ -52,6 +53,7 @@ const App = () => {
             <PushNotifications />
             <Snackbar />
             <AuthStateChangedListener />
+            <JoinGroupModal />
             <LoginModal />
             <IonReactRouter>
                 {!isPremiumVideoPage() && (
