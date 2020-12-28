@@ -2,7 +2,6 @@ import React from 'react'
 import { authInstance, firebaseAuth } from '../../firebase/firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import { EMULATORS } from '../../constants'
-import { auth as firebaseuiAuth } from 'firebaseui'
 import { isAuthEmulatorEnabled } from '../../utils/emulators'
 import { isLoading as isLoadingSelector } from '../App/userSelector'
 import { useSelector, useDispatch } from 'react-redux'
@@ -22,7 +21,6 @@ const uiConfig = {
     signInOptions: [
         firebaseAuth.GoogleAuthProvider.PROVIDER_ID,
         firebaseAuth.EmailAuthProvider.PROVIDER_ID,
-        firebaseuiAuth.AnonymousAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
         signInSuccessWithAuthResult: ({ user }) => {
