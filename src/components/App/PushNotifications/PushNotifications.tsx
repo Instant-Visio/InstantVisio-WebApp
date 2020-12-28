@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { showErrorMessage } from '../Snackbar/snackbarActions'
 import { useTranslation } from 'react-i18next'
 import { LocalNotificationsService } from '../../../services/local-notifications'
-import { setRegistrationToken } from '../../../actions/userActions'
+import { sendRegistrationToken } from '../../../actions/userActions'
 
 export const PushNotifications = () => {
     const dispatch = useDispatch()
@@ -21,7 +21,9 @@ export const PushNotifications = () => {
                     PushNotificationsService.createDefaultChannel()
                     PushNotificationsService.listenForRegistration(
                         (registrationToken) => {
-                            dispatch(setRegistrationToken(registrationToken))
+                            dispatch(
+                                sendRegistrationToken(t, registrationToken)
+                            )
                         },
                         () => {
                             dispatch(

@@ -1,0 +1,6 @@
+{
+    "errors": {
+        "register": "Erreur configuration notifications push. Veillez essayer de rédemarrer l'application",
+        "permissions": "Erreur de permissions pour les notifications push"
+    }
+}

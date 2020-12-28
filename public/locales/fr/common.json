@@ -48,5 +48,8 @@
         "joinGroupButton": "Rejoindre un groupe",
         "loginButton": "Connexion",
         "signOutButton": "Se déconnecter"
+    },
+    "push-notifications": {
+        "register-error": "Erreur configuration notifications push. Veillez essayer de rédemarrer l'application."
     }
 }
