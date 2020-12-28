@@ -13,6 +13,9 @@ export const sendPush = async (
                 title: subject,
                 body: messageBody,
             },
+            android: {
+                priority: 'high',
+            },
             tokens: params.tokens,
         })
     } catch (error) {
