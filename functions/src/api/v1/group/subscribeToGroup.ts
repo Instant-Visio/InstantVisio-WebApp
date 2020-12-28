@@ -54,14 +54,21 @@ export const subscribeToGroup = wrap(async (req: Request, res: Response) => {
         ])
     }
 
+    await subscribeUserToGroup(registrationToken, group.id)
+
+    res.status(204).send()
+})
+
+export const subscribeUserToGroup = async (
+    registrationToken: string,
+    groupId: GroupId
+): Promise<void> => {
     const { successCount } = await messaging().subscribeToTopic(
         registrationToken,
-        group.id
+        groupId
     )
 
     if (successCount !== 1) {
         throw new MessagingServerError('Failed to subscribe to topic')
     }
-
-    res.status(204).send()
-})
+}

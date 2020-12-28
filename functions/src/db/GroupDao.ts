@@ -64,17 +64,40 @@ export class GroupDao {
     public static async add(
         ownerUserId: UID,
         name: string,
+        password: string,
         members?: Member[]
     ): Promise<GroupId> {
         const documentReference = await db.collection(COLLECTIONS.groups).add({
             name,
             ownerUserId,
+            password,
             members: members ? members.map((member) => member.id) : [],
             membersDetails: members || {},
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
         })
         return documentReference.id
+    }
+
+    public static async set(
+        groupId: GroupId,
+        ownerUserId: UID,
+        name: string,
+        password: string,
+        members?: Member[]
+    ): Promise<void> {
+        await db
+            .collection(COLLECTIONS.groups)
+            .doc(groupId)
+            .set({
+                name,
+                ownerUserId,
+                password,
+                members: members ? members.map((member) => member.id) : [],
+                membersDetails: members || {},
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp(),
+            })
     }
 
     public static async update(group: GroupEditData): Promise<void> {

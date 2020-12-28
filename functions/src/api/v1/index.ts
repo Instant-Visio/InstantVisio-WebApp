@@ -18,6 +18,7 @@ import { addMembersToGroup } from './group/addMembersToGroup'
 import { removeMembersFromGroup } from './group/removeMembersFromGroup'
 import { subscribeToGroup } from './group/subscribeToGroup'
 import { unsubscribeFromGroup } from './group/unsubscribeFromGroup'
+import { joinGroup } from './group/joinGroup'
 
 const router = express.Router()
 router.use(authenticateJWTMiddleware)
@@ -42,5 +43,6 @@ router.post('/groups/:groupId/addMembers', addMembersToGroup)
 router.delete('/groups/:groupId/removeMembers', removeMembersFromGroup)
 router.post('/groups/:groupId/subscribe', subscribeToGroup)
 router.delete('/groups/:groupId/unsubscribe', unsubscribeFromGroup)
+router.post('/groups/:groupId/join', joinGroup)
 
 export default router

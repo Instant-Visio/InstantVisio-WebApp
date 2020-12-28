@@ -4,6 +4,13 @@ import { assertNewResourceCreationGranted } from '../subscription/assertNewResou
 import { UID } from '../../../types/uid'
 import { GroupDao } from '../../../db/GroupDao'
 import { JSONParse } from '../utils/JSONParse'
+import { GroupId } from '../../../types/Group'
+import {
+    BadRequestError,
+    GroupConflictError,
+    GroupNotFoundError,
+} from '../../errors/HttpError'
+import { Member } from '../../../types/Member'
 
 /**
  * @swagger
@@ -21,6 +28,16 @@ import { JSONParse } from '../utils/JSONParse'
  *         description: The group name
  *         in: x-www-form-urlencoded
  *         required: true
+ *         type: string
+ *       - name: password
+ *         description: The group password required to join it
+ *         in: x-www-form-urlencoded
+ *         required: true
+ *         type: string
+ *       - name: groupId
+ *         description: (optional) the group id. If the requested group id is not available, an error will be thrown
+ *         in: x-www-form-urlencoded
+ *         required: false
  *         type: string
  *       - $ref: '#/components/parameters/group/members'
  *     responses:
@@ -47,14 +64,49 @@ export const createGroup = wrap(async (req: Request, res: Response) => {
     await assertNewResourceCreationGranted(userId)
 
     const name = req.body.name
+    const requestedGroupId = req.body.groupId
+    const password = req.body.password
     const members = JSONParse(req.body.members || '[]')
 
-    const groupId = await GroupDao.add(userId, name, members)
-    await GroupDao.update({
-        id: groupId,
-    })
+    if (!password) {
+        throw new BadRequestError('Password is required')
+    }
+
+    let groupId: GroupId
+    if (requestedGroupId) {
+        groupId = await tryCreateGroupWithPredefinedId(
+            requestedGroupId,
+            userId,
+            password,
+            members
+        )
+    } else {
+        groupId = await GroupDao.add(userId, name, password, members)
+        await GroupDao.update({
+            id: groupId,
+        })
+    }
 
     res.status(201).send({
         groupId,
     })
 })
+
+const tryCreateGroupWithPredefinedId = async (
+    groupId: GroupId,
+    userId: UID,
+    password: string,
+    members: Member[]
+): Promise<GroupId> => {
+    try {
+        await GroupDao.get(groupId)
+        throw new GroupConflictError()
+    } catch (error) {
+        if (error instanceof GroupNotFoundError) {
+            await GroupDao.set(groupId, userId, name, password, members)
+            return groupId
+        } else {
+            throw error
+        }
+    }
+}

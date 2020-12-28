@@ -131,7 +131,7 @@ export const inviteParticipant = async ({
     await UserDao.updateUsage(userId, {
         sentSMSs: increment(smssSent.length),
         sentEmails: increment(emailsSent.length),
-        pushsSent: increment(pushsSent.length),
+        sentPushs: increment(pushsSent.length),
     })
 
     return {
