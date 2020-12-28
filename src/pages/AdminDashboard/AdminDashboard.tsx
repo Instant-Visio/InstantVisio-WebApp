@@ -23,6 +23,8 @@ import { useHistory } from 'react-router-dom'
 import { openPremiumVideoCall } from '../../services/safari-view-controller'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../components/App/userSelector'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+
 
 const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
@@ -146,12 +148,14 @@ const AdminDashboard = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs className={classes.textRight}>
-                                        <Link
-                                            href="#"
-                                            onClick={preventDefault}
-                                            variant="body2">
-                                            {t('click-to-copy')}
-                                        </Link>
+                                        <CopyToClipboard text={ token }>
+                                            <Link
+                                                href="#"
+                                                onClick={preventDefault}
+                                                variant="body2">
+                                                {t('click-to-copy')}
+                                            </Link>
+                                        </CopyToClipboard>
                                     </Grid>
                                 </Grid>
                                 <Divider />
