@@ -85,12 +85,9 @@ const AppBar = () => {
             <WhiteAppBar>
                 <MaterialAppBar color="primary" position="static">
                     <Toolbar>
-                    <Typography
-                            color="primary"
-                            variant="h6"
-                            className={classes.title}>
-                            {t('appBar.appName')}
-                        </Typography>
+                        <LogoWrapper>
+                            <Logo />
+                        </LogoWrapper>
                         <Button onClick={openJoinGroupModal} color="primary">
                             {t('appBar.joinGroupButton')}
                         </Button>
