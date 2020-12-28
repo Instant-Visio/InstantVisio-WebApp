@@ -6,6 +6,7 @@ import {
     SIGNIN_SUCCESS,
     SIGNIN_ERROR,
     UserActionsTypes,
+    REGISTER_PUSH_NOTIF_TOKEN,
 } from './userActionsTypes'
 import { authInstance } from '../firebase/firebase'
 import { UID } from '../../types/uid'
@@ -40,6 +41,15 @@ const setSignInError = (error): UserActionsTypes => ({
 
 const setSignOut = (): UserActionsTypes => ({
     type: SIGNOUT,
+})
+
+export const setRegistrationToken = (
+    registrationToken: string
+): UserActionsTypes => ({
+    type: REGISTER_PUSH_NOTIF_TOKEN,
+    payload: {
+        registrationToken,
+    },
 })
 
 export const didSignin: DidSignIn = (user) => async (dispatch, getState) => {

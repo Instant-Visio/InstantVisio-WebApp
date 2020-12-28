@@ -4,6 +4,7 @@ import { UID } from '../../types/uid'
 export const SIGNOUT = 'SIGNOUT'
 export const SIGNIN_ERROR = 'SIGNIN_ERROR'
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS'
+export const REGISTER_PUSH_NOTIF_TOKEN = 'REGISTER_PUSH_NOTIF_TOKEN'
 
 interface SetSignInAction {
     type: typeof SIGNIN_SUCCESS
@@ -25,4 +26,15 @@ interface SetSignInError {
     }
 }
 
-export type UserActionsTypes = SetSignInAction | SetSignOut | SetSignInError
+interface SetRegistrationTokenAction {
+    type: typeof REGISTER_PUSH_NOTIF_TOKEN
+    payload: {
+        registrationToken: string
+    }
+}
+
+export type UserActionsTypes =
+    | SetSignInAction
+    | SetSignOut
+    | SetSignInError
+    | SetRegistrationTokenAction
