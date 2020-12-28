@@ -44,7 +44,7 @@
     },
     "appBar": {
         "appName": "Instant Visio",
-        "joinVisioButton": "Rejoins Visio",
+        "joinVisioButton": "Rejoindre une visio",
         "joinGroupButton": "Rejoins Group",
         "loginButton": "Login"
     }
