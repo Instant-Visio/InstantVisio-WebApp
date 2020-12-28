@@ -78,6 +78,18 @@ export class ReminderNotFoundError extends NotFoundError {
     }
 }
 
+class ConflictError extends HttpError {
+    constructor(message?: string) {
+        super(409, message || 'Conflict')
+    }
+}
+
+export class GroupConflictError extends ConflictError {
+    constructor() {
+        super('Group already exist')
+    }
+}
+
 class GoneError extends HttpError {
     constructor(message?: string) {
         super(410, message || 'Gone')
