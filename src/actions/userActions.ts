@@ -59,7 +59,7 @@ export const sendRegistrationToken = (
     registrationToken: string
 ) => async (dispatch, getState) => {
     const { user: userState } = getState()
-    const { token, id: userId } = userState.user
+    const { token, userId } = userState.user
 
     try {
         const api = new Api(token)
