@@ -92,6 +92,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                         size="small"
                         component={TextField}
                         variant="outlined"
+                        type="password"
                         name="password"
                         label={t('fields.password.placeholder')}
                     />
