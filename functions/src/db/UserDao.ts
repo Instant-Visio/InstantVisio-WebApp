@@ -1,11 +1,13 @@
 import { UID } from '../types/uid'
 import { JWTToken } from '../types/JWT'
-import { db, serverTimestamp } from '../firebase/firebase'
+import { db, documentId, serverTimestamp } from '../firebase/firebase'
 import { COLLECTIONS } from './constants'
 import { BadRequestError, NotFoundError } from '../api/errors/HttpError'
 import { User } from '../types/User'
 import admin from 'firebase-admin'
 import FieldValue = admin.firestore.FieldValue
+import { GroupId } from '../types/Group'
+import { GroupDao } from './GroupDao'
 
 export class UserDao {
     public static async get(userId: UID): Promise<User> {
@@ -101,5 +103,38 @@ export class UserDao {
             },
             updatedAt: serverTimestamp(),
         })
+    }
+
+    public static async getRegistrationTokensForGroup(groupId: GroupId) {
+        const group = await GroupDao.get(groupId)
+        const querySnapshots = await db
+            .collection(COLLECTIONS.users)
+            .where(documentId(), 'in', group.members)
+            .get()
+
+        return querySnapshots.docs.reduce((acc: string[], userDoc) => {
+            const { registrationTokens } = userDoc.data()
+            return acc.concat(registrationTokens)
+        }, [])
+    }
+}
+
+export interface UserEditData {
+    name?: string
+    subscription?: {
+        isActive: boolean
+        isQuotaReached: boolean
+        type: string
+        quotas?: {
+            sms: number
+            email: number
+            push: number
+            minutes: number
+        }
+    }
+    usage?: {
+        sentSMSs: number
+        sentEmails: number
+        sentPushs: number
     }
 }

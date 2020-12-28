@@ -25,7 +25,7 @@ export interface EmailNotificationParams extends BaseNotificationParams {
 
 export interface PushNotificationParams extends BaseNotificationParams {
     type: NotificationType.PushNotificationType
-    topic: string
+    tokens: string[]
     additionalData: {
         [key: string]: string
     }
