@@ -17,6 +17,7 @@ import { getGroup } from './group/getGroup'
 import { addMembersToGroup } from './group/addMembersToGroup'
 import { removeMembersFromGroup } from './group/removeMembersFromGroup'
 import { joinGroup } from './group/joinGroup'
+import { addRegistrationToken } from './users/addRegistrationToken'
 
 const router = express.Router()
 router.use(authenticateJWTMiddleware)
@@ -31,7 +32,10 @@ router.get('/rooms/:roomId/reminders/', getReminders)
 router.post('/rooms/:roomId/reminders/', createReminderRoute)
 router.patch('/rooms/:roomId/reminders/:reminderId', editReminder)
 router.delete('/rooms/:roomId/reminders/:reminderId', deleteReminder)
+
+// User
 router.get('/users/:userId/', getUser)
+router.post('/users/:userId/addRegistrationToken', addRegistrationToken)
 
 // Group
 router.post('/groups/', createGroup)
