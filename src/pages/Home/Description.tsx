@@ -4,7 +4,6 @@ import color from 'color'
 import { useTranslation, Trans } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
 import BaseList from '../../components/List/List'
-import Logo from '../../components/Logo/Logo'
 import BaseArrow, { BaseArrowProps } from '../../components/Arrow/Arrow'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 
