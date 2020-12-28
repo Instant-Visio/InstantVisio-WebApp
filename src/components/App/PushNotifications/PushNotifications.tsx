@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { showErrorMessage } from '../Snackbar/snackbarActions'
 import { useTranslation } from 'react-i18next'
 import { LocalNotificationsService } from '../../../services/local-notifications'
+import { setRegistrationToken } from '../../../actions/userActions'
 
 export const PushNotifications = () => {
     const dispatch = useDispatch()
@@ -18,13 +19,18 @@ export const PushNotifications = () => {
                     console.log('Permissions granted')
                     PushNotificationsService.register()
                     PushNotificationsService.createDefaultChannel()
-                    PushNotificationsService.listenForRegistration(() => {
-                        dispatch(
-                            showErrorMessage(
-                                t('notification.errors.registration')
+                    PushNotificationsService.listenForRegistration(
+                        (registrationToken) => {
+                            dispatch(setRegistrationToken(registrationToken))
+                        },
+                        () => {
+                            dispatch(
+                                showErrorMessage(
+                                    t('notification.errors.registration')
+                                )
                             )
-                        )
-                    })
+                        }
+                    )
 
                     const redirectHandler = (roomId: string) => {
                         window.location.pathname = `/premium-video/

@@ -8,6 +8,10 @@ export const selectUser = createSelector(
     ({ user }: UserState) => user
 )
 export const selectToken = createSelector(selectUser, ({ token }) => token)
+export const selectRegistrationToken = createSelector(
+    selectUser,
+    ({ registrationToken }) => registrationToken
+)
 export const isLoading = ({ user }) => user.isLoading
 
 export const selectIsPremiumUser = createSelector(

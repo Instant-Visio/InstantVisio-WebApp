@@ -41,5 +41,12 @@
     "message": {
         "title": "Demande URGENTE de visiophonie de",
         "Message": "vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien :"
+    },
+    "appBar": {
+        "appName": "Instant Visio",
+        "joinVisioButton": "Rejoindre une visio",
+        "joinGroupButton": "Rejoindre un groupe",
+        "loginButton": "Connexion",
+        "signOutButton": "Se déconnecter"
     }
 }

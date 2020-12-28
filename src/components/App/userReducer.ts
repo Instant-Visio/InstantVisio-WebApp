@@ -1,11 +1,16 @@
 import { UID } from '../../../types/uid'
-import { SIGNIN_SUCCESS } from '../../actions/userActionsTypes'
 import { JWTToken } from '../../../types/JWT'
-import { SIGNOUT, SIGNIN_ERROR } from '../../actions/userActionsTypes'
+import {
+    SIGNOUT,
+    SIGNIN_ERROR,
+    SIGNIN_SUCCESS,
+    REGISTER_PUSH_NOTIF_TOKEN,
+} from '../../actions/userActionsTypes'
 import produce, { Draft } from 'immer'
 
 export interface User {
     token: JWTToken
+    registrationToken: string
     userId: UID
     isAnonymous: boolean
 }
@@ -19,6 +24,7 @@ export interface UserState {
 const initialState = {
     user: {
         token: '',
+        registrationToken: '',
         userId: '',
         isAnonymous: true,
     },
@@ -32,6 +38,7 @@ export const userReducer = produce(
             case SIGNIN_SUCCESS:
                 draft.user = {
                     token: payload.token,
+                    registrationToken: '',
                     isAnonymous: payload.isAnonymous,
                     userId: payload.userId,
                 }
@@ -45,11 +52,18 @@ export const userReducer = produce(
             case SIGNOUT:
                 draft.user = {
                     token: '',
+                    registrationToken: '',
                     isAnonymous: true,
                     userId: '',
                 }
                 draft.error = null
                 draft.isLoading = false
+                break
+            case REGISTER_PUSH_NOTIF_TOKEN:
+                draft.user = {
+                    ...draft.user,
+                    registrationToken: payload.registrationToken,
+                }
                 break
         }
     },

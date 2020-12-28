@@ -12,6 +12,8 @@ import { showLoginModal } from '../../LoginModal/loginModalActions'
 import { signOut } from '../../../actions/userActions'
 import { useHistory } from 'react-router-dom'
 import { selectIsPremiumUser } from '../userSelector'
+import { isMobile } from '../../../services/platform'
+import { showJoinGroupModal } from '../../JoinGroup/joinGroupModalActions'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -41,6 +43,30 @@ const AppBar = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const renderLoginLogoutBtn = () => {
+        if (!isMobile()) {
+            return isPremiumUser ? (
+                <Button
+                    onClick={() => {
+                        dispatch(signOut())
+                        history.replace('/')
+                    }}>
+                    Sign out
+                </Button>
+            ) : (
+                <Button
+                    onClick={() => dispatch(showLoginModal())}
+                    color="primary">
+                    {t('appBar.loginButton')}
+                </Button>
+            )
+        }
+    }
+
+    const openJoinGroupModal = () => {
+        dispatch(showJoinGroupModal())
+    }
+
     return (
         <div className={classes.root}>
             <WhiteAppBar>
@@ -52,24 +78,10 @@ const AppBar = () => {
                             className={classes.title}>
                             {t('appBar.appName')}
                         </Typography>
-                        <Button color="primary">
-                            {t('appBar.joinVisioButton')}
+                        <Button onClick={openJoinGroupModal} color="primary">
+                            {t('appBar.joinGroupButton')}
                         </Button>
-                        {isPremiumUser ? (
-                            <Button
-                                onClick={() => {
-                                    dispatch(signOut())
-                                    history.replace('/')
-                                }}>
-                                Sign out
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() => dispatch(showLoginModal())}
-                                color="primary">
-                                {t('appBar.loginButton')}
-                            </Button>
-                        )}
+                        {renderLoginLogoutBtn()}
 
                         <SwipeableTemporaryDrawer />
                     </Toolbar>

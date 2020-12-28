@@ -35,17 +35,23 @@ export class PushNotificationsService {
         PushNotifications.register()
     }
 
-    static listenForRegistration(errorHandler: () => void) {
-        this.listenForRegistrationSuccess()
+    static listenForRegistration(
+        successHandler: (registrationToken: string) => void,
+        errorHandler: () => void
+    ) {
+        this.listenForRegistrationSuccess(successHandler)
         this.listenForRegistrationError(errorHandler)
     }
 
-    static listenForRegistrationSuccess() {
+    static listenForRegistrationSuccess(
+        successHandler: (registrationToken) => void
+    ) {
         PushNotifications.addListener(
             'registration',
             (token: PushNotificationToken) => {
                 console.log('Push registration success, token: ' + token.value)
-                this.subscribeToTopic('test')
+                successHandler(token.value)
+                // this.subscribeToTopic('test')
             }
         )
     }

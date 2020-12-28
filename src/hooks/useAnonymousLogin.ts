@@ -6,13 +6,21 @@ import { JWTToken } from '../../types/JWT'
 import { useSelector } from 'react-redux'
 import { selectToken } from '../components/App/userSelector'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import {
+    hideBackdrop,
+    showBackdrop,
+} from '../components/App/Backdrop/backdropActions'
 
 export default async (): Promise<void> => {
     const token = useSelector(selectToken)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const anonymousAuth = async (token: JWTToken) => {
             if (!token) {
+                dispatch(showBackdrop())
+
                 try {
                     if (isAuthEmulatorEnabled()) {
                         authInstance.useEmulator(EMULATORS.hosts.auth)
@@ -23,10 +31,11 @@ export default async (): Promise<void> => {
                     console.log(
                         `Error anonymous login: ${error.message}, code: ${error.code}`
                     )
+                    dispatch(hideBackdrop())
                 }
             }
         }
 
         anonymousAuth(token)
-    }, [token])
+    }, [token, dispatch])
 }
