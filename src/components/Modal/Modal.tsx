@@ -3,8 +3,8 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { Modal as MaterialModal } from '@material-ui/core'
 
 function getModalStyle() {
-    const top = 30
-    const left = 30
+    const top = 50
+    const left = 50
 
     return {
         top: `${top}%`,
