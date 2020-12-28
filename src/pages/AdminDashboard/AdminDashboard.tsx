@@ -21,10 +21,14 @@ import CreateRoomForm from './CreateRoomForm'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { openPremiumVideoCall } from '../../services/safari-view-controller'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../components/App/userSelector'
 
 const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
     const history = useHistory()
+    const { token } = useSelector(selectUser)
+
     const preventDefault = (event: React.SyntheticEvent) =>
         event.preventDefault()
 
@@ -43,6 +47,9 @@ const AdminDashboard = () => {
             listItem: {
                 paddingTop: 0,
                 paddingBottom: 0,
+            },
+            apiTokenListItem: {
+                wordWrap: 'break-word',
             },
         })
     )
@@ -149,7 +156,10 @@ const AdminDashboard = () => {
                                 </Grid>
                                 <Divider />
                                 <ListItem className={classes.list}>
-                                    <ListItemText primary="fjqdkjvq7gjhqdjfd9fsdf767" />
+                                    <ListItemText
+                                        className={classes.apiTokenListItem}
+                                        primary={token}
+                                    />
                                 </ListItem>
                             </Paper>
                         </Grid>
