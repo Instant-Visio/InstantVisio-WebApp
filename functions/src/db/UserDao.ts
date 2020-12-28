@@ -103,3 +103,23 @@ export class UserDao {
         })
     }
 }
+
+export interface UserEditData {
+    name?: string
+    subscription?: {
+        isActive: boolean
+        isQuotaReached: boolean
+        type: string
+        quotas?: {
+            sms: number
+            email: number
+            push: number
+            minutes: number
+        }
+    }
+    usage?: {
+        sentSMSs: number
+        sentEmails: number
+        sentPushs: number
+    }
+}
