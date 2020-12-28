@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom'
 import { selectIsPremiumUser } from '../userSelector'
 import { isMobile } from '../../../services/platform'
 import { showJoinGroupModal } from '../../JoinGroup/joinGroupModalActions'
+import Logo from '../../Logo/Logo'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -24,15 +25,19 @@ const useStyles = makeStyles((theme: Theme) =>
         menuButton: {
             marginRight: theme.spacing(2),
         },
-        title: {
-            flexGrow: 1,
-        },
     })
 )
+
+const LogoWrapper = styled.div`
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+`
 
 const WhiteAppBar = styled.div`
     .MuiAppBar-colorPrimary {
         background-color: white;
+        padding: 16px 0;
     }
 `
 
@@ -72,7 +77,7 @@ const AppBar = () => {
             <WhiteAppBar>
                 <MaterialAppBar color="primary" position="static">
                     <Toolbar>
-                        <Typography
+                    <Typography
                             color="primary"
                             variant="h6"
                             className={classes.title}>
@@ -82,7 +87,6 @@ const AppBar = () => {
                             {t('appBar.joinGroupButton')}
                         </Button>
                         {renderLoginLogoutBtn()}
-
                         <SwipeableTemporaryDrawer />
                     </Toolbar>
                 </MaterialAppBar>

@@ -145,7 +145,6 @@ function Description() {
     return (
         <Wrapper>
             <LogoBaseline>
-                <Logo />
                 <Baseline>
                     <Trans i18nKey="common:homeBaseline">
                         Joignez un proche en visio, en un clic,

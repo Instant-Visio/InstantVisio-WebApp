@@ -85,7 +85,6 @@ export default function Default({ children, title }: DefaultProps) {
 
     return (
         <Wrapper>
-            {!isMobile && <Lang />}
             {!isMobile && <Header />}
             <Body>
                 <Container>{children}</Container>

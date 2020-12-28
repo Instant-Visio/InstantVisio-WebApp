@@ -137,9 +137,6 @@ export default function Home({ location }) {
             ) : (
                 <WrapperMobile key={'anchor-left'}>
                     <MobileContent>
-                        <LogoContainer>
-                            <Logo />
-                        </LogoContainer>
                         <DescriptionMobile>
                             {t('information.form-submit')}
                         </DescriptionMobile>
