@@ -10,6 +10,7 @@ import {
     GroupConflictError,
     GroupNotFoundError,
 } from '../../errors/HttpError'
+import { Member } from '../../../types/Member'
 
 /**
  * @swagger
@@ -73,23 +74,12 @@ export const createGroup = wrap(async (req: Request, res: Response) => {
 
     let groupId: GroupId
     if (requestedGroupId) {
-        try {
-            await GroupDao.get(requestedGroupId)
-            throw new GroupConflictError()
-        } catch (error) {
-            if (error instanceof GroupNotFoundError) {
-                await GroupDao.set(
-                    requestedGroupId,
-                    userId,
-                    name,
-                    password,
-                    members
-                )
-                groupId = requestedGroupId
-            } else {
-                throw error
-            }
-        }
+        groupId = await tryCreateGroupWithPredefinedId(
+            requestedGroupId,
+            userId,
+            password,
+            members
+        )
     } else {
         groupId = await GroupDao.add(userId, name, password, members)
         await GroupDao.update({
@@ -101,3 +91,22 @@ export const createGroup = wrap(async (req: Request, res: Response) => {
         groupId,
     })
 })
+
+const tryCreateGroupWithPredefinedId = async (
+    groupId: GroupId,
+    userId: UID,
+    password: string,
+    members: Member[]
+): Promise<GroupId> => {
+    try {
+        await GroupDao.get(groupId)
+        throw new GroupConflictError()
+    } catch (error) {
+        if (error instanceof GroupNotFoundError) {
+            await GroupDao.set(groupId, userId, name, password, members)
+            return groupId
+        } else {
+            throw error
+        }
+    }
+}
