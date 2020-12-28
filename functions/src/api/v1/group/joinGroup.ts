@@ -4,12 +4,13 @@ import { UID } from '../../../types/uid'
 import { GroupId } from '../../../types/Group'
 import { GroupDao } from '../../../db/GroupDao'
 import { BadRequestError, ForbiddenError } from '../../errors/HttpError'
+import { subscribeUserToGroup } from './subscribeToGroup'
 
 /**
  * @swagger
  * /v1/groups/{groupId}/join:
  *   post:
- *     description: Request to join a group, by providing the group id, password and user name
+ *     description: Request to join a group, by providing the group id, password and user name. You can also subscribe a device for the group push notification at the same time.
  *     tags:
  *       - groups
  *     consumes:
@@ -27,6 +28,11 @@ import { BadRequestError, ForbiddenError } from '../../errors/HttpError'
  *         in: x-www-form-urlencoded
  *         required: true
  *         type: string
+ *       - name: registrationToken
+ *         description: (optional) The registrationToken associated with this user device
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         type: string
  *     responses:
  *       204:
  *         description: Room joined with success
@@ -43,7 +49,7 @@ export const joinGroup = wrap(async (req: Request, res: Response) => {
     const userId: UID = res.locals.uid
     const groupId: GroupId = req.params.groupId
 
-    const { password, name } = req.body
+    const { password, name, registrationToken } = req.body
     if (!password) {
         throw new BadRequestError('Password is required')
     }
@@ -59,6 +65,10 @@ export const joinGroup = wrap(async (req: Request, res: Response) => {
             id: userId,
         },
     ])
+
+    if (registrationToken) {
+        await subscribeUserToGroup(registrationToken, group.id)
+    }
 
     res.status(204).send()
 })
