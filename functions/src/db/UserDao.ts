@@ -88,7 +88,7 @@ export class UserDao {
             participantSeconds?: FieldValue
             sentEmails?: FieldValue
             sentSMSs?: FieldValue
-            pushsSent?: FieldValue
+            sentPushs?: FieldValue
         }
     ): Promise<void> {
         const month = new Date().getMonth() + 1

@@ -18,6 +18,7 @@ const makeUserData = (
     usage: {
         sentSMSs: 0,
         sentEmails: 0,
+        sentPushs: 0,
     },
 })
 
