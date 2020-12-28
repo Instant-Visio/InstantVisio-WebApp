@@ -9,7 +9,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Logo from '../Logo/Logo'
 import { useTranslation } from 'react-i18next'
-
 import styled from 'styled-components'
 import HomeIcon from '@material-ui/icons/Home'
 import DuoIcon from '@material-ui/icons/Duo'
@@ -19,29 +18,34 @@ import InfoIcon from '@material-ui/icons/Info'
 import { IonItem, IonList } from '@ionic/react'
 import Lang from '../Lang/Lang'
 import { IconButton } from '@material-ui/core'
-import { Link } from 'react-router-dom'
 import NewsletterModal from '../../pages/Newsletter/NewsletterModal'
 import { showPreferencesDialog } from '../../utils/gdpr'
 import About from '../../documents/Instant_Visio_Keynote.pdf'
 
-const LogoContainer = styled.div`
-    padding-left: 35%;
-    padding-right: 35%;
+const Wrapper = styled.div`
+    p {
+        margin-bottom: 0;
+    }
 `
 
-const StyledItem = styled.div`
-    width: 100%;
-
-    .MuiListItem-gutters {
-        padding-left: 0;
-        padding-right: 0;
-    }
+const StyledLogo = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
 `
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         list: {
             width: 250,
+        },
+        listItem: {
+            padding: 0,
+        },
+        item: {
+            width: '100%',
+            padding: 0,
         },
         fullList: {
             width: 'auto',
@@ -79,13 +83,11 @@ export default function SwipeableTemporaryDrawer() {
     }
 
     const list = (anchor) => (
-        <div>
-            <LogoContainer>
+        <Wrapper>
+            <StyledLogo>
                 <Logo />
-            </LogoContainer>
-
+            </StyledLogo>
             <Lang className={classes.languagePicker} />
-
             <div
                 className={clsx(classes.list, {
                     [classes.fullList]: anchor === 'top' || anchor === 'bottom',
@@ -136,63 +138,59 @@ export default function SwipeableTemporaryDrawer() {
                             title: t('footer.license'),
                         },
                     ].map(({ title, icon, url }) => (
-                        <ListItem button key={title}>
-                            <StyledItem>
-                                <IonItem routerLink={url}>
-                                    <ListItemIcon>{icon}</ListItemIcon>
-                                    <ListItemText primary={title} />
-                                </IonItem>
-                            </StyledItem>
+                        <ListItem
+                            button
+                            key={title}
+                            className={classes.listItem}>
+                            <IonItem routerLink={url} className={classes.item}>
+                                <ListItemIcon>{icon}</ListItemIcon>
+                                <ListItemText primary={title} />
+                            </IonItem>
                         </ListItem>
                     ))}
 
-                    <ListItem>
-                        <IonItem>
-                            <ListItemIcon>
-                                <InfoIcon />
-                            </ListItemIcon>
-                            <a
-                                className="footer-link-content"
-                                href={`mailto:contact@instantvisio.com?Subject=${t(
-                                    'footer.contact'
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer">
-                                {t('footer.contact-us')}
-                            </a>{' '}
-                        </IonItem>
-                    </ListItem>
-
-                    <ListItem>
-                        <IonItem>
-                            <ListItemIcon>
-                                <InfoIcon />
-                            </ListItemIcon>
-                            <Link
-                                to={About}
-                                className="footer-link-content"
-                                target="_blank"
-                                rel="noopener noreferrer">
-                                {t('footer.about')}
-                            </Link>
-                        </IonItem>
-                    </ListItem>
-
-                    <ListItem>
-                        <IonItem>
-                            <ListItemIcon>
-                                <InfoIcon />
-                            </ListItemIcon>
-                            <Link to="" className="footer-link-content">
-                                <NewsletterModal />
-                            </Link>
-                        </IonItem>
-                    </ListItem>
-
-                    <ListItem>
+                    <ListItem button className={classes.listItem}>
                         <IonItem
-                            routerLink={''}
-                            onClick={showPreferencesDialog}>
+                            className={classes.item}
+                            href={`mailto:contact@instantvisio.com?Subject=${t(
+                                'footer.contact'
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <ListItemIcon>
+                                <InfoIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={t('footer.contact-us')} />
+                        </IonItem>
+                    </ListItem>
+
+                    <ListItem button className={classes.listItem}>
+                        <IonItem
+                            className={classes.item}
+                            href={About}
+                            rel="noopener noreferrer"
+                            target="_blank">
+                            <ListItemIcon>
+                                <InfoIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={t('footer.about')} />
+                        </IonItem>
+                    </ListItem>
+
+                    <ListItem button className={classes.listItem}>
+                        <IonItem button className={classes.item}>
+                            <ListItemIcon>
+                                <InfoIcon />
+                            </ListItemIcon>
+                            <NewsletterModal />
+                        </IonItem>
+                    </ListItem>
+
+                    <ListItem button className={classes.listItem}>
+                        <IonItem
+                            button
+                            onClick={showPreferencesDialog}
+                            className={classes.item}>
                             <ListItemIcon>
                                 <InfoIcon />
                             </ListItemIcon>
@@ -202,7 +200,7 @@ export default function SwipeableTemporaryDrawer() {
                 </IonList>
                 <Divider />
             </div>
-        </div>
+        </Wrapper>
     )
 
     const anchor = 'right'

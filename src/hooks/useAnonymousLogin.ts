@@ -12,7 +12,7 @@ import {
     showBackdrop,
 } from '../components/App/Backdrop/backdropActions'
 
-export default async (): Promise<void> => {
+export default () => {
     const token = useSelector(selectToken)
     const dispatch = useDispatch()
 
