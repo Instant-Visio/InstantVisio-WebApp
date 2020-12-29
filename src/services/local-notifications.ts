@@ -14,7 +14,6 @@ export class LocalNotificationsService {
                     body: body || 'Click to join',
                     id: new Date().getTime(),
                     schedule: { at: ONE_SECOND_FROM_NOW },
-                    sound: undefined,
                     attachments: undefined,
                     actionTypeId: '',
                     extra,
