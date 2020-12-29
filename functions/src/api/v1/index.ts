@@ -19,6 +19,7 @@ import { removeMembersFromGroup } from './group/removeMembersFromGroup'
 import { joinGroup } from './group/joinGroup'
 import { addRegistrationToken } from './users/addRegistrationToken'
 import { editUser } from './users/editUser'
+import { getGroups } from './group/getGroups'
 
 const router = express.Router()
 router.use(authenticateJWTMiddleware)
@@ -40,6 +41,7 @@ router.patch('/users/:userId/', editUser)
 router.post('/users/:userId/addRegistrationToken', addRegistrationToken)
 
 // Group
+router.get('/groups/', getGroups)
 router.post('/groups/', createGroup)
 router.patch('/groups/:groupId', editGroup)
 router.get('/groups/:groupId', getGroup)
