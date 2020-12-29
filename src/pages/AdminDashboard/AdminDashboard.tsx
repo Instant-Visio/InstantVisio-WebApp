@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { IonContent } from '@ionic/react'
 import Typography from '@material-ui/core/Typography'
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -21,10 +21,31 @@ import CreateRoomForm from './CreateRoomForm'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { openPremiumVideoCall } from '../../services/safari-view-controller'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../components/App/userSelector'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { Api } from '../../services/api'
+import { UserDetailsRetrieved } from '../../actions/userActions'
+import { useDispatch } from 'react-redux'
 
 const AdminDashboard = () => {
-    const { t } = useTranslation('dashboard')
+    const dispatch = useDispatch()
     const history = useHistory()
+    const { t } = useTranslation('dashboard')
+    const { userId, token, details } = useSelector(selectUser)
+
+    useEffect(() => {
+        const getUserDetails = async () => {
+            const api = new Api(token)
+            const userDetails = await api.getUserDetails(userId)
+            dispatch(UserDetailsRetrieved(userDetails))
+        }
+
+        if (token) {
+            getUserDetails()
+        }
+    }, [token, userId, dispatch])
+
     const preventDefault = (event: React.SyntheticEvent) =>
         event.preventDefault()
 
@@ -44,6 +65,9 @@ const AdminDashboard = () => {
                 paddingTop: 0,
                 paddingBottom: 0,
             },
+            apiTokenListItem: {
+                wordWrap: 'break-word',
+            },
         })
     )
 
@@ -52,6 +76,10 @@ const AdminDashboard = () => {
     const onFormSubmit = () => {
         openPremiumVideoCall(history)
     }
+
+    const getSMSUsage = () => details?.usage?.sentSMSs
+
+    const getSMSQuota = () => details?.subscription?.quotas?.sms
 
     return (
         <ThemeProvider theme={theme}>
@@ -116,11 +144,19 @@ const AdminDashboard = () => {
                                 </Grid>
                                 <Divider />
                                 <ListItem className={classes.list}>
-                                    <ListItemText
-                                        primary={`250 SMS ${t('consumed')} ${t(
-                                            'on'
-                                        )} 500 ${t('available')}`}
-                                    />
+                                    {details && (
+                                        <ListItemText
+                                            primary={`${
+                                                getSMSUsage() !== undefined
+                                                    ? getSMSUsage()
+                                                    : '?'
+                                            } SMS ${t('consumed')} ${t('on')} ${
+                                                getSMSQuota() !== undefined
+                                                    ? getSMSQuota()
+                                                    : '?'
+                                            } ${t('available')}`}
+                                        />
+                                    )}
                                 </ListItem>
                             </Paper>
 
@@ -139,17 +175,22 @@ const AdminDashboard = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs className={classes.textRight}>
-                                        <Link
-                                            href="#"
-                                            onClick={preventDefault}
-                                            variant="body2">
-                                            {t('click-to-copy')}
-                                        </Link>
+                                        <CopyToClipboard text={token}>
+                                            <Link
+                                                href="#"
+                                                onClick={preventDefault}
+                                                variant="body2">
+                                                {t('click-to-copy')}
+                                            </Link>
+                                        </CopyToClipboard>
                                     </Grid>
                                 </Grid>
                                 <Divider />
                                 <ListItem className={classes.list}>
-                                    <ListItemText primary="fjqdkjvq7gjhqdjfd9fsdf767" />
+                                    <ListItemText
+                                        className={classes.apiTokenListItem}
+                                        primary={token}
+                                    />
                                 </ListItem>
                             </Paper>
                         </Grid>

@@ -18,6 +18,9 @@ export class PushNotificationsService {
             description: 'Visio call notifications',
             importance: 5,
             visibility: 1,
+            vibration: true,
+            lights: true,
+            sound: 'xephron__perfect_message_ringtone_modified.mp3',
         }
 
         PushNotificationsService.createChannel(notificationChannel)

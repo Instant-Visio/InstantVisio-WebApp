@@ -37,7 +37,7 @@ export class GroupDao {
     public static async listByUserId(userId: UID): Promise<PublicGroup[]> {
         const querySnapshots = await db
             .collection(COLLECTIONS.groups)
-            .where('destinations', 'array-contains', userId)
+            .where('members', 'array-contains', userId)
             .get()
 
         return querySnapshots.docs.map((doc) => {
