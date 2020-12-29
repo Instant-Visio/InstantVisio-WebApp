@@ -4,15 +4,41 @@ import {
     SIGNOUT,
     SIGNIN_ERROR,
     SIGNIN_SUCCESS,
+    USER_DETAILS,
     REGISTER_PUSH_NOTIF_TOKEN,
 } from '../../actions/userActionsTypes'
 import produce, { Draft } from 'immer'
+
+export interface UserSubscriptionQuotas {
+    push: number
+    minutes: number
+    email: number
+    sms: number
+}
+
+export interface UserSubscription {
+    isActive: boolean
+    isQuotaReached: boolean
+    quotas: UserSubscriptionQuotas
+    type: string
+}
+
+export interface UserUsage {
+    sentEmails: number
+    sentSMSs: number
+}
+
+export interface UserDetails {
+    subscription: UserSubscription
+    usage: UserUsage
+}
 
 export interface User {
     token: JWTToken
     registrationToken: string
     userId: UID
     isAnonymous: boolean
+    details: null | UserDetails
 }
 
 export interface UserState {
@@ -27,6 +53,7 @@ const initialState = {
         registrationToken: '',
         userId: '',
         isAnonymous: true,
+        details: null,
     },
     isLoading: true,
     error: null,
@@ -41,6 +68,7 @@ export const userReducer = produce(
                     registrationToken: '',
                     isAnonymous: payload.isAnonymous,
                     userId: payload.userId,
+                    details: null,
                 }
                 draft.error = null
                 draft.isLoading = false
@@ -55,6 +83,7 @@ export const userReducer = produce(
                     registrationToken: '',
                     isAnonymous: true,
                     userId: '',
+                    details: null,
                 }
                 draft.error = null
                 draft.isLoading = false
@@ -63,6 +92,12 @@ export const userReducer = produce(
                 draft.user = {
                     ...draft.user,
                     registrationToken: payload.registrationToken,
+                }
+                break
+            case USER_DETAILS:
+                draft.user.details = {
+                    subscription: payload.subscription,
+                    usage: payload.usage,
                 }
                 break
         }

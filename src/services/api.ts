@@ -62,6 +62,21 @@ export class Api {
         })
     }
 
+    async getUserDetails(userId) : Promise<any> {
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.jwtToken}`,
+        }
+
+        const response = await axios({
+            url: `${this.baseUrl}/users/${userId}`,
+            headers,
+            method : 'get',
+        });
+
+        return response?.data?.user;
+    }
+
     async post(apiUrl: string, data: any): Promise<any> {
         const headers = {
             'Content-Type': 'application/json',
