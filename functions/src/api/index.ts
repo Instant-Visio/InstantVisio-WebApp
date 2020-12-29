@@ -9,6 +9,7 @@ import { errorMiddleware } from './middlewares/errorMiddleware'
 import * as cors from 'cors'
 import { isUsingEmulator } from './utils/isUsingEmulator'
 import { sendTestPushNotification } from './v1/invite/sendTestPushNotification'
+import { seeds } from './utils/seeds/seeds'
 
 const app = express()
 
@@ -30,6 +31,7 @@ if (isUsingEmulator()) {
     app.get('/api/v1-tests/notification/push', (req, res) =>
         sendTestPushNotification(req, res)
     )
+    app.get('/api/v1-tests/seeds/', seeds)
 }
 app.use(errorMiddleware)
 
