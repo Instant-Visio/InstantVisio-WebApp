@@ -7,6 +7,7 @@ import {
     SIGNIN_ERROR,
     UserActionsTypes,
     REGISTER_PUSH_NOTIF_TOKEN,
+    USER_DETAILS,
 } from './userActionsTypes'
 import { authInstance } from '../firebase/firebase'
 import { UID } from '../../types/uid'
@@ -85,4 +86,13 @@ export const signOut = () => async (dispatch): Promise<void> => {
     await authInstance.signOut()
     dispatch(setSignOut())
     dispatch(hideBackdrop())
+}
+
+export const UserDetailsRetrieved = (userDetails) => async (
+    dispatch
+): Promise<void> => {
+    dispatch({
+        type: USER_DETAILS,
+        payload: userDetails,
+    })
 }

@@ -1,10 +1,12 @@
 import { JWTToken } from '../../types/JWT'
 import { UID } from '../../types/uid'
+import { UserDetails } from '../components/App/userReducer'
 
 export const SIGNOUT = 'SIGNOUT'
 export const SIGNIN_ERROR = 'SIGNIN_ERROR'
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS'
 export const REGISTER_PUSH_NOTIF_TOKEN = 'REGISTER_PUSH_NOTIF_TOKEN'
+export const USER_DETAILS = 'USER_DETAILS'
 
 interface SetSignInAction {
     type: typeof SIGNIN_SUCCESS
@@ -26,6 +28,11 @@ interface SetSignInError {
     }
 }
 
+interface SetUserDetails {
+    type: typeof USER_DETAILS
+    payload: UserDetails
+}
+
 interface SetRegistrationTokenAction {
     type: typeof REGISTER_PUSH_NOTIF_TOKEN
     payload: {
@@ -37,4 +44,5 @@ export type UserActionsTypes =
     | SetSignInAction
     | SetSignOut
     | SetSignInError
+    | SetUserDetails
     | SetRegistrationTokenAction
