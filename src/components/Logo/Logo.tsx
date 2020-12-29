@@ -1,32 +1,37 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import homeLogo from '../../styles/assets/images/homeLogo.svg'
-import logo from '../../styles/assets/images/logo.svg'
-import logoMobile from '../../styles/assets/images/logo_mobile.svg'
+import defaultLogo from '../../styles/assets/images/logo.svg'
+import mobileLogo from '../../styles/assets/images/logo_mobile.svg'
+import styled from 'styled-components'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
+
+const Img = styled.img`
+    width: 100%;
+`
+
+const StyledLink = styled(Link)`
+    width: 100px;
+    display: block;
+    @media screen and (min-width: 1024px) {
+        width: 181px;
+        height: 66px;
+    }
+`
 
 function Logo() {
     const { t } = useTranslation()
     const isMobile = useDetectMobileOrTablet()
-    let logoToChoose = ''
+    let logo = mobileLogo
 
-    if (isMobile) {
-        logoToChoose = logoMobile
-    } else if (window.location.pathname === '/' && !isMobile) {
-        logoToChoose = homeLogo
-    } else if (window.location.pathname !== '/' && !isMobile) {
-        logoToChoose = logo
+    if (!isMobile) {
+        logo = defaultLogo
     }
 
     return (
-        <Link to="/" className="logo-link">
-            <img
-                src={logoToChoose}
-                alt={t('logo.alt')}
-                className="logo-picture"
-            />
-        </Link>
+        <StyledLink to="/">
+            <Img src={logo} alt={t('logo.alt')} />
+        </StyledLink>
     )
 }
 

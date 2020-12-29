@@ -7,13 +7,16 @@ export const sendPush = async (
     subject: string
 ) => {
     try {
-        await messaging().send({
+        await messaging().sendMulticast({
             data: params.additionalData,
             notification: {
                 title: subject,
                 body: messageBody,
             },
-            topic: params.topic,
+            android: {
+                priority: 'high',
+            },
+            tokens: params.tokens,
         })
     } catch (error) {
         console.log('Failed to send push notification to topic')

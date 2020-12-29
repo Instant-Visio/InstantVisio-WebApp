@@ -16,9 +16,9 @@ import { editGroup } from './group/editGroup'
 import { getGroup } from './group/getGroup'
 import { addMembersToGroup } from './group/addMembersToGroup'
 import { removeMembersFromGroup } from './group/removeMembersFromGroup'
-import { subscribeToGroup } from './group/subscribeToGroup'
-import { unsubscribeFromGroup } from './group/unsubscribeFromGroup'
 import { joinGroup } from './group/joinGroup'
+import { addRegistrationToken } from './users/addRegistrationToken'
+import { editUser } from './users/editUser'
 
 const router = express.Router()
 router.use(authenticateJWTMiddleware)
@@ -33,7 +33,11 @@ router.get('/rooms/:roomId/reminders/', getReminders)
 router.post('/rooms/:roomId/reminders/', createReminderRoute)
 router.patch('/rooms/:roomId/reminders/:reminderId', editReminder)
 router.delete('/rooms/:roomId/reminders/:reminderId', deleteReminder)
+
+// User
 router.get('/users/:userId/', getUser)
+router.patch('/users/:userId/', editUser)
+router.post('/users/:userId/addRegistrationToken', addRegistrationToken)
 
 // Group
 router.post('/groups/', createGroup)
@@ -41,8 +45,6 @@ router.patch('/groups/:groupId', editGroup)
 router.get('/groups/:groupId', getGroup)
 router.post('/groups/:groupId/addMembers', addMembersToGroup)
 router.delete('/groups/:groupId/removeMembers', removeMembersFromGroup)
-router.post('/groups/:groupId/subscribe', subscribeToGroup)
-router.delete('/groups/:groupId/unsubscribe', unsubscribeFromGroup)
 router.post('/groups/:groupId/join', joinGroup)
 
 export default router
