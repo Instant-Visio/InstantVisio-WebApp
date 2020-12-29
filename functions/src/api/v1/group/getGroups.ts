@@ -7,7 +7,7 @@ import { GroupDao } from '../../../db/GroupDao'
  * @swagger
  * /v1/groups/:
  *   get:
- *     description: Get all the user associated within the token groups.
+ *     description: Get all the current user groups.
  *     tags:
  *       - groups
  *     produces:
