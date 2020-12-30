@@ -6,6 +6,9 @@
     "on": "on",
     "consumed": "consumed",
     "available": "available",
+    "errors:": {
+        "rooms-fetch": "Error retrieving planned discussions"
+    },
     "form": {
         "create-visio": "Create Visio",
         "visio-name": {

@@ -19,20 +19,22 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Link from '@material-ui/core/Link'
 import CreateRoomForm from './CreateRoomForm'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
-import { openPremiumVideoCall } from '../../services/safari-view-controller'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../components/App/userSelector'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { Api } from '../../services/api'
 import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
+import { getRooms } from './roomsActions'
+import { selectRooms } from './roomsSelector'
+import EditIcon from '@material-ui/icons/Edit'
+import { IconButton } from '@material-ui/core'
 
 const AdminDashboard = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
     const { t } = useTranslation('dashboard')
     const { userId, token, details } = useSelector(selectUser)
+    const { rooms } = useSelector(selectRooms)
 
     useEffect(() => {
         const getUserDetails = async () => {
@@ -43,8 +45,9 @@ const AdminDashboard = () => {
 
         if (token) {
             getUserDetails()
+            dispatch(getRooms(t))
         }
-    }, [token, userId, dispatch])
+    }, [token, userId, dispatch, t])
 
     const preventDefault = (event: React.SyntheticEvent) =>
         event.preventDefault()
@@ -81,6 +84,22 @@ const AdminDashboard = () => {
 
     const getSMSQuota = () => details?.subscription?.quotas?.sms
 
+    const formatStartAtDate = (room: any) => {
+        const date = new Date(room.startAt * 1000)
+        return date.toLocaleDateString()
+    }
+
+    // const editRoom = (room) => {
+    //     formValues = {
+    //         ...formValues,
+    //         ...{
+    //             roomName: room.name,
+    //         },
+    //     }
+
+    //     console.log('FormValues: ', formValues)
+    // }
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -107,25 +126,51 @@ const AdminDashboard = () => {
                                 </Grid>
                                 <Divider />
                                 <List component="nav" className={classes.list}>
-                                    <ListItem className={classes.listItem}>
-                                        <ListItemText primary="Comité de pilotage" />
+                                    {rooms.map((room, i) => {
+                                        return (
+                                            <>
+                                                <ListItem
+                                                    key={i}
+                                                    className={
+                                                        classes.listItem
+                                                    }>
+                                                    <ListItemText
+                                                        primary={room.name}
+                                                    />
+                                                    <ListItemText
+                                                        primary={formatStartAtDate(
+                                                            room
+                                                        )}
+                                                        primaryTypographyProps={{
+                                                            align: 'right',
+                                                        }}
+                                                    />
+                                                    <IconButton
+                                                        onClick={() =>
+                                                            editRoom(room)
+                                                        }>
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                </ListItem>
+                                                <Divider variant="middle" />
+                                            </>
+                                        )
+                                    })}
+                                    <ListItem
+                                        key={10}
+                                        className={classes.listItem}>
+                                        <ListItemText primary="ROOM1" />
                                         <ListItemText
-                                            primary="30 mai"
+                                            primary="29/10"
                                             primaryTypographyProps={{
                                                 align: 'right',
                                             }}
                                         />
+                                        <IconButton>
+                                            <EditIcon />
+                                        </IconButton>
                                     </ListItem>
                                     <Divider variant="middle" />
-                                    <ListItem className={classes.list}>
-                                        <ListItemText primary="Comité de pilotage" />
-                                        <ListItemText
-                                            primary="30 mai"
-                                            primaryTypographyProps={{
-                                                align: 'right',
-                                            }}
-                                        />
-                                    </ListItem>
                                 </List>
                             </Paper>
                             <Box m={6} />

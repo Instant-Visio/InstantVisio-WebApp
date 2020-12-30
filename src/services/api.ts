@@ -58,7 +58,30 @@ export class Api {
         })
     }
 
-    async getUserDetails(userId) : Promise<any> {
+    async getRooms(): Promise<any> {
+        return this.get(`/rooms`)
+    }
+
+    async get(url: string) {
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.jwtToken}`,
+        }
+
+        try {
+            const response = await axios({
+                url: `${this.baseUrl}/${url}`,
+                headers,
+                method: 'get',
+            })
+
+            return response.data
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
+
+    async getUserDetails(userId): Promise<any> {
         const headers = {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${this.jwtToken}`,
@@ -67,10 +90,10 @@ export class Api {
         const response = await axios({
             url: `${this.baseUrl}/users/${userId}`,
             headers,
-            method : 'get',
-        });
+            method: 'get',
+        })
 
-        return response?.data?.user;
+        return response?.data?.user
     }
 
     async post(apiUrl: string, data: any): Promise<any> {

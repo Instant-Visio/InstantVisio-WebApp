@@ -6,6 +6,9 @@
     "on": "sur",
     "consumed": "consommés",
     "available": "disponibles",
+    "errors:": {
+        "rooms-fetch": "Impossible de récupérer les discussion plannifiées"
+    },
     "form": {
         "create-visio": "Créer une discussion en visio",
         "visio-name": {
