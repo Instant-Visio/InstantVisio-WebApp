@@ -14,7 +14,7 @@ export const roomsReducer = produce(
                 draft.rooms = payload.rooms
                 break
             case SIGNOUT:
-                draft.rooms = []
+                return initialState
         }
     },
     initialState
