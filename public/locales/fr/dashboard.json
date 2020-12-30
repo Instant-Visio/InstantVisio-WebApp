@@ -21,7 +21,7 @@
         "host-name": {
             "title": "Votre nom",
             "description": "Le nom qui sera visible par les autres participants",
-            "placeholder": "Joseph"
+            "placeholder": "Bilbon Sacquet"
         },
         "participants": {
             "title": "Liste des participants",

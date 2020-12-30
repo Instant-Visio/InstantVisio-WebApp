@@ -19,9 +19,9 @@
             "placeholder": "Example meeting"
         },
         "host-name": {
-            "title": "Your display name",
+            "title": "Your name",
             "description": "The name the participants will see",
-            "placeholder": "Joseph"
+            "placeholder": "Bilbo Bagins"
         },
         "participants": {
             "title": "Participants list",
