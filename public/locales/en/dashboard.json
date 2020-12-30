@@ -7,7 +7,8 @@
     "consumed": "consumed",
     "available": "available",
     "errors:": {
-        "rooms-fetch": "Error retrieving planned discussions"
+        "rooms-fetch": "Error retrieving planned discussions",
+        "rooms-create": "Error creating meeting"
     },
     "form": {
         "create-visio": "Create Visio",
@@ -15,6 +16,11 @@
             "title": "Visio title",
             "description": "Give a title to your Visio to find it more easily.",
             "placeholder": "Example meeting"
+        },
+        "host-name": {
+            "title": "Your display name",
+            "description": "The name the participants will see",
+            "placeholder": "Joseph"
         },
         "participants": {
             "title": "Participants list",

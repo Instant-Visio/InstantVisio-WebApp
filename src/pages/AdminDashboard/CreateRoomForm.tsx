@@ -31,12 +31,13 @@ import { useTranslation } from 'react-i18next'
 
 const Button = styled(MuiButton)(spacing)
 
-const CreateRoomForm = ({ onFormSubmit }) => {
+const CreateRoomForm = ({ fields, onFormSubmit }) => {
     const { t } = useTranslation('dashboard')
     interface Values {
         roomName: string
         participants: Array<any>
         startAt: Date
+        hostName: string
     }
 
     const [value, setValue] = React.useState([])
@@ -151,13 +152,30 @@ const CreateRoomForm = ({ onFormSubmit }) => {
         )
     }
 
+    const isNumeric = (destination) => {
+        for (let char of destination) {
+            if (char >= '0' && char <= '9') continue
+            else return false
+        }
+
+        return true
+    }
+
+    const formatDestinations = (destinations) => {
+        return destinations.map((destination) => {
+            if (destination.includes('@')) {
+                return { email: destination }
+            } else if (isNumeric(destination)) {
+                return { phone: destination }
+            } else {
+                return { groupId: destination }
+            }
+        })
+    }
+
     return (
         <Formik
-            initialValues={{
-                roomName: '',
-                participants: [],
-                startAt: null,
-            }}
+            initialValues={fields}
             validate={(values) => {
                 const errors: Partial<Values> = {}
                 if (!values.roomName) {
@@ -168,8 +186,8 @@ const CreateRoomForm = ({ onFormSubmit }) => {
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
                     setSubmitting(false)
-                    alert(JSON.stringify(values, null, 2))
-                    onFormSubmit()
+                    const destinations = formatDestinations(value)
+                    onFormSubmit({ ...values, participants: destinations })
                 }, 500)
             }}>
             {({ submitForm, isSubmitting }) => (
@@ -194,6 +212,22 @@ const CreateRoomForm = ({ onFormSubmit }) => {
                             label={t('form.visio-name.placeholder')}
                         />
                         <Box m={4} />
+                        <Typography variant="h6" component="h2">
+                            {t('form.host-name.title')}
+                        </Typography>
+                        <Typography variant="body1">
+                            {t('form.host-name.description')}
+                        </Typography>
+                        <Box m={2} />
+                        <Field
+                            size="small"
+                            component={TextField}
+                            variant="outlined"
+                            name="hostName"
+                            label={t('form.host-name.placeholder')}
+                        />
+                        <Box m={4} />
+
                         <Typography variant="h6" component="h2">
                             {t('form.participants.title')}
                         </Typography>

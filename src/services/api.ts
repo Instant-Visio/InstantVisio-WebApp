@@ -15,8 +15,18 @@ export class Api {
         this.jwtToken = jwtToken
     }
 
-    async createRoom(password?: string): Promise<NewRoomResponse> {
-        return this.post('/rooms/new', password ? { password } : null)
+    async createRoom(
+        name,
+        hostName,
+        destinations,
+        password?: string
+    ): Promise<NewRoomResponse> {
+        return this.post('/rooms/new', {
+            name: name,
+            hostName,
+            destinations: JSON.stringify(destinations),
+            password,
+        })
     }
 
     async joinRoom(
