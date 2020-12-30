@@ -175,6 +175,7 @@ const CreateRoomForm = ({ fields, onFormSubmit }) => {
 
     return (
         <Formik
+            enableReinitialize
             initialValues={fields}
             validate={(values) => {
                 const errors: Partial<Values> = {}

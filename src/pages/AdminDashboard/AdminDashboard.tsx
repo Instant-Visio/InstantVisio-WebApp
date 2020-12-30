@@ -48,13 +48,14 @@ const AdminDashboard = () => {
     }
 
     const onRoomEdit = (room) => {
-        setFields({
+        const updatedFields = {
             ...fields,
             ...{
                 roomName: room.name,
                 hostName: room.hostName,
             },
-        })
+        }
+        setFields(updatedFields)
     }
 
     return (

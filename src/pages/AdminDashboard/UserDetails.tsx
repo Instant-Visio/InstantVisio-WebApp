@@ -94,19 +94,6 @@ const UserDetails = ({ onRoomEdit }) => {
                             </>
                         )
                     })}
-                    <ListItem key={10} className={classes.listItem}>
-                        <ListItemText primary="ROOM1" />
-                        <ListItemText
-                            primary="29/10"
-                            primaryTypographyProps={{
-                                align: 'right',
-                            }}
-                        />
-                        <IconButton>
-                            <EditIcon />
-                        </IconButton>
-                    </ListItem>
-                    <Divider variant="middle" />
                 </List>
             </Paper>
             <Box m={6} />
