@@ -33,6 +33,37 @@ export class ReminderDao {
         })
     }
 
+    public static async listBetween(from: Date, to: Date): Promise<Reminder[]> {
+        const snapshot = await db
+            .collection(COLLECTIONS.reminders)
+            .where('isSent', '==', false)
+            .where('sentAt', '>=', from)
+            .where('sentAt', '<', to)
+            .get()
+
+        return snapshot.docs.map((doc) => {
+            const {
+                destinations,
+                hostName,
+                sendAt,
+                isSent,
+                roomId,
+                createdAt,
+                updatedAt,
+            } = doc.data()
+            return {
+                id: doc.id,
+                roomId,
+                destinations,
+                hostName,
+                sendAt: sendAt.seconds,
+                isSent,
+                createdAt: createdAt.seconds,
+                updatedAt: updatedAt.seconds,
+            }
+        })
+    }
+
     public static async get(reminderId: ReminderId): Promise<ReminderResponse> {
         const snapshot = await db
             .collection(COLLECTIONS.reminders)
