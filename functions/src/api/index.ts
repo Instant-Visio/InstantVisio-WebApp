@@ -10,6 +10,7 @@ import * as cors from 'cors'
 import { isUsingEmulator } from './utils/isUsingEmulator'
 import { sendTestPushNotification } from './v1/invite/sendTestPushNotification'
 import { processScheduledReminder } from '../cron/remindersCron'
+import { seeds } from './utils/seeds/seeds'
 
 const app = express()
 
@@ -27,11 +28,12 @@ app.use('/api/v1', routerV1)
 app.use('/api/v1-private', routerPrivate)
 app.use('/api/v1-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
-app.get('/api/v1-tests/reminders/runCron', processScheduledReminder)
 if (isUsingEmulator()) {
+    app.get('/api/v1-tests/reminders/runCron', processScheduledReminder)
     app.get('/api/v1-tests/notification/push', (req, res) =>
         sendTestPushNotification(req, res)
     )
+    app.get('/api/v1-tests/seeds/', seeds)
 }
 app.use(errorMiddleware)
 
