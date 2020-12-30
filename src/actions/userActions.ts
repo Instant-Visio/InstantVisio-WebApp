@@ -15,6 +15,8 @@ import {
     hideBackdrop,
     showBackdrop,
 } from '../components/App/Backdrop/backdropActions'
+import { showErrorMessage } from '../components/App/Snackbar/snackbarActions'
+import { Api } from '../services/api'
 
 type DidSignIn = (
     user: firebase.User | null
@@ -52,6 +54,23 @@ export const setRegistrationToken = (
         registrationToken,
     },
 })
+
+export const sendRegistrationToken = (
+    t: any,
+    registrationToken: string
+) => async (dispatch, getState) => {
+    const { user: userState } = getState()
+    const { token, userId } = userState.user
+
+    try {
+        const api = new Api(token)
+        await api.addRegistrationToken(userId, registrationToken)
+        dispatch(setRegistrationToken(registrationToken))
+    } catch (e) {
+        console.log('addRegistrationToken error: ', e)
+        dispatch(showErrorMessage(t('errors.register')))
+    }
+}
 
 export const didSignin: DidSignIn = (user) => async (dispatch, getState) => {
     const { user: userState } = getState()
