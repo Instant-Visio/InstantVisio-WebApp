@@ -1,5 +1,6 @@
 import { InvitationDestination } from './InvitationDestination'
 import { Timestamp } from '../firebase/firebase'
+import { RoomId } from './Room'
 
 export interface ReminderResponse {
     id: string
@@ -11,7 +12,9 @@ export interface ReminderResponse {
     isSent?: false
 }
 export interface Reminder {
+    id: ReminderId
     sendAt: Timestamp
+    roomId: RoomId
     destinations: InvitationDestination[]
     hostName: string
     createdAt: Timestamp

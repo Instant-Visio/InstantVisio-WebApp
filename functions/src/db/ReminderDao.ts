@@ -25,6 +25,7 @@ export class ReminderDao {
                 id: doc.id,
                 destinations,
                 hostName,
+                roomId,
                 sendAt: sendAt.seconds,
                 isSent,
                 createdAt: createdAt.seconds,
@@ -37,8 +38,8 @@ export class ReminderDao {
         const snapshot = await db
             .collection(COLLECTIONS.reminders)
             .where('isSent', '==', false)
-            .where('sentAt', '>=', from)
-            .where('sentAt', '<', to)
+            .where('sendAt', '>=', from)
+            .where('sendAt', '<', to)
             .get()
 
         return snapshot.docs.map((doc) => {
@@ -137,4 +138,5 @@ export interface ReminderEditData {
     hostName?: string
     destinations?: InvitationDestination[]
     sendAt?: Timestamp
+    isSent?: boolean
 }

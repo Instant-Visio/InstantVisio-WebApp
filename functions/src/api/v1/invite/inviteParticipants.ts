@@ -3,7 +3,6 @@ import { Request, Response } from 'express'
 import { BadRequestError } from '../../errors/HttpError'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { InvitationDestination } from '../../../types/InvitationDestination'
-import { getAppEnv } from '../../../firebase/env'
 import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
 import { UID } from '../../../types/uid'
@@ -12,6 +11,7 @@ import { UserDao } from '../../../db/UserDao'
 import { increment } from '../../../firebase/firebase'
 import { RoomId } from '../../../types/Room'
 import { JSONParse } from '../utils/JSONParse'
+import { formatRoomUrl } from '../../../db/RoomDao'
 
 /**
  * @swagger
@@ -109,13 +109,9 @@ export const inviteParticipant = async ({
         }
     )
 
-    const appEnv = getAppEnv()
-
-    const roomUrl = `https://${appEnv.domain}/room/${roomId}?pwd=${room.password}`
-
     const notificationContent: NotificationContent = {
         name: hostName,
-        roomUrl: roomUrl,
+        roomUrl: formatRoomUrl(room.id, room.password),
     }
 
     const { emailsSent, smssSent, pushsSent } = await sendNotifications(

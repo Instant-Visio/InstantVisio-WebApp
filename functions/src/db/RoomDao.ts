@@ -129,7 +129,7 @@ export class RoomDao {
     }
 }
 
-const formatRoomUrl = (roomId: RoomId, roomPassword: string) => {
+export const formatRoomUrl = (roomId: RoomId, roomPassword: string) => {
     const { domain } = getAppEnv()
     return `https://${domain}/premium-video/room/${roomId}?passcode=${roomPassword}`
 }

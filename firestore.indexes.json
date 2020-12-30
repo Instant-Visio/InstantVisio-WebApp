@@ -9,7 +9,7 @@
                     "order": "ASCENDING"
                 },
                 {
-                    "fieldPath": "sentAt",
+                    "fieldPath": "sendAt",
                     "order": "ASCENDING"
                 }
             ]
