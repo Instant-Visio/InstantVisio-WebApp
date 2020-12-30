@@ -109,15 +109,11 @@ const UserDetails = ({ onRoomEdit }) => {
                 <ListItem className={classes.list}>
                     {details && (
                         <ListItemText
-                            primary={`${
-                                getSMSUsage() !== undefined
-                                    ? getSMSUsage()
-                                    : '?'
-                            } SMS ${t('consumed')} ${t('on')} ${
-                                getSMSQuota() !== undefined
-                                    ? getSMSQuota()
-                                    : '?'
-                            } ${t('available')}`}
+                            primary={`${getSMSUsage() || '0'} SMS ${t(
+                                'consumed'
+                            )} ${t('on')} ${getSMSQuota() || '?'} ${t(
+                                'available'
+                            )}`}
                         />
                     )}
                 </ListItem>

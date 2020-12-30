@@ -5,6 +5,7 @@ import {
     hideBackdrop,
     showBackdrop,
 } from '../../components/App/Backdrop/backdropActions'
+import { selectToken } from '../../components/App/userSelector'
 
 export const setRooms = (rooms: any): RoomsActionsTypes => ({
     type: SET_ROOMS,
@@ -14,8 +15,7 @@ export const setRooms = (rooms: any): RoomsActionsTypes => ({
 })
 
 export const getRooms = (t) => async (dispatch, getState) => {
-    const { user: userState } = getState()
-    const { token } = userState.user
+    const token = selectToken(getState())
     const api = new Api(token)
 
     try {
@@ -31,8 +31,7 @@ export const createRoom = (t, roomName, hostName, destinations) => async (
     getState
 ) => {
     dispatch(showBackdrop())
-    const { user: userState } = getState()
-    const { token } = userState.user
+    const token = selectToken(getState())
     const api = new Api(token)
 
     try {
@@ -50,8 +49,7 @@ export const editRoom = (t, roomId, roomName, hostName, destinations) => async (
     getState
 ) => {
     dispatch(showBackdrop())
-    const { user: userState } = getState()
-    const { token } = userState.user
+    const token = selectToken(getState())
     const api = new Api(token)
 
     try {

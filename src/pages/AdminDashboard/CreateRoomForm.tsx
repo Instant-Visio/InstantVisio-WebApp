@@ -214,11 +214,9 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                 return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    setSubmitting(false)
-                    const destinations = formatDestinations(value)
-                    onFormSubmit({ ...values, destinations }, isEditing)
-                }, 500)
+                setSubmitting(false)
+                const destinations = formatDestinations(value)
+                onFormSubmit({ ...values, destinations }, isEditing)
             }}>
             {({ submitForm, isSubmitting }) => (
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
@@ -319,37 +317,30 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                         />
                         <Box m={4} />
                         <Box display="flex" justifyContent="flex-end">
-                            {isEditing ? (
-                                <>
-                                    <Button
-                                        color="primary"
-                                        disabled={isSubmitting}
-                                        onClick={() => {
-                                            onCreateFormReset()
-                                            cancelEdit()
-                                            setValue([])
-                                        }}>
-                                        {t('form.buttons.cancel')}
-                                    </Button>
-                                    <Button
-                                        startIcon={<CheckBoxIcon />}
-                                        variant="contained"
-                                        color="primary"
-                                        disabled={isSubmitting}
-                                        onClick={submitForm}>
-                                        {t('form.buttons.save')}
-                                    </Button>
-                                </>
-                            ) : (
+                            {isEditing && (
                                 <Button
-                                    startIcon={<CheckBoxIcon />}
-                                    variant="contained"
                                     color="primary"
                                     disabled={isSubmitting}
-                                    onClick={submitForm}>
-                                    {t('form.buttons.submit')}
+                                    onClick={() => {
+                                        onCreateFormReset()
+                                        cancelEdit()
+                                        setValue([])
+                                    }}>
+                                    {t('form.buttons.cancel')}
                                 </Button>
                             )}
+                            <Button
+                                startIcon={<CheckBoxIcon />}
+                                variant="contained"
+                                color="primary"
+                                disabled={isSubmitting}
+                                onClick={submitForm}>
+                                {t(
+                                    isEditing
+                                        ? 'form.buttons.save'
+                                        : 'form.buttons.submit'
+                                )}
+                            </Button>
                         </Box>
                     </Form>
                 </MuiPickersUtilsProvider>

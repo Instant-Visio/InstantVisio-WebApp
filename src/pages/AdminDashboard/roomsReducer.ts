@@ -1,4 +1,5 @@
 import produce, { Draft } from 'immer'
+import { SIGNOUT } from '../../actions/userActionsTypes'
 import { SET_ROOMS } from './roomsActionTypes'
 import { RoomsState } from './roomsSelector'
 
@@ -12,6 +13,8 @@ export const roomsReducer = produce(
             case SET_ROOMS:
                 draft.rooms = payload.rooms
                 break
+            case SIGNOUT:
+                draft.rooms = []
         }
     },
     initialState
