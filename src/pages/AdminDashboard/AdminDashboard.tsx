@@ -28,7 +28,7 @@ const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
 
     const dispatch = useDispatch()
-    const { userId, token, details } = useSelector(selectUser)
+    const { userId, token } = useSelector(selectUser)
     const [fields, setFields] = useState<Values>(initialValues)
 
     useEffect(() => {

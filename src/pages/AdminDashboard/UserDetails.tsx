@@ -74,24 +74,23 @@ const UserDetails = ({ onRoomEdit }) => {
                 </Grid>
                 <Divider />
                 <List component="nav" className={classes.list}>
-                    {rooms.map((room, i) => {
+                    {rooms.map((room) => {
                         return (
-                            <>
-                                <ListItem key={i} className={classes.listItem}>
-                                    <ListItemText primary={room.name} />
-                                    <ListItemText
-                                        primary={formatStartAtDate(room)}
-                                        primaryTypographyProps={{
-                                            align: 'right',
-                                        }}
-                                    />
-                                    <IconButton
-                                        onClick={() => onRoomEdit(room)}>
-                                        <EditIcon />
-                                    </IconButton>
-                                </ListItem>
+                            <ListItem
+                                key={room.id}
+                                className={classes.listItem}>
+                                <ListItemText primary={room.name} />
+                                <ListItemText
+                                    primary={formatStartAtDate(room)}
+                                    primaryTypographyProps={{
+                                        align: 'right',
+                                    }}
+                                />
+                                <IconButton onClick={() => onRoomEdit(room)}>
+                                    <EditIcon />
+                                </IconButton>
                                 <Divider variant="middle" />
-                            </>
+                            </ListItem>
                         )
                     })}
                 </List>

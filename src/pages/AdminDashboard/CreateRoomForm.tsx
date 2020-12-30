@@ -37,7 +37,7 @@ export interface Values {
 }
 
 const mapDestinationsToInputField = (destinations) => {
-    const values = Array()
+    const values = [] as any
     for (const destination of destinations) {
         const [value] = Object.values(destination)
         values.push(value)
@@ -217,10 +217,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                 setTimeout(() => {
                     setSubmitting(false)
                     const destinations = formatDestinations(value)
-                    onFormSubmit(
-                        { ...values, participants: destinations },
-                        isEditing
-                    )
+                    onFormSubmit({ ...values, destinations }, isEditing)
                 }, 500)
             }}>
             {({ submitForm, isSubmitting }) => (

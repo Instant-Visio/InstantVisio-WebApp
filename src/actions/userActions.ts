@@ -72,7 +72,7 @@ export const sendRegistrationToken = (
     }
 }
 
-export const didSignin: DidSignIn = (user) => async (dispatch, getState) => {
+export const didSignin: DidSignIn = (user) => async (dispatch) => {
     if (user) {
         try {
             const token = await fetchToken(user.uid)

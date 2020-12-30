@@ -95,7 +95,7 @@ export class Api {
 
         try {
             const response = await axios({
-                url: `${this.baseUrl}/${url}`,
+                url: `${this.baseUrl}${url}`,
                 headers,
                 method: 'get',
             })
