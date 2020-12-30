@@ -3,6 +3,7 @@ import { db, serverTimestamp, Timestamp } from '../firebase/firebase'
 import { COLLECTIONS, DEFAULT_ROOM_TYPE } from './constants'
 import { RoomNotFoundError } from '../api/errors/HttpError'
 import { UID } from '../types/uid'
+import { getAppEnv } from '../firebase/env'
 
 type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt' | 'startAt'>
 export interface RoomEditData {
@@ -49,20 +50,23 @@ export class RoomDao {
 
         return results.docs.map((doc) => {
             const {
-                roomId,
+                id,
                 createdAt,
                 updatedAt,
                 startAt,
+                password,
                 name,
                 hideChatbot,
             } = doc.data()
             const room = {
-                id: roomId,
+                id,
                 name,
                 createdAt: createdAt._seconds,
                 updatedAt: updatedAt._seconds,
                 startAt,
                 hideChatbot,
+                password,
+                roomUrl: formatRoomUrl(id, password),
             }
 
             if (startAt) {
@@ -123,4 +127,9 @@ export class RoomDao {
                 { merge: true }
             )
     }
+}
+
+const formatRoomUrl = (roomId: RoomId, roomPassword: string) => {
+    const { domain } = getAppEnv()
+    return `https://${domain}/premium-video/room/${roomId}?passcode=${roomPassword}`
 }
