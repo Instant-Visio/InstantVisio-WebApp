@@ -13,21 +13,23 @@ import { selectUser } from '../../components/App/userSelector'
 import { Api } from '../../services/api'
 import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
-import { createRoom, getRooms } from './roomsActions'
+import { createRoom, editRoom, getRooms } from './roomsActions'
 import UserDetails from './UserDetails'
 import { Values } from './CreateRoomForm'
+
+const initialValues = {
+    roomName: '',
+    destinations: [],
+    startAt: null,
+    hostName: '',
+}
 
 const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
 
     const dispatch = useDispatch()
     const { userId, token, details } = useSelector(selectUser)
-    const [fields, setFields] = useState<Values>({
-        roomName: '',
-        destinations: [],
-        startAt: null,
-        hostName: '',
-    })
+    const [fields, setFields] = useState<Values>(initialValues)
 
     useEffect(() => {
         const getUserDetails = async () => {
@@ -42,9 +44,13 @@ const AdminDashboard = () => {
         }
     }, [token, userId, dispatch, t])
 
-    const onFormSubmit = (values) => {
-        const { roomName, hostName, destinations } = values
-        dispatch(createRoom(t, roomName, hostName, destinations))
+    const onFormSubmit = (values, isEditing) => {
+        const { roomName, hostName, destinations, roomId } = values
+        if (isEditing) {
+            dispatch(editRoom(t, roomId, roomName, hostName, destinations))
+        } else {
+            dispatch(createRoom(t, roomName, hostName, destinations))
+        }
     }
 
     const onRoomEdit = (room) => {
@@ -60,6 +66,10 @@ const AdminDashboard = () => {
         setFields(updatedFields)
     }
 
+    const onCreateFormReset = () => {
+        setFields(initialValues)
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -71,6 +81,7 @@ const AdminDashboard = () => {
                             <CreateRoomForm
                                 fields={fields}
                                 onFormSubmit={onFormSubmit}
+                                onCreateFormReset={onCreateFormReset}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>

@@ -48,9 +48,10 @@ const mapDestinationsToInputField = (destinations) => {
 
 const Button = styled(MuiButton)(spacing)
 
-const CreateRoomForm = ({ fields, onFormSubmit }) => {
+const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     const { t } = useTranslation('dashboard')
     const [value, setValue] = React.useState([])
+    const [isEditing, setIsEditing] = React.useState(false)
 
     // Populate the form with fields values when isEditing
     useEffect(() => {
@@ -59,6 +60,10 @@ const CreateRoomForm = ({ fields, onFormSubmit }) => {
                 fields.destinations
             )
             setValue(mappedDestinations as any)
+        }
+
+        if (fields?.roomName?.length) {
+            setIsEditing(true)
         }
     }, [setValue, fields])
 
@@ -193,6 +198,10 @@ const CreateRoomForm = ({ fields, onFormSubmit }) => {
         })
     }
 
+    const cancelEdit = () => {
+        setIsEditing(false)
+    }
+
     return (
         <Formik
             enableReinitialize
@@ -208,7 +217,10 @@ const CreateRoomForm = ({ fields, onFormSubmit }) => {
                 setTimeout(() => {
                     setSubmitting(false)
                     const destinations = formatDestinations(value)
-                    onFormSubmit({ ...values, participants: destinations })
+                    onFormSubmit(
+                        { ...values, participants: destinations },
+                        isEditing
+                    )
                 }, 500)
             }}>
             {({ submitForm, isSubmitting }) => (
@@ -310,14 +322,37 @@ const CreateRoomForm = ({ fields, onFormSubmit }) => {
                         />
                         <Box m={4} />
                         <Box display="flex" justifyContent="flex-end">
-                            <Button
-                                startIcon={<CheckBoxIcon />}
-                                variant="contained"
-                                color="primary"
-                                disabled={isSubmitting}
-                                onClick={submitForm}>
-                                {t('form.submit')}
-                            </Button>
+                            {isEditing ? (
+                                <>
+                                    <Button
+                                        color="primary"
+                                        disabled={isSubmitting}
+                                        onClick={() => {
+                                            onCreateFormReset()
+                                            cancelEdit()
+                                            setValue([])
+                                        }}>
+                                        {t('form.buttons.cancel')}
+                                    </Button>
+                                    <Button
+                                        startIcon={<CheckBoxIcon />}
+                                        variant="contained"
+                                        color="primary"
+                                        disabled={isSubmitting}
+                                        onClick={submitForm}>
+                                        {t('form.buttons.save')}
+                                    </Button>
+                                </>
+                            ) : (
+                                <Button
+                                    startIcon={<CheckBoxIcon />}
+                                    variant="contained"
+                                    color="primary"
+                                    disabled={isSubmitting}
+                                    onClick={submitForm}>
+                                    {t('form.buttons.submit')}
+                                </Button>
+                            )}
                         </Box>
                     </Form>
                 </MuiPickersUtilsProvider>

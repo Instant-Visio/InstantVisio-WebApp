@@ -8,7 +8,8 @@
     "available": "available",
     "errors:": {
         "rooms-fetch": "Error retrieving planned discussions",
-        "rooms-create": "Error creating meeting"
+        "rooms-create": "Error creating meeting",
+        "rooms-edit": "Error editing the meeting"
     },
     "form": {
         "create-visio": "Create Visio",
@@ -35,6 +36,10 @@
         "date": {
             "placeholder": "Click here to pick the date and time"
         },
-        "submit": "Create Visio"
+        "buttons": {
+            "submit": "Create visio",
+            "save": "Save",
+            "cancel": "Cancel"
+        }
     }
 }

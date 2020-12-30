@@ -29,6 +29,21 @@ export class Api {
         })
     }
 
+    async editRoom(
+        roomId,
+        name,
+        hostName,
+        destinations,
+        password?: string
+    ): Promise<NewRoomResponse> {
+        return this.post(`/rooms/${roomId}`, {
+            name: name,
+            hostName,
+            destinations: JSON.stringify(destinations),
+            password,
+        })
+    }
+
     async joinRoom(
         roomId: RoomId,
         participantName: string,
