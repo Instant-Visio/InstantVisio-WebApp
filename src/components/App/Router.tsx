@@ -79,11 +79,6 @@ const Router = () => {
                         component={License}
                     />
                     <Route
-                        path={`/admin`}
-                        exact
-                        component={AdminDashboardPage}
-                    />
-                    <Route
                         path={`/premium-video`}
                         component={PremiumVideoPage}
                     />
@@ -107,7 +102,7 @@ const Router = () => {
                     <ProtectedRoute
                         path="/admin"
                         isAuthorized={!isAnonymous}
-                        component={Dashboard}
+                        component={AdminDashboardPage}
                     />
                     <Route component={NotFound} />
                 </Switch>
