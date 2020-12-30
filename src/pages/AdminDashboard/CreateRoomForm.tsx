@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { TextField } from 'formik-material-ui'
@@ -29,18 +29,38 @@ import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
 
+export interface Values {
+    roomName: string
+    destinations: Array<any>
+    startAt: Date | null
+    hostName: string
+}
+
+const mapDestinationsToInputField = (destinations) => {
+    const values = Array()
+    for (const destination of destinations) {
+        const [value] = Object.values(destination)
+        values.push(value)
+    }
+
+    return values
+}
+
 const Button = styled(MuiButton)(spacing)
 
 const CreateRoomForm = ({ fields, onFormSubmit }) => {
     const { t } = useTranslation('dashboard')
-    interface Values {
-        roomName: string
-        participants: Array<any>
-        startAt: Date
-        hostName: string
-    }
-
     const [value, setValue] = React.useState([])
+
+    // Populate the form with fields values when isEditing
+    useEffect(() => {
+        if (fields?.destinations?.length) {
+            const mappedDestinations = mapDestinationsToInputField(
+                fields.destinations
+            )
+            setValue(mappedDestinations as any)
+        }
+    }, [setValue, fields])
 
     const ErrorChip = withStyles({
         root: {
@@ -241,7 +261,7 @@ const CreateRoomForm = ({ fields, onFormSubmit }) => {
                         </Typography>
                         <Field
                             size="small"
-                            name="participants"
+                            name="destinations"
                             component={Autocomplete}
                             multiple
                             freeSolo

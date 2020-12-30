@@ -15,16 +15,16 @@ import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
 import { createRoom, getRooms } from './roomsActions'
 import UserDetails from './UserDetails'
+import { Values } from './CreateRoomForm'
 
 const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
 
     const dispatch = useDispatch()
     const { userId, token, details } = useSelector(selectUser)
-
-    const [fields, setFields] = useState({
+    const [fields, setFields] = useState<Values>({
         roomName: '',
-        participants: [],
+        destinations: [],
         startAt: null,
         hostName: '',
     })
@@ -43,7 +43,7 @@ const AdminDashboard = () => {
     }, [token, userId, dispatch, t])
 
     const onFormSubmit = (values) => {
-        const { roomName, hostName, participants: destinations } = values
+        const { roomName, hostName, destinations } = values
         dispatch(createRoom(t, roomName, hostName, destinations))
     }
 
@@ -53,6 +53,8 @@ const AdminDashboard = () => {
             ...{
                 roomName: room.name,
                 hostName: room.hostName,
+                startAt: room.startAt,
+                destinations: room.destinations,
             },
         }
         setFields(updatedFields)
