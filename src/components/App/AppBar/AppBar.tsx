@@ -56,22 +56,26 @@ const AppBar = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const renderLoginLogoutBtn = () => {
+    const renderWebOnlyButtons = () => {
         if (!isMobile()) {
-            return isPremiumUser ? (
-                <Button
-                    onClick={() => {
-                        dispatch(signOut())
-                        history.replace('/')
-                    }}>
-                    Sign out
-                </Button>
-            ) : (
-                <Button
-                    onClick={() => dispatch(showLoginModal())}
-                    color="primary">
-                    {t('appBar.loginButton')}
-                </Button>
+            return (
+                <>
+                    {isPremiumUser ? (
+                        <Button
+                            onClick={() => {
+                                dispatch(signOut())
+                                history.replace('/')
+                            }}>
+                            Sign out
+                        </Button>
+                    ) : (
+                        <Button
+                            onClick={() => dispatch(showLoginModal())}
+                            color="primary">
+                            {t('appBar.loginButton')}
+                        </Button>
+                    )}
+                </>
             )
         }
     }
@@ -88,10 +92,14 @@ const AppBar = () => {
                         <LogoWrapper>
                             <Logo />
                         </LogoWrapper>
-                        <Button onClick={openJoinGroupModal} color="primary">
-                            {t('appBar.joinGroupButton')}
-                        </Button>
-                        {renderLoginLogoutBtn()}
+                        {isMobile() && (
+                            <Button
+                                onClick={openJoinGroupModal}
+                                color="primary">
+                                {t('appBar.joinGroupButton')}
+                            </Button>
+                        )}
+                        {renderWebOnlyButtons()}
                         <SwipeableTemporaryDrawer />
                     </Toolbar>
                 </MaterialAppBar>
