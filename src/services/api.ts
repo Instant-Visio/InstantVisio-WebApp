@@ -3,6 +3,7 @@ import { JoinRoomResponse } from '../../types/JoinRoomResponse'
 import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { RoomId } from '../../types/Room'
 import axios from 'axios'
+import { UID } from '../../types/uid'
 export class Api {
     baseUrl: string | undefined
     jwtToken: string
@@ -29,24 +30,19 @@ export class Api {
         })
     }
 
-    async subscribeToGroup(
-        groupId: string,
-        username: string,
-        password: string
-    ): Promise<void> {
-        return this.post(`/groups/${groupId}/join`, {
-            username,
-            password,
+    async addRegistrationToken(userId: UID, registrationToken: string) {
+        return this.post(`/users/${userId}/addRegistrationToken`, {
+            registrationToken,
         })
     }
 
-    async subscribePushNotifs(
+    async subscribeToGroup(
         groupId: string,
-        password: string,
-        registrationToken: string
+        name: string,
+        password: string
     ): Promise<void> {
-        return this.post(`/groups/${groupId}/subscribe`, {
-            registrationToken,
+        return this.post(`/groups/${groupId}/join`, {
+            name,
             password,
         })
     }
@@ -62,7 +58,7 @@ export class Api {
         })
     }
 
-    async getUserDetails(userId) : Promise<any> {
+    async getUserDetails(userId): Promise<any> {
         const headers = {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${this.jwtToken}`,
@@ -71,10 +67,10 @@ export class Api {
         const response = await axios({
             url: `${this.baseUrl}/users/${userId}`,
             headers,
-            method : 'get',
-        });
+            method: 'get',
+        })
 
-        return response?.data?.user;
+        return response?.data?.user
     }
 
     async post(apiUrl: string, data: any): Promise<any> {

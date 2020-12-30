@@ -5,14 +5,17 @@ import { useDispatch } from 'react-redux'
 import { showErrorMessage } from '../Snackbar/snackbarActions'
 import { useTranslation } from 'react-i18next'
 import { LocalNotificationsService } from '../../../services/local-notifications'
-import { setRegistrationToken } from '../../../actions/userActions'
+import { sendRegistrationToken } from '../../../actions/userActions'
+import { useSelector } from 'react-redux'
+import { selectToken } from '../userSelector'
 
 export const PushNotifications = () => {
     const dispatch = useDispatch()
-    const { t } = useTranslation()
+    const { t } = useTranslation('notifications')
+    const hasToken = useSelector(selectToken)
 
     useEffect(() => {
-        if (isAndroid()) {
+        if (isAndroid() && hasToken) {
             const initPushNotifications = async () => {
                 const isPermissionGranted = await PushNotificationsService.requestPermissions()
                 if (isPermissionGranted) {
@@ -21,14 +24,12 @@ export const PushNotifications = () => {
                     PushNotificationsService.createDefaultChannel()
                     PushNotificationsService.listenForRegistration(
                         (registrationToken) => {
-                            dispatch(setRegistrationToken(registrationToken))
+                            dispatch(
+                                sendRegistrationToken(t, registrationToken)
+                            )
                         },
                         () => {
-                            dispatch(
-                                showErrorMessage(
-                                    t('notification.errors.registration')
-                                )
-                            )
+                            dispatch(showErrorMessage(t('errors.registration')))
                         }
                     )
 
@@ -49,7 +50,7 @@ export const PushNotifications = () => {
 
             initPushNotifications()
         }
-    }, [dispatch, t])
+    }, [dispatch, t, hasToken])
 
     return <></>
 }
