@@ -20,13 +20,13 @@ export const hideJoinGroupModal = (): JoinGroupModalActionTypes => ({
 })
 
 export const joinGroup = (t, joinGroupParams) => async (dispatch, getState) => {
-    const { id: groupId, password: groupPassword, username } = joinGroupParams
+    const { groupId, groupPassword, displayName } = joinGroupParams
     const { user: userState } = getState()
     const { token } = userState.user
 
     try {
         const api = new Api(token)
-        await api.subscribeToGroup(groupId, username, groupPassword)
+        await api.subscribeToGroup(groupId, displayName, groupPassword)
         dispatch(showSuccessMessage(t('success', { groupId })))
         setTimeout(() => dispatch(hideJoinGroupModal()), 250)
     } catch (e) {

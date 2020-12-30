@@ -13,36 +13,41 @@ import { useSelector } from 'react-redux'
 const Button = styled(MuiButton)(spacing)
 
 export interface JoinGroupValues {
-    id: string
-    password: string
-    username: string
+    groupId: string
+    groupPassword: string
+    displayName: string
 }
 
 const JoinGroupForm = ({ onFormSubmit }) => {
     const { t } = useTranslation('join-group-form')
     const token = useSelector(selectToken)
 
+    const validateForm = (values) => {
+        const errors: Partial<JoinGroupValues> = {}
+        const requiredFields = ['groupId', 'groupPassword', 'displayName']
+        for (const requiredField of requiredFields) {
+            if (!values[requiredField]) {
+                errors[requiredField] = 'Required'
+            }
+        }
+        return errors
+    }
+
     return (
         <Formik
             initialValues={{
-                id: '',
-                password: '',
-                username: '',
+                groupId: '',
+                groupPassword: '',
+                displayName: '',
             }}
-            validate={(values) => {
-                const errors: Partial<JoinGroupValues> = {}
-                if (!values.id) {
-                    errors.id = 'Required'
-                }
-                return errors
-            }}
+            validate={(values) => validateForm(values)}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
                     console.log('Submitted: ', values)
                     onFormSubmit(values, { setSubmitting })
                 }, 500)
             }}>
-            {({ submitForm, isSubmitting }) => (
+            {({ submitForm, isSubmitting, isValid }) => (
                 <Form>
                     <Typography variant="h5" component="h1">
                         {t('title')}
@@ -60,7 +65,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                         size="small"
                         component={TextField}
                         variant="outlined"
-                        name="username"
+                        name="displayName"
                         label={t('fields.username.placeholder')}
                     />
                     <Box m={4} />
@@ -76,7 +81,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                         size="small"
                         component={TextField}
                         variant="outlined"
-                        name="id"
+                        name="groupId"
                         label={t('fields.id.placeholder')}
                     />
                     <Box m={4} />
@@ -93,7 +98,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                         component={TextField}
                         variant="outlined"
                         type="password"
-                        name="password"
+                        name="groupPassword"
                         label={t('fields.password.placeholder')}
                     />
                     <Box m={4} />
@@ -102,7 +107,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                             startIcon={<CheckBoxIcon />}
                             variant="contained"
                             color="primary"
-                            disabled={isSubmitting || !token}
+                            disabled={isSubmitting || !token || !isValid}
                             onClick={submitForm}>
                             {t('submit')}
                         </Button>
