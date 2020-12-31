@@ -101,6 +101,7 @@ const processEmailDestinations = async (
                     email: dest.email,
                     emailFrom: appEnv.emailFrom,
                     formatType: content.format,
+                    roomStartAt: content.roomStatAt,
                 },
                 successField: dest.email,
             }
@@ -129,6 +130,7 @@ const processSmsDestinations = async (
                     lang: dest.lang,
                     phone: dest.phone,
                     formatType: content.format,
+                    roomStartAt: content.roomStatAt,
                 },
                 successField: dest.phone,
             }
@@ -162,6 +164,7 @@ const processPushDestinations = async (
                     lang: dest.lang,
                     tokens,
                     formatType: content.format,
+                    roomStartAt: content.roomStatAt,
                     additionalData: {
                         roomId: roomId,
                         password: room.password,

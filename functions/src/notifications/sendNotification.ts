@@ -41,7 +41,7 @@ export const getContent = (
             // @ts-ignore
             const langData = translations.scheduled[params.lang]
             const message = langData.Message.replace('{NAME}', name)
-                .replace('{DATE}', ' XX:XX')
+                .replace('{DATE}', params.roomStartAt?.toDate().toUTCString())
                 .replace('{URL}', params.roomUrl)
             return {
                 subject: `${langData.title} ${params.name}`,
