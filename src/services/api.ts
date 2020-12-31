@@ -19,7 +19,6 @@ export class Api {
             name,
             hostName,
             destinations: JSON.stringify(destinations),
-            password: 'test-password', //TODO set a password ?
         })
     }
 

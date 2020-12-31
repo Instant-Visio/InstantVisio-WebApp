@@ -21,7 +21,6 @@ export const getRooms = (t) => async (dispatch, getState) => {
 
     try {
         const rooms = await api.getRooms()
-        console.log('Rooms: ', rooms)
         dispatch(setRooms(rooms))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-fetch')))
