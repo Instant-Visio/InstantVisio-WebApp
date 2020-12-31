@@ -13,10 +13,9 @@ import { selectUser } from '../../components/App/userSelector'
 import { Api } from '../../services/api'
 import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
-import { createRoom, editRoom, getRooms, createReminder } from './roomsActions'
+import { createRoom, editRoom, getRooms } from './roomsActions'
 import UserDetails from './UserDetails'
 import { Room } from './CreateRoomForm'
-import NotificationSelector, { UNITS } from './Reminders/NotificationSelector'
 
 const initialValues: Room = {
     id: '',
