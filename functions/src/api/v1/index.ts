@@ -21,6 +21,7 @@ import { addRegistrationToken } from './users/addRegistrationToken'
 import { editUser } from './users/editUser'
 import { getGroups } from './group/getGroups'
 import { deleteReminders } from './reminders/deleteReminders'
+import { deleteRoom } from './rooms/deleteRoom'
 
 const router = express.Router()
 router.use(authenticateJWTMiddleware)
@@ -30,6 +31,7 @@ router.get('/rooms/', getRooms)
 router.post('/rooms/new', createRoomRoute)
 router.patch('/rooms/:roomId', editRoom)
 router.post('/rooms/:roomId/join', joinRoom)
+router.delete('/rooms/:roomId/', deleteRoom)
 router.post('/rooms/:roomId/inviteParticipants', inviteParticipantsRoute)
 router.get('/rooms/:roomId/reminders/', getReminders)
 router.post('/rooms/:roomId/reminders/', createReminderRoute)

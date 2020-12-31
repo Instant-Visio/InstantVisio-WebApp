@@ -130,6 +130,10 @@ export class RoomDao {
                 { merge: true }
             )
     }
+
+    public static async delete(roomId: RoomId) {
+        await db.collection(COLLECTIONS.rooms).doc(roomId).delete()
+    }
 }
 
 const formatRoomUrl = (roomId: RoomId, roomPassword: string) => {
