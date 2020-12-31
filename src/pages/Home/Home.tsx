@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { Link, Route } from 'react-router-dom'
+import { Link, Redirect, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
 import ColumnsLayout from '../../layout/Columns/Columns'
 import { createCall } from '../../actions/createCall'
@@ -17,9 +17,10 @@ import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
 import * as LocalStorage from '../../services/local-storage'
 import { authInstance } from '../../firebase/firebase'
 import { isAuthEmulatorEnabled } from '../../utils/emulators'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { EmulatorLogin } from './EmulatorLogin'
 import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
+import { selectUser } from '../../components/App/userSelector'
 
 const DataMentions = styled.div`
     .cnil {
@@ -55,6 +56,7 @@ export default function Home({ location }) {
     const formSubmissionMessage: any = useRef(null)
     const [modalShow, setModalShow] = React.useState(false)
     const dispatch = useDispatch()
+    const { isAnonymous } = useSelector(selectUser)
 
     useEffect(() => {
         if (location.state?.isPremiumVideoPasswordSet === false) {
@@ -89,6 +91,10 @@ export default function Home({ location }) {
             {isAuthEmulatorEnabled() && (
                 <EmulatorLogin authInstance={authInstance} />
             )}
+
+            {/* In case the user upgrades to non-anonymous one, we must redirect him to /admin page,
+            signInSuccessUrl in Login component seems not to be used */}
+            {!isAnonymous && <Redirect to="/admin" />}
 
             {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">

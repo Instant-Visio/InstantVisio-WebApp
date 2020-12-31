@@ -11,7 +11,6 @@ import {
     JoinVideoCall,
 } from '../../pages'
 
-import AdminDashboardPage from '../../pages/AdminDashboard/AdminDashboard'
 import { PremiumVideoPage } from '../../pages/PremiumVideoCall'
 import VideoCallPrecheck from '../../pages/VideoCall/VideoCallPrecheck'
 import { useTranslation } from 'react-i18next'
@@ -27,7 +26,9 @@ import { useSelector } from 'react-redux'
 import { IonContent } from '@ionic/react'
 import AcceptCookies from '../../pages/AcceptCookies/AcceptCookies'
 
-const Dashboard = lazy(() => import('../../pages/Admin/Dashboard'))
+const AdminDashboardPage = lazy(() =>
+    import('../../pages/AdminDashboard/AdminDashboard')
+)
 
 const Router = () => {
     const { t } = useTranslation()
@@ -79,11 +80,6 @@ const Router = () => {
                         component={License}
                     />
                     <Route
-                        path={`/admin`}
-                        exact
-                        component={AdminDashboardPage}
-                    />
-                    <Route
                         path={`/premium-video`}
                         component={PremiumVideoPage}
                     />
@@ -107,7 +103,7 @@ const Router = () => {
                     <ProtectedRoute
                         path="/admin"
                         isAuthorized={!isAnonymous}
-                        component={Dashboard}
+                        component={AdminDashboardPage}
                     />
                     <Route component={NotFound} />
                 </Switch>

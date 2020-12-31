@@ -6,12 +6,22 @@
     "on": "sur",
     "consumed": "consommés",
     "available": "disponibles",
+    "errors:": {
+        "rooms-fetch": "Impossible de récupérer les discussion plannifiées",
+        "rooms-create": "Impossible de créer la réunion",
+        "rooms-edit": "Impossible de modifier la réunion"
+    },
     "form": {
         "create-visio": "Créer une discussion en visio",
         "visio-name": {
             "title": "Nom de la discussion",
             "description": "Donner un nom à votre discussion pour la retrouver plus facilement.",
             "placeholder": "Réunion de rédaction"
+        },
+        "host-name": {
+            "title": "Votre nom",
+            "description": "Le nom qui sera visible par les autres participants",
+            "placeholder": "Bilbon Sacquet"
         },
         "participants": {
             "title": "Liste des participants",
@@ -26,6 +36,10 @@
         "date": {
             "placeholder": "Cliquez pour choisir la date et l'heure"
         },
-        "submit": "Je crée le RDV"
+        "buttons": {
+            "submit": "Je crée le RDV",
+            "save": "Enregistrer",
+            "cancel": "Annuler"
+        }
     }
 }
