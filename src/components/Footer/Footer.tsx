@@ -1,13 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
 import About from '../../documents/Instant_Visio_Keynote.pdf'
 import FooterStyled from './FooterStyled'
 import { showPreferencesDialog } from '../../utils/gdpr'
-import NewsletterModal from '../../pages/Newsletter/NewsletterModal'
+import { showModal } from '../Modal/modalAction'
 
 const Footer = () => {
     const { t } = useTranslation()
+    const dispatch = useDispatch()
+    const showNewsletterModal = () => dispatch(showModal('Newsletter'))
+
     return (
         <FooterStyled>
             <ul className="footer">
@@ -56,9 +60,11 @@ const Footer = () => {
                     </Link>
                 </li>
                 <li className="footer-link">
-                    <Link to="" className="footer-link-content">
-                        <NewsletterModal />
-                    </Link>
+                    <button
+                        className="footer-link-content"
+                        onClick={showNewsletterModal}>
+                        {t('footer.newsletter')}
+                    </button>
                 </li>
                 <li className="footer-link">
                     <a

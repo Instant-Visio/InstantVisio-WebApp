@@ -18,9 +18,10 @@ import InfoIcon from '@material-ui/icons/Info'
 import { IonItem, IonList } from '@ionic/react'
 import Lang from '../Lang/Lang'
 import { IconButton } from '@material-ui/core'
-import NewsletterModal from '../../pages/Newsletter/NewsletterModal'
+import { useDispatch } from 'react-redux'
 import { showPreferencesDialog } from '../../utils/gdpr'
 import About from '../../documents/Instant_Visio_Keynote.pdf'
+import { showModal } from '../Modal/modalAction'
 
 const Wrapper = styled.div`
     p {
@@ -62,6 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SwipeableTemporaryDrawer() {
     const classes = useStyles()
     const { t } = useTranslation()
+    const dispatch = useDispatch()
 
     const [state, setState] = React.useState({
         top: false,
@@ -178,11 +180,14 @@ export default function SwipeableTemporaryDrawer() {
                     </ListItem>
 
                     <ListItem button className={classes.listItem}>
-                        <IonItem button className={classes.item}>
+                        <IonItem
+                            button
+                            className={classes.item}
+                            onClick={() => dispatch(showModal('Newsletter'))}>
                             <ListItemIcon>
                                 <InfoIcon />
                             </ListItemIcon>
-                            <NewsletterModal />
+                            <ListItemText primary={t('footer.newsletter')} />
                         </IonItem>
                     </ListItem>
 

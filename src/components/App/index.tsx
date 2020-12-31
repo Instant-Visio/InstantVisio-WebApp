@@ -8,6 +8,7 @@ import AppBar from './AppBar/AppBar'
 import Snackbar from './Snackbar/Snackbar'
 import { PushNotifications } from './PushNotifications/PushNotifications'
 import LoginModal from '../LoginModal/LoginModal'
+import ModalRoot from '../Modal/ModalRoot'
 import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
 import Backdrop from './Backdrop/Backdrop'
 import JoinGroupModal from '../JoinGroup/JoinGroupModal'
@@ -58,6 +59,7 @@ const App = () => {
             <AuthStateChangedListener />
             <JoinGroupModal />
             <LoginModal />
+            <ModalRoot />
             <IonReactRouter>
                 {!isPremiumVideoPage() && (
                     <IonHeader id="topbar">
