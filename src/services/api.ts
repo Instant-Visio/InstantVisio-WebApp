@@ -32,6 +32,13 @@ export class Api {
         })
     }
 
+    async createReminder(roomId: string, sendAt: number): Promise<any> {
+        return this.apiClient.post(`/rooms/${roomId}/reminders`, {
+            roomId,
+            sendAt,
+        })
+    }
+
     async joinRoom(
         roomId: RoomId,
         participantName: string,

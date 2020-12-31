@@ -28,6 +28,7 @@ import {
 import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
+import NotificationSelector, { UNITS } from './Reminders/NotificationSelector'
 
 export interface Room {
     id: string
@@ -37,6 +38,12 @@ export interface Room {
     hostName: string
     hideChatbot: boolean
     roomUrl: string
+}
+
+type Unit = 'Minutes' | 'Heures' | 'Jours'
+interface Notification {
+    unit: Unit
+    number: number
 }
 
 const mapDestinationsToInputField = (destinations) => {
@@ -55,6 +62,27 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     const { t } = useTranslation('dashboard')
     const [value, setValue] = React.useState([])
     const [isEditing, setIsEditing] = React.useState(false)
+    const [notification, setNotification] = React.useState<Notification>({
+        unit: UNITS.mins as Unit,
+        number: 0,
+    })
+
+    const getRemindAt = (startAt, notification) => {
+        let remindBeforeTimestampSecs = 0
+        switch (notification.unit) {
+            case UNITS.mins:
+                remindBeforeTimestampSecs = notification.number * 60
+                break
+            case UNITS.hours:
+                remindBeforeTimestampSecs = notification.number * 60 * 60
+                break
+            case UNITS.days:
+                remindBeforeTimestampSecs = notification.number * 60 * 60 * 24
+                break
+        }
+
+        return startAt - remindBeforeTimestampSecs
+    }
 
     // Populate the form with fields values when isEditing
     useEffect(() => {
@@ -224,7 +252,9 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                     id: fields.id,
                     destinations,
                 }
-                onFormSubmit(room, isEditing)
+
+                const remindAt = getRemindAt(room.startAt / 1000, notification)
+                onFormSubmit(room, isEditing, remindAt)
             }}>
             {({ submitForm, isSubmitting }) => (
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
@@ -324,6 +354,19 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             ampm={false}
                         />
                         <Box m={4} />
+
+                        {!isEditing && (
+                            <>
+                                <Typography variant="h6" component="h2">
+                                    {t('form.reminders.title')}
+                                </Typography>
+                                <NotificationSelector
+                                    notification={notification}
+                                    setNotification={setNotification}
+                                />
+                            </>
+                        )}
+
                         <Box display="flex" justifyContent="flex-end">
                             {isEditing && (
                                 <Button
