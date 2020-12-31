@@ -5,9 +5,9 @@ import { ReminderDao } from '../../../db/ReminderDao'
 
 /**
  * @swagger
- * /v1/rooms/{roomId}/reminders/{reminderId}:
+ * /v1/rooms/{roomId}/reminders/:
  *   delete:
- *     description: Delete an existing reminder. The destinations and hostName are saved in the room, delete the room to delete those data
+ *     description: Delete all the reminders for the room
  *     tags:
  *       - rooms
  *     consumes:
@@ -16,7 +16,7 @@ import { ReminderDao } from '../../../db/ReminderDao'
  *     - application/json
  *     responses:
  *       204:
- *         description: Reminder deleted with success
+ *         description: Reminders deleted with success
  *       401:
  *         description: missing authorization bearer token
  *       403:
@@ -24,12 +24,15 @@ import { ReminderDao } from '../../../db/ReminderDao'
  *       412:
  *         description: authorization header present but not formatted correctly
  */
-export const deleteReminder = wrap(async (req: Request, res: Response) => {
+export const deleteReminders = wrap(async (req: Request, res: Response) => {
     const userId = res.locals.uid
-    const { roomId, reminderId } = req.params
+    const { roomId } = req.params
     await assertRightToEditRoom(roomId, userId)
 
-    await ReminderDao.delete(reminderId)
+    const reminders = await ReminderDao.listByRoomId(roomId)
+    for (const reminder of reminders) {
+        await ReminderDao.delete(reminder.id)
+    }
 
     res.status(204).send()
 })

@@ -9,7 +9,7 @@ import { assertTimestampInFuture } from './assertTimestampInFuture'
  * @swagger
  * /v1/rooms/{roomId}/reminders/{reminderId}:
  *   patch:
- *     description: Update an existing reminder, either to change the destinations (all at once, replacing them) or the datetime at which it will be sent.
+ *     description: Update an existing reminder to change datetime at which it will be sent.
  *     tags:
  *       - rooms
  *     consumes:

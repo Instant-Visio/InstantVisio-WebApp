@@ -6,7 +6,9 @@ import { Reminder, ReminderId, ReminderResponse } from '../types/Reminder'
 import { ReminderNotFoundError } from '../api/errors/HttpError'
 
 export class ReminderDao {
-    public static async listByRoomId(roomId: RoomId): Promise<Reminder[]> {
+    public static async listByRoomId(
+        roomId: RoomId
+    ): Promise<ReminderResponse[]> {
         const snapshot = await db
             .collection(COLLECTIONS.reminders)
             .where('roomId', '==', roomId)
