@@ -35,13 +35,21 @@ export const processScheduledReminders = async () => {
 
     for (const reminder of reminders) {
         const room = await RoomDao.get(reminder.roomId)
+
+        if (!room.hostName || !room.destinations) {
+            console.warn(
+                `⚠️ Reminder ${reminder.id} missing hostName or destinations`
+            )
+            continue
+        }
+
         const notificationContent: NotificationContent = {
-            name: reminder.hostName,
+            name: room.hostName,
             roomUrl: formatRoomUrl(reminder.roomId, room.password),
         }
 
         const { emailsSent, smssSent, pushsSent } = await sendNotifications(
-            reminder.destinations,
+            room.destinations,
             notificationContent,
             reminder.roomId
         )
@@ -55,11 +63,9 @@ export const processScheduledReminders = async () => {
         pushsSentTotal += pushsSent.length
     }
 
-    if (emailsSentTotal > 0 || smsSentTotal > 0 || pushsSentTotal > 0) {
+    if (emailsSentTotal || smsSentTotal || pushsSentTotal) {
         console.info(
             `Reminder cron sent: email:${emailsSentTotal}, sms:${smsSentTotal}, push:${pushsSentTotal}`
         )
     }
-
-    return
 }
