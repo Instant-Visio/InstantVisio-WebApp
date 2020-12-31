@@ -6,6 +6,7 @@ import { selectToken } from '../../components/App/userSelector'
 import { useSelector } from 'react-redux'
 import { Api } from '../../services/api'
 import { RoomId } from '../../../types/Room'
+import { formatDestinations } from '../../pages/AdminDashboard/CreateRoomForm'
 
 const InviteParticipants = ({
     roomId,
@@ -23,11 +24,7 @@ const InviteParticipants = ({
 
     const onSubmit = async (values, { setSubmitting }) => {
         const { participantAddresses } = values
-        const addresses = participantAddresses.split(' ').map((email) => ({
-            email,
-            lang: 'fr',
-        }))
-        console.log('On submit called: ', addresses)
+        const addresses = formatDestinations(participantAddresses.split(' '))
 
         try {
             const api = new Api(token)

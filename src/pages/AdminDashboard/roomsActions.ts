@@ -27,7 +27,7 @@ export const getRooms = (t) => async (dispatch, getState) => {
     }
 }
 
-export const createRoom = (t, room: Room, remindAt: number) => async (
+export const createRoom = (t, history, room: Room, remindAt: number) => async (
     dispatch,
     getState
 ) => {
@@ -36,9 +36,14 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
     const api = new Api(token)
 
     try {
-        const { roomId } = await api.createRoom(room)
-        dispatch(getRooms(t))
-        dispatch(createReminder(t, roomId, remindAt))
+        const { roomId, roomUrl } = await api.createRoom(room)
+        await dispatch(getRooms(t))
+        // await dispatch(createReminder(t, roomId, remindAt))
+
+        if (!room.startAt) {
+            const [base, url] = roomUrl.split('/premium-video')
+            history.push(`/premium-video${url}`)
+        }
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
     }

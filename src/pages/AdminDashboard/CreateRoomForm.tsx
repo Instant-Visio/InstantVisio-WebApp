@@ -34,7 +34,7 @@ export interface Room {
     id: string
     name: string
     destinations: Array<any>
-    startAt: Date | null
+    startAt: number | null
     hostName: string
     hideChatbot: boolean
     roomUrl: string
@@ -44,6 +44,27 @@ type Unit = 'Minutes' | 'Heures' | 'Jours'
 interface Notification {
     unit: Unit
     number: number
+}
+
+export const isNumeric = (destination) => {
+    for (let char of destination) {
+        if (char >= '0' && char <= '9') continue
+        else return false
+    }
+
+    return true
+}
+
+export const formatDestinations = (destinations) => {
+    return destinations.map((destination) => {
+        if (destination.includes('@')) {
+            return { email: destination }
+        } else if (isNumeric(destination)) {
+            return { phone: destination }
+        } else {
+            return { groupId: destination }
+        }
+    })
 }
 
 const mapDestinationsToInputField = (destinations) => {
@@ -140,25 +161,26 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         }
     }
 
-    const validateEmail = (email) => {
-        const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return regexp.test(email)
-    }
+    // const validateEmail = (email) => {
+    //     const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    //     return regexp.test(email)
+    // }
 
-    const validatePhoneNumber = (phoneNumber) => {
-        let isValid = true
+    // const validatePhoneNumber = (phoneNumber) => {
+    //     let isValid = true
 
-        try {
-            parsePhoneNumber(phoneNumber, 'FR')
-        } catch (error) {
-            isValid = false
-        }
+    //     try {
+    //         parsePhoneNumber(phoneNumber, 'FR')
+    //     } catch (error) {
+    //         isValid = false
+    //     }
 
-        return isValid
-    }
+    //     return isValid
+    // }
 
     const isParticipantValid = (participant) => {
-        return validateEmail(participant) || validatePhoneNumber(participant)
+        return true
+        // return validateEmail(participant) || validatePhoneNumber(participant)
     }
     interface MyInputProps {
         onKeyDown: (event: object) => void
@@ -206,27 +228,6 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                 {...getTagProps({ index })}
             />
         )
-    }
-
-    const isNumeric = (destination) => {
-        for (let char of destination) {
-            if (char >= '0' && char <= '9') continue
-            else return false
-        }
-
-        return true
-    }
-
-    const formatDestinations = (destinations) => {
-        return destinations.map((destination) => {
-            if (destination.includes('@')) {
-                return { email: destination }
-            } else if (isNumeric(destination)) {
-                return { phone: destination }
-            } else {
-                return { groupId: destination }
-            }
-        })
     }
 
     const cancelEdit = () => {

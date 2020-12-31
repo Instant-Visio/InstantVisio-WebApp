@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux'
 import { createRoom, editRoom, getRooms } from './roomsActions'
 import UserDetails from './UserDetails'
 import { Room } from './CreateRoomForm'
+import { useHistory } from 'react-router-dom'
 
 const initialValues: Room = {
     id: '',
@@ -29,6 +30,7 @@ const initialValues: Room = {
 
 const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
+    const history = useHistory()
 
     const dispatch = useDispatch()
     const { userId, token } = useSelector(selectUser)
@@ -47,13 +49,15 @@ const AdminDashboard = () => {
         }
     }, [token, userId, dispatch, t])
 
-    const onFormSubmit = (room, isEditing, remindAt) => {
+    const onFormSubmit = async (room, isEditing, remindAt) => {
         room.startAt = room.startAt / 1000
         if (isEditing) {
             console.log('SAving room: ', room)
             dispatch(editRoom(t, room))
         } else {
-            dispatch(createRoom(t, room, remindAt))
+            const roomUrl = await dispatch(
+                createRoom(t, history, room, remindAt)
+            )
         }
     }
 
