@@ -100,6 +100,7 @@ const processEmailDestinations = async (
                     lang: dest.lang,
                     email: dest.email,
                     emailFrom: appEnv.emailFrom,
+                    formatType: content.format,
                 },
                 successField: dest.email,
             }
@@ -127,6 +128,7 @@ const processSmsDestinations = async (
                     country: dest.country,
                     lang: dest.lang,
                     phone: dest.phone,
+                    formatType: content.format,
                 },
                 successField: dest.phone,
             }
@@ -159,6 +161,7 @@ const processPushDestinations = async (
                     type: NotificationType.PushNotificationType,
                     lang: dest.lang,
                     tokens,
+                    formatType: content.format,
                     additionalData: {
                         roomId: roomId,
                         password: room.password,

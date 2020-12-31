@@ -1,7 +1,10 @@
 import * as functions from 'firebase-functions'
 import { ReminderDao } from '../db/ReminderDao'
 import { Request, Response } from 'express'
-import { NotificationContent } from '../types/Notification'
+import {
+    NotificationContent,
+    NotificationFormatType,
+} from '../types/Notification'
 import { sendNotifications } from '../notifications/sendNotifications'
 import { formatRoomUrl, RoomDao } from '../db/RoomDao'
 
@@ -46,6 +49,7 @@ export const processScheduledReminders = async () => {
         const notificationContent: NotificationContent = {
             name: room.hostName,
             roomUrl: formatRoomUrl(reminder.roomId, room.password),
+            format: NotificationFormatType.Scheduled,
         }
 
         const { emailsSent, smssSent, pushsSent } = await sendNotifications(

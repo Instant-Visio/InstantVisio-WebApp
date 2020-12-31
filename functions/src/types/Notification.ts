@@ -3,12 +3,17 @@ export enum NotificationType {
     EmailNotificationType,
     PushNotificationType,
 }
+export enum NotificationFormatType {
+    Now = 1,
+    Scheduled,
+}
 
 export interface BaseNotificationParams {
     name: string
     roomUrl: string
     lang: string
     type: NotificationType
+    formatType: NotificationFormatType
 }
 
 export interface SmsNotificationParams extends BaseNotificationParams {
@@ -39,4 +44,5 @@ export type NotificationParams =
 export interface NotificationContent {
     name: string
     roomUrl: string
+    format: NotificationFormatType
 }
