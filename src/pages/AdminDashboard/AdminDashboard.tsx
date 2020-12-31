@@ -15,13 +15,16 @@ import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
 import { createRoom, editRoom, getRooms } from './roomsActions'
 import UserDetails from './UserDetails'
-import { Values } from './CreateRoomForm'
+import { Room } from './CreateRoomForm'
 
-const initialValues = {
-    roomName: '',
+const initialValues: Room = {
+    id: '',
+    name: '',
     destinations: [],
     startAt: null,
     hostName: '',
+    hideChatbot: false,
+    roomUrl: '',
 }
 
 const AdminDashboard = () => {
@@ -29,7 +32,7 @@ const AdminDashboard = () => {
 
     const dispatch = useDispatch()
     const { userId, token } = useSelector(selectUser)
-    const [fields, setFields] = useState<Values>(initialValues)
+    const [fields, setFields] = useState<Room>(initialValues)
 
     useEffect(() => {
         const getUserDetails = async () => {
@@ -44,24 +47,21 @@ const AdminDashboard = () => {
         }
     }, [token, userId, dispatch, t])
 
-    const onFormSubmit = (values, isEditing) => {
-        const { roomName, hostName, destinations, roomId } = values
+    const onFormSubmit = (room, isEditing) => {
+        room.startAt = room.startAt / 1000
         if (isEditing) {
-            dispatch(editRoom(t, roomId, roomName, hostName, destinations))
+            console.log('SAving room: ', room)
+            dispatch(editRoom(t, room))
         } else {
-            dispatch(createRoom(t, roomName, hostName, destinations))
+            dispatch(createRoom(t, room))
         }
     }
 
     const onRoomEdit = (room) => {
         const updatedFields = {
             ...fields,
-            ...{
-                roomName: room.name,
-                hostName: room.hostName,
-                startAt: room.startAt,
-                destinations: room.destinations,
-            },
+            ...room,
+            startAt: room.startAt * 1000,
         }
         setFields(updatedFields)
     }
