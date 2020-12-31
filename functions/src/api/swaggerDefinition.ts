@@ -157,6 +157,32 @@ export const swaggerDefinition = {
                     type: 'boolean',
                     in: 'x-www-form-urlencoded',
                 },
+                destinations: {
+                    name: 'destinations',
+                    description: 'An array of destinations',
+                    required: false,
+                    in: 'x-www-form-urlencoded',
+                    schema: {
+                        type: 'string',
+                    },
+                    items: {
+                        $ref: '#/components/schemas/Destination',
+                    },
+                    examples: {
+                        mixed: {
+                            summary: 'Mixed email, sms and languages',
+                            $ref: '#/components/examples/Destinations',
+                        },
+                    },
+                },
+                hostName: {
+                    name: 'hostName',
+                    description:
+                        'The name or organisation which sent the invite(s). Required if you want any invitation to be sent',
+                    required: false,
+                    in: 'x-www-form-urlencoded',
+                    type: 'string',
+                },
             },
             group: {
                 members: {

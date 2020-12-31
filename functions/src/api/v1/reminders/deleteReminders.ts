@@ -6,30 +6,17 @@ import { ReminderDao } from '../../../db/ReminderDao'
 /**
  * @swagger
  * /v1/rooms/{roomId}/reminders/:
- *   get:
- *     description: Get all reminders for the room.
+ *   delete:
+ *     description: Delete all the reminders for the room
  *     tags:
  *       - rooms
+ *     consumes:
+ *     - multipart/form-data
  *     produces:
  *     - application/json
  *     responses:
- *       200:
- *         description: Room's reminders
- *         content:
- *           application/json:
- *             example: {
- *               reminders: [{
- *                 id: 'vXIUuaGkH4kukbwRH5cU',
- *                 createdAt: 1605969562,
- *                 updatedAt: 1605969562,
- *                 sendAt: 1605969562,
- *                 isSent: false
- *               }]
- *             }
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Reminder'
+ *       204:
+ *         description: Reminders deleted with success
  *       401:
  *         description: missing authorization bearer token
  *       403:
@@ -37,14 +24,15 @@ import { ReminderDao } from '../../../db/ReminderDao'
  *       412:
  *         description: authorization header present but not formatted correctly
  */
-export const getReminders = wrap(async (req: Request, res: Response) => {
+export const deleteReminders = wrap(async (req: Request, res: Response) => {
     const userId = res.locals.uid
-    const roomId = req.params.roomId
+    const { roomId } = req.params
     await assertRightToEditRoom(roomId, userId)
 
     const reminders = await ReminderDao.listByRoomId(roomId)
+    for (const reminder of reminders) {
+        await ReminderDao.delete(reminder.id)
+    }
 
-    res.send({
-        reminders,
-    })
+    res.status(204).send()
 })

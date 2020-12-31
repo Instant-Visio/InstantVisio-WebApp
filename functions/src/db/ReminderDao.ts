@@ -6,7 +6,9 @@ import { Reminder, ReminderId, ReminderResponse } from '../types/Reminder'
 import { ReminderNotFoundError } from '../api/errors/HttpError'
 
 export class ReminderDao {
-    public static async listByRoomId(roomId: RoomId): Promise<Reminder[]> {
+    public static async listByRoomId(
+        roomId: RoomId
+    ): Promise<ReminderResponse[]> {
         const snapshot = await db
             .collection(COLLECTIONS.reminders)
             .where('roomId', '==', roomId)
@@ -43,18 +45,11 @@ export class ReminderDao {
             throw new ReminderNotFoundError('Resource does not exist')
         }
 
-        const {
-            destinations,
-            hostName,
-            sendAt,
-            isSent,
-            createdAt,
-            updatedAt,
-        } = <Reminder>snapshot.data()
+        const { sendAt, isSent, createdAt, updatedAt } = <Reminder>(
+            snapshot.data()
+        )
         return {
             id: snapshot.id,
-            destinations,
-            hostName,
             sendAt: sendAt.seconds,
             isSent,
             createdAt: createdAt.seconds,
@@ -64,17 +59,13 @@ export class ReminderDao {
 
     public static async add(
         roomId: RoomId,
-        sendAt: Timestamp,
-        destinations: InvitationDestination[],
-        hostName: string
+        sendAt: Timestamp
     ): Promise<ReminderId> {
         const documentReference = await db
             .collection(COLLECTIONS.reminders)
             .add({
                 roomId,
                 sendAt,
-                destinations,
-                hostName,
                 createdAt: serverTimestamp(),
                 updatedAt: serverTimestamp(),
                 isSent: false,

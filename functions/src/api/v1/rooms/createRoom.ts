@@ -14,6 +14,7 @@ import {
     InviteParticipantsResponse,
 } from '../invite/inviteParticipants'
 import { JSONParse } from '../utils/JSONParse'
+import { parseDestinations } from '../utils/parseDestinations'
 
 /**
  * @swagger
@@ -30,23 +31,8 @@ import { JSONParse } from '../utils/JSONParse'
  *       - $ref: '#/components/parameters/room/password'
  *       - $ref: '#/components/parameters/room/name'
  *       - $ref: '#/components/parameters/room/startAt'
- *       - name: destinations
- *         description: An array of destinations
- *         in: x-www-form-urlencoded
- *         required: false
- *         examples:
- *            mixed:
- *                summary: Mixed email, sms and languages
- *                $ref: '#/components/examples/Destinations'
- *         schema:
- *            type: string
- *         items:
- *            $ref: '#/components/schemas/Destination'
- *       - name: hostName
- *         description: The name or organisation which sent the invite(s)
- *         in: x-www-form-urlencoded
- *         required: false
- *         type: string
+ *       - $ref: '#/components/parameters/room/destinations'
+ *       - $ref: '#/components/parameters/room/hostName'
  *       - name: sendsAt
  *         description: An array of UTC timestamp(s) in seconds at which the reminder(s) are scheduled to be sent. If not supplied, the invitation will be sent upon request process, otherwise reminders will be created.
  *         in: x-www-form-urlencoded
@@ -175,6 +161,13 @@ const processDestinations = async (
     sendsAt?: string
 ): Promise<ProcessDestinationsResponse> => {
     if (sendsAt) {
+        const formattedDestinations = parseDestinations(destinations)
+        await RoomDao.update({
+            id: roomId,
+            destinations: formattedDestinations,
+            hostName,
+        })
+
         const sendsAtValues = parseSendsAt(sendsAt)
         const reminderIds: ReminderId[] = []
         for (const sendAt of sendsAtValues) {
@@ -182,8 +175,6 @@ const processDestinations = async (
                 roomId,
                 userId,
                 sendAtSeconds: sendAt,
-                hostName,
-                destinationsParameter: destinations,
             })
             reminderIds.push(id)
         }

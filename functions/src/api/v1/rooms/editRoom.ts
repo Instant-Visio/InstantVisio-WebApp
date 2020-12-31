@@ -3,6 +3,8 @@ import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { wrap } from 'async-middleware'
 import { Timestamp } from '../../../firebase/firebase'
 import { RoomDao, RoomEditData } from '../../../db/RoomDao'
+import { BadRequestError } from '../../errors/HttpError'
+import { parseDestinations } from '../utils/parseDestinations'
 
 /**
  * @swagger
@@ -20,6 +22,8 @@ import { RoomDao, RoomEditData } from '../../../db/RoomDao'
  *       - $ref: '#/components/parameters/room/startAt'
  *       - $ref: '#/components/parameters/room/name'
  *       - $ref: '#/components/parameters/room/hideChatbot'
+ *       - $ref: '#/components/parameters/room/destinations'
+ *       - $ref: '#/components/parameters/room/hostName'
  *     responses:
  *       204:
  *         description: Room edited with success
@@ -34,7 +38,7 @@ import { RoomDao, RoomEditData } from '../../../db/RoomDao'
  */
 export const editRoom = wrap(async (req: Request, res: Response) => {
     const roomId = req.params.roomId
-    await assertRightToEditRoom(roomId, res.locals.uid)
+    const room = await assertRightToEditRoom(roomId, res.locals.uid)
 
     const dataToEdit: RoomEditData = {
         id: roomId,
@@ -44,7 +48,7 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
         dataToEdit.password = req.body.password
     }
     if (req.body.hideChatbot) {
-        dataToEdit['hideChatbot'] = req.body.hideChatbot === 'true'
+        dataToEdit.hideChatbot = req.body.hideChatbot === 'true'
     }
     if (req.body.startTimestamp) {
         dataToEdit.startAt = Timestamp.fromMillis(+req.body.startAt * 1000)
@@ -52,6 +56,16 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
     if (req.body.name) {
         dataToEdit.name = req.body.name
     }
+    if (req.body.destinations) {
+        if (!req.body.hostName && !room.hostName) {
+            throw new BadRequestError('Missing hostName in request body')
+        }
+        dataToEdit.destinations = parseDestinations(req.body.destinations)
+    }
+    if (req.body.hostName) {
+        dataToEdit.hostName = req.body.hostName
+    }
+
     await RoomDao.update(dataToEdit)
 
     res.send()
