@@ -17,11 +17,7 @@ export const sendNotification = async (
         | EmailNotificationParams
         | PushNotificationParams
 ) => {
-    // @ts-ignore
-    const langData = translations[params.lang]
-    const subject = `${langData.title} ${params.name}`
-    const message = `${name} ${langData.Message} ${params.roomUrl}`
-
+    const { subject, message } = getContent(params)
     if (params.type === NotificationType.EmailNotificationType) {
         await sendEmail(params, message, subject)
     }
@@ -43,7 +39,7 @@ export const getContent = (
     switch (params.formatType) {
         case NotificationFormatType.Scheduled: {
             // @ts-ignore
-            const langData = translations[params.lang].scheduled
+            const langData = translations.scheduled[params.lang]
             const message = langData.Message.replace('{NAME}', name)
                 .replace('{DATE}', ' XX:XX')
                 .replace('{URL}', params.roomUrl)
@@ -55,7 +51,7 @@ export const getContent = (
         default:
         case NotificationFormatType.Now: {
             // @ts-ignore
-            const langData = translations[params.lang].now
+            const langData = translations.now[params.lang]
             const subject = `${langData.title} ${params.name}`
             const message = `${name} ${langData.Message} ${params.roomUrl}`
             return {
