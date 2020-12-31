@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { hideBackdrop, showBackdrop } from '../App/Backdrop/backdropActions'
 
 export const isUsingEmulator = () => {
-    return process.env.FIREBASE_AUTH_EMULATOR_HOST
+    return process.env.REACT_APP_AUTH_EMULATOR_ENABLED
 }
 
 const uiConfig = {

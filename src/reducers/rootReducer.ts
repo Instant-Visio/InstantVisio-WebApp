@@ -11,6 +11,8 @@ import { ModalState } from '../components/Modal/modalSelector'
 import { backdropReducer } from '../components/App/Backdrop/backdropReducer'
 import { JoinGroupModalState } from '../components/JoinGroup/joinGroupModalSelector'
 import { joinGroupModalReducer } from '../components/JoinGroup/joinGroupModalReducer'
+import { RoomsState } from '../pages/AdminDashboard/roomsSelector'
+import { roomsReducer } from '../pages/AdminDashboard/roomsReducer'
 
 export interface AppState {
     user: UserState
@@ -20,6 +22,7 @@ export interface AppState {
     loginModal: LoginModalState
     modal: ModalState
     joinGroupModal: JoinGroupModalState
+    rooms: RoomsState
 }
 
 const rootReducer = combineReducers({
@@ -30,6 +33,7 @@ const rootReducer = combineReducers({
     loginModal: loginModalReducer,
     modal: modalReducer,
     joinGroupModal: joinGroupModalReducer,
+    rooms: roomsReducer,
 })
 
 export default rootReducer

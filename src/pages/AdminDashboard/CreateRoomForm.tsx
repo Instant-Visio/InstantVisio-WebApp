@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { TextField } from 'formik-material-ui'
@@ -29,17 +29,43 @@ import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
 
-const Button = styled(MuiButton)(spacing)
+export interface Values {
+    roomName: string
+    destinations: Array<any>
+    startAt: Date | null
+    hostName: string
+}
 
-const CreateRoomForm = ({ onFormSubmit }) => {
-    const { t } = useTranslation('dashboard')
-    interface Values {
-        roomName: string
-        participants: Array<any>
-        startAt: Date
+const mapDestinationsToInputField = (destinations) => {
+    const values = [] as any
+    for (const destination of destinations) {
+        const [value] = Object.values(destination)
+        values.push(value)
     }
 
+    return values
+}
+
+const Button = styled(MuiButton)(spacing)
+
+const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
+    const { t } = useTranslation('dashboard')
     const [value, setValue] = React.useState([])
+    const [isEditing, setIsEditing] = React.useState(false)
+
+    // Populate the form with fields values when isEditing
+    useEffect(() => {
+        if (fields?.destinations?.length) {
+            const mappedDestinations = mapDestinationsToInputField(
+                fields.destinations
+            )
+            setValue(mappedDestinations as any)
+        }
+
+        if (fields?.roomName?.length) {
+            setIsEditing(true)
+        }
+    }, [setValue, fields])
 
     const ErrorChip = withStyles({
         root: {
@@ -151,13 +177,35 @@ const CreateRoomForm = ({ onFormSubmit }) => {
         )
     }
 
+    const isNumeric = (destination) => {
+        for (let char of destination) {
+            if (char >= '0' && char <= '9') continue
+            else return false
+        }
+
+        return true
+    }
+
+    const formatDestinations = (destinations) => {
+        return destinations.map((destination) => {
+            if (destination.includes('@')) {
+                return { email: destination }
+            } else if (isNumeric(destination)) {
+                return { phone: destination }
+            } else {
+                return { groupId: destination }
+            }
+        })
+    }
+
+    const cancelEdit = () => {
+        setIsEditing(false)
+    }
+
     return (
         <Formik
-            initialValues={{
-                roomName: '',
-                participants: [],
-                startAt: null,
-            }}
+            enableReinitialize
+            initialValues={fields}
             validate={(values) => {
                 const errors: Partial<Values> = {}
                 if (!values.roomName) {
@@ -166,11 +214,9 @@ const CreateRoomForm = ({ onFormSubmit }) => {
                 return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    setSubmitting(false)
-                    alert(JSON.stringify(values, null, 2))
-                    onFormSubmit()
-                }, 500)
+                setSubmitting(false)
+                const destinations = formatDestinations(value)
+                onFormSubmit({ ...values, destinations }, isEditing)
             }}>
             {({ submitForm, isSubmitting }) => (
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
@@ -195,6 +241,22 @@ const CreateRoomForm = ({ onFormSubmit }) => {
                         />
                         <Box m={4} />
                         <Typography variant="h6" component="h2">
+                            {t('form.host-name.title')}
+                        </Typography>
+                        <Typography variant="body1">
+                            {t('form.host-name.description')}
+                        </Typography>
+                        <Box m={2} />
+                        <Field
+                            size="small"
+                            component={TextField}
+                            variant="outlined"
+                            name="hostName"
+                            label={t('form.host-name.placeholder')}
+                        />
+                        <Box m={4} />
+
+                        <Typography variant="h6" component="h2">
                             {t('form.participants.title')}
                         </Typography>
                         <Typography variant="body1">
@@ -206,7 +268,7 @@ const CreateRoomForm = ({ onFormSubmit }) => {
                         </Typography>
                         <Field
                             size="small"
-                            name="participants"
+                            name="destinations"
                             component={Autocomplete}
                             multiple
                             freeSolo
@@ -255,13 +317,29 @@ const CreateRoomForm = ({ onFormSubmit }) => {
                         />
                         <Box m={4} />
                         <Box display="flex" justifyContent="flex-end">
+                            {isEditing && (
+                                <Button
+                                    color="primary"
+                                    disabled={isSubmitting}
+                                    onClick={() => {
+                                        onCreateFormReset()
+                                        cancelEdit()
+                                        setValue([])
+                                    }}>
+                                    {t('form.buttons.cancel')}
+                                </Button>
+                            )}
                             <Button
                                 startIcon={<CheckBoxIcon />}
                                 variant="contained"
                                 color="primary"
                                 disabled={isSubmitting}
                                 onClick={submitForm}>
-                                {t('form.submit')}
+                                {t(
+                                    isEditing
+                                        ? 'form.buttons.save'
+                                        : 'form.buttons.submit'
+                                )}
                             </Button>
                         </Box>
                     </Form>

@@ -8,8 +8,8 @@ const AuthStateChangedListener = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        return authInstance.onAuthStateChanged((user) => {
-            dispatch(didSignin(user))
+        return authInstance.onAuthStateChanged((user: any) => {
+            dispatch(didSignin(user || user?.user))
             dispatch(hideLoginModal())
         })
     }, [dispatch])
