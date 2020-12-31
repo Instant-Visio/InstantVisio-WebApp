@@ -30,6 +30,7 @@ const AdminDashboard = () => {
     const dispatch = useDispatch()
     const { userId, token } = useSelector(selectUser)
     const [fields, setFields] = useState<Values>(initialValues)
+    const [roomId, setRoomId] = useState<string>()
 
     useEffect(() => {
         const getUserDetails = async () => {
@@ -45,7 +46,7 @@ const AdminDashboard = () => {
     }, [token, userId, dispatch, t])
 
     const onFormSubmit = (values, isEditing) => {
-        const { roomName, hostName, destinations, roomId } = values
+        const { roomName, hostName, destinations } = values
         if (isEditing) {
             dispatch(editRoom(t, roomId, roomName, hostName, destinations))
         } else {
@@ -63,6 +64,7 @@ const AdminDashboard = () => {
                 destinations: room.destinations,
             },
         }
+        setRoomId(room.id)
         setFields(updatedFields)
     }
 

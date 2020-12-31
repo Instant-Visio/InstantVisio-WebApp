@@ -50,8 +50,9 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
         dataToEdit.startAt = Timestamp.fromMillis(+req.body.startAt * 1000)
     }
     if (req.body.name) {
-        dataToEdit.startAt = req.body.name
+        dataToEdit.name = req.body.name
     }
+    console.log(dataToEdit)
 
     await RoomDao.update(dataToEdit)
 
