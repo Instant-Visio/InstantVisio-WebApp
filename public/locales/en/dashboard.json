@@ -9,7 +9,8 @@
     "errors:": {
         "rooms-fetch": "Error retrieving planned discussions",
         "rooms-create": "Error creating meeting",
-        "rooms-edit": "Error editing the meeting"
+        "rooms-edit": "Error editing the meeting",
+        "reminders-create": "Error creating notification"
     },
     "form": {
         "create-visio": "Create Visio",

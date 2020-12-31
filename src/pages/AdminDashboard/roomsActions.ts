@@ -27,14 +27,18 @@ export const getRooms = (t) => async (dispatch, getState) => {
     }
 }
 
-export const createRoom = (t, room: Room) => async (dispatch, getState) => {
+export const createRoom = (t, room: Room, remindAt: number) => async (
+    dispatch,
+    getState
+) => {
     dispatch(showBackdrop())
     const token = selectToken(getState())
     const api = new Api(token)
 
     try {
-        await api.createRoom(room)
+        const { roomId } = await api.createRoom(room)
         dispatch(getRooms(t))
+        dispatch(createReminder(t, roomId, remindAt))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
     }
@@ -52,6 +56,23 @@ export const editRoom = (t, room: Room) => async (dispatch, getState) => {
         dispatch(getRooms(t))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-edit')))
+    }
+
+    dispatch(hideBackdrop())
+}
+
+export const createReminder = (t, roomId, remindAt) => async (
+    dispatch,
+    getState
+) => {
+    dispatch(showBackdrop())
+    const token = selectToken(getState())
+    const api = new Api(token)
+
+    try {
+        await api.createReminder(roomId, remindAt)
+    } catch (err) {
+        dispatch(showErrorMessage(t('errors.reminders-create')))
     }
 
     dispatch(hideBackdrop())

@@ -13,9 +13,10 @@ import { selectUser } from '../../components/App/userSelector'
 import { Api } from '../../services/api'
 import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
-import { createRoom, editRoom, getRooms } from './roomsActions'
+import { createRoom, editRoom, getRooms, createReminder } from './roomsActions'
 import UserDetails from './UserDetails'
 import { Room } from './CreateRoomForm'
+import NotificationSelector, { UNITS } from './Reminders/NotificationSelector'
 
 const initialValues: Room = {
     id: '',
@@ -47,13 +48,13 @@ const AdminDashboard = () => {
         }
     }, [token, userId, dispatch, t])
 
-    const onFormSubmit = (room, isEditing) => {
+    const onFormSubmit = (room, isEditing, remindAt) => {
         room.startAt = room.startAt / 1000
         if (isEditing) {
             console.log('SAving room: ', room)
             dispatch(editRoom(t, room))
         } else {
-            dispatch(createRoom(t, room))
+            dispatch(createRoom(t, room, remindAt))
         }
     }
 
