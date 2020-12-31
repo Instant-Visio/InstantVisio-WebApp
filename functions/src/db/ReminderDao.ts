@@ -43,18 +43,11 @@ export class ReminderDao {
             throw new ReminderNotFoundError('Resource does not exist')
         }
 
-        const {
-            destinations,
-            hostName,
-            sendAt,
-            isSent,
-            createdAt,
-            updatedAt,
-        } = <Reminder>snapshot.data()
+        const { sendAt, isSent, createdAt, updatedAt } = <Reminder>(
+            snapshot.data()
+        )
         return {
             id: snapshot.id,
-            destinations,
-            hostName,
             sendAt: sendAt.seconds,
             isSent,
             createdAt: createdAt.seconds,
@@ -64,17 +57,13 @@ export class ReminderDao {
 
     public static async add(
         roomId: RoomId,
-        sendAt: Timestamp,
-        destinations: InvitationDestination[],
-        hostName: string
+        sendAt: Timestamp
     ): Promise<ReminderId> {
         const documentReference = await db
             .collection(COLLECTIONS.reminders)
             .add({
                 roomId,
                 sendAt,
-                destinations,
-                hostName,
                 createdAt: serverTimestamp(),
                 updatedAt: serverTimestamp(),
                 isSent: false,

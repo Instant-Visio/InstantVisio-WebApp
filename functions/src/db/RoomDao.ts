@@ -4,6 +4,7 @@ import { COLLECTIONS, DEFAULT_ROOM_TYPE } from './constants'
 import { RoomNotFoundError } from '../api/errors/HttpError'
 import { UID } from '../types/uid'
 import { getAppEnv } from '../firebase/env'
+import { InvitationDestination } from '../types/InvitationDestination'
 
 type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt' | 'startAt'>
 export interface RoomEditData {
@@ -16,6 +17,8 @@ export interface RoomEditData {
     startAt?: Timestamp
     name?: string
     hideChatbot?: boolean
+    hostName?: string
+    destinations?: InvitationDestination[]
 }
 
 export class RoomDao {

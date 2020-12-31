@@ -22,7 +22,6 @@ import { ReminderDao } from '../../../db/ReminderDao'
  *                 id: 'vXIUuaGkH4kukbwRH5cU',
  *                 createdAt: 1605969562,
  *                 updatedAt: 1605969562,
- *                 destinations: [],
  *                 sendAt: 1605969562,
  *                 isSent: false
  *               }]
