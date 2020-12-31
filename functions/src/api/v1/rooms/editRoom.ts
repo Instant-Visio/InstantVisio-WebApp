@@ -52,8 +52,6 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
     if (req.body.name) {
         dataToEdit.name = req.body.name
     }
-    console.log(dataToEdit)
-
     await RoomDao.update(dataToEdit)
 
     res.send()
