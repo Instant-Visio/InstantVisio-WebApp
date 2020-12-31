@@ -4,6 +4,7 @@ import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { RoomId } from '../../types/Room'
 import { UID } from '../../types/uid'
 import ApiClient from './apiClient'
+import { Room } from '../pages/AdminDashboard/CreateRoomForm'
 
 export class Api {
     private apiClient: ApiClient
@@ -12,32 +13,23 @@ export class Api {
         this.apiClient = new ApiClient(jwtToken)
     }
 
-    async createRoom(
-        name,
-        hostName,
-        destinations,
-        password?: string
-    ): Promise<NewRoomResponse> {
+    async createRoom(room: Room): Promise<NewRoomResponse> {
+        const { name, hostName, destinations } = room
         return this.apiClient.post('/rooms/new', {
-            name: name,
+            name,
             hostName,
             destinations: JSON.stringify(destinations),
-            password,
+            password: 'test-password', //TODO set a password ?
         })
     }
 
-    async editRoom(
-        roomId,
-        name,
-        hostName,
-        destinations,
-        password?: string
-    ): Promise<NewRoomResponse> {
-        return this.apiClient.patch(`/rooms/${roomId}`, {
-            name: name,
+    async editRoom(room: Room): Promise<NewRoomResponse> {
+        const { id, name, hostName, destinations, startAt } = room
+        return this.apiClient.patch(`/rooms/${id}`, {
+            name,
             hostName,
+            startAt,
             destinations: JSON.stringify(destinations),
-            password,
         })
     }
 

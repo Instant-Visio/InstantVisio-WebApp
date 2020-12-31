@@ -6,6 +6,7 @@ import {
     showBackdrop,
 } from '../../components/App/Backdrop/backdropActions'
 import { selectToken } from '../../components/App/userSelector'
+import { Room } from './CreateRoomForm'
 
 export const setRooms = (rooms: any): RoomsActionsTypes => ({
     type: SET_ROOMS,
@@ -20,22 +21,20 @@ export const getRooms = (t) => async (dispatch, getState) => {
 
     try {
         const rooms = await api.getRooms()
+        console.log('Rooms: ', rooms)
         dispatch(setRooms(rooms))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-fetch')))
     }
 }
 
-export const createRoom = (t, roomName, hostName, destinations) => async (
-    dispatch,
-    getState
-) => {
+export const createRoom = (t, room: Room) => async (dispatch, getState) => {
     dispatch(showBackdrop())
     const token = selectToken(getState())
     const api = new Api(token)
 
     try {
-        await api.createRoom(roomName, hostName, destinations)
+        await api.createRoom(room)
         dispatch(getRooms(t))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
@@ -44,16 +43,13 @@ export const createRoom = (t, roomName, hostName, destinations) => async (
     dispatch(hideBackdrop())
 }
 
-export const editRoom = (t, roomId, roomName, hostName, destinations) => async (
-    dispatch,
-    getState
-) => {
+export const editRoom = (t, room: Room) => async (dispatch, getState) => {
     dispatch(showBackdrop())
     const token = selectToken(getState())
     const api = new Api(token)
 
     try {
-        await api.editRoom(roomId, roomName, hostName, destinations)
+        await api.editRoom(room)
         dispatch(getRooms(t))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-edit')))
