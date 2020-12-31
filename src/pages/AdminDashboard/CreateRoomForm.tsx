@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { TextField } from 'formik-material-ui'
@@ -28,18 +28,75 @@ import {
 import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
+import NotificationSelector, { UNITS } from './Reminders/NotificationSelector'
+
+export interface Room {
+    id: string
+    name: string
+    destinations: Array<any>
+    startAt: Date | null
+    hostName: string
+    hideChatbot: boolean
+    roomUrl: string
+}
+
+type Unit = 'Minutes' | 'Heures' | 'Jours'
+interface Notification {
+    unit: Unit
+    number: number
+}
+
+const mapDestinationsToInputField = (destinations) => {
+    const values = [] as any
+    for (const destination of destinations) {
+        const [value] = Object.values(destination)
+        values.push(value)
+    }
+
+    return values
+}
 
 const Button = styled(MuiButton)(spacing)
 
-const CreateRoomForm = ({ onFormSubmit }) => {
+const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     const { t } = useTranslation('dashboard')
-    interface Values {
-        roomName: string
-        participants: Array<any>
-        startAt: Date
+    const [value, setValue] = React.useState([])
+    const [isEditing, setIsEditing] = React.useState(false)
+    const [notification, setNotification] = React.useState<Notification>({
+        unit: UNITS.mins as Unit,
+        number: 0,
+    })
+
+    const getRemindAt = (startAt, notification) => {
+        let remindBeforeTimestampSecs = 0
+        switch (notification.unit) {
+            case UNITS.mins:
+                remindBeforeTimestampSecs = notification.number * 60
+                break
+            case UNITS.hours:
+                remindBeforeTimestampSecs = notification.number * 60 * 60
+                break
+            case UNITS.days:
+                remindBeforeTimestampSecs = notification.number * 60 * 60 * 24
+                break
+        }
+
+        return startAt - remindBeforeTimestampSecs
     }
 
-    const [value, setValue] = React.useState([])
+    // Populate the form with fields values when isEditing
+    useEffect(() => {
+        if (fields?.destinations?.length) {
+            const mappedDestinations = mapDestinationsToInputField(
+                fields.destinations
+            )
+            setValue(mappedDestinations as any)
+        }
+
+        if (fields?.name?.length) {
+            setIsEditing(true)
+        }
+    }, [setValue, fields])
 
     const ErrorChip = withStyles({
         root: {
@@ -151,26 +208,53 @@ const CreateRoomForm = ({ onFormSubmit }) => {
         )
     }
 
+    const isNumeric = (destination) => {
+        for (let char of destination) {
+            if (char >= '0' && char <= '9') continue
+            else return false
+        }
+
+        return true
+    }
+
+    const formatDestinations = (destinations) => {
+        return destinations.map((destination) => {
+            if (destination.includes('@')) {
+                return { email: destination }
+            } else if (isNumeric(destination)) {
+                return { phone: destination }
+            } else {
+                return { groupId: destination }
+            }
+        })
+    }
+
+    const cancelEdit = () => {
+        setIsEditing(false)
+    }
+
     return (
         <Formik
-            initialValues={{
-                roomName: '',
-                participants: [],
-                startAt: null,
-            }}
+            enableReinitialize
+            initialValues={fields}
             validate={(values) => {
-                const errors: Partial<Values> = {}
-                if (!values.roomName) {
-                    errors.roomName = 'Required'
+                const errors: Partial<Room> = {}
+                if (!values.name) {
+                    errors.name = 'Required'
                 }
                 return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                    setSubmitting(false)
-                    alert(JSON.stringify(values, null, 2))
-                    onFormSubmit()
-                }, 500)
+                setSubmitting(false)
+                const destinations = formatDestinations(value)
+                const room = {
+                    ...values,
+                    id: fields.id,
+                    destinations,
+                }
+
+                const remindAt = getRemindAt(room.startAt / 1000, notification)
+                onFormSubmit(room, isEditing, remindAt)
             }}>
             {({ submitForm, isSubmitting }) => (
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
@@ -190,10 +274,26 @@ const CreateRoomForm = ({ onFormSubmit }) => {
                             size="small"
                             component={TextField}
                             variant="outlined"
-                            name="roomName"
+                            name="name"
                             label={t('form.visio-name.placeholder')}
                         />
                         <Box m={4} />
+                        <Typography variant="h6" component="h2">
+                            {t('form.host-name.title')}
+                        </Typography>
+                        <Typography variant="body1">
+                            {t('form.host-name.description')}
+                        </Typography>
+                        <Box m={2} />
+                        <Field
+                            size="small"
+                            component={TextField}
+                            variant="outlined"
+                            name="hostName"
+                            label={t('form.host-name.placeholder')}
+                        />
+                        <Box m={4} />
+
                         <Typography variant="h6" component="h2">
                             {t('form.participants.title')}
                         </Typography>
@@ -206,7 +306,7 @@ const CreateRoomForm = ({ onFormSubmit }) => {
                         </Typography>
                         <Field
                             size="small"
-                            name="participants"
+                            name="destinations"
                             component={Autocomplete}
                             multiple
                             freeSolo
@@ -254,14 +354,43 @@ const CreateRoomForm = ({ onFormSubmit }) => {
                             ampm={false}
                         />
                         <Box m={4} />
+
+                        {!isEditing && (
+                            <>
+                                <Typography variant="h6" component="h2">
+                                    {t('form.reminders.title')}
+                                </Typography>
+                                <NotificationSelector
+                                    notification={notification}
+                                    setNotification={setNotification}
+                                />
+                            </>
+                        )}
+
                         <Box display="flex" justifyContent="flex-end">
+                            {isEditing && (
+                                <Button
+                                    color="primary"
+                                    disabled={isSubmitting}
+                                    onClick={() => {
+                                        onCreateFormReset()
+                                        cancelEdit()
+                                        setValue([])
+                                    }}>
+                                    {t('form.buttons.cancel')}
+                                </Button>
+                            )}
                             <Button
                                 startIcon={<CheckBoxIcon />}
                                 variant="contained"
                                 color="primary"
                                 disabled={isSubmitting}
                                 onClick={submitForm}>
-                                {t('form.submit')}
+                                {t(
+                                    isEditing
+                                        ? 'form.buttons.save'
+                                        : 'form.buttons.submit'
+                                )}
                             </Button>
                         </Box>
                     </Form>

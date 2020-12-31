@@ -7,7 +7,7 @@ import { ReminderDao } from '../../../db/ReminderDao'
  * @swagger
  * /v1/rooms/{roomId}/reminders/{reminderId}:
  *   delete:
- *     description: Delete an existing reminder. This will also delete all the data in database, meaning the destinations will no longer be visible to anyone, including you. There will be no solution to retrieve those data afterward.
+ *     description: Delete an existing reminder. The destinations and hostName are saved in the room, delete the room to delete those data
  *     tags:
  *       - rooms
  *     consumes:

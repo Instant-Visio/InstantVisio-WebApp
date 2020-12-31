@@ -1,38 +1,38 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IonContent } from '@ionic/react'
-import Typography from '@material-ui/core/Typography'
 import { ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../../styles/muiTheme'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
-import Paper from '@material-ui/core/Paper'
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline'
-import RestaurantIcon from '@material-ui/icons/Restaurant'
-import FingerprintIcon from '@material-ui/icons/Fingerprint'
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import Divider from '@material-ui/core/Divider'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import Link from '@material-ui/core/Link'
 import CreateRoomForm from './CreateRoomForm'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
-import { openPremiumVideoCall } from '../../services/safari-view-controller'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../components/App/userSelector'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { Api } from '../../services/api'
 import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
+import { createRoom, editRoom, getRooms } from './roomsActions'
+import UserDetails from './UserDetails'
+import { Room } from './CreateRoomForm'
+
+const initialValues: Room = {
+    id: '',
+    name: '',
+    destinations: [],
+    startAt: null,
+    hostName: '',
+    hideChatbot: false,
+    roomUrl: '',
+}
 
 const AdminDashboard = () => {
-    const dispatch = useDispatch()
-    const history = useHistory()
     const { t } = useTranslation('dashboard')
-    const { userId, token, details } = useSelector(selectUser)
+
+    const dispatch = useDispatch()
+    const { userId, token } = useSelector(selectUser)
+    const [fields, setFields] = useState<Room>(initialValues)
 
     useEffect(() => {
         const getUserDetails = async () => {
@@ -43,43 +43,32 @@ const AdminDashboard = () => {
 
         if (token) {
             getUserDetails()
+            dispatch(getRooms(t))
         }
-    }, [token, userId, dispatch])
+    }, [token, userId, dispatch, t])
 
-    const preventDefault = (event: React.SyntheticEvent) =>
-        event.preventDefault()
-
-    const useStyles = makeStyles((theme: Theme) =>
-        createStyles({
-            icon: {
-                marginLeft: theme.spacing(2),
-            },
-            textRight: {
-                textAlign: 'right',
-            },
-            list: {
-                paddingTop: 0,
-                paddingBottom: 0,
-            },
-            listItem: {
-                paddingTop: 0,
-                paddingBottom: 0,
-            },
-            apiTokenListItem: {
-                wordWrap: 'break-word',
-            },
-        })
-    )
-
-    const classes = useStyles()
-
-    const onFormSubmit = () => {
-        openPremiumVideoCall(history)
+    const onFormSubmit = (room, isEditing, remindAt) => {
+        room.startAt = room.startAt / 1000
+        if (isEditing) {
+            console.log('SAving room: ', room)
+            dispatch(editRoom(t, room))
+        } else {
+            dispatch(createRoom(t, room, remindAt))
+        }
     }
 
-    const getSMSUsage = () => details?.usage?.sentSMSs
+    const onRoomEdit = (room) => {
+        const updatedFields = {
+            ...fields,
+            ...room,
+            startAt: room.startAt * 1000,
+        }
+        setFields(updatedFields)
+    }
 
-    const getSMSQuota = () => details?.subscription?.quotas?.sms
+    const onCreateFormReset = () => {
+        setFields(initialValues)
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -89,110 +78,14 @@ const AdminDashboard = () => {
                     <Box m={6} />
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
-                            <CreateRoomForm onFormSubmit={onFormSubmit} />
+                            <CreateRoomForm
+                                fields={fields}
+                                onFormSubmit={onFormSubmit}
+                                onCreateFormReset={onCreateFormReset}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <Paper elevation={0}>
-                                <Grid container alignItems="center" spacing={2}>
-                                    <Grid item>
-                                        <ChatBubbleOutlineIcon
-                                            className={classes.icon}
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography variant="h6">
-                                            {t('planned-discussions')}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                                <Divider />
-                                <List component="nav" className={classes.list}>
-                                    <ListItem className={classes.listItem}>
-                                        <ListItemText primary="Comité de pilotage" />
-                                        <ListItemText
-                                            primary="30 mai"
-                                            primaryTypographyProps={{
-                                                align: 'right',
-                                            }}
-                                        />
-                                    </ListItem>
-                                    <Divider variant="middle" />
-                                    <ListItem className={classes.list}>
-                                        <ListItemText primary="Comité de pilotage" />
-                                        <ListItemText
-                                            primary="30 mai"
-                                            primaryTypographyProps={{
-                                                align: 'right',
-                                            }}
-                                        />
-                                    </ListItem>
-                                </List>
-                            </Paper>
-                            <Box m={6} />
-                            <Paper elevation={0}>
-                                <Grid container alignItems="center" spacing={2}>
-                                    <Grid item>
-                                        <RestaurantIcon
-                                            className={classes.icon}
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography variant="h6">
-                                            {t('consumption')}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                                <Divider />
-                                <ListItem className={classes.list}>
-                                    {details && (
-                                        <ListItemText
-                                            primary={`${
-                                                getSMSUsage() !== undefined
-                                                    ? getSMSUsage()
-                                                    : '?'
-                                            } SMS ${t('consumed')} ${t('on')} ${
-                                                getSMSQuota() !== undefined
-                                                    ? getSMSQuota()
-                                                    : '?'
-                                            } ${t('available')}`}
-                                        />
-                                    )}
-                                </ListItem>
-                            </Paper>
-
-                            <Box m={6} />
-
-                            <Paper elevation={0}>
-                                <Grid container alignItems="center" spacing={2}>
-                                    <Grid item>
-                                        <FingerprintIcon
-                                            className={classes.icon}
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography variant="h6">
-                                            {t('api-identifier')}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs className={classes.textRight}>
-                                        <CopyToClipboard text={token}>
-                                            <Link
-                                                href="#"
-                                                onClick={preventDefault}
-                                                variant="body2">
-                                                {t('click-to-copy')}
-                                            </Link>
-                                        </CopyToClipboard>
-                                    </Grid>
-                                </Grid>
-                                <Divider />
-                                <ListItem className={classes.list}>
-                                    <ListItemText
-                                        className={classes.apiTokenListItem}
-                                        primary={token}
-                                    />
-                                </ListItem>
-                            </Paper>
+                            <UserDetails onRoomEdit={onRoomEdit} />
                         </Grid>
                     </Grid>
                 </Container>

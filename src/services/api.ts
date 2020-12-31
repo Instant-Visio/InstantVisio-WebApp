@@ -2,21 +2,41 @@ import { JWTToken } from '../../types/JWT'
 import { JoinRoomResponse } from '../../types/JoinRoomResponse'
 import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { RoomId } from '../../types/Room'
-import axios from 'axios'
 import { UID } from '../../types/uid'
+import ApiClient from './apiClient'
+import { Room } from '../pages/AdminDashboard/CreateRoomForm'
+
 export class Api {
-    baseUrl: string | undefined
-    jwtToken: string
+    private apiClient: ApiClient
+
     constructor(jwtToken: JWTToken) {
-        this.baseUrl = process.env.REACT_APP_API_URL
-        if (!this.baseUrl) {
-            throw new Error('API url is missing from env configuration')
-        }
-        this.jwtToken = jwtToken
+        this.apiClient = new ApiClient(jwtToken)
     }
 
-    async createRoom(password?: string): Promise<NewRoomResponse> {
-        return this.post('/rooms/new', password ? { password } : null)
+    async createRoom(room: Room): Promise<NewRoomResponse> {
+        const { name, hostName, destinations } = room
+        return this.apiClient.post('/rooms/new', {
+            name,
+            hostName,
+            destinations: JSON.stringify(destinations),
+        })
+    }
+
+    async editRoom(room: Room): Promise<NewRoomResponse> {
+        const { id, name, hostName, destinations, startAt } = room
+        return this.apiClient.patch(`/rooms/${id}`, {
+            name,
+            hostName,
+            startAt,
+            destinations: JSON.stringify(destinations),
+        })
+    }
+
+    async createReminder(roomId: string, sendAt: number): Promise<any> {
+        return this.apiClient.post(`/rooms/${roomId}/reminders`, {
+            roomId,
+            sendAt,
+        })
     }
 
     async joinRoom(
@@ -24,14 +44,14 @@ export class Api {
         participantName: string,
         password: string | null
     ): Promise<JoinRoomResponse> {
-        return this.post(`/rooms/${roomId}/join`, {
+        return this.apiClient.post(`/rooms/${roomId}/join`, {
             participantName,
             password,
         })
     }
 
     async addRegistrationToken(userId: UID, registrationToken: string) {
-        return this.post(`/users/${userId}/addRegistrationToken`, {
+        return this.apiClient.post(`/users/${userId}/addRegistrationToken`, {
             registrationToken,
         })
     }
@@ -41,7 +61,7 @@ export class Api {
         name: string,
         password: string
     ): Promise<void> {
-        return this.post(`/groups/${groupId}/join`, {
+        return this.apiClient.post(`/groups/${groupId}/join`, {
             name,
             password,
         })
@@ -52,44 +72,17 @@ export class Api {
         hostname: string,
         destinations: [any]
     ): Promise<any> {
-        return this.post(`/rooms/${roomId}/inviteParticipants`, {
+        return this.apiClient.post(`/rooms/${roomId}/inviteParticipants`, {
             hostname,
             destinations: JSON.stringify(destinations),
         })
     }
 
-    async getUserDetails(userId): Promise<any> {
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.jwtToken}`,
-        }
-
-        const response = await axios({
-            url: `${this.baseUrl}/users/${userId}`,
-            headers,
-            method: 'get',
-        })
-
-        return response?.data?.user
+    async getRooms(): Promise<any> {
+        return this.apiClient.get(`/rooms`)
     }
 
-    async post(apiUrl: string, data: any): Promise<any> {
-        const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${this.jwtToken}`,
-        }
-
-        try {
-            const { data: responseData } = await axios({
-                headers,
-                method: 'post',
-                url: `${this.baseUrl}${apiUrl}`,
-                data,
-            })
-            return responseData
-        } catch (err) {
-            const { error: errorMessage } = err.response.data
-            throw new Error(errorMessage)
-        }
+    async getUserDetails(userId): Promise<any> {
+        return this.apiClient.get(`/users/${userId}`)
     }
 }

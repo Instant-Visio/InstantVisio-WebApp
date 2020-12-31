@@ -72,13 +72,7 @@ export const sendRegistrationToken = (
     }
 }
 
-export const didSignin: DidSignIn = (user) => async (dispatch, getState) => {
-    const { user: userState } = getState()
-    if (userState.user.token) {
-        dispatch(hideBackdrop())
-        return
-    }
-
+export const didSignin: DidSignIn = (user) => async (dispatch) => {
     if (user) {
         try {
             const token = await fetchToken(user.uid)
