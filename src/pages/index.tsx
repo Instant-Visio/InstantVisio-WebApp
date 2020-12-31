@@ -7,6 +7,7 @@ import Credits from './Credits/Credits'
 import MediaNews from './MediaNews/MediaNews'
 import NotFound from './NotFound/NotFound'
 import JoinVideoCall from './JoinVideoCall/JoinVideoCall'
+import Pricing from './Pricing/Pricing'
 import License from './License/License'
 import { PremiumVideoPage } from './PremiumVideoCall'
 
@@ -22,4 +23,5 @@ export {
     License,
     NotFound,
     PremiumVideoPage,
+    Pricing,
 }
