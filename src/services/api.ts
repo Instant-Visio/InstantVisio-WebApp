@@ -4,6 +4,7 @@ import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { RoomId } from '../../types/Room'
 import axios from 'axios'
 import { UID } from '../../types/uid'
+import { Room } from '../pages/AdminDashboard/CreateRoomForm'
 export class Api {
     baseUrl: string | undefined
     jwtToken: string
@@ -15,32 +16,23 @@ export class Api {
         this.jwtToken = jwtToken
     }
 
-    async createRoom(
-        name,
-        hostName,
-        destinations,
-        password?: string
-    ): Promise<NewRoomResponse> {
+    async createRoom(room: Room): Promise<NewRoomResponse> {
+        const { name, hostName, destinations } = room
         return this.post('/rooms/new', {
-            name: name,
+            name,
             hostName,
             destinations: JSON.stringify(destinations),
-            password,
+            password: 'test-password', //TODO set a password ?
         })
     }
 
-    async editRoom(
-        roomId,
-        name,
-        hostName,
-        destinations,
-        password?: string
-    ): Promise<NewRoomResponse> {
-        return this.post(`/rooms/${roomId}`, {
+    async editRoom(room: Room): Promise<NewRoomResponse> {
+        const { id, name, hostName, destinations, startAt } = room
+        return this.patch(`/rooms/${id}`, {
             name: name,
             hostName,
+            startAt,
             destinations: JSON.stringify(destinations),
-            password,
         })
     }
 
@@ -119,6 +111,26 @@ export class Api {
         })
 
         return response?.data?.user
+    }
+
+    async patch(apiUrl: string, data: any): Promise<any> {
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${this.jwtToken}`,
+        }
+
+        try {
+            const { data: responseData } = await axios({
+                headers,
+                method: 'patch',
+                url: `${this.baseUrl}${apiUrl}`,
+                data,
+            })
+            return responseData
+        } catch (err) {
+            const { error: errorMessage } = err.response.data
+            throw new Error(errorMessage)
+        }
     }
 
     async post(apiUrl: string, data: any): Promise<any> {

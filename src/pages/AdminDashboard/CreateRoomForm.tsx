@@ -29,11 +29,14 @@ import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
 
-export interface Values {
-    roomName: string
+export interface Room {
+    id: string
+    name: string
     destinations: Array<any>
     startAt: Date | null
     hostName: string
+    hideChatbot: boolean
+    roomUrl: string
 }
 
 const mapDestinationsToInputField = (destinations) => {
@@ -62,7 +65,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
             setValue(mappedDestinations as any)
         }
 
-        if (fields?.roomName?.length) {
+        if (fields?.name?.length) {
             setIsEditing(true)
         }
     }, [setValue, fields])
@@ -207,16 +210,21 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
             enableReinitialize
             initialValues={fields}
             validate={(values) => {
-                const errors: Partial<Values> = {}
-                if (!values.roomName) {
-                    errors.roomName = 'Required'
+                const errors: Partial<Room> = {}
+                if (!values.name) {
+                    errors.name = 'Required'
                 }
                 return errors
             }}
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(false)
                 const destinations = formatDestinations(value)
-                onFormSubmit({ ...values, destinations }, isEditing)
+                const room = {
+                    ...values,
+                    id: fields.id,
+                    destinations,
+                }
+                onFormSubmit(room, isEditing)
             }}>
             {({ submitForm, isSubmitting }) => (
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
@@ -236,7 +244,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             size="small"
                             component={TextField}
                             variant="outlined"
-                            name="roomName"
+                            name="name"
                             label={t('form.visio-name.placeholder')}
                         />
                         <Box m={4} />
