@@ -46,9 +46,12 @@ export const getAppEnv = (): AppEnv => {
         domain = 'localhost:3000'
     }
 
+    const protocol = isUsingEmulator() ? 'http' : 'https'
+
     return {
         domain: domain,
         emailFrom: emailfrom,
+        protocol,
     }
 }
 
