@@ -18,7 +18,9 @@ export class Api {
         return this.apiClient.post('/rooms/new', {
             name,
             hostName,
-            destinations: JSON.stringify(destinations),
+            destinations: destinations?.length
+                ? JSON.stringify(destinations)
+                : null,
         })
     }
 
