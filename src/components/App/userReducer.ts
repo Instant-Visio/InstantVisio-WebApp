@@ -26,6 +26,7 @@ export interface UserSubscription {
 export interface UserUsage {
     sentEmails: number
     sentSMSs: number
+    sentPushs: number
 }
 
 export interface UserDetails {

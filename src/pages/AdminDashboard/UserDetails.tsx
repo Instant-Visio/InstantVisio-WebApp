@@ -17,7 +17,11 @@ import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import { selectRooms } from './roomsSelector'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../components/App/userSelector'
+import {
+    selectUser,
+    selectQuotasUsage,
+    QuotasUsage,
+} from '../../components/App/userSelector'
 import { useTranslation } from 'react-i18next'
 
 export const preventDefault = (event: React.SyntheticEvent) =>
@@ -53,12 +57,36 @@ const useStyles = makeStyles((theme: Theme) =>
 const UserDetails = ({ onRoomEdit }) => {
     const classes = useStyles()
     const rooms = useSelector(selectRooms)
-    const { token, details } = useSelector(selectUser)
+    const { token } = useSelector(selectUser)
+    const quotasUsage: QuotasUsage = useSelector(selectQuotasUsage)
     const { t } = useTranslation('dashboard')
 
-    const getSMSUsage = () => details?.usage?.sentSMSs
+    //TODO better to export in a fc
+    const renderQuotasUsage = () => {
+        if (!quotasUsage) return null
 
-    const getSMSQuota = () => details?.subscription?.quotas?.sms
+        const { minutes, ...quotas } = quotasUsage
+        return (
+            <>
+                {Object.entries(quotas).map(([type, value], index) => (
+                    <ListItem
+                        className={classes.listItem}
+                        key={`quota-${index}`}>
+                        <ListItemText
+                            primary={`${value.sent} ${type} ${t('on')} ${
+                                value.quota
+                            } ${t('available')}`}
+                        />
+                    </ListItem>
+                ))}
+                <ListItem className={classes.listItem}>
+                    <ListItemText
+                        primary={`${minutes} min ${t('available')}`}
+                    />
+                </ListItem>
+            </>
+        )
+    }
 
     return (
         <>
@@ -107,17 +135,9 @@ const UserDetails = ({ onRoomEdit }) => {
                     </Grid>
                 </Grid>
                 <Divider />
-                <ListItem className={classes.list}>
-                    {details && (
-                        <ListItemText
-                            primary={`${getSMSUsage() || '0'} SMS ${t(
-                                'consumed'
-                            )} ${t('on')} ${getSMSQuota() || '?'} ${t(
-                                'available'
-                            )}`}
-                        />
-                    )}
-                </ListItem>
+                <List component="nav" className={classes.list}>
+                    {renderQuotasUsage()}
+                </List>
             </Paper>
 
             <Box m={6} />
