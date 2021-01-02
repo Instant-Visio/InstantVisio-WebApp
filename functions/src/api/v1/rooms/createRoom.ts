@@ -6,7 +6,7 @@ import { UID } from '../../../types/uid'
 import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { RoomId } from '../../../types/Room'
 import { Timestamp } from '../../../firebase/firebase'
-import { RoomDao } from '../../../db/RoomDao'
+import { formatRoomUrl, RoomDao } from '../../../db/RoomDao'
 import { ReminderId } from '../../../types/Reminder'
 import { createReminder } from '../reminders/createReminder'
 import {
@@ -148,6 +148,7 @@ export const createRoom = async ({
 
     return {
         roomId,
+        roomUrl: formatRoomUrl(roomId, roomPassword),
         roomSid: twilioRoomResponse.sid,
         ...processDestinationsResults,
     }

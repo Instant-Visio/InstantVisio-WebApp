@@ -14,6 +14,7 @@ interface RommCreatedAction {
     payload: {
         roomId: string
         roomName: string
+        roomUrl: string
     }
 }
 

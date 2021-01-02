@@ -7,6 +7,7 @@ export interface RoomsState {
     created: {
         roomId: string
         roomName: string
+        roomUrl: string
     }
 }
 

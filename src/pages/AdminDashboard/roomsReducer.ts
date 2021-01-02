@@ -8,6 +8,7 @@ const initialState = {
     created: {
         roomId: '',
         roomName: '',
+        roomUrl: '',
     },
 }
 
@@ -18,10 +19,11 @@ export const roomsReducer = produce(
                 draft.rooms = payload.rooms
                 break
             case ROOM_CREATED:
-                const { roomId, roomName } = payload
+                const { roomId, roomName, roomUrl } = payload
                 draft.created = {
                     roomId,
                     roomName,
+                    roomUrl,
                 }
                 break
             case NEW_ROOM: {

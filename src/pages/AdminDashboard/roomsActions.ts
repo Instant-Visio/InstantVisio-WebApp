@@ -20,11 +20,16 @@ export const setRooms = (rooms: any): RoomsActionsTypes => ({
     },
 })
 
-const roomCreated = (roomId, roomName: string): RoomsActionsTypes => ({
+const roomCreated = (
+    roomId,
+    roomName: string,
+    roomUrl: string
+): RoomsActionsTypes => ({
     type: ROOM_CREATED,
     payload: {
         roomId,
         roomName,
+        roomUrl,
     },
 })
 
@@ -53,10 +58,10 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
     const api = new Api(token)
 
     try {
-        const { roomId } = await api.createRoom(room)
+        const { roomId, roomUrl } = await api.createRoom(room)
         dispatch(getRooms(t))
         dispatch(createReminder(t, roomId, remindAt))
-        dispatch(roomCreated(roomId, room.name))
+        dispatch(roomCreated(roomId, room.name, roomUrl))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
     }
