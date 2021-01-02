@@ -1,0 +1,49 @@
+{
+    "planned-discussions": "Vos discussions planifiées",
+    "consumption": "Votre conso",
+    "api-identifier": "Votre identifiant API",
+    "click-to-copy": "Cliquez ici pour copier le token",
+    "on": "sur",
+    "consumed": "consommés",
+    "available": "disponibles",
+    "errors:": {
+        "rooms-fetch": "Impossible de récupérer les discussion plannifiées",
+        "rooms-create": "Impossible de créer la réunion",
+        "rooms-edit": "Impossible de modifier la réunion",
+        "reminders-create": "Impossible de créer la notification de rappel"
+    },
+    "form": {
+        "create-visio": "Créer une discussion en visio",
+        "visio-name": {
+            "title": "Nom de la discussion",
+            "description": "Donner un nom à votre discussion pour la retrouver plus facilement.",
+            "placeholder": "Réunion de rédaction"
+        },
+        "host-name": {
+            "title": "Votre nom",
+            "description": "Le nom qui sera visible par les autres participants",
+            "placeholder": "Bilbon Sacquet"
+        },
+        "participants": {
+            "title": "Liste des participants",
+            "description": "Notez ici les numéros de téléphone, les adresses email et les groupes de contact à qui vous souhaitez envoyer une invitation.",
+            "description2": "Les numéros de téléphone ne doivent pas contenir d'espace.",
+            "placeholder": "Autocomplete"
+        },
+        "plan-visio": {
+            "title": "Planifier votre RDV en visio",
+            "description": "Choisissez la date et l'heurede début de votre visio."
+        },
+        "date": {
+            "placeholder": "Cliquez pour choisir la date et l'heure"
+        },
+        "reminders": {
+            "title": "Notifications de rappel"
+        },
+        "buttons": {
+            "submit": "Je crée le RDV",
+            "save": "Enregistrer",
+            "cancel": "Annuler"
+        }
+    }
+}

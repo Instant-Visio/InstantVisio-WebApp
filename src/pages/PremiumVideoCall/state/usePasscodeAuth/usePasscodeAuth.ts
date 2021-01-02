@@ -9,6 +9,8 @@ import { RoomType } from '../../types'
 import { Api } from '../../../../services/api'
 import { JWTToken } from '../../../../../types/JWT'
 import { RoomId } from '../../../../../types/Room'
+import { selectUser } from '../../../../components/App/userSelector'
+import { useSelector } from 'react-redux'
 
 export function getPasscode() {
     const match = window.location.search.match(/passcode=(.*)&?/)
@@ -21,10 +23,15 @@ export function getPasscode() {
 export async function fetchTwilioVideoToken(
     instantVisioToken: JWTToken,
     roomId: RoomId,
-    password: string
+    participantName: string,
+    password: string | null
 ) {
     const api = new Api(instantVisioToken)
-    const { jwtAccessToken } = await api.joinRoom(roomId, password)
+    const { jwtAccessToken } = await api.joinRoom(
+        roomId,
+        participantName,
+        password
+    )
     return jwtAccessToken
 }
 
@@ -45,6 +52,7 @@ export function getErrorMessage(message: string) {
 
 export default function usePasscodeAuth() {
     const history = useHistory()
+    const instantVisioUser = useSelector(selectUser)
 
     const [user, setUser] = useState<{
         displayName: undefined
@@ -55,24 +63,38 @@ export default function usePasscodeAuth() {
     const [roomType, setRoomType] = useState<RoomType>()
 
     const getTwilioVideoToken = useCallback(
-        (instantVisioToken: string, roomId: RoomId) => {
+        (
+            instantVisioToken: string,
+            roomId: RoomId,
+            participantName: string
+        ) => {
             const fetchTokenAndSetRoomType = async (
                 instantVisioToken,
-                roomId
+                roomId,
+                participantName
             ) => {
+                const roomPassword = user!.passcode
+                const passwordSpecified =
+                    !instantVisioUser.isAnonymous && roomPassword === 'admin'
+                        ? null
+                        : roomPassword
                 const token = await fetchTwilioVideoToken(
                     instantVisioToken,
                     roomId,
-                    user!.passcode
+                    participantName,
+                    passwordSpecified
                 )
-
                 setRoomType('group')
                 return token as string
             }
 
-            return fetchTokenAndSetRoomType(instantVisioToken, roomId)
+            return fetchTokenAndSetRoomType(
+                instantVisioToken,
+                roomId,
+                participantName
+            )
         },
-        [user]
+        [user, instantVisioUser]
     )
 
     useEffect(() => {
@@ -87,7 +109,9 @@ export default function usePasscodeAuth() {
                         history.replace(window.location.pathname)
                     }
                 })
-                .then(() => setIsAuthReady(true))
+                .then(() => {
+                    setIsAuthReady(true)
+                })
         } else {
             setIsAuthReady(true)
         }

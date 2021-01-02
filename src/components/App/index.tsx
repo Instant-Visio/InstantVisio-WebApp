@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react'
 import './App.scss'
 import { gdprHandler } from '../../utils/gdpr'
-import Router from './router'
+import Router from './Router'
 import { IonApp, IonHeader } from '@ionic/react'
-import SwipeableTemporaryDrawer from '../SwipeableTemporaryDrawer/SwipeableTemporaryDrawer'
-import { Navbar } from 'react-bootstrap'
-import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
-import styled from 'styled-components'
 import { IonReactRouter } from '@ionic/react-router'
-import Login from '../Login'
-
+import AppBar from './AppBar/AppBar'
+import Snackbar from './Snackbar/Snackbar'
+import { PushNotifications } from './PushNotifications/PushNotifications'
+import LoginModal from '../LoginModal/LoginModal'
+import ModalRoot from '../Modal/ModalRoot'
+import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
+import Backdrop from './Backdrop/Backdrop'
+import JoinGroupModal from '../JoinGroup/JoinGroupModal'
+import useAnonymousLogin from '../../hooks/useAnonymousLogin'
 declare global {
     interface Window {
         iv: any
@@ -18,13 +21,8 @@ declare global {
     }
 }
 
-const NavbarContainer = styled.div`
-    position: 'relative';
-    margin-left: 40%;
-`
-
 const App = () => {
-    const isMobile = useDetectMobileOrTablet()
+    useAnonymousLogin()
 
     useEffect(() => {
         // when using vh and vw units in css:
@@ -49,17 +47,23 @@ const App = () => {
         gdprHandler()
     }, [])
 
+    const isPremiumVideoPage = () => {
+        return window.location.pathname.includes('premium-video')
+    }
+
     return (
         <IonApp className="App">
-            <Login />
-
+            <Backdrop />
+            <PushNotifications />
+            <Snackbar />
+            <AuthStateChangedListener />
+            <JoinGroupModal />
+            <LoginModal />
+            <ModalRoot />
             <IonReactRouter>
-                {isMobile && (
+                {!isPremiumVideoPage() && (
                     <IonHeader id="topbar">
-                        <Navbar bg="light" variant="dark">
-                            <SwipeableTemporaryDrawer />
-                            <NavbarContainer />
-                        </Navbar>
+                        <AppBar />
                     </IonHeader>
                 )}
                 <Router />

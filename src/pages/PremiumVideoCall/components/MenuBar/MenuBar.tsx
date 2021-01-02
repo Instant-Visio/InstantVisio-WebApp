@@ -17,6 +17,9 @@ import { Typography, Grid, Hidden } from '@material-ui/core'
 import ToggleAudioButton from '../Buttons/ToggleAudioButton/ToggleAudioButton'
 import ToggleVideoButton from '../Buttons/ToggleVideoButton/ToggleVideoButton'
 import ToggleScreenShareButton from '../Buttons/ToogleScreenShareButton/ToggleScreenShareButton'
+import InviteParticipants from '../../../../components/InviteParticipants/InviteParticipants'
+import { selectRoomId, selectHostName } from '../../roomSelector'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -67,12 +70,19 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 )
 
+const formatRoomName = (roomName) => {
+    return roomName.indexOf('#') ? roomName.split('#')[0] : roomName
+}
+
 export default function MenuBar() {
     const classes = useStyles()
     const { isSharingScreen, toggleScreenShare } = useVideoContext()
     const roomState = useRoomState()
     const isReconnecting = roomState === 'reconnecting'
     const { room } = useVideoContext()
+    const roomId = useSelector(selectRoomId)
+    const hostName = useSelector(selectHostName)
+    const roomName = formatRoomName(room.name)
 
     return (
         <>
@@ -94,13 +104,17 @@ export default function MenuBar() {
                 <Grid container justify="space-around" alignItems="center">
                     <Hidden smDown>
                         <Grid style={{ flex: 1 }}>
-                            <Typography variant="body1">{room.name}</Typography>
+                            <Typography variant="body1">{roomName}</Typography>
                         </Grid>
                     </Hidden>
                     <Grid item>
                         <Grid container justify="center">
                             <ToggleAudioButton disabled={isReconnecting} />
                             <ToggleVideoButton disabled={isReconnecting} />
+                            <InviteParticipants
+                                roomId={roomId}
+                                hostName={hostName}
+                            />
                             <Hidden smDown>
                                 {!isSharingScreen && (
                                     <ToggleScreenShareButton

@@ -38,10 +38,19 @@
         "credits": "credits",
         "media": "in-the-news",
         "newsletter": "newsletter",
-        "license": "license"
+        "license": "license",
+        "premiumVideo": "premium-video",
+        "room": "room"
     },
     "message": {
         "title": "URGENT video call request from",
         "Message": "invites you to a video chat. Join the chat now at this link:"
+    },
+    "appBar": {
+        "appName": "Instant Visio",
+        "joinVisioButton": "Join Visio",
+        "joinGroupButton": "Join Group",
+        "loginButton": "Login",
+        "signOutButton": "Se déconnecter"
     }
 }

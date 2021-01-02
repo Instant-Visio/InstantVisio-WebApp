@@ -8,14 +8,18 @@ export const errorMiddleware = (
     res: Response,
     next: Function
 ) => {
+    const url = req.protocol + '://' + req.get('host') + req.originalUrl
     if (error instanceof HttpError) {
         const httpError = <HttpError>error
+        console.log(
+            `API HTTP Error ${httpError.statusCode}:${httpError.message} at ${url}`
+        )
         return res.status(httpError.statusCode).send({
             error: httpError.message,
         })
     }
 
-    console.error(`API ERROR ${req.url}`, error)
+    console.error(`API ERROR ${url}`, error)
 
     return res.status(500).send({
         error: 'Internal Server Error',

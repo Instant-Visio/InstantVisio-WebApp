@@ -7,13 +7,17 @@ import { getAppEnv } from '../../../firebase/env'
 import { NotificationContent } from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
 import { UID } from '../../../types/uid'
-import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCounts'
+import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
+import { UserDao } from '../../../db/UserDao'
+import { increment } from '../../../firebase/firebase'
+import { RoomId } from '../../../types/Room'
+import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
  * /v1/rooms/{roomId}/inviteParticipants:
  *   post:
- *     description: Send an invitation to one or many participants, via email and/or sms. It can combine email and sms destinations, as well as specific lang for each participants. Email & phone can be used at the same time, email will be sent first. <br/> Default lang is "en". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improve the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
+ *     description: Send an invitation to one or many participants, via email and/or sms and/or push notification with a given groupId. It can combine all notification types, as well as specific lang for each participants. <br/> Default lang is "en". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improves the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
  *     tags:
  *       - rooms
  *     consumes:
@@ -31,34 +35,11 @@ import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCoun
  *         in: x-www-form-urlencoded
  *         required: true
  *         examples:
- *            mixedTypeAndLang:
- *                summary: Mixed email, sms and languages
- *                value: [{email: "user@example.com", lang: "en"}, {phone: "+33600000000", lang:"fr"}, {phone: "+33600000000", lang:"fr", country:"en"}]
- *            emailInvite:
- *                summary: One email invite with French lang
- *                value: [{email: "user@example.com", lang: "fr"}]
+ *            mixed:
+ *                summary: Mixed email, sms, groupId and languages
+ *                $ref: '#/components/examples/Destinations'
  *         schema:
- *            type: array
- *            items:
- *                type: object
- *                properties:
- *                   email:
- *                       type: string
- *                   phone:
- *                       type: string
- *                   lang:
- *                       type: string
- *                       default: en
- *                       enum:
- *                           - en
- *                           - fr
- *                           - de
- *                           - es
- *                           - gr
- *                           - hu
- *                           - it
- *                           - ro
- *
+ *            type: string
  *     responses:
  *       200:
  *         description: One or many invites were sent successfully. It will return a 2xx if some invitation where not able to be sent (malformed email or phone number for eg).
@@ -68,6 +49,7 @@ import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCoun
  *               example: {
  *                   emailsSent: ["participant@example.com", "anotherParticipant@example.com"],
  *                   smssSent: ["+33600000000"],
+ *                   pushsSent: ["groupId"],
  *               }
  *       400:
  *         description: request content (x-www-form-urlencoded) not correct, or zero invitation delivered
@@ -80,25 +62,42 @@ import { updateInvitationSentCounts } from '../../../db/updateInvitationSentCoun
  *       412:
  *         description: authorization header wrong format
  */
-export const inviteParticipants = wrap(async (req: Request, res: Response) => {
-    const roomId = req.params.roomId
-    const userId: UID = res.locals.uid
+export const inviteParticipantsRoute = wrap(
+    async (req: Request, res: Response) => {
+        const roomId = req.params.roomId
+        const userId: UID = res.locals.uid
+        const { hostName, destinations } = req.body
+
+        const invitationsSent = await inviteParticipant({
+            roomId,
+            userId,
+            hostName,
+            destinations,
+        })
+
+        res.send(invitationsSent)
+    }
+)
+
+export const inviteParticipant = async ({
+    roomId,
+    userId,
+    hostName,
+    destinations,
+}: {
+    roomId: RoomId
+    userId: UID
+    hostName: string
+    destinations: string
+}): Promise<InviteParticipantsResponse> => {
     const room = await assertRightToEditRoom(roomId, userId)
+    const destinationArray = <InvitationDestination[]>JSONParse(destinations)
 
-    const body = req.body
-    const hostname = body.hostname
-    const destinations = JSON.parse(body.destinations)
-
-    if (
-        !hostname ||
-        !destinations ||
-        !Array.isArray(destinations) ||
-        destinations.length === 0
-    ) {
+    if (!hostName || !isDestinationsCorrectlyFormatted(destinationArray)) {
         throw new BadRequestError('Request body not formatted correctly')
     }
 
-    const invitationsDestinations: InvitationDestination[] = destinations.map(
+    const invitationsDestinations: InvitationDestination[] = destinationArray.map(
         (dest) => {
             const lang = dest.lang || 'en'
             const country = dest.country || 'fr'
@@ -115,23 +114,35 @@ export const inviteParticipants = wrap(async (req: Request, res: Response) => {
     const roomUrl = `https://${appEnv.domain}/room/${roomId}?pwd=${room.password}`
 
     const notificationContent: NotificationContent = {
-        name: hostname,
+        name: hostName,
         roomUrl: roomUrl,
     }
 
-    const { emailsSent, smssSent } = await sendNotifications(
+    const { emailsSent, smssSent, pushsSent } = await sendNotifications(
         invitationsDestinations,
-        notificationContent
+        notificationContent,
+        roomId
     )
 
     if (emailsSent.length === 0 && smssSent.length === 0) {
         throw new BadRequestError('No emails or SMS delivered')
     }
 
-    res.send({
-        emailsSent: emailsSent,
-        smssSent: smssSent,
+    await UserDao.updateUsage(userId, {
+        sentSMSs: increment(smssSent.length),
+        sentEmails: increment(emailsSent.length),
+        sentPushs: increment(pushsSent.length),
     })
 
-    await updateInvitationSentCounts(userId, smssSent.length, emailsSent.length)
-})
+    return {
+        emailsSent,
+        smssSent,
+        pushsSent,
+    }
+}
+
+export interface InviteParticipantsResponse {
+    emailsSent: string[]
+    smssSent: string[]
+    pushsSent: string[]
+}

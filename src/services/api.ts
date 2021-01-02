@@ -2,37 +2,87 @@ import { JWTToken } from '../../types/JWT'
 import { JoinRoomResponse } from '../../types/JoinRoomResponse'
 import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { RoomId } from '../../types/Room'
+import { UID } from '../../types/uid'
+import ApiClient from './apiClient'
+import { Room } from '../pages/AdminDashboard/CreateRoomForm'
+
 export class Api {
-    baseUrl: string | undefined
-    jwtToken: string
+    private apiClient: ApiClient
+
     constructor(jwtToken: JWTToken) {
-        this.baseUrl = process.env.REACT_APP_API_URL
-        if (!this.baseUrl) {
-            throw new Error('API url is missing from env configuration')
-        }
-        this.jwtToken = jwtToken
+        this.apiClient = new ApiClient(jwtToken)
     }
 
-    async createRoom(password?: string): Promise<NewRoomResponse> {
-        return this.post('/rooms/new', password ? { password } : null)
+    async createRoom(room: Room): Promise<NewRoomResponse> {
+        const { name, hostName, destinations } = room
+        return this.apiClient.post('/rooms/new', {
+            name,
+            hostName,
+            destinations: JSON.stringify(destinations),
+        })
+    }
+
+    async editRoom(room: Room): Promise<NewRoomResponse> {
+        const { id, name, hostName, destinations, startAt } = room
+        return this.apiClient.patch(`/rooms/${id}`, {
+            name,
+            hostName,
+            startAt,
+            destinations: JSON.stringify(destinations),
+        })
+    }
+
+    async createReminder(roomId: string, sendAt: number): Promise<any> {
+        return this.apiClient.post(`/rooms/${roomId}/reminders`, {
+            roomId,
+            sendAt,
+        })
     }
 
     async joinRoom(
         roomId: RoomId,
-        password: string
+        participantName: string,
+        password: string | null
     ): Promise<JoinRoomResponse> {
-        return this.post(`/rooms/${roomId}/join`, { password })
+        return this.apiClient.post(`/rooms/${roomId}/join`, {
+            participantName,
+            password,
+        })
     }
 
-    async post(apiUrl: string, data: any): Promise<any> {
-        const response = await fetch(`${this.baseUrl}${apiUrl}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${this.jwtToken}`,
-            },
-            body: data ? JSON.stringify(data) : null,
+    async addRegistrationToken(userId: UID, registrationToken: string) {
+        return this.apiClient.post(`/users/${userId}/addRegistrationToken`, {
+            registrationToken,
         })
-        return response.json()
+    }
+
+    async subscribeToGroup(
+        groupId: string,
+        name: string,
+        password: string
+    ): Promise<void> {
+        return this.apiClient.post(`/groups/${groupId}/join`, {
+            name,
+            password,
+        })
+    }
+
+    async inviteParticipants(
+        roomId: RoomId,
+        hostname: string,
+        destinations: [any]
+    ): Promise<any> {
+        return this.apiClient.post(`/rooms/${roomId}/inviteParticipants`, {
+            hostname,
+            destinations: JSON.stringify(destinations),
+        })
+    }
+
+    async getRooms(): Promise<any> {
+        return this.apiClient.get(`/rooms`)
+    }
+
+    async getUserDetails(userId): Promise<any> {
+        return this.apiClient.get(`/users/${userId}`)
     }
 }

@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { Link, Route } from 'react-router-dom'
+import { Link, Redirect, Route } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
 import ColumnsLayout from '../../layout/Columns/Columns'
 import { createCall } from '../../actions/createCall'
@@ -13,15 +13,14 @@ import {
     setNewCallError,
     setNewCallRedirected,
 } from '../../utils/support'
-import Logo from '../../components/Logo/Logo'
 import useDetectMobileOrTablet from '../../hooks/useDetectMobileOrTablet'
-import { IonContent } from '@ionic/react'
 import * as LocalStorage from '../../services/local-storage'
 import { authInstance } from '../../firebase/firebase'
 import { isAuthEmulatorEnabled } from '../../utils/emulators'
-import { selectToken } from '../../utils/selectors'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { EmulatorLogin } from './EmulatorLogin'
+import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
+import { selectUser } from '../../components/App/userSelector'
 
 const DataMentions = styled.div`
     .cnil {
@@ -29,11 +28,6 @@ const DataMentions = styled.div`
         color: ${({ theme }) => theme.color.white};
         font-size: ${({ theme }) => theme.font.S};
     }
-`
-
-const LogoContainer = styled.div`
-    padding-left: 25%;
-    padding-right: 25%;
 `
 
 const DescriptionMobile = styled.p`
@@ -54,14 +48,23 @@ const KnowMoreMobile = styled.p`
     text-align: center;
 `
 
-export default function Home() {
-    const { t } = useTranslation(['home', 'common'])
-    const token = useSelector(selectToken)
+export default function Home({ location }) {
+    const { t } = useTranslation(['home', 'common', 'premium-video'])
     const [videoCallId, setVideoCallId] = useState()
     const [error, setError] = useState()
     const isMobile = useDetectMobileOrTablet()
     const formSubmissionMessage: any = useRef(null)
     const [modalShow, setModalShow] = React.useState(false)
+    const dispatch = useDispatch()
+    const { isAnonymous } = useSelector(selectUser)
+
+    useEffect(() => {
+        if (location.state?.isPremiumVideoPasswordSet === false) {
+            dispatch(
+                showErrorMessage(t('premium-video:errors.missing-password'))
+            )
+        }
+    })
 
     const submit = (values, setSubmitting) => {
         setNewCall(values)
@@ -84,10 +87,14 @@ export default function Home() {
     }
 
     return (
-        <IonContent>
+        <>
             {isAuthEmulatorEnabled() && (
-                <EmulatorLogin authInstance={authInstance} token={token} />
+                <EmulatorLogin authInstance={authInstance} />
             )}
+
+            {/* In case the user upgrades to non-anonymous one, we must redirect him to /admin page,
+            signInSuccessUrl in Login component seems not to be used */}
+            {!isAnonymous && <Redirect to="/admin" />}
 
             {!isMobile ? (
                 <ColumnsLayout title="Instant Visio">
@@ -130,9 +137,6 @@ export default function Home() {
             ) : (
                 <WrapperMobile key={'anchor-left'}>
                     <MobileContent>
-                        <LogoContainer>
-                            <Logo />
-                        </LogoContainer>
                         <DescriptionMobile>
                             {t('information.form-submit')}
                         </DescriptionMobile>
@@ -161,6 +165,6 @@ export default function Home() {
                     </MobileContent>
                 </WrapperMobile>
             )}
-        </IonContent>
+        </>
     )
 }

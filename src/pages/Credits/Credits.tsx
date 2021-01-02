@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import DefaultLayout from '../../layout/Default/Default'
 import CreditsStyled from './CreditsStyled'
 import data from './data.json'
-import { IonContent } from '@ionic/react'
 
 const sort = ({ name: aName }, { name: bName }) => {
     const [, aLastname] = aName.split(' ')
@@ -46,13 +45,9 @@ const Credits = () => {
     }
 
     return (
-        <IonContent>
-            <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
-                <CreditsStyled>
-                    {Object.entries(data).map(render)}
-                </CreditsStyled>
-            </DefaultLayout>
-        </IonContent>
+        <DefaultLayout title={`${t('page-title')} - Instant Visio`}>
+            <CreditsStyled>{Object.entries(data).map(render)}</CreditsStyled>
+        </DefaultLayout>
     )
 }
 

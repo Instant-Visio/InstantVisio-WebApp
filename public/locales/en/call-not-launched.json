@@ -1,0 +1,10 @@
+{
+    "hello-welcome": "Hello and welcome",
+    "discussion-is-not-launched": "The visio-conference of ${ROOM.name} is not launched yet",
+    "takes-places-at": "It will takes place at ${ROOM.time}",
+    "too-early": "You came a bit early",
+    "enjoy": "Enjoy this time to : ",
+    "discover-join": "Discover how to join a visio",
+    "discover-create": "Discover how to create a visio",
+    "discover-us": "Discover InstantVisio"
+}

@@ -1,20 +1,26 @@
 import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
-import { getRoom } from '../../../db/getRoom'
-import { ForbiddenError, RoomNotFoundError } from '../../errors/HttpError'
+import {
+    ForbiddenError,
+    RoomEndedError,
+    RoomNotFoundError,
+} from '../../errors/HttpError'
 import {
     createTwilioClientToken,
     TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS,
 } from './service/createTwilioClientToken'
 import { createRoom } from './createRoom'
 import { UID } from '../../../types/uid'
-import { Room, RoomId } from '../../../types/Room'
+import { isStatusEnded, Room, RoomId } from '../../../types/Room'
+import { RoomDao } from '../../../db/RoomDao'
+import { makeParticipantNameUnique } from './service/makeParticipantNameUnique'
+import { createTwilioRoom } from './service/createTwilioRoom'
 
 /**
  * @swagger
  * /v1/rooms/{roomId}/join:
  *   post:
- *     description: Request to join an existing room. This will retrieve the client JWT access token (if granted) to join the room using the Twilio Video JS SDK. <br/> If the room does not exist, and user is allowed (subscription active and not over quota), the room will be created before joining it.
+ *     description: Request to join an existing room. This will retrieve the client JWT access token (if granted) to join the room using the Twilio Video JS SDK. <br/> If the room does not exist, and user is allowed (subscription active and not over quota), the room will be created before joining it. A room is ended 24 hours after startAt time, a room ended cannot be joined anymore.
  *     tags:
  *       - rooms
  *     consumes:
@@ -27,6 +33,11 @@ import { Room, RoomId } from '../../../types/Room'
  *         in: x-www-form-urlencoded
  *         required: true
  *         type: string
+ *       - name: participantName
+ *         description: The participant name. This is used to ensure the participant name is unique
+ *         in: x-www-form-urlencoded
+ *         required: false
+ *         type: string
  *     responses:
  *       200:
  *         description: Room access granted
@@ -35,7 +46,8 @@ import { Room, RoomId } from '../../../types/Room'
  *             schema:
  *               example: {
  *                   jwtAccessToken: "aZxo2xsk.IaZxo.2xskI",
- *                   ttl: 14400
+ *                   ttl: 14400,
+ *                   participantName: "Gandalf1"
  *               }
  *       401:
  *         description: missing authorization bearer token
@@ -43,6 +55,8 @@ import { Room, RoomId } from '../../../types/Room'
  *         description: wrong password to join the room, or token not valid
  *       404:
  *         description: room does not exist
+ *       410:
+ *         description: the room has ended (24 hours after start) and is no longer available
  *       412:
  *         description: authorization header wrong format
  */
@@ -50,21 +64,43 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
     const roomPassword = req.body.password
     const participantUID = res.locals.uid
     const roomId = req.params.roomId
-    if (!roomPassword) {
-        throw new ForbiddenError('Unable to join a room without a password')
-    }
 
     const room = await getOrCreateRoom(roomId, participantUID, roomPassword)
 
-    if (room.password !== roomPassword) {
+    const isCurrentAdmin = room.uid === participantUID
+
+    if (room.password !== roomPassword && !isCurrentAdmin) {
         throw new ForbiddenError('Wrong password to join the room')
     }
-
-    const accessToken = createTwilioClientToken(participantUID, room.id)
+    if (isStatusEnded(room)) {
+        if (isRoomCreationRecent(room)) {
+            // Twilio room are "ended" after 5 min without activity.
+            // We allow up to 24hours after creation time re-creating a new twilio room to simplify the user experience.
+            const twilioResponse = await createTwilioRoom(roomId)
+            await RoomDao.update({
+                id: roomId,
+                status: '', // status are filled by Twilio webhook token
+                ...twilioResponse,
+            })
+        } else {
+            throw new RoomEndedError()
+        }
+    }
+    const participantName = await makeParticipantNameUnique(
+        roomId,
+        req.body.participantName
+    )
+    const accessToken = createTwilioClientToken(
+        participantUID,
+        room.twilioRoomId,
+        participantName
+    )
 
     res.send({
         jwtAccessToken: accessToken.toJwt(),
         ttl: TTL_ACCESS_TOKEN_PARTICIPANT_SECONDS,
+        participantName,
+        hideChatbot: room.hideChatbot,
     })
 })
 
@@ -74,13 +110,22 @@ const getOrCreateRoom = async (
     roomPassword: string
 ): Promise<Room> => {
     try {
-        return await getRoom(roomId)
+        return await RoomDao.get(roomId)
     } catch (error) {
         if (error instanceof RoomNotFoundError) {
-            await createRoom(participantUID, roomPassword, roomId)
-            return getRoom(roomId)
+            await createRoom({
+                userId: participantUID,
+                roomRequestedPassword: roomPassword,
+                specificRoomId: roomId,
+            })
+            return RoomDao.get(roomId)
         } else {
             throw error
         }
     }
+}
+
+const isRoomCreationRecent = (room: Room): boolean => {
+    const twentyFourHours = 24 * 60 * 60
+    return Date.now() <= room.startAt.toMillis() + twentyFourHours
 }

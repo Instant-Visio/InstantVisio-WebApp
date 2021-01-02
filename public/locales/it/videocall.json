@@ -7,6 +7,11 @@
     "participant-left": "Il tuo familiare ha abbandonato la chiamata.",
     "leave": "Esci",
     "leave-confirmation": "Hai abbandonato la chiamata.",
+    "leave-help-us-message": "Pour nous aider à Améliorer notre service, vous pouvez noter la qualité de votre visio.",
+    "leave-title-card": "À BIENTÔT !",
+    "leave-messageOne-card": "Nous espérons que votre InstantVisio s'est bien passé.",
+    "leave-messageTwo-card": "Prenez soin de vous.",
+    "leave-labelBtnNewCall-card": "Lancer un nouvel instantVisio",
     "help": "Help",
     "permissions": {
         "dialog": {

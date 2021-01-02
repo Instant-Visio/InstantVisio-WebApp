@@ -11,5 +11,5 @@ export default function useDetectMobileOrTablet() {
             window.removeEventListener('resize', handleResize)
         }
     }, [])
-    return width < 1180
+    return width < 1024
 }
