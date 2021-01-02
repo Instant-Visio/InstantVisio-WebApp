@@ -17,6 +17,8 @@ import {
 } from '../components/App/Backdrop/backdropActions'
 import { showErrorMessage } from '../components/App/Snackbar/snackbarActions'
 import { Api } from '../services/api'
+import { isAuthEmulatorEnabled } from '../utils/emulators'
+import { EMULATORS } from '../constants'
 
 type DidSignIn = (
     user: firebase.User | null
@@ -99,6 +101,22 @@ export const signOut = () => async (dispatch): Promise<void> => {
     await authInstance.signOut()
     dispatch(setSignOut())
     dispatch(hideBackdrop())
+}
+
+export const signInAnonymously = () => async (dispatch) => {
+    dispatch(showBackdrop())
+
+    try {
+        if (isAuthEmulatorEnabled()) {
+            authInstance.useEmulator(EMULATORS.hosts.auth)
+        }
+        await authInstance.signInAnonymously()
+        console.log('User signed up anonymously...')
+    } catch (error) {
+        console.log(
+            `Error anonymous login: ${error.message}, code: ${error.code}`
+        )
+    }
 }
 
 export const UserDetailsRetrieved = (userDetails) => async (

@@ -23,7 +23,7 @@ async function tryAtMost(promise, maxRetries, retryInterval) {
             const result = await promise
             return result
         } catch (err) {
-            await sleep(RETRY.interval + RETRY.number ** 1.3)
+            await sleep(retryInterval + (maxRetries * 100) ** 1.3)
         }
     }
 
