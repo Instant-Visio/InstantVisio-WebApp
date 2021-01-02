@@ -5,6 +5,7 @@ import { TwilioEnv } from '../types/TwilioEnv'
 import { AppEnv } from '../types/AppEnv'
 import { OVHCredentials } from '../types/OVHCredentials'
 import { SendGridEnv } from '../types/SendGridEnv'
+import { isUsingEmulator } from '../api/utils/isUsingEmulator'
 
 export const getJWTEnv = (): JWTKey => {
     const {
@@ -34,12 +35,17 @@ export const getTwilioEnv = (): TwilioEnv => {
 }
 
 export const getAppEnv = (): AppEnv => {
-    const {
+    let {
         app: { domain, emailfrom },
     } = functions.config()
     if (!domain || !emailfrom) {
         throw new InternalServerError('Missing app domain or emailfrom env')
     }
+
+    if (isUsingEmulator()) {
+        domain = 'localhost:3000'
+    }
+
     return {
         domain: domain,
         emailFrom: emailfrom,
