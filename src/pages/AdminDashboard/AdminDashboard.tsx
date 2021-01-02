@@ -6,7 +6,7 @@ import theme from '../../styles/muiTheme'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
-import CreateRoomForm from './CreateRoomForm'
+import CreateRoomForm from './CreateRoomForm/CreateRoomForm'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../components/App/userSelector'
@@ -15,7 +15,7 @@ import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
 import { createRoom, editRoom, getRooms, newRoom } from './roomsActions'
 import UserDetails from './UserDetails'
-import { Room } from './CreateRoomForm'
+import { Room } from './CreateRoomForm/CreateRoomForm'
 import CreateRoomConfirmation from './CreateRoomConfirmation'
 import { selectCreatedRoom } from './roomsSelector'
 
@@ -48,9 +48,9 @@ const AdminDashboard = () => {
             dispatch(getRooms(t))
         }
 
-        return () => {
-            dispatch(newRoom())
-        }
+        // return () => {
+        //     dispatch(newRoom())
+        // }
     }, [token, userId, dispatch, t])
 
     const onFormSubmit = (room, isEditing, remindAt) => {
