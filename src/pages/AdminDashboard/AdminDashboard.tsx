@@ -13,9 +13,11 @@ import { selectUser } from '../../components/App/userSelector'
 import { Api } from '../../services/api'
 import { UserDetailsRetrieved } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
-import { createRoom, editRoom, getRooms } from './roomsActions'
+import { createRoom, editRoom, getRooms, newRoom } from './roomsActions'
 import UserDetails from './UserDetails'
 import { Room } from './CreateRoomForm'
+import CreateRoomConfirmation from './CreateRoomConfirmation'
+import { selectCreatedRoom } from './roomsSelector'
 
 const initialValues: Room = {
     id: '',
@@ -29,10 +31,10 @@ const initialValues: Room = {
 
 const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
-
     const dispatch = useDispatch()
     const { userId, token } = useSelector(selectUser)
     const [fields, setFields] = useState<Room>(initialValues)
+    const { roomId: createdRoomId } = useSelector(selectCreatedRoom)
 
     useEffect(() => {
         const getUserDetails = async () => {
@@ -44,6 +46,10 @@ const AdminDashboard = () => {
         if (token) {
             getUserDetails()
             dispatch(getRooms(t))
+        }
+
+        return () => {
+            dispatch(newRoom())
         }
     }, [token, userId, dispatch, t])
 
@@ -78,11 +84,14 @@ const AdminDashboard = () => {
                     <Box m={6} />
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
-                            <CreateRoomForm
-                                fields={fields}
-                                onFormSubmit={onFormSubmit}
-                                onCreateFormReset={onCreateFormReset}
-                            />
+                            {!createdRoomId && (
+                                <CreateRoomForm
+                                    fields={fields}
+                                    onFormSubmit={onFormSubmit}
+                                    onCreateFormReset={onCreateFormReset}
+                                />
+                            )}
+                            {createdRoomId && <CreateRoomConfirmation />}
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <UserDetails onRoomEdit={onRoomEdit} />

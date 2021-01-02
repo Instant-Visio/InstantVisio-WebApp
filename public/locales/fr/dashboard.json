@@ -12,6 +12,10 @@
         "rooms-edit": "Impossible de modifier la réunion",
         "reminders-create": "Impossible de créer la notification de rappel"
     },
+    "confirmation": {
+        "heading": "Votre Instant Visio \"{{roomName}}\" a été créé.",
+        "message": "Bonjour,\r\n{{hostName}"
+    },
     "form": {
         "create-visio": "Créer une discussion en visio",
         "visio-name": {

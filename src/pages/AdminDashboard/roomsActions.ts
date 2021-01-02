@@ -1,4 +1,9 @@
-import { RoomsActionsTypes, SET_ROOMS } from './roomsActionTypes'
+import {
+    RoomsActionsTypes,
+    ROOM_CREATED,
+    SET_ROOMS,
+    NEW_ROOM,
+} from './roomsActionTypes'
 import { Api } from '../../services/api'
 import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
 import {
@@ -13,6 +18,18 @@ export const setRooms = (rooms: any): RoomsActionsTypes => ({
     payload: {
         rooms,
     },
+})
+
+const roomCreated = (roomId, roomName: string): RoomsActionsTypes => ({
+    type: ROOM_CREATED,
+    payload: {
+        roomId,
+        roomName,
+    },
+})
+
+const setNewRoom = (): RoomsActionsTypes => ({
+    type: NEW_ROOM,
 })
 
 export const getRooms = (t) => async (dispatch, getState) => {
@@ -39,11 +56,16 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
         const { roomId } = await api.createRoom(room)
         dispatch(getRooms(t))
         dispatch(createReminder(t, roomId, remindAt))
+        dispatch(roomCreated(roomId, room.name))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
     }
 
     dispatch(hideBackdrop())
+}
+
+export const newRoom = () => (dispatch) => {
+    dispatch(setNewRoom())
 }
 
 export const editRoom = (t, room: Room) => async (dispatch, getState) => {

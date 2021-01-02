@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const UserDetails = ({ onRoomEdit }) => {
     const classes = useStyles()
-    const { rooms } = useSelector(selectRooms)
+    const rooms = useSelector(selectRooms)
     const { token, details } = useSelector(selectUser)
     const { t } = useTranslation('dashboard')
 

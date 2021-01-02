@@ -29,6 +29,7 @@ import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
 import NotificationSelector, { UNITS } from './Reminders/NotificationSelector'
+import { validationSchema } from './formValidation'
 
 export interface Room {
     id: string
@@ -189,13 +190,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     }
 
     const renderTag = (participant, index, getTagProps) => {
-        let ChipElement
-
-        if (isParticipantValid(participant)) {
-            ChipElement = Chip
-        } else {
-            ChipElement = ErrorChip
-        }
+        const ChipElement = isParticipantValid(participant) ? Chip : ErrorChip
 
         return (
             <ChipElement
@@ -237,13 +232,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         <Formik
             enableReinitialize
             initialValues={fields}
-            validate={(values) => {
-                const errors: Partial<Room> = {}
-                if (!values.name) {
-                    errors.name = 'Required'
-                }
-                return errors
-            }}
+            //validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(false)
                 const destinations = formatDestinations(value)
