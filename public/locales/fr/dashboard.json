@@ -32,11 +32,11 @@
             "title": "Liste des participants",
             "description": "Notez ici les numéros de téléphone, les adresses email et les groupes de contact à qui vous souhaitez envoyer une invitation.",
             "description2": "Les numéros de téléphone ne doivent pas contenir d'espace.",
-            "placeholder": "Autocomplete"
+            "placeholder": "Email ou numéro de téléphone"
         },
         "plan-visio": {
             "title": "Planifier votre RDV en visio",
-            "description": "Choisissez la date et l'heurede début de votre visio."
+            "description": "Choisissez la date et l'heure de début de votre visio."
         },
         "date": {
             "placeholder": "Cliquez pour choisir la date et l'heure"
