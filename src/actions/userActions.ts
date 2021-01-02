@@ -134,6 +134,6 @@ export const getUserDetails = (t) => async (dispatch, getState) => {
         const { user } = await api.getUserDetails(userId)
         dispatch(setUserDetail(user))
     } catch (e) {
-        dispatch(showErrorMessage(t('errors.register')))
+        dispatch(showErrorMessage(t('errors.user-details')))
     }
 }
