@@ -17,7 +17,7 @@ export default function CreateRoomConfirmation() {
 
     const formatJoinDiscussionLink = (roomUrl: string) => {
         const premiumVideoPagePrefixUrl = '/premium-video'
-        const [_, routerUrl] = roomUrl.split(premiumVideoPagePrefixUrl)
+        const routerUrl = roomUrl.split(premiumVideoPagePrefixUrl)[1]
         return `${premiumVideoPagePrefixUrl}${routerUrl}`
     }
 

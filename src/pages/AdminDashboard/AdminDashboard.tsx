@@ -48,9 +48,9 @@ const AdminDashboard = () => {
             dispatch(getRooms(t))
         }
 
-        // return () => {
-        //     dispatch(newRoom())
-        // }
+        return () => {
+            dispatch(newRoom())
+        }
     }, [token, userId, dispatch, t])
 
     const onFormSubmit = (room, isEditing, remindAt) => {

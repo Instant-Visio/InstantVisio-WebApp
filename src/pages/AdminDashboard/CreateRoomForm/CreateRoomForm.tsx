@@ -29,14 +29,11 @@ import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
 import NotificationSelector, { UNITS } from '../Reminders/NotificationSelector'
-import { validationSchema } from '../formValidation'
+// import { validationSchema } from '../formValidation'
 import {
     mapDestinationsToInputField,
     getRemindAt,
-    validateEmail,
-    validatePhoneNumber,
     isParticipantValid,
-    isNumeric,
     formatDestinations,
 } from './createRoomTools'
 
