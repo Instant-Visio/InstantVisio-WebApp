@@ -102,18 +102,24 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
 
     const classes = useStyles()
 
+    const autoCompleteHandler = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        event.preventDefault()
+        event.stopPropagation()
+        const { target } = event
+        if (target.value.length > 0) {
+            const newValue = [...value, target.value] as never[]
+            setValue(newValue)
+        }
+    }
+
     const handleKeyDown = (event) => {
         switch (event.keyCode) {
             case 186: // ;
             case 32: // space
             case 9: {
-                // tab
-                event.preventDefault()
-                event.stopPropagation()
-                if (event.target.value.length > 0) {
-                    const newValue = [...value, event.target.value] as never[]
-                    setValue(newValue)
-                }
+                autoCompleteHandler(event)
                 break
             }
             default:
@@ -240,6 +246,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             value={value}
                             onChange={(event, newValue) => setValue(newValue)}
                             options={[]}
+                            onBlur={autoCompleteHandler}
                             defaultValue={[]}
                             renderTags={(value, getTagProps) =>
                                 value.map((participant, index) =>
