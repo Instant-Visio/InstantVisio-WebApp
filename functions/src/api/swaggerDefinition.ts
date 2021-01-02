@@ -183,6 +183,14 @@ export const swaggerDefinition = {
                     in: 'x-www-form-urlencoded',
                     type: 'string',
                 },
+                timezone: {
+                    name: 'timezone',
+                    description:
+                        'The room IANA-specified zones, like "Europe/Paris". Default is "Europe/Paris". This will be used to send date in the correct timezone in reminders, if any.',
+                    required: false,
+                    in: 'x-www-form-urlencoded',
+                    type: 'string',
+                },
             },
             group: {
                 members: {

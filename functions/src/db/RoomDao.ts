@@ -19,6 +19,7 @@ export interface RoomEditData {
     hideChatbot?: boolean
     hostName?: string
     destinations?: InvitationDestination[]
+    timezone?: string
 }
 
 export class RoomDao {
@@ -79,12 +80,19 @@ export class RoomDao {
         })
     }
 
-    public static async add(
-        userId: UID,
-        password: string,
-        startAt: Timestamp,
+    public static async add({
+        userId,
+        password,
+        startAt,
+        hideChatbot,
+        timezone,
+    }: {
+        userId: UID
+        password: string
+        startAt: Timestamp
         hideChatbot: boolean
-    ): Promise<RoomId> {
+        timezone: string
+    }): Promise<RoomId> {
         const documentReference = await db.collection(COLLECTIONS.rooms).add({
             uid: userId,
             password: password,
@@ -93,18 +101,27 @@ export class RoomDao {
             service: DEFAULT_ROOM_TYPE,
             startAt,
             hideChatbot,
+            timezone,
         })
 
         return documentReference.id
     }
 
-    public static async set(
-        userId: UID,
-        roomId: RoomId,
-        password: string,
-        startAt: Timestamp,
+    public static async set({
+        userId,
+        roomId,
+        password,
+        startAt,
+        hideChatbot,
+        timezone,
+    }: {
+        userId: UID
+        roomId: RoomId
+        password: string
+        startAt: Timestamp
         hideChatbot: boolean
-    ): Promise<RoomId> {
+        timezone: string
+    }): Promise<RoomId> {
         await db.collection(COLLECTIONS.rooms).doc(roomId).set({
             uid: userId,
             password: password,
@@ -113,6 +130,7 @@ export class RoomDao {
             service: DEFAULT_ROOM_TYPE,
             startAt,
             hideChatbot,
+            timezone,
         })
 
         return roomId
