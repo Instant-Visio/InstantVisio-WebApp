@@ -60,7 +60,8 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
     try {
         const { roomId, roomUrl } = await api.createRoom(room)
         dispatch(getRooms(t))
-        dispatch(createReminder(t, roomId, remindAt))
+
+        if (remindAt) dispatch(createReminder(t, roomId, remindAt))
         dispatch(roomCreated(roomId, room.name, roomUrl))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
