@@ -2,20 +2,27 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { selectCreatedRoom } from './roomsSelector'
 import { Link } from 'react-router-dom'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { preventDefault } from './UserDetails'
+import { Button } from './CreateRoomForm/CreateRoomForm'
+import { newRoom } from './roomsActions'
 
 export default function CreateRoomConfirmation() {
     const { t } = useTranslation('dashboard')
     const createdRoom = useSelector(selectCreatedRoom)
+    const dispatch = useDispatch()
 
     const formatJoinDiscussionLink = (roomUrl: string) => {
         const premiumVideoPagePrefixUrl = '/premium-video'
         const [_, routerUrl] = roomUrl.split(premiumVideoPagePrefixUrl)
         return `${premiumVideoPagePrefixUrl}${routerUrl}`
+    }
+
+    const createDiscussion = () => {
+        dispatch(newRoom())
     }
 
     return (
@@ -34,6 +41,9 @@ export default function CreateRoomConfirmation() {
                     {'Cliquer pour copier le lien à partager'}
                 </Link>
             </CopyToClipboard>
+            <Button color="primary" onClick={createDiscussion}>
+                {'Créer une nouvelle discussion'}
+            </Button>
         </>
     )
 }

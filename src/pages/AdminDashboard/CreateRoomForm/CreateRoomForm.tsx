@@ -56,7 +56,7 @@ interface Notification {
     number: number
 }
 
-const Button = styled(MuiButton)(spacing)
+export const Button = styled(MuiButton)(spacing)
 
 const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     const { t } = useTranslation('dashboard')
