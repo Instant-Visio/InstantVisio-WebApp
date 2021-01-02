@@ -1,11 +1,22 @@
 import { AppState } from '../../reducers/rootReducer'
 import { createSelector } from 'reselect'
 
+const roomsState = (state: AppState) => state.rooms
 export interface RoomsState {
     rooms?: any
+    created: {
+        roomId: string
+        roomName: string
+        roomUrl: string
+    }
 }
 
 export const selectRooms = createSelector(
-    (state: AppState) => state.rooms,
-    (rooms: RoomsState) => rooms
+    roomsState,
+    ({ rooms }: RoomsState) => rooms
+)
+
+export const selectCreatedRoom = createSelector(
+    roomsState,
+    ({ created }: RoomsState) => created
 )

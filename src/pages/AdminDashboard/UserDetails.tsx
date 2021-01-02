@@ -20,7 +20,8 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '../../components/App/userSelector'
 import { useTranslation } from 'react-i18next'
 
-const preventDefault = (event: React.SyntheticEvent) => event.preventDefault()
+export const preventDefault = (event: React.SyntheticEvent) =>
+    event.preventDefault()
 
 const formatStartAtDate = (room: any) => {
     const date = new Date(room.startAt * 1000)
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const UserDetails = ({ onRoomEdit }) => {
     const classes = useStyles()
-    const { rooms } = useSelector(selectRooms)
+    const rooms = useSelector(selectRooms)
     const { token, details } = useSelector(selectUser)
     const { t } = useTranslation('dashboard')
 

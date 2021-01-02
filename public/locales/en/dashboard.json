@@ -12,6 +12,9 @@
         "rooms-edit": "Error editing the meeting",
         "reminders-create": "Error creating notification"
     },
+    "confirmation": {
+        "heading": "Your Instant Visio \"{{roomName}}\" has been created."
+    },
     "form": {
         "create-visio": "Create Visio",
         "visio-name": {

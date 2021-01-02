@@ -28,7 +28,14 @@ import {
 import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
-import NotificationSelector, { UNITS } from './Reminders/NotificationSelector'
+import NotificationSelector, { UNITS } from '../Reminders/NotificationSelector'
+// import { validationSchema } from '../formValidation'
+import {
+    mapDestinationsToInputField,
+    getRemindAt,
+    isParticipantValid,
+    formatDestinations,
+} from './createRoomTools'
 
 export interface Room {
     id: string
@@ -46,17 +53,7 @@ interface Notification {
     number: number
 }
 
-const mapDestinationsToInputField = (destinations) => {
-    const values = [] as any
-    for (const destination of destinations) {
-        const [value] = Object.values(destination)
-        values.push(value)
-    }
-
-    return values
-}
-
-const Button = styled(MuiButton)(spacing)
+export const Button = styled(MuiButton)(spacing)
 
 const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     const { t } = useTranslation('dashboard')
@@ -66,23 +63,6 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         unit: UNITS.mins as Unit,
         number: 0,
     })
-
-    const getRemindAt = (startAt, notification) => {
-        let remindBeforeTimestampSecs = 0
-        switch (notification.unit) {
-            case UNITS.mins:
-                remindBeforeTimestampSecs = notification.number * 60
-                break
-            case UNITS.hours:
-                remindBeforeTimestampSecs = notification.number * 60 * 60
-                break
-            case UNITS.days:
-                remindBeforeTimestampSecs = notification.number * 60 * 60 * 24
-                break
-        }
-
-        return startAt - remindBeforeTimestampSecs
-    }
 
     // Populate the form with fields values when isEditing
     useEffect(() => {
@@ -140,26 +120,6 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         }
     }
 
-    const validateEmail = (email) => {
-        const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return regexp.test(email)
-    }
-
-    const validatePhoneNumber = (phoneNumber) => {
-        let isValid = true
-
-        try {
-            parsePhoneNumber(phoneNumber, 'FR')
-        } catch (error) {
-            isValid = false
-        }
-
-        return isValid
-    }
-
-    const isParticipantValid = (participant) => {
-        return validateEmail(participant) || validatePhoneNumber(participant)
-    }
     interface MyInputProps {
         onKeyDown: (event: object) => void
     }
@@ -189,13 +149,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     }
 
     const renderTag = (participant, index, getTagProps) => {
-        let ChipElement
-
-        if (isParticipantValid(participant)) {
-            ChipElement = Chip
-        } else {
-            ChipElement = ErrorChip
-        }
+        const ChipElement = isParticipantValid(participant) ? Chip : ErrorChip
 
         return (
             <ChipElement
@@ -208,27 +162,6 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         )
     }
 
-    const isNumeric = (destination) => {
-        for (let char of destination) {
-            if (char >= '0' && char <= '9') continue
-            else return false
-        }
-
-        return true
-    }
-
-    const formatDestinations = (destinations) => {
-        return destinations.map((destination) => {
-            if (destination.includes('@')) {
-                return { email: destination }
-            } else if (isNumeric(destination)) {
-                return { phone: destination }
-            } else {
-                return { groupId: destination }
-            }
-        })
-    }
-
     const cancelEdit = () => {
         setIsEditing(false)
     }
@@ -237,13 +170,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         <Formik
             enableReinitialize
             initialValues={fields}
-            validate={(values) => {
-                const errors: Partial<Room> = {}
-                if (!values.name) {
-                    errors.name = 'Required'
-                }
-                return errors
-            }}
+            //validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(false)
                 const destinations = formatDestinations(value)
