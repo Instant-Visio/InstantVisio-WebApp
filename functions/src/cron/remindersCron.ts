@@ -51,6 +51,7 @@ export const processScheduledReminders = async () => {
             roomUrl: formatRoomUrl(reminder.roomId, room.password),
             format: NotificationFormatType.Scheduled,
             roomStatAt: room.startAt,
+            timezone: room.timezone,
         }
 
         const { emailsSent, smssSent, pushsSent } = await sendNotifications(

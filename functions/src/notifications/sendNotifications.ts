@@ -102,6 +102,7 @@ const processEmailDestinations = async (
                     emailFrom: appEnv.emailFrom,
                     formatType: content.format,
                     roomStartAt: content.roomStatAt,
+                    timezone: content.timezone,
                 },
                 successField: dest.email,
             }
@@ -131,6 +132,7 @@ const processSmsDestinations = async (
                     phone: dest.phone,
                     formatType: content.format,
                     roomStartAt: content.roomStatAt,
+                    timezone: content.timezone,
                 },
                 successField: dest.phone,
             }
@@ -157,19 +159,25 @@ const processPushDestinations = async (
             const tokens = await UserDao.getRegistrationTokensForGroup(
                 dest.groupId
             )
-            return {
-                params: {
-                    ...content,
-                    type: NotificationType.PushNotificationType,
-                    lang: dest.lang,
-                    tokens,
-                    formatType: content.format,
-                    roomStartAt: content.roomStatAt,
-                    additionalData: {
-                        roomId: roomId,
-                        password: room.password,
-                    },
+            const params: any = {
+                ...content,
+                type: NotificationType.PushNotificationType,
+                lang: dest.lang,
+                tokens,
+                formatType: content.format,
+                roomStartAt: content.roomStatAt,
+                additionalData: {
+                    roomId: roomId,
+                    password: room.password,
+                    timezone: content.timezone,
                 },
+            }
+            if (content.timezone) {
+                params.timezone = content.timezone
+                params.additionalData.timezone = content.timezone
+            }
+            return {
+                params: params,
                 successField: dest.groupId,
             }
         }

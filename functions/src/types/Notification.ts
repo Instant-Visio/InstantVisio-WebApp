@@ -17,6 +17,7 @@ export interface BaseNotificationParams {
     type: NotificationType
     formatType: NotificationFormatType
     roomStartAt?: Timestamp
+    timezone?: string
 }
 
 export interface SmsNotificationParams extends BaseNotificationParams {
@@ -47,6 +48,7 @@ export type NotificationParams =
 export interface NotificationContent {
     name: string
     roomUrl: string
-    roomStatAt?: Timestamp
     format: NotificationFormatType
+    roomStatAt?: Timestamp
+    timezone?: string
 }

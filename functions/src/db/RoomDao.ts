@@ -61,6 +61,7 @@ export class RoomDao {
                 password,
                 name,
                 hideChatbot,
+                timezone,
             } = doc.data()
             const room = {
                 id,
@@ -71,6 +72,7 @@ export class RoomDao {
                 hideChatbot,
                 password,
                 roomUrl: formatRoomUrl(id, password),
+                timezone,
             }
 
             if (startAt) {

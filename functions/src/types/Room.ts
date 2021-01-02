@@ -27,6 +27,7 @@ export interface Room {
     status?: RoomStatus
     destinations?: InvitationDestination[]
     hostName?: string
+    timezone: string
 }
 
 export const isStatusEnded = (room?: Room): boolean =>
