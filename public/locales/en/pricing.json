@@ -1,4 +1,18 @@
 {
     "instant-visio": "Instant Visio is a tool for visio free and ethic",
-    "entreprise-institution": "Are you a company or an institution ?"
+    "entreprise-institution": "Are you a company or an institution ?",
+    "support-us": "Support us",
+    "choose-subscription": "Choose subscription",
+    "item0": "texte explicatif / mission statement",
+    "item1": "invitation par SMS & email",
+    "item2": "jusqu'à 4 participants dans une visio",
+    "item3": "appels encryptés 'peer to peer' de bout en bout",
+    "item4": "texte d'identification Profil persona assoce, institution, collectivités, entreprise",
+    "item5": "jusqu'à 50 participants",
+    "item6": "appels encryptés de bout en bout via un serveur européen",
+    "item7": "partage d'écran",
+    "item8": "invitation par SMS & email & notifications",
+    "item9": "gestion de groupes de contacts",
+    "item10": "système de rappel SMS & email",
+    "item11": "accès à l'API Instant Visio"
 }
