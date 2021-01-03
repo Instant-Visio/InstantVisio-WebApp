@@ -17,6 +17,7 @@ jobs:
     - name: npm install, build
       run: |
         npm ci
+        npm run jetifier
         npm run build:apk:prod
       env:
         REACT_APP_APPID: ${{ secrets.REACT_APP_APPID }}
