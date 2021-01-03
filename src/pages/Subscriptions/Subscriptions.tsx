@@ -7,7 +7,7 @@ import { IonContent } from '@ionic/react'
 import { withStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 
-const ButtonPurple = withStyles({
+const ButtonSubscribe = withStyles({
     root: {
         background: '#6558f5',
         color: 'white',
@@ -21,7 +21,7 @@ const ButtonPurple = withStyles({
     },
 })(Button)
 
-const ButtonGreen = withStyles({
+const ButtonEstimate = withStyles({
     root: {
         background: '#1aae9f',
         color: 'white',
@@ -37,7 +37,7 @@ const ButtonGreen = withStyles({
 
 const MainView = styled.div`
     h1 {
-        font-size: ${({ theme }) => theme.spacing.XL};
+        font-size: ${({ theme }) => theme.spacing.L};
         text-align: center;
     }
 `
@@ -79,7 +79,10 @@ const ColumnView = styled.div`
     .listContainer {
         // border: 1px solid #c3cfd9; // DEBUG
     }
-
+    .subscriptionButton {
+        text-decoration: none;
+        text-align: center;
+    }
     ${SCREEN.MOBILE} {
         flex-direction: column;
         padding: ${({ theme }) =>
@@ -93,7 +96,7 @@ const ColumnView = styled.div`
 `
 
 export default function Subscriptions() {
-    const { t } = useTranslation('pricing')
+    const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
     const history = useHistory()
 
     return (
@@ -110,23 +113,24 @@ export default function Subscriptions() {
                             <p>✔ {t('item2')}</p>
                             <p>✔ {t('item3')}</p>
                         </div>
-                        <ButtonPurple onClick={() => history.push('/pricing')}>
+                        <ButtonSubscribe
+                            onClick={() => history.push('/pricing')}>
                             {t('support-us')}
-                        </ButtonPurple>
+                        </ButtonSubscribe>
                     </ColumnView>
                     <ColumnView>
                         <div className="infoContainer">
                             <h3>{t('premium')}</h3>
                             <h5>{t('meeting2')}</h5>
                             <h5>{t('10K-credits-visio')}</h5>
-                            <h5>{t('500-creditss')}</h5>
+                            <h5>{t('500-credits')}</h5>
                             <h5>{t('unlimited')}</h5>
                         </div>
                         <div className="listContainer">
-                            <ButtonGreen
-                                onClick={() => history.push('/pricing')}>
+                            <ButtonEstimate>
+                                {/* TODO:  onClick={() => dispatch(showLoginModal())}> */}
                                 {t('estimate-need')}
-                            </ButtonGreen>
+                            </ButtonEstimate>
                             <p>✔ {t('item5')}</p>
                             <p>✔ {t('item6')}</p>
                             <p>✔ {t('item7')}</p>
@@ -135,7 +139,15 @@ export default function Subscriptions() {
                             <p>✔ {t('item10')}</p>
                             <p>✔ {t('item11')}</p>
                         </div>
-                        <ButtonPurple>{t('subscription1')}</ButtonPurple>
+                        <a
+                            className="subscriptionButton"
+                            href="https://www.helloasso.com/associations/instant-visio/paiements/souscription-au-service-premium"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <ButtonSubscribe>
+                                {t('subscription1')}
+                            </ButtonSubscribe>
+                        </a>
                     </ColumnView>
                     <ColumnView>
                         <div className="infoContainer">
@@ -146,7 +158,9 @@ export default function Subscriptions() {
                             <h5>{t('unlimited')}</h5>
                         </div>
                         <div className="listContainer">
-                            <ButtonGreen>{t('estimate-need')}</ButtonGreen>
+                            <ButtonEstimate>
+                                {t('estimate-need')}
+                            </ButtonEstimate>
                             <p>✔ {t('item5')}</p>
                             <p>✔ {t('item6')}</p>
                             <p>✔ {t('item7')}</p>
@@ -155,7 +169,15 @@ export default function Subscriptions() {
                             <p>✔ {t('item10')}</p>
                             <p>✔ {t('item11')}</p>
                         </div>
-                        <ButtonPurple>{t('subscription2')}</ButtonPurple>
+                        <a
+                            className="subscriptionButton"
+                            href="https://www.helloasso.com/associations/instant-visio/paiements/compte-business?banner=True"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <ButtonSubscribe>
+                                {t('subscription2')}
+                            </ButtonSubscribe>
+                        </a>
                     </ColumnView>
                 </Wrapper>
             </MainView>
