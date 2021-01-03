@@ -1,17 +1,12 @@
-<div align="center">
 ![InstantVisio](./public/instantvisio.png)
-</div>
+
+<p align="center">
+Open source video conference app using Twilio and Daily, with SMS and Email.
+</p>
 
 ---
 
 <br/>
-<div align="center">
-
-
-</div>
-
-<div align="center">Open source video conference app using Twilio and Daily, with SMS and Email.</div>
-
 
 # API
 
