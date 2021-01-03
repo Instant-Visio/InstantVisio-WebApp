@@ -6,6 +6,7 @@ import 'firebase/auth'
 import { EMULATORS } from '../constants'
 
 import { isAuthEmulatorEnabled } from '../utils/emulators'
+import { isUsingEmulator } from '../components/Login/Login'
 
 const firebaseConfig = {
     appId: process.env.REACT_APP_APPID,
@@ -31,7 +32,7 @@ remoteConfig.settings = {
 
 export const db = firebaseInstance.firestore()
 
-if (process.env.REACT_APP_AUTH_EMULATOR_ENABLED) {
+if (isUsingEmulator()) {
     firebase.functions().useFunctionsEmulator(EMULATORS.hosts.functions)
     db.settings({
         host: EMULATORS.hosts.db,
