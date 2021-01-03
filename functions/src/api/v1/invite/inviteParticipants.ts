@@ -116,6 +116,7 @@ export const inviteParticipant = async ({
         name: hostName,
         roomUrl: formatRoomUrl(room.id, room.password),
         format: NotificationFormatType.Now,
+        timezone: room.timezone,
     }
 
     const { emailsSent, smssSent, pushsSent } = await sendNotifications(
