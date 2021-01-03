@@ -70,19 +70,20 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 )
 
-const formatRoomName = (roomName) => {
-    return roomName.indexOf('#') ? roomName.split('#')[0] : roomName
-}
+// const formatRoomName = (roomName) => {
+//     return roomName.indexOf('#') ? roomName.split('#')[0] : roomName
+// }
 
 export default function MenuBar() {
     const classes = useStyles()
     const { isSharingScreen, toggleScreenShare } = useVideoContext()
     const roomState = useRoomState()
     const isReconnecting = roomState === 'reconnecting'
-    const { room } = useVideoContext()
+    //TODO show the room name in and before the premium video call screen
+    // const { room } = useVideoContext()
     // const roomId = useSelector(selectRoomId)
     // const hostName = useSelector(selectHostName)
-    const roomName = formatRoomName(room.name)
+    // const roomName = formatRoomName(room.name)
 
     return (
         <>
@@ -102,11 +103,11 @@ export default function MenuBar() {
             )}
             <footer className={classes.container}>
                 <Grid container justify="space-around" alignItems="center">
-                    <Hidden smDown>
+                    {/* <Hidden smDown>
                         <Grid style={{ flex: 1 }}>
                             <Typography variant="body1">{roomName}</Typography>
                         </Grid>
-                    </Hidden>
+                    </Hidden> */}
                     <Grid item>
                         <Grid container justify="center">
                             <ToggleAudioButton disabled={isReconnecting} />

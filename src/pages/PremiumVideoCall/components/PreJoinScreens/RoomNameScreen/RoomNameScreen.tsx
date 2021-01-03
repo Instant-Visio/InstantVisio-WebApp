@@ -66,9 +66,10 @@ export default function RoomNameScreen({
         setName(event.target.value)
     }
 
-    const handleRoomNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setRoomName(event.target.value)
-    }
+    //TODO show the room name in and before the premium video call screen
+    // const handleRoomNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setRoomName(event.target.value)
+    // }
 
     const hasUsername =
         !window.location.search.includes('customIdentity=true') &&
@@ -101,7 +102,7 @@ export default function RoomNameScreen({
                             />
                         </div>
                     )}
-                    <div className={classes.textFieldContainer}>
+                    {/* <div className={classes.textFieldContainer}>
                         <InputLabel shrink htmlFor="input-room-name">
                             Votre Réunion de Groupe
                         </InputLabel>
@@ -114,7 +115,7 @@ export default function RoomNameScreen({
                             value={roomName}
                             onChange={handleRoomNameChange}
                         />
-                    </div>
+                    </div> */}
                 </div>
                 <Grid container justify="flex-end">
                     <Button

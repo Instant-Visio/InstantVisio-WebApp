@@ -87,7 +87,7 @@ export default function CreateRoomConfirmation() {
 
             <Typography variant="h5" component="h1">
                 <Link to={formatJoinDiscussionLink(roomUrl)}>
-                    Start discussion
+                    {'Rejoindre la discussion'}
                 </Link>
             </Typography>
             <CopyToClipboard text={roomUrl}>
