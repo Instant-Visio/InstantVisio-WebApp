@@ -18,14 +18,14 @@ jobs:
       run: |
         npm ci
         npm run build:apk:prod
-        env:
-          REACT_APP_APPID: ${{ secrets.REACT_APP_APPID }}
-          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
-          REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
-          REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL }}
-          REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
-          REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID }}
-          REACT_APP_COOKIEBOT_ID: ${{ secrets.REACT_APP_COOKIEBOT_ID }}
-          REACT_APP_AUTH_EMULATOR_ENABLED: ${{ secrets.REACT_APP_AUTH_EMULATOR_ENABLED }}
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-          REACT_APP_SET_AUTH: ${{ secrets.REACT_APP_SET_AUTH }}
+      env:
+        REACT_APP_APPID: ${{ secrets.REACT_APP_APPID }}
+        REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+        REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
+        REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL }}
+        REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
+        REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID }}
+        REACT_APP_COOKIEBOT_ID: ${{ secrets.REACT_APP_COOKIEBOT_ID }}
+        REACT_APP_AUTH_EMULATOR_ENABLED: ${{ secrets.REACT_APP_AUTH_EMULATOR_ENABLED }}
+        REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+        REACT_APP_SET_AUTH: ${{ secrets.REACT_APP_SET_AUTH }}
