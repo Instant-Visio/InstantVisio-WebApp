@@ -11,7 +11,7 @@ import { showLoginModal } from '../../LoginModal/loginModalActions'
 import { signOut } from '../../../actions/userActions'
 import { useHistory } from 'react-router-dom'
 import { selectIsPremiumUser } from '../userSelector'
-import { isMobile } from '../../../services/platform'
+import { isMobile, isAndroidAndWeb } from '../../../services/platform'
 import { showJoinGroupModal } from '../../JoinGroup/joinGroupModalActions'
 import Logo from '../../Logo/Logo'
 
@@ -92,7 +92,7 @@ const AppBar = () => {
                         <LogoWrapper>
                             <Logo />
                         </LogoWrapper>
-                        {isMobile() && (
+                        {isAndroidAndWeb() && (
                             <Button
                                 onClick={openJoinGroupModal}
                                 color="primary">
