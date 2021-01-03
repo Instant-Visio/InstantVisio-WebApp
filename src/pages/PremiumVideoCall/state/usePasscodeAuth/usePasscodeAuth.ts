@@ -106,7 +106,8 @@ export default function usePasscodeAuth() {
                     if (verification?.isValid) {
                         setUser({ passcode } as any)
                         window.sessionStorage.setItem('passcode', passcode)
-                        history.replace(window.location.pathname)
+                        //TODO check if to remove the passcode from url
+                        // history.replace(window.location.pathname)
                     }
                 })
                 .then(() => {
