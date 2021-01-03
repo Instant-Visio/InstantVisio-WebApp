@@ -1,5 +1,5 @@
 {
-    "appId": "com.instantvisio.app",
+    "appId": "com.instantvisio",
     "appName": "Instant Visio",
     "bundledWebRuntime": false,
     "npmClient": "npm",
