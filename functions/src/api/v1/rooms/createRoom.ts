@@ -6,7 +6,7 @@ import { UID } from '../../../types/uid'
 import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { RoomId } from '../../../types/Room'
 import { Timestamp } from '../../../firebase/firebase'
-import { formatRoomUrl, RoomDao } from '../../../db/RoomDao'
+import { formatRoomUrl, RoomDao, RoomEditData } from '../../../db/RoomDao'
 import { ReminderId } from '../../../types/Reminder'
 import { createReminder } from '../reminders/createReminder'
 import {
@@ -15,6 +15,7 @@ import {
 } from '../invite/inviteParticipants'
 import { JSONParse } from '../utils/JSONParse'
 import { parseDestinations } from '../utils/parseDestinations'
+import { ROOM_MAX_DURATION_MILLISECONDS } from '../../../constants'
 
 /**
  * @swagger
@@ -51,7 +52,6 @@ import { parseDestinations } from '../utils/parseDestinations'
  *           application/json:
  *             schema:
  *               example: {
- *                   roomSid: "aZxo2xskIaZxo2xskI",
  *                   roomId: "390FJZDms390FJZDms",
  *                   remindersIds: ["dza5cv8zzDAza882"],
  *                   emailsSent: ["hi@example.com"],
@@ -132,14 +132,17 @@ export const createRoom = async ({
         })
     }
 
-    const twilioRoomResponse = await createTwilioRoom(roomId)
-    await RoomDao.update({
+    const updateRoomData: RoomEditData = {
         id: roomId,
-        sid: twilioRoomResponse.sid,
-        twilioRoomId: twilioRoomResponse.twilioRoomId,
         name: name || roomId,
         hostName,
-    })
+    }
+    if (isRoomStartingBeforeMaxDuration(roomStartAt)) {
+        const twilioRoomResponse = await createTwilioRoom(roomId)
+        updateRoomData.sid = twilioRoomResponse.sid
+        updateRoomData.twilioRoomId = twilioRoomResponse.twilioRoomId
+    }
+    await RoomDao.update(updateRoomData)
 
     let processDestinationsResults = {}
     if (hostName && destinations) {
@@ -155,7 +158,6 @@ export const createRoom = async ({
     return {
         roomId,
         roomUrl: formatRoomUrl(roomId, password),
-        roomSid: twilioRoomResponse.sid,
         ...processDestinationsResults,
     }
 }
@@ -206,4 +208,8 @@ type ProcessDestinationsResponse =
 
 const parseSendsAt = (sendsAt: string | Array<string>): string[] => {
     return Array.isArray(sendsAt) ? sendsAt : JSONParse(sendsAt)
+}
+
+const isRoomStartingBeforeMaxDuration = (startAt: Timestamp) => {
+    return startAt.toMillis() < Date.now() + ROOM_MAX_DURATION_MILLISECONDS
 }

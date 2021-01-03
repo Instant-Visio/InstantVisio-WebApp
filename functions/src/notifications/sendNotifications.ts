@@ -170,6 +170,7 @@ const processPushDestinations = async (
                     roomId: roomId,
                     password: room.password,
                     timezone: content.timezone,
+                    roomUrl: content.roomUrl,
                 },
             }
             if (content.timezone) {

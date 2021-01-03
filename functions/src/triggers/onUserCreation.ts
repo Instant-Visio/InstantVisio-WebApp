@@ -63,12 +63,12 @@ export const onUserCreation = functions.auth.user().onCreate(async (user) => {
     return user
 })
 
-export const generateNewTokenToUser = async (userId: UID): Promise<string> => {
+export const generateNewTokenToUser = async (uid: UID): Promise<string> => {
     const jwtKey = getJWTEnv()
-    const newJWTToken = jsonWebToken.sign({ userId }, jwtKey, {
+    const newJWTToken = jsonWebToken.sign({ uid }, jwtKey, {
         algorithm: 'HS256',
     })
 
-    await UserDao.addToken(userId, newJWTToken)
+    await UserDao.addToken(uid, newJWTToken)
     return newJWTToken
 }

@@ -32,3 +32,4 @@ export interface Room {
 
 export const isStatusEnded = (room?: Room): boolean =>
     room?.status === StatusEnded
+export const isStatusUndefined = (room?: Room): boolean => !room?.status
