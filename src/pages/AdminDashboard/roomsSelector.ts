@@ -4,11 +4,7 @@ import { createSelector } from 'reselect'
 const roomsState = (state: AppState) => state.rooms
 export interface RoomsState {
     rooms?: any
-    created: {
-        roomId: string
-        roomName: string
-        roomUrl: string
-    }
+    createdRoomId: string
 }
 
 export const selectRooms = createSelector(
@@ -18,5 +14,6 @@ export const selectRooms = createSelector(
 
 export const selectCreatedRoom = createSelector(
     roomsState,
-    ({ created }: RoomsState) => created
+    ({ rooms, createdRoomId }: RoomsState) =>
+        rooms.find(({ id }) => id === createdRoomId)
 )

@@ -29,7 +29,7 @@ import Flags from 'country-flag-icons/react/3x2'
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { useTranslation } from 'react-i18next'
 import NotificationSelector, { UNITS } from '../Reminders/NotificationSelector'
-// import { validationSchema } from '../formValidation'
+import { validationSchema } from './formValidation'
 import {
     mapDestinationsToInputField,
     getRemindAt,
@@ -176,7 +176,8 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         <Formik
             enableReinitialize
             initialValues={fields}
-            //validationSchema={validationSchema}
+            validationSchema={validationSchema}
+            validateOnBlur={false}
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(false)
                 const destinations = formatDestinations(value)
@@ -208,6 +209,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             component={TextField}
                             variant="outlined"
                             name="name"
+                            required={true}
                             label={t('form.visio-name.placeholder')}
                         />
                         <Box m={4} />
@@ -223,6 +225,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             component={TextField}
                             variant="outlined"
                             name="hostName"
+                            required={true}
                             label={t('form.host-name.placeholder')}
                         />
                         <Box m={4} />

@@ -14,7 +14,7 @@
     },
     "confirmation": {
         "heading": "Votre Instant Visio \"{{roomName}}\" a été créé.",
-        "message": "Bonjour,\r\n{{hostName}"
+        "message": "{{hostName}} vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien : {{link}}"
     },
     "form": {
         "create-visio": "Créer une discussion en visio",
