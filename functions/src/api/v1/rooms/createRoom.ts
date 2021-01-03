@@ -138,6 +138,7 @@ export const createRoom = async ({
         sid: twilioRoomResponse.sid,
         twilioRoomId: twilioRoomResponse.twilioRoomId,
         name: name || roomId,
+        hostName,
     })
 
     let processDestinationsResults = {}
