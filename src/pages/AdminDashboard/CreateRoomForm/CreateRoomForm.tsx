@@ -177,6 +177,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
             enableReinitialize
             initialValues={fields}
             validationSchema={validationSchema}
+            validateOnChange={false}
             validateOnBlur={false}
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(false)

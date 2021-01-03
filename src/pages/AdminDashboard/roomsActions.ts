@@ -20,10 +20,11 @@ export const setRooms = (rooms: any): RoomsActionsTypes => ({
     },
 })
 
-const setRoomCreated = (roomId: string): RoomsActionsTypes => ({
+const setRoomCreated = (roomId: string, destinations): RoomsActionsTypes => ({
     type: ROOM_CREATED,
     payload: {
         roomId,
+        destinations,
     },
 })
 
@@ -43,6 +44,14 @@ export const getRooms = (t) => async (dispatch, getState) => {
     }
 }
 
+const countDestinations = (destinations): Record<'phone' | 'email', number> => {
+    return destinations.reduce((accu, current) => {
+        const key = Object.keys(current)[0]
+        accu[key] = (accu[key] || 0) + 1
+        return accu
+    }, {})
+}
+
 export const createRoom = (t, room: Room, remindAt: number) => async (
     dispatch,
     getState
@@ -56,7 +65,9 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
         dispatch(getRooms(t))
 
         if (remindAt) dispatch(createReminder(t, roomId, remindAt))
-        dispatch(setRoomCreated(roomId))
+        const { destinations } = room
+
+        dispatch(setRoomCreated(roomId, countDestinations(destinations)))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
     }

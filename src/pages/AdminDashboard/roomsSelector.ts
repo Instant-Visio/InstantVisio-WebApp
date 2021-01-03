@@ -4,7 +4,13 @@ import { createSelector } from 'reselect'
 const roomsState = (state: AppState) => state.rooms
 export interface RoomsState {
     rooms?: any
-    createdRoomId: string
+    createdRoom: {
+        id: string
+        destinations: {
+            phone: number
+            email: number
+        }
+    }
 }
 
 export const selectRooms = createSelector(
@@ -12,8 +18,24 @@ export const selectRooms = createSelector(
     ({ rooms }: RoomsState) => rooms
 )
 
+//todo typing
 export const selectCreatedRoom = createSelector(
     roomsState,
-    ({ rooms, createdRoomId }: RoomsState) =>
-        rooms.find(({ id }) => id === createdRoomId)
+    ({ rooms, createdRoom }: RoomsState) => {
+        const { id: createdRoomId, destinations } = createdRoom
+        const room = rooms.find(({ id }) => id === createdRoomId)
+
+        if (room) {
+            return {
+                ...room,
+                destinations,
+                hasDestinationSent: Object.values(destinations).reduce(
+                    (accu, current) => accu + current,
+                    0
+                ),
+            }
+        }
+
+        return room
+    }
 )

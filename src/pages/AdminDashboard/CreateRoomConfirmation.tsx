@@ -21,7 +21,14 @@ const useStyles = makeStyles({
 
 export default function CreateRoomConfirmation() {
     const { t } = useTranslation('dashboard')
-    const createdRoom = useSelector(selectCreatedRoom)
+    const {
+        roomUrl,
+        name,
+        hostName,
+        hasDestinationSent,
+        destinations,
+    } = useSelector(selectCreatedRoom)
+    const { email: emailCount, phone: phoneCount } = destinations || {}
     const dispatch = useDispatch()
 
     const formatJoinDiscussionLink = (roomUrl: string) => {
@@ -36,16 +43,41 @@ export default function CreateRoomConfirmation() {
         dispatch(resetRoomCreated())
     }
 
+    const renderDestinationSentMessage = () => {
+        if (!hasDestinationSent) return null
+
+        let message = t('confirmation.destinations-sent-phone', { phoneCount })
+
+        if (emailCount > 0 && phoneCount > 0) {
+            message = t('confirmation.destinations-sent', {
+                phoneCount,
+                emailCount,
+            })
+        } else if (emailCount > 0) {
+            message = t('confirmation.destinations-sent-email', { emailCount })
+        }
+
+        return (
+            <>
+                <Typography>{message}</Typography>
+                <Box m={2} />
+            </>
+        )
+    }
+
     return (
         <>
             <Typography variant="h5" component="h1">
-                {t('confirmation.heading', { roomName: createdRoom.name })}
+                {t('confirmation.heading', { roomName: name })}
             </Typography>
+            <Box m={2} />
+            {renderDestinationSentMessage()}
+            <Typography>{t('confirmation.message-explanation')}</Typography>
             <Box m={2} />
             <Paper elevation={0} className={classes.paper}>
                 {t('confirmation.message', {
-                    hostName: '', //todo not return yet by api,
-                    link: createdRoom.roomUrl,
+                    hostName,
+                    link: roomUrl,
                     interpolation: {
                         escapeValue: false,
                     },
@@ -54,11 +86,11 @@ export default function CreateRoomConfirmation() {
             <Box m={4} />
 
             <Typography variant="h5" component="h1">
-                <Link to={formatJoinDiscussionLink(createdRoom.roomUrl)}>
+                <Link to={formatJoinDiscussionLink(roomUrl)}>
                     Start discussion
                 </Link>
             </Typography>
-            <CopyToClipboard text={createdRoom.roomUrl}>
+            <CopyToClipboard text={roomUrl}>
                 <Link to={'#'} onClick={preventDefault}>
                     {'Cliquer pour copier le lien à partager'}
                 </Link>

@@ -14,7 +14,11 @@
     },
     "confirmation": {
         "heading": "Votre Instant Visio \"{{roomName}}\" a été créé.",
-        "message": "{{hostName}} vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien : {{link}}"
+        "message": "{{hostName}} vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien : {{link}}.",
+        "message-explanation": "Vous pouvez également envoyer cette invitation pas vos propres moyens en copiant le contenu de l'invitation ci-dessous.",
+        "destinations-sent-email": "Vous avez envoyé {{emailCount}} invitation(s) par email.",
+        "destinations-sent-phone": "Vous avez envoyé {{phoneCount}} invitation(s) par téléphone.",
+        "destinations-sent": "Vous avez envoyé {{emailCount}} invitation(s) par email et {{phoneCount}} invitation(s) par téléphone."
     },
     "form": {
         "create-visio": "Créer une discussion en visio",

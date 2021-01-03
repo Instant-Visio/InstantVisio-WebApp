@@ -5,7 +5,13 @@ import { RoomsState } from './roomsSelector'
 
 const initialState = {
     rooms: [],
-    createdRoomId: '',
+    createdRoom: {
+        id: '',
+        destinations: {
+            email: 0,
+            phone: 0,
+        },
+    },
 }
 
 export const roomsReducer = produce(
@@ -15,11 +21,13 @@ export const roomsReducer = produce(
                 draft.rooms = payload.rooms
                 break
             case ROOM_CREATED:
-                const { roomId } = payload
-                draft.createdRoomId = roomId
+                const { roomId, destinations } = payload
+                draft.createdRoom.id = roomId
+                draft.createdRoom.destinations = destinations
+
                 break
             case RESET_ROOM_CREATED: {
-                draft.createdRoomId = initialState.createdRoomId
+                draft.createdRoom = initialState.createdRoom
                 break
             }
             case SIGNOUT:

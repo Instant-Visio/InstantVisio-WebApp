@@ -39,7 +39,7 @@ export const selectQuotasUsage = createSelector(
 
         return {
             emails: {
-                sent: usage.sentSMSs,
+                sent: usage.sentEmails,
                 quota: quotas.email,
             },
             sms: {

@@ -13,6 +13,10 @@ interface RoomCreatedAction {
     type: typeof ROOM_CREATED
     payload: {
         roomId: string
+        destinations: {
+            phone: number
+            email: number
+        }
     }
 }
 
