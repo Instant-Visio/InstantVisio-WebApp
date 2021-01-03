@@ -17,9 +17,9 @@ import { Typography, Grid, Hidden } from '@material-ui/core'
 import ToggleAudioButton from '../Buttons/ToggleAudioButton/ToggleAudioButton'
 import ToggleVideoButton from '../Buttons/ToggleVideoButton/ToggleVideoButton'
 import ToggleScreenShareButton from '../Buttons/ToogleScreenShareButton/ToggleScreenShareButton'
-import InviteParticipants from '../../../../components/InviteParticipants/InviteParticipants'
-import { selectRoomId, selectHostName } from '../../roomSelector'
-import { useSelector } from 'react-redux'
+// import InviteParticipants from '../../../../components/InviteParticipants/InviteParticipants'
+// import { selectRoomId, selectHostName } from '../../roomSelector'
+// import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -80,8 +80,8 @@ export default function MenuBar() {
     const roomState = useRoomState()
     const isReconnecting = roomState === 'reconnecting'
     const { room } = useVideoContext()
-    const roomId = useSelector(selectRoomId)
-    const hostName = useSelector(selectHostName)
+    // const roomId = useSelector(selectRoomId)
+    // const hostName = useSelector(selectHostName)
     const roomName = formatRoomName(room.name)
 
     return (
