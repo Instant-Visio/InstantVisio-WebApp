@@ -124,7 +124,11 @@ export const inviteParticipant = async ({
         roomId
     )
 
-    if (emailsSent.length === 0 && smssSent.length === 0) {
+    if (
+        emailsSent.length === 0 &&
+        smssSent.length === 0 &&
+        pushsSent.length === 0
+    ) {
         throw new BadRequestError('No emails or SMS delivered')
     }
 

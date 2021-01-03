@@ -6,6 +6,7 @@
         "shell": "npm run build && firebase functions:shell",
         "serve-emulators": "npm run build && firebase emulators:start --only firestore,auth,functions",
         "serve-watch": "npm run build && firebase emulators:exec --ui --only functions,firestore,auth 'npm run watch'",
+        "seed:db": "curl --location --request GET 'http://localhost:5050/instantvisio-dev/us-central1/api/api/v1-tests/seeds/'",
         "init:emulators": "firebase init emulators",
         "watch": "tsc --watch --preserveWatchOutput",
         "start": "npm run shell",
