@@ -15,6 +15,7 @@ import { isStatusEnded, Room, RoomId } from '../../../types/Room'
 import { RoomDao } from '../../../db/RoomDao'
 import { makeParticipantNameUnique } from './service/makeParticipantNameUnique'
 import { createTwilioRoom } from './service/createTwilioRoom'
+import { ROOM_MAX_DURATION_MILLISECONDS } from '../../../constants'
 
 /**
  * @swagger
@@ -126,6 +127,7 @@ const getOrCreateRoom = async (
 }
 
 const isRoomCreationRecent = (room: Room): boolean => {
-    const twentyFourHours = 24 * 60 * 60
-    return Date.now() <= room.startAt.toMillis() + twentyFourHours
+    return (
+        Date.now() <= room.startAt.toMillis() + ROOM_MAX_DURATION_MILLISECONDS
+    )
 }
