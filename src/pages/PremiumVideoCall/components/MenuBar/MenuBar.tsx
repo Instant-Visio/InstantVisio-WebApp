@@ -111,10 +111,10 @@ export default function MenuBar() {
                         <Grid container justify="center">
                             <ToggleAudioButton disabled={isReconnecting} />
                             <ToggleVideoButton disabled={isReconnecting} />
-                            <InviteParticipants
+                            {/* <InviteParticipants
                                 roomId={roomId}
                                 hostName={hostName}
-                            />
+                            /> */}
                             <Hidden smDown>
                                 {!isSharingScreen && (
                                     <ToggleScreenShareButton
