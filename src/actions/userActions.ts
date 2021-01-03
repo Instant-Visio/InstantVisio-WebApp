@@ -1,3 +1,4 @@
+import { UserDetails } from './../components/App/userReducer'
 import { AppState } from './../reducers/rootReducer'
 import { fetchToken } from './../services/fetch-token'
 import { JWTToken } from '../../types/JWT'
@@ -55,6 +56,11 @@ export const setRegistrationToken = (
     payload: {
         registrationToken,
     },
+})
+
+export const setUserDetail = (payload: UserDetails): UserActionsTypes => ({
+    type: USER_DETAILS,
+    payload,
 })
 
 export const sendRegistrationToken = (
@@ -119,11 +125,15 @@ export const signInAnonymously = () => async (dispatch) => {
     }
 }
 
-export const UserDetailsRetrieved = (userDetails) => async (
-    dispatch
-): Promise<void> => {
-    dispatch({
-        type: USER_DETAILS,
-        payload: userDetails,
-    })
+export const getUserDetails = (t) => async (dispatch, getState) => {
+    const { user: userState } = getState()
+    const { token, userId } = userState.user
+
+    try {
+        const api = new Api(token)
+        const { user } = await api.getUserDetails(userId)
+        dispatch(setUserDetail(user))
+    } catch (e) {
+        dispatch(showErrorMessage(t('errors.user-details')))
+    }
 }

@@ -10,8 +10,7 @@ import CreateRoomForm from './CreateRoomForm/CreateRoomForm'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../components/App/userSelector'
-import { Api } from '../../services/api'
-import { UserDetailsRetrieved } from '../../actions/userActions'
+import { getUserDetails } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
 import { createRoom, editRoom, getRooms, newRoom } from './roomsActions'
 import UserDetails from './UserDetails'
@@ -37,14 +36,8 @@ const AdminDashboard = () => {
     const { roomId: createdRoomId } = useSelector(selectCreatedRoom)
 
     useEffect(() => {
-        const getUserDetails = async () => {
-            const api = new Api(token)
-            const userDetails = await api.getUserDetails(userId)
-            dispatch(UserDetailsRetrieved(userDetails))
-        }
-
         if (token) {
-            getUserDetails()
+            dispatch(getUserDetails(t))
             dispatch(getRooms(t))
         }
 
