@@ -1,5 +1,5 @@
 <div align="center">
-[![PlantNet](./public/logo.png)](https://instantvisio.com)
+![PlantNet](./public/instantvisio.png)
 </div>
 
 ---
