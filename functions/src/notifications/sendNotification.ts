@@ -10,6 +10,8 @@ import {
 import { sendEmail } from './sendEmail'
 import { sendSms } from './sendSMS'
 import { sendPush } from './sendPush'
+import { DateTime } from 'luxon'
+import { InternalServerError } from '../api/errors/HttpError'
 
 export const sendNotification = async (
     params:
@@ -38,10 +40,30 @@ export const getContent = (
     const name = params.name.replace(/(.{20})..+/, '$1…')
     switch (params.formatType) {
         case NotificationFormatType.Scheduled: {
+            if (!params.roomStartAt) {
+                throw new InternalServerError(
+                    `Trying to send a reminder without a startAt, id: ${params.roomUrl}`
+                )
+            }
+            if (!params.timezone) {
+                throw new InternalServerError(
+                    `Trying to send a reminder without a timezone, id: ${params.roomUrl}`
+                )
+            }
             // @ts-ignore
             const langData = translations.scheduled[params.lang]
+            const date = DateTime.fromJSDate(params.roomStartAt.toDate())
+                .setZone(params.timezone)
+                .setLocale(params.lang)
+                .toLocaleString({
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                })
             const message = langData.Message.replace('{NAME}', name)
-                .replace('{DATE}', params.roomStartAt?.toDate().toUTCString())
+                .replace('{DATE}', date)
                 .replace('{URL}', params.roomUrl)
             return {
                 subject: `${langData.title} ${params.name}`,

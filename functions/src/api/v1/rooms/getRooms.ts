@@ -28,7 +28,9 @@ import { wrap } from 'async-middleware'
  *               updatedAt: 1605969562,
  *               startTimestamp: 1605969562,
  *               roomUrl: "http://example.com/room/id?passcode=toto",
- *               password: "password"
+ *               password: "password",
+ *               timezone: "Europe/Paris",
+ *               hostName: "Bilbo"
  *             }]
  *             schema:
  *               type: array

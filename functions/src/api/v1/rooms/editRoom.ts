@@ -24,6 +24,7 @@ import { parseDestinations } from '../utils/parseDestinations'
  *       - $ref: '#/components/parameters/room/hideChatbot'
  *       - $ref: '#/components/parameters/room/destinations'
  *       - $ref: '#/components/parameters/room/hostName'
+ *       - $ref: '#/components/parameters/room/timezone'
  *     responses:
  *       204:
  *         description: Room edited with success
@@ -64,6 +65,9 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
     }
     if (req.body.hostName) {
         dataToEdit.hostName = req.body.hostName
+    }
+    if (req.body.timezone) {
+        dataToEdit.timezone = req.body.timezone
     }
 
     await RoomDao.update(dataToEdit)
