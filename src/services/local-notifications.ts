@@ -26,7 +26,7 @@ export class LocalNotificationsService {
     }
 
     static listenForNotificationClick(
-        redirectHandler: (roomId: string) => void
+        redirectHandler: (roomUrl: string) => void
     ) {
         LocalNotifications.addListener(
             'localNotificationActionPerformed',
@@ -34,8 +34,8 @@ export class LocalNotificationsService {
                 console.log(
                     'Local action performed: ' + JSON.stringify(notification)
                 )
-                const { roomId } = notification.notification.extra
-                redirectHandler(roomId)
+                const { roomUrl } = notification.notification.extra
+                redirectHandler(roomUrl)
             }
         )
     }
