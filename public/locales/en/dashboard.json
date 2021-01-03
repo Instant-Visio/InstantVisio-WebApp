@@ -31,7 +31,7 @@
             "title": "Participants list",
             "description": "Write here the telephone numbers, email addresses and contact groups you wish to send an invitation to.",
             "description2": "Telephone numbers must not contain any 'space' character.",
-            "placeholder": "Autocomplete"
+            "placeholder": "Email or telephone number"
         },
         "plan-visio": {
             "title": "Plan your Visio Meeting",
