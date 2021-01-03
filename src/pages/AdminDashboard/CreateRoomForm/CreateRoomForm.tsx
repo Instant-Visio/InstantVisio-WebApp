@@ -286,7 +286,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             placeholder={t('form.date.placeholder')}
                             fullWidth
                             locale="fr"
-                            format="dd MMMM yyyy à HH:MM"
+                            format="dd MMMM yyyy à HH:mm"
                             ampm={false}
                         />
                         <Box m={4} />
