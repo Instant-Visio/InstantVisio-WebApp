@@ -1,7 +1,6 @@
-import { RoomId, RoomSid } from './Room'
+import { RoomId } from './Room'
 
 export interface NewRoomResponse {
     roomId: RoomId
-    roomSid: RoomSid
     roomUrl: string
 }
