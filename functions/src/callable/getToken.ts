@@ -18,7 +18,7 @@ export const getToken = functions.https.onCall(async (data, context) => {
 
     try {
         return {
-            token: await UserDao.getFirstValidToken(context.auth.uid),
+            token: await UserDao.getFirstValidToken(uid),
         }
     } catch (error) {
         if (
