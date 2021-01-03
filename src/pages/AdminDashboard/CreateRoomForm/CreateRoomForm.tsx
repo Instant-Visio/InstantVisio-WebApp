@@ -237,6 +237,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                         <Typography variant="body2">
                             {t('form.participants.description2')}
                         </Typography>
+                        <Box m={2} />
                         <Field
                             size="small"
                             name="destinations"
@@ -257,13 +258,14 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                                 params.inputProps.onKeyDown = handleKeyDown
                                 return (
                                     <MuiTextField
+                                        variant="outlined"
                                         {...params}
                                         error={false}
                                         helperText={false}
-                                        label={t(
+                                        label=""
+                                        placeholder={t(
                                             'form.participants.placeholder'
                                         )}
-                                        variant="outlined"
                                     />
                                 )
                             }}
