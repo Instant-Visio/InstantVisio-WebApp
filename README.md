@@ -1,8 +1,17 @@
-Instant Visio app (web + firebase)
+<div align="center">
+[![PlantNet](./public/logo.png)](https://instantvisio.com)
+</div>
 
-Instant Visio is a no-app one to one video conference created to help medical workers & caregivers connect patients with their friends and family.
+---
 
-More info on the Hacking Health Camp 2020 slack, #instantvisio
+<br/>
+<div align="center">
+
+
+</div>
+
+<div align="center">Open source video conference app using Twilio and Daily, with SMS and Email.</div>
+
 
 # API
 
@@ -41,6 +50,13 @@ Furthermore, you need to change your `.env.development` file to set the followin
 REACT_APP_AUTH_EMULATOR_ENABLED=true
 REACT_APP_API_URL=http://localhost:5050/.../api # Check the URL exposed by firebase functions emulator
 ```
+
+### Seed local database
+
+To seed/populate the emulator database with test users and some basic firestore data, you can use a route on the API. 
+1. Start the API using emulators: `cd function && npm run serve-emulators`
+2. Open `http://localhost:5050/instantvisio-dev/us-central1/api/api/v1-tests/seeds/` in your browser/postman/anything in GET
+3. Upon success seeding, test users are answered by the network request
 
 ## Functions
 
