@@ -16,9 +16,9 @@ export const sendPush = async (
             android: {
                 priority: 'high',
             },
-            tokens: params.tokens,
+            tokens: params.tokens.filter((token) => token?.length),
         })
     } catch (error) {
-        console.log('Failed to send push notification to topic')
+        console.log('Failed to send push notification to topic', error)
     }
 }

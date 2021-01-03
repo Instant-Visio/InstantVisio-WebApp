@@ -7,10 +7,6 @@ import { isLoading as isLoadingSelector } from '../App/userSelector'
 import { useSelector, useDispatch } from 'react-redux'
 import { hideBackdrop, showBackdrop } from '../App/Backdrop/backdropActions'
 
-export const isUsingEmulator = () => {
-    return process.env.REACT_APP_AUTH_EMULATOR_ENABLED
-}
-
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
