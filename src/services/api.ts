@@ -4,7 +4,7 @@ import { NewRoomResponse } from '../../types/NewRoomResponse'
 import { RoomId } from '../../types/Room'
 import { UID } from '../../types/uid'
 import ApiClient from './apiClient'
-import { Room } from '../pages/AdminDashboard/CreateRoomForm'
+import { Room } from '../pages/AdminDashboard/CreateRoomForm/CreateRoomForm'
 
 export class Api {
     private apiClient: ApiClient
@@ -18,7 +18,9 @@ export class Api {
         return this.apiClient.post('/rooms/new', {
             name,
             hostName,
-            destinations: JSON.stringify(destinations),
+            destinations: destinations?.length
+                ? JSON.stringify(destinations)
+                : null,
         })
     }
 

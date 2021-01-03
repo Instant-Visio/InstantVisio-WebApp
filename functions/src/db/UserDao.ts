@@ -2,7 +2,11 @@ import { UID } from '../types/uid'
 import { JWTToken } from '../types/JWT'
 import { db, documentId, serverTimestamp } from '../firebase/firebase'
 import { COLLECTIONS } from './constants'
-import { BadRequestError, NotFoundError } from '../api/errors/HttpError'
+import {
+    NoAvailableTokenError,
+    NotFoundError,
+    UserNotFoundError,
+} from '../api/errors/HttpError'
 import { User } from '../types/User'
 import admin from 'firebase-admin'
 import FieldValue = admin.firestore.FieldValue
@@ -17,7 +21,7 @@ export class UserDao {
             .get()
 
         if (!userDocumentSnapshot?.exists) {
-            throw new NotFoundError('Resource does not exist')
+            throw new UserNotFoundError()
         }
         return <User>{
             id: userId,
@@ -64,7 +68,7 @@ export class UserDao {
             }
         }
 
-        throw new BadRequestError('No available/valid token')
+        throw new NoAvailableTokenError()
     }
 
     public static async isTokenValid(

@@ -12,6 +12,10 @@
         "rooms-edit": "Impossible de modifier la réunion",
         "reminders-create": "Impossible de créer la notification de rappel"
     },
+    "confirmation": {
+        "heading": "Votre Instant Visio \"{{roomName}}\" a été créé.",
+        "message": "Bonjour,\r\n{{hostName}"
+    },
     "form": {
         "create-visio": "Créer une discussion en visio",
         "visio-name": {
@@ -28,11 +32,11 @@
             "title": "Liste des participants",
             "description": "Notez ici les numéros de téléphone, les adresses email et les groupes de contact à qui vous souhaitez envoyer une invitation.",
             "description2": "Les numéros de téléphone ne doivent pas contenir d'espace.",
-            "placeholder": "Autocomplete"
+            "placeholder": "Email ou numéro de téléphone"
         },
         "plan-visio": {
             "title": "Planifier votre RDV en visio",
-            "description": "Choisissez la date et l'heurede début de votre visio."
+            "description": "Choisissez la date et l'heure de début de votre visio."
         },
         "date": {
             "placeholder": "Cliquez pour choisir la date et l'heure"

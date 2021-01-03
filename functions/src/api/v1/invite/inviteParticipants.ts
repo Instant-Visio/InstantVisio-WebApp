@@ -3,8 +3,10 @@ import { Request, Response } from 'express'
 import { BadRequestError } from '../../errors/HttpError'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { InvitationDestination } from '../../../types/InvitationDestination'
-import { getAppEnv } from '../../../firebase/env'
-import { NotificationContent } from '../../../types/Notification'
+import {
+    NotificationContent,
+    NotificationFormatType,
+} from '../../../types/Notification'
 import { sendNotifications } from '../../../notifications/sendNotifications'
 import { UID } from '../../../types/uid'
 import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
@@ -12,12 +14,13 @@ import { UserDao } from '../../../db/UserDao'
 import { increment } from '../../../firebase/firebase'
 import { RoomId } from '../../../types/Room'
 import { JSONParse } from '../utils/JSONParse'
+import { formatRoomUrl } from '../../../db/RoomDao'
 
 /**
  * @swagger
  * /v1/rooms/{roomId}/inviteParticipants:
  *   post:
- *     description: Send an invitation to one or many participants, via email and/or sms and/or push notification with a given groupId. It can combine all notification types, as well as specific lang for each participants. <br/> Default lang is "en". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improves the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
+ *     description: Send an invitation to one or many participants, via email and/or sms and/or push notification with a given groupId. It can combine all notification types, as well as specific lang for each participants. <br/> Default lang is "fr". <br/> Available languages are en, fr, de, es, gr (el), hu, it, ro. <br/> Country are defaulted to "fr" if not supplied, it improves the phone umber parsing success rate, though it is already good by default (it use libphonenumber-js). <br/> Email and phone numbers are not saved in InstantVisio databases, not logged. Phone number are stored for a maximum of 24 hours on OVH Telecom (CRON run to clear them up every 12h), while emails logs are kept on SendGrid (email) without being able to erase those logs.
  *     tags:
  *       - rooms
  *     consumes:
@@ -99,7 +102,7 @@ export const inviteParticipant = async ({
 
     const invitationsDestinations: InvitationDestination[] = destinationArray.map(
         (dest) => {
-            const lang = dest.lang || 'en'
+            const lang = dest.lang || 'fr'
             const country = dest.country || 'fr'
             return {
                 ...dest,
@@ -109,13 +112,10 @@ export const inviteParticipant = async ({
         }
     )
 
-    const appEnv = getAppEnv()
-
-    const roomUrl = `https://${appEnv.domain}/room/${roomId}?pwd=${room.password}`
-
     const notificationContent: NotificationContent = {
         name: hostName,
-        roomUrl: roomUrl,
+        roomUrl: formatRoomUrl(room.id, room.password),
+        format: NotificationFormatType.Now,
     }
 
     const { emailsSent, smssSent, pushsSent } = await sendNotifications(
@@ -124,7 +124,11 @@ export const inviteParticipant = async ({
         roomId
     )
 
-    if (emailsSent.length === 0 && smssSent.length === 0) {
+    if (
+        emailsSent.length === 0 &&
+        smssSent.length === 0 &&
+        pushsSent.length === 0
+    ) {
         throw new BadRequestError('No emails or SMS delivered')
     }
 

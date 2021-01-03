@@ -6,7 +6,7 @@ import { UID } from '../../../types/uid'
 import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { RoomId } from '../../../types/Room'
 import { Timestamp } from '../../../firebase/firebase'
-import { RoomDao } from '../../../db/RoomDao'
+import { formatRoomUrl, RoomDao } from '../../../db/RoomDao'
 import { ReminderId } from '../../../types/Reminder'
 import { createReminder } from '../reminders/createReminder'
 import {
@@ -43,6 +43,7 @@ import { parseDestinations } from '../utils/parseDestinations'
  *                summary: Multiple sendAt dates
  *                value: '[1708118298, 1808118298]'
  *       - $ref: '#/components/parameters/room/hideChatbot'
+ *       - $ref: '#/components/parameters/room/timezone'
  *     responses:
  *       201:
  *         description: Room created with success. Depending on the parameters, it will either be a list of created reminders ids OR the emails & SMSs sent list.
@@ -76,6 +77,7 @@ export const createRoomRoute = wrap(async (req: Request, res: Response) => {
         hostName: req.body.hostName,
         destinations: req.body.destinations,
         sendsAt: req.body.sendsAt,
+        timezone: req.body.timezone,
     })
     res.send(newRoomResponse)
 })
@@ -90,6 +92,7 @@ export const createRoom = async ({
     destinations,
     sendsAt,
     hideChatbot = false,
+    timezone = 'Europe/Paris',
 }: {
     userId: UID
     hideChatbot?: boolean
@@ -100,31 +103,33 @@ export const createRoom = async ({
     hostName?: string
     destinations?: string
     sendsAt?: string
+    timezone?: string
 }): Promise<NewRoomResponse> => {
     await assertNewResourceCreationGranted(userId)
 
     let roomId: RoomId
-    const roomPassword =
-        roomRequestedPassword || `${~~(Math.random() * 999999)}`
+    const password = roomRequestedPassword || `${~~(Math.random() * 999999)}`
     const roomStartAt = Timestamp.fromMillis(
         startAt ? +startAt * 1000 : Date.now()
     )
 
     if (specificRoomId) {
-        roomId = await RoomDao.set(
+        roomId = await RoomDao.set({
             userId,
-            specificRoomId,
-            roomPassword,
-            roomStartAt,
-            hideChatbot
-        )
+            roomId: specificRoomId,
+            password,
+            startAt: roomStartAt,
+            hideChatbot,
+            timezone,
+        })
     } else {
-        roomId = await RoomDao.add(
+        roomId = await RoomDao.add({
             userId,
-            roomPassword,
-            roomStartAt,
-            hideChatbot
-        )
+            password,
+            startAt: roomStartAt,
+            hideChatbot,
+            timezone,
+        })
     }
 
     const twilioRoomResponse = await createTwilioRoom(roomId)
@@ -133,6 +138,7 @@ export const createRoom = async ({
         sid: twilioRoomResponse.sid,
         twilioRoomId: twilioRoomResponse.twilioRoomId,
         name: name || roomId,
+        hostName,
     })
 
     let processDestinationsResults = {}
@@ -148,6 +154,7 @@ export const createRoom = async ({
 
     return {
         roomId,
+        roomUrl: formatRoomUrl(roomId, password),
         roomSid: twilioRoomResponse.sid,
         ...processDestinationsResults,
     }
