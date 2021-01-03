@@ -4,6 +4,7 @@ import {
     ForbiddenError,
     RoomEndedError,
     RoomNotFoundError,
+    RoomNotStartedOrExpiredError,
 } from '../../errors/HttpError'
 import {
     createTwilioClientToken,
@@ -11,11 +12,17 @@ import {
 } from './service/createTwilioClientToken'
 import { createRoom } from './createRoom'
 import { UID } from '../../../types/uid'
-import { isStatusEnded, Room, RoomId } from '../../../types/Room'
+import {
+    isStatusEnded,
+    isStatusUndefined,
+    Room,
+    RoomId,
+} from '../../../types/Room'
 import { RoomDao } from '../../../db/RoomDao'
 import { makeParticipantNameUnique } from './service/makeParticipantNameUnique'
 import { createTwilioRoom } from './service/createTwilioRoom'
 import { ROOM_MAX_DURATION_MILLISECONDS } from '../../../constants'
+import { Timestamp } from '../../../firebase/firebase'
 
 /**
  * @swagger
@@ -74,17 +81,20 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
         throw new ForbiddenError('Wrong password to join the room')
     }
     if (isStatusEnded(room)) {
-        if (isRoomCreationRecent(room)) {
-            // Twilio room are "ended" after 5 min without activity.
-            // We allow up to 24hours after creation time re-creating a new twilio room to simplify the user experience.
-            const twilioResponse = await createTwilioRoom(roomId)
-            await RoomDao.update({
-                id: roomId,
-                status: '', // status are filled by Twilio webhook token
-                ...twilioResponse,
-            })
+        if (isRoomStartedRecently(room.startAt)) {
+            await createTwilioRoomAndSaveIt(roomId)
         } else {
             throw new RoomEndedError()
+        }
+    }
+    if (isStatusUndefined(room)) {
+        if (
+            isRoomAlreadyStarted(room.startAt) &&
+            isRoomStartedRecently(room.startAt)
+        ) {
+            await createTwilioRoomAndSaveIt(roomId)
+        } else {
+            throw new RoomNotStartedOrExpiredError()
         }
     }
     const participantName = await makeParticipantNameUnique(
@@ -125,9 +135,17 @@ const getOrCreateRoom = async (
         }
     }
 }
-
-const isRoomCreationRecent = (room: Room): boolean => {
-    return (
-        Date.now() <= room.startAt.toMillis() + ROOM_MAX_DURATION_MILLISECONDS
-    )
+const createTwilioRoomAndSaveIt = async (roomId: RoomId): Promise<void> => {
+    const twilioResponse = await createTwilioRoom(roomId)
+    await RoomDao.update({
+        id: roomId,
+        status: '', // status are filled by Twilio webhook token
+        ...twilioResponse,
+    })
 }
+
+export const isRoomStartedRecently = (startAt: Timestamp): boolean =>
+    Date.now() < startAt.toMillis() + ROOM_MAX_DURATION_MILLISECONDS
+
+export const isRoomAlreadyStarted = (startAt: Timestamp): boolean =>
+    Date.now() >= startAt.toMillis()

@@ -114,6 +114,12 @@ export class RoomEndedError extends GoneError {
     }
 }
 
+export class RoomNotStartedOrExpiredError extends GoneError {
+    constructor() {
+        super('Room not started or expired')
+    }
+}
+
 export class PreconditionFailedError extends HttpError {
     constructor(message?: string) {
         super(412, message || 'PreconditionFailed')
