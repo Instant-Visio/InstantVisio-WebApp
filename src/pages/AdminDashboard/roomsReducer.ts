@@ -1,14 +1,16 @@
 import produce, { Draft } from 'immer'
 import { SIGNOUT } from '../../actions/userActionsTypes'
-import { SET_ROOMS, ROOM_CREATED, NEW_ROOM } from './roomsActionTypes'
+import { SET_ROOMS, ROOM_CREATED, RESET_ROOM_CREATED } from './roomsActionTypes'
 import { RoomsState } from './roomsSelector'
 
 const initialState = {
     rooms: [],
-    created: {
-        roomId: '',
-        roomName: '',
-        roomUrl: '',
+    createdRoom: {
+        id: '',
+        destinations: {
+            email: 0,
+            phone: 0,
+        },
     },
 }
 
@@ -19,15 +21,13 @@ export const roomsReducer = produce(
                 draft.rooms = payload.rooms
                 break
             case ROOM_CREATED:
-                const { roomId, roomName, roomUrl } = payload
-                draft.created = {
-                    roomId,
-                    roomName,
-                    roomUrl,
-                }
+                const { roomId, destinations } = payload
+                draft.createdRoom.id = roomId
+                draft.createdRoom.destinations = destinations
+
                 break
-            case NEW_ROOM: {
-                draft.created = initialState.created
+            case RESET_ROOM_CREATED: {
+                draft.createdRoom = initialState.createdRoom
                 break
             }
             case SIGNOUT:

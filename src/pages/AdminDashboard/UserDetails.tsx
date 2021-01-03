@@ -43,6 +43,8 @@ const useStyles = makeStyles((theme: Theme) =>
         list: {
             paddingTop: 0,
             paddingBottom: 0,
+            maxHeight: 200,
+            overflowY: 'auto',
         },
         listItem: {
             paddingTop: 0,
