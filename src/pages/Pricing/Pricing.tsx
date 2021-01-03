@@ -4,6 +4,22 @@ import { useTranslation } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
 import Button from '@material-ui/core/Button'
 import { IonContent } from '@ionic/react'
+import { withStyles } from '@material-ui/core'
+
+const StyledButton = withStyles({
+    root: {
+        background: '#6558f5',
+        color: 'white',
+        padding: '6px 14px',
+        marginTop: '24px',
+        fontSize: '0.9rem',
+        fontWeight: 'bolder',
+        alignSelf: 'center',
+    },
+    label: {
+        textTransform: 'capitalize',
+    },
+})(Button)
 
 const Wrapper = styled.div`
     display: flex;
@@ -35,12 +51,6 @@ const ColumnView = styled.div`
         margin-bottom: 0rem;
     }
 
-    // TODO: customize color of Mui-button with color='#6558f5'
-    button {
-        align-self: center;
-        margin-top: ${({ theme }) => theme.spacing.XL};
-    }
-
     ${SCREEN.MOBILE} {
         flex-direction: column;
         padding: ${({ theme }) =>
@@ -67,9 +77,7 @@ export default function Pricing() {
                         <p>✔ {t('item2')}</p>
                         <p>✔ {t('item3')}</p>
                     </div>
-                    <Button variant="contained" color="primary">
-                        {t('support-us')}
-                    </Button>
+                    <StyledButton>{t('support-us')}</StyledButton>
                 </ColumnView>
                 <ColumnView>
                     <div className="textContainer">
@@ -83,9 +91,7 @@ export default function Pricing() {
                         <p>✔ {t('item10')}</p>
                         <p>✔ {t('item11')}</p>
                     </div>
-                    <Button variant="contained" color="primary">
-                        {t('choose-subscription')}
-                    </Button>
+                    <StyledButton>{t('choose-subscription')}</StyledButton>
                 </ColumnView>
             </Wrapper>
         </IonContent>
