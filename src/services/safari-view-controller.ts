@@ -1,6 +1,5 @@
 import { SafariViewController } from '@ionic-native/safari-view-controller'
 import { InAppBrowser } from '@ionic-native/in-app-browser'
-import { isMobile } from './platform'
 
 const openWithNativeBrowser = async (url: string) => {
     InAppBrowser.create(url, '_system')
