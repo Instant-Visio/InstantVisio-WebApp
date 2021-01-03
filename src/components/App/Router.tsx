@@ -26,6 +26,7 @@ import { selectUser } from './userSelector'
 import { useSelector } from 'react-redux'
 import { IonContent } from '@ionic/react'
 import AcceptCookies from '../../pages/AcceptCookies/AcceptCookies'
+import Subscriptions from '../../pages/Subscriptions/Subscriptions'
 
 const AdminDashboardPage = lazy(() =>
     import('../../pages/AdminDashboard/AdminDashboard')
@@ -100,6 +101,11 @@ const Router = () => {
                         component={CallNotLaunched}
                     />
                     <Route path={'/pricing'} exact component={Pricing} />
+                    <Route
+                        path={'/subscriptions'}
+                        exact
+                        component={Subscriptions}
+                    />
                     <ProtectedRoute
                         path="/admin"
                         isAuthorized={!isAnonymous}

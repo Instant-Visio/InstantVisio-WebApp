@@ -10,6 +10,7 @@ import JoinVideoCall from './JoinVideoCall/JoinVideoCall'
 import Pricing from './Pricing/Pricing'
 import License from './License/License'
 import { PremiumVideoPage } from './PremiumVideoCall'
+import Subscriptions from './Subscriptions/Subscriptions'
 
 export {
     Home,
@@ -24,4 +25,5 @@ export {
     NotFound,
     PremiumVideoPage,
     Pricing,
+    Subscriptions,
 }
