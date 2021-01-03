@@ -1,7 +1,13 @@
+import { Timestamp } from '../firebase/firebase'
+
 export enum NotificationType {
     SmsNotificationType = 1,
     EmailNotificationType,
     PushNotificationType,
+}
+export enum NotificationFormatType {
+    Now = 1,
+    Scheduled,
 }
 
 export interface BaseNotificationParams {
@@ -9,6 +15,9 @@ export interface BaseNotificationParams {
     roomUrl: string
     lang: string
     type: NotificationType
+    formatType: NotificationFormatType
+    roomStartAt?: Timestamp
+    timezone?: string
 }
 
 export interface SmsNotificationParams extends BaseNotificationParams {
@@ -39,4 +48,7 @@ export type NotificationParams =
 export interface NotificationContent {
     name: string
     roomUrl: string
+    format: NotificationFormatType
+    roomStartAt?: Timestamp
+    timezone?: string
 }

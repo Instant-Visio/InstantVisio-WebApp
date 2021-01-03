@@ -1,4 +1,9 @@
-import { RoomsActionsTypes, SET_ROOMS } from './roomsActionTypes'
+import {
+    RoomsActionsTypes,
+    ROOM_CREATED,
+    SET_ROOMS,
+    NEW_ROOM,
+} from './roomsActionTypes'
 import { Api } from '../../services/api'
 import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
 import {
@@ -6,13 +11,30 @@ import {
     showBackdrop,
 } from '../../components/App/Backdrop/backdropActions'
 import { selectToken } from '../../components/App/userSelector'
-import { Room } from './CreateRoomForm'
+import { Room } from './CreateRoomForm/CreateRoomForm'
 
 export const setRooms = (rooms: any): RoomsActionsTypes => ({
     type: SET_ROOMS,
     payload: {
         rooms,
     },
+})
+
+const roomCreated = (
+    roomId,
+    roomName: string,
+    roomUrl: string
+): RoomsActionsTypes => ({
+    type: ROOM_CREATED,
+    payload: {
+        roomId,
+        roomName,
+        roomUrl,
+    },
+})
+
+const setNewRoom = (): RoomsActionsTypes => ({
+    type: NEW_ROOM,
 })
 
 export const getRooms = (t) => async (dispatch, getState) => {
@@ -36,14 +58,20 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
     const api = new Api(token)
 
     try {
-        const { roomId } = await api.createRoom(room)
+        const { roomId, roomUrl } = await api.createRoom(room)
         dispatch(getRooms(t))
-        dispatch(createReminder(t, roomId, remindAt))
+
+        if (remindAt) dispatch(createReminder(t, roomId, remindAt))
+        dispatch(roomCreated(roomId, room.name, roomUrl))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
     }
 
     dispatch(hideBackdrop())
+}
+
+export const newRoom = () => (dispatch) => {
+    dispatch(setNewRoom())
 }
 
 export const editRoom = (t, room: Room) => async (dispatch, getState) => {

@@ -27,6 +27,38 @@ export class ReminderDao {
                 id: doc.id,
                 destinations,
                 hostName,
+                roomId,
+                sendAt: sendAt.seconds,
+                isSent,
+                createdAt: createdAt.seconds,
+                updatedAt: updatedAt.seconds,
+            }
+        })
+    }
+
+    public static async listBetween(from: Date, to: Date): Promise<Reminder[]> {
+        const snapshot = await db
+            .collection(COLLECTIONS.reminders)
+            .where('isSent', '==', false)
+            .where('sendAt', '>=', from)
+            .where('sendAt', '<', to)
+            .get()
+
+        return snapshot.docs.map((doc) => {
+            const {
+                destinations,
+                hostName,
+                sendAt,
+                isSent,
+                roomId,
+                createdAt,
+                updatedAt,
+            } = doc.data()
+            return {
+                id: doc.id,
+                roomId,
+                destinations,
+                hostName,
                 sendAt: sendAt.seconds,
                 isSent,
                 createdAt: createdAt.seconds,
@@ -97,4 +129,5 @@ export interface ReminderEditData {
     hostName?: string
     destinations?: InvitationDestination[]
     sendAt?: Timestamp
+    isSent?: boolean
 }

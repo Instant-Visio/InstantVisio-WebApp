@@ -100,6 +100,9 @@ const processEmailDestinations = async (
                     lang: dest.lang,
                     email: dest.email,
                     emailFrom: appEnv.emailFrom,
+                    formatType: content.format,
+                    roomStartAt: content.roomStartAt,
+                    timezone: content.timezone,
                 },
                 successField: dest.email,
             }
@@ -127,6 +130,9 @@ const processSmsDestinations = async (
                     country: dest.country,
                     lang: dest.lang,
                     phone: dest.phone,
+                    formatType: content.format,
+                    roomStartAt: content.roomStartAt,
+                    timezone: content.timezone,
                 },
                 successField: dest.phone,
             }
@@ -153,17 +159,25 @@ const processPushDestinations = async (
             const tokens = await UserDao.getRegistrationTokensForGroup(
                 dest.groupId
             )
-            return {
-                params: {
-                    ...content,
-                    type: NotificationType.PushNotificationType,
-                    lang: dest.lang,
-                    tokens,
-                    additionalData: {
-                        roomId: roomId,
-                        password: room.password,
-                    },
+            const params: any = {
+                ...content,
+                type: NotificationType.PushNotificationType,
+                lang: dest.lang,
+                tokens,
+                formatType: content.format,
+                roomStartAt: content.roomStartAt,
+                additionalData: {
+                    roomId: roomId,
+                    password: room.password,
+                    timezone: content.timezone,
                 },
+            }
+            if (content.timezone) {
+                params.timezone = content.timezone
+                params.additionalData.timezone = content.timezone
+            }
+            return {
+                params: params,
                 successField: dest.groupId,
             }
         }

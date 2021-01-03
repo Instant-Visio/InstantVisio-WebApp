@@ -66,7 +66,7 @@ const AppBar = () => {
                                 dispatch(signOut())
                                 history.replace('/')
                             }}>
-                            Sign out
+                            {t('appBar.signOutButton')}
                         </Button>
                     ) : (
                         <Button
