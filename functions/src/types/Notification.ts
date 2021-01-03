@@ -49,6 +49,6 @@ export interface NotificationContent {
     name: string
     roomUrl: string
     format: NotificationFormatType
-    roomStatAt?: Timestamp
+    roomStartAt?: Timestamp
     timezone?: string
 }
