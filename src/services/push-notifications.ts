@@ -52,18 +52,17 @@ export class PushNotificationsService {
         PushNotifications.addListener(
             'registration',
             (token: PushNotificationToken) => {
-                console.log('Push registration success, token: ' + token.value)
                 successHandler(token.value)
-                // this.subscribeToTopic('test')
+                this.listenForPayload()
             }
         )
     }
 
+    //TODO check if to remove, now unused
     static async subscribeToTopic(topic: string) {
         try {
             await fcm.subscribeTo({ topic })
             this.listenForPayload()
-            console.log('subscribed to topic')
         } catch (err) {
             console.log(err)
         }
@@ -96,7 +95,7 @@ export class PushNotificationsService {
     }
 
     static listenForNotificationClick(
-        redirectHandler: (roomId: string) => void
+        redirectHandler: (roomUrl: string) => void
     ) {
         PushNotifications.addListener(
             'pushNotificationActionPerformed',
@@ -104,8 +103,8 @@ export class PushNotificationsService {
                 console.log(
                     'Push action performed: ' + JSON.stringify(notification)
                 )
-                const { roomId } = notification.notification.data
-                redirectHandler(roomId)
+                const { roomUrl } = notification.notification.data
+                redirectHandler(roomUrl)
             }
         )
     }

@@ -8,6 +8,7 @@ import { LocalNotificationsService } from '../../../services/local-notifications
 import { sendRegistrationToken } from '../../../actions/userActions'
 import { useSelector } from 'react-redux'
 import { selectToken } from '../userSelector'
+import { openPremiumVideoCall } from '../../../services/safari-view-controller'
 
 export const PushNotifications = () => {
     const dispatch = useDispatch()
@@ -33,9 +34,8 @@ export const PushNotifications = () => {
                         }
                     )
 
-                    const redirectHandler = (roomId: string) => {
-                        window.location.pathname = `/premium-video/
-                            room/${roomId}`
+                    const redirectHandler = (roomUrl: string) => {
+                        openPremiumVideoCall(roomUrl)
                     }
                     LocalNotificationsService.listenForNotificationClick(
                         redirectHandler
