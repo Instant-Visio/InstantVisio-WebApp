@@ -15,6 +15,7 @@ export default function PricingDetails() {
         <div>
             <h3>{t('information.packages')}</h3>
             <p>{t('information.1-credit')}</p>
+            <p>{t('information.120mn')}</p>
             <h3>{t('information.exemples')}</h3>
             <img
                 src={'../../src/styles/assets/images/pricing/tableur.png'}

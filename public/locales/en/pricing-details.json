@@ -1,8 +1,9 @@
 {
     "information": {
-        "how-to": "How-to estimate my need",
-        "packages": "Our premium packages ...",
-        "1-credit": "One visio credit = 1 minnute participant ...",
-        "exemples": "How much cost one metting ? ..."
+        "how-to": "How to estimate my need",
+        "packages": "Our premium packages include video & SMS credits and allow you to send an unlimited number of invitations by email and notification.",
+        "1-credit": "A video credit = 1 participant minute. This is one minute spent per participant in video.",
+        "120mn": "Ex: a one-hour video call with 2 people consumes 120 participant-minutes",
+        "exemples": "How much does a meeting cost? How many meetings can I do?       Some examples :"
     }
 }

@@ -9,12 +9,12 @@ export default function PricingDetailsModal(props) {
     return (
         <Modal
             {...props}
-            size="lg"
+            size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    {t('information.how-to')}
+                    Estimation
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
