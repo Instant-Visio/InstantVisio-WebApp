@@ -7,31 +7,36 @@ import * as admin from 'firebase-admin'
 import { isUsingEmulator } from '../api/utils/isUsingEmulator'
 import { UID } from '../types/uid'
 
-const makeUserData = (
-    isSubscriptionActive: boolean,
-    isQuotaReached: boolean
-) => ({
-    subscription: {
-        isActive: isSubscriptionActive,
-        isQuotaReached,
-        type: SUBSCRIPTIONS.manual,
-        quotas: {
-            sms: 100,
-            email: 100,
-            push: 100,
-            minutes: 10000,
-        },
-    },
-    usage: {
-        sentSMSs: 0,
-        sentEmails: 0,
-        sentPushs: 0,
-    },
+export const onUserCreation = functions.auth.user().onCreate(async (user) => {
+    const { uid } = user
+
+    await setNewUserData(uid, user)
+
+    return user
 })
 
-const getUserData = (user: admin.auth.UserRecord) => {
+export const setNewUserData = async (
+    userId: UID,
+    user?: admin.auth.UserRecord
+): Promise<string> => {
+    const token = await generateNewTokenToUser(userId)
+    await UserDao.update(userId, getUserData(user))
+    return token
+}
+
+export const generateNewTokenToUser = async (uid: UID): Promise<string> => {
+    const jwtKey = getJWTEnv()
+    const newJWTToken = jsonWebToken.sign({ uid }, jwtKey, {
+        algorithm: 'HS256',
+    })
+
+    await UserDao.addToken(uid, newJWTToken)
+    return newJWTToken
+}
+
+const getUserData = (user?: admin.auth.UserRecord) => {
     let userData
-    if (isUsingEmulator()) {
+    if (isUsingEmulator() && user) {
         switch (user.email) {
             case TEST_ACCOUNTS.paidUser.email:
                 userData = makeUserData(true, false)
@@ -54,21 +59,24 @@ const getUserData = (user: admin.auth.UserRecord) => {
     return userData
 }
 
-export const onUserCreation = functions.auth.user().onCreate(async (user) => {
-    const { uid } = user
-
-    await generateNewTokenToUser(uid)
-    await UserDao.update(uid, getUserData(user))
-
-    return user
+const makeUserData = (
+    isSubscriptionActive: boolean,
+    isQuotaReached: boolean
+) => ({
+    subscription: {
+        isActive: isSubscriptionActive,
+        isQuotaReached,
+        type: SUBSCRIPTIONS.manual,
+        quotas: {
+            sms: 100,
+            email: 100,
+            push: 100,
+            minutes: 10000,
+        },
+    },
+    usage: {
+        sentSMSs: 0,
+        sentEmails: 0,
+        sentPushs: 0,
+    },
 })
-
-export const generateNewTokenToUser = async (uid: UID): Promise<string> => {
-    const jwtKey = getJWTEnv()
-    const newJWTToken = jsonWebToken.sign({ uid }, jwtKey, {
-        algorithm: 'HS256',
-    })
-
-    await UserDao.addToken(uid, newJWTToken)
-    return newJWTToken
-}
