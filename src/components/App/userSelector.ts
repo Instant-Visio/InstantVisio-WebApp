@@ -40,7 +40,12 @@ export const selectQuotasUsage = createSelector(
             return null
         }
 
-        const { quotas } = subscription
+        const quotas = subscription.quotas || {
+            email: 0,
+            sms: 0,
+            push: 0,
+            minutes: 0,
+        }
 
         return {
             emails: {

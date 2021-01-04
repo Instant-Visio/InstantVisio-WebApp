@@ -4,7 +4,10 @@ import {
     NoAvailableTokenError,
     UserNotFoundError,
 } from '../api/errors/HttpError'
-import { generateNewTokenToUser } from '../triggers/onUserCreation'
+import {
+    generateNewTokenToUser,
+    setNewUserData,
+} from '../api/v1/utils/UserUtils'
 import { UID } from '../types/uid'
 
 export const getToken = functions.https.onCall(async (data, context) => {
@@ -21,10 +24,11 @@ export const getToken = functions.https.onCall(async (data, context) => {
             token: await UserDao.getFirstValidToken(uid),
         }
     } catch (error) {
-        if (
-            error instanceof NoAvailableTokenError ||
-            error instanceof UserNotFoundError
-        ) {
+        if (error instanceof UserNotFoundError) {
+            return {
+                token: await setNewUserData(uid),
+            }
+        } else if (error instanceof NoAvailableTokenError) {
             return {
                 token: await generateNewTokenToUser(uid),
             }
