@@ -6,34 +6,29 @@ import { TEST_ACCOUNTS } from '../../../db/constants'
 
 export const seeds = wrap(async (req: Request, res: Response) => {
     const authEmulatorUrl = 'localhost:9099'
-    const firestoreEmulatorUrl = 'localhost:9099'
     const {
-        premiumUser,
-        freeUser,
-        overQuotaUser,
+        premiumUserId,
+        freeUserId,
+        overQuotaUserId,
     } = await seedAuth(authEmulatorUrl, [
-        TEST_ACCOUNTS.paidUser,
-        TEST_ACCOUNTS.unpaidUser,
+        TEST_ACCOUNTS.premiumUser,
+        TEST_ACCOUNTS.freeUser,
         TEST_ACCOUNTS.overQuotaUser,
     ])
 
-    await seedFirestore(firestoreEmulatorUrl, premiumUser)
+    TEST_ACCOUNTS.premiumUser.id = premiumUserId
+    TEST_ACCOUNTS.freeUser.id = freeUserId
+    TEST_ACCOUNTS.overQuotaUser.id = overQuotaUserId
+
+    await seedFirestore(TEST_ACCOUNTS)
+    const { premiumUser, freeUser, overQuotaUser } = TEST_ACCOUNTS
 
     res.send({
         status: 'Done 🥳🍪',
         data: {
-            premiumUser: {
-                id: premiumUser,
-                ...TEST_ACCOUNTS.paidUser,
-            },
-            freeUser: {
-                id: freeUser,
-                ...TEST_ACCOUNTS.unpaidUser,
-            },
-            overQuotaUser: {
-                id: overQuotaUser,
-                ...TEST_ACCOUNTS.overQuotaUser,
-            },
+            premiumUser,
+            freeUser,
+            overQuotaUser,
         },
     })
 })

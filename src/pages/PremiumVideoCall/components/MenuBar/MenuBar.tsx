@@ -127,7 +127,7 @@ export default function MenuBar() {
                         </Grid>
                     </Grid>
                     <Hidden smDown>
-                        <Grid style={{ flex: 1 }}>
+                        <Grid style={{ flex: 1, marginRight: '5rem' }}>
                             <Grid container justify="flex-end">
                                 <Menu />
                                 <EndCallButton />

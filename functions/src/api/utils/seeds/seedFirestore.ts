@@ -1,12 +1,17 @@
 import { db } from '../../../firebase/firebase'
 import { COLLECTIONS } from '../../../db/constants'
-import { UID } from '../../../types/uid'
 import { GroupDao } from '../../../db/GroupDao'
+import { setNewUserData } from '../../v1/utils/UserUtils'
 
-export const seedFirestore = async (url: string, premiumUserId: UID) => {
+export const seedFirestore = async (users: any) => {
+    const { premiumUser, freeUser, overQuotaUser } = users
+    await setNewUserData(premiumUser.id, premiumUser)
+    await setNewUserData(freeUser.id, freeUser)
+    await setNewUserData(overQuotaUser.id, overQuotaUser)
+
     await db
         .collection(COLLECTIONS.users)
-        .doc(premiumUserId)
+        .doc(users.premiumUser.id)
         .set(
             {
                 registrationTokens: ['toto'],
@@ -14,5 +19,5 @@ export const seedFirestore = async (url: string, premiumUserId: UID) => {
             { merge: true }
         )
 
-    await GroupDao.set('test-group', premiumUserId, 'test-group', '0000')
+    await GroupDao.set('test-group', users.premiumUser.id, 'test-group', '0000')
 }

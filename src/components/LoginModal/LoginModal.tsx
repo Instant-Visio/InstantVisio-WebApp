@@ -11,7 +11,7 @@ import {
 } from '../../utils/emulators'
 import { TEST_ACCOUNTS } from '../../constants'
 import { authInstance } from '../../firebase/firebase'
-const { paidUser, unpaidUser, overQuotaUser } = TEST_ACCOUNTS
+const { premiumUser, freeUser, overQuotaUser } = TEST_ACCOUNTS
 
 export default function LoginModal() {
     const { isDisplayed } = useSelector(selectLoginModal)
@@ -40,11 +40,11 @@ export default function LoginModal() {
             {isAuthEmulatorEnabled() && (
                 <>
                     <Button
-                        onClick={() => signInWithEmailAndPassword(paidUser)}>
+                        onClick={() => signInWithEmailAndPassword(premiumUser)}>
                         Paid
                     </Button>
                     <Button
-                        onClick={() => signInWithEmailAndPassword(unpaidUser)}>
+                        onClick={() => signInWithEmailAndPassword(freeUser)}>
                         Unpaid
                     </Button>
                     <Button
