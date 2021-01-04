@@ -28,14 +28,15 @@ export const generateNewTokenToUser = async (uid: UID): Promise<string> => {
 const getUserData = (user?: admin.auth.UserRecord) => {
     let userData
     if (isUsingEmulator() && user) {
+        const { premiumUser, freeUser, overQuotaUser } = TEST_ACCOUNTS
         switch (user.email) {
-            case TEST_ACCOUNTS.paidUser.email:
+            case premiumUser.email:
                 userData = makeUserData(true, false)
                 break
-            case TEST_ACCOUNTS.unpaidUser.email:
+            case freeUser.email:
                 userData = makeUserData(false, false)
                 break
-            case TEST_ACCOUNTS.overQuotaUser.email:
+            case overQuotaUser.email:
                 userData = makeUserData(true, true)
                 break
             default:

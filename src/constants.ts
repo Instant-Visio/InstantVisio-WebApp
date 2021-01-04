@@ -7,11 +7,11 @@ export const EMULATORS = {
 }
 
 export const TEST_ACCOUNTS = {
-    paidUser: {
+    premiumUser: {
         email: 'paid-user@instantvisio.com',
         password: 'test-password',
     },
-    unpaidUser: {
+    freeUser: {
         email: 'unpaid-user@instantvisio.com',
         password: 'test-password',
     },

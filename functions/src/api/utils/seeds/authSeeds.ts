@@ -11,9 +11,9 @@ export const seedAuth = async (
     url: string,
     users: UserSeed[]
 ): Promise<{
-    premiumUser: UID
-    freeUser: UID
-    overQuotaUser: UID
+    premiumUserId: UID
+    freeUserId: UID
+    overQuotaUserId: UID
 }> => {
     // delete everything first
     const response = await fetch(
@@ -58,9 +58,9 @@ export const seedAuth = async (
             }
         }
         return {
-            premiumUser: userIds[0],
-            freeUser: userIds[1],
-            overQuotaUser: userIds[2],
+            premiumUserId: userIds[0],
+            freeUserId: userIds[1],
+            overQuotaUserId: userIds[2],
         }
     } catch (error) {
         console.log(error)
