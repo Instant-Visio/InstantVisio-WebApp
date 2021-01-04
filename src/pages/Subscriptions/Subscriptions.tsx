@@ -6,11 +6,13 @@ import Button from '@material-ui/core/Button'
 import { IonContent } from '@ionic/react'
 import { withStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import VerticallyCenteredModal from '../../components/VerticallyCenteredModal/VerticallyCenteredModal'
+import PricingDetailsModal from '../../components/PricingDetailsModal/PricingDetailsModal'
 // import { showModal } from '../../components/Modal/modalAction'
 // import { useDispatch } from 'react-redux'
 // import { PricingDetails } from '../../components/PricingDetailsModal/PricingDetails'
 
-// consider use MaterialUi Grid to reduce the custom css
+// consider use MaterialUi Grid to reduce the custom css https://material-ui.com/components/grid/
 const ButtonSubscribe = withStyles({
     root: {
         background: '#6558f5',
@@ -117,8 +119,7 @@ const ColumnView = styled.div`
 export default function Subscriptions() {
     const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
     const history = useHistory()
-    // const dispatch = useDispatch()
-    // const showPricingModal = () => dispatch(showModal('PricingDetails')) //TODO: it works only with Newletters type -> see type.ts ti fix it
+    const [modalShow, setModalShow] = React.useState(false)
 
     return (
         <IonContent style={{ '--background': 'white' }}>
@@ -189,11 +190,14 @@ export default function Subscriptions() {
                             <h5>{t('60K-credits-visio')}</h5>
                             <h5>{t('3000-credits')}</h5>
                             <h5>{t('unlimited')}</h5>
-                            <ButtonEstimate
-                            //TODO: onClick={showPricingModal}
-                            >
+                            <ButtonEstimate onClick={() => setModalShow(true)}>
                                 {t('estimate-need')}
                             </ButtonEstimate>
+                            <PricingDetailsModal
+                                show={modalShow}
+                                onHide={() =>
+                                    setModalShow(false)
+                                }></PricingDetailsModal>
                         </div>
                         <div className="listContainer">
                             <p>✔ {t('up-to-50')}</p>

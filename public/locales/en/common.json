@@ -52,5 +52,8 @@
         "joinGroupButton": "Join Group",
         "loginButton": "Login",
         "signOutButton": "Se déconnecter"
+    },
+    "modal": {
+        "close-button": "Close"
     }
 }
