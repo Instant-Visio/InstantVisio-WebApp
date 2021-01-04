@@ -12,12 +12,12 @@ export const SUBSCRIPTIONS = {
 export const TEST_ACCOUNTS = {
     premiumUser: {
         id: '',
-        email: 'paid-user@instantvisio.com',
+        email: 'premium-user@instantvisio.com',
         password: 'test-password',
     },
     freeUser: {
         id: '',
-        email: 'unpaid-user@instantvisio.com',
+        email: 'free-user@instantvisio.com',
         password: 'test-password',
     },
     overQuotaUser: {
