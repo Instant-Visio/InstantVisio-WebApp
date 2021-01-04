@@ -46,13 +46,14 @@ export default function NotificationSelector({
     }
 
     return (
-        <div>
+        <>
             <FormControl className={classes.formControl}>
                 <TextField
                     id="outlined-basic"
                     value={notification.number}
                     type="number"
                     variant="outlined"
+                    name="sendsAt"
                     onChange={handleChangeNumber}
                 />
             </FormControl>
@@ -67,6 +68,6 @@ export default function NotificationSelector({
                     <MenuItem value={UNITS.days}>{UNITS.days}</MenuItem>
                 </MaterialSelect>
             </FormControl>
-        </div>
+        </>
     )
 }

@@ -42,6 +42,7 @@ export interface Room {
     name: string
     destinations: Array<any>
     startAt: Date | null
+    sendsAt?: number
     hostName: string
     hideChatbot: boolean
     roomUrl: string
@@ -182,14 +183,16 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(false)
                 const destinations = formatDestinations(value)
+                const startAt = values.startAt / 1000
                 const room = {
                     ...values,
                     id: fields.id,
                     destinations,
+                    startAt,
+                    sendsAt: getRemindAt(startAt, notification),
                 }
 
-                const remindAt = getRemindAt(room.startAt / 1000, notification)
-                onFormSubmit(room, isEditing, remindAt)
+                onFormSubmit(room, isEditing)
             }}>
             {({ submitForm, isSubmitting }) => (
                 <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
@@ -286,6 +289,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             name="startAt"
                             size="small"
                             component={DateTimePicker}
+                            disablePast
                             inputVariant="outlined"
                             placeholder={t('form.date.placeholder')}
                             fullWidth

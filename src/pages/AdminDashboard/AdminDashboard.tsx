@@ -51,13 +51,12 @@ const AdminDashboard = () => {
         }
     }, [token, userId, dispatch, t])
 
-    const onFormSubmit = (room, isEditing, remindAt) => {
-        room.startAt = room.startAt / 1000
+    const onFormSubmit = (room, isEditing) => {
         if (isEditing) {
             console.log('SAving room: ', room)
             dispatch(editRoom(t, room))
         } else {
-            dispatch(createRoom(t, room, remindAt))
+            dispatch(createRoom(t, room))
         }
     }
 

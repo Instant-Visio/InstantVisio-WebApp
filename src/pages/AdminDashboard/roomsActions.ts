@@ -13,6 +13,7 @@ import {
 import { selectToken } from '../../components/App/userSelector'
 import { Room } from './CreateRoomForm/CreateRoomForm'
 import { getUserDetails } from '../../actions/userActions'
+import { TFunction } from 'i18next'
 
 export const setRooms = (rooms: any): RoomsActionsTypes => ({
     type: SET_ROOMS,
@@ -53,7 +54,7 @@ const countDestinations = (destinations): Record<'phone' | 'email', number> => {
     }, {})
 }
 
-export const createRoom = (t, room: Room, remindAt: number) => async (
+export const createRoom = (t: TFunction, room: Room) => async (
     dispatch,
     getState
 ) => {
@@ -65,13 +66,11 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
         const { roomId } = await api.createRoom(room)
         dispatch(getRooms(t))
 
-        if (remindAt) dispatch(createReminder(t, roomId, remindAt))
         const { destinations } = room
 
         dispatch(setRoomCreated(roomId, countDestinations(destinations)))
-        if (destinations.length) {
-            dispatch(getUserDetails(t))
-        }
+
+        destinations.length && dispatch(getUserDetails(t))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
     }
@@ -83,7 +82,10 @@ export const resetRoomCreated = () => (dispatch) => {
     dispatch(setResetRoomCreated())
 }
 
-export const editRoom = (t, room: Room) => async (dispatch, getState) => {
+export const editRoom = (t: TFunction, room: Room) => async (
+    dispatch,
+    getState
+) => {
     dispatch(showBackdrop())
     const token = selectToken(getState())
     const api = new Api(token)
@@ -93,23 +95,6 @@ export const editRoom = (t, room: Room) => async (dispatch, getState) => {
         dispatch(getRooms(t))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-edit')))
-    }
-
-    dispatch(hideBackdrop())
-}
-
-export const createReminder = (t, roomId, remindAt) => async (
-    dispatch,
-    getState
-) => {
-    dispatch(showBackdrop())
-    const token = selectToken(getState())
-    const api = new Api(token)
-
-    try {
-        await api.createReminder(roomId, remindAt)
-    } catch (err) {
-        dispatch(showErrorMessage(t('errors.reminders-create')))
     }
 
     dispatch(hideBackdrop())

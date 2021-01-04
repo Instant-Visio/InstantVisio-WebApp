@@ -14,10 +14,12 @@ export class Api {
     }
 
     async createRoom(room: Room): Promise<NewRoomResponse> {
-        const { name, hostName, destinations } = room
+        const { name, hostName, destinations, sendsAt, startAt } = room
         return this.apiClient.post('/rooms/new', {
             name,
             hostName,
+            sendsAt: [sendsAt],
+            startAt,
             destinations: destinations?.length
                 ? JSON.stringify(destinations)
                 : null,
