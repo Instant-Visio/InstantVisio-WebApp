@@ -6,7 +6,11 @@ import Button from '@material-ui/core/Button'
 import { IonContent } from '@ionic/react'
 import { withStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import { showModal } from '../../components/Modal/modalAction'
+import { useDispatch } from 'react-redux'
+// import { PricingDetails } from '../../components/PricingDetailsModal/PricingDetails'
 
+// TODO: move CSS in file styles.tsx
 const ButtonSubscribe = withStyles({
     root: {
         background: '#6558f5',
@@ -51,7 +55,6 @@ const Wrapper = styled.div`
         flex-direction: column;
     }
 `
-// TODO: fix division of columns width when resizing window
 const ColumnView = styled.div`
     display: flex;
     flex-direction: column;
@@ -87,6 +90,7 @@ const ColumnView = styled.div`
     }
     .listContainerFree {
         font-size: 1.1rem;
+        margin-top: -3rem;
     }
     .subscriptionButton {
         text-decoration: none;
@@ -100,6 +104,9 @@ const ColumnView = styled.div`
         .hidden {
             display: none;
         }
+        .listContainerFree {
+            margin-top: 0rem;
+        }
     }
     ${SCREEN.DESKTOP} {
         padding: ${({ theme }) =>
@@ -110,6 +117,8 @@ const ColumnView = styled.div`
 export default function Subscriptions() {
     const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
     const history = useHistory()
+    const dispatch = useDispatch()
+    // const showPricingModal = () => dispatch(showModal('PricingDetails')) //TODO: it works only with Newletters type -> see type.ts ti fix it
 
     return (
         <IonContent style={{ '--background': 'white' }}>
@@ -145,8 +154,9 @@ export default function Subscriptions() {
                             <h5>{t('10K-credits-visio')}</h5>
                             <h5>{t('500-credits')}</h5>
                             <h5>{t('unlimited')}</h5>
-                            <ButtonEstimate>
-                                {/* TODO:  onClick={() => dispatch(showLoginModal())}> */}
+                            <ButtonEstimate
+                            //TODO: onClick={showPricingModal}
+                            >
                                 {t('estimate-need')}
                             </ButtonEstimate>
                         </div>
@@ -176,7 +186,9 @@ export default function Subscriptions() {
                             <h5>{t('60K-credits-visio')}</h5>
                             <h5>{t('3000-credits')}</h5>
                             <h5>{t('unlimited')}</h5>
-                            <ButtonEstimate>
+                            <ButtonEstimate
+                            //TODO: onClick={showPricingModal}
+                            >
                                 {t('estimate-need')}
                             </ButtonEstimate>
                         </div>
