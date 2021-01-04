@@ -6,8 +6,8 @@ import Button from '@material-ui/core/Button'
 import { IonContent } from '@ionic/react'
 import { withStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
-import { showModal } from '../../components/Modal/modalAction'
-import { useDispatch } from 'react-redux'
+// import { showModal } from '../../components/Modal/modalAction'
+// import { useDispatch } from 'react-redux'
 // import { PricingDetails } from '../../components/PricingDetailsModal/PricingDetails'
 
 // TODO: move CSS in file styles.tsx
@@ -33,7 +33,7 @@ const ButtonEstimate = withStyles({
         padding: '6px 14px',
         fontSize: '0.9rem',
         fontWeight: 'bolder',
-        marginTop: '${({ theme }) => theme.spacing.M}',
+        marginTop: '1rem',
     },
     label: {
         textTransform: 'capitalize',
@@ -117,7 +117,7 @@ const ColumnView = styled.div`
 export default function Subscriptions() {
     const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
     const history = useHistory()
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     // const showPricingModal = () => dispatch(showModal('PricingDetails')) //TODO: it works only with Newletters type -> see type.ts ti fix it
 
     return (
