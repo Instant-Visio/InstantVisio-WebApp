@@ -62,10 +62,9 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
     const api = new Api(token)
 
     try {
-        const { roomId } = await api.createRoom(room)
+        const reminders = remindAt > 0 ? [remindAt] : null
+        const { roomId } = await api.createRoom(room, reminders)
         dispatch(getRooms(t))
-
-        if (remindAt) dispatch(createReminder(t, roomId, remindAt))
         const { destinations } = room
 
         dispatch(setRoomCreated(roomId, countDestinations(destinations)))
