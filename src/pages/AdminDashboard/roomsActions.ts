@@ -12,6 +12,7 @@ import {
 } from '../../components/App/Backdrop/backdropActions'
 import { selectToken } from '../../components/App/userSelector'
 import { Room } from './CreateRoomForm/CreateRoomForm'
+import { getUserDetails } from '../../actions/userActions'
 
 export const setRooms = (rooms: any): RoomsActionsTypes => ({
     type: SET_ROOMS,
@@ -68,6 +69,9 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
         const { destinations } = room
 
         dispatch(setRoomCreated(roomId, countDestinations(destinations)))
+        if (destinations.length) {
+            dispatch(getUserDetails(t))
+        }
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
     }
