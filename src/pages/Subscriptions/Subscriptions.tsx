@@ -6,11 +6,7 @@ import Button from '@material-ui/core/Button'
 import { IonContent } from '@ionic/react'
 import { withStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
-import VerticallyCenteredModal from '../../components/VerticallyCenteredModal/VerticallyCenteredModal'
 import PricingDetailsModal from '../../components/PricingDetailsModal/PricingDetailsModal'
-// import { showModal } from '../../components/Modal/modalAction'
-// import { useDispatch } from 'react-redux'
-// import { PricingDetails } from '../../components/PricingDetailsModal/PricingDetails'
 
 // consider use MaterialUi Grid to reduce the custom css https://material-ui.com/components/grid/
 const ButtonSubscribe = withStyles({
