@@ -140,9 +140,9 @@ export default function Subscriptions() {
                         </div>
                         <div className="listContainer listContainerFree">
                             {/* TODO: use more explicit names here instead */}
-                            <p>✔ {t('item1')}</p>
-                            <p>✔ {t('item2')}</p>
-                            <p>✔ {t('item3')}</p>
+                            <p>✔ {t('invitation-SMS-email')}</p>
+                            <p>✔ {t('up-to-4')}</p>
+                            <p>✔ {t('encrypted-calls')}</p>
                         </div>
                         <ButtonSubscribe
                             onClick={() => history.push('/pricing')}>
@@ -164,13 +164,13 @@ export default function Subscriptions() {
                         </div>
                         <div className="listContainer">
                             {/* TODO: use a loop */}
-                            <p>✔ {t('item5')}</p>
-                            <p>✔ {t('item6')}</p>
-                            <p>✔ {t('item7')}</p>
-                            <p>✔ {t('item8')}</p>
-                            <p>✔ {t('item9')}</p>
-                            <p>✔ {t('item10')}</p>
-                            <p>✔ {t('item11')}</p>
+                            <p>✔ {t('up-to-50')}</p>
+                            <p>✔ {t('encrypted-calls-EU')}</p>
+                            <p>✔ {t('sharescreen"')}</p>
+                            <p>✔ {t('invitation-SMS-email-notifs')}</p>
+                            <p>✔ {t('group-contact')}</p>
+                            <p>✔ {t('reminder-SMS-email')}</p>
+                            <p>✔ {t('API-instantvisio')}</p>
                         </div>
                         <a
                             className="subscriptionButton"
@@ -196,13 +196,13 @@ export default function Subscriptions() {
                             </ButtonEstimate>
                         </div>
                         <div className="listContainer">
-                            <p>✔ {t('item5')}</p>
-                            <p>✔ {t('item6')}</p>
-                            <p>✔ {t('item7')}</p>
-                            <p>✔ {t('item8')}</p>
-                            <p>✔ {t('item9')}</p>
-                            <p>✔ {t('item10')}</p>
-                            <p>✔ {t('item11')}</p>
+                            <p>✔ {t('up-to-50')}</p>
+                            <p>✔ {t('encrypted-calls-EU')}</p>
+                            <p>✔ {t('sharescreen"')}</p>
+                            <p>✔ {t('invitation-SMS-email-notifs')}</p>
+                            <p>✔ {t('group-contact')}</p>
+                            <p>✔ {t('reminder-SMS-email')}</p>
+                            <p>✔ {t('API-instantvisio')}</p>
                         </div>
                         <a
                             className="subscriptionButton"
