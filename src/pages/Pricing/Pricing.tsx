@@ -5,6 +5,7 @@ import { SCREEN } from '../../styles/theme'
 import Button from '@material-ui/core/Button'
 import { IonContent } from '@ionic/react'
 import { withStyles } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 
 const StyledButton = withStyles({
     root: {
@@ -50,6 +51,10 @@ const ColumnView = styled.div`
     p {
         margin-bottom: 0rem;
     }
+    .subscriptionButton {
+        text-decoration: none;
+        text-align: center;
+    }
 
     ${SCREEN.MOBILE} {
         flex-direction: column;
@@ -65,6 +70,7 @@ const ColumnView = styled.div`
 
 export default function Pricing() {
     const { t } = useTranslation('pricing')
+    const history = useHistory()
 
     return (
         <IonContent style={{ '--background': 'white' }}>
@@ -77,7 +83,13 @@ export default function Pricing() {
                         <p>✔ {t('up-to-4')}</p>
                         <p>✔ {t('encrypted-calls')}</p>
                     </div>
-                    <StyledButton>{t('support-us')}</StyledButton>
+                    <a
+                        className="subscriptionButton"
+                        href="https://www.helloasso.com/associations/instant-visio/paiements/paiement-express"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        <StyledButton>{t('support-us')}</StyledButton>
+                    </a>
                 </ColumnView>
                 <ColumnView>
                     <div className="textContainer">
@@ -91,7 +103,10 @@ export default function Pricing() {
                         <p>✔ {t('reminder-SMS-email')}</p>
                         <p>✔ {t('API-instantvisio')}</p>
                     </div>
-                    <StyledButton>{t('choose-subscription')}</StyledButton>
+                    <StyledButton
+                        onClick={() => history.push('/subscriptions')}>
+                        {t('choose-subscription')}
+                    </StyledButton>
                 </ColumnView>
             </Wrapper>
         </IonContent>
