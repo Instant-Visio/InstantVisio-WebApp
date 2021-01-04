@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom'
 // import { useDispatch } from 'react-redux'
 // import { PricingDetails } from '../../components/PricingDetailsModal/PricingDetails'
 
-// TODO: move CSS in file styles.tsx
+// consider use MaterialUi Grid to reduce the custom css
 const ButtonSubscribe = withStyles({
     root: {
         background: '#6558f5',
@@ -125,6 +125,7 @@ export default function Subscriptions() {
             <MainView>
                 <h1>{t('ours-subscriptions')}</h1>
                 <Wrapper>
+                    {/* TODO:  move ColumnView different children into separate components, in order to make Subscriptions component lighter and easier to read */}
                     <ColumnView>
                         <div className="infoContainer">
                             <h3>{t('free')}</h3>
@@ -138,6 +139,7 @@ export default function Subscriptions() {
                             </div>
                         </div>
                         <div className="listContainer listContainerFree">
+                            {/* TODO: use more explicit names here instead */}
                             <p>✔ {t('item1')}</p>
                             <p>✔ {t('item2')}</p>
                             <p>✔ {t('item3')}</p>
@@ -161,6 +163,7 @@ export default function Subscriptions() {
                             </ButtonEstimate>
                         </div>
                         <div className="listContainer">
+                            {/* TODO: use a loop */}
                             <p>✔ {t('item5')}</p>
                             <p>✔ {t('item6')}</p>
                             <p>✔ {t('item7')}</p>

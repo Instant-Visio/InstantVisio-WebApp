@@ -72,24 +72,24 @@ export default function Pricing() {
                 <ColumnView>
                     <div className="textContainer">
                         <h3>{t('instant-visio')}</h3>
-                        <h5>{t('item0')}</h5>
-                        <p>✔ {t('item1')}</p>
-                        <p>✔ {t('item2')}</p>
-                        <p>✔ {t('item3')}</p>
+                        <h5>{t('mission-statement')}</h5>
+                        <p>✔ {t('invitation-SMS-email')}</p>
+                        <p>✔ {t('up-to-4')}</p>
+                        <p>✔ {t('encrypted-calls')}</p>
                     </div>
                     <StyledButton>{t('support-us')}</StyledButton>
                 </ColumnView>
                 <ColumnView>
                     <div className="textContainer">
                         <h3>{t('entreprise-institution')}</h3>
-                        <h5>{t('item4')}</h5>
-                        <p>✔ {t('item5')}</p>
-                        <p>✔ {t('item6')}</p>
-                        <p>✔ {t('item7')}</p>
-                        <p>✔ {t('item8')}</p>
-                        <p>✔ {t('item9')}</p>
-                        <p>✔ {t('item10')}</p>
-                        <p>✔ {t('item11')}</p>
+                        <h5>{t('profil-persona')}</h5>
+                        <p>✔ {t('up-to-50')}</p>
+                        <p>✔ {t('encrypted-calls-EU')}</p>
+                        <p>✔ {t('sharescreen"')}</p>
+                        <p>✔ {t('invitation-SMS-email-notifs')}</p>
+                        <p>✔ {t('group-contact')}</p>
+                        <p>✔ {t('reminder-SMS-email')}</p>
+                        <p>✔ {t('API-instantvisio')}</p>
                     </div>
                     <StyledButton>{t('choose-subscription')}</StyledButton>
                 </ColumnView>
