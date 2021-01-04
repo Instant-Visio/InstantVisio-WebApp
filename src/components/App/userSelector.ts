@@ -35,6 +35,11 @@ export const selectQuotasUsage = createSelector(
         if (!details) return null
 
         const { subscription, usage } = details
+
+        if (!subscription || !usage) {
+            return null
+        }
+
         const { quotas } = subscription
 
         return {
