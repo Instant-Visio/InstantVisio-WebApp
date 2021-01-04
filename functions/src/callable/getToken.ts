@@ -7,7 +7,7 @@ import {
 import {
     generateNewTokenToUser,
     setNewUserData,
-} from '../triggers/onUserCreation'
+} from '../api/v1/utils/UserUtils'
 import { UID } from '../types/uid'
 
 export const getToken = functions.https.onCall(async (data, context) => {

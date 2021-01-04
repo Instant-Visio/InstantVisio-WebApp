@@ -1,19 +1,10 @@
-import * as functions from 'firebase-functions'
 import * as jsonWebToken from 'jsonwebtoken'
-import { getJWTEnv } from '../firebase/env'
-import { UserDao } from '../db/UserDao'
-import { SUBSCRIPTIONS, TEST_ACCOUNTS } from '../db/constants'
+import { getJWTEnv } from '../../../firebase/env'
+import { UserDao } from '../../../db/UserDao'
+import { SUBSCRIPTIONS, TEST_ACCOUNTS } from '../../../db/constants'
 import * as admin from 'firebase-admin'
-import { isUsingEmulator } from '../api/utils/isUsingEmulator'
-import { UID } from '../types/uid'
-
-export const onUserCreation = functions.auth.user().onCreate(async (user) => {
-    const { uid } = user
-
-    await setNewUserData(uid, user)
-
-    return user
-})
+import { isUsingEmulator } from '../../utils/isUsingEmulator'
+import { UID } from '../../../types/uid'
 
 export const setNewUserData = async (
     userId: UID,
