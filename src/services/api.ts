@@ -13,7 +13,10 @@ export class Api {
         this.apiClient = new ApiClient(jwtToken)
     }
 
-    async createRoom(room: Room): Promise<NewRoomResponse> {
+    async createRoom(
+        room: Room,
+        reminders: Array<any> | null
+    ): Promise<NewRoomResponse> {
         const { name, hostName, destinations } = room
         return this.apiClient.post('/rooms/new', {
             name,
@@ -21,6 +24,7 @@ export class Api {
             destinations: destinations?.length
                 ? JSON.stringify(destinations)
                 : null,
+            sendsAt: reminders,
         })
     }
 

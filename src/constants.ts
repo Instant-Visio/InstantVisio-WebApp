@@ -8,11 +8,11 @@ export const EMULATORS = {
 
 export const TEST_ACCOUNTS = {
     premiumUser: {
-        email: 'paid-user@instantvisio.com',
+        email: 'premium-user@instantvisio.com',
         password: 'test-password',
     },
     freeUser: {
-        email: 'unpaid-user@instantvisio.com',
+        email: 'free-user@instantvisio.com',
         password: 'test-password',
     },
     overQuotaUser: {

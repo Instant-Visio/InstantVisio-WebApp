@@ -25,7 +25,8 @@ export const getRemindAt = (startAt, notification) => {
             break
     }
 
-    return startAt - remindBeforeTimestampSecs
+    const remindAt = startAt - remindBeforeTimestampSecs
+    return remindAt > 0 ? remindAt : 0
 }
 
 export const validateEmail = (email) => {
