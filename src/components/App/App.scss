@@ -64,3 +64,7 @@ ion-content {
 ion-content {
     --ion-background-color: transparent;
 }
+
+.no-topbar-offset {
+    --offset-top: 0 !important;
+}
