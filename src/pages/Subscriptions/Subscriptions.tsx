@@ -7,6 +7,7 @@ import { IonContent } from '@ionic/react'
 import { withStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import PricingDetailsModal from '../../components/PricingDetailsModal/PricingDetailsModal'
+import PricingDetails from '../../components/PricingDetailsModal/PricingDetails'
 
 // consider use MaterialUi Grid to reduce the custom css https://material-ui.com/components/grid/
 const ButtonSubscribe = withStyles({
@@ -153,9 +154,7 @@ export default function Subscriptions() {
                             <h5>{t('10K-credits-visio')}</h5>
                             <h5>{t('500-credits')}</h5>
                             <h5>{t('unlimited')}</h5>
-                            <ButtonEstimate
-                            //TODO: onClick={showPricingModal}
-                            >
+                            <ButtonEstimate onClick={() => setModalShow(true)}>
                                 {t('estimate-need')}
                             </ButtonEstimate>
                         </div>
@@ -191,9 +190,10 @@ export default function Subscriptions() {
                             </ButtonEstimate>
                             <PricingDetailsModal
                                 show={modalShow}
-                                onHide={() =>
-                                    setModalShow(false)
-                                }></PricingDetailsModal>
+                                title={t('estimate-need')}
+                                onHide={() => setModalShow(false)}>
+                                <PricingDetails />
+                            </PricingDetailsModal>
                         </div>
                         <div className="listContainer">
                             <p>✔ {t('up-to-50')}</p>

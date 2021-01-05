@@ -1,12 +1,5 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-// import styled from 'styled-components'
-
-// const StyledIframe = styled.div`
-//     img {
-//         border: 1px solid #c3cfd9;
-//     }
-// `
 
 export default function PricingDetails() {
     const { t } = useTranslation('pricing-details')
@@ -18,10 +11,9 @@ export default function PricingDetails() {
             <p>{t('information.120mn')}</p>
             <h3>{t('information.exemples')}</h3>
             <img
-                src={'../../src/styles/assets/images/pricing/tableur.png'}
+                src="images/pricing-details/tableur.png"
                 alt="tableur_pricing"
-                width="80%"
-                height="10rem"
+                width="100%"
             />
         </div>
     )
