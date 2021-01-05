@@ -22,6 +22,7 @@ import { useDispatch } from 'react-redux'
 import { showPreferencesDialog } from '../../utils/gdpr'
 import About from '../../documents/Instant_Visio_Keynote.pdf'
 import { showModal } from '../Modal/modalAction'
+import packageJson from '../../../package.json'
 
 const Wrapper = styled.div`
     p {
@@ -34,6 +35,11 @@ const StyledLogo = styled.div`
     justify-content: center;
     margin-top: 16px;
     margin-bottom: 16px;
+`
+
+const AppVersion = styled.p`
+    color: black;
+    text-align: center;
 `
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -204,6 +210,7 @@ export default function SwipeableTemporaryDrawer() {
                     </ListItem>
                 </IonList>
                 <Divider />
+                <AppVersion>v{packageJson.version}</AppVersion>
             </div>
         </Wrapper>
     )
