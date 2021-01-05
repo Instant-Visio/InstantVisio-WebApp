@@ -1,11 +1,11 @@
 import { AppBarActionTypes } from './appBarActionTypes'
 import { SHOW_APP_BAR, HIDE_APP_BAR } from './appBarActionTypes'
 
-export const show = (): AppBarActionTypes => ({
+const show = (): AppBarActionTypes => ({
     type: SHOW_APP_BAR,
 })
 
-export const hide = (): AppBarActionTypes => ({
+const hide = (): AppBarActionTypes => ({
     type: HIDE_APP_BAR,
 })
 
