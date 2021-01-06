@@ -36,6 +36,8 @@ import {
     isParticipantValid,
     formatDestinations,
 } from './createRoomTools'
+import { useSelector } from 'react-redux'
+import { selectGroups,  Group } from '../groupsSelector'
 
 export interface Room {
     id: string
@@ -57,7 +59,8 @@ export const Button = styled(MuiButton)(spacing)
 
 const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     const { t } = useTranslation('dashboard')
-    const [value, setValue] = React.useState([])
+    const groups: Array<Group> = useSelector(selectGroups)
+    const [destinations, setDestinations] = React.useState([])
     const [isEditing, setIsEditing] = React.useState(false)
     const [notification, setNotification] = React.useState<Notification>({
         unit: UNITS.mins as Unit,
@@ -70,13 +73,13 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
             const mappedDestinations = mapDestinationsToInputField(
                 fields.destinations
             )
-            setValue(mappedDestinations as any)
+            setDestinations(mappedDestinations as any)
         }
 
         if (fields?.name?.length) {
             setIsEditing(true)
         }
-    }, [setValue, fields])
+    }, [setDestinations, fields])
 
     const ErrorChip = withStyles({
         root: {
@@ -109,8 +112,8 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         event.stopPropagation()
         const { target } = event
         if (target.value.length > 0) {
-            const newValue = [...value, target.value] as never[]
-            setValue(newValue)
+            const newValue = [...destinations, target.value] as never[]
+            setDestinations(newValue)
         }
     }
 
@@ -181,11 +184,11 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
             validateOnBlur={false}
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(false)
-                const destinations = formatDestinations(value)
+                const formattedDestinations = formatDestinations(destinations)
                 const room = {
                     ...values,
                     id: fields.id,
-                    destinations,
+                    formattedDestinations,
                 }
 
                 const remindAt = getRemindAt(room.startAt / 1000, notification)
@@ -248,9 +251,9 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             component={Autocomplete}
                             multiple
                             freeSolo
-                            value={value}
-                            onChange={(event, newValue) => setValue(newValue)}
-                            options={[]}
+                            value={destinations}
+                            onChange={(event, newValue) => setDestinations(newValue)}
+                            options={groups.map((group) => group.name)}
                             onBlur={autoCompleteHandler}
                             defaultValue={[]}
                             renderTags={(value, getTagProps) =>
@@ -315,7 +318,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                                     onClick={() => {
                                         onCreateFormReset()
                                         cancelEdit()
-                                        setValue([])
+                                        setDestinations([])
                                     }}>
                                     {t('form.buttons.cancel')}
                                 </Button>

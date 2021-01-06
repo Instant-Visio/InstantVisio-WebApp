@@ -12,9 +12,11 @@ import { backdropReducer } from '../components/App/Backdrop/backdropReducer'
 import { JoinGroupModalState } from '../components/JoinGroup/joinGroupModalSelector'
 import { joinGroupModalReducer } from '../components/JoinGroup/joinGroupModalReducer'
 import { RoomsState } from '../pages/AdminDashboard/roomsSelector'
+import { GroupsState } from '../pages/AdminDashboard/groupsSelector'
 import { roomsReducer } from '../pages/AdminDashboard/roomsReducer'
 import { AppBarState } from '../components/App/AppBar/redux/appBarSelectors'
 import { appBarReducer } from '../components/App/AppBar/redux/appBarReducer'
+import { groupsReducer } from '../pages/AdminDashboard/groupsReducer'
 
 export interface AppState {
     user: UserState
@@ -26,6 +28,7 @@ export interface AppState {
     joinGroupModal: JoinGroupModalState
     rooms: RoomsState
     appBar: AppBarState
+    groups: GroupsState
 }
 
 const rootReducer = combineReducers({
@@ -38,6 +41,7 @@ const rootReducer = combineReducers({
     joinGroupModal: joinGroupModalReducer,
     rooms: roomsReducer,
     appBar: appBarReducer,
+    groups: groupsReducer
 })
 
 export default rootReducer

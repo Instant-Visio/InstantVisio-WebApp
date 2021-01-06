@@ -18,6 +18,9 @@ import {
     getRooms,
     resetRoomCreated,
 } from './roomsActions'
+import {
+    getGroups
+} from './groupsActions'
 import UserDetails from './UserDetails'
 import { Room } from './CreateRoomForm/CreateRoomForm'
 import CreateRoomConfirmation from './CreateRoomConfirmation'
@@ -44,6 +47,7 @@ const AdminDashboard = () => {
         if (token) {
             dispatch(getUserDetails(t))
             dispatch(getRooms(t))
+            dispatch(getGroups(t))
         }
 
         return () => {
