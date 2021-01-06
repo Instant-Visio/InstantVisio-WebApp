@@ -14,6 +14,7 @@ import { selectIsPremiumUser } from '../userSelector'
 import { isMobile, isNative } from '../../../services/platform'
 import { showJoinGroupModal } from '../../JoinGroup/joinGroupModalActions'
 import Logo from '../../Logo/Logo'
+import { selectAppBar } from './redux/appBarSelectors'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -55,6 +56,7 @@ const AppBar = () => {
     const { t } = useTranslation('common')
     const dispatch = useDispatch()
     const history = useHistory()
+    const { isDisplayed } = useSelector(selectAppBar)
 
     const renderWebOnlyButtons = () => {
         if (!isMobile()) {
@@ -85,26 +87,28 @@ const AppBar = () => {
     }
 
     return (
-        <div className={classes.root}>
-            <WhiteAppBar>
-                <MaterialAppBar color="primary" position="static">
-                    <Toolbar>
-                        <LogoWrapper>
-                            <Logo />
-                        </LogoWrapper>
-                        {isNative() && (
-                            <Button
-                                onClick={openJoinGroupModal}
-                                color="primary">
-                                {t('appBar.joinGroupButton')}
-                            </Button>
-                        )}
-                        {renderWebOnlyButtons()}
-                        <SwipeableTemporaryDrawer />
-                    </Toolbar>
-                </MaterialAppBar>
-            </WhiteAppBar>
-        </div>
+        isDisplayed && (
+            <div className={classes.root}>
+                <WhiteAppBar>
+                    <MaterialAppBar color="primary" position="static">
+                        <Toolbar>
+                            <LogoWrapper>
+                                <Logo />
+                            </LogoWrapper>
+                            {isNative() && (
+                                <Button
+                                    onClick={openJoinGroupModal}
+                                    color="primary">
+                                    {t('appBar.joinGroupButton')}
+                                </Button>
+                            )}
+                            {renderWebOnlyButtons()}
+                            <SwipeableTemporaryDrawer />
+                        </Toolbar>
+                    </MaterialAppBar>
+                </WhiteAppBar>
+            </div>
+        )
     )
 }
 
