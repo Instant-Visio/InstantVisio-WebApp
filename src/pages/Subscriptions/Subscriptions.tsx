@@ -1,43 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import { SCREEN } from '../../styles/theme'
-import Button from '@material-ui/core/Button'
+// import { SCREEN } from '../../styles/theme'
 import { IonContent } from '@ionic/react'
-import { withStyles } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import PricingDetailsModal from '../../components/PricingDetailsModal/PricingDetailsModal'
 import PricingDetails from '../../components/PricingDetailsModal/PricingDetails'
-
-// consider use MaterialUi Grid to reduce the custom css https://material-ui.com/components/grid/
-const ButtonSubscribe = withStyles({
-    root: {
-        background: '#6558f5',
-        color: 'white',
-        padding: '6px 14px',
-        marginTop: '24px',
-        fontSize: '0.9rem',
-        fontWeight: 'bolder',
-        alignSelf: 'center',
-    },
-    label: {
-        textTransform: 'capitalize',
-    },
-})(Button)
-
-const ButtonEstimate = withStyles({
-    root: {
-        background: '#1aae9f',
-        color: 'white',
-        padding: '6px 14px',
-        fontSize: '0.9rem',
-        fontWeight: 'bolder',
-        marginTop: '1rem',
-    },
-    label: {
-        textTransform: 'capitalize',
-    },
-})(Button)
+import ButtonEstimate from '../../components/Button/ButtonEstimate'
+import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
 
 const MainView = styled.div`
     h1 {
@@ -46,72 +17,6 @@ const MainView = styled.div`
     }
 `
 
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    ${SCREEN.MOBILE} {
-        flex-direction: column;
-    }
-`
-const ColumnView = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 25%;
-    padding: 2rem 2% 2rem 2%;
-    min-width: 220px;
-    background: ${({ theme }) => theme.color.white};
-    border: 1px solid #c3cfd9;
-    margin: ${({ theme }) => theme.spacing.XXL};
-
-    h3 {
-        margin-bottom: ${({ theme }) => theme.spacing.S};
-    }
-
-    .infoContainer > h5:nth-of-type(1) {
-        height: 4rem;
-        margin-bottom: ${({ theme }) => theme.spacing.XL};
-    }
-    p {
-        margin-bottom: 0rem;
-    }
-    .infoContainer {
-        // border: 1px solid #c3cfd9; // DEBUG
-        text-align: center;
-        margin-bottom: ${({ theme }) => theme.spacing.M};
-    }
-    .listContainer {
-        // border: 1px solid #c3cfd9; // DEBUG
-    }
-    .hidden {
-        visibility: hidden;
-    }
-    .listContainerFree {
-        font-size: 1.1rem;
-        margin-top: -3rem;
-    }
-    .subscriptionButton {
-        text-decoration: none;
-        text-align: center;
-    }
-    ${SCREEN.MOBILE} {
-        flex-direction: column;
-        padding: ${({ theme }) =>
-            `${theme.spacing.XXL} 3rem ${theme.spacing.XXL} 3rem`};
-        width: 80%;
-        .hidden {
-            display: none;
-        }
-        .listContainerFree {
-            margin-top: 0rem;
-        }
-    }
-    ${SCREEN.DESKTOP} {
-        padding: ${({ theme }) =>
-            `${theme.spacing.XXXL} 3rem ${theme.spacing.XXXL} 3rem`};
-    }
-`
 const listPackage = [
     'up-to-50',
     'encrypted-calls-EU',
@@ -131,8 +36,8 @@ export default function Subscriptions() {
         <IonContent style={{ '--background': 'white' }}>
             <MainView>
                 <h1>{t('ours-subscriptions')}</h1>
-                <Wrapper>
-                    <ColumnView>
+                <Grid container>
+                    <Grid item lg>
                         <div className="infoContainer">
                             <h3>{t('free')}</h3>
                             <h5>{t('meeting1')}</h5>
@@ -141,7 +46,7 @@ export default function Subscriptions() {
                             <div className="hidden">
                                 <h5>hidden</h5>
                                 <h5>hidden but with longer text</h5>
-                                <ButtonEstimate>hidden</ButtonEstimate>
+                                <ButtonEstimate title="" />
                             </div>
                         </div>
                         <div className="listContainer listContainerFree">
@@ -150,20 +55,21 @@ export default function Subscriptions() {
                             <p>✔ {t('encrypted-calls')}</p>
                         </div>
                         <ButtonSubscribe
-                            onClick={() => history.push('/pricing')}>
-                            {t('support-us')}
-                        </ButtonSubscribe>
-                    </ColumnView>
-                    <ColumnView>
+                            onClick={() => history.push('/pricing')}
+                            title={t('support-us')}
+                        />
+                    </Grid>
+                    <Grid item lg>
                         <div className="infoContainer">
                             <h3>{t('premium')}</h3>
                             <h5>{t('meeting2')}</h5>
                             <h5>{t('10K-credits-visio')}</h5>
                             <h5>{t('500-credits')}</h5>
                             <h5>{t('unlimited')}</h5>
-                            <ButtonEstimate onClick={() => setModalShow(true)}>
-                                {t('estimate-need')}
-                            </ButtonEstimate>
+                            <ButtonEstimate
+                                onClick={() => setModalShow(true)}
+                                title={t('estimate-need')}
+                            />
                         </div>
                         <div className="listContainer">
                             {listPackage.map((item, index) => (
@@ -175,21 +81,20 @@ export default function Subscriptions() {
                             href="https://www.helloasso.com/associations/instant-visio/paiements/souscription-au-service-premium"
                             target="_blank"
                             rel="noopener noreferrer">
-                            <ButtonSubscribe>
-                                {t('subscription1')}
-                            </ButtonSubscribe>
+                            <ButtonSubscribe title={t('subscription1')} />
                         </a>
-                    </ColumnView>
-                    <ColumnView>
+                    </Grid>
+                    <Grid item lg>
                         <div className="infoContainer">
                             <h3>{t('business')}</h3>
                             <h5>{t('meeting3')}</h5>
                             <h5>{t('60K-credits-visio')}</h5>
                             <h5>{t('3000-credits')}</h5>
                             <h5>{t('unlimited')}</h5>
-                            <ButtonEstimate onClick={() => setModalShow(true)}>
-                                {t('estimate-need')}
-                            </ButtonEstimate>
+                            <ButtonEstimate
+                                onClick={() => setModalShow(true)}
+                                title={t('estimate-need')}
+                            />
                             <PricingDetailsModal
                                 show={modalShow}
                                 title={t('how-to')}
@@ -207,12 +112,10 @@ export default function Subscriptions() {
                             href="https://www.helloasso.com/associations/instant-visio/paiements/compte-business?banner=True"
                             target="_blank"
                             rel="noopener noreferrer">
-                            <ButtonSubscribe>
-                                {t('subscription2')}
-                            </ButtonSubscribe>
+                            <ButtonSubscribe title={t('subscription2')} />
                         </a>
-                    </ColumnView>
-                </Wrapper>
+                    </Grid>
+                </Grid>
             </MainView>
         </IonContent>
     )
