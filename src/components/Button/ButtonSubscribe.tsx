@@ -4,12 +4,7 @@
  */
 
 import React from 'react'
-import {
-    createStyles,
-    makeStyles,
-    Theme,
-    withStyles,
-} from '@material-ui/core/styles'
+import { Theme, withStyles } from '@material-ui/core/styles'
 
 import { Button } from '@material-ui/core'
 import { purple } from '@material-ui/core/colors'
@@ -21,31 +16,21 @@ const PurpleButton = withStyles((theme: Theme) => ({
         backgroundColor: '#6558f5',
         color: 'white',
         padding: '6px 14px',
-        marginTop: '24px',
+        marginTop: theme.spacing(3),
         fontSize: '0.9rem',
         fontWeight: 'bolder',
+        alignSelf: 'center',
         '&:hover': {
             backgroundColor: purple[700],
         },
     },
 }))(Button)
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        margin: {
-            margin: theme.spacing(1),
-        },
-    })
-)
-
 export default function ButtonEstimate(props: { onClick?: any; title: any }) {
-    const classes = useStyles()
-
     return (
         <PurpleButton
             variant="contained"
             color="primary"
-            className={classes.margin}
             onClick={props.onClick}>
             {props.title}
         </PurpleButton>

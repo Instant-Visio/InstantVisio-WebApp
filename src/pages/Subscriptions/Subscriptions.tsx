@@ -23,13 +23,13 @@ export default function Subscriptions() {
             <MainView>
                 <h1>{t('ours-subscriptions')}</h1>
                 <Grid container>
-                    <Grid item lg>
+                    <Grid item md>
                         <SubscriptionFree />
                     </Grid>
-                    <Grid item lg>
+                    <Grid item md>
                         <SubscriptionPremium />
                     </Grid>
-                    <Grid item lg>
+                    <Grid item md>
                         <SubscriptionBusiness />
                     </Grid>
                 </Grid>

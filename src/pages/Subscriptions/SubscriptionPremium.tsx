@@ -4,6 +4,7 @@ import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
 import PricingDetailsModal from '../../components/PricingDetailsModal/PricingDetailsModal'
 import PricingDetails from '../../components/PricingDetailsModal/PricingDetails'
 import { useTranslation } from 'react-i18next'
+import { MainView } from './style'
 
 const listPackage = [
     'up-to-50',
@@ -15,12 +16,12 @@ const listPackage = [
     'API-instantvisio',
 ]
 
-export default function SubscriptionsFree() {
+export default function SubscriptionPremium() {
     const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
     const [modalShow, setModalShow] = React.useState(false)
 
     return (
-        <>
+        <MainView>
             <div className="infoContainer">
                 <h3>{t('premium')}</h3>
                 <h5>{t('meeting2')}</h5>
@@ -50,6 +51,6 @@ export default function SubscriptionsFree() {
                 rel="noopener noreferrer">
                 <ButtonSubscribe title={t('subscription1')} />
             </a>
-        </>
+        </MainView>
     )
 }

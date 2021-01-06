@@ -4,12 +4,7 @@
  */
 
 import React from 'react'
-import {
-    createStyles,
-    makeStyles,
-    Theme,
-    withStyles,
-} from '@material-ui/core/styles'
+import { Theme, withStyles } from '@material-ui/core/styles'
 
 import { Button } from '@material-ui/core'
 import { lightGreen } from '@material-ui/core/colors'
@@ -21,7 +16,7 @@ const GreenButton = withStyles((theme: Theme) => ({
         color: 'white',
         backgroundColor: '#1aae9f',
         padding: '6px 14px',
-        marginTop: '24px',
+        marginTop: theme.spacing(3),
         fontSize: '0.9rem',
         fontWeight: 'bolder',
         '&:hover': {
@@ -30,22 +25,11 @@ const GreenButton = withStyles((theme: Theme) => ({
     },
 }))(Button)
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        margin: {
-            margin: theme.spacing(1),
-        },
-    })
-)
-
 export default function ButtonEstimate(props: { onClick?: any; title: any }) {
-    const classes = useStyles()
-
     return (
         <GreenButton
             variant="contained"
             color="primary"
-            className={classes.margin}
             onClick={props.onClick}>
             {props.title}
         </GreenButton>

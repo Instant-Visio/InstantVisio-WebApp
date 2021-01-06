@@ -2,13 +2,14 @@ import React from 'react'
 import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
+import { MainView } from './style'
 
 export default function SubscriptionsFree() {
     const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
     const history = useHistory()
 
     return (
-        <>
+        <MainView>
             <div className="infoContainer">
                 <h3>{t('free')}</h3>
                 <h5>{t('meeting1')}</h5>
@@ -29,6 +30,6 @@ export default function SubscriptionsFree() {
                 onClick={() => history.push('/pricing')}
                 title={t('support-us')}
             />
-        </>
+        </MainView>
     )
 }
