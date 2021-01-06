@@ -112,6 +112,15 @@ const ColumnView = styled.div`
             `${theme.spacing.XXXL} 3rem ${theme.spacing.XXXL} 3rem`};
     }
 `
+const listPackage = [
+    'up-to-50',
+    'encrypted-calls-EU',
+    'sharescreen"',
+    'invitation-SMS-email-notifs',
+    'group-contact',
+    'reminder-SMS-email',
+    'API-instantvisio',
+]
 
 export default function Subscriptions() {
     const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
@@ -123,7 +132,6 @@ export default function Subscriptions() {
             <MainView>
                 <h1>{t('ours-subscriptions')}</h1>
                 <Wrapper>
-                    {/* TODO:  move ColumnView different children into separate components, in order to make Subscriptions component lighter and easier to read */}
                     <ColumnView>
                         <div className="infoContainer">
                             <h3>{t('free')}</h3>
@@ -137,7 +145,6 @@ export default function Subscriptions() {
                             </div>
                         </div>
                         <div className="listContainer listContainerFree">
-                            {/* TODO: use more explicit names here instead */}
                             <p>✔ {t('invitation-SMS-email')}</p>
                             <p>✔ {t('up-to-4')}</p>
                             <p>✔ {t('encrypted-calls')}</p>
@@ -159,14 +166,9 @@ export default function Subscriptions() {
                             </ButtonEstimate>
                         </div>
                         <div className="listContainer">
-                            {/* TODO: use a loop */}
-                            <p>✔ {t('up-to-50')}</p>
-                            <p>✔ {t('encrypted-calls-EU')}</p>
-                            <p>✔ {t('sharescreen"')}</p>
-                            <p>✔ {t('invitation-SMS-email-notifs')}</p>
-                            <p>✔ {t('group-contact')}</p>
-                            <p>✔ {t('reminder-SMS-email')}</p>
-                            <p>✔ {t('API-instantvisio')}</p>
+                            {listPackage.map((item, index) => (
+                                <p key={index}>✔ {t(item)}</p>
+                            ))}
                         </div>
                         <a
                             className="subscriptionButton"
@@ -196,13 +198,9 @@ export default function Subscriptions() {
                             </PricingDetailsModal>
                         </div>
                         <div className="listContainer">
-                            <p>✔ {t('up-to-50')}</p>
-                            <p>✔ {t('encrypted-calls-EU')}</p>
-                            <p>✔ {t('sharescreen"')}</p>
-                            <p>✔ {t('invitation-SMS-email-notifs')}</p>
-                            <p>✔ {t('group-contact')}</p>
-                            <p>✔ {t('reminder-SMS-email')}</p>
-                            <p>✔ {t('API-instantvisio')}</p>
+                            {listPackage.map((item, index) => (
+                                <p key={index}>✔ {t(item)}</p>
+                            ))}
                         </div>
                         <a
                             className="subscriptionButton"
