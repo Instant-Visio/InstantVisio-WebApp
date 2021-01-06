@@ -158,7 +158,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     }
 
     const renderTag = (participant, index, getTagProps) => {
-        const ChipElement = isParticipantValid(participant) ? Chip : ErrorChip
+        const ChipElement = isParticipantValid(participant, groups) ? Chip : ErrorChip
 
         return (
             <ChipElement
@@ -251,6 +251,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             component={Autocomplete}
                             multiple
                             freeSolo
+                            filterSelectedOptions
                             value={destinations}
                             onChange={(event, newValue) => setDestinations(newValue)}
                             options={groups.map((group) => group.name)}
