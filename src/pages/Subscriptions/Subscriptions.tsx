@@ -190,7 +190,7 @@ export default function Subscriptions() {
                             </ButtonEstimate>
                             <PricingDetailsModal
                                 show={modalShow}
-                                title={t('estimate-need')}
+                                title={t('how-to')}
                                 onHide={() => setModalShow(false)}>
                                 <PricingDetails />
                             </PricingDetailsModal>

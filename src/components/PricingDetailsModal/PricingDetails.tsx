@@ -6,14 +6,15 @@ const ModalContent = styled.div`
     margin: ${({ theme }) =>
         `0rem ${theme.spacing.XXXL} 0rem ${theme.spacing.XXL}`};
     h3 {
-        font-weight: bold;
-        margin-bottom: ${({ theme }) => theme.spacing.XXXL};
-    }
-    h3:nth-of-type(2) {
         text-align: center;
         margin-bottom: 0rem;
+        font-weight: bold;
+    }
+    h3:nth-of-type(1) {
+        margin-bottom: ${({ theme }) => theme.spacing.XXXL};
     }
     p {
+        font-size: ${({ theme }) => theme.spacing.L};
         margin-bottom: 0rem;
     }
     p:nth-of-type(2) {
@@ -29,7 +30,8 @@ export default function PricingDetails() {
             <h3>{t('information.packages')}</h3>
             <p>{t('information.1-credit')}</p>
             <p>{t('information.120mn')}</p>
-            <h3>{t('information.exemples')}</h3>
+            <h3>{t('information.questions')}</h3>
+            <h3>{t('information.examples')}</h3>
             <img
                 src="images/pricing-details/tableur.png"
                 alt="tableur_pricing"

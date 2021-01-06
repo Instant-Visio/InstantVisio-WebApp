@@ -1,9 +1,9 @@
 {
     "information": {
-        "how-to": "Commennt estimer mes besoins",
         "packages": "Nos formules premiums comprennet des crédits visio & SMS et vous permet d'envoyer un nombre illimités d'invitations par email et par notification.",
         "1-credit": "Un crédit visio = 1 minute participant. Il s'agit d'une minute passée par participant en visio.",
         "120mn": "Ex: un appel visio d'une heure avec 2 personnes consomme 120minutes-participants",
-        "exemples": "Combien coûte une réunion ? Combien de réunion puis-je faire ? Quelques exemples :"
+        "questions": "Combien coûte une réunion ? Combien de réunion puis-je faire ? Quelques exemples :",
+        "examples": "Quelques exemples :"
     }
 }
