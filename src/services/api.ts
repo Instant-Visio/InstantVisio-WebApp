@@ -91,4 +91,8 @@ export class Api {
     async getUserDetails(userId): Promise<any> {
         return this.apiClient.get(`/users/${userId}`)
     }
+
+    async getGroups() : Promise<any> {
+        return this.apiClient.get(`/groups`)
+    }
 }

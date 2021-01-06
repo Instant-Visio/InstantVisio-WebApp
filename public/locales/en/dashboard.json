@@ -10,6 +10,7 @@
         "rooms-fetch": "Error retrieving planned discussions",
         "rooms-create": "Error creating meeting",
         "rooms-edit": "Error editing the meeting",
+        "groups-fetch": "Error retrieving groups",
         "reminders-create": "Error creating notification"
     },
     "confirmation": {

@@ -1,5 +1,6 @@
 import { parsePhoneNumber } from 'libphonenumber-js'
 import { UNITS } from '../Reminders/NotificationSelector'
+import { Group } from  '../groupsSelector'
 
 export const mapDestinationsToInputField = (destinations) => {
     const values = [] as any
@@ -29,12 +30,12 @@ export const getRemindAt = (startAt, notification) => {
     return remindAt > 0 ? remindAt : 0
 }
 
-export const validateEmail = (email) => {
+export const validateEmail = (email : string): boolean => {
     const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return regexp.test(email)
 }
 
-export const validatePhoneNumber = (phoneNumber) => {
+export const validatePhoneNumber = (phoneNumber : string): boolean => {
     let isValid = true
 
     try {
@@ -46,8 +47,13 @@ export const validatePhoneNumber = (phoneNumber) => {
     return isValid
 }
 
-export const isParticipantValid = (participant) => {
-    return validateEmail(participant) || validatePhoneNumber(participant)
+export const validateGroupName = (groupName : string, groups : Array<Group>): boolean => {
+    const groupFound = groups.find(group => group.name === groupName);
+    return groupFound !== undefined;
+}
+
+export const isParticipantValid = (participant : string, groups : Array<Group>): boolean => {
+    return validateEmail(participant) || validatePhoneNumber(participant) || validateGroupName(participant, groups);
 }
 
 export const isNumeric = (destination) => {
