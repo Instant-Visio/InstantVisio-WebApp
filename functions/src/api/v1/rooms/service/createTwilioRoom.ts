@@ -14,7 +14,7 @@ export const createTwilioRoom = async (roomId: RoomId) => {
         statusCallback: `https://${domain}/api/v1-private/webhook/twilioStatusCallback`,
     })
     return {
-        sid: room.sid,
+        sid: room?.sid,
         twilioRoomId,
     }
 }
