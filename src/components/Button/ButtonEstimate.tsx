@@ -1,5 +1,5 @@
 /**
- * This file was modified by
+ * This file was created by
  * Nicolas Hovart <hovart.nicolasa@gmail.com>
  */
 
@@ -27,10 +27,7 @@ const GreenButton = withStyles((theme: Theme) => ({
 
 export default function ButtonEstimate(props: { onClick?: any; title: any }) {
     return (
-        <GreenButton
-            variant="contained"
-            color="primary"
-            onClick={props.onClick}>
+        <GreenButton variant="contained" onClick={props.onClick}>
             {props.title}
         </GreenButton>
     )

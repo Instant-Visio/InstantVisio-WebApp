@@ -19,19 +19,18 @@ const PurpleButton = withStyles((theme: Theme) => ({
         marginTop: theme.spacing(3),
         fontSize: '0.9rem',
         fontWeight: 'bolder',
-        alignSelf: 'center',
+        // width: '100%',
+        // textAlign: 'center',
         '&:hover': {
             backgroundColor: purple[700],
         },
+        textTransform: 'none',
     },
 }))(Button)
 
 export default function ButtonEstimate(props: { onClick?: any; title: any }) {
     return (
-        <PurpleButton
-            variant="contained"
-            color="primary"
-            onClick={props.onClick}>
+        <PurpleButton variant="contained" onClick={props.onClick}>
             {props.title}
         </PurpleButton>
     )

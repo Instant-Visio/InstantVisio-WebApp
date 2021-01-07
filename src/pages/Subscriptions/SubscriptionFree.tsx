@@ -18,18 +18,23 @@ export default function SubscriptionsFree() {
                 <div className="hidden">
                     <h5>hidden</h5>
                     <h5>hidden but with longer text</h5>
-                    <ButtonSubscribe title="" />
+                    <ButtonSubscribe title="Text" />
                 </div>
             </div>
-            <div className="listContainer listContainerFree">
-                <p>✔ {t('invitation-SMS-email')}</p>
-                <p>✔ {t('up-to-4')}</p>
-                <p>✔ {t('encrypted-calls')}</p>
+            <div className="flexend">
+                <div className="listContainer listContainerFree">
+                    <p>✔ {t('invitation-SMS-email')}</p>
+                    <p>✔ {t('up-to-4')}</p>
+                    <p>✔ {t('encrypted-calls')}</p>
+                </div>
+                {/* <div className="fillSpace"></div> */}
+                <div className="subscriptionButton">
+                    <ButtonSubscribe
+                        onClick={() => history.push('/pricing')}
+                        title={t('support-us')}
+                    />
+                </div>
             </div>
-            <ButtonSubscribe
-                onClick={() => history.push('/pricing')}
-                title={t('support-us')}
-            />
         </MainView>
     )
 }
