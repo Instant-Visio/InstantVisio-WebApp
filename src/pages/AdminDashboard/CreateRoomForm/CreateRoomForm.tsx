@@ -16,8 +16,6 @@ import {
     getRemindAt,
     formatDestinations,
 } from './createRoomTools'
-import { useSelector } from 'react-redux'
-import { selectGroups, Group } from '../groupsSelector'
 import ToggleButton from '@material-ui/lab/ToggleButton'
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup'
 
@@ -44,11 +42,8 @@ enum DateToggleValue {
     LATER = 'later',
 }
 
-export const Button = styled(MuiButton)(spacing)
-
 const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     const { t } = useTranslation('dashboard')
-    const groups: Array<Group> = useSelector(selectGroups)
     const [dateToggleValue, setToggleValue] = React.useState<string | null>(
         DateToggleValue.NOW
     )
