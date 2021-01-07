@@ -38,6 +38,8 @@ import {
 } from './createRoomTools'
 import { useSelector } from 'react-redux'
 import { selectGroups,  Group } from '../groupsSelector'
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 export interface Room {
     id: string
@@ -55,11 +57,17 @@ interface Notification {
     number: number
 }
 
+enum DateToggleValue {
+    NOW = "now",
+    LATER = "later"
+}
+
 export const Button = styled(MuiButton)(spacing)
 
 const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
     const { t } = useTranslation('dashboard')
     const groups: Array<Group> = useSelector(selectGroups)
+    const [dateToggleValue, setToggleValue] = React.useState<string | null>(DateToggleValue.NOW);
     const [destinations, setDestinations] = React.useState([])
     const [isEditing, setIsEditing] = React.useState(false)
     const [notification, setNotification] = React.useState<Notification>({
@@ -175,6 +183,10 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         setIsEditing(false)
     }
 
+    const dateToggleChanged = (event: React.MouseEvent<HTMLElement>, newValue: string | null) => {
+        setToggleValue(newValue);
+    };
+
     return (
         <Formik
             enableReinitialize
@@ -190,8 +202,11 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                     id: fields.id,
                     formattedDestinations,
                 }
-
+                if(dateToggleValue === DateToggleValue.NOW){
+                    room.startAt = null;
+                }
                 const remindAt = getRemindAt(room.startAt / 1000, notification)
+
                 onFormSubmit(room, isEditing, remindAt)
             }}>
             {({ submitForm, isSubmitting }) => (
@@ -282,21 +297,41 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                         <Typography variant="h6" component="h2">
                             {t('form.plan-visio.title')}
                         </Typography>
-                        <Typography variant="body1">
-                            {t('form.plan-visio.description')}
-                        </Typography>
                         <Box m={2} />
-                        <Field
-                            name="startAt"
-                            size="small"
-                            component={DateTimePicker}
-                            inputVariant="outlined"
-                            placeholder={t('form.date.placeholder')}
-                            fullWidth
-                            locale="fr"
-                            format="dd MMMM yyyy à HH:mm"
-                            ampm={false}
-                        />
+                        <ToggleButtonGroup
+                            value={dateToggleValue}
+                            exclusive
+                            onChange={dateToggleChanged}
+                            aria-label="text alignment"
+                            >
+                            <ToggleButton value={DateToggleValue.NOW}>
+                                {t('form.plan-visio.now')}
+                            </ToggleButton>
+                            <ToggleButton value={DateToggleValue.LATER}>
+                                {t('form.plan-visio.later')}
+                            </ToggleButton>
+                        </ToggleButtonGroup>
+                        <Box m={2} />
+                        {dateToggleValue === DateToggleValue.LATER && (
+                            <>
+                                <Typography variant="body1">
+                                {t('form.plan-visio.description')}
+                                </Typography>
+                                <Box m={2} />
+                                <Field
+                                    name="startAt"
+                                    size="small"
+                                    component={DateTimePicker}
+                                    inputVariant="outlined"
+                                    placeholder={t('form.date.placeholder')}
+                                    fullWidth
+                                    locale="fr"
+                                    format="dd MMMM yyyy à HH:mm"
+                                    ampm={false}
+                                />
+                            </>
+                        )}
+                        
                         <Box m={4} />
 
                         {!isEditing && (
