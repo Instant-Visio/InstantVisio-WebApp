@@ -43,6 +43,9 @@ export default function InviteParticipantsForm() {
                 }}>
                 {({ submitForm, isSubmitting }) => (
                     <Form>
+                        <Typography variant="h5" component="h2">
+                            {t('add-participants-form:title')}
+                        </Typography>
                         <Typography variant="h6" component="h2">
                             {t('dashboard:form.participants.title')}
                         </Typography>

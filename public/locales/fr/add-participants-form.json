@@ -1,0 +1,10 @@
+{
+    "title": "Ajouter des participants",
+    "buttons": {
+        "submit": "Je confirme"
+    },
+    "invited": "Invitation envoyée!",
+    "errors": {
+        "general": "Impossible envoyer l'invitation"
+    }
+}

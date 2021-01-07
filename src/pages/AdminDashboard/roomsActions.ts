@@ -5,7 +5,10 @@ import {
     RESET_ROOM_CREATED,
 } from './roomsActionTypes'
 import { Api } from '../../services/api'
-import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
+import {
+    showErrorMessage,
+    showSuccessMessage,
+} from '../../components/App/Snackbar/snackbarActions'
 import {
     hideBackdrop,
     showBackdrop,
@@ -87,8 +90,9 @@ export const inviteParticipants = (t, roomId, hostName, destinations) => async (
         const token = selectToken(getState())
         const api = new Api(token)
         await api.inviteParticipants(roomId, hostName, destinations)
+        dispatch(showSuccessMessage(t('add-participants-form:invited')))
     } catch (err) {
-        dispatch(showErrorMessage(t('errors.rooms-create')))
+        dispatch(showErrorMessage(t('add-participants-form:errors.general')))
     }
     dispatch(hideBackdrop())
 }
