@@ -41,7 +41,9 @@
         },
         "plan-visio": {
             "title": "Plan your Visio Meeting",
-            "description": "Pick date and time to start your Visio."
+            "description": "Pick date and time to start your Visio.",
+            "now" : "Now",
+            "later" : "Later"
         },
         "date": {
             "placeholder": "Click here to pick the date and time"

@@ -41,7 +41,9 @@
         },
         "plan-visio": {
             "title": "Planifier votre RDV en visio",
-            "description": "Choisissez la date et l'heure de début de votre visio."
+            "description": "Choisissez la date et l'heure de début de votre visio.",
+            "now" : "Maintenant",
+            "later" : "Plus tard"
         },
         "date": {
             "placeholder": "Cliquez pour choisir la date et l'heure"
