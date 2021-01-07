@@ -109,6 +109,7 @@ export const editRoom = (t, room: Room) => async (dispatch, getState) => {
     try {
         await api.editRoom(room)
         dispatch(getRooms(t))
+        dispatch(showSuccessMessage(t('add-participants-form:invited')))
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-edit')))
     }
