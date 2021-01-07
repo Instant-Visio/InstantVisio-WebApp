@@ -3,4 +3,4 @@ export interface ModalProps {
     isOpened: boolean
 }
 
-export type ModalType = 'Newsletter'
+export type ModalType = 'Newsletter' | 'InviteParticipants'
