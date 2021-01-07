@@ -4,8 +4,9 @@ import Newsletter from '../NewsletterModal/NewsletterModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectModal } from './modalSelector'
 import { hideModal } from './modalAction'
+import InviteParticipants from '../InviteParticipants/InviteParticipantsModal'
 
-const modals = { Newsletter }
+const modals = { Newsletter, InviteParticipants }
 
 export default function ModalRoot() {
     const { modalType, isDisplayed } = useSelector(selectModal)

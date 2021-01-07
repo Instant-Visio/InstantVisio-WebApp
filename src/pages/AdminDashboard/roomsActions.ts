@@ -78,6 +78,21 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
     dispatch(hideBackdrop())
 }
 
+export const inviteParticipants = (t, roomId, hostName, destinations) => async (
+    dispatch,
+    getState
+) => {
+    dispatch(showBackdrop())
+    try {
+        const token = selectToken(getState())
+        const api = new Api(token)
+        await api.inviteParticipants(roomId, hostName, destinations)
+    } catch (err) {
+        dispatch(showErrorMessage(t('errors.rooms-create')))
+    }
+    dispatch(hideBackdrop())
+}
+
 export const resetRoomCreated = () => (dispatch) => {
     dispatch(setResetRoomCreated())
 }
