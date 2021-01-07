@@ -93,7 +93,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                 const room = {
                     ...values,
                     id: fields.id,
-                    formattedDestinations,
+                    destinations: formattedDestinations,
                 }
                 if (dateToggleValue === DateToggleValue.NOW) {
                     room.startAt = null
