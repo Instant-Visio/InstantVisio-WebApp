@@ -17,9 +17,11 @@ import { Typography, Grid, Hidden } from '@material-ui/core'
 import ToggleAudioButton from '../Buttons/ToggleAudioButton/ToggleAudioButton'
 import ToggleVideoButton from '../Buttons/ToggleVideoButton/ToggleVideoButton'
 import ToggleScreenShareButton from '../Buttons/ToogleScreenShareButton/ToggleScreenShareButton'
+import { showModal } from '../../../../components/Modal/modalAction'
 // import InviteParticipants from '../../../../components/InviteParticipants/InviteParticipants'
 // import { selectRoomId, selectHostName } from '../../roomSelector'
 // import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -78,12 +80,17 @@ export default function MenuBar() {
     const classes = useStyles()
     const { isSharingScreen, toggleScreenShare } = useVideoContext()
     const roomState = useRoomState()
+    const dispatch = useDispatch()
     const isReconnecting = roomState === 'reconnecting'
     //TODO show the room name in and before the premium video call screen
     // const { room } = useVideoContext()
     // const roomId = useSelector(selectRoomId)
     // const hostName = useSelector(selectHostName)
     // const roomName = formatRoomName(room.name)
+
+    const showInviteParticipantsModal = () => {
+        dispatch(showModal('InviteParticipants'))
+    }
 
     return (
         <>
@@ -112,6 +119,9 @@ export default function MenuBar() {
                         <Grid container justify="center">
                             <ToggleAudioButton disabled={isReconnecting} />
                             <ToggleVideoButton disabled={isReconnecting} />
+                            <Button onClick={showInviteParticipantsModal}>
+                                Add participants
+                            </Button>
                             {/* <InviteParticipants
                                 roomId={roomId}
                                 hostName={hostName}

@@ -77,11 +77,11 @@ export class Api {
 
     async inviteParticipants(
         roomId: RoomId,
-        hostname: string,
+        hostName: string,
         destinations: [any]
     ): Promise<any> {
         return this.apiClient.post(`/rooms/${roomId}/inviteParticipants`, {
-            hostname,
+            hostName,
             destinations: JSON.stringify(destinations),
         })
     }

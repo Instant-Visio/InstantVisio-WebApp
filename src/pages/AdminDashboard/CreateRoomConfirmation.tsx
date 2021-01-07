@@ -8,7 +8,7 @@ import { selectCreatedRoom } from './roomsSelector'
 import { Link } from 'react-router-dom'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { preventDefault } from './UserDetails'
-import { Button } from './CreateRoomForm/CreateRoomForm'
+import Button from '../../components/Button/Button'
 import { resetRoomCreated } from './roomsActions'
 import { makeStyles } from '@material-ui/core'
 

@@ -1,12 +1,9 @@
 {
     "title": "Add participants",
-    "description": "Note here all telephone numbers and email addresses to which you want to send an invite. You can also add a group name.",
-    "notice": "Telephone numbers must not contain any 'space' caracters",
     "buttons": {
-        "cancel": "Cancel",
         "submit": "I confirm"
     },
-    "placeholder": "Type participants addresses ...",
+    "invited": "Invite sent with success!",
     "errors": {
         "general": "An error occurred while trying to send invites"
     }

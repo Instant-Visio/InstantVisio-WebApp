@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "start": "react-scripts start",
-        "start-chrome": "BROWSER=\"google chrome\" react-scripts start",
+        "start:chrome": "BROWSER=\"google chrome\" react-scripts start",
+        "start:chrome:local": "env-cmd -f .env.local npm run start:chrome",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
