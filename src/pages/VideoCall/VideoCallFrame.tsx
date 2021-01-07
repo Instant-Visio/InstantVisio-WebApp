@@ -13,11 +13,18 @@ import { addCallRating } from '../../actions/addCallRating'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 1500,
-        [theme.breakpoints.down('md')]: {
-            maxWidth: 300,
-        },
+        maxWidth: '100%'
     },
+    help: {
+        fontSize: 20,
+        [theme.breakpoints.down('md')]: {
+            fontSize: 12,
+            marginLeft:30,
+            marginRight:30
+        },
+        textAlign: 'center',
+        color: 'white'
+    }
 }))
 
 const StyledRating = withStyles({
@@ -28,7 +35,6 @@ const StyledRating = withStyles({
       color: '#724BDD',
     },
   })(Rating);
-
 
 const VideoCallFrame = ({
     participantsNumber,
@@ -82,6 +88,10 @@ const VideoCallFrame = ({
 
             {hasLeft && (
                 <div>
+                    <Grid
+                        container
+                        justify="center"
+                        alignItems="center">
                     <Card 
                         title={t('leave-title-card')} 
                         messageOne={t('leave-messageOne-card')} 
@@ -93,14 +103,13 @@ const VideoCallFrame = ({
                         container
                         justify="center"
                         alignItems="center"
-                        className={classes.root}>
+                        >
                         <Typography
-                            style={{ textAlign: 'center', marginTop: 20 }}
+                            className={classes.help}
                             variant="h5"
                             component="h6">
                             {t('leave-help-us-message')}
                         </Typography>
-                    </Grid>
                     <Grid container justify="center" alignItems="center">
                         <StyledRating
                             name="instantvisio-feedback"
@@ -109,6 +118,8 @@ const VideoCallFrame = ({
                             onChange={onChange}
                         />
                     </Grid>
+                </Grid>
+            </Grid>
                 </div>
             )}
         </IframeContainer>
