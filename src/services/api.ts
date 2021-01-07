@@ -13,6 +13,10 @@ export class Api {
         this.apiClient = new ApiClient(jwtToken)
     }
 
+    stringifyDestinations(destinations: any) {
+        return destinations?.length ? JSON.stringify(destinations) : null
+    }
+
     async createRoom(
         room: Room,
         reminders: Array<any> | null
@@ -21,9 +25,7 @@ export class Api {
         return this.apiClient.post('/rooms/new', {
             name,
             hostName,
-            destinations: destinations?.length
-                ? JSON.stringify(destinations)
-                : null,
+            destinations: this.stringifyDestinations(destinations),
             sendsAt: reminders,
         })
     }
@@ -34,7 +36,7 @@ export class Api {
             name,
             hostName,
             startAt,
-            destinations: JSON.stringify(destinations),
+            destinations: this.stringifyDestinations(destinations),
         })
     }
 
@@ -92,7 +94,7 @@ export class Api {
         return this.apiClient.get(`/users/${userId}`)
     }
 
-    async getGroups() : Promise<any> {
+    async getGroups(): Promise<any> {
         return this.apiClient.get(`/groups`)
     }
 }
