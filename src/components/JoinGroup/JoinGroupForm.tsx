@@ -66,7 +66,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                         component={TextField}
                         variant="outlined"
                         name="displayName"
-                        label={t('fields.username.placeholder')}
+                        placeholder={t('fields.username.placeholder')}
                     />
                     <Box m={4} />
 
@@ -82,7 +82,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                         component={TextField}
                         variant="outlined"
                         name="groupId"
-                        label={t('fields.id.placeholder')}
+                        placeholder={t('fields.id.placeholder')}
                     />
                     <Box m={4} />
 
@@ -99,7 +99,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                         variant="outlined"
                         type="password"
                         name="groupPassword"
-                        label={t('fields.password.placeholder')}
+                        placeholder={t('fields.password.placeholder')}
                     />
                     <Box m={4} />
                     <Box display="flex" justifyContent="flex-end">
