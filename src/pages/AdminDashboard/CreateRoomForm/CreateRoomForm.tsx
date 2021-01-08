@@ -122,7 +122,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             variant="outlined"
                             name="name"
                             required={true}
-                            label={t('form.visio-name.placeholder')}
+                            placeholder={t('form.visio-name.placeholder')}
                         />
                         <Box m={4} />
                         <Typography variant="h6" component="h2">
@@ -138,7 +138,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                             variant="outlined"
                             name="hostName"
                             required={true}
-                            label={t('form.host-name.placeholder')}
+                            placeholder={t('form.host-name.placeholder')}
                         />
                         <Box m={4} />
 
