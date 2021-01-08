@@ -2,8 +2,6 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { TextField } from 'formik-material-ui'
-import { spacing } from '@material-ui/system'
-import { styled } from '@material-ui/core/styles'
 import Button from '../Button/Button'
 import { Formik, Form, Field } from 'formik'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
@@ -12,6 +10,7 @@ import { selectToken } from '../App/userSelector'
 import { useSelector } from 'react-redux'
 import { createGroup } from '../../pages/AdminDashboard/groupsActions'
 import { useDispatch } from 'react-redux'
+import { validationSchema } from './formValidation'
 
 export interface Group {
     name: string
@@ -23,25 +22,13 @@ const CreateGroupForm = () => {
     const token = useSelector(selectToken)
     const dispatch = useDispatch()
 
-
-    const validateForm = (values) => {
-        const errors: Partial<Group> = {}
-        const requiredFields = ['name', 'password']
-        for (const requiredField of requiredFields) {
-            if (!values[requiredField]) {
-                errors[requiredField] = 'Required'
-            }
-        }
-        return errors
-    }
-
     return (
         <Formik
             initialValues={{
                 name: '',
                 password: '',
             }}
-            validate={(values) => validateForm(values)}
+            validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(true)
                 dispatch(createGroup(t,values))
