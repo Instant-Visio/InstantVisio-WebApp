@@ -100,11 +100,7 @@ export class Api {
     async createGroup(
         group: Group,
     ): Promise<NewGroupResponse> {
-        const { name, password } = group
-        return this.apiClient.post('/groups', {
-            name,
-            password
-        })
+        return this.apiClient.post('/groups', group)
     }
 
 
