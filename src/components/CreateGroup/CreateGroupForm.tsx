@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box'
 import { TextField } from 'formik-material-ui'
 import { spacing } from '@material-ui/system'
 import { styled } from '@material-ui/core/styles'
-import MuiButton from '@material-ui/core/Button'
+import Button from '../Button/Button'
 import { Formik, Form, Field } from 'formik'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
 import { useTranslation } from 'react-i18next'
@@ -12,8 +12,6 @@ import { selectToken } from '../App/userSelector'
 import { useSelector } from 'react-redux'
 import { createGroup } from '../../pages/AdminDashboard/groupsActions'
 import { useDispatch } from 'react-redux'
-
-const Button = styled(MuiButton)(spacing)
 
 export interface Group {
     name: string
