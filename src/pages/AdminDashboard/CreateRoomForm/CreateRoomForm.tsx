@@ -185,6 +185,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                                     name="startAt"
                                     size="small"
                                     component={DateTimePicker}
+                                    disablePast
                                     inputVariant="outlined"
                                     placeholder={t('form.date.placeholder')}
                                     fullWidth
