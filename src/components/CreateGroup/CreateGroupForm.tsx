@@ -68,7 +68,7 @@ const CreateGroupForm = () => {
                         component={TextField}
                         variant="outlined"
                         name="name"
-                        label={t('fields.name.placeholder')}
+                        placeholder={t('fields.name.placeholder')}
                     />
                     <Box m={4} />
 
@@ -85,7 +85,7 @@ const CreateGroupForm = () => {
                         variant="outlined"
                         type="password"
                         name="password"
-                        label={t('fields.password.placeholder')}
+                        placeholder={t('fields.password.placeholder')}
                     />
                     <Box m={4} />
                     <Box display="flex" justifyContent="flex-end">
