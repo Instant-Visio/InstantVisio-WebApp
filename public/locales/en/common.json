@@ -46,6 +46,8 @@
         "title": "URGENT video call request from",
         "Message": "invites you to a video chat. Join the chat now at this link:"
     },
+    "required-field": "Le champ est obligatoire",
+    "invalid-date": "Invalid date",
     "appBar": {
         "appName": "Instant Visio",
         "joinVisioButton": "Join Visio",
