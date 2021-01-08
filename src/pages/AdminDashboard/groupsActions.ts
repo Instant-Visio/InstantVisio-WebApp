@@ -3,7 +3,7 @@ import {
     SET_GROUPS,
 } from './groupsActionTypes'
 import { Api } from '../../services/api'
-import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
+import { showErrorMessage, showSuccessMessage } from '../../components/App/Snackbar/snackbarActions'
 import { selectToken } from '../../components/App/userSelector'
 import {
     hideBackdrop,
@@ -42,8 +42,9 @@ export const createGroup = (t, group: Group) => async (
     try {
         await api.createGroup(group)
         dispatch(getGroups(t))
+        dispatch(showSuccessMessage(t('success')))
     } catch (err) {
-        dispatch(showErrorMessage(t('errors.rooms-create')))
+        dispatch(showErrorMessage(t('error')))
     }
 
     dispatch(hideBackdrop())
