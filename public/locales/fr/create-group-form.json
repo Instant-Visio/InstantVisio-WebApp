@@ -1,0 +1,20 @@
+
+{
+    "title": "Créer un groupe",
+    "fields": {
+        "name": {
+            "title": "Nom du groupe",
+            "description": "Tapez ici le nom du groupe que vous voulez créer",
+            "placeholder": "Nom du groupe"
+        },
+        "password": {
+            "title": "Mot de passe du groupe",
+            "description": "Tapez ici le mot de passe du groupe",
+            "placeholder": "Mot de passe"
+        }
+    },
+    "submit": "Créer",
+    "success": "Le groupe a bien été créé",
+    "error": "Erreur: Impossible de créer le groupe",
+    "missing-registration-token": "Impossible de créer un groupe. Veuillez ressayer plus tard"
+}
