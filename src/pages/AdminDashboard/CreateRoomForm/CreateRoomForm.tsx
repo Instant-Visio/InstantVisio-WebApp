@@ -192,22 +192,23 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                                     format="dd MMMM yyyy à HH:mm"
                                     ampm={false}
                                 />
+
+                                <Box m={2} />
+                                {!isEditing && (
+                                    <>
+                                        <Typography variant="h6" component="h2">
+                                            {t('form.reminders.title')}
+                                        </Typography>
+                                        <NotificationSelector
+                                            notification={notification}
+                                            setNotification={setNotification}
+                                        />
+                                    </>
+                                )}
                             </>
                         )}
 
                         <Box m={4} />
-
-                        {!isEditing && (
-                            <>
-                                <Typography variant="h6" component="h2">
-                                    {t('form.reminders.title')}
-                                </Typography>
-                                <NotificationSelector
-                                    notification={notification}
-                                    setNotification={setNotification}
-                                />
-                            </>
-                        )}
 
                         <Box display="flex" justifyContent="flex-end">
                             {isEditing && (
