@@ -42,16 +42,22 @@
         "plan-visio": {
             "title": "Plan your Visio Meeting",
             "description": "Pick date and time to start your Visio.",
-            "now" : "Now",
-            "later" : "Later"
+            "now": "Now",
+            "later": "Later"
         },
         "date": {
             "placeholder": "Click here to pick the date and time"
+        },
+        "reminders": {
+            "title": "Reminder Notifications"
         },
         "buttons": {
             "submit": "Create visio",
             "save": "Save",
             "cancel": "Cancel"
+        },
+        "messages": {
+            "saved": "Correctly saved"
         }
     }
 }

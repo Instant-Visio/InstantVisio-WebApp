@@ -10,19 +10,25 @@ import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 1500,
+        maxWidth: '100%',
         [theme.breakpoints.down('md')]: {
-            maxWidth: 300,
+            maxWidth: '90%',
         },
     },
     title: {
         fontSize: 40,
+        [theme.breakpoints.down('md')]: {
+            fontSize: 28,
+        },
         textAlign: 'center',
         fontWeight: 'bold',
         color: '#30404f',
     },
     pos: {
         fontSize: 35,
+        [theme.breakpoints.down('md')]: {
+            fontSize: 17,
+        },
         textAlign: 'center',
         fontWeight: 'bold',
         color: '#30404f',
@@ -36,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
         fontSize: 20,
+        [theme.breakpoints.down('md')]: {
+            fontSize: 10,
+        }
     },
 }))
 

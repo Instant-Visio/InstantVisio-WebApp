@@ -1,0 +1,24 @@
+{
+    "title": "Join group",
+    "fields": {
+        "id": {
+            "title": "Group name",
+            "description": "Write here the group name of the group to join",
+            "placeholder": "Group name"
+        },
+        "password": {
+            "title": "Group password",
+            "description": "Write here the group password",
+            "placeholder": "Password"
+        },
+        "username": {
+            "title": "Your display name",
+            "description": "Write your display name here",
+            "placeholder": "Joseph"
+        }
+    },
+    "submit": "Join",
+    "success": "You are now part of group {{groupId}}",
+    "error": "Impossible to join the group {{groupId}}",
+    "missing-registration-token": "Impossible to join a group. Please try again later"
+}
