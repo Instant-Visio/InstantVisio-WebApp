@@ -9,8 +9,7 @@ export const MainView = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 772px;
-    // min-width: 420px;
+    min-height: 650px;
 
     h1 {
         font-size: ${({ theme }) => theme.spacing.L};
