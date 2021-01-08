@@ -77,7 +77,9 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         event: React.MouseEvent<HTMLElement>,
         newValue: string | null
     ) => {
-        setToggleValue(newValue)
+        if(newValue !== null) {
+            setToggleValue(newValue)
+        }
     }
 
     return (
