@@ -22,7 +22,7 @@ export default function Subscriptions() {
         <IonContent style={{ '--background': 'white' }}>
             <MainView>
                 <h1>{t('ours-subscriptions')}</h1>
-                <Grid container>
+                <Grid container spacing={0} justify="center">
                     <Grid item sm>
                         <SubscriptionFree />
                     </Grid>

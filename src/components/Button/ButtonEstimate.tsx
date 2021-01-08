@@ -7,9 +7,6 @@ import React from 'react'
 import { Theme, withStyles } from '@material-ui/core/styles'
 
 import { Button } from '@material-ui/core'
-import { lightGreen } from '@material-ui/core/colors'
-
-// TODO: find correct color '#1aae9f' in @material-ui/core/colors
 
 const GreenButton = withStyles((theme: Theme) => ({
     root: {
@@ -20,7 +17,7 @@ const GreenButton = withStyles((theme: Theme) => ({
         fontSize: '0.9rem',
         fontWeight: 'bolder',
         '&:hover': {
-            backgroundColor: lightGreen[700],
+            backgroundColor: '#60e0d0',
         },
     },
 }))(Button)

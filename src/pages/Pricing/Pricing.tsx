@@ -2,25 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
-import Button from '@material-ui/core/Button'
 import { IonContent } from '@ionic/react'
-import { withStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
 
-const StyledButton = withStyles({
-    root: {
-        background: '#6558f5',
-        color: 'white',
-        padding: '6px 14px',
-        marginTop: '24px',
-        fontSize: '0.9rem',
-        fontWeight: 'bolder',
-        alignSelf: 'center',
-    },
-    label: {
-        textTransform: 'capitalize',
-    },
-})(Button)
+const listPackage = [
+    'up-to-50',
+    'encrypted-calls-EU',
+    'sharescreen"',
+    'invitation-SMS-email-notifs',
+    'group-contact',
+    'reminder-SMS-email',
+    'API-instantvisio',
+]
 
 const Wrapper = styled.div`
     display: flex;
@@ -88,25 +82,23 @@ export default function Pricing() {
                         href="https://www.helloasso.com/associations/instant-visio/paiements/paiement-express"
                         target="_blank"
                         rel="noopener noreferrer">
-                        <StyledButton>{t('support-us')}</StyledButton>
+                        <ButtonSubscribe title={t('support-us')} />
                     </a>
                 </ColumnView>
                 <ColumnView>
                     <div className="textContainer">
                         <h3>{t('entreprise-institution')}</h3>
                         <h5>{t('profil-persona')}</h5>
-                        <p>✔ {t('up-to-50')}</p>
-                        <p>✔ {t('encrypted-calls-EU')}</p>
-                        <p>✔ {t('sharescreen"')}</p>
-                        <p>✔ {t('invitation-SMS-email-notifs')}</p>
-                        <p>✔ {t('group-contact')}</p>
-                        <p>✔ {t('reminder-SMS-email')}</p>
-                        <p>✔ {t('API-instantvisio')}</p>
+                        {listPackage.map((item, index) => (
+                            <p key={index}>✔ {t(item)}</p>
+                        ))}
                     </div>
-                    <StyledButton
-                        onClick={() => history.push('/subscriptions')}>
-                        {t('choose-subscription')}
-                    </StyledButton>
+                    <div className="subscriptionButton">
+                        <ButtonSubscribe
+                            onClick={() => history.push('/subscriptions')}
+                            title={t('choose-subscription')}
+                        />
+                    </div>
                 </ColumnView>
             </Wrapper>
         </IonContent>

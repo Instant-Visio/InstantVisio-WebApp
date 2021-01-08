@@ -7,9 +7,6 @@ import React from 'react'
 import { Theme, withStyles } from '@material-ui/core/styles'
 
 import { Button } from '@material-ui/core'
-import { purple } from '@material-ui/core/colors'
-
-// TODO: find correct color '#6558f5' in @material-ui/core/colors
 
 const PurpleButton = withStyles((theme: Theme) => ({
     root: {
@@ -22,7 +19,7 @@ const PurpleButton = withStyles((theme: Theme) => ({
         // width: '100%',
         // textAlign: 'center',
         '&:hover': {
-            backgroundColor: purple[700],
+            backgroundColor: '#1c2dc1',
         },
         textTransform: 'none',
     },

@@ -10,30 +10,29 @@ export default function SubscriptionsFree() {
 
     return (
         <MainView>
-            <div className="infoContainer">
-                <h3>{t('free')}</h3>
-                <h5>{t('meeting1')}</h5>
-                <h5>{t('50-visios')}</h5>
-                {/* trick: to have same heights in all columns: */}
-                <div className="hidden">
-                    <h5>hidden</h5>
-                    <h5>hidden but with longer text</h5>
-                    <ButtonSubscribe title="Text" />
+            <div>
+                <div className="infoContainer">
+                    <h3>{t('free')}</h3>
+                    <h5>{t('meeting1')}</h5>
+                    <h5>{t('50-visios')}</h5>
+                    {/* trick: to have same heights in all columns: */}
+                    <div className="hidden">
+                        <h5>hidden</h5>
+                        <h5>hidden but with longer text</h5>
+                        <ButtonSubscribe title="Text" />
+                    </div>
                 </div>
-            </div>
-            <div className="flexend">
                 <div className="listContainer listContainerFree">
                     <p>✔ {t('invitation-SMS-email')}</p>
                     <p>✔ {t('up-to-4')}</p>
                     <p>✔ {t('encrypted-calls')}</p>
                 </div>
-                {/* <div className="fillSpace"></div> */}
-                <div className="subscriptionButton">
-                    <ButtonSubscribe
-                        onClick={() => history.push('/pricing')}
-                        title={t('support-us')}
-                    />
-                </div>
+            </div>
+            <div className="subscriptionButton">
+                <ButtonSubscribe
+                    onClick={() => history.push('/pricing')}
+                    title={t('support-us')}
+                />
             </div>
         </MainView>
     )

@@ -1,11 +1,16 @@
 import styled from 'styled-components'
 
 export const MainView = styled.div`
-    padding: 2rem 7% 2rem 7%;
+    padding: 2rem 1rem 2rem 1rem;
     background: ${({ theme }) => theme.color.white};
     border: 1px solid #c3cfd9;
-    margin: 6%;
-    height: 96%; // not so good
+    margin: ${({ theme }) => theme.spacing.XXL};
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 772px;
+    // min-width: 420px;
 
     h1 {
         font-size: ${({ theme }) => theme.spacing.L};
@@ -17,6 +22,9 @@ export const MainView = styled.div`
     .infoContainer > h5:nth-of-type(1) {
         height: 4rem;
         margin-bottom: ${({ theme }) => theme.spacing.XL};
+    }
+    h5 {
+        min-width: 160px;
     }
     p {
         margin-bottom: 0rem;
@@ -38,12 +46,5 @@ export const MainView = styled.div`
     .subscriptionButton {
         text-decoration: none;
         text-align: center;
-    }
-    .fillSpace {
-    }
-    .flexend {
-        display: flex;
-        flex-direction: column;
-        align-content: space-between;
     }
 `
