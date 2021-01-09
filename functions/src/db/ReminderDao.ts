@@ -15,18 +15,9 @@ export class ReminderDao {
             .get()
 
         return snapshot.docs.map((doc) => {
-            const {
-                destinations,
-                hostName,
-                sendAt,
-                isSent,
-                createdAt,
-                updatedAt,
-            } = doc.data()
+            const { sendAt, isSent, createdAt, updatedAt } = doc.data()
             return {
                 id: doc.id,
-                destinations,
-                hostName,
                 roomId,
                 sendAt: sendAt.seconds,
                 isSent,
