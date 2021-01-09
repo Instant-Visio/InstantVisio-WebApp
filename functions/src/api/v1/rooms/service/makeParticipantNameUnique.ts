@@ -1,6 +1,5 @@
 import { twilioClient } from './twilioClient'
 import { RoomId } from '../../../../types/Room'
-import { TwilioConstants } from './TwilioConstants'
 import { LOTR_NAMES } from '../../utils/LOTR_NAMES'
 
 export const makeParticipantNameUnique = async (
@@ -17,9 +16,7 @@ export const makeParticipantNameUnique = async (
 
     const connectedParticipantNames = participants.reduce(
         (acc: string[], participant) => {
-            if (participant.status === TwilioConstants.STATUS_CONNECTED) {
-                acc.push(participant.identity)
-            }
+            acc.push(participant.identity)
 
             return acc
         },
