@@ -21,6 +21,11 @@ import Flags from 'country-flag-icons/react/3x2'
 import { selectGroups, Group } from '../groupsSelector'
 import { useSelector } from 'react-redux'
 
+interface Props {
+    destinations: unknown[]
+    setDestinations: Function
+}
+
 interface MyInputProps {
     onKeyDown: (event: object) => void
 }
@@ -50,7 +55,11 @@ const ErrorChip = withStyles({
     },
 })(Chip)
 
-export const InviteParticipantsField = ({ destinations, setDestinations }) => {
+export const InviteParticipantsField = ({
+    destinations,
+    setDestinations,
+}: Props) => {
+    console.log(destinations)
     const { t } = useTranslation('dashboard')
     const classes = useStyles()
 
@@ -125,7 +134,7 @@ export const InviteParticipantsField = ({ destinations, setDestinations }) => {
             freeSolo
             filterSelectedOptions
             value={destinations}
-            onChange={(event, newValue) => setDestinations(newValue)}
+            onChange={(_, newValue) => setDestinations(newValue)}
             options={groups.map((group) => group.name)}
             onBlur={autoCompleteHandler}
             defaultValue={[]}
