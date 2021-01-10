@@ -12,6 +12,8 @@ import ModalRoot from '../Modal/ModalRoot'
 import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
 import Backdrop from './Backdrop/Backdrop'
 import JoinGroupModal from '../JoinGroup/JoinGroupModal'
+import useFirebaseCrashlytics from '../../hooks/useFirebaseCrashlytics'
+
 declare global {
     interface Window {
         iv: any
@@ -43,6 +45,8 @@ const App = () => {
 
         gdprHandler()
     }, [])
+
+    useFirebaseCrashlytics()
 
     return (
         <IonApp className="App">
