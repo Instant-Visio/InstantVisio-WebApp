@@ -1,4 +1,4 @@
-import { isDate, setSeconds } from 'date-fns'
+import { isDate } from 'date-fns'
 import i18n from '../../../i18n/i18n'
 import * as Yup from 'yup'
 
