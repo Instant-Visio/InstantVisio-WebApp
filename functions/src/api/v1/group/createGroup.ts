@@ -68,6 +68,12 @@ export const createGroup = wrap(async (req: Request, res: Response) => {
     const password = req.body.password
     const members = JSONParse(req.body.members || '[]')
 
+    // add the owner to the members
+    members.push({
+        id: userId,
+        name: 'Owner',
+    })
+
     if (!password) {
         throw new BadRequestError('Password is required')
     }
