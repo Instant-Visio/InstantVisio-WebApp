@@ -13,9 +13,9 @@ import {
     inviteParticipant,
     InviteParticipantsResponse,
 } from '../invite/inviteParticipants'
-import { JSONParse } from '../utils/JSONParse'
 import { parseDestinations } from '../utils/parseDestinations'
 import { ROOM_MAX_DURATION_MILLISECONDS } from '../../../constants'
+import { parseSendsAt } from './parseSendsAt'
 
 /**
  * @swagger
@@ -205,10 +205,6 @@ type ProcessDestinationsResponse =
     | {
           reminderIds: ReminderId[]
       }
-
-const parseSendsAt = (sendsAt: string | Array<string>): string[] => {
-    return Array.isArray(sendsAt) ? sendsAt : JSONParse(sendsAt)
-}
 
 const isRoomStartingBeforeMaxDuration = (startAt: Timestamp) => {
     return startAt.toMillis() < Date.now() + ROOM_MAX_DURATION_MILLISECONDS
