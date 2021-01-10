@@ -19,6 +19,11 @@ Currently in development and deployed for development propose only
 
 # Setup
 
+## Configurations
+- `.env.development` -> local development environment
+- `.env.staging` -> staging environment
+- `.env.production` -> production environment
+
 ## Front
 
 -   Make sure you have a correct version of `./.env.development`.
@@ -29,27 +34,42 @@ npm i # Install dependencies
 npm start # Run the app
 ```
 
+## Front Staging (use staging server)
+```bash
+nvm use # Use correct node version
+npm i # Install dependencies
+npm start:staging # Run the app
+```
+
+## Start development server with Chrome
+
+```bash
+npm run start:chrome
+```
 ### Local Emulator
 
-If you want to use Firebase Emulators to run the app locally:
+If you want to use Firebase Emulators (with watch/live-reload enabled) to run the app locally:
 
 ```bash
 cd functions;
-export FIREBASE_AUTH_EMULATOR_HOST="localhost:9099"
-nvm use; npm run serve-emulators
+nvm use; npm run serve:watch
 ```
 
-Furthermore, you need to change your `.env.development` file to set the following information:
+Running the front with one of the following commands will connect to the emulator:
 
-```
-REACT_APP_AUTH_EMULATOR_ENABLED=true
-REACT_APP_API_URL=http://localhost:5050/.../api # Check the URL exposed by firebase functions emulator
+```bash
+npm start
+npm run start:chrome
+npm run:ios
+npm run:android
 ```
 
 ### Seed local database
 
+**Note**: database is automatically seed when using emulators locally
+
 To seed/populate the emulator database with test users and some basic firestore data, you can use a route on the API. 
-1. Start the API using emulators: `cd function && npm run serve-emulators`
+1. Start the API using emulators: `cd function && npm run serve-watch`
 2. Open `http://localhost:5050/instantvisio-dev/us-central1/api/api/v1-tests/seeds/` in your browser/postman/anything in GET
 3. Upon success seeding, test users are answered by the network request
 
