@@ -47,7 +47,7 @@
         "Message": "invites you to a video chat. Join the chat now at this link:"
     },
     "required-field": "Le champ est obligatoire",
-    "invalid-date": "Invalid date",
+    "invalid-min-date": "Date should not be before current day",
     "appBar": {
         "appName": "Instant Visio",
         "joinVisioButton": "Join Visio",

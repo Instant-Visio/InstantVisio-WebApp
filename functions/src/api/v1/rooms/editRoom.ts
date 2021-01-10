@@ -51,7 +51,7 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
     if (req.body.hideChatbot) {
         dataToEdit.hideChatbot = req.body.hideChatbot === 'true'
     }
-    if (req.body.startTimestamp) {
+    if (req.body.startAt) {
         dataToEdit.startAt = Timestamp.fromMillis(+req.body.startAt * 1000)
     }
     if (req.body.name) {
