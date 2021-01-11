@@ -1,5 +1,6 @@
 import { PushNotificationParams } from '../types/Notification'
 import { messaging } from '../firebase/firebase'
+import * as functions from 'firebase-functions'
 
 export const sendPush = async (
     params: PushNotificationParams,
@@ -19,6 +20,7 @@ export const sendPush = async (
             tokens: params.tokens.filter((token) => token?.length),
         })
     } catch (error) {
-        console.log('Failed to send push notification to topic', error)
+        console.error('Failed to send push notification', error)
+        throw new functions.https.HttpsError('unknown', error.message)
     }
 }
