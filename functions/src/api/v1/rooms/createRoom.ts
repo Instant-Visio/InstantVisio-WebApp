@@ -14,7 +14,10 @@ import {
     InviteParticipantsResponse,
 } from '../invite/inviteParticipants'
 import { parseDestinations } from '../utils/parseDestinations'
-import { ROOM_MAX_DURATION_MILLISECONDS } from '../../../constants'
+import {
+    DEFAULT_TIMEZONE,
+    ROOM_MAX_DURATION_MILLISECONDS,
+} from '../../../constants'
 import { parseSendsAt } from './parseSendsAt'
 
 /**
@@ -92,7 +95,7 @@ export const createRoom = async ({
     destinations,
     sendsAt,
     hideChatbot = false,
-    timezone = 'Europe/Paris',
+    timezone = DEFAULT_TIMEZONE,
 }: {
     userId: UID
     hideChatbot?: boolean

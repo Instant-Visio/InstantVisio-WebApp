@@ -8,12 +8,14 @@ import {
     NotificationContent,
     NotificationParams,
     NotificationType,
+    PushNotificationParams,
 } from '../types/Notification'
 import { getAppEnv } from '../firebase/env'
 import { sendNotification } from './sendNotification'
 import { RoomId } from '../types/Room'
 import { RoomDao } from '../db/RoomDao'
 import { UserDao } from '../db/UserDao'
+import { DEFAULT_TIMEZONE } from '../constants'
 
 export interface SendNotificationsResult {
     emailsSent: string[]
@@ -159,7 +161,7 @@ const processPushDestinations = async (
             const tokens = await UserDao.getRegistrationTokensForGroup(
                 dest.groupId
             )
-            const params: any = {
+            const params: PushNotificationParams = {
                 ...content,
                 type: NotificationType.PushNotificationType,
                 lang: dest.lang,
@@ -169,9 +171,9 @@ const processPushDestinations = async (
                 additionalData: {
                     roomId: roomId,
                     password: room.password,
-                    timezone: content.timezone,
+                    timezone: content.timezone || DEFAULT_TIMEZONE,
                     roomUrl: content.roomUrl,
-                    startAt: room.startAt.toMillis() / 1000,
+                    startAt: `${room.startAt.toMillis() / 1000}`,
                 },
             }
             if (content.timezone) {
