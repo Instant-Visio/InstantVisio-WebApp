@@ -107,7 +107,7 @@ export class Api {
 
     async deleteMembers(
         groupId : string,
-        members : [Member]
+        members : Array<Member>
     ): Promise<any> {
         return this.apiClient.delete(`/groups/${groupId}/removeMembers`, {
             members: JSON.stringify(members)

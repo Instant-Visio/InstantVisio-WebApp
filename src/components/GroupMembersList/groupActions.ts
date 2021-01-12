@@ -5,18 +5,19 @@ import {
 import { Api } from '../../services/api'
 import { showErrorMessage } from '../App/Snackbar/snackbarActions'
 import { selectToken } from '../App/userSelector'
-import { selectGroup } from './groupSelector'
+import { Group, Member, selectGroup } from './groupSelector'
 import _ from 'lodash'
+import { TFunction } from 'i18next'
 
 
-export const setGroup = (group: any): GroupActionsTypes => ({
+export const setGroup = (group: Group): GroupActionsTypes => ({
     type: SET_GROUP,
     payload: {
         group,
     },
 })
 
-export const getGroup = (t, groupId) => async (dispatch, getState) => {
+export const getGroup = (t: TFunction, groupId: string) => async (dispatch, getState) => {
     const token = selectToken(getState())
     const api = new Api(token)
 
@@ -28,7 +29,7 @@ export const getGroup = (t, groupId) => async (dispatch, getState) => {
     }
 }
 
-export const deleteMembers = (t, groupId, members) => async (dispatch, getState) => {
+export const deleteMembers = (t: TFunction, groupId: string, members: Array<Member>) => async (dispatch, getState) => {
     const token = selectToken(getState())
     const group = selectGroup(getState())
     const api = new Api(token)
