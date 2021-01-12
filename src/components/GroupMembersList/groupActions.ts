@@ -6,7 +6,6 @@ import { Api } from '../../services/api'
 import { showErrorMessage } from '../App/Snackbar/snackbarActions'
 import { selectToken } from '../App/userSelector'
 import { Group, Member, selectGroup } from './groupSelector'
-import _ from 'lodash'
 import { TFunction } from 'i18next'
 
 
@@ -40,7 +39,7 @@ export const deleteMembers = (t: TFunction, groupId: string, members: Array<Memb
 
     const newGroup = {
         ...group,
-        members :  _.differenceBy(group.members, members,'id')
+        members :  group.members.filter((member) => !members.some((memberToRemove) => member.id === memberToRemove.id))
     }
     
     dispatch(setGroup(newGroup))
