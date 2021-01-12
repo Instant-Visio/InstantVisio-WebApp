@@ -18,14 +18,10 @@ import {
     getRooms,
     resetRoomCreated,
 } from './roomsActions'
-import {
-    getGroups
-} from './groupsActions'
 import UserDetails from './UserDetails'
 import { Room } from './CreateRoomForm/CreateRoomForm'
 import CreateRoomConfirmation from './CreateRoomConfirmation'
 import { selectCreatedRoom } from './roomsSelector'
-import GroupMembersList from '../../components/GroupMembersList/GroupMembersList'
 
 const initialValues: Room = {
     id: '',
@@ -48,7 +44,6 @@ const AdminDashboard = () => {
         if (token) {
             dispatch(getUserDetails(t))
             dispatch(getRooms(t))
-            dispatch(getGroups(t))
         }
 
         return () => {
