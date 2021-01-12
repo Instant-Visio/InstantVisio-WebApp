@@ -100,7 +100,6 @@ const AdminDashboard = () => {
                         <Grid item xs={12} sm={6}>
                             <UserDetails onRoomEdit={onRoomEdit} />
                         </Grid>
-                        <GroupMembersList groupId={'76WdSSeCmohX1gvUxVa9'} />
                     </Grid>
                 </Container>
             </IonContent>
