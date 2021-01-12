@@ -62,36 +62,34 @@ const GroupMembersList = ( { groupId }: Props ) => {
     }
 
     return (
-        <>
-            <Paper elevation={0}>
-                <Grid container alignItems="center" spacing={2}>
-                    <Grid item>
-                        <GroupIcon className={classes.icon} />
-                    </Grid>
-                    <Grid item>
-                        <Typography variant="h6">
-                            {t('title')}
-                        </Typography>
-                    </Grid>
+        <Paper elevation={0}>
+            <Grid container alignItems="center" spacing={2}>
+                <Grid item>
+                    <GroupIcon className={classes.icon} />
                 </Grid>
-                <Divider />
-                <List component="nav" className={classes.list}>
-                    {group && group.members.map((member) => {
-                        return (
-                            <ListItem
-                                key={member.id}
-                                className={classes.listItem}>
-                                <ListItemText primary={member.name} />
-                                <IconButton onClick={() => deleteMember(member)}>
-                                    <ClearIcon />
-                                </IconButton>
-                                <Divider variant="middle" />
-                            </ListItem>
-                        )
-                    })}
-                </List>
-            </Paper>
-        </>
+                <Grid item>
+                    <Typography variant="h6">
+                        {t('title')}
+                    </Typography>
+                </Grid>
+            </Grid>
+            <Divider />
+            <List component="nav" className={classes.list}>
+                {group && group.members.map((member) => {
+                    return (
+                        <ListItem
+                            key={member.id}
+                            className={classes.listItem}>
+                            <ListItemText primary={member.name} />
+                            <IconButton onClick={() => deleteMember(member)}>
+                                <ClearIcon />
+                            </IconButton>
+                            <Divider variant="middle" />
+                        </ListItem>
+                    )
+                })}
+            </List>
+        </Paper>
     )
 }
 
