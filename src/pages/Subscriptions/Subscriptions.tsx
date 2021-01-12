@@ -16,7 +16,7 @@ const MainView = styled.div`
 `
 
 export default function Subscriptions() {
-    const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
+    const { t } = useTranslation('pricing')
 
     return (
         <IonContent style={{ '--background': 'white' }}>

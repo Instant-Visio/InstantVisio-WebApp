@@ -5,16 +5,7 @@ import PricingDetailsModal from '../../components/PricingDetailsModal/PricingDet
 import PricingDetails from '../../components/PricingDetailsModal/PricingDetails'
 import { useTranslation } from 'react-i18next'
 import { MainView } from './style'
-
-const listPackage = [
-    'up-to-50',
-    'encrypted-calls-EU',
-    'sharescreen"',
-    'invitation-SMS-email-notifs',
-    'group-contact',
-    'reminder-SMS-email',
-    'API-instantvisio',
-]
+import packagePricing from '../../data/js/packagePricing'
 
 export default function SubscriptionBusiness() {
     const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
@@ -40,7 +31,7 @@ export default function SubscriptionBusiness() {
                 </PricingDetailsModal>
             </div>
             <div className="listContainer">
-                {listPackage.map((item, index) => (
+                {packagePricing.list.map((item, index) => (
                     <p key={index}>✔ {t(item)}</p>
                 ))}
             </div>

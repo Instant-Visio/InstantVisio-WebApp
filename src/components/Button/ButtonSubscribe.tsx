@@ -1,6 +1,6 @@
 /**
  * This file was modified by
- * Nicolas Hovart <hovart.nicolasa@gmail.com>
+ * Nicolas Hovart <hovart.nicolas@gmail.com>
  */
 
 import React from 'react'
@@ -16,8 +16,6 @@ const PurpleButton = withStyles((theme: Theme) => ({
         marginTop: theme.spacing(3),
         fontSize: '0.9rem',
         fontWeight: 'bolder',
-        // width: '100%',
-        // textAlign: 'center',
         '&:hover': {
             backgroundColor: '#1c2dc1',
         },
@@ -25,7 +23,13 @@ const PurpleButton = withStyles((theme: Theme) => ({
     },
 }))(Button)
 
-export default function ButtonEstimate(props: { onClick?: any; title: any }) {
+export default function ButtonEstimate(props: {
+    onClick?: any
+    title: string
+    backgroundColor?: string
+}) {
+    // const classes = useStyles(props)
+
     return (
         <PurpleButton variant="contained" onClick={props.onClick}>
             {props.title}

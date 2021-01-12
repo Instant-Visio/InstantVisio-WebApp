@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
-import { IonContent } from '@ionic/react'
 import { useHistory } from 'react-router-dom'
 import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
 
@@ -20,6 +19,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    background-color: white;
     ${SCREEN.MOBILE} {
         flex-direction: column;
     }
@@ -67,40 +67,38 @@ export default function Pricing() {
     const history = useHistory()
 
     return (
-        <IonContent style={{ '--background': 'white' }}>
-            <Wrapper>
-                <ColumnView>
-                    <div className="textContainer">
-                        <h3>{t('instant-visio')}</h3>
-                        <h5>{t('mission-statement')}</h5>
-                        <p>✔ {t('invitation-SMS-email')}</p>
-                        <p>✔ {t('up-to-4')}</p>
-                        <p>✔ {t('encrypted-calls')}</p>
-                    </div>
-                    <a
-                        className="subscriptionButton"
-                        href="https://www.helloasso.com/associations/instant-visio/paiements/paiement-express"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        <ButtonSubscribe title={t('support-us')} />
-                    </a>
-                </ColumnView>
-                <ColumnView>
-                    <div className="textContainer">
-                        <h3>{t('entreprise-institution')}</h3>
-                        <h5>{t('profil-persona')}</h5>
-                        {listPackage.map((item, index) => (
-                            <p key={index}>✔ {t(item)}</p>
-                        ))}
-                    </div>
-                    <div className="subscriptionButton">
-                        <ButtonSubscribe
-                            onClick={() => history.push('/subscriptions')}
-                            title={t('choose-subscription')}
-                        />
-                    </div>
-                </ColumnView>
-            </Wrapper>
-        </IonContent>
+        <Wrapper>
+            <ColumnView>
+                <div className="textContainer">
+                    <h3>{t('instant-visio')}</h3>
+                    <h5>{t('mission-statement')}</h5>
+                    <p>✔ {t('invitation-SMS-email')}</p>
+                    <p>✔ {t('up-to-4')}</p>
+                    <p>✔ {t('encrypted-calls')}</p>
+                </div>
+                <a
+                    className="subscriptionButton"
+                    href="https://www.helloasso.com/associations/instant-visio/paiements/paiement-express"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <ButtonSubscribe title={t('support-us')} />
+                </a>
+            </ColumnView>
+            <ColumnView>
+                <div className="textContainer">
+                    <h3>{t('entreprise-institution')}</h3>
+                    <h5>{t('profil-persona')}</h5>
+                    {listPackage.map((item, index) => (
+                        <p key={index}>✔ {t(item)}</p>
+                    ))}
+                </div>
+                <div className="subscriptionButton">
+                    <ButtonSubscribe
+                        onClick={() => history.push('/subscriptions')}
+                        title={t('choose-subscription')}
+                    />
+                </div>
+            </ColumnView>
+        </Wrapper>
     )
 }

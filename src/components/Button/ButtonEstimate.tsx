@@ -1,6 +1,6 @@
 /**
  * This file was created by
- * Nicolas Hovart <hovart.nicolasa@gmail.com>
+ * Nicolas Hovart <hovart.nicolas@gmail.com>
  */
 
 import React from 'react'
