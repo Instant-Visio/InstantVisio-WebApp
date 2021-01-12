@@ -17,11 +17,6 @@ import { useTranslation } from 'react-i18next'
 import { getGroup, deleteMembers } from './groupActions'
 import { useDispatch } from 'react-redux'
 
-
-
-export const preventDefault = (event: React.SyntheticEvent) =>
-    event.preventDefault()
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         icon: {
