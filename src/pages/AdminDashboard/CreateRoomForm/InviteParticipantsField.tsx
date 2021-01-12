@@ -59,7 +59,6 @@ export const InviteParticipantsField = ({
     destinations,
     setDestinations,
 }: Props) => {
-    console.log(destinations)
     const { t } = useTranslation('dashboard')
     const classes = useStyles()
 

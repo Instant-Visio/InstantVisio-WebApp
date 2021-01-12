@@ -25,6 +25,7 @@ import UserDetails from './UserDetails'
 import { Room } from './CreateRoomForm/CreateRoomForm'
 import CreateRoomConfirmation from './CreateRoomConfirmation'
 import { selectCreatedRoom } from './roomsSelector'
+import GroupMembersList from '../../components/GroupMembersList/GroupMembersList'
 
 const initialValues: Room = {
     id: '',
@@ -99,6 +100,7 @@ const AdminDashboard = () => {
                         <Grid item xs={12} sm={6}>
                             <UserDetails onRoomEdit={onRoomEdit} />
                         </Grid>
+                        <GroupMembersList groupId={'76WdSSeCmohX1gvUxVa9'} />
                     </Grid>
                 </Container>
             </IonContent>

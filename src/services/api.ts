@@ -5,6 +5,7 @@ import { RoomId } from '../../types/Room'
 import { UID } from '../../types/uid'
 import ApiClient from './apiClient'
 import { Room } from '../pages/AdminDashboard/CreateRoomForm/CreateRoomForm'
+import { Member } from '../components/GroupMembersList/groupSelector'
 
 export class Api {
     private apiClient: ApiClient
@@ -96,5 +97,20 @@ export class Api {
 
     async getGroups(): Promise<any> {
         return this.apiClient.get(`/groups`)
+    }
+
+    async getGroup(
+        groupId : string
+    ): Promise<any> {
+        return this.apiClient.get(`/groups/${groupId}`)
+    }
+
+    async deleteMembers(
+        groupId : string,
+        members : [Member]
+    ): Promise<any> {
+        return this.apiClient.delete(`/groups/${groupId}/removeMembers`, {
+            members: JSON.stringify(members)
+        })
     }
 }

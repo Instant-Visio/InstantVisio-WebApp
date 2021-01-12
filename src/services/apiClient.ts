@@ -50,6 +50,22 @@ export default class ApiClient {
         }
     }
 
+    async delete<T>(url: string, data: unknown): Promise<T> {
+        try {
+            const { data: responseData } = await axios({
+                headers: this.getHeaders(),
+                method: 'delete',
+                url: `${this.baseUrl}${url}`,
+                data,
+            })
+
+            return responseData
+        } catch (err) {
+            const { error: errorMessage } = err.response.data
+            throw new Error(errorMessage)
+        }
+    }
+
     async post<T>(url: string, data: any): Promise<T> {
         try {
             const { data: responseData } = await axios({
