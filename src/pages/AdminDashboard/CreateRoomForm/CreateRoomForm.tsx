@@ -77,7 +77,7 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
         event: React.MouseEvent<HTMLElement>,
         newValue: string | null
     ) => {
-        if(newValue !== null) {
+        if (newValue !== null) {
             setToggleValue(newValue)
         }
     }
@@ -188,6 +188,9 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
                                     size="small"
                                     component={DateTimePicker}
                                     disablePast
+                                    minDateMessage={t(
+                                        'common:invalid-min-date'
+                                    )}
                                     inputVariant="outlined"
                                     placeholder={t('form.date.placeholder')}
                                     fullWidth

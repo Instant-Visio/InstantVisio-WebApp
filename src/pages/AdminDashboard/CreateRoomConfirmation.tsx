@@ -11,6 +11,7 @@ import { preventDefault } from './UserDetails'
 import Button from '../../components/Button/Button'
 import { resetRoomCreated } from './roomsActions'
 import { makeStyles } from '@material-ui/core'
+import { showSuccessMessage } from '../../components/App/Snackbar/snackbarActions'
 
 const useStyles = makeStyles({
     paper: {
@@ -36,6 +37,14 @@ export default function CreateRoomConfirmation() {
         const routerUrl = roomUrl.split(premiumVideoPagePrefixUrl)[1]
         return `${premiumVideoPagePrefixUrl}${routerUrl}`
     }
+
+    const invitationMessage = t('confirmation.message', {
+        hostName,
+        link: roomUrl,
+        interpolation: {
+            escapeValue: false,
+        },
+    })
 
     const classes = useStyles()
 
@@ -74,14 +83,20 @@ export default function CreateRoomConfirmation() {
             {renderDestinationSentMessage()}
             <Typography>{t('confirmation.message-explanation')}</Typography>
             <Box m={2} />
+            <CopyToClipboard
+                text={invitationMessage}
+                onCopy={() =>
+                    dispatch(
+                        showSuccessMessage(t('confirmation.invitation-copied'))
+                    )
+                }>
+                <Link to={'#'} onClick={preventDefault}>
+                    {t('confirmation.invitation-link')}
+                </Link>
+            </CopyToClipboard>
+            <Box m={2} />
             <Paper elevation={0} className={classes.paper}>
-                {t('confirmation.message', {
-                    hostName,
-                    link: roomUrl,
-                    interpolation: {
-                        escapeValue: false,
-                    },
-                })}
+                {invitationMessage}
             </Paper>
             <Box m={4} />
 
@@ -90,7 +105,11 @@ export default function CreateRoomConfirmation() {
                     {'Rejoindre la discussion'}
                 </Link>
             </Typography>
-            <CopyToClipboard text={roomUrl}>
+            <CopyToClipboard
+                text={roomUrl}
+                onCopy={() =>
+                    dispatch(showSuccessMessage(t('confirmation.link-copied')))
+                }>
                 <Link to={'#'} onClick={preventDefault}>
                     {'Cliquer pour copier le lien à partager'}
                 </Link>
