@@ -10,7 +10,6 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox'
 import { useTranslation } from 'react-i18next'
 import { selectToken, selectRegistrationToken } from '../App/userSelector'
 import {  } from '../App/userSelector'
-import { Backdrop as MaterialBackdrop } from '@material-ui/core'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 
