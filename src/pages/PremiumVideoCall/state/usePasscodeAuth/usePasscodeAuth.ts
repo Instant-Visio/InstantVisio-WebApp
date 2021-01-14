@@ -106,6 +106,7 @@ export default function usePasscodeAuth() {
                     if (verification?.isValid) {
                         setUser({ passcode } as any)
                         window.sessionStorage.setItem('passcode', passcode)
+                        window.sessionStorage.setItem('roomUrl', window.location.href)
                         //TODO check if to remove the passcode from url
                         // history.replace(window.location.pathname)
                     }
@@ -123,6 +124,7 @@ export default function usePasscodeAuth() {
             if (verification?.isValid) {
                 setUser({ passcode } as any)
                 window.sessionStorage.setItem('passcode', passcode)
+                window.sessionStorage.setItem('roomUrl', window.location.href)
             } else {
                 throw new Error(getErrorMessage(verification?.error))
             }
@@ -132,6 +134,7 @@ export default function usePasscodeAuth() {
     const signOut = useCallback(() => {
         setUser(null)
         window.sessionStorage.removeItem('passcode')
+        window.sessionStorage.removeItem('roomUrl')
         return Promise.resolve()
     }, [])
 
