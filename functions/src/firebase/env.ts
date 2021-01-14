@@ -81,10 +81,8 @@ export const getSendGridEnv = (): SendGridEnv => {
     const {
         sendgrid: { apikey, ip_pool_name },
     } = functions.config()
-    if (!apikey || !ip_pool_name) {
-        throw new InternalServerError(
-            'Missing sendgrid apikey or ip_pool_name env'
-        )
+    if (!apikey) {
+        throw new InternalServerError('Missing sendgrid apikey env')
     }
     return {
         apiKey: apikey,
