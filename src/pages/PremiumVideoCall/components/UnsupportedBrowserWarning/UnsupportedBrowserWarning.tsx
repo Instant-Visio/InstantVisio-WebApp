@@ -26,12 +26,12 @@ const isMobileFirefox = () : boolean =>  isMobile && isFirefox
 
 const isIOSMobileSafari = () : boolean =>  isIOS && isMobileSafari
 
-const isVideoSupported = () : boolean => !Video.isSupported || !isMobileFirefox() || !isIOSMobileSafari()
+const isVideoSupported = () : boolean => Video.isSupported && !isMobileFirefox() && !isIOSMobileSafari()
 
 export default function ({ children }: { children: React.ReactElement }) {
     const classes = useStyles()
 
-    if (!isVideoSupported) {
+    if (!isVideoSupported()) {
         return (
             <Container>
                 <Grid container justify="center" className={classes.container}>
