@@ -26,7 +26,7 @@ const isMobileFirefox = () : boolean =>  isMobile && isFirefox
 
 const isIOSMobileSafari = () : boolean =>  isIOS && isMobileSafari
 
-const isVideoSupported = () : boolean => Video.isSupported && !isMobileFirefox() && !isIOSMobileSafari()
+const isVideoSupported = () : boolean => Video.isSupported && !isMobileFirefox() && (!isIOS || isIOSMobileSafari())
 
 export default function ({ children }: { children: React.ReactElement }) {
     const classes = useStyles()
