@@ -8,7 +8,7 @@ import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
- * /v1/groups/{groupId}/addMembers:
+ * /v1/groups/{groupId}/removeMembers:
  *   delete:
  *     description: Remove members from an existing group, only allowed for the group owner.
  *     tags:

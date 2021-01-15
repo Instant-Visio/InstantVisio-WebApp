@@ -14,14 +14,17 @@ import {
     InviteParticipantsResponse,
 } from '../invite/inviteParticipants'
 import { parseDestinations } from '../utils/parseDestinations'
-import { ROOM_MAX_DURATION_MILLISECONDS } from '../../../constants'
+import {
+    DEFAULT_TIMEZONE,
+    ROOM_MAX_DURATION_MILLISECONDS,
+} from '../../../constants'
 import { parseSendsAt } from './parseSendsAt'
 
 /**
  * @swagger
  * /v1/rooms/new:
  *   post:
- *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 char) and a random password if none provided. The room will have a 24 hours lifetime after its startAt time (if not supplied, the creation time). <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before or after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allows sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
+ *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 char) and a random password if none provided. The room will have a 24 hours lifetime after its startAt time (if not supplied, the creation time). <br/><br/>To schedule a room, use this route and set the startAt field, it will not prevent the meeting to start before or after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allows sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
  *     tags:
  *       - rooms
  *     consumes:
@@ -92,7 +95,7 @@ export const createRoom = async ({
     destinations,
     sendsAt,
     hideChatbot = false,
-    timezone = 'Europe/Paris',
+    timezone = DEFAULT_TIMEZONE,
 }: {
     userId: UID
     hideChatbot?: boolean
