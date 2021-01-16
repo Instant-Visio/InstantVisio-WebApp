@@ -69,7 +69,7 @@ npm run:android
 **Note**: database is automatically seed when using emulators locally
 
 To seed/populate the emulator database with test users and some basic firestore data, you can use a route on the API. 
-1. Start the API using emulators: `cd function && npm run serve-watch`
+1. Start the API using emulators: `cd function && npm run serve:watch`
 2. Open `http://localhost:5050/instantvisio-dev/us-central1/api/api/v1-tests/seeds/` in your browser/postman/anything in GET
 3. Upon success seeding, test users are answered by the network request
 
