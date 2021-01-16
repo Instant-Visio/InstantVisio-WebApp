@@ -5,7 +5,12 @@ import {
 } from '@capacitor/core'
 const { LocalNotifications } = Plugins
 export class LocalNotificationsService {
-    static async schedule(title?: string, body?: string, extra?: any) {
+    static async schedule(
+        title?: string,
+        body?: string,
+        extra?: any,
+        channelId: string = 'visio-call-notifications'
+    ) {
         const ONE_SECOND_FROM_NOW = new Date(Date.now() + 1000)
         const notifs = await LocalNotifications.schedule({
             notifications: [
@@ -18,7 +23,7 @@ export class LocalNotificationsService {
                     actionTypeId: '',
                     extra,
                     smallIcon: 'ic_logo_mobile',
-                    channelId: 'visio-call-notifications',
+                    channelId: channelId,
                 },
             ],
         })

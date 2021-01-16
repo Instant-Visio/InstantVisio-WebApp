@@ -5,7 +5,9 @@ import {
     SmsInvitationDestination,
 } from '../types/InvitationDestination'
 import {
+    NotificationChannelId,
     NotificationContent,
+    NotificationFormatType,
     NotificationParams,
     NotificationType,
     PushNotificationParams,
@@ -175,6 +177,10 @@ const processPushDestinations = async (
                     roomUrl: content.roomUrl,
                     startAt: `${room.startAt.toMillis() / 1000}`,
                 },
+                channelId:
+                    notificationContent.format === NotificationFormatType.Now
+                        ? NotificationChannelId.Now
+                        : NotificationChannelId.Reminder,
             }
             if (content.timezone) {
                 params.timezone = content.timezone

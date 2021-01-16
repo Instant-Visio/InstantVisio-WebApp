@@ -35,9 +35,15 @@ export interface EmailNotificationParams extends BaseNotificationParams {
 export interface PushNotificationParams extends BaseNotificationParams {
     type: NotificationType.PushNotificationType
     tokens: string[]
+    channelId: NotificationChannelId
     additionalData: {
         [key: string]: string
     }
+}
+
+export enum NotificationChannelId {
+    Reminder = 'visio-call-reminders',
+    Now = 'visio-call-notifications',
 }
 
 export type NotificationParams =

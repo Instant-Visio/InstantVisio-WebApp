@@ -16,7 +16,7 @@
         "run:ios": "env-cmd -f .env.development npm run run:ios:livereload",
         "run:ios:staging": "env-cmd -f .env.staging npm run run:ios:livereload",
         "open:ios": "npx cap open ios",
-        "build:android": "npm run build && npx cap sync android && npx cap copy android && npm run open:android",
+        "build:android": "npx cap sync android && npx cap copy android && npm run open:android",
         "open:android": "npx cap open android",
         "run:android:livereload": "npm run build:android && ionic capacitor run android --livereload --external",
         "run:android": "env-cmd -f .env.development npm run run:android:livereload",
