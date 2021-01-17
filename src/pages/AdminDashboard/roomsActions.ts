@@ -101,7 +101,10 @@ export const resetRoomCreated = () => (dispatch) => {
     dispatch(setResetRoomCreated())
 }
 
-export const editRoom = (t, room: Room) => async (dispatch, getState) => {
+export const editRoom = (t, room: Room) => async (
+    dispatch,
+    getState
+): Promise<void> => {
     dispatch(showBackdrop())
     const token = selectToken(getState())
     const api = new Api(token)
@@ -109,12 +112,14 @@ export const editRoom = (t, room: Room) => async (dispatch, getState) => {
     try {
         await api.editRoom(room)
         dispatch(getRooms(t))
-        dispatch(showSuccessMessage(t('add-participants-form:invited')))
+        dispatch(showSuccessMessage(t('dashboard:form.messages.saved')))
+        return Promise.resolve()
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-edit')))
+        return Promise.reject(err)
+    } finally {
+        dispatch(hideBackdrop())
     }
-
-    dispatch(hideBackdrop())
 }
 
 export const createReminder = (t, roomId, remindAt) => async (

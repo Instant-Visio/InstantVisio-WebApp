@@ -1,11 +1,14 @@
 import { JWTToken } from '../../types/JWT'
 import { JoinRoomResponse } from '../../types/JoinRoomResponse'
 import { NewRoomResponse } from '../../types/NewRoomResponse'
+import { NewGroupResponse } from '../../types/NewGroupResponse'
 import { RoomId } from '../../types/Room'
 import { UID } from '../../types/uid'
 import ApiClient from './apiClient'
 import { Room } from '../pages/AdminDashboard/CreateRoomForm/CreateRoomForm'
 import { Member } from '../components/GroupMembersList/groupSelector'
+import { Group } from '../components/CreateGroup/CreateGroupForm'
+
 
 export class Api {
     private apiClient: ApiClient
@@ -95,7 +98,14 @@ export class Api {
         return this.apiClient.get(`/users/${userId}`)
     }
 
-    async getGroups(): Promise<any> {
+    async createGroup(
+        group: Group,
+    ): Promise<NewGroupResponse> {
+        return this.apiClient.post('/groups', group)
+    }
+
+
+    async getGroups() : Promise<any> {
         return this.apiClient.get(`/groups`)
     }
 

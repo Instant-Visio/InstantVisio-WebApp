@@ -1,8 +1,10 @@
 {
     "planned-discussions": "Your planned visio",
     "consumption": "Your consumption",
+    "join-room": "Join the room",
     "api-identifier": "Your API identifier",
     "click-to-copy": "Click here to copy the token link",
+    "click-to-copy-link": "Click here to copy the share link",
     "on": "on",
     "consumed": "consumed",
     "available": "available",
@@ -19,7 +21,10 @@
         "destinations-sent-email": "You sent {{emailCount}} invitation(s) by email.",
         "destinations-sent-phone": "You sent {{phoneCount}} invitation(s) by phone.",
         "destinations-sent": "You sent {{emailCount}} invitation(s) by email and {{phoneCount}} invitation(s) by phone.",
-        "message-explanation": "You can send this invitation by your own ways by copying the below invitation content."
+        "message-explanation": "You can send this invitation by your own ways by copying the below invitation content.",
+        "invitation-copied": "The invitation has been copied",
+        "invitation-link": "Click here to copy invitation",
+        "link-copied": "Link has been copied"
     },
     "form": {
         "create-visio": "Create Visio",

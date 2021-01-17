@@ -11,13 +11,20 @@ import Logo from '../Logo/Logo'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import HomeIcon from '@material-ui/icons/Home'
+import { mdiAccountGroup } from '@mdi/js'
+import { mdiPost } from '@mdi/js'
+import { mdiNewspaperVariantMultipleOutline } from '@mdi/js'
+import { mdiLicense } from '@mdi/js'
+import { mdiDeskphone } from '@mdi/js'
+import { mdiInformation } from '@mdi/js'
+import { mdiEmailNewsletter } from '@mdi/js'
+import { mdiShieldAccount } from '@mdi/js'
+import { mdiCookie } from '@mdi/js'
 import DuoIcon from '@material-ui/icons/Duo'
 import SubjectIcon from '@material-ui/icons/Subject'
-import PersonIcon from '@material-ui/icons/Person'
-import InfoIcon from '@material-ui/icons/Info'
 import { IonItem, IonList } from '@ionic/react'
 import Lang from '../Lang/Lang'
-import { IconButton } from '@material-ui/core'
+import { IconButton, SvgIcon } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 import { showPreferencesDialog } from '../../utils/gdpr'
 import About from '../../documents/Instant_Visio_Keynote.pdf'
@@ -122,27 +129,49 @@ export default function SwipeableTemporaryDrawer() {
                         },
                         {
                             title: t('footer.personal-data'),
-                            icon: <PersonIcon />,
+                            icon: (
+                                <SvgIcon>
+                                    <path d={mdiShieldAccount} />
+                                </SvgIcon>
+                            ),
                             url: `/${t('url.personal-data')}`,
                         },
                         {
                             title: t('footer.credits'),
-                            icon: <InfoIcon />,
+                            icon: (
+                                <SvgIcon>
+                                    <path d={mdiAccountGroup} />
+                                </SvgIcon>
+                            ),
                             url: `/${t('url.credits')}`,
                         },
                         {
                             url: `/${t('url.blog')}`,
-                            icon: <InfoIcon />,
+                            icon: (
+                                <SvgIcon>
+                                    <path d={mdiPost} />
+                                </SvgIcon>
+                            ),
                             title: t('footer.blog'),
                         },
                         {
                             url: `/${t('url.media')}`,
-                            icon: <InfoIcon />,
+                            icon: (
+                                <SvgIcon>
+                                    <path
+                                        d={mdiNewspaperVariantMultipleOutline}
+                                    />
+                                </SvgIcon>
+                            ),
                             title: t('footer.media'),
                         },
                         {
                             url: `/${t('url.license')}`,
-                            icon: <InfoIcon />,
+                            icon: (
+                                <SvgIcon>
+                                    <path d={mdiLicense} />
+                                </SvgIcon>
+                            ),
                             title: t('footer.license'),
                         },
                     ].map(({ title, icon, url }) => (
@@ -166,7 +195,9 @@ export default function SwipeableTemporaryDrawer() {
                             target="_blank"
                             rel="noopener noreferrer">
                             <ListItemIcon>
-                                <InfoIcon />
+                                <SvgIcon>
+                                    <path d={mdiDeskphone} />
+                                </SvgIcon>
                             </ListItemIcon>
                             <ListItemText primary={t('footer.contact-us')} />
                         </IonItem>
@@ -179,7 +210,9 @@ export default function SwipeableTemporaryDrawer() {
                             rel="noopener noreferrer"
                             target="_blank">
                             <ListItemIcon>
-                                <InfoIcon />
+                                <SvgIcon>
+                                    <path d={mdiInformation} />
+                                </SvgIcon>
                             </ListItemIcon>
                             <ListItemText primary={t('footer.about')} />
                         </IonItem>
@@ -191,7 +224,9 @@ export default function SwipeableTemporaryDrawer() {
                             className={classes.item}
                             onClick={() => dispatch(showModal('Newsletter'))}>
                             <ListItemIcon>
-                                <InfoIcon />
+                                <SvgIcon>
+                                    <path d={mdiEmailNewsletter} />
+                                </SvgIcon>
                             </ListItemIcon>
                             <ListItemText primary={t('footer.newsletter')} />
                         </IonItem>
@@ -203,7 +238,9 @@ export default function SwipeableTemporaryDrawer() {
                             onClick={showPreferencesDialog}
                             className={classes.item}>
                             <ListItemIcon>
-                                <InfoIcon />
+                                <SvgIcon>
+                                    <path d={mdiCookie} />
+                                </SvgIcon>
                             </ListItemIcon>
                             <ListItemText primary={t('footer.cookies')} />
                         </IonItem>

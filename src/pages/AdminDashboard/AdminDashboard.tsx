@@ -18,6 +18,7 @@ import {
     getRooms,
     resetRoomCreated,
 } from './roomsActions'
+import { getGroups } from './groupsActions'
 import UserDetails from './UserDetails'
 import { Room } from './CreateRoomForm/CreateRoomForm'
 import CreateRoomConfirmation from './CreateRoomConfirmation'
@@ -51,11 +52,11 @@ const AdminDashboard = () => {
         }
     }, [token, userId, dispatch, t])
 
-    const onFormSubmit = (room, isEditing, remindAt) => {
+    const onFormSubmit = async (room, isEditing, remindAt) => {
         room.startAt = room.startAt / 1000
         if (isEditing) {
-            console.log('SAving room: ', room)
-            dispatch(editRoom(t, room))
+            await dispatch(editRoom(t, room))
+            onCreateFormReset()
         } else {
             dispatch(createRoom(t, room, remindAt))
         }
