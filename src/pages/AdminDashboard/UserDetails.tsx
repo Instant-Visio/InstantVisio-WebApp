@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Link from '@material-ui/core/Link'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import EditIcon from '@material-ui/icons/Edit'
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import { IconButton } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
@@ -23,6 +24,7 @@ import {
     QuotasUsage,
 } from '../../components/App/userSelector'
 import { useTranslation } from 'react-i18next'
+import Button from '../../components/Button/Button'
 
 export const preventDefault = (event: React.SyntheticEvent) =>
     event.preventDefault()
@@ -117,6 +119,12 @@ const UserDetails = ({ onRoomEdit }) => {
                                         align: 'right',
                                     }}
                                 />
+                                <IconButton
+                                    title={t('join-room')}
+                                    href={room.roomUrl}
+                                    target="_blank">
+                                    <MeetingRoomIcon />
+                                </IconButton>
                                 <IconButton onClick={() => onRoomEdit(room)}>
                                     <EditIcon />
                                 </IconButton>
