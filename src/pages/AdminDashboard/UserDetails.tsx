@@ -24,7 +24,6 @@ import {
     QuotasUsage,
 } from '../../components/App/userSelector'
 import { useTranslation } from 'react-i18next'
-import Button from '../../components/Button/Button'
 
 export const preventDefault = (event: React.SyntheticEvent) =>
     event.preventDefault()
