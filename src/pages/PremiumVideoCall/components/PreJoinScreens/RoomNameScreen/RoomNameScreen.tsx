@@ -73,9 +73,10 @@ export default function RoomNameScreen({
     //     setRoomName(event.target.value)
     // }
 
-    const hasUsername =
+    const hasUsername = Boolean(
         !window.location.search.includes('customIdentity=true') &&
-        user?.displayName
+            user?.displayName
+    )
 
     return (
         <>
@@ -84,8 +85,8 @@ export default function RoomNameScreen({
             </Typography>
             <Typography variant="body1">
                 {hasUsername
-                    ? t('prejoin.room-name')
-                    : t('prejoin.username-and-room')}
+                    ? t('prejoin.username-and-room')
+                    : t('prejoin.room-name')}
             </Typography>
             <form onSubmit={handleSubmit}>
                 <div className={classes.inputContainer}>
