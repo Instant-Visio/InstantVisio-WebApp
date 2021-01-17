@@ -166,7 +166,7 @@ const processPushDestinations = async (
             const params: PushNotificationParams = {
                 ...content,
                 type: NotificationType.PushNotificationType,
-                lang: dest.lang,
+                lang: dest.lang || 'fr',
                 tokens,
                 formatType: content.format,
                 roomStartAt: content.roomStartAt,
