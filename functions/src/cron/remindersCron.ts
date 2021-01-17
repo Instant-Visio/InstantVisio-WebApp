@@ -26,7 +26,7 @@ export const processScheduledReminder = async (req: Request, res: Response) => {
     res.send()
 }
 
-const FiveMinutesMs = 5 * 60 * 1000
+const FiveMinutesMs = 5 * 60 * 1000 - 1000 // - 1000 because we don't want a reminder at 01:10:00 to be sent at 01:05:00
 export const processScheduledReminders = async () => {
     const reminders = await ReminderDao.listBetween(
         new Date(),
