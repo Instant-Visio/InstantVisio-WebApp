@@ -7,6 +7,7 @@ import {
 } from '../types/Notification'
 import { sendNotifications } from '../notifications/sendNotifications'
 import { formatRoomUrl, RoomDao } from '../db/RoomDao'
+import { Timestamp } from '../firebase/firebase'
 
 export const remindersCron = functions
     .runWith({
@@ -25,7 +26,7 @@ export const processScheduledReminder = async (req: Request, res: Response) => {
     res.send()
 }
 
-const FiveMinutesMs = 5 * 60 * 1000
+const FiveMinutesMs = 5 * 60 * 1000 - 1000 // - 1000 because we don't want a reminder at 01:10:00 to be sent at 01:05:00
 export const processScheduledReminders = async () => {
     const reminders = await ReminderDao.listBetween(
         new Date(),
@@ -49,7 +50,7 @@ export const processScheduledReminders = async () => {
         const notificationContent: NotificationContent = {
             name: room.hostName,
             roomUrl: formatRoomUrl(reminder.roomId, room.password),
-            format: NotificationFormatType.Scheduled,
+            format: getNotificationFormatType(room.startAt),
             roomStartAt: room.startAt,
             timezone: room.timezone,
         }
@@ -74,4 +75,15 @@ export const processScheduledReminders = async () => {
             `Reminder cron sent: email:${emailsSentTotal}, sms:${smsSentTotal}, push:${pushsSentTotal}`
         )
     }
+}
+
+const getNotificationFormatType = (
+    startAt: Timestamp
+): NotificationFormatType => {
+    const NOW_DELTA_SECONDS = 300 // 5 minutes
+
+    if (startAt.toMillis() < Date.now() + NOW_DELTA_SECONDS) {
+        return NotificationFormatType.Now
+    }
+    return NotificationFormatType.Scheduled
 }
