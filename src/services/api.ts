@@ -36,6 +36,7 @@ export class Api {
             name,
             hostName,
             destinations: this.stringifyParams(destinations),
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }
 
         if (startAt && startAt > Date.now() / 1000) {
