@@ -54,7 +54,7 @@ const AdminDashboard = () => {
     const onFormSubmit = async (room, isEditing, remindAt) => {
         room.startAt = room.startAt / 1000
         if (isEditing) {
-            await dispatch(editRoom(t, room))
+            await dispatch(editRoom(t, room, remindAt))
             onCreateFormReset()
         } else {
             dispatch(createRoom(t, room, remindAt))

@@ -30,7 +30,12 @@ const TwilioVideoApp = () => {
 
     return (
         <UnsupportedBrowserWarning>
-            <VideoProvider options={connectionOptions} onError={setError}>
+            <VideoProvider
+                options={connectionOptions}
+                onError={setError}
+                onDisconnect={() => {
+                    document.location.replace('/admin')
+                }}>
                 <ErrorDialog
                     dismissError={() => setError(null)}
                     error={error}
