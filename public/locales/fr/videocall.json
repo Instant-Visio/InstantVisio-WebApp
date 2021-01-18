@@ -12,6 +12,12 @@
     "leave-messageOne-card": "Nous espérons que votre InstantVisio s'est bien passé.",
     "leave-messageTwo-card": "Prenez soin de vous.",
     "leave-labelBtnNewCall-card": "Lancer un nouvel instantVisio",
+    "prejoin": {
+        "heading": "Rejoindre une visio de groupe",
+        "room-name": "Entrez le nom de la réunion que vous souhaitez rejoindre",
+        "username-and-room": "Entrez votre nom et le nom de la réunion que vous souhaitez rejoindre",
+        "your-name": "Votre nom"
+    },
     "help": "Aide",
     "permissions": {
         "dialog": {

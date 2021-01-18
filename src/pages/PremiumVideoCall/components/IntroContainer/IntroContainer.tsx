@@ -77,9 +77,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     content: {
         background: 'white',
-        width: '100%',
         padding: '4em',
         flex: 1,
+        [theme.breakpoints.up('lg')]: {
+            width: '100%',
+        },
         [theme.breakpoints.down('sm')]: {
             padding: '2em',
         },

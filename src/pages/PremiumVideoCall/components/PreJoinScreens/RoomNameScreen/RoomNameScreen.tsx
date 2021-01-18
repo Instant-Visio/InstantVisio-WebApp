@@ -13,6 +13,7 @@ import {
     InputLabel,
     Theme,
 } from '@material-ui/core'
+import { useTranslation } from 'react-i18next'
 import { useAppState } from '../../../state'
 import { useSelector } from 'react-redux'
 import { selectToken } from '../../../../../components/App/userSelector'
@@ -61,6 +62,7 @@ export default function RoomNameScreen({
     const { user } = useAppState()
     const token = useSelector(selectToken)
     const disableButtons = !name || !roomName || !token
+    const { t } = useTranslation('videocall')
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value)
@@ -71,26 +73,27 @@ export default function RoomNameScreen({
     //     setRoomName(event.target.value)
     // }
 
-    const hasUsername =
+    const hasUsername = Boolean(
         !window.location.search.includes('customIdentity=true') &&
-        user?.displayName
+            user?.displayName
+    )
 
     return (
         <>
             <Typography variant="h5" className={classes.gutterBottom}>
-                Rejoindre une visio de groupe
+                {t('prejoin.heading')}
             </Typography>
             <Typography variant="body1">
                 {hasUsername
-                    ? "Enter the name of a room you'd like to join."
-                    : "Enter your name and the name of a room you'd like to join"}
+                    ? t('prejoin.username-and-room')
+                    : t('prejoin.room-name')}
             </Typography>
             <form onSubmit={handleSubmit}>
                 <div className={classes.inputContainer}>
                     {!hasUsername && (
                         <div className={classes.textFieldContainer}>
                             <InputLabel shrink htmlFor="input-user-name">
-                                Votre nom
+                                {t('prejoin.your-name')}
                             </InputLabel>
                             <TextField
                                 id="input-user-name"
