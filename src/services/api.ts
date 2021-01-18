@@ -5,10 +5,13 @@ import { NewGroupResponse } from '../../types/NewGroupResponse'
 import { RoomId } from '../../types/Room'
 import { UID } from '../../types/uid'
 import ApiClient from './apiClient'
-import { Room } from '../pages/AdminDashboard/CreateRoomForm/CreateRoomForm'
+import {
+    NewEditRoom,
+    Room,
+} from '../pages/AdminDashboard/CreateRoomForm/CreateRoomForm'
 import { Member } from '../components/GroupMembersList/groupSelector'
 import { Group } from '../components/CreateGroup/CreateGroupForm'
-
+import { start } from 'repl'
 
 export class Api {
     private apiClient: ApiClient
@@ -17,38 +20,54 @@ export class Api {
         this.apiClient = new ApiClient(jwtToken)
     }
 
-    stringifyDestinations(destinations: any) {
-        return destinations?.length ? JSON.stringify(destinations) : null
+    stringifyParams(params: string[] | number[] | null) {
+        return params?.length ? JSON.stringify(params) : null
     }
 
     async createRoom(
-        room: Room,
-        reminders: Array<any> | null
+        room: NewEditRoom,
+        reminders: number | null
     ): Promise<NewRoomResponse> {
-        const { name, hostName, destinations } = room
-        return this.apiClient.post('/rooms/new', {
+        const { name, hostName, destinations, startAt } = room
+
+        const data: {
+            [key: string]: boolean | number | string | number[] | null
+        } = {
             name,
             hostName,
-            destinations: this.stringifyDestinations(destinations),
-            sendsAt: reminders,
-        })
+            destinations: this.stringifyParams(destinations),
+        }
+
+        if (startAt && startAt > Date.now() / 1000) {
+            data.startAt = startAt
+        }
+        if (reminders) {
+            data.sendsAt = [reminders]
+        }
+
+        return this.apiClient.post('/rooms/new', data)
     }
 
-    async editRoom(room: Room): Promise<NewRoomResponse> {
+    async editRoom(
+        room: NewEditRoom,
+        reminders: number | null
+    ): Promise<NewRoomResponse> {
         const { id, name, hostName, destinations, startAt } = room
-        return this.apiClient.patch(`/rooms/${id}`, {
+
+        const data: {
+            [key: string]: string | number[] | number | null
+        } = {
             name,
             hostName,
             startAt,
-            destinations: this.stringifyDestinations(destinations),
-        })
-    }
+            destinations: this.stringifyParams(destinations),
+        }
 
-    async createReminder(roomId: string, sendAt: number): Promise<any> {
-        return this.apiClient.post(`/rooms/${roomId}/reminders`, {
-            roomId,
-            sendAt,
-        })
+        if (reminders) {
+            data.sendsAt = [reminders]
+        }
+
+        return this.apiClient.patch(`/rooms/${id}`, data)
     }
 
     async joinRoom(
@@ -98,29 +117,21 @@ export class Api {
         return this.apiClient.get(`/users/${userId}`)
     }
 
-    async createGroup(
-        group: Group,
-    ): Promise<NewGroupResponse> {
+    async createGroup(group: Group): Promise<NewGroupResponse> {
         return this.apiClient.post('/groups', group)
     }
 
-
-    async getGroups() : Promise<any> {
+    async getGroups(): Promise<any> {
         return this.apiClient.get(`/groups`)
     }
 
-    async getGroup(
-        groupId : string
-    ): Promise<any> {
+    async getGroup(groupId: string): Promise<any> {
         return this.apiClient.get(`/groups/${groupId}`)
     }
 
-    async deleteMembers(
-        groupId : string,
-        members : Array<Member>
-    ): Promise<any> {
+    async deleteMembers(groupId: string, members: Array<Member>): Promise<any> {
         return this.apiClient.delete(`/groups/${groupId}/removeMembers`, {
-            members: JSON.stringify(members)
+            members: JSON.stringify(members),
         })
     }
 }

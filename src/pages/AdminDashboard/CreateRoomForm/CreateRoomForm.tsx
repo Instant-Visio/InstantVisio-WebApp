@@ -21,6 +21,17 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup'
 
 import { InviteParticipantsField } from './InviteParticipantsField'
 import Button from '../../../components/Button/Button'
+
+export interface NewEditRoom {
+    id: string
+    name: string
+    destinations: Array<any>
+    startAt: number | null
+    hostName: string
+    hideChatbot: boolean
+    roomUrl: string
+}
+
 export interface Room {
     id: string
     name: string
@@ -66,6 +77,8 @@ const CreateRoomForm = ({ fields, onFormSubmit, onCreateFormReset }) => {
 
         if (fields?.name?.length) {
             setIsEditing(true)
+        } else {
+            setIsEditing(false)
         }
     }, [setDestinations, fields])
 

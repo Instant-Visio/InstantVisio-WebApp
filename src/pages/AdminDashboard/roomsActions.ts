@@ -14,7 +14,7 @@ import {
     showBackdrop,
 } from '../../components/App/Backdrop/backdropActions'
 import { selectToken } from '../../components/App/userSelector'
-import { Room } from './CreateRoomForm/CreateRoomForm'
+import { NewEditRoom, Room } from './CreateRoomForm/CreateRoomForm'
 import { getUserDetails } from '../../actions/userActions'
 
 export const setRooms = (rooms: any): RoomsActionsTypes => ({
@@ -56,7 +56,7 @@ const countDestinations = (destinations): Record<'phone' | 'email', number> => {
     }, {})
 }
 
-export const createRoom = (t, room: Room, remindAt: number) => async (
+export const createRoom = (t, room: NewEditRoom, remindAt: number) => async (
     dispatch,
     getState
 ) => {
@@ -65,7 +65,7 @@ export const createRoom = (t, room: Room, remindAt: number) => async (
     const api = new Api(token)
 
     try {
-        const reminders = remindAt > 0 ? [remindAt] : null
+        const reminders = remindAt > 0 ? remindAt : null
         const { roomId } = await api.createRoom(room, reminders)
         dispatch(getRooms(t))
         const { destinations } = room
@@ -101,16 +101,17 @@ export const resetRoomCreated = () => (dispatch) => {
     dispatch(setResetRoomCreated())
 }
 
-export const editRoom = (t, room: Room) => async (
-    dispatch,
-    getState
-): Promise<void> => {
+export const editRoom = (
+    t,
+    room: NewEditRoom,
+    remindAt: number | null
+) => async (dispatch, getState): Promise<void> => {
     dispatch(showBackdrop())
     const token = selectToken(getState())
     const api = new Api(token)
 
     try {
-        await api.editRoom(room)
+        await api.editRoom(room, remindAt)
         dispatch(getRooms(t))
         dispatch(showSuccessMessage(t('dashboard:form.messages.saved')))
         return Promise.resolve()
@@ -120,21 +121,4 @@ export const editRoom = (t, room: Room) => async (
     } finally {
         dispatch(hideBackdrop())
     }
-}
-
-export const createReminder = (t, roomId, remindAt) => async (
-    dispatch,
-    getState
-) => {
-    dispatch(showBackdrop())
-    const token = selectToken(getState())
-    const api = new Api(token)
-
-    try {
-        await api.createReminder(roomId, remindAt)
-    } catch (err) {
-        dispatch(showErrorMessage(t('errors.reminders-create')))
-    }
-
-    dispatch(hideBackdrop())
 }
