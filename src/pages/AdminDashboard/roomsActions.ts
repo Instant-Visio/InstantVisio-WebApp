@@ -14,7 +14,7 @@ import {
     showBackdrop,
 } from '../../components/App/Backdrop/backdropActions'
 import { selectToken } from '../../components/App/userSelector'
-import { NewEditRoom, Room } from './CreateRoomForm/CreateRoomForm'
+import { NewEditRoom } from './CreateRoomForm/CreateRoomForm'
 import { getUserDetails } from '../../actions/userActions'
 
 export const setRooms = (rooms: any): RoomsActionsTypes => ({
