@@ -35,8 +35,7 @@
         "tag:before:prod": "npm version minor",
         "tag:before:dev": "npm version prerelease",
         "tag:after": "git push && git push --tags",
-        "lint": "eslint -c .eslintrc.js --ext .ts --ext .tsx src",
-        "postversion": "ionic-version"
+        "lint": "eslint -c .eslintrc.js --ext .ts --ext .tsx src"
     },
     "dependencies": {
         "@capacitor-community/fcm": "^1.0.8",
@@ -138,7 +137,6 @@
     },
     "devDependencies": {
         "@capacitor/cli": "2.1.0",
-        "@ionic/app-scripts": "^3.2.4",
         "@ionic/cli": "^6.8.0",
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.4.0",
@@ -159,7 +157,6 @@
         "eslint-plugin-react-hooks": "^4.2.0",
         "firebase-tools": "^9.1.0",
         "husky": "^4.2.5",
-        "ionic-version": "^1.0.3",
         "isomorphic-fetch": "^3.0.0",
         "jest-junit": "^9.0.0",
         "lint-staged": "^10.1.3",
