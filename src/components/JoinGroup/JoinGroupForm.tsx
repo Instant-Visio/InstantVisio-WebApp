@@ -109,6 +109,8 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                             variant="outlined"
                             name="groupId"
                             placeholder={t('fields.id.placeholder')}
+                            autoCorrect="off"
+                            autoCapitalize="none"
                         />
                         <Box m={4} />
 
@@ -125,6 +127,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                             variant="outlined"
                             type="password"
                             name="groupPassword"
+                            autoComplete="new-password"
                             placeholder={t('fields.password.placeholder')}
                         />
                         <Box m={4} />
