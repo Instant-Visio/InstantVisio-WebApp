@@ -35,7 +35,8 @@
         "tag:before:prod": "npm version minor",
         "tag:before:dev": "npm version prerelease",
         "tag:after": "git push && git push --tags",
-        "lint": "eslint -c .eslintrc.js --ext .ts --ext .tsx src"
+        "lint": "eslint -c .eslintrc.js --ext .ts --ext .tsx src",
+        "postversion": "react-native-version"
     },
     "dependencies": {
         "@capacitor-community/fcm": "^1.0.8",
@@ -166,6 +167,7 @@
         "pixelmatch": "^5.1.0",
         "prettier": "^2.0.4",
         "puppeteer": "^5.3.1",
+        "react-native-version": "^4.0.0",
         "react-test-renderer": "^16.12.0",
         "ts-jest": "^24.3.0",
         "typescript": "^3.8.3"
