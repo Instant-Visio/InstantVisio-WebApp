@@ -152,6 +152,7 @@ export const InviteParticipantsField = ({
                         helperText={false}
                         label=""
                         placeholder={t('form.participants.placeholder')}
+                        autoComplete="off"
                     />
                 )
             }}
