@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '../../components/App/userSelector'
 import { getUserDetails } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
+import { getGroups } from './groupsActions'
 import {
     createRoom,
     editRoom,
@@ -44,6 +45,7 @@ const AdminDashboard = () => {
         if (token) {
             dispatch(getUserDetails(t))
             dispatch(getRooms(t))
+            dispatch(getGroups(t))
         }
 
         return () => {

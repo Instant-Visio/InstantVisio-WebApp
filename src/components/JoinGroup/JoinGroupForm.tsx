@@ -22,21 +22,21 @@ export interface JoinGroupValues {
 }
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    loader: {
-        zIndex: theme.zIndex.drawer + 1,
-        position: 'absolute',
-        margin: 'auto',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
-    },
-    container: {
-        position: "relative",
-    }
-  }),
-);
+    createStyles({
+        loader: {
+            zIndex: theme.zIndex.drawer + 1,
+            position: 'absolute',
+            margin: 'auto',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+        },
+        container: {
+            position: 'relative',
+        },
+    })
+)
 
 const JoinGroupForm = ({ onFormSubmit }) => {
     const { t } = useTranslation('join-group-form')
@@ -57,10 +57,9 @@ const JoinGroupForm = ({ onFormSubmit }) => {
 
     return (
         <Box className={classes.container}>
-            {
-                !registrationToken &&
+            {!registrationToken && (
                 <CircularProgress className={classes.loader} color="primary" />
-            }
+            )}
             <Formik
                 initialValues={{
                     groupId: '',
@@ -75,7 +74,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                     }, 500)
                 }}>
                 {({ submitForm, isSubmitting, isValid }) => (
-                    <Form>
+                    <Form autoComplete="off">
                         <Typography variant="h5" component="h1">
                             {t('title')}
                         </Typography>
@@ -110,6 +109,8 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                             variant="outlined"
                             name="groupId"
                             placeholder={t('fields.id.placeholder')}
+                            autoCorrect="off"
+                            autoCapitalize="none"
                         />
                         <Box m={4} />
 
@@ -126,6 +127,7 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                             variant="outlined"
                             type="password"
                             name="groupPassword"
+                            autoComplete="new-password"
                             placeholder={t('fields.password.placeholder')}
                         />
                         <Box m={4} />
@@ -134,7 +136,12 @@ const JoinGroupForm = ({ onFormSubmit }) => {
                                 startIcon={<CheckBoxIcon />}
                                 variant="contained"
                                 color="primary"
-                                disabled={isSubmitting || !token || !registrationToken || !isValid}
+                                disabled={
+                                    isSubmitting ||
+                                    !token ||
+                                    !registrationToken ||
+                                    !isValid
+                                }
                                 onClick={submitForm}>
                                 {t('submit')}
                             </Button>

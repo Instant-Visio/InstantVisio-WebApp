@@ -31,11 +31,11 @@ const CreateGroupForm = () => {
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 setSubmitting(true)
-                dispatch(createGroup(t,values))
+                dispatch(createGroup(t, values))
                 setSubmitting(false)
             }}>
             {({ submitForm, isSubmitting, isValid }) => (
-                <Form>
+                <Form autoComplete="off">
                     <Typography variant="h5" component="h1">
                         {t('title')}
                     </Typography>
