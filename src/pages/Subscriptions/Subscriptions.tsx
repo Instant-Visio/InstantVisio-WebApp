@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
-// import { SCREEN } from '../../styles/theme'
 import { IonContent } from '@ionic/react'
 import { Grid } from '@material-ui/core'
 import SubscriptionFree from './SubscriptionFree'

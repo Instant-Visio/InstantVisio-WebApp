@@ -5,6 +5,9 @@ import styled from 'styled-components'
 const ModalContent = styled.div`
     margin: ${({ theme }) =>
         `0rem ${theme.spacing.XXXL} 0rem ${theme.spacing.XXL}`};
+    h1 {
+        text-align: center;
+    }
     h3 {
         text-align: center;
         margin-bottom: 0rem;
@@ -27,6 +30,7 @@ export default function PricingDetails() {
 
     return (
         <ModalContent>
+            <h1>{t('information.how-to')}</h1>
             <h3>{t('information.packages')}</h3>
             <p>{t('information.1-credit')}</p>
             <p>{t('information.120mn')}</p>

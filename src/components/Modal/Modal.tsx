@@ -2,6 +2,13 @@ import React from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { Modal as MaterialModal } from '@material-ui/core'
 
+export interface ModalProps {
+    widthModal?: number
+    isOpened: any
+    onClose: any
+    children: any
+}
+
 function getModalStyle() {
     const top = 50
     const left = 50
@@ -17,7 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         paper: {
             position: 'absolute',
-            width: 400,
             backgroundColor: theme.palette.background.paper,
             border: '2px solid #000',
             boxShadow: theme.shadows[5],
@@ -26,12 +32,19 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 )
 
-export default function Modal({ isOpened, children, onClose }) {
+export default function Modal({
+    isOpened,
+    children,
+    onClose,
+    widthModal,
+}: ModalProps) {
     const classes = useStyles()
     const [modalStyle] = React.useState(getModalStyle)
 
     const body = (
-        <div style={modalStyle} className={classes.paper}>
+        <div
+            style={{ ...modalStyle, width: widthModal || '400' }}
+            className={classes.paper}>
             {children}
         </div>
     )

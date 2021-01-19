@@ -1,15 +1,15 @@
 import React from 'react'
 import ButtonEstimate from '../../components/Button/ButtonEstimate'
 import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
-import PricingDetailsModal from '../../components/PricingDetailsModal/PricingDetailsModal'
-import PricingDetails from '../../components/PricingDetailsModal/PricingDetails'
 import { useTranslation } from 'react-i18next'
 import { MainView } from './style'
 import packagePricing from '../../data/js/packagePricing'
+import { showModal } from '../../components/Modal/modalAction'
+import { useDispatch } from 'react-redux'
 
 export default function SubscriptionPremium() {
     const { t } = useTranslation('pricing')
-    const [modalShow, setModalShow] = React.useState(false)
+    const dispatch = useDispatch()
 
     return (
         <MainView>
@@ -20,15 +20,9 @@ export default function SubscriptionPremium() {
                 <h5>{t('500-credits')}</h5>
                 <h5>{t('unlimited')}</h5>
                 <ButtonEstimate
-                    onClick={() => setModalShow(true)}
+                    onClick={() => dispatch(showModal('PricingTable'))}
                     title={t('estimate-need')}
                 />
-                <PricingDetailsModal
-                    show={modalShow}
-                    title={t('how-to')}
-                    onHide={() => setModalShow(false)}>
-                    <PricingDetails />
-                </PricingDetailsModal>
             </div>
             <div className="listContainer">
                 {packagePricing.list.map((item, index) => (
