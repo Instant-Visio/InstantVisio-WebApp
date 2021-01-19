@@ -1,13 +1,7 @@
 import React from 'react'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { Modal as MaterialModal } from '@material-ui/core'
-
-export interface ModalProps {
-    widthModal?: number
-    isOpened: any
-    onClose: any
-    children: any
-}
+import { ModalProps } from '../Modal/types'
 
 function getModalStyle() {
     const top = 50
