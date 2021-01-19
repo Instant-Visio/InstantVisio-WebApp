@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { SCREEN } from '../../styles/theme'
 import { useHistory } from 'react-router-dom'
-import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
+import InstantButton from '../../components/Button/InstantButton'
 
 const listPackage = [
     'up-to-50',
@@ -81,7 +81,7 @@ export default function Pricing() {
                     href="https://www.helloasso.com/associations/instant-visio/paiements/paiement-express"
                     target="_blank"
                     rel="noopener noreferrer">
-                    <ButtonSubscribe title={t('support-us')} />
+                    <InstantButton title={t('support-us')} />
                 </a>
             </ColumnView>
             <ColumnView>
@@ -93,9 +93,10 @@ export default function Pricing() {
                     ))}
                 </div>
                 <div className="subscriptionButton">
-                    <ButtonSubscribe
-                        onClick={() => history.push('/subscriptions')}
+                    <InstantButton
                         title={t('choose-subscription')}
+                        bgColor="#6558f5"
+                        bgColorHover="#1c2dc1"
                     />
                 </div>
             </ColumnView>

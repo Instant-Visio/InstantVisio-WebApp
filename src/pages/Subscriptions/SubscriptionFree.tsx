@@ -1,8 +1,8 @@
 import React from 'react'
-import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { MainView } from './style'
+import InstantButton from '../../components/Button/InstantButton'
 
 export default function SubscriptionsFree() {
     const { t } = useTranslation('pricing') // NB: share the same .JSON than /Pricing
@@ -19,7 +19,7 @@ export default function SubscriptionsFree() {
                     <div className="hidden">
                         <h5>hidden</h5>
                         <h5>hidden but with longer text</h5>
-                        <ButtonSubscribe title="Text" />
+                        <InstantButton title="Text" />
                     </div>
                 </div>
                 <div className="listContainer listContainerFree">
@@ -29,9 +29,11 @@ export default function SubscriptionsFree() {
                 </div>
             </div>
             <div className="subscriptionButton">
-                <ButtonSubscribe
-                    onClick={() => history.push('/pricing')}
+                <InstantButton
                     title={t('support-us')}
+                    onClick={() => history.push('/pricing')}
+                    bgColor="#6558f5"
+                    bgColorHover="#1c2dc1"
                 />
             </div>
         </MainView>

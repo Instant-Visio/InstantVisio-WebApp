@@ -1,11 +1,10 @@
 import React from 'react'
-import ButtonEstimate from '../../components/Button/ButtonEstimate'
-import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
 import { useTranslation } from 'react-i18next'
 import { MainView } from './style'
 import packagePricing from '../../data/js/packagePricing'
 import { showModal } from '../../components/Modal/modalAction'
 import { useDispatch } from 'react-redux'
+import InstantButton from '../../components/Button/InstantButton'
 
 export default function SubscriptionPremium() {
     const { t } = useTranslation('pricing')
@@ -19,9 +18,11 @@ export default function SubscriptionPremium() {
                 <h5>{t('10K-credits-visio')}</h5>
                 <h5>{t('500-credits')}</h5>
                 <h5>{t('unlimited')}</h5>
-                <ButtonEstimate
-                    onClick={() => dispatch(showModal('PricingTable'))}
+                <InstantButton
                     title={t('estimate-need')}
+                    onClick={() => dispatch(showModal('PricingTable'))}
+                    bgColor="#1aae9f"
+                    bgColorHover="#60e0d0"
                 />
             </div>
             <div className="listContainer">
@@ -34,7 +35,11 @@ export default function SubscriptionPremium() {
                 href="https://www.helloasso.com/associations/instant-visio/paiements/souscription-au-service-premium"
                 target="_blank"
                 rel="noopener noreferrer">
-                <ButtonSubscribe title={t('subscription1')} />
+                <InstantButton
+                    title={t('subscription1')}
+                    bgColor="#6558f5"
+                    bgColorHover="#1c2dc1"
+                />
             </a>
         </MainView>
     )

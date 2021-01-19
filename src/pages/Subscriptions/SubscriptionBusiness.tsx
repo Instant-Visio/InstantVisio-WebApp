@@ -1,6 +1,5 @@
 import React from 'react'
-import ButtonEstimate from '../../components/Button/ButtonEstimate'
-import ButtonSubscribe from '../../components/Button/ButtonSubscribe'
+import InstantButton from '../../components/Button/InstantButton'
 import { useTranslation } from 'react-i18next'
 import { MainView } from './style'
 import packagePricing from '../../data/js/packagePricing'
@@ -19,9 +18,11 @@ export default function SubscriptionBusiness() {
                 <h5>{t('60K-credits-visio')}</h5>
                 <h5>{t('3000-credits')}</h5>
                 <h5>{t('unlimited')}</h5>
-                <ButtonEstimate
-                    onClick={() => dispatch(showModal('PricingTable'))}
+                <InstantButton
                     title={t('estimate-need')}
+                    onClick={() => dispatch(showModal('PricingTable'))}
+                    bgColor="#1aae9f"
+                    bgColorHover="#60e0d0"
                 />
             </div>
             <div className="listContainer">
@@ -34,7 +35,11 @@ export default function SubscriptionBusiness() {
                 href="https://www.helloasso.com/associations/instant-visio/paiements/compte-business?banner=True"
                 target="_blank"
                 rel="noopener noreferrer">
-                <ButtonSubscribe title={t('subscription2')} />
+                <InstantButton
+                    title={t('subscription2')}
+                    bgColor="#6558f5"
+                    bgColorHover="#1c2dc1"
+                />
             </a>
         </MainView>
     )
