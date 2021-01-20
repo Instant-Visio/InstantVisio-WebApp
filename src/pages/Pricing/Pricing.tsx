@@ -81,7 +81,11 @@ export default function Pricing() {
                     href="https://www.helloasso.com/associations/instant-visio/paiements/paiement-express"
                     target="_blank"
                     rel="noopener noreferrer">
-                    <InstantButton title={t('support-us')} />
+                    <InstantButton
+                        title={t('support-us')}
+                        bgColor="#6558f5"
+                        bgColorHover="#1c2dc1"
+                    />
                 </a>
             </ColumnView>
             <ColumnView>
@@ -95,6 +99,7 @@ export default function Pricing() {
                 <div className="subscriptionButton">
                     <InstantButton
                         title={t('choose-subscription')}
+                        onClick={() => history.push('/subscriptions')}
                         bgColor="#6558f5"
                         bgColorHover="#1c2dc1"
                     />
