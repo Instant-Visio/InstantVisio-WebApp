@@ -13,18 +13,30 @@ const { PushNotifications } = Plugins
 export class PushNotificationsService {
     static createDefaultChannel() {
         const notificationChannel: NotificationChannel = {
-            id: 'visio-call-notifications', // id must match android/app/src/main/res/values/strings.xml's default_notification_channel_id
-            name: 'Visio call notifications',
-            description: 'Visio call notifications',
+            id: 'visio-call-notifications',
+            name: 'Visio call now',
+            description: 'Visio call is starting now, this is important!',
             importance: 5,
             visibility: 1,
             vibration: true,
             lights: true,
             sound: 'xephron__perfect_message_ringtone_modified.mp3',
         }
+        const notificationChannelReminders: NotificationChannel = {
+            id: 'visio-call-reminders',
+            name: 'Visio call reminders',
+            description:
+                'When you have a reminder that a video call is schedule for a date',
+            importance: 3,
+            visibility: 1,
+            vibration: true,
+            lights: true,
+        }
 
         PushNotificationsService.createChannel(notificationChannel)
         LocalNotificationsService.createChannel(notificationChannel)
+        PushNotificationsService.createChannel(notificationChannelReminders)
+        LocalNotificationsService.createChannel(notificationChannelReminders)
     }
 
     static async requestPermissions() {
@@ -52,18 +64,17 @@ export class PushNotificationsService {
         PushNotifications.addListener(
             'registration',
             (token: PushNotificationToken) => {
-                console.log('Push registration success, token: ' + token.value)
                 successHandler(token.value)
-                // this.subscribeToTopic('test')
+                this.listenForPayload()
             }
         )
     }
 
+    //TODO check if to remove, now unused
     static async subscribeToTopic(topic: string) {
         try {
             await fcm.subscribeTo({ topic })
             this.listenForPayload()
-            console.log('subscribed to topic')
         } catch (err) {
             console.log(err)
         }
@@ -89,14 +100,15 @@ export class PushNotificationsService {
                 LocalNotificationsService.schedule(
                     title,
                     body,
-                    notification.data
+                    notification.data,
+                    notification.data.channelId
                 )
             }
         )
     }
 
     static listenForNotificationClick(
-        redirectHandler: (roomId: string) => void
+        redirectHandler: (roomUrl: string) => void
     ) {
         PushNotifications.addListener(
             'pushNotificationActionPerformed',
@@ -104,8 +116,8 @@ export class PushNotificationsService {
                 console.log(
                     'Push action performed: ' + JSON.stringify(notification)
                 )
-                const { roomId } = notification.notification.data
-                redirectHandler(roomId)
+                const { roomUrl } = notification.notification.data
+                redirectHandler(roomUrl)
             }
         )
     }

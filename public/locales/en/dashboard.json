@@ -1,15 +1,30 @@
 {
     "planned-discussions": "Your planned visio",
     "consumption": "Your consumption",
+    "join-room": "Join the room",
     "api-identifier": "Your API identifier",
     "click-to-copy": "Click here to copy the token link",
+    "click-to-copy-link": "Click here to copy the share link",
     "on": "on",
     "consumed": "consumed",
     "available": "available",
     "errors:": {
         "rooms-fetch": "Error retrieving planned discussions",
         "rooms-create": "Error creating meeting",
-        "rooms-edit": "Error editing the meeting"
+        "rooms-edit": "Error editing the meeting",
+        "groups-fetch": "Error retrieving groups",
+        "reminders-create": "Error creating notification"
+    },
+    "confirmation": {
+        "heading": "Your Instant Visio \"{{roomName}}\" has been created.",
+        "message": "{{hostName}} invites you to a video chat. Join the chat now at this link: {{link}}.",
+        "destinations-sent-email": "You sent {{emailCount}} invitation(s) by email.",
+        "destinations-sent-phone": "You sent {{phoneCount}} invitation(s) by phone.",
+        "destinations-sent": "You sent {{emailCount}} invitation(s) by email and {{phoneCount}} invitation(s) by phone.",
+        "message-explanation": "You can send this invitation by your own ways by copying the below invitation content.",
+        "invitation-copied": "The invitation has been copied",
+        "invitation-link": "Click here to copy invitation",
+        "link-copied": "Link has been copied"
     },
     "form": {
         "create-visio": "Create Visio",
@@ -27,19 +42,27 @@
             "title": "Participants list",
             "description": "Write here the telephone numbers, email addresses and contact groups you wish to send an invitation to.",
             "description2": "Telephone numbers must not contain any 'space' character.",
-            "placeholder": "Autocomplete"
+            "placeholder": "Email or telephone number"
         },
         "plan-visio": {
             "title": "Plan your Visio Meeting",
-            "description": "Pick date and time to start your Visio."
+            "description": "Pick date and time to start your Visio.",
+            "now": "Now",
+            "later": "Later"
         },
         "date": {
             "placeholder": "Click here to pick the date and time"
+        },
+        "reminders": {
+            "title": "Reminder Notifications"
         },
         "buttons": {
             "submit": "Create visio",
             "save": "Save",
             "cancel": "Cancel"
+        },
+        "messages": {
+            "saved": "Correctly saved"
         }
     }
 }

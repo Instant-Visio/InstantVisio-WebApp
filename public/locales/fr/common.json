@@ -42,6 +42,8 @@
         "title": "Demande URGENTE de visiophonie de",
         "Message": "vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien :"
     },
+    "required-field": "Le champ est obligatoire",
+    "invalid-min-date": "La date saisie ne peut être inférieure à la date de jour",
     "appBar": {
         "appName": "Instant Visio",
         "joinVisioButton": "Rejoindre une visio",

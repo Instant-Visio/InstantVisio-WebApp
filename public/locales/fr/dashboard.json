@@ -1,15 +1,30 @@
 {
     "planned-discussions": "Vos discussions planifiées",
     "consumption": "Votre conso",
+    "join-room": "Rejoindre la réunion",
     "api-identifier": "Votre identifiant API",
     "click-to-copy": "Cliquez ici pour copier le token",
+    "click-to-copy-link": "Cliquez ici pour copier le lien à partager",
     "on": "sur",
     "consumed": "consommés",
     "available": "disponibles",
     "errors:": {
         "rooms-fetch": "Impossible de récupérer les discussion plannifiées",
         "rooms-create": "Impossible de créer la réunion",
-        "rooms-edit": "Impossible de modifier la réunion"
+        "rooms-edit": "Impossible de modifier la réunion",
+        "groups-fetch": "Impossible de récupérer les groupes",
+        "reminders-create": "Impossible de créer la notification de rappel"
+    },
+    "confirmation": {
+        "heading": "Votre Instant Visio \"{{roomName}}\" a été créé.",
+        "message": "{{hostName}} vous invite à une conversation vidéo. Rejoignez maintenant la conversation sur ce lien : {{link}}.",
+        "message-explanation": "Vous pouvez également envoyer cette invitation pas vos propres moyens en copiant le contenu de l'invitation ci-dessous.",
+        "destinations-sent-email": "Vous avez envoyé {{emailCount}} invitation(s) par email.",
+        "destinations-sent-phone": "Vous avez envoyé {{phoneCount}} invitation(s) par téléphone.",
+        "destinations-sent": "Vous avez envoyé {{emailCount}} invitation(s) par email et {{phoneCount}} invitation(s) par téléphone.",
+        "invitation-copied": "L'invitation a été copiée",
+        "invitation-link": "Cliquez ici pour copier l'invitation",
+        "link-copied": "Le lien a été copié"
     },
     "form": {
         "create-visio": "Créer une discussion en visio",
@@ -27,19 +42,27 @@
             "title": "Liste des participants",
             "description": "Notez ici les numéros de téléphone, les adresses email et les groupes de contact à qui vous souhaitez envoyer une invitation.",
             "description2": "Les numéros de téléphone ne doivent pas contenir d'espace.",
-            "placeholder": "Autocomplete"
+            "placeholder": "Email ou numéro de téléphone"
         },
         "plan-visio": {
             "title": "Planifier votre RDV en visio",
-            "description": "Choisissez la date et l'heurede début de votre visio."
+            "description": "Choisissez la date et l'heure de début de votre visio.",
+            "now": "Maintenant",
+            "later": "Plus tard"
         },
         "date": {
             "placeholder": "Cliquez pour choisir la date et l'heure"
+        },
+        "reminders": {
+            "title": "Notifications de rappel"
         },
         "buttons": {
             "submit": "Je crée le RDV",
             "save": "Enregistrer",
             "cancel": "Annuler"
+        },
+        "messages": {
+            "saved": "Sauvegardé"
         }
     }
 }

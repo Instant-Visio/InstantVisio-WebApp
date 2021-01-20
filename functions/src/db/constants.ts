@@ -10,15 +10,18 @@ export const SUBSCRIPTIONS = {
 }
 
 export const TEST_ACCOUNTS = {
-    paidUser: {
-        email: 'paid-user@instantvisio.com',
+    premiumUser: {
+        id: '',
+        email: 'premium-user@instantvisio.com',
         password: 'test-password',
     },
-    unpaidUser: {
-        email: 'unpaid-user@instantvisio.com',
+    freeUser: {
+        id: '',
+        email: 'free-user@instantvisio.com',
         password: 'test-password',
     },
     overQuotaUser: {
+        id: '',
         email: 'over-quota-user@instantvisio.com',
         password: 'test-password',
     },

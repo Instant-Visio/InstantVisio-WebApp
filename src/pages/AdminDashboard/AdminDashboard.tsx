@@ -6,62 +6,69 @@ import theme from '../../styles/muiTheme'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
-import CreateRoomForm from './CreateRoomForm'
+import CreateRoomForm from './CreateRoomForm/CreateRoomForm'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../components/App/userSelector'
-import { Api } from '../../services/api'
-import { UserDetailsRetrieved } from '../../actions/userActions'
+import { getUserDetails } from '../../actions/userActions'
 import { useDispatch } from 'react-redux'
-import { createRoom, editRoom, getRooms } from './roomsActions'
+import { getGroups } from './groupsActions'
+import {
+    createRoom,
+    editRoom,
+    getRooms,
+    resetRoomCreated,
+} from './roomsActions'
 import UserDetails from './UserDetails'
-import { Values } from './CreateRoomForm'
+import { Room } from './CreateRoomForm/CreateRoomForm'
+import CreateRoomConfirmation from './CreateRoomConfirmation'
+import { selectCreatedRoom } from './roomsSelector'
 
-const initialValues = {
-    roomName: '',
+const initialValues: Room = {
+    id: '',
+    name: '',
     destinations: [],
     startAt: null,
     hostName: '',
+    hideChatbot: false,
+    roomUrl: '',
 }
 
 const AdminDashboard = () => {
     const { t } = useTranslation('dashboard')
-
     const dispatch = useDispatch()
     const { userId, token } = useSelector(selectUser)
-    const [fields, setFields] = useState<Values>(initialValues)
+    const [fields, setFields] = useState<Room>(initialValues)
+    const isCreatedRoom = useSelector(selectCreatedRoom)
 
     useEffect(() => {
-        const getUserDetails = async () => {
-            const api = new Api(token)
-            const userDetails = await api.getUserDetails(userId)
-            dispatch(UserDetailsRetrieved(userDetails))
+        if (token) {
+            dispatch(getUserDetails(t))
+            dispatch(getRooms(t))
+            dispatch(getGroups(t))
         }
 
-        if (token) {
-            getUserDetails()
-            dispatch(getRooms(t))
+        return () => {
+            dispatch(resetRoomCreated())
         }
     }, [token, userId, dispatch, t])
 
-    const onFormSubmit = (values, isEditing) => {
-        const { roomName, hostName, destinations, roomId } = values
+    const onFormSubmit = async (room, isEditing, remindAt) => {
+        room.startAt = room.startAt / 1000
         if (isEditing) {
-            dispatch(editRoom(t, roomId, roomName, hostName, destinations))
+            await dispatch(editRoom(t, room, remindAt))
+            onCreateFormReset()
         } else {
-            dispatch(createRoom(t, roomName, hostName, destinations))
+            dispatch(createRoom(t, room, remindAt))
         }
     }
 
     const onRoomEdit = (room) => {
+        dispatch(resetRoomCreated())
         const updatedFields = {
             ...fields,
-            ...{
-                roomName: room.name,
-                hostName: room.hostName,
-                startAt: room.startAt,
-                destinations: room.destinations,
-            },
+            ...room,
+            startAt: room.startAt * 1000,
         }
         setFields(updatedFields)
     }
@@ -78,11 +85,14 @@ const AdminDashboard = () => {
                     <Box m={6} />
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
-                            <CreateRoomForm
-                                fields={fields}
-                                onFormSubmit={onFormSubmit}
-                                onCreateFormReset={onCreateFormReset}
-                            />
+                            {!isCreatedRoom && (
+                                <CreateRoomForm
+                                    fields={fields}
+                                    onFormSubmit={onFormSubmit}
+                                    onCreateFormReset={onCreateFormReset}
+                                />
+                            )}
+                            {isCreatedRoom && <CreateRoomConfirmation />}
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <UserDetails onRoomEdit={onRoomEdit} />

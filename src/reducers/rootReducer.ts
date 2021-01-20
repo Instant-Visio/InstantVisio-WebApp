@@ -12,28 +12,41 @@ import { backdropReducer } from '../components/App/Backdrop/backdropReducer'
 import { JoinGroupModalState } from '../components/JoinGroup/joinGroupModalSelector'
 import { joinGroupModalReducer } from '../components/JoinGroup/joinGroupModalReducer'
 import { RoomsState } from '../pages/AdminDashboard/roomsSelector'
+import { GroupsState } from '../pages/AdminDashboard/groupsSelector'
+import { GroupState } from '../components/GroupMembersList/groupSelector'
 import { roomsReducer } from '../pages/AdminDashboard/roomsReducer'
+import { AppBarState } from '../components/App/AppBar/redux/appBarSelectors'
+import { appBarReducer } from '../components/App/AppBar/redux/appBarReducer'
+import { groupsReducer } from '../pages/AdminDashboard/groupsReducer'
+import { groupReducer } from '../components/GroupMembersList/groupReducer'
+
 
 export interface AppState {
     user: UserState
     room: RoomState
+    group: GroupState
     snackbar: SnackbarState
     backdrop: BackdropState
     loginModal: LoginModalState
     modal: ModalState
     joinGroupModal: JoinGroupModalState
     rooms: RoomsState
+    appBar: AppBarState
+    groups: GroupsState
 }
 
 const rootReducer = combineReducers({
     user: userReducer,
     room: roomReducer,
+    group: groupReducer,
     snackbar: snackbarReducer,
     backdrop: backdropReducer,
     loginModal: loginModalReducer,
     modal: modalReducer,
     joinGroupModal: joinGroupModalReducer,
     rooms: roomsReducer,
+    appBar: appBarReducer,
+    groups: groupsReducer
 })
 
 export default rootReducer

@@ -1,7 +1,13 @@
+import { Timestamp } from '../firebase/firebase'
+
 export enum NotificationType {
     SmsNotificationType = 1,
     EmailNotificationType,
     PushNotificationType,
+}
+export enum NotificationFormatType {
+    Now = 1,
+    Scheduled,
 }
 
 export interface BaseNotificationParams {
@@ -9,6 +15,9 @@ export interface BaseNotificationParams {
     roomUrl: string
     lang: string
     type: NotificationType
+    formatType: NotificationFormatType
+    roomStartAt?: Timestamp
+    timezone?: string
 }
 
 export interface SmsNotificationParams extends BaseNotificationParams {
@@ -26,9 +35,15 @@ export interface EmailNotificationParams extends BaseNotificationParams {
 export interface PushNotificationParams extends BaseNotificationParams {
     type: NotificationType.PushNotificationType
     tokens: string[]
+    channelId: NotificationChannelId
     additionalData: {
         [key: string]: string
     }
+}
+
+export enum NotificationChannelId {
+    Reminder = 'visio-call-reminders',
+    Now = 'visio-call-notifications',
 }
 
 export type NotificationParams =
@@ -39,4 +54,7 @@ export type NotificationParams =
 export interface NotificationContent {
     name: string
     roomUrl: string
+    format: NotificationFormatType
+    roomStartAt?: Timestamp
+    timezone?: string
 }

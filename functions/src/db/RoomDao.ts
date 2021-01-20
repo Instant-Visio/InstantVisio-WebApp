@@ -4,6 +4,7 @@ import { COLLECTIONS, DEFAULT_ROOM_TYPE } from './constants'
 import { RoomNotFoundError } from '../api/errors/HttpError'
 import { UID } from '../types/uid'
 import { getAppEnv } from '../firebase/env'
+import { InvitationDestination } from '../types/InvitationDestination'
 
 type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt' | 'startAt'>
 export interface RoomEditData {
@@ -16,6 +17,9 @@ export interface RoomEditData {
     startAt?: Timestamp
     name?: string
     hideChatbot?: boolean
+    hostName?: string
+    destinations?: InvitationDestination[]
+    timezone?: string
 }
 
 export class RoomDao {
@@ -57,6 +61,8 @@ export class RoomDao {
                 password,
                 name,
                 hideChatbot,
+                timezone,
+                hostName,
             } = doc.data()
             const room = {
                 id,
@@ -67,6 +73,8 @@ export class RoomDao {
                 hideChatbot,
                 password,
                 roomUrl: formatRoomUrl(id, password),
+                timezone,
+                hostName,
             }
 
             if (startAt) {
@@ -76,12 +84,19 @@ export class RoomDao {
         })
     }
 
-    public static async add(
-        userId: UID,
-        password: string,
-        startAt: Timestamp,
+    public static async add({
+        userId,
+        password,
+        startAt,
+        hideChatbot,
+        timezone,
+    }: {
+        userId: UID
+        password: string
+        startAt: Timestamp
         hideChatbot: boolean
-    ): Promise<RoomId> {
+        timezone: string
+    }): Promise<RoomId> {
         const documentReference = await db.collection(COLLECTIONS.rooms).add({
             uid: userId,
             password: password,
@@ -90,18 +105,27 @@ export class RoomDao {
             service: DEFAULT_ROOM_TYPE,
             startAt,
             hideChatbot,
+            timezone,
         })
 
         return documentReference.id
     }
 
-    public static async set(
-        userId: UID,
-        roomId: RoomId,
-        password: string,
-        startAt: Timestamp,
+    public static async set({
+        userId,
+        roomId,
+        password,
+        startAt,
+        hideChatbot,
+        timezone,
+    }: {
+        userId: UID
+        roomId: RoomId
+        password: string
+        startAt: Timestamp
         hideChatbot: boolean
-    ): Promise<RoomId> {
+        timezone: string
+    }): Promise<RoomId> {
         await db.collection(COLLECTIONS.rooms).doc(roomId).set({
             uid: userId,
             password: password,
@@ -110,6 +134,7 @@ export class RoomDao {
             service: DEFAULT_ROOM_TYPE,
             startAt,
             hideChatbot,
+            timezone,
         })
 
         return roomId
@@ -127,9 +152,13 @@ export class RoomDao {
                 { merge: true }
             )
     }
+
+    public static async delete(roomId: RoomId) {
+        await db.collection(COLLECTIONS.rooms).doc(roomId).delete()
+    }
 }
 
-const formatRoomUrl = (roomId: RoomId, roomPassword: string) => {
-    const { domain } = getAppEnv()
-    return `https://${domain}/premium-video/room/${roomId}?passcode=${roomPassword}`
+export const formatRoomUrl = (roomId: RoomId, roomPassword: string) => {
+    const { domain, protocol } = getAppEnv()
+    return `${protocol}://${domain}/premium-video/room/${roomId}?passcode=${roomPassword}`
 }

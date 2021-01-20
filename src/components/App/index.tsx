@@ -12,7 +12,8 @@ import ModalRoot from '../Modal/ModalRoot'
 import AuthStateChangedListener from './AuthStateChangedListener/AuthStateChangedListener'
 import Backdrop from './Backdrop/Backdrop'
 import JoinGroupModal from '../JoinGroup/JoinGroupModal'
-import useAnonymousLogin from '../../hooks/useAnonymousLogin'
+import useFirebaseCrashlytics from '../../hooks/useFirebaseCrashlytics'
+
 declare global {
     interface Window {
         iv: any
@@ -22,8 +23,6 @@ declare global {
 }
 
 const App = () => {
-    useAnonymousLogin()
-
     useEffect(() => {
         // when using vh and vw units in css:
         // to make sure the height taken into account
@@ -47,9 +46,7 @@ const App = () => {
         gdprHandler()
     }, [])
 
-    const isPremiumVideoPage = () => {
-        return window.location.pathname.includes('premium-video')
-    }
+    useFirebaseCrashlytics()
 
     return (
         <IonApp className="App">
@@ -61,11 +58,9 @@ const App = () => {
             <LoginModal />
             <ModalRoot />
             <IonReactRouter>
-                {!isPremiumVideoPage() && (
-                    <IonHeader id="topbar">
-                        <AppBar />
-                    </IonHeader>
-                )}
+                <IonHeader id="topbar">
+                    <AppBar />
+                </IonHeader>
                 <Router />
             </IonReactRouter>
         </IonApp>

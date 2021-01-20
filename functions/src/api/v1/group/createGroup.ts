@@ -68,6 +68,12 @@ export const createGroup = wrap(async (req: Request, res: Response) => {
     const password = req.body.password
     const members = JSONParse(req.body.members || '[]')
 
+    // add the owner to the members
+    members.push({
+        id: userId,
+        name: 'Owner',
+    })
+
     if (!password) {
         throw new BadRequestError('Password is required')
     }
@@ -78,7 +84,8 @@ export const createGroup = wrap(async (req: Request, res: Response) => {
             requestedGroupId,
             userId,
             password,
-            members
+            members,
+            name
         )
     } else {
         groupId = await GroupDao.add(userId, name, password, members)
@@ -96,7 +103,8 @@ const tryCreateGroupWithPredefinedId = async (
     groupId: GroupId,
     userId: UID,
     password: string,
-    members: Member[]
+    members: Member[],
+    name: string
 ): Promise<GroupId> => {
     try {
         await GroupDao.get(groupId)

@@ -5,7 +5,12 @@ import {
 } from '@capacitor/core'
 const { LocalNotifications } = Plugins
 export class LocalNotificationsService {
-    static async schedule(title?: string, body?: string, extra?: any) {
+    static async schedule(
+        title?: string,
+        body?: string,
+        extra?: any,
+        channelId = 'visio-call-notifications'
+    ) {
         const ONE_SECOND_FROM_NOW = new Date(Date.now() + 1000)
         const notifs = await LocalNotifications.schedule({
             notifications: [
@@ -18,7 +23,7 @@ export class LocalNotificationsService {
                     actionTypeId: '',
                     extra,
                     smallIcon: 'ic_logo_mobile',
-                    channelId: 'visio-call-notifications',
+                    channelId,
                 },
             ],
         })
@@ -26,7 +31,7 @@ export class LocalNotificationsService {
     }
 
     static listenForNotificationClick(
-        redirectHandler: (roomId: string) => void
+        redirectHandler: (roomUrl: string) => void
     ) {
         LocalNotifications.addListener(
             'localNotificationActionPerformed',
@@ -34,8 +39,8 @@ export class LocalNotificationsService {
                 console.log(
                     'Local action performed: ' + JSON.stringify(notification)
                 )
-                const { roomId } = notification.notification.extra
-                redirectHandler(roomId)
+                const { roomUrl } = notification.notification.extra
+                redirectHandler(roomUrl)
             }
         )
     }

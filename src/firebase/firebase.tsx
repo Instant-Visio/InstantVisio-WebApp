@@ -31,7 +31,7 @@ remoteConfig.settings = {
 
 export const db = firebaseInstance.firestore()
 
-if (process.env.NODE_ENV === 'development') {
+if (isAuthEmulatorEnabled()) {
     firebase.functions().useFunctionsEmulator(EMULATORS.hosts.functions)
     db.settings({
         host: EMULATORS.hosts.db,

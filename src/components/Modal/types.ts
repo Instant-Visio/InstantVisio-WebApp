@@ -8,4 +8,4 @@ export interface ModalProps extends Pick<MaterialModalProps, 'onClose'> {
     children?: ReactNode
 }
 
-export type ModalType = 'Newsletter' | 'PricingTable'
+export type ModalType = 'Newsletter' | 'PricingTable' | 'InviteParticipants'

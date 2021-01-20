@@ -24,6 +24,12 @@ export class BadRequestError extends HttpError {
     }
 }
 
+export class NoAvailableTokenError extends BadRequestError {
+    constructor() {
+        super('No token available')
+    }
+}
+
 export class UnauthorizedError extends HttpError {
     constructor(message?: string) {
         super(401, message || 'Unauthorized')
@@ -57,6 +63,12 @@ export class GroupReadForbiddenError extends ForbiddenError {
 export class NotFoundError extends HttpError {
     constructor(message?: string) {
         super(404, message || 'Not Found')
+    }
+}
+
+export class UserNotFoundError extends NotFoundError {
+    constructor() {
+        super('User Not Found')
     }
 }
 
@@ -99,6 +111,12 @@ class GoneError extends HttpError {
 export class RoomEndedError extends GoneError {
     constructor() {
         super('Room ended')
+    }
+}
+
+export class RoomNotStartedOrExpiredError extends GoneError {
+    constructor() {
+        super('Room not started or expired')
     }
 }
 

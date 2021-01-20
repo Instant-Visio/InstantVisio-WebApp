@@ -1,5 +1,6 @@
 import { UID } from './uid'
 import { Timestamp } from '../firebase/firebase'
+import { InvitationDestination } from './InvitationDestination'
 
 export type RoomId = string
 export type RoomSid = string
@@ -24,7 +25,11 @@ export interface Room {
     hideChatbot: boolean
     parameters?: Record<string | number, unknown>
     status?: RoomStatus
+    destinations?: InvitationDestination[]
+    hostName?: string
+    timezone: string
 }
 
 export const isStatusEnded = (room?: Room): boolean =>
     room?.status === StatusEnded
+export const isStatusUndefined = (room?: Room): boolean => !room?.status

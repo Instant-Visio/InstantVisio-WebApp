@@ -2,17 +2,14 @@ import { Request, Response } from 'express'
 import { wrap } from 'async-middleware'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { ReminderEditData, ReminderDao } from '../../../db/ReminderDao'
-import { isDestinationsCorrectlyFormatted } from '../utils/isDestinationsCorrectlyFormatted'
-import { BadRequestError } from '../../errors/HttpError'
 import { Timestamp } from '../../../firebase/firebase'
 import { assertTimestampInFuture } from './assertTimestampInFuture'
-import { JSONParse } from '../utils/JSONParse'
 
 /**
  * @swagger
  * /v1/rooms/{roomId}/reminders/{reminderId}:
  *   patch:
- *     description: Update an existing reminder, either to change the destinations (all at once, replacing them) or the datetime at which it will be sent.
+ *     description: Update an existing reminder to change datetime at which it will be sent.
  *     tags:
  *       - rooms
  *     consumes:
@@ -20,27 +17,11 @@ import { JSONParse } from '../utils/JSONParse'
  *     produces:
  *     - application/json
  *     parameters:
- *       - name: hostName
- *         description: The name or organisation which sent the invite(s)
- *         in: x-www-form-urlencoded
- *         required: true
- *         type: string
  *       - name: sendAt
  *         description: (optional) The UTC timestamp in seconds at which the reminder is scheduled to be sent.
  *         in: x-www-form-urlencoded
  *         required: false
  *         type: integer
- *       - name: destinations
- *         description: (optional) An array of destinations
- *         in: x-www-form-urlencoded
- *         required: false
- *         examples:
- *            mixed:
- *                summary: Mixed email, sms and languages
- *                $ref: '#/components/examples/Destinations'
- *         type: string
- *         items:
- *            $ref: '#/components/schemas/Destination'
  *     responses:
  *       200:
  *         description: Reminder updated with success
@@ -51,8 +32,6 @@ import { JSONParse } from '../utils/JSONParse'
  *                 id: 'vXIUuaGkH4kukbwRH5cU',
  *                 createdAt: 1605969562,
  *                 updatedAt: 1605969562,
- *                 destinations: [],
- *                 hostName: "MaSuperAsso",
  *                 sendAt: 1605969562,
  *                 isSent: false
  *               }
@@ -78,22 +57,11 @@ export const editReminder = wrap(async (req: Request, res: Response) => {
         reminderId,
     }
 
-    const { destinations, hostName, sendAt } = req.body
-    if (destinations) {
-        const parsedDestinations = JSONParse(destinations)
-        if (isDestinationsCorrectlyFormatted(parsedDestinations)) {
-            dataToEdit['destinations'] = parsedDestinations
-        } else {
-            throw new BadRequestError('Request body not formatted correctly')
-        }
-    }
+    const { sendAt } = req.body
     if (sendAt) {
         const sendAtTs = Timestamp.fromMillis(parseInt(sendAt) * 1000)
         assertTimestampInFuture(sendAtTs)
         dataToEdit.sendAt = sendAtTs
-    }
-    if (hostName) {
-        dataToEdit.hostName = hostName
     }
 
     await ReminderDao.update(dataToEdit)

@@ -5,8 +5,9 @@ import PricingTable from '../PricingTableModal/PricingTableModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectModal } from './modalSelector'
 import { hideModal } from './modalAction'
+import InviteParticipants from '../InviteParticipants/InviteParticipantsModal'
 
-const modals = { Newsletter, PricingTable }
+const modals = { Newsletter, PricingTable, InviteParticipants }
 
 export default function ModalRoot() {
     const { modalType, isDisplayed } = useSelector(selectModal)

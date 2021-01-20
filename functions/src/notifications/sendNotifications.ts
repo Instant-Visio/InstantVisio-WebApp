@@ -5,15 +5,19 @@ import {
     SmsInvitationDestination,
 } from '../types/InvitationDestination'
 import {
+    NotificationChannelId,
     NotificationContent,
+    NotificationFormatType,
     NotificationParams,
     NotificationType,
+    PushNotificationParams,
 } from '../types/Notification'
 import { getAppEnv } from '../firebase/env'
 import { sendNotification } from './sendNotification'
 import { RoomId } from '../types/Room'
 import { RoomDao } from '../db/RoomDao'
 import { UserDao } from '../db/UserDao'
+import { DEFAULT_TIMEZONE } from '../constants'
 
 export interface SendNotificationsResult {
     emailsSent: string[]
@@ -100,6 +104,9 @@ const processEmailDestinations = async (
                     lang: dest.lang,
                     email: dest.email,
                     emailFrom: appEnv.emailFrom,
+                    formatType: content.format,
+                    roomStartAt: content.roomStartAt,
+                    timezone: content.timezone,
                 },
                 successField: dest.email,
             }
@@ -127,6 +134,9 @@ const processSmsDestinations = async (
                     country: dest.country,
                     lang: dest.lang,
                     phone: dest.phone,
+                    formatType: content.format,
+                    roomStartAt: content.roomStartAt,
+                    timezone: content.timezone,
                 },
                 successField: dest.phone,
             }
@@ -153,17 +163,31 @@ const processPushDestinations = async (
             const tokens = await UserDao.getRegistrationTokensForGroup(
                 dest.groupId
             )
-            return {
-                params: {
-                    ...content,
-                    type: NotificationType.PushNotificationType,
-                    lang: dest.lang,
-                    tokens,
-                    additionalData: {
-                        roomId: roomId,
-                        password: room.password,
-                    },
+            const params: PushNotificationParams = {
+                ...content,
+                type: NotificationType.PushNotificationType,
+                lang: dest.lang || 'fr',
+                tokens,
+                formatType: content.format,
+                roomStartAt: content.roomStartAt,
+                additionalData: {
+                    roomId: roomId,
+                    password: room.password,
+                    timezone: content.timezone || DEFAULT_TIMEZONE,
+                    roomUrl: content.roomUrl,
+                    startAt: `${room.startAt.toMillis() / 1000}`,
                 },
+                channelId:
+                    notificationContent.format === NotificationFormatType.Now
+                        ? NotificationChannelId.Now
+                        : NotificationChannelId.Reminder,
+            }
+            if (content.timezone) {
+                params.timezone = content.timezone
+                params.additionalData.timezone = content.timezone
+            }
+            return {
+                params: params,
                 successField: dest.groupId,
             }
         }

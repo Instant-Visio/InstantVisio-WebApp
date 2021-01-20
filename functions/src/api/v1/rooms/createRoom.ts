@@ -6,20 +6,25 @@ import { UID } from '../../../types/uid'
 import { assertNewResourceCreationGranted } from '../subscription/assertNewResourceCreationGranted'
 import { RoomId } from '../../../types/Room'
 import { Timestamp } from '../../../firebase/firebase'
-import { RoomDao } from '../../../db/RoomDao'
+import { formatRoomUrl, RoomDao, RoomEditData } from '../../../db/RoomDao'
 import { ReminderId } from '../../../types/Reminder'
 import { createReminder } from '../reminders/createReminder'
 import {
     inviteParticipant,
     InviteParticipantsResponse,
 } from '../invite/inviteParticipants'
-import { JSONParse } from '../utils/JSONParse'
+import { parseDestinations } from '../utils/parseDestinations'
+import {
+    DEFAULT_TIMEZONE,
+    ROOM_MAX_DURATION_MILLISECONDS,
+} from '../../../constants'
+import { parseSendsAt } from './parseSendsAt'
 
 /**
  * @swagger
  * /v1/rooms/new:
  *   post:
- *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 char) and a random password if none provided. The room will have a 24 hours lifetime after its startAt time (if not supplied, the creation time). <br/><br/>To schedule a room, use this route and set the startTimestamp field, it will not prevent the meeting to start before or after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allows sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
+ *     description: Create a new room. This will generate a random room id (9 random a-Z 0-9 char) and a random password if none provided. The room will have a 24 hours lifetime after its startAt time (if not supplied, the creation time). <br/><br/>To schedule a room, use this route and set the startAt field, it will not prevent the meeting to start before or after and will be used to fill the date on the UI & reminders. <br/><br/>This route also allows sending invitation to join it right away or setup reminders for the future. For this, always supply hostName & destinations, and use sendsAt only for reminders. This route will either send invitation or schedule reminder, not both.
  *     tags:
  *       - rooms
  *     consumes:
@@ -30,23 +35,8 @@ import { JSONParse } from '../utils/JSONParse'
  *       - $ref: '#/components/parameters/room/password'
  *       - $ref: '#/components/parameters/room/name'
  *       - $ref: '#/components/parameters/room/startAt'
- *       - name: destinations
- *         description: An array of destinations
- *         in: x-www-form-urlencoded
- *         required: false
- *         examples:
- *            mixed:
- *                summary: Mixed email, sms and languages
- *                $ref: '#/components/examples/Destinations'
- *         schema:
- *            type: string
- *         items:
- *            $ref: '#/components/schemas/Destination'
- *       - name: hostName
- *         description: The name or organisation which sent the invite(s)
- *         in: x-www-form-urlencoded
- *         required: false
- *         type: string
+ *       - $ref: '#/components/parameters/room/destinations'
+ *       - $ref: '#/components/parameters/room/hostName'
  *       - name: sendsAt
  *         description: An array of UTC timestamp(s) in seconds at which the reminder(s) are scheduled to be sent. If not supplied, the invitation will be sent upon request process, otherwise reminders will be created.
  *         in: x-www-form-urlencoded
@@ -57,6 +47,7 @@ import { JSONParse } from '../utils/JSONParse'
  *                summary: Multiple sendAt dates
  *                value: '[1708118298, 1808118298]'
  *       - $ref: '#/components/parameters/room/hideChatbot'
+ *       - $ref: '#/components/parameters/room/timezone'
  *     responses:
  *       201:
  *         description: Room created with success. Depending on the parameters, it will either be a list of created reminders ids OR the emails & SMSs sent list.
@@ -64,7 +55,6 @@ import { JSONParse } from '../utils/JSONParse'
  *           application/json:
  *             schema:
  *               example: {
- *                   roomSid: "aZxo2xskIaZxo2xskI",
  *                   roomId: "390FJZDms390FJZDms",
  *                   remindersIds: ["dza5cv8zzDAza882"],
  *                   emailsSent: ["hi@example.com"],
@@ -90,6 +80,7 @@ export const createRoomRoute = wrap(async (req: Request, res: Response) => {
         hostName: req.body.hostName,
         destinations: req.body.destinations,
         sendsAt: req.body.sendsAt,
+        timezone: req.body.timezone,
     })
     res.send(newRoomResponse)
 })
@@ -104,6 +95,7 @@ export const createRoom = async ({
     destinations,
     sendsAt,
     hideChatbot = false,
+    timezone = DEFAULT_TIMEZONE,
 }: {
     userId: UID
     hideChatbot?: boolean
@@ -114,40 +106,46 @@ export const createRoom = async ({
     hostName?: string
     destinations?: string
     sendsAt?: string
+    timezone?: string
 }): Promise<NewRoomResponse> => {
     await assertNewResourceCreationGranted(userId)
 
     let roomId: RoomId
-    const roomPassword =
-        roomRequestedPassword || `${~~(Math.random() * 999999)}`
+    const password = roomRequestedPassword || `${~~(Math.random() * 999999)}`
     const roomStartAt = Timestamp.fromMillis(
         startAt ? +startAt * 1000 : Date.now()
     )
 
     if (specificRoomId) {
-        roomId = await RoomDao.set(
+        roomId = await RoomDao.set({
             userId,
-            specificRoomId,
-            roomPassword,
-            roomStartAt,
-            hideChatbot
-        )
+            roomId: specificRoomId,
+            password,
+            startAt: roomStartAt,
+            hideChatbot,
+            timezone,
+        })
     } else {
-        roomId = await RoomDao.add(
+        roomId = await RoomDao.add({
             userId,
-            roomPassword,
-            roomStartAt,
-            hideChatbot
-        )
+            password,
+            startAt: roomStartAt,
+            hideChatbot,
+            timezone,
+        })
     }
 
-    const twilioRoomResponse = await createTwilioRoom(roomId)
-    await RoomDao.update({
+    const updateRoomData: RoomEditData = {
         id: roomId,
-        sid: twilioRoomResponse.sid,
-        twilioRoomId: twilioRoomResponse.twilioRoomId,
         name: name || roomId,
-    })
+        hostName,
+    }
+    if (isRoomStartingBeforeMaxDuration(roomStartAt)) {
+        const twilioRoomResponse = await createTwilioRoom(roomId)
+        updateRoomData.sid = twilioRoomResponse.sid
+        updateRoomData.twilioRoomId = twilioRoomResponse.twilioRoomId
+    }
+    await RoomDao.update(updateRoomData)
 
     let processDestinationsResults = {}
     if (hostName && destinations) {
@@ -162,7 +160,7 @@ export const createRoom = async ({
 
     return {
         roomId,
-        roomSid: twilioRoomResponse.sid,
+        roomUrl: formatRoomUrl(roomId, password),
         ...processDestinationsResults,
     }
 }
@@ -175,6 +173,13 @@ const processDestinations = async (
     sendsAt?: string
 ): Promise<ProcessDestinationsResponse> => {
     if (sendsAt) {
+        const formattedDestinations = parseDestinations(destinations)
+        await RoomDao.update({
+            id: roomId,
+            destinations: formattedDestinations,
+            hostName,
+        })
+
         const sendsAtValues = parseSendsAt(sendsAt)
         const reminderIds: ReminderId[] = []
         for (const sendAt of sendsAtValues) {
@@ -182,8 +187,6 @@ const processDestinations = async (
                 roomId,
                 userId,
                 sendAtSeconds: sendAt,
-                hostName,
-                destinationsParameter: destinations,
             })
             reminderIds.push(id)
         }
@@ -206,6 +209,6 @@ type ProcessDestinationsResponse =
           reminderIds: ReminderId[]
       }
 
-const parseSendsAt = (sendsAt: string | Array<string>): string[] => {
-    return Array.isArray(sendsAt) ? sendsAt : JSONParse(sendsAt)
+const isRoomStartingBeforeMaxDuration = (startAt: Timestamp) => {
+    return startAt.toMillis() < Date.now() + ROOM_MAX_DURATION_MILLISECONDS
 }

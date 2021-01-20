@@ -1,0 +1,7 @@
+{
+    "title": "Membres du groupe",
+    "errors": {
+        "group-fetch" : "Erreur: Impossible de récupérer le groupe",
+        "delete-members" : "Erreur: Impossible de supprimer le membre du groupe"
+    }
+}

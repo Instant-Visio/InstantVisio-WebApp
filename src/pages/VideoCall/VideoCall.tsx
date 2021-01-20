@@ -69,7 +69,7 @@ const VideoCallPage = () => {
         if (dailyRef.current) {
             return
         }
-        dailyRef.current = DailyIframe.wrap(videoFrame.current, {
+        dailyRef.current = DailyIframe.wrap(videoFrame.current as any, {
             customLayout: true,
         })
 

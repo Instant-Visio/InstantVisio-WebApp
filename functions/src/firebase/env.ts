@@ -5,6 +5,7 @@ import { TwilioEnv } from '../types/TwilioEnv'
 import { AppEnv } from '../types/AppEnv'
 import { OVHCredentials } from '../types/OVHCredentials'
 import { SendGridEnv } from '../types/SendGridEnv'
+import { isUsingEmulator } from '../api/utils/isUsingEmulator'
 
 export const getJWTEnv = (): JWTKey => {
     const {
@@ -17,32 +18,45 @@ export const getJWTEnv = (): JWTKey => {
 }
 
 export const getTwilioEnv = (): TwilioEnv => {
-    const {
-        twilio: { sid, authtoken, apikeysid, apikeysecret },
-    } = functions.config()
-    if (!sid || !authtoken || !apikeysid || !apikeysecret) {
+    try {
+        const {
+            twilio: { sid, authtoken, apikeysid, apikeysecret },
+        } = functions.config()
+        if (!sid || !authtoken || !apikeysid || !apikeysecret) {
+            throw new Error()
+        }
+
+        return {
+            sid: sid,
+            authToken: authtoken,
+            apiKeySid: apikeysid,
+            apiKeySecret: apikeysecret,
+        }
+    } catch (err) {
         throw new InternalServerError(
             'Missing Twilio sid or authtoken or apikeysid or apikeysecret'
         )
     }
-    return {
-        sid: sid,
-        authToken: authtoken,
-        apiKeySid: apikeysid,
-        apiKeySecret: apikeysecret,
-    }
 }
 
 export const getAppEnv = (): AppEnv => {
-    const {
+    let {
         app: { domain, emailfrom },
     } = functions.config()
     if (!domain || !emailfrom) {
         throw new InternalServerError('Missing app domain or emailfrom env')
     }
+
+    if (isUsingEmulator()) {
+        domain = 'localhost:3000'
+    }
+
+    const protocol = isUsingEmulator() ? 'http' : 'https'
+
     return {
         domain: domain,
         emailFrom: emailfrom,
+        protocol,
     }
 }
 
@@ -67,10 +81,8 @@ export const getSendGridEnv = (): SendGridEnv => {
     const {
         sendgrid: { apikey, ip_pool_name },
     } = functions.config()
-    if (!apikey || !ip_pool_name) {
-        throw new InternalServerError(
-            'Missing sendgrid apikey or ip_pool_name env'
-        )
+    if (!apikey) {
+        throw new InternalServerError('Missing sendgrid apikey env')
     }
     return {
         apiKey: apikey,
