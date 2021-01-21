@@ -6,6 +6,7 @@ import {
     PersonalData,
     Blog,
     Credits,
+    Pricing,
     MediaNews,
     NotFound,
     JoinVideoCall,
@@ -25,6 +26,7 @@ import { selectUser } from './userSelector'
 import { useSelector } from 'react-redux'
 import { IonContent } from '@ionic/react'
 import AcceptCookies from '../../pages/AcceptCookies/AcceptCookies'
+import Subscriptions from '../../pages/Subscriptions/Subscriptions'
 
 const AdminDashboardPage = lazy(() =>
     import('../../pages/AdminDashboard/AdminDashboard')
@@ -68,7 +70,6 @@ const Router = () => {
                         exact
                         component={MediaNews}
                     />
-
                     <Route
                         path={`/${t('url.credits')}`}
                         exact
@@ -80,26 +81,31 @@ const Router = () => {
                         component={License}
                     />
                     <Route
-                        path={`/premium-video`}
+                        path={'/premium-video'}
                         component={PremiumVideoPage}
                     />
-                    <Route path={`/welcome`} component={WelcomeCall} />
-                    <Route path={'/accept-cookies'} component={AcceptCookies} />
+                    <Route path={'/welcome'} exact component={WelcomeCall} />
+                    <Route
+                        path={'/accept-cookies'}
+                        exact
+                        component={AcceptCookies}
+                    />
                     <Route
                         path={'/permissions-audio-video'}
+                        exact
                         component={PermissionVideoAudio}
                     />
-
-                    <Route
-                        path={`/premium-video`}
-                        component={PremiumVideoPage}
-                    />
-                    <Route path={`/welcome`} component={WelcomeCall} />
                     <Route
                         path={'/call-not-launched'}
+                        exact
                         component={CallNotLaunched}
                     />
-
+                    <Route path={'/pricing'} exact component={Pricing} />
+                    <Route
+                        path={'/subscriptions'}
+                        exact
+                        component={Subscriptions}
+                    />
                     <ProtectedRoute
                         path="/admin"
                         isAuthorized={!isAnonymous}

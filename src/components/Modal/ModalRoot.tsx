@@ -1,12 +1,13 @@
 import React from 'react'
 //TODO maybe use dynamic import
 import Newsletter from '../NewsletterModal/NewsletterModal'
+import PricingTable from '../PricingTableModal/PricingTableModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectModal } from './modalSelector'
 import { hideModal } from './modalAction'
 import InviteParticipants from '../InviteParticipants/InviteParticipantsModal'
 
-const modals = { Newsletter, InviteParticipants }
+const modals = { Newsletter, PricingTable, InviteParticipants }
 
 export default function ModalRoot() {
     const { modalType, isDisplayed } = useSelector(selectModal)
