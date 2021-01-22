@@ -102,7 +102,7 @@ const Router = () => {
                     />
                     <Route path={'/pricing'} exact component={Pricing} />
                     <Route
-                        path={'/subscriptions'}
+                        path={'/pricing/subscriptions'}
                         exact
                         component={Subscriptions}
                     />
