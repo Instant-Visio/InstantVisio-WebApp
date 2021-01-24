@@ -20,6 +20,7 @@ import { mdiInformation } from '@mdi/js'
 import { mdiEmailNewsletter } from '@mdi/js'
 import { mdiShieldAccount } from '@mdi/js'
 import { mdiCookie } from '@mdi/js'
+import { mdiCreditCardOutline } from '@mdi/js'
 import DuoIcon from '@material-ui/icons/Duo'
 import SubjectIcon from '@material-ui/icons/Subject'
 import { IonItem, IonList } from '@ionic/react'
@@ -121,6 +122,15 @@ export default function SwipeableTemporaryDrawer() {
                             title: t('footer.visio'),
                             icon: <DuoIcon />,
                             url: `/${t('url.video-call')}/`,
+                        },
+                        {
+                            title: t('footer.pricing'),
+                            icon: (
+                                <SvgIcon>
+                                    <path d={mdiCreditCardOutline} />
+                                </SvgIcon>
+                            ),
+                            url: `/pricing/`,
                         },
                         {
                             title: t('footer.legal-mentions'),

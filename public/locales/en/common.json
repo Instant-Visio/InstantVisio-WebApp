@@ -17,7 +17,8 @@
         "contact": "Contact form",
         "cookies": "Cookies management",
         "newsletter": "Newsletter",
-        "license": "License"
+        "license": "License",
+        "pricing": "Pricing"
     },
     "lang": {
         "fr": "Français",
@@ -40,7 +41,8 @@
         "newsletter": "newsletter",
         "license": "license",
         "premiumVideo": "premium-video",
-        "room": "room"
+        "room": "room",
+        "pricing": "pricing"
     },
     "message": {
         "title": "URGENT video call request from",
