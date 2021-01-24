@@ -4,36 +4,38 @@ import { Button } from '@material-ui/core'
 import styled from 'styled-components'
 
 export interface CustomButtonProps {
-    bgcolor?: string
-    bgcolorhover?: string
+    // Warning: React does not recognize the bgColor & bgColorHover props on a DOM element. See: "composite components should “consume” any prop that is intended for the composite component and not intended for the child component" https://reactjs.org/warnings/unknown-prop.html
+    bgColor?: string
+    bgColorHover?: string
 }
 
 const CustomButton = styled(Button)<CustomButtonProps>`
-    background-color: ${(props) => props.bgcolor};
+    background-color: ${(props) => props.bgColor};
     color: white;
     padding: 6px 14px;
     margin-top: 24px;
     font-size: 0.9rem;
     font-weight: bolder;
     &:hover {
-        background-color: ${(props) => props.bgcolorhover};
+        background-color: ${(props) => props.bgColorHover};
     }
     text-transform: none;
 `
 
-export default function InstantButton(props: {
-    onClick?: any
-    title: string
-    bgColor?: string
-    bgColorHover?: string
-}) {
+export default function InstantButton(
+    props: {
+        onClick?: () => void
+        title: string
+    } & CustomButtonProps
+) {
+    const { bgColor, bgColorHover, onClick, title } = props
     return (
         <CustomButton
             variant="contained"
-            onClick={props.onClick}
-            bgcolor={props.bgColor}
-            bgcolorhover={props.bgColorHover}>
-            {props.title}
+            onClick={onClick}
+            bgColor={bgColor}
+            bgColorHover={bgColorHover}>
+            {title}
         </CustomButton>
     )
 }

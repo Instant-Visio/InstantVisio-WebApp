@@ -99,7 +99,7 @@ export default function Pricing() {
                 <div className="subscriptionButton">
                     <InstantButton
                         title={t('choose-subscription')}
-                        onClick={() => history.push('/subscriptions')}
+                        onClick={() => history.push('/pricing/subscriptions')}
                         bgColor="#6558f5"
                         bgColorHover="#1c2dc1"
                     />
