@@ -40,7 +40,7 @@ const ColumnView = styled.div`
     }
 
     h5:nth-of-type(1) {
-        height: 7rem;
+        min-height: 7rem;
     }
     p {
         margin-bottom: 0rem;
