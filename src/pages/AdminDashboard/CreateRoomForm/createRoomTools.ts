@@ -1,4 +1,4 @@
-import { parsePhoneNumber, parsePhoneNumberFromString } from 'libphonenumber-js'
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 import { UNITS } from '../Reminders/NotificationSelector'
 import { Group } from '../groupsSelector'
 
