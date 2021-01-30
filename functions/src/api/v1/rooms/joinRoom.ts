@@ -73,7 +73,7 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
     const participantUID = res.locals.uid
     const roomId = req.params.roomId
 
-    const room = await getOrCreateRoom(roomId, participantUID, roomPassword)
+    let room = await getOrCreateRoom(roomId, participantUID, roomPassword)
 
     const isCurrentAdmin = room.uid === participantUID
 
@@ -83,6 +83,7 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
     if (isStatusEnded(room)) {
         if (isRoomStartedRecently(room.startAt)) {
             await createTwilioRoomAndSaveIt(roomId)
+            room = await RoomDao.get(room.id)
         } else {
             throw new RoomEndedError()
         }
@@ -93,6 +94,7 @@ export const joinRoom = wrap(async (req: Request, res: Response) => {
             isRoomStartedRecently(room.startAt)
         ) {
             await createTwilioRoomAndSaveIt(roomId)
+            room = await RoomDao.get(room.id)
         } else {
             throw new RoomNotStartedOrExpiredError()
         }
