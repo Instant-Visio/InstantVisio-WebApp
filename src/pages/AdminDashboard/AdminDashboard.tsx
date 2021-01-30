@@ -39,6 +39,7 @@ const AdminDashboard = () => {
     const dispatch = useDispatch()
     const { userId, token } = useSelector(selectUser)
     const [fields, setFields] = useState<Room>(initialValues)
+    const [formId, setFormId] = useState(Date.now()) // Force new component to be rendered clearing any local state which should not be needed if we where using redux...
     const isCreatedRoom = useSelector(selectCreatedRoom)
     useEffect(() => {
         if (token) {
@@ -74,6 +75,7 @@ const AdminDashboard = () => {
 
     const onCreateFormReset = () => {
         setFields(initialValues)
+        setFormId(Date.now())
     }
 
     return (
@@ -86,6 +88,7 @@ const AdminDashboard = () => {
                         <Grid item xs={12} sm={6}>
                             {!isCreatedRoom && (
                                 <CreateRoomForm
+                                    key={formId}
                                     fields={fields}
                                     onFormSubmit={onFormSubmit}
                                     onCreateFormReset={onCreateFormReset}
