@@ -11,7 +11,7 @@ import { showLoginModal } from '../../LoginModal/loginModalActions'
 import { signOut } from '../../../actions/userActions'
 import { useHistory } from 'react-router-dom'
 import { selectIsPremiumUser } from '../userSelector'
-import { isMobile, isNative } from '../../../services/platform'
+import { isNative } from '../../../services/platform'
 import { showJoinGroupModal } from '../../JoinGroup/joinGroupModalActions'
 import Logo from '../../Logo/Logo'
 import { selectAppBar } from './redux/appBarSelectors'
@@ -58,30 +58,6 @@ const AppBar = () => {
     const history = useHistory()
     const { isDisplayed } = useSelector(selectAppBar)
 
-    const renderWebOnlyButtons = () => {
-        if (!isMobile()) {
-            return (
-                <>
-                    {isPremiumUser ? (
-                        <Button
-                            onClick={() => {
-                                dispatch(signOut())
-                                history.replace('/')
-                            }}>
-                            {t('appBar.signOutButton')}
-                        </Button>
-                    ) : (
-                        <Button
-                            onClick={() => dispatch(showLoginModal())}
-                            color="primary">
-                            {t('appBar.loginButton')}
-                        </Button>
-                    )}
-                </>
-            )
-        }
-    }
-
     const openJoinGroupModal = () => {
         dispatch(showJoinGroupModal())
     }
@@ -102,7 +78,21 @@ const AppBar = () => {
                                     {t('appBar.joinGroupButton')}
                                 </Button>
                             )}
-                            {renderWebOnlyButtons()}
+                            {isPremiumUser ? (
+                                <Button
+                                    onClick={() => {
+                                        dispatch(signOut())
+                                        history.replace('/')
+                                    }}>
+                                    {t('appBar.signOutButton')}
+                                </Button>
+                            ) : (
+                                <Button
+                                    onClick={() => dispatch(showLoginModal())}
+                                    color="primary">
+                                    {t('appBar.loginButton')}
+                                </Button>
+                            )}
                             <SwipeableTemporaryDrawer />
                         </Toolbar>
                     </MaterialAppBar>

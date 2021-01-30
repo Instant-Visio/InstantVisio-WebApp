@@ -106,8 +106,10 @@ export class Api {
         })
     }
 
-    async getRooms(): Promise<any> {
-        return this.apiClient.get(`/rooms`)
+    async getRooms(startingAfter: number = Date.now()): Promise<any> {
+        return this.apiClient.get(
+            `/rooms?startingAfter=${startingAfter / 1000}`
+        )
     }
 
     async getUserDetails(userId): Promise<any> {
