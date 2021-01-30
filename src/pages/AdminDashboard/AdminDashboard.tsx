@@ -70,6 +70,7 @@ const AdminDashboard = () => {
             ...room,
             startAt: room.startAt * 1000,
         }
+        setFormId(Date.now())
         setFields(updatedFields)
     }
 
