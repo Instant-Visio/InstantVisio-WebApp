@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import MuiTextField from '@material-ui/core/TextField'
 import {
     Autocomplete,
@@ -28,6 +28,7 @@ interface Props {
 
 interface MyInputProps {
     onKeyDown: (event: object) => void
+    onChange: (event: FormEvent) => void
 }
 interface MyParams extends AutocompleteRenderInputParams {
     inputProps: MyInputProps
@@ -64,10 +65,33 @@ export const InviteParticipantsField = ({
 
     const groups: Array<Group> = useSelector(selectGroups)
 
+    const onChange = (delegateChange) => (event) => {
+        const value = event.target.value
+        const newValues = [...destinations]
+        // Manage copy paste when the value can contain separator
+        const didFoundSeparator = [',', ';', ' '].reduce((acc, separator) => {
+            if (value.includes(separator)) {
+                value
+                    .split(separator)
+                    .filter((element) => element.length)
+                    .forEach((element) => newValues.push(element))
+                return true
+            }
+            return acc
+        }, false)
+
+        if (didFoundSeparator) {
+            setDestinations(newValues)
+        } else {
+            delegateChange(event)
+        }
+    }
+
     const handleKeyDown = (event) => {
         switch (event.keyCode) {
             case 186: // ;
             case 32: // space
+            case 188: // ,
             case 9: {
                 autoCompleteHandler(event)
                 break
@@ -127,6 +151,7 @@ export const InviteParticipantsField = ({
 
     return (
         <Field
+            name="destinations"
             size="small"
             component={Autocomplete}
             multiple
@@ -143,7 +168,6 @@ export const InviteParticipantsField = ({
                 )
             }
             renderInput={(params: MyParams) => {
-                params.inputProps.onKeyDown = handleKeyDown
                 return (
                     <MuiTextField
                         variant="outlined"
@@ -153,6 +177,11 @@ export const InviteParticipantsField = ({
                         label=""
                         placeholder={t('form.participants.placeholder')}
                         autoComplete="off"
+                        inputProps={{
+                            onKeyDown: handleKeyDown,
+                            ...params.inputProps,
+                            onChange: onChange(params.inputProps.onChange),
+                        }}
                     />
                 )
             }}
