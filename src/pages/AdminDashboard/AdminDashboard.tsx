@@ -40,7 +40,6 @@ const AdminDashboard = () => {
     const { userId, token } = useSelector(selectUser)
     const [fields, setFields] = useState<Room>(initialValues)
     const isCreatedRoom = useSelector(selectCreatedRoom)
-
     useEffect(() => {
         if (token) {
             dispatch(getUserDetails(t))

@@ -66,13 +66,33 @@ export const createRoom = (t, room: NewEditRoom, remindAt: number) => async (
 
     try {
         const reminders = remindAt > 0 ? remindAt : null
-        const { roomId } = await api.createRoom(room, reminders)
+        const {
+            roomId,
+            smssSent,
+            pushsSent,
+            emailsSent,
+        } = await api.createRoom(room, reminders)
         dispatch(getRooms(t))
         const { destinations } = room
 
         dispatch(setRoomCreated(roomId, countDestinations(destinations)))
         if (destinations.length) {
             dispatch(getUserDetails(t))
+
+            if (
+                smssSent &&
+                pushsSent &&
+                emailsSent &&
+                !smssSent.length &&
+                !pushsSent.length &&
+                !emailsSent.length
+            ) {
+                dispatch(
+                    showSuccessMessage(
+                        t('errors.rooms-created-no-notification')
+                    )
+                )
+            }
         }
     } catch (err) {
         dispatch(showErrorMessage(t('errors.rooms-create')))
