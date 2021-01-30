@@ -58,30 +58,6 @@ const AppBar = () => {
     const history = useHistory()
     const { isDisplayed } = useSelector(selectAppBar)
 
-    const renderWebOnlyButtons = () => {
-        if (!isMobile()) {
-            return (
-                <>
-                    {isPremiumUser ? (
-                        <Button
-                            onClick={() => {
-                                dispatch(signOut())
-                                history.replace('/')
-                            }}>
-                            {t('appBar.signOutButton')}
-                        </Button>
-                    ) : (
-                        <Button
-                            onClick={() => dispatch(showLoginModal())}
-                            color="primary">
-                            {t('appBar.loginButton')}
-                        </Button>
-                    )}
-                </>
-            )
-        }
-    }
-
     const openJoinGroupModal = () => {
         dispatch(showJoinGroupModal())
     }
@@ -102,7 +78,21 @@ const AppBar = () => {
                                     {t('appBar.joinGroupButton')}
                                 </Button>
                             )}
-                            {renderWebOnlyButtons()}
+                            {isPremiumUser ? (
+                                <Button
+                                    onClick={() => {
+                                        dispatch(signOut())
+                                        history.replace('/')
+                                    }}>
+                                    {t('appBar.signOutButton')}
+                                </Button>
+                            ) : (
+                                <Button
+                                    onClick={() => dispatch(showLoginModal())}
+                                    color="primary">
+                                    {t('appBar.loginButton')}
+                                </Button>
+                            )}
                             <SwipeableTemporaryDrawer />
                         </Toolbar>
                     </MaterialAppBar>
