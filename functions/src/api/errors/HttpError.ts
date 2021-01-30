@@ -29,6 +29,11 @@ export class NoAvailableTokenError extends BadRequestError {
         super('No token available')
     }
 }
+export class NoNotificationSentError extends BadRequestError {
+    constructor() {
+        super('No emails/SMS/notifications delivered')
+    }
+}
 
 export class UnauthorizedError extends HttpError {
     constructor(message?: string) {

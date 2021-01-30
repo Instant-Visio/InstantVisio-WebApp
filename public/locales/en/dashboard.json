@@ -8,12 +8,13 @@
     "on": "on",
     "consumed": "consumed",
     "available": "available",
-    "errors:": {
+    "errors": {
         "rooms-fetch": "Error retrieving planned discussions",
         "rooms-create": "Error creating meeting",
         "rooms-edit": "Error editing the meeting",
         "groups-fetch": "Error retrieving groups",
-        "reminders-create": "Error creating notification"
+        "reminders-create": "Error creating notification",
+        "rooms-created-no-notification": "Meeting created but no notifications sent"
     },
     "confirmation": {
         "heading": "Your Instant Visio \"{{roomName}}\" has been created.",

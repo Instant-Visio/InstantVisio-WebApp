@@ -19,6 +19,7 @@ import {
     ROOM_MAX_DURATION_MILLISECONDS,
 } from '../../../constants'
 import { parseSendsAt } from './parseSendsAt'
+import { NoNotificationSentError } from '../../errors/HttpError'
 
 /**
  * @swagger
@@ -195,12 +196,23 @@ const processDestinations = async (
         }
     }
 
-    return inviteParticipant({
-        roomId,
-        userId,
-        hostName,
-        destinations,
-    })
+    try {
+        return await inviteParticipant({
+            roomId,
+            userId,
+            hostName,
+            destinations,
+        })
+    } catch (error) {
+        if (error instanceof NoNotificationSentError) {
+            return {
+                smssSent: [],
+                emailsSent: [],
+                pushsSent: [],
+            }
+        }
+        throw error
+    }
 }
 
 type ProcessDestinationsResponse =

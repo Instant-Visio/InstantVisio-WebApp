@@ -1,6 +1,9 @@
 import { wrap } from 'async-middleware'
 import { Request, Response } from 'express'
-import { BadRequestError } from '../../errors/HttpError'
+import {
+    BadRequestError,
+    NoNotificationSentError,
+} from '../../errors/HttpError'
 import { assertRightToEditRoom } from '../../../db/assertRightsToEditRoom'
 import { InvitationDestination } from '../../../types/InvitationDestination'
 import {
@@ -130,7 +133,7 @@ export const inviteParticipant = async ({
         smssSent.length === 0 &&
         pushsSent.length === 0
     ) {
-        throw new BadRequestError('No emails or SMS delivered')
+        throw new NoNotificationSentError()
     }
 
     await UserDao.updateUsage(userId, {

@@ -8,9 +8,10 @@
     "on": "sur",
     "consumed": "consommés",
     "available": "disponibles",
-    "errors:": {
+    "errors": {
         "rooms-fetch": "Impossible de récupérer les discussion plannifiées",
         "rooms-create": "Impossible de créer la réunion",
+        "rooms-created-no-notification": "Réunion créée mais aucunes notifications envoyées",
         "rooms-edit": "Impossible de modifier la réunion",
         "groups-fetch": "Impossible de récupérer les groupes",
         "reminders-create": "Impossible de créer la notification de rappel"
