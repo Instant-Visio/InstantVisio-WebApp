@@ -45,7 +45,6 @@ export default function MobileTopMenuBar() {
             alignItems="center"
             justify="space-between"
             className={classes.container}>
-            <Typography variant="subtitle1">{room.name}</Typography>
             <div>
                 <EndCallButton className={classes.endCallButton} />
                 <Menu buttonClassName={classes.settingsButton} />

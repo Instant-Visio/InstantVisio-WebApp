@@ -110,10 +110,6 @@ export default function DeviceSelectionScreen({
 
     return (
         <>
-            <Typography variant="h5" className={classes.gutterBottom}>
-                Join {roomId}
-            </Typography>
-
             <Grid container justify="center">
                 <Grid item md={7} sm={12} xs={12}>
                     <div className={classes.localPreviewContainer}>
