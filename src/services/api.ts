@@ -9,6 +9,7 @@ import { NewEditRoom } from '../pages/AdminDashboard/CreateRoomForm/CreateRoomFo
 import { Member } from '../components/GroupMembersList/groupSelector'
 import { Group } from '../components/CreateGroup/CreateGroupForm'
 
+const ONE_MIN_IN_MS = 60 * 1000
 export class Api {
     private apiClient: ApiClient
 
@@ -106,7 +107,9 @@ export class Api {
         })
     }
 
-    async getRooms(startingAfter: number = Date.now()): Promise<any> {
+    async getRooms(
+        startingAfter: number = Date.now() - ONE_MIN_IN_MS
+    ): Promise<any> {
         return this.apiClient.get(
             `/rooms?startingAfter=${startingAfter / 1000}`
         )
