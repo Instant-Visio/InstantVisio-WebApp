@@ -6,7 +6,6 @@
 import React, { useState } from 'react'
 import {
     makeStyles,
-    Typography,
     Grid,
     Button,
     Theme,

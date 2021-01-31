@@ -3,9 +3,8 @@
  * Mattia Primavera <sconqua@gmail.com>
  */
 
-import { Grid, makeStyles, Theme, Typography } from '@material-ui/core'
+import { Grid, makeStyles, Theme } from '@material-ui/core'
 import React from 'react'
-import useVideoContext from '../../hooks/useVideoContext/useVideoContext'
 import EndCallButton from '../Buttons/EndCallButton/EndCallButton'
 import Menu from '../MenuBar/Menu/Menu'
 
@@ -37,7 +36,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function MobileTopMenuBar() {
     const classes = useStyles()
-    const { room } = useVideoContext()
 
     return (
         <Grid
