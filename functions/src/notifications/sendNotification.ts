@@ -51,7 +51,7 @@ export const getContent = (
                 )
             }
             // @ts-ignore
-            const langData = translations.scheduled[params.lang]
+            const langData = translations.scheduled[params.lang || 'fr']
             const date = DateTime.fromJSDate(params.roomStartAt.toDate())
                 .setZone(params.timezone)
                 .setLocale(params.lang)
@@ -72,8 +72,9 @@ export const getContent = (
         }
         default:
         case NotificationFormatType.Now: {
+            console.log(params)
             // @ts-ignore
-            const langData = translations.now[params.lang]
+            const langData = translations.now[params.lang || 'fr']
             const subject = `${langData.title} ${params.name}`
             const message = `${name} ${langData.Message} ${params.roomUrl}`
             return {
