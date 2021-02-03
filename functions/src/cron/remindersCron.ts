@@ -51,8 +51,6 @@ export const processScheduledReminders = async () => {
             continue
         }
 
-        console.log('sending for ', room)
-
         const notificationContent: NotificationContent = {
             name: room.hostName,
             roomUrl: formatRoomUrl(reminder.roomId, room.password),
