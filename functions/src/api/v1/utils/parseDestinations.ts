@@ -11,5 +11,8 @@ export const parseDestinations = (
     if (!isDestinationsCorrectlyFormatted(parsedDestinations)) {
         throw new BadRequestError('Request body not formatted correctly')
     }
-    return parsedDestinations
+    return parsedDestinations.map((destination: InvitationDestination) => ({
+        ...destination,
+        lang: destination.lang || 'fr',
+    }))
 }

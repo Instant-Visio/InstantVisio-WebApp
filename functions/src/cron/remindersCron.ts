@@ -8,6 +8,7 @@ import {
 import { sendNotifications } from '../notifications/sendNotifications'
 import { formatRoomUrl, RoomDao } from '../db/RoomDao'
 import { Timestamp } from '../firebase/firebase'
+import { DateTime } from 'luxon'
 
 export const remindersCron = functions
     .runWith({
@@ -26,12 +27,15 @@ export const processScheduledReminder = async (req: Request, res: Response) => {
     res.send()
 }
 
-const FiveMinutesMs = 5 * 60 * 1000 - 1000 // - 1000 because we don't want a reminder at 01:10:00 to be sent at 01:05:00
 export const processScheduledReminders = async () => {
-    const reminders = await ReminderDao.listBetween(
-        new Date(),
-        new Date(Date.now() + FiveMinutesMs)
-    )
+    const startDate = DateTime.utc()
+        .set({ second: 0, millisecond: 0 })
+        .toJSDate()
+    const endDate = DateTime.utc()
+        .plus({ minutes: 5 })
+        .set({ second: 0, millisecond: 0 })
+        .toJSDate()
+    const reminders = await ReminderDao.listBetween(startDate, endDate)
 
     let emailsSentTotal = 0
     let smsSentTotal = 0

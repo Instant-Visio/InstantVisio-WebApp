@@ -38,6 +38,7 @@ export const getContent = (
     message: string
 } => {
     const name = params.name.replace(/(.{20})..+/, '$1…')
+    const lang = params.lang || 'fr'
     switch (params.formatType) {
         case NotificationFormatType.Scheduled: {
             if (!params.roomStartAt) {
@@ -51,10 +52,10 @@ export const getContent = (
                 )
             }
             // @ts-ignore
-            const langData = translations.scheduled[params.lang]
+            const langData = translations.scheduled[lang]
             const date = DateTime.fromJSDate(params.roomStartAt.toDate())
                 .setZone(params.timezone)
-                .setLocale(params.lang)
+                .setLocale(lang)
                 .toLocaleString({
                     weekday: 'long',
                     month: 'long',
@@ -73,7 +74,7 @@ export const getContent = (
         default:
         case NotificationFormatType.Now: {
             // @ts-ignore
-            const langData = translations.now[params.lang]
+            const langData = translations.now[lang]
             const subject = `${langData.title} ${params.name}`
             const message = `${name} ${langData.Message} ${params.roomUrl}`
             return {
