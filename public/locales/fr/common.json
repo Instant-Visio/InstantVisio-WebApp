@@ -49,7 +49,7 @@
         "appName": "Instant Visio",
         "joinVisioButton": "Rejoindre une visio",
         "joinGroupButton": "Rejoindre un groupe",
-        "loginButton": "Connexion",
+        "loginButton": "Accès Premium",
         "signOutButton": "Se déconnecter"
     },
     "push-notifications": {
