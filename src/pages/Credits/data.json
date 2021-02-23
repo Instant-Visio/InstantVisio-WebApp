@@ -1,5 +1,5 @@
 {
-    "creators":[
+      "creators":[
        {
           "name": "Stéphane Luçon",
           "link":"https://fr.linkedin.com/in/stephanelucon"
@@ -46,6 +46,15 @@
        }
 
     ],
+    "Product Marketing":[
+     {
+        "name": "Eric Fossoul",
+        "link":"https://www.linkedin.com/in/ericfossoul/"
+     },
+     {
+        "name": "Stéphane Luçon",
+        "link":"https://fr.linkedin.com/in/stephanelucon"
+     }],
     "graphic-designers":[
        {
           "name": "Ophélie Strezlec",
@@ -100,4 +109,5 @@
           "name": "Yves-Claude Llorca"
        }
     ]
+
  }
