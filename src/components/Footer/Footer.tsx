@@ -54,6 +54,13 @@ const Footer = () => {
                 </li>
                 <li className="footer-link">
                     <Link
+                        to={`/${t('url.backers')}`}
+                        className="footer-link-content">
+                        {t('footer.backers')}
+                    </Link>
+                </li>
+                <li className="footer-link">
+                    <Link
                         to={`/${t('url.media')}`}
                         className="footer-link-content">
                         {t('footer.media')}

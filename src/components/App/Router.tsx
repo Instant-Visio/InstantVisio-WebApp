@@ -8,6 +8,7 @@ import {
     Credits,
     Pricing,
     MediaNews,
+    Backers,
     NotFound,
     JoinVideoCall,
 } from '../../pages'
@@ -69,6 +70,11 @@ const Router = () => {
                         path={`/${t('url.media')}`}
                         exact
                         component={MediaNews}
+                    />
+                    <Route
+                        path={`/${t('url.backers')}`}
+                        exact
+                        component={Backers}
                     />
                     <Route
                         path={`/${t('url.credits')}`}

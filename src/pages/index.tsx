@@ -5,6 +5,7 @@ import PersonalData from './PersonalData/PersonalData'
 import Blog from './Blog/Blog'
 import Credits from './Credits/Credits'
 import MediaNews from './MediaNews/MediaNews'
+import Backers from './Backers/Backers'
 import NotFound from './NotFound/NotFound'
 import JoinVideoCall from './JoinVideoCall/JoinVideoCall'
 import Pricing from './Pricing/Pricing'
@@ -20,6 +21,7 @@ export {
     Blog,
     Credits,
     MediaNews,
+    Backers,
     JoinVideoCall,
     License,
     NotFound,
