@@ -176,6 +176,17 @@ export default function SwipeableTemporaryDrawer() {
                             title: t('footer.media'),
                         },
                         {
+                            url: `/${t('url.backers')}`,
+                            icon: (
+                                <SvgIcon>
+                                    <path
+                                        d={mdiNewspaperVariantMultipleOutline}
+                                    />
+                                </SvgIcon>
+                            ),
+                            title: t('footer.backers'),
+                        },
+                        {
                             url: `/${t('url.license')}`,
                             icon: (
                                 <SvgIcon>
