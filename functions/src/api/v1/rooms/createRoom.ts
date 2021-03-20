@@ -20,6 +20,7 @@ import {
 } from '../../../constants'
 import { parseSendsAt } from './parseSendsAt'
 import { NoNotificationSentError } from '../../errors/HttpError'
+import { InvitationDestination } from '../../../types/InvitationDestination'
 
 /**
  * @swagger
@@ -173,14 +174,35 @@ const processDestinations = async (
     destinations: string,
     sendsAt?: string
 ): Promise<ProcessDestinationsResponse> => {
-    if (sendsAt) {
-        const formattedDestinations = parseDestinations(destinations)
-        await RoomDao.update({
-            id: roomId,
-            destinations: formattedDestinations,
-            hostName,
-        })
+    const formattedDestinations = parseDestinations(destinations)
+    const groupsIds: string[] = formattedDestinations.reduce(
+        (acc: string[], invit) => {
+            if (invit.groupId) {
+                acc.push(invit.groupId)
+            }
+            return acc
+        },
+        []
+    )
 
+    const roomUpdateData: {
+        id: RoomId
+        hostName: string
+        groupsIds: string[]
+        destinations?: InvitationDestination[]
+    } = {
+        id: roomId,
+        groupsIds: groupsIds,
+        hostName,
+    }
+
+    if (sendsAt) {
+        roomUpdateData.destinations = formattedDestinations
+    }
+
+    await RoomDao.update(roomUpdateData)
+
+    if (sendsAt) {
         const sendsAtValues = parseSendsAt(sendsAt)
         const reminderIds: ReminderId[] = []
         for (const sendAt of sendsAtValues) {

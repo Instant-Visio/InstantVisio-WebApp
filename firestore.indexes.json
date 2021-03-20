@@ -15,6 +15,88 @@
             ]
         },
         {
+            "collectionGroup": "reminders",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "isSent",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "sentAt",
+                    "order": "ASCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "rooms",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "groupsIds",
+                    "arrayConfig": "CONTAINS"
+                },
+                {
+                    "fieldPath": "createdAt",
+                    "order": "DESCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "rooms",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "groupsIds",
+                    "arrayConfig": "CONTAINS"
+                },
+                {
+                    "fieldPath": "startAt",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "createdAt",
+                    "order": "DESCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "rooms",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "groupsIds",
+                    "arrayConfig": "CONTAINS"
+                },
+                {
+                    "fieldPath": "status",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "createdAt",
+                    "order": "DESCENDING"
+                }
+            ]
+        },
+        {
+            "collectionGroup": "rooms",
+            "queryScope": "COLLECTION",
+            "fields": [
+                {
+                    "fieldPath": "status",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "uid",
+                    "order": "ASCENDING"
+                },
+                {
+                    "fieldPath": "createdAt",
+                    "order": "DESCENDING"
+                }
+            ]
+        },
+        {
             "collectionGroup": "rooms",
             "queryScope": "COLLECTION",
             "fields": [

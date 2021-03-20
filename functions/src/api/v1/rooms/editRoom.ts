@@ -74,6 +74,18 @@ export const editRoom = wrap(async (req: Request, res: Response) => {
             throw new BadRequestError('Missing hostName in request body')
         }
         dataToEdit.destinations = parseDestinations(req.body.destinations)
+        const groupsIds: string[] = dataToEdit.destinations.reduce(
+            (acc: string[], invit) => {
+                if (invit.groupId) {
+                    acc.push(invit.groupId)
+                }
+                return acc
+            },
+            []
+        )
+        if (groupsIds.length) {
+            dataToEdit.groupsIds = groupsIds
+        }
     }
     if (req.body.hostName) {
         dataToEdit.hostName = req.body.hostName

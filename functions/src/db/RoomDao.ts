@@ -1,12 +1,14 @@
 import { Room, RoomId, RoomSid, RoomStatus, TwilioRoomId } from '../types/Room'
 import { db, serverTimestamp, Timestamp } from '../firebase/firebase'
 import { COLLECTIONS, DEFAULT_ROOM_TYPE } from './constants'
-import { RoomNotFoundError } from '../api/errors/HttpError'
+import { BadRequestError, RoomNotFoundError } from '../api/errors/HttpError'
 import { UID } from '../types/uid'
 import { getAppEnv } from '../firebase/env'
 import { InvitationDestination } from '../types/InvitationDestination'
+import { GroupId } from '../types/Group'
 
 type Response = Pick<Room, 'id' | 'createdAt' | 'updatedAt' | 'startAt'>
+
 export interface RoomEditData {
     id: RoomId
     twilioRoomId?: TwilioRoomId
@@ -19,6 +21,7 @@ export interface RoomEditData {
     hideChatbot?: boolean
     hostName?: string
     destinations?: InvitationDestination[]
+    groupsIds?: string[]
     timezone?: string
 }
 
@@ -38,11 +41,44 @@ export class RoomDao {
 
     public static async listByUserId(
         userId: UID,
-        startingAfter?: number
+        startingAfter?: number,
+        status?: RoomStatus
     ): Promise<(Response | null)[]> {
-        let query = await db
-            .collection(COLLECTIONS.rooms)
-            .where('uid', '==', userId)
+        return await RoomDao.listBy(undefined, userId, startingAfter, status)
+    }
+
+    public static async listByGroupsIds(
+        groupsIds: GroupId[],
+        startingAfter?: number,
+        status?: RoomStatus
+    ): Promise<(Response | null)[]> {
+        return await RoomDao.listBy(groupsIds, undefined, startingAfter, status)
+    }
+
+    private static async listBy(
+        groupsIds?: GroupId[],
+        userId?: UID,
+        startingAfter?: number,
+        status?: RoomStatus
+    ): Promise<(Response | null)[]> {
+        const collectionRef = await db.collection(COLLECTIONS.rooms)
+
+        let query: FirebaseFirestore.Query
+        if (userId) {
+            query = collectionRef.where('uid', '==', userId)
+        } else if (groupsIds && groupsIds.length > 0) {
+            query = collectionRef.where(
+                'groupsIds',
+                'array-contains-any',
+                groupsIds
+            )
+        } else {
+            throw new BadRequestError('BadRequest to get the rooms')
+        }
+
+        if (status) {
+            query = query.where('status', '==', status)
+        }
 
         if (startingAfter) {
             query = query

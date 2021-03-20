@@ -65,6 +65,12 @@ export class GroupReadForbiddenError extends ForbiddenError {
     }
 }
 
+export class GroupJoinLimitReachedError extends ForbiddenError {
+    constructor() {
+        super('Unable to join more than 10 groups')
+    }
+}
+
 export class NotFoundError extends HttpError {
     constructor(message?: string) {
         super(404, message || 'Not Found')
