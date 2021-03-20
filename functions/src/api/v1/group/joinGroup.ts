@@ -3,7 +3,11 @@ import { Request, Response } from 'express'
 import { UID } from '../../../types/uid'
 import { GroupId } from '../../../types/Group'
 import { GroupDao } from '../../../db/GroupDao'
-import { BadRequestError, ForbiddenError } from '../../errors/HttpError'
+import {
+    BadRequestError,
+    ForbiddenError,
+    GroupJoinLimitReachedError,
+} from '../../errors/HttpError'
 
 /**
  * @swagger
@@ -53,6 +57,13 @@ export const joinGroup = wrap(async (req: Request, res: Response) => {
     if (group.password !== password) {
         throw new ForbiddenError('Password does not match')
     }
+
+    // Due to array-contains-any in getRooms, cannot join more than 10 groups
+    const alreadyJoinedGroups = await GroupDao.listByUserId(userId)
+    if (alreadyJoinedGroups.length > 10) {
+        throw new GroupJoinLimitReachedError()
+    }
+
     await GroupDao.addMembers(groupId, [
         {
             name,
