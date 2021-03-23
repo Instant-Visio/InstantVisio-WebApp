@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Grid, Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import { Api } from '../../../services/api'
@@ -6,6 +6,9 @@ import { openPremiumVideoCall } from '../../../services/safari-view-controller'
 import { selectToken } from '../../../components/App/userSelector'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { useInterval } from '../../../hooks/useInterval'
+
+const ONGOING_CALLS_FETCH_INTERVAL = 1000 * 60
 
 const StyledPendingCalls = styled.div`
     font-size: ${({ theme }) => theme.font.S};
@@ -22,19 +25,18 @@ const StyledCard = styled.div`
     }
 `
 
-export const PendingCalls = () => {
+export const OnGoingCalls = () => {
     const { t } = useTranslation('home')
     const [onGoingCalls, setOnGoingCalls] = useState<any>([])
     const token = useSelector(selectToken)
 
-    useEffect(() => {
+    useInterval(async () => {
         if (token) {
             const api = new Api(token)
-            api.getOngoingCalls().then((onGoingCalls) =>
-                setOnGoingCalls(onGoingCalls)
-            )
+            const onGoingCalls = await api.getOngoingCalls()
+            setOnGoingCalls(onGoingCalls)
         }
-    }, [token])
+    }, ONGOING_CALLS_FETCH_INTERVAL)
 
     const getGroupName = (currentCall) => {
         const { destinations } = currentCall
