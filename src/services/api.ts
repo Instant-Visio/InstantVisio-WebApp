@@ -115,6 +115,10 @@ export class Api {
         )
     }
 
+    async getOngoingCalls(): Promise<any> {
+        return this.apiClient.get('/rooms?includeGroups=true&status=created')
+    }
+
     async getUserDetails(userId): Promise<any> {
         return this.apiClient.get(`/users/${userId}`)
     }

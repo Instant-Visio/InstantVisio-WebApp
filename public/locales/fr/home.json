@@ -16,5 +16,9 @@
             "mandatory": "Les champs marqués d'un astérisque sont obligatoires.",
             "management": "Le responsable de traitement, Stéphane Luçon, s'assure du traitement des données recueillies pour effectuer l'envoi du SMS ou de l'e-mail au correspondant. Suite à l'envoi, ces données sont effacées au bout d'un jour. Pour en savoir plus sur la gestion des données personnelles et pour exercer vos droits, veuillez vous reporter à la page <1>Données personnelles</1>."
         }
+    },
+    "ongoing-calls": {
+        "join": "Rejoindre",
+        "calls": "Appels en cours"
     }
 }
