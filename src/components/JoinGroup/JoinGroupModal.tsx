@@ -22,7 +22,7 @@ const JoinGroupModal = () => {
     }
 
     return (
-        <Modal isOpened={isDisplayed} onClose={handleClose}>
+        <Modal widthModal={300} isOpened={isDisplayed} onClose={handleClose}>
             <JoinGroupForm onFormSubmit={onSubmit} />
         </Modal>
     )
