@@ -5,6 +5,7 @@ import { Api } from '../../../services/api'
 import { openPremiumVideoCall } from '../../../services/safari-view-controller'
 import { selectToken } from '../../../components/App/userSelector'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 const StyledPendingCalls = styled.div`
     font-size: ${({ theme }) => theme.font.S};
@@ -22,15 +23,18 @@ const StyledCard = styled.div`
 `
 
 export const PendingCalls = () => {
+    const { t } = useTranslation('home')
     const [onGoingCalls, setOnGoingCalls] = useState<any>([])
     const token = useSelector(selectToken)
-    const api = new Api(token)
 
     useEffect(() => {
-        api.getOngoingCalls().then((onGoingCalls) =>
-            setOnGoingCalls(onGoingCalls)
-        )
-    }, [api])
+        if (token) {
+            const api = new Api(token)
+            api.getOngoingCalls().then((onGoingCalls) =>
+                setOnGoingCalls(onGoingCalls)
+            )
+        }
+    }, [token])
 
     const getGroupName = (currentCall) => {
         const { destinations } = currentCall
@@ -50,7 +54,9 @@ export const PendingCalls = () => {
         <StyledCard style={{ marginBottom: '0.5rem' }}>
             <Grid container spacing={1} direction="column">
                 <Grid item style={{ fontWeight: 'bold' }}>
-                    <Typography variant="body1">Appels en cours</Typography>
+                    <Typography variant="body1">
+                        {t('home:ongoing-calls.calls')}
+                    </Typography>
                 </Grid>
                 <StyledPendingCalls style={{ width: '100%' }}>
                     <Grid item container alignItems="center">
@@ -75,7 +81,7 @@ export const PendingCalls = () => {
                                                     currentCall.roomUrl
                                                 )
                                             }>
-                                            Rejoindre
+                                            {t('home:ongoing-calls.join')}
                                         </Button>
                                     </Grid>
                                 </>
