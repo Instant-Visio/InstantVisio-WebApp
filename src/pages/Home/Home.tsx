@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { EmulatorLogin } from './EmulatorLogin'
 import { showErrorMessage } from '../../components/App/Snackbar/snackbarActions'
 import { selectUser } from '../../components/App/userSelector'
+import { PendingCalls } from './PendingCalls/PendingCalls'
 
 const DataMentions = styled.div`
     .cnil {
@@ -140,6 +141,7 @@ export default function Home({ location }) {
                         <DescriptionMobile>
                             {t('information.form-submit')}
                         </DescriptionMobile>
+                        <PendingCalls />
                         <FormMobile onSubmit={submit} error={error} />
                         <div ref={formSubmissionMessage}>
                             {videoCallId && (
