@@ -9,7 +9,6 @@ const ModalContent = styled.div`
         text-align: center;
     }
     h3 {
-        text-align: center;
         margin-bottom: 0rem;
         font-weight: bold;
     }
@@ -36,11 +35,6 @@ export default function PricingDetails() {
             <p>{t('information.120mn')}</p>
             <h3>{t('information.questions')}</h3>
             <h3>{t('information.examples')}</h3>
-            <img
-                src="images/pricing-details/tableur.png"
-                alt="tableur_pricing"
-                width="100%"
-            />
         </ModalContent>
     )
 }

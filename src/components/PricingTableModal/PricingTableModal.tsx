@@ -5,8 +5,9 @@ import { ModalProps } from '../Modal/types'
 
 export default function PricingTableModal({ onClose, isOpened }: ModalProps) {
     return (
-        <Modal isOpened={isOpened} onClose={onClose} widthModal={1200}>
+        <Modal isOpened={isOpened} onClose={onClose}>
             <PricingTable />
+            <br />
         </Modal>
     )
 }
