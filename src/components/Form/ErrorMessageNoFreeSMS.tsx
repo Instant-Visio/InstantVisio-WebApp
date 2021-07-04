@@ -12,6 +12,7 @@ export const ErrorMessageNoFreeSMS = ({ t }) => {
             <Text>{t('phone.notAllowed')}</Text>
             <a
                 target="_blank"
+                rel="noopener noreferrer"
                 href="https://www.helloasso.com/associations/instant-visio/formulaires/1">
                 helloasso.com/associations/instant-visio
             </a>
