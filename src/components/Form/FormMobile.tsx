@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { Form as BaseForm, Button, Tabs, Tab } from 'react-bootstrap'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import Field from '../Form/Field'
-import CallError from '../Form/CallError'
-import { triggerValidation, format } from '../Form/validation'
-import PhoneField from '../Form/PhoneField'
+import Field from './Field'
+import CallError from './CallError'
+import { triggerValidation, format } from './validation'
+import PhoneField from './PhoneField'
 import { getLocale } from '../../i18n/helper'
+import { getIsFreeSMSAllowed } from '../../firebase/getIsFreeSMSAllowed'
+import { ErrorMessageNoFreeSMS } from './ErrorMessageNoFreeSMS'
 
 const BootstrapForm = styled(BaseForm)`
     width: 100%;
@@ -49,6 +51,17 @@ export default function FormMobile({ onSubmit, error }) {
         mail: 'mail',
     }
     const [tab, setTab] = useState(tabs.phone)
+    const [smsAllowed, setSMSAllowed] = useState(true)
+
+    useEffect(() => {
+        const run = async () => {
+            const isFreeSMSAllowed = await getIsFreeSMSAllowed()
+            if (!isFreeSMSAllowed) {
+                setSMSAllowed(false)
+            }
+        }
+        run()
+    }, [])
 
     const initialValues = {
         personName: '',
@@ -106,10 +119,14 @@ export default function FormMobile({ onSubmit, error }) {
                                     eventKey={tabs.phone}
                                     title={t('buttons.sms.label')}>
                                     <FormFields>
-                                        <PhoneField
-                                            showLabel={false}
-                                            isSubmitting={isSubmitting}
-                                        />
+                                        {smsAllowed ? (
+                                            <PhoneField
+                                                showLabel={false}
+                                                isSubmitting={isSubmitting}
+                                            />
+                                        ) : (
+                                            <ErrorMessageNoFreeSMS t={t} />
+                                        )}
                                     </FormFields>
                                 </Tab>
                                 <Tab

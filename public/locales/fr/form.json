@@ -19,7 +19,8 @@
         "errors": {
             "required": "Veuillez saisir le numéro de votre proche",
             "invalid": "Le numéro de téléphone de votre proche est invalide. Il doit contenir au minimum 6 chiffres"
-        }
+        },
+        "notAllowed": "Nous n'avons plus d'argent pour payer des SMS pour tout le monde (chaque SMS coûte 10 centimes d'€). Vous pouvez nous aider en faisant un don à l'association InstantVisio via le lien suivant : "
     },
     "mail": {
         "label": "Adresse e-mail de votre proche*",
@@ -40,7 +41,7 @@
     },
     "errors": {
         "general": "Le sms ou l'e-mail n'a pas pu être envoyé. Veuillez vérifier les informations renseignées et soumettre à nouveau le formulaire.",
-        "quotaSMS": "Impossible d'envoyer le SMS, nous n'avons plus de crédit.",
+        "quotaSMS": "Impossible d'envoyer le SMS, nous n'avons plus de crédit SMS.",
         "resourceExausted": "Impossible de notifier votre proche, nous n'avons plus de ressource disponible."
     }
 }

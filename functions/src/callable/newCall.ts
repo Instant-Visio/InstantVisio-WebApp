@@ -6,6 +6,7 @@ import { alert } from './alerts/alert'
 import { ALERT_ROOM_NOT_CREATED } from './alerts/alertList'
 import { sendNotification } from '../notifications/sendNotification'
 import { NotificationFormatType, NotificationType } from '../types/Notification'
+import { SettingsDao } from '../db/SettingsDao'
 
 const roomExpirationSeconds = 60 * 120 // = 2hr
 
@@ -38,6 +39,14 @@ export const newCall = functions.https.onCall(async (data, context) => {
     }
 
     if (data.phone) {
+        const isFreeSMSAllowed = await SettingsDao.isFreeSMSAllowed()
+        if (!isFreeSMSAllowed) {
+            throw new functions.https.HttpsError(
+                'resource-exhausted',
+                'No free SMS available (out of money)'
+            )
+        }
+
         const lastChar = data.phone.substring(data.phone.length - 1)
         const countOfSameNbr = data.phone.split(lastChar).length - 1
         if (countOfSameNbr > 6) {
