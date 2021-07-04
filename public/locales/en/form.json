@@ -19,7 +19,8 @@
         "errors": {
             "required": "Please enter the phone number of your close one",
             "invalid": "The entered phone number is not valid"
-        }
+        },
+        "notAllowed": "We are out of money to pay SMS for everyone (each SMS cost us 0.10€!). You can help us by donating to InstantVisio non-profit using the link bellow: "
     },
     "mail": {
         "label": "E-mail address of your close one*",

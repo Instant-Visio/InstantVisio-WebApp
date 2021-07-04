@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Formik } from 'formik'
 import { Form as BaseForm, Button, Tabs, Tab } from 'react-bootstrap'
 import styled from 'styled-components'
@@ -9,6 +9,8 @@ import CallError, { Error } from './CallError'
 import { triggerValidation, format } from './validation'
 import PhoneField from './PhoneField'
 import { getLocale } from '../../i18n/helper'
+import { getIsFreeSMSAllowed } from '../../firebase/getIsFreeSMSAllowed'
+import { ErrorMessageNoFreeSMS } from './ErrorMessageNoFreeSMS'
 
 const BootstrapForm = styled(BaseForm)`
     width: 100%;
@@ -72,6 +74,18 @@ export default function Form({ onSubmit, error }: FormProps) {
     }
     const [tab, setTab] = useState(tabs.phone)
 
+    const [smsAllowed, setSMSAllowed] = useState(true)
+
+    useEffect(() => {
+        const run = async () => {
+            const isFreeSMSAllowed = await getIsFreeSMSAllowed()
+            if (!isFreeSMSAllowed) {
+                setSMSAllowed(false)
+            }
+        }
+        run()
+    }, [])
+
     const initialValues = {
         personName: '',
         phone: '',
@@ -132,10 +146,14 @@ export default function Form({ onSubmit, error }: FormProps) {
                                     eventKey={tabs.phone}
                                     title={t('buttons.sms.label')}>
                                     <FormFields>
-                                        <PhoneField
-                                            showLabel={true}
-                                            isSubmitting={isSubmitting}
-                                        />
+                                        {smsAllowed ? (
+                                            <PhoneField
+                                                showLabel={true}
+                                                isSubmitting={isSubmitting}
+                                            />
+                                        ) : (
+                                            <ErrorMessageNoFreeSMS t={t} />
+                                        )}
                                     </FormFields>
                                 </Tab>
                                 <Tab
