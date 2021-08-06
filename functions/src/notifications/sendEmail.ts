@@ -21,7 +21,7 @@ export const sendEmailWithCustomEnv = async (
         from: `InstantVisio <${params.emailFrom}>`,
         subject: subject,
         text: messageBody,
-        ip_pool_name: sendGridEnv.ipPoolName,
+        // ip_pool_name: sendGridEnv.ipPoolName,
     }
 
     try {
