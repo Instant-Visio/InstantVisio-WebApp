@@ -5,13 +5,15 @@ import Box from '@material-ui/core/Box'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCreatedRoom } from './roomsSelector'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { preventDefault } from './UserDetails'
 import Button from '../../components/Button/Button'
 import { resetRoomCreated } from './roomsActions'
 import { makeStyles } from '@material-ui/core'
 import { showSuccessMessage } from '../../components/App/Snackbar/snackbarActions'
+import { isPlatform } from '@ionic/react'
+import { openPremiumVideoCall } from '../../services/safari-view-controller'
 
 const useStyles = makeStyles({
     paper: {
@@ -29,6 +31,7 @@ export default function CreateRoomConfirmation() {
         hasDestinationSent,
         destinations,
     } = useSelector(selectCreatedRoom)
+    const history = useHistory()
     const { email: emailCount, phone: phoneCount } = destinations || {}
     const dispatch = useDispatch()
 
@@ -74,6 +77,17 @@ export default function CreateRoomConfirmation() {
         )
     }
 
+    const joinDiscussion = (event) => {
+        event.preventDefault()
+        const url = formatJoinDiscussionLink(roomUrl)
+        if (isPlatform('hybrid')) {
+            // noinspection JSIgnoredPromiseFromCall
+            openPremiumVideoCall(roomUrl)
+        } else {
+            history.push(url)
+        }
+    }
+
     return (
         <>
             <Typography variant="h5" component="h1">
@@ -101,7 +115,7 @@ export default function CreateRoomConfirmation() {
             <Box m={4} />
 
             <Typography variant="h5" component="h1">
-                <Link to={formatJoinDiscussionLink(roomUrl)}>
+                <Link onClick={joinDiscussion} to={'#'}>
                     {'Rejoindre la discussion'}
                 </Link>
             </Typography>
