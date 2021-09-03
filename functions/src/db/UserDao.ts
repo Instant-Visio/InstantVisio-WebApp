@@ -9,9 +9,9 @@ import {
 } from '../api/errors/HttpError'
 import { User } from '../types/User'
 import admin from 'firebase-admin'
-import FieldValue = admin.firestore.FieldValue
 import { GroupId } from '../types/Group'
 import { GroupDao } from './GroupDao'
+import FieldValue = admin.firestore.FieldValue
 
 export class UserDao {
     public static async get(userId: UID): Promise<User> {
@@ -111,12 +111,20 @@ export class UserDao {
 
     public static async getRegistrationTokensForGroup(groupId: GroupId) {
         const group = await GroupDao.get(groupId)
-        const querySnapshots = await db
-            .collection(COLLECTIONS.users)
-            .where(documentId(), 'in', group.members)
-            .get()
+        // In operator limited to 10 elements
+        const membersByChunk = splitArrayIntoChunks(group.members, 9)
+        const docs = []
 
-        return querySnapshots.docs.reduce((acc: string[], userDoc) => {
+        for (const memberChunk of membersByChunk) {
+            const querySnapshots = await db
+                .collection(COLLECTIONS.users)
+                .where(documentId(), 'in', memberChunk)
+                .get()
+
+            docs.push(...querySnapshots.docs)
+        }
+
+        return docs.reduce((acc: string[], userDoc) => {
             const { registrationTokens } = userDoc.data()
             return acc.concat(registrationTokens)
         }, [])
@@ -141,4 +149,18 @@ export interface UserEditData {
         sentEmails: number
         sentPushs: number
     }
+}
+
+const splitArrayIntoChunks = (array: Array<string>, elementByChunk: number) => {
+    return array.reduce((resultArray: string[][], item, index) => {
+        const chunkIndex = Math.floor(index / elementByChunk)
+
+        if (!resultArray[chunkIndex]) {
+            resultArray[chunkIndex] = [] // start a new chunk
+        }
+
+        resultArray[chunkIndex].push(item)
+
+        return resultArray
+    }, [])
 }
