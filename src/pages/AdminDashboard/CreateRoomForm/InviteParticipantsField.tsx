@@ -159,7 +159,7 @@ export const InviteParticipantsField = ({
             filterSelectedOptions
             value={destinations}
             onChange={(_, newValue) => setDestinations(newValue)}
-            options={groups.map((group) => group.name)}
+            options={groups.map((group) => group.id)}
             onBlur={autoCompleteHandler}
             defaultValue={[]}
             renderTags={(value, getTagProps) =>

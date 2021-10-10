@@ -6,8 +6,8 @@ android {
         applicationId "com.instantvisio"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 26
-        versionName "2.21.0"
+        versionCode 27
+        versionName "2.21.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
